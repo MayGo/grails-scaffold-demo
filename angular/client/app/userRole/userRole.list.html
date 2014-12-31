@@ -1,0 +1,84 @@
+
+
+
+
+
+
+
+
+<div ng-init="pageTitle = 'pages.UserRole.list.title'" data-ng-include=" 'components/blocks/page_heading.html' " ng-hide="isEmbeddedView" ></div>
+
+<div class="wrapper-md ng-scope"  st-table="rowCollection" st-pipe="callServer" >
+<accordion close-others="false">
+    <accordion-group  heading="{{'pages.UserRole.list.table.search' | translate}}"  is-open="isSearchOpen">
+      <div class="row">
+		 
+	   		<div class="col-lg-2 form-inline"><!--ManyToOne-->
+     <div class="input-group input-group-sm" style="width:100%">
+           <tags-input custom-st-search="role" 
+              ng-model="search.role" placeholder="{{'pages.UserRole.list.search.placeholder.role' | translate}}">
+              <auto-complete source="autocompleteService.roleQuery($query, ['authority'], true)" ></auto-complete>
+            </tags-input></div></div>		 
+	   		<div class="col-lg-2 form-inline"><!--ManyToOne-->
+     <div class="input-group input-group-sm" style="width:100%">
+           <tags-input custom-st-search="user" 
+              ng-model="search.user" placeholder="{{'pages.UserRole.list.search.placeholder.user' | translate}}">
+              <auto-complete source="autocompleteService.userQuery($query, ['username'], true)" ></auto-complete>
+            </tags-input></div></div>		 
+		</div>
+    </accordion-group>
+</accordion>
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      	<span translate="pages.UserRole.list.table.title"></span>
+      	<div class="box-tools pull-right">
+			<a class="btn btn-default btn-xs" ui-sref="app.userRole.create">
+				<i class="fa fa-plus" translate="pages.UserRole.list.new" mx-show-loading></i>
+	       	</a>
+		</div>
+    </div>
+    <div class="panel-body">
+		
+		 <div>
+	      <table class="table table-responsive">
+	      	<thead>
+	      		<tr>
+	      			<th width='20' st-sort="id" translate="pages.UserRole.list.table.header.id"></th>	      		
+			   		<th st-sort="role" translate="pages.UserRole.list.table.header.role" ></th>				 
+			   		<th st-sort="user" translate="pages.UserRole.list.table.header.user" ></th>				 
+				 	<th></th>
+				</tr>
+	      	</thead>
+	      
+	      	<tbody ng-hide="isLoading">
+	      		
+				<tr ng-repeat="userRole in rowCollection">
+					 <td>{{userRole.id}}</td>					
+			   		<td>{{userRole.role.authority}} </td>				 	
+			   		<td>{{userRole.user.username}} </td>				 	
+				 	
+		            <td class="text-right">
+		            	<a class="btn btn-default btn-xs" ui-sref="app.userRole.view({id:userRole.id})">
+		            		<i class="fa fa-eye" translate="pages.UserRole.list.view"></i>
+		            	</a>
+		            	<a class="btn btn-default btn-xs" ui-sref="app.userRole.edit({id:userRole.id})">
+		            		<i class="fa fa-edit" translate="pages.UserRole.list.edit"></i>
+		            	</a>
+		            	<a class="btn btn-danger btn-xs" ng-click="deleteUserRole(userRole)" mx-show-loading>
+		            		<i class="fa fa-trash-o" translate="pages.UserRole.list.delete" ></i>
+		            	</a>
+		            </td>
+				</tr>
+			</tbody>
+			<tfoot ng-hide="isLoading">
+	          <tr>
+	            <td colspan="10" class="text-center">
+	              <div st-pagination="" st-items-by-page="stTable.itemsByPage" st-displayed-pages="15" ></div>
+	            </td>
+	          </tr>
+	        </tfoot>
+	      </table>
+	    </div>
+	</div>
+  </div>
+</div>

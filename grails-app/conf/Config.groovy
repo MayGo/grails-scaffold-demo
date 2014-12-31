@@ -115,3 +115,17 @@ log4j.main = {
            'org.hibernate',
            'net.sf.ehcache.hibernate'
 }
+
+
+grails.resources.resourceLocatorEnabled = true
+			//generate api: grails rest-api-doc
+			//view api: http://.../restApiDoc/?doc_url=http://.../restApiDoc/api#
+			grails.plugins.restapidoc.outputFileGeneration = "web-app/WEB-INF/restapidoc.json"
+			grails.plugins.restapidoc.outputFileReading = "WEB-INF/restapidoc.json"
+			
+			environments {
+			    development {
+					grails.plugins.restapidoc.outputFileReading = "web-app/WEB-INF/restapidoc.json"
+				}
+			}
+		

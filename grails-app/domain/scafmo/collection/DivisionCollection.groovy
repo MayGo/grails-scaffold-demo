@@ -18,7 +18,7 @@ class DivisionCollection {
 	
 
 	static mapping = {
-		sort "nameTrail"
+		sort "name"
 		persons sort:"name", cascade: "all-delete-orphan"
 	}	
 

@@ -8,8 +8,7 @@ class DivisionCollectionless {
 
 	String name
 	DivisionCollectionless headDivision
-	String idTrail
-	String nameTrail
+
 
 	
 	static constraints = {
@@ -19,7 +18,7 @@ class DivisionCollectionless {
 	
 
 	static mapping = {
-		sort "nameTrail"
+		sort "name"
 	}	
 
 	def beforeDelete() {

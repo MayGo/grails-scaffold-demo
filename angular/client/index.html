@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="angularDemoApp">
+<head>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<script type="text/javascript">
+	   document.write("<base href='" + location.href+ "' />");
+	</script>
+	<title>Scafmo</title>
+	<meta name="description" content="app, web app, responsive, responsive layout, admin, admin panel, admin dashboard, flat, flat ui, ui kit, AngularJS, ui route, charts, widgets, components" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+	<link rel="stylesheet" href="assets/css/bootstrap.css" type="text/css" />
+	<link rel="stylesheet" href="assets/css/animate.css" type="text/css" />
+	<link rel="stylesheet" href="assets/css/simple-line-icons.css" type="text/css" />
+	<link rel="stylesheet" href="assets/css/font.css" type="text/css" />
+	<link rel="stylesheet" href="assets/css/app.css" type="text/css" />
+	<link rel="stylesheet" href="app/app.css" type="text/css" />
+	<link rel="stylesheet" href="components/modal/modal.css" type="text/css" />
+	<link rel="stylesheet" href="bower_components/angular-loading-bar/build/loading-bar.min.css"type="text/css" />
+	<link rel="stylesheet" href="bower_components/angular-inform/dist/angular-inform.min.css" type="text/css"	/>
+	<link rel="stylesheet" href="bower_components/ng-tags-input/ng-tags-input.min.css" type="text/css" />
+	<link rel="stylesheet" href="bower_components/ng-tags-input/ng-tags-input.bootstrap.min.css" type="text/css" />
+	<link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.min.css" type="text/css"	/>
+	<link rel="stylesheet" href="bower_components/ngToggle/ng-toggle.css" type="text/css"	/>
+
+</head>
+<body >
+    <div class="app" id="app" ng-class="{'app-header-fixed':app.settings.headerFixed, 'app-aside-fixed':app.settings.asideFixed, 'app-aside-folded':app.settings.asideFolded, 'app-aside-dock':app.settings.asideDock, 'container':app.settings.container}" ui-view></div>
+<!-- build:js({client,node_modules}) app/vendor.js -->
+    <!-- bower:js -->
+	<script src="bower_components/jquery/dist/jquery.js"></script>
+	<script src="bower_components/angular/angular.js"></script>
+	<script src="bower_components/angular-animate/angular-animate.js"></script>
+	<script src="bower_components/angular-resource/angular-resource.js"></script>
+	<script src="bower_components/angular-cookies/angular-cookies.js"></script>
+	<script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
+	<script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+	<script src="bower_components/lodash/dist/lodash.compat.js"></script>
+	<script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+	<script src="bower_components/angular-auto-validate/dist/jcs-auto-validate.min.js"></script>
+	<script src="bower_components/angular-loading-bar/build/loading-bar.min.js"></script>
+	<script src="bower_components/angular-inform/dist/angular-inform.min.js"></script>
+	<script src="bower_components/angular-smart-table/dist/smart-table.min.js"></script>
+	
+	<script src="bower_components/angular-touch/angular-touch.min.js"></script>
+	<script src="bower_components/ngstorage/ngStorage.min.js"></script>
+	<script src="bower_components/angular-translate/angular-translate.min.js"></script>
+	<script src="bower_components/angular-translate-loader-static-files/angular-translate-loader-static-files.min.js"></script>
+	<script src="bower_components/angular-translate-storage-cookie/angular-translate-storage-cookie.min.js"></script>
+	<script src="bower_components/angular-translate-storage-local/angular-translate-storage-local.min.js"></script>
+	<script src="bower_components/ng-tags-input/ng-tags-input.min.js"></script>
+	<script src="bower_components/angular-fullscreen/src/angular-fullscreen.js"></script>
+	<script src="bower_components/satellizer/satellizer.min.js"></script>
+	<script src="bower_components/angular-strap/dist/angular-strap.min.js"></script>
+	<script src="bower_components/angular-strap/dist/angular-strap.tpl.min.js"></script>
+	<script src="bower_components/ngToggle/ng-toggle.js"></script>
+    <!-- endbower -->
+<!-- endbuild -->
+	
+	
+	<!-- build:js({.tmp,client}) app/app.js -->
+	<script src="app/app.js"></script>
+	<script src="app/app.service.js"></script>
+	<script src="app/app.controller.js"></script>
+	<!-- injector:js -->
+	<script src="app/login/login.controller.js"></script>
+	<script src="app/login/login.js"></script>
+	<script src="app/logout/logout.controller.js"></script>
+	<script src="app/logout/logout.js"></script>
+	<script src="app/dashboard/dashboard.controller.js"></script>
+    <script src="app/dashboard/dashboard.js"></script>
+	<script src="app/search/search.controller.js"></script>
+	<script src="app/search/search.js"></script>
+	<script src="app/settings/settings.controller.js"></script>
+	<script src="app/settings/settings.js"></script>
+    <script src="components/directives/menu.directive.js"></script>
+    <script src="components/directives/smarttable.customstsearch.directive.js"></script>
+    <script src="components/directives/toggleclass.directive.js"></script>
+    <script src="components/directives/ui-shift.js"></script>
+	<script src="components/directives/show-loading.directive.js"></script>
+
+	<script src="app/divisionCollection/divisionCollection.js"></script>
+	<script src="app/divisionCollection/divisionCollection.edit.controller.js"></script>
+	<script src="app/divisionCollection/divisionCollection.list.controller.js"></script>
+	<script src="app/divisionCollection/divisionCollection.view.controller.js"></script>
+	<script src="app/divisionCollection/divisionCollection.service.js"></script>
+
+	<script src="app/divisionCollectionless/divisionCollectionless.js"></script>
+	<script src="app/divisionCollectionless/divisionCollectionless.edit.controller.js"></script>
+	<script src="app/divisionCollectionless/divisionCollectionless.list.controller.js"></script>
+	<script src="app/divisionCollectionless/divisionCollectionless.view.controller.js"></script>
+	<script src="app/divisionCollectionless/divisionCollectionless.service.js"></script>
+
+	<script src="app/personCollection/personCollection.js"></script>
+	<script src="app/personCollection/personCollection.edit.controller.js"></script>
+	<script src="app/personCollection/personCollection.list.controller.js"></script>
+	<script src="app/personCollection/personCollection.view.controller.js"></script>
+	<script src="app/personCollection/personCollection.service.js"></script>
+
+	<script src="app/personCollectionless/personCollectionless.js"></script>
+	<script src="app/personCollectionless/personCollectionless.edit.controller.js"></script>
+	<script src="app/personCollectionless/personCollectionless.list.controller.js"></script>
+	<script src="app/personCollectionless/personCollectionless.view.controller.js"></script>
+	<script src="app/personCollectionless/personCollectionless.service.js"></script>
+
+	<script src="app/testNumber/testNumber.js"></script>
+	<script src="app/testNumber/testNumber.edit.controller.js"></script>
+	<script src="app/testNumber/testNumber.list.controller.js"></script>
+	<script src="app/testNumber/testNumber.view.controller.js"></script>
+	<script src="app/testNumber/testNumber.service.js"></script>
+
+	<script src="app/testOther/testOther.js"></script>
+	<script src="app/testOther/testOther.edit.controller.js"></script>
+	<script src="app/testOther/testOther.list.controller.js"></script>
+	<script src="app/testOther/testOther.view.controller.js"></script>
+	<script src="app/testOther/testOther.service.js"></script>
+
+	<script src="app/testString/testString.js"></script>
+	<script src="app/testString/testString.edit.controller.js"></script>
+	<script src="app/testString/testString.list.controller.js"></script>
+	<script src="app/testString/testString.view.controller.js"></script>
+	<script src="app/testString/testString.service.js"></script>
+
+	<script src="app/role/role.js"></script>
+	<script src="app/role/role.edit.controller.js"></script>
+	<script src="app/role/role.list.controller.js"></script>
+	<script src="app/role/role.view.controller.js"></script>
+	<script src="app/role/role.service.js"></script>
+
+	<script src="app/user/user.js"></script>
+	<script src="app/user/user.edit.controller.js"></script>
+	<script src="app/user/user.list.controller.js"></script>
+	<script src="app/user/user.view.controller.js"></script>
+	<script src="app/user/user.service.js"></script>
+
+	<script src="app/userRole/userRole.js"></script>
+	<script src="app/userRole/userRole.edit.controller.js"></script>
+	<script src="app/userRole/userRole.list.controller.js"></script>
+	<script src="app/userRole/userRole.view.controller.js"></script>
+	<script src="app/userRole/userRole.service.js"></script>
+
+			
+	<script src="components/modal/modal.service.js"></script>
+	<script src="components/navbar/navbar.controller.js"></script>
+	<!-- endinjector -->
+<!-- endbuild -->
+</body>
+</html>

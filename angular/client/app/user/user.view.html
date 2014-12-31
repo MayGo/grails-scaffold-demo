@@ -1,0 +1,93 @@
+
+
+
+
+<div ng-init="pageTitle = 'pages.User.view.title'" ng-include=" 'components/blocks/page_heading.html' "></div>
+<div class="wrapper-md ng-scope">
+    <div class="row">
+		<div class="col-sm-6">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+			      <span class="h4" translate="pages.User.view.title"></span>
+			    </div>
+			    <div class="panel-body">
+			    	<div class=" form-horizontal">		
+				
+				
+        <div class="form-group">
+            <label class="col-sm-2 control-label" translate="pages.User.view.field.accountExpired"></label>
+            <div class="col-sm-10 form-control-static" ng-bind="user.accountExpired"></div>
+        </div>
+        <div class="line line-dashed b-b line-lg pull-in"></div>
+    					
+				
+				
+        <div class="form-group">
+            <label class="col-sm-2 control-label" translate="pages.User.view.field.accountLocked"></label>
+            <div class="col-sm-10 form-control-static" ng-bind="user.accountLocked"></div>
+        </div>
+        <div class="line line-dashed b-b line-lg pull-in"></div>
+    					
+				
+				
+        <div class="form-group">
+            <label class="col-sm-2 control-label" translate="pages.User.view.field.enabled"></label>
+            <div class="col-sm-10 form-control-static" ng-bind="user.enabled"></div>
+        </div>
+        <div class="line line-dashed b-b line-lg pull-in"></div>
+    					
+				
+				
+        <div class="form-group">
+            <label class="col-sm-2 control-label" translate="pages.User.view.field.passwordExpired"></label>
+            <div class="col-sm-10 form-control-static" ng-bind="user.passwordExpired"></div>
+        </div>
+        <div class="line line-dashed b-b line-lg pull-in"></div>
+    					
+				
+				
+        <div class="form-group">
+            <label class="col-sm-2 control-label" translate="pages.User.view.field.username"></label>
+            <div class="col-sm-10 form-control-static" ng-bind="user.username"></div>
+        </div>
+        <div class="line line-dashed b-b line-lg pull-in"></div>
+    					
+				
+					</div>
+			    </div>
+			    <footer class="panel-footer text-right bg-light lter">
+			      	<a class="btn btn-default" ui-sref="app.user.edit({id:user.id})">
+				    	<i class="fa fa-edit" translate="pages.User.view.edit"></i>
+			       	</a>
+					<a class="btn btn-danger" ng-click="deleteUser(user)" mx-show-loading>
+						<i class="fa fa-trash-o" translate="pages.User.view.delete"></i>
+			        </a>
+					
+					<a class="btn btn-default" ng-click="back()">
+						<i class="fa fa-chevron-left" translate="pages.User.view.back"></i>
+					</a>
+					
+			    </footer>
+			 </div>
+		</div>
+        <div>
+		      
+             <div class="form-group"    
+             ng-init="search={user:[autocompleteService.promiseToLabel(user, ['username'])]}"
+                    ng-controller="UserRoleEmbeddedListController" 
+                    >
+                <div class="col-sm-10 form-control-static" 
+                    ng-controller="UserRoleListController" 
+                    ng-include="'app/userRole/userRole.list.html'">
+                   <a class="h4" href ui-sref="app.userRole.list({search:{}})" 
+                        translate="pages.UserRole.view.lists" 
+                        translate-value-isval="{{ 'pages.UserRole.view.field.user' | translate }}" translate-value-inval="{{ 'pages.UserRole.name' | translate }}">
+                   </a>
+                </div>
+             </div>
+        
+        </div>       
+		
+		
+	</div>
+</div>			

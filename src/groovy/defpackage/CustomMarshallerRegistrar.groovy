@@ -66,6 +66,69 @@ class CustomMarshallerRegistrar {
     @javax.annotation.PostConstruct
     static void registerMarshallers() {             
 		
+		JSON.registerObjectMarshaller org.example.pomodoro.Tag, {org.example.pomodoro.Tag instance, JSON json->
+			Class cl = instance.getClass()
+			List defaultExcludes = ['tasks'] 
+			Map excludes = createMap(defaultExcludes + json.getExcludes(cl) - json.getIncludes(cl))
+			return filter(instance, excludes)
+		}
+	
+		JSON.registerObjectMarshaller org.example.pomodoro.Task, {org.example.pomodoro.Task instance, JSON json->
+			Class cl = instance.getClass()
+			List defaultExcludes = ['tags'] 
+			Map excludes = createMap(defaultExcludes + json.getExcludes(cl) - json.getIncludes(cl))
+			return filter(instance, excludes)
+		}
+	
+		JSON.registerObjectMarshaller org.grails.samples.Owner, {org.grails.samples.Owner instance, JSON json->
+			Class cl = instance.getClass()
+			List defaultExcludes = ['pets'] 
+			Map excludes = createMap(defaultExcludes + json.getExcludes(cl) - json.getIncludes(cl))
+			return filter(instance, excludes)
+		}
+	
+		JSON.registerObjectMarshaller org.grails.samples.Person, {org.grails.samples.Person instance, JSON json->
+			Class cl = instance.getClass()
+			List defaultExcludes = [] 
+			Map excludes = createMap(defaultExcludes + json.getExcludes(cl) - json.getIncludes(cl))
+			return filter(instance, excludes)
+		}
+	
+		JSON.registerObjectMarshaller org.grails.samples.Pet, {org.grails.samples.Pet instance, JSON json->
+			Class cl = instance.getClass()
+			List defaultExcludes = ['ownerId', 'owner.address', 'owner.city', 'owner.firstName', 'owner.lastName', 'owner.pets', 'owner.telephone', 'typeId', 'visits'] 
+			Map excludes = createMap(defaultExcludes + json.getExcludes(cl) - json.getIncludes(cl))
+			return filter(instance, excludes)
+		}
+	
+		JSON.registerObjectMarshaller org.grails.samples.PetType, {org.grails.samples.PetType instance, JSON json->
+			Class cl = instance.getClass()
+			List defaultExcludes = [] 
+			Map excludes = createMap(defaultExcludes + json.getExcludes(cl) - json.getIncludes(cl))
+			return filter(instance, excludes)
+		}
+	
+		JSON.registerObjectMarshaller org.grails.samples.Speciality, {org.grails.samples.Speciality instance, JSON json->
+			Class cl = instance.getClass()
+			List defaultExcludes = [] 
+			Map excludes = createMap(defaultExcludes + json.getExcludes(cl) - json.getIncludes(cl))
+			return filter(instance, excludes)
+		}
+	
+		JSON.registerObjectMarshaller org.grails.samples.Vet, {org.grails.samples.Vet instance, JSON json->
+			Class cl = instance.getClass()
+			List defaultExcludes = ['specialities'] 
+			Map excludes = createMap(defaultExcludes + json.getExcludes(cl) - json.getIncludes(cl))
+			return filter(instance, excludes)
+		}
+	
+		JSON.registerObjectMarshaller org.grails.samples.Visit, {org.grails.samples.Visit instance, JSON json->
+			Class cl = instance.getClass()
+			List defaultExcludes = ['petId', 'pet.birthDate', 'pet.owner', 'pet.ownerId', 'pet.type', 'pet.typeId', 'pet.visits'] 
+			Map excludes = createMap(defaultExcludes + json.getExcludes(cl) - json.getIncludes(cl))
+			return filter(instance, excludes)
+		}
+	
 		JSON.registerObjectMarshaller scafmo.collection.DivisionCollection, {scafmo.collection.DivisionCollection instance, JSON json->
 			Class cl = instance.getClass()
 			List defaultExcludes = ['headDivisionId', 'headDivision.headDivision', 'headDivision.headDivisionId', 'headDivision.persons', 'persons'] 

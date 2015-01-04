@@ -1,0 +1,93 @@
+
+
+
+
+
+
+
+
+<div ng-init="pageTitle = 'pages.Owner.list.title'" data-ng-include=" 'components/blocks/page_heading.html' " ng-hide="isEmbeddedView" ></div>
+
+<div class="wrapper-md ng-scope"  st-table="rowCollection" st-pipe="callServer" >
+<accordion close-others="false">
+    <accordion-group  heading="{{'pages.Owner.list.table.search' | translate}}"  is-open="isSearchOpen">
+      <div class="row">
+		 
+	   		<div class="col-lg-2 form-inline"><div class="input-group input-group-sm">
+                    <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
+                    <input name="address" class="form-control" type="text" st-search="'address'" placeholder="{{'pages.Owner.list.search.placeholder.address' | translate}}"  ></div> </div>		 
+	   		<div class="col-lg-2 form-inline"><div class="input-group input-group-sm">
+                    <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
+                    <input name="city" class="form-control" type="text" st-search="'city'" placeholder="{{'pages.Owner.list.search.placeholder.city' | translate}}"  ></div> </div>		 
+	   		<div class="col-lg-2 form-inline"><div class="input-group input-group-sm">
+                    <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
+                    <input name="firstName" class="form-control" type="text" st-search="'firstName'" placeholder="{{'pages.Owner.list.search.placeholder.firstName' | translate}}"  ></div> </div>		 
+	   		<div class="col-lg-2 form-inline"><div class="input-group input-group-sm">
+                    <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
+                    <input name="lastName" class="form-control" type="text" st-search="'lastName'" placeholder="{{'pages.Owner.list.search.placeholder.lastName' | translate}}"  ></div> </div>		 
+	   		<div class="col-lg-2 form-inline"><div class="input-group input-group-sm">
+                    <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
+                    <input name="telephone" class="form-control" type="text" st-search="'telephone'" placeholder="{{'pages.Owner.list.search.placeholder.telephone' | translate}}"  ng-pattern="/\d+/"  ></div> </div>		 
+		</div>
+    </accordion-group>
+</accordion>
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      	<span translate="pages.Owner.list.table.title"></span>
+      	<div class="box-tools pull-right">
+			<a class="btn btn-default btn-xs" ui-sref="app.owner.create">
+				<i class="fa fa-plus" translate="pages.Owner.list.new" mx-show-loading></i>
+	       	</a>
+		</div>
+    </div>
+    <div class="panel-body">
+		
+		 <div>
+	      <table class="table table-responsive">
+	      	<thead>
+	      		<tr>
+	      			<th width='20' st-sort="id" translate="pages.Owner.list.table.header.id"></th>	      		
+			   		<th st-sort="address" translate="pages.Owner.list.table.header.address" ></th>				 
+			   		<th st-sort="city" translate="pages.Owner.list.table.header.city" ></th>				 
+			   		<th st-sort="firstName" translate="pages.Owner.list.table.header.firstName" ></th>				 
+			   		<th st-sort="lastName" translate="pages.Owner.list.table.header.lastName" ></th>				 
+			   		<th st-sort="telephone" translate="pages.Owner.list.table.header.telephone" ></th>				 
+				 	<th></th>
+				</tr>
+	      	</thead>
+	      
+	      	<tbody ng-hide="isLoading">
+	      		
+				<tr ng-repeat="owner in rowCollection">
+					 <td>{{owner.id}}</td>					
+			   		<td>{{owner.address}}</td>				 	
+			   		<td>{{owner.city}}</td>				 	
+			   		<td>{{owner.firstName}}</td>				 	
+			   		<td>{{owner.lastName}}</td>				 	
+			   		<td>{{owner.telephone}}</td>				 	
+				 	
+		            <td class="text-right">
+		            	<a class="btn btn-default btn-xs" ui-sref="app.owner.view({id:owner.id})">
+		            		<i class="fa fa-eye" translate="pages.Owner.list.view"></i>
+		            	</a>
+		            	<a class="btn btn-default btn-xs" ui-sref="app.owner.edit({id:owner.id})">
+		            		<i class="fa fa-edit" translate="pages.Owner.list.edit"></i>
+		            	</a>
+		            	<a class="btn btn-danger btn-xs" ng-click="deleteOwner(owner)" mx-show-loading>
+		            		<i class="fa fa-trash-o" translate="pages.Owner.list.delete" ></i>
+		            	</a>
+		            </td>
+				</tr>
+			</tbody>
+			<tfoot ng-hide="isLoading">
+	          <tr>
+	            <td colspan="10" class="text-center">
+	              <div st-pagination="" st-items-by-page="stTable.itemsByPage" st-displayed-pages="15" ></div>
+	            </td>
+	          </tr>
+	        </tfoot>
+	      </table>
+	    </div>
+	</div>
+  </div>
+</div>

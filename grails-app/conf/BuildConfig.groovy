@@ -44,14 +44,23 @@ grails.project.dependency.resolution = {
 
     dependencies {
         // specify dependencies here under either 'build', 'compile', 'runtime', 'test' or 'provided' scopes e.g.
-
+		test "org.gebish:geb-spock:0.9.2"
     }
 
     plugins {
 
+		test ":geb:0.9.2"
+		compile ":rest-client-builder:2.0.3"
+		compile ":spring-security-core:2.0-RC3"
+		compile ":spring-security-rest:1.4.1.RC2", {
+    		excludes: 'spring-security-core'
+		}
+
+
+
 		compile ":build-test-data:2.2.2"
 
-
+		
 		runtime ":cors:1.1.6"
 		compile ":dirserve:0.4"
 		compile ":rest-api-doc:0.5"
@@ -65,6 +74,7 @@ grails.project.dependency.resolution = {
 		runtime ":hibernate:3.6.10.17"
 		
 		compile ":scaffold-angular-smit:0.3.26"
+		compile ':cache:1.1.1'
 
     }
 }

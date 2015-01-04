@@ -2,6 +2,17 @@ class UrlMappings {
 
 	static mappings = {
 
+		'/tags'(resources:'Tag')
+		'/tasks'(resources:'Task')
+		'/owners'(resources:'Owner')
+		'/persons'(resources:'Person')
+		'/pets'(resources:'Pet')
+		'/pettypes'(resources:'PetType')
+		'/specialitys'(resources:'Speciality')
+		'/vets'(resources:'Vet')
+		'/visits'(resources:'Visit')
+
+
 		'/divisioncollections'(resources:'DivisionCollection')
 		'/divisioncollectionlesss'(resources:'DivisionCollectionless')
 		'/personcollections'(resources:'PersonCollection')

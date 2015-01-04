@@ -89,6 +89,9 @@ environments {
     development {
         grails.logging.jul.usebridge = true
     }
+	test{
+		grails.serverURL = "http://localhost:3333/Scafmo"
+	}
     production {
         grails.logging.jul.usebridge = false
         // TODO: grails.serverURL = "http://www.changeme.com"
@@ -116,6 +119,85 @@ log4j.main = {
            'net.sf.ehcache.hibernate'
 }
 
+
+
+/*-----------------------------*/
+
+grails.plugin.springsecurity.active = true
+environments {
+	development {
+		//grails.plugin.springsecurity.active = false
+	}
+}
+
+ /*********************Added by the Spring Security Core plugin*/
+//grails.plugin.springsecurity.userLookup.userDomainClassName = 'ee.smit.horizon.security.User'
+//grails.plugin.springsecurity.userLookup.authorityJoinClassName = 'ee.smit.horizon.security.UserRole'
+//grails.plugin.springsecurity.authority.className = 'ee.smit.horizon.security.Role'
+
+grails.plugin.springsecurity.filterChain.chainMap = [
+	'/ng/**': 'nonAuthFilter',
+	'/static/**': 'nonAuthFilter',
+	'/css/**': 'nonAuthFilter',
+	'/js/**': 'nonAuthFilter',
+	'/index.gsp': 'nonAuthFilter',
+	'/index': 'nonAuthFilter',
+	'/': 'nonAuthFilter',
+	'/restApiDoc/**': 'nonAuthFilter', //disable in production
+	'/**/**': 'JOINED_FILTERS'
+]
+
+grails.plugin.springsecurity.securityConfigType = 'InterceptUrlMap'
+grails.plugin.springsecurity.interceptUrlMap = [
+	  '/**':                  ['isFullyAuthenticated()']
+]
+
+
+
+grails.plugin.springsecurity.rest.token.rendering.usernamePropertyName = 'login'
+grails.plugin.springsecurity.rest.token.rendering.tokenPropertyName = 'access_token'
+grails.plugin.springsecurity.rest.token.rendering.authoritiesPropertyName = 'permissions'
+
+grails.plugin.springsecurity.rest.token.storage.useGrailsCache = true
+grails.cache.config = {
+	cache {
+	   name 'userTokens'
+	}
+}
+grails.plugin.springsecurity.rest.token.storage.grailsCacheName = "userTokens"
+
+grails.plugin.springsecurity.rest.login.active=true
+grails.plugin.springsecurity.rest.login.useJsonCredentials = true
+grails.plugin.springsecurity.rest.login.usernamePropertyName = "username"
+grails.plugin.springsecurity.rest.login.passwordPropertyName = "password"
+
+grails.plugin.springsecurity.rest.login.endpointUrl = "/api/login"
+grails.plugin.springsecurity.rest.login.failureStatusCode = 401
+
+grails.plugin.springsecurity.rest.token.validation.useBearerToken = true
+grails.plugin.springsecurity.rest.token.validation.headerName = 'Authorization'
+grails.plugin.springsecurity.rest.token.validation.active = true
+grails.plugin.springsecurity.rest.token.validation.endpointUrl = "/api/validate"
+
+
+/************************************/
+
+grails{
+	plugin{
+		scaffold{
+			core{
+				overwrite = true // false = Ask before replacing file
+				defaultDisplayNames = ['name', 'username', 'authority'] // Domain property names that are included as displaynames
+				// Map of domain class names. contains list of maps
+				//displayNames = ['Division2':['persons':['name':null]]]//e.g 'User':['group':['name']]
+				displayNames = [:]
+				//Problems when reloading folder structure "file:./grails-app/services/**/*Service.groovy"
+				//TODO: add automatic appending of /
+				folders = ['backendRestSrc':'src/', 'backendRestTests':'test/', 'backendRestGrailsApp':'grails-app/', 'frontendAngular':'angular/', 'frontendAngulr':'angular/']
+			}
+		}
+	}
+}
 
 grails.resources.resourceLocatorEnabled = true
 			//generate api: grails rest-api-doc

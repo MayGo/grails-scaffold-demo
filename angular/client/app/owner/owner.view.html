@@ -1,0 +1,94 @@
+
+
+
+
+<div ng-init="pageTitle = 'pages.Owner.view.title'" ng-include=" 'components/blocks/page_heading.html' "></div>
+<div class="wrapper-md ng-scope">
+    <div class="row">
+		<div class="col-sm-6">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+			      <span class="h4" translate="pages.Owner.view.title"></span>
+			    </div>
+			    <div class="panel-body">
+			    	<div class=" form-horizontal">		
+				
+				
+        <div class="form-group">
+            <label class="col-sm-2 control-label" translate="pages.Owner.view.field.address"></label>
+            <div class="col-sm-10 form-control-static" ng-bind="owner.address"></div>
+        </div>
+        <div class="line line-dashed b-b line-lg pull-in"></div>
+    					
+				
+				
+        <div class="form-group">
+            <label class="col-sm-2 control-label" translate="pages.Owner.view.field.city"></label>
+            <div class="col-sm-10 form-control-static" ng-bind="owner.city"></div>
+        </div>
+        <div class="line line-dashed b-b line-lg pull-in"></div>
+    					
+				
+				
+        <div class="form-group">
+            <label class="col-sm-2 control-label" translate="pages.Owner.view.field.firstName"></label>
+            <div class="col-sm-10 form-control-static" ng-bind="owner.firstName"></div>
+        </div>
+        <div class="line line-dashed b-b line-lg pull-in"></div>
+    					
+				
+				
+        <div class="form-group">
+            <label class="col-sm-2 control-label" translate="pages.Owner.view.field.lastName"></label>
+            <div class="col-sm-10 form-control-static" ng-bind="owner.lastName"></div>
+        </div>
+        <div class="line line-dashed b-b line-lg pull-in"></div>
+    					
+				
+				
+        <div class="form-group">
+            <label class="col-sm-2 control-label" translate="pages.Owner.view.field.telephone"></label>
+            <div class="col-sm-10 form-control-static" ng-bind="owner.telephone"></div>
+        </div>
+        <div class="line line-dashed b-b line-lg pull-in"></div>
+    					
+				
+				
+					</div>
+			    </div>
+			    <footer class="panel-footer text-right bg-light lter">
+			      	<a class="btn btn-default" ui-sref="app.owner.edit({id:owner.id})">
+				    	<i class="fa fa-edit" translate="pages.Owner.view.edit"></i>
+			       	</a>
+					<a class="btn btn-danger" ng-click="deleteOwner(owner)" mx-show-loading>
+						<i class="fa fa-trash-o" translate="pages.Owner.view.delete"></i>
+			        </a>
+					
+					<a class="btn btn-default" ng-click="back()">
+						<i class="fa fa-chevron-left" translate="pages.Owner.view.back"></i>
+					</a>
+					
+			    </footer>
+			 </div>
+		</div>
+        <div>
+		      
+             <div class="form-group"    
+             ng-init="search={owner:[autocompleteService.promiseToLabel(owner, ['id'])]}"
+                    ng-controller="PetEmbeddedListController" 
+                    >
+                <div class="col-sm-10 form-control-static" 
+                    ng-controller="PetListController" 
+                    ng-include="'app/pet/pet.list.html'">
+                   <a class="h4" href ui-sref="app.pet.list({search:{}})" 
+                        translate="pages.Pet.view.lists" 
+                        translate-value-isval="{{ 'pages.Pet.view.field.owner' | translate }}" translate-value-inval="{{ 'pages.Pet.name' | translate }}">
+                   </a>
+                </div>
+             </div>
+        
+        </div>       
+		
+		
+	</div>
+</div>			

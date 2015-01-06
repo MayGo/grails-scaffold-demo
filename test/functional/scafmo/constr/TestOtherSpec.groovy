@@ -23,7 +23,7 @@ class TestOtherSpec extends AbstractRestSpec {
 			accept "application/json"
 			json {
 				booleanNullable = 'false'
-				testDate = '2014-12-31 12:46:32.32+0200'
+				testDate = '2015-01-02 12:59:57.57+0200'
 				testEnum = 'TEST_1'
 
 
@@ -33,7 +33,7 @@ class TestOtherSpec extends AbstractRestSpec {
 		then: "Should create and return created values"
 		
 			response.json.booleanNullable == 'false'
-			response.json.testDate == '2014-12-31 12:46:32.32+0200'
+			response.json.testDate == '2015-01-02 12:59:57.57+0200'
 			response.json.testEnum == 'TEST_1'
 
 
@@ -46,7 +46,7 @@ class TestOtherSpec extends AbstractRestSpec {
 		}
 		then: "Should return correct values"
 			response.json.booleanNullable == 'false'
-			response.json.testDate == '2014-12-31 12:46:32.32+0200'
+			response.json.testDate == '2015-01-02 12:59:57.57+0200'
 			response.json.testEnum == 'TEST_1'
 
 
@@ -58,7 +58,7 @@ class TestOtherSpec extends AbstractRestSpec {
 			accept "application/json"
 			json {
 				booleanNullable = 'false'
-				testDate = '2014-12-31 12:46:32.32+0200'
+				testDate = '2015-01-02 12:59:57.57+0200'
 				testEnum = 'TEST_1'
 
 
@@ -66,7 +66,7 @@ class TestOtherSpec extends AbstractRestSpec {
 		}
 		then: "Should return updated values"
 			response.json.booleanNullable == 'false'
-			response.json.testDate == '2014-12-31 12:46:32.32+0200'
+			response.json.testDate == '2015-01-02 12:59:57.57+0200'
 			response.json.testEnum == 'TEST_1'
 
 

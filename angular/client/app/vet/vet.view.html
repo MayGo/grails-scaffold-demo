@@ -1,0 +1,56 @@
+
+
+
+
+<div ng-init="pageTitle = 'pages.Vet.view.title'" ng-include=" 'components/blocks/page_heading.html' "></div>
+<div class="wrapper-md ng-scope">
+    <div class="row">
+		<div class="col-sm-6">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+			      <span class="h4" translate="pages.Vet.view.title"></span>
+			    </div>
+			    <div class="panel-body">
+			    	<div class=" form-horizontal">		
+				
+				
+        <div class="form-group">
+            <label class="col-sm-2 control-label" translate="pages.Vet.view.field.firstName"></label>
+            <div class="col-sm-10 form-control-static" ng-bind="vet.firstName"></div>
+        </div>
+        <div class="line line-dashed b-b line-lg pull-in"></div>
+    					
+				
+				
+        <div class="form-group">
+            <label class="col-sm-2 control-label" translate="pages.Vet.view.field.lastName"></label>
+            <div class="col-sm-10 form-control-static" ng-bind="vet.lastName"></div>
+        </div>
+        <div class="line line-dashed b-b line-lg pull-in"></div>
+    					
+				
+				
+					</div>
+			    </div>
+			    <footer class="panel-footer text-right bg-light lter">
+			      	<a class="btn btn-default" ui-sref="app.vet.edit({id:vet.id})">
+				    	<i class="fa fa-edit" translate="pages.Vet.view.edit"></i>
+			       	</a>
+					<a class="btn btn-danger" ng-click="deleteVet(vet)" mx-show-loading>
+						<i class="fa fa-trash-o" translate="pages.Vet.view.delete"></i>
+			        </a>
+					
+					<a class="btn btn-default" ng-click="back()">
+						<i class="fa fa-chevron-left" translate="pages.Vet.view.back"></i>
+					</a>
+					
+			    </footer>
+			 </div>
+		</div>
+        <div>
+		      
+        </div>       
+		
+		
+	</div>
+</div>			

@@ -16,7 +16,7 @@ abstract class AbstractRestSpec extends Specification {
     RestBuilder restBuilder = new RestBuilder()
 
     @Shared
-    String baseUrl = "http://localhost:3333/horizon"
+    String baseUrl = Holders.config.grails.serverURL
 
     def sendWrongCredentials() {
             restBuilder.post("${baseUrl}/api/login") {
@@ -30,8 +30,8 @@ abstract class AbstractRestSpec extends Specification {
     def sendCorrectCredentials() {
             restBuilder.post("${baseUrl}/api/login") {
                 json {
-					username = "${Holders.config.functionalTest.userName}"
-					password = "${Holders.config.functionalTest.password}"
+					username = "jimi"//"${Holders.config.functionalTest.userName}"
+					password = "jimi"//"${Holders.config.functionalTest.password}"
 				}
             }
     }

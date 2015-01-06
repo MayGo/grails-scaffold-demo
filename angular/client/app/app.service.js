@@ -49,6 +49,69 @@ angular.module('angularDemoApp')
 		},
 	
 	
+  		tagQuery : function(val, labelProperties, tagsOutput){
+  			return resourceQuery(val, 'tags', labelProperties, 'tasks', tagsOutput);
+	    },
+	    tagFormatLabel : function(model, labelProperties) {
+		    return toLabel(model, labelProperties);
+		},
+    
+  		taskQuery : function(val, labelProperties, tagsOutput){
+  			return resourceQuery(val, 'tasks', labelProperties, 'tags', tagsOutput);
+	    },
+	    taskFormatLabel : function(model, labelProperties) {
+		    return toLabel(model, labelProperties);
+		},
+    
+  		ownerQuery : function(val, labelProperties, tagsOutput){
+  			return resourceQuery(val, 'owners', labelProperties, 'pets', tagsOutput);
+	    },
+	    ownerFormatLabel : function(model, labelProperties) {
+		    return toLabel(model, labelProperties);
+		},
+    
+  		personQuery : function(val, labelProperties, tagsOutput){
+  			return resourceQuery(val, 'persons', labelProperties, '', tagsOutput);
+	    },
+	    personFormatLabel : function(model, labelProperties) {
+		    return toLabel(model, labelProperties);
+		},
+    
+  		petQuery : function(val, labelProperties, tagsOutput){
+  			return resourceQuery(val, 'pets', labelProperties, 'visits,type,owner', tagsOutput);
+	    },
+	    petFormatLabel : function(model, labelProperties) {
+		    return toLabel(model, labelProperties);
+		},
+    
+  		petTypeQuery : function(val, labelProperties, tagsOutput){
+  			return resourceQuery(val, 'pettypes', labelProperties, '', tagsOutput);
+	    },
+	    petTypeFormatLabel : function(model, labelProperties) {
+		    return toLabel(model, labelProperties);
+		},
+    
+  		specialityQuery : function(val, labelProperties, tagsOutput){
+  			return resourceQuery(val, 'specialitys', labelProperties, '', tagsOutput);
+	    },
+	    specialityFormatLabel : function(model, labelProperties) {
+		    return toLabel(model, labelProperties);
+		},
+    
+  		vetQuery : function(val, labelProperties, tagsOutput){
+  			return resourceQuery(val, 'vets', labelProperties, 'specialities', tagsOutput);
+	    },
+	    vetFormatLabel : function(model, labelProperties) {
+		    return toLabel(model, labelProperties);
+		},
+    
+  		visitQuery : function(val, labelProperties, tagsOutput){
+  			return resourceQuery(val, 'visits', labelProperties, 'pet', tagsOutput);
+	    },
+	    visitFormatLabel : function(model, labelProperties) {
+		    return toLabel(model, labelProperties);
+		},
+    
   		divisionCollectionQuery : function(val, labelProperties, tagsOutput){
   			return resourceQuery(val, 'divisioncollections', labelProperties, 'persons,headDivision', tagsOutput);
 	    },

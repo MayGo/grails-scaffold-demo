@@ -1,5 +1,40 @@
 testDataConfig {
 	sampleData {
+		'org.example.pomodoro.Tag' {
+			def i = 1
+			name = {->"Work Tag ${i++}" }
+		}
+		'org.example.pomodoro.Task' {
+			def i = 1
+			summary = {->"Work Summary ${i++}" }
+		}
+		'org.grails.samples.Owner' {
+			def i = 1
+			telephone = {->"555${i++}"}
+		}
+		'org.grails.samples.Person' {
+			def i = 1
+		}
+		'org.grails.samples.Pet' {
+			def i = 1
+		}
+		'org.grails.samples.PetType' {
+			def i = 1
+			name = {->"Type ${i++}" }
+		}
+		'org.grails.samples.Speciality' {
+			def i = 1
+			name = {->"Type ${i++}" }
+		}
+		'org.grails.samples.Vet' {
+			def i = 1
+		}
+		'org.grails.samples.Visit' {
+			def i = 1
+		}
+		
+		
+		
 	    'scafmo.constr.TestNumber' {
             def i = 1
             doubleNr = {->123.123 }

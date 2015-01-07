@@ -4,20 +4,17 @@ import org.springframework.security.core.userdetails.UserDetails
 import org.springframework.security.provisioning.InMemoryUserDetailsManager
 
 class BootStrap {
+
+	def testUserGeneratorService
+
 	
-	def userDetailsService
-	def springSecurityService
-
     def init = { servletContext ->
-		
-		UserDetails jimi = new User('jimi', springSecurityService.encodePassword('jimi'), [new SimpleGrantedAuthority('ROLE_USER'), new SimpleGrantedAuthority('ROLE_ADMIN')])
-		userDetailsService.createUser(jimi)
-
-		UserDetails alvaro = new User('115537660854424164575', 'N/A', [new SimpleGrantedAuthority('ROLE_USER'), new SimpleGrantedAuthority('ROLE_ADMIN')])
-		userDetailsService.createUser(alvaro)
 
 		defpackage.CustomMarshallerRegistrar.registerMarshallers()
 		defpackage.InternalFrontendHelper.writeConfig('angular/client/')
+		testUserGeneratorService.generate()
+
+
 
     }
     def destroy = {

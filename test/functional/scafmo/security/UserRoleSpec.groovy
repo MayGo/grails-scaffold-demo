@@ -3,88 +3,69 @@ package scafmo.security
 
 import grails.plugins.rest.client.*
 import spock.lang.Specification
+import spock.lang.Shared
+import spock.lang.Ignore
 import static org.springframework.http.HttpStatus.*
 import defpackage.AbstractRestSpec
+import defpackage.RestQueries
 
 
 
 
-class UserRoleSpec extends AbstractRestSpec {
-
-	void "Test UserRole crud"() {
-
-		given:
-		def authResponse = sendCorrectCredentials()
-		def userRoleId
-
+class UserRoleSpec extends AbstractRestSpec implements RestQueries{
+	
+	String REST_URL = "${baseUrl}/userroles"
+	
+	@Shared
+	Long domainId
+	@Shared
+	Long otherDomainId
+	
+	@Shared
+	def authResponse
+	
+	@Shared
+	def response
+	
+	def setupSpec() {
+		authResponse = sendCorrectCredentials()
+	}
+	
+	void "Test creating another UserRole instance."() {//This is for creating some data to test list sorting
 		when: "Create userRole"
-		def response = restBuilder.post("${baseUrl}/userroles") {
-			header 'Authorization', 'Bearer '+authResponse.json.access_token
-			accept "application/json"
-			json {
-
+			response = sendCreateWithData(){
+				role = null
+				user = null
 
 			}
-		}
-		userRoleId = response.json.id
+			otherDomainId = response.json.id
+			
 		then: "Should create and return created values"
 		
+			response.json.role?.id == null
+			response.json.user?.id == null
 
+			response.status == CREATED.value()
+	}
 
-		response.status == CREATED.value()
-
-		when: "Read userRole"
-		response = restBuilder.get("${baseUrl}/userroles/${userRoleId}") {
-			header 'Authorization', 'Bearer '+authResponse.json.access_token
-			accept "application/json"
-		}
-		then: "Should return correct values"
-
-
-		response.status == OK.value()
-
-		when: "Update userRole"
-		response = restBuilder.put("${baseUrl}/userroles/${userRoleId}") {
-			header 'Authorization', 'Bearer '+authResponse.json.access_token
-			accept "application/json"
-			json {
-
+	void "Test creating UserRole instance."() {
+		when: "Create userRole"
+			response = sendCreateWithData(){
+				role = null
+				user = null
 
 			}
-		}
-		then: "Should return updated values"
+			domainId = response.json.id
+			
+		then: "Should create and return created values"
+			response.json.role?.id == null
+			response.json.user?.id == null
 
-
-		response.status == OK.value()
-
-
-		when:"Get userRole sorted list"
-		response = restBuilder.get("${baseUrl}/userroles.json?order=desc&sort=id") {
-			header 'Authorization', 'Bearer '+authResponse.json.access_token
-			accept "application/json"
-		}
-
-		then:"First item should be just inserted object"
-		response.json[0].id == userRoleId
-		response.status == OK.value()
-
-		
-		when:"Find unexisting userRole"
-		response = restBuilder.get("${baseUrl}/userroles/nonexistent") {
-			header 'Authorization', 'Bearer '+authResponse.json.access_token
-			accept "application/json"
-		}
-		then:"Should not find"
-		response.status == NOT_FOUND.value()
-
-		
-		when: "Delete userRole"
-		response = restBuilder.delete("${baseUrl}/userroles/${userRoleId}") {
-			header 'Authorization', 'Bearer '+authResponse.json.access_token
-			accept "application/json"
-		}
-		then:
-		response.status == NO_CONTENT.value()
-		
+			response.status == CREATED.value()
 	}
+	
+	
+			
+		
+
 }

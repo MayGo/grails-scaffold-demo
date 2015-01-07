@@ -3,98 +3,252 @@ package org.grails.samples
 
 import grails.plugins.rest.client.*
 import spock.lang.Specification
+import spock.lang.Shared
+import spock.lang.Ignore
 import static org.springframework.http.HttpStatus.*
 import defpackage.AbstractRestSpec
+import defpackage.RestQueries
 
 
 
 
-class PetSpec extends AbstractRestSpec {
-
-	void "Test Pet crud"() {
-
-		given:
-		def authResponse = sendCorrectCredentials()
-		def petId
-
+class PetSpec extends AbstractRestSpec implements RestQueries{
+	
+	String REST_URL = "${baseUrl}/pets"
+	
+	@Shared
+	Long domainId
+	@Shared
+	Long otherDomainId
+	
+	@Shared
+	def authResponse
+	
+	@Shared
+	def response
+	
+	def setupSpec() {
+		authResponse = sendCorrectCredentials()
+	}
+	
+	void "Test creating another Pet instance."() {//This is for creating some data to test list sorting
 		when: "Create pet"
-		def response = restBuilder.post("${baseUrl}/pets") {
-			header 'Authorization', 'Bearer '+authResponse.json.access_token
-			accept "application/json"
-			json {
-				birthDate = '2015-01-02 12:59:55.55+0200'
+			response = sendCreateWithData(){
+				birthDate = '2015-01-07 10:06:06.072+0200'
 				name = 'name'
-
+				type = null
+				owner = null
 
 			}
-		}
-		petId = response.json.id
+			otherDomainId = response.json.id
+			
 		then: "Should create and return created values"
 		
-			response.json.birthDate == '2015-01-02 12:59:55.55+0200'
+			response.json.birthDate == '2015-01-07T08:06:06Z'
 			response.json.name == 'name'
+			response.json.type?.id == null
+			response.json.owner?.id == null
 
+			response.status == CREATED.value()
+	}
 
-		response.status == CREATED.value()
-
-		when: "Read pet"
-		response = restBuilder.get("${baseUrl}/pets/${petId}") {
-			header 'Authorization', 'Bearer '+authResponse.json.access_token
-			accept "application/json"
-		}
-		then: "Should return correct values"
-			response.json.birthDate == '2015-01-02 12:59:55.55+0200'
-			response.json.name == 'name'
-
-
-		response.status == OK.value()
-
-		when: "Update pet"
-		response = restBuilder.put("${baseUrl}/pets/${petId}") {
-			header 'Authorization', 'Bearer '+authResponse.json.access_token
-			accept "application/json"
-			json {
-				birthDate = '2015-01-02 12:59:55.55+0200'
+	void "Test creating Pet instance."() {
+		when: "Create pet"
+			response = sendCreateWithData(){
+				birthDate = '2015-01-07 10:06:06.072+0200'
 				name = 'name'
+				type = null
+				owner = null
+
+			}
+			domainId = response.json.id
+			
+		then: "Should create and return created values"
+			response.json.birthDate == '2015-01-07T08:06:06Z'
+			response.json.name == 'name'
+			response.json.type?.id == null
+			response.json.owner?.id == null
+
+			response.status == CREATED.value()
+	}
+	
+	
+			
+		
+
+	void "Test reading Pet instance."() {
+		when: "Read pet"
+			response = readDomainItemWithParams(domainId.toString(), "")
+		then: "Should return correct values"
+			response.json.birthDate == '2015-01-07T08:06:06Z'
+			response.json.name == 'name'
+			response.json.type?.id == null
+			response.json.owner?.id == null
+
+			response.status == OK.value()
+	}
+	
+	
+	void "Test excluding fields from reading Pet instance."() {
+		when: "Read pet id excluded"
+			response = readDomainItemWithParams(domainId.toString(), "excludes=id")
+		then: "Should not return id"
+			response.json.id == null
+			response.status == OK.value()
+	}
+	
+	
+	void "Test including fields from reading Pet instance."() {
+		when: "Read pet id excluded and then included"
+			response = readDomainItemWithParams(domainId.toString(), "excludes=id&includes=id")
+		then: "Should return id"
+			response.json.id != null
+			response.status == OK.value()
+	}
+	
+	
+	void "Test reading unexisting Pet instance."() {
+		when:"Find unexisting pet"
+			response = readDomainItemWithParams("9999999999", "")
+		then:"Should not find"
+			response.status == NOT_FOUND.value()
+		when:"Find unexisting pet id not a number"
+			response = readDomainItemWithParams("nonexistent", "")
+		then:"Should not find"
+			response.status == NOT_FOUND.value()
+	}
+
+	
+	void "Test updating Pet instance."() {
+		when: "Update pet"
+			response = sendUpdateWithData(domainId.toString()){
+				birthDate = '2015-01-07 10:06:06.088+0200'
+				name = 'name'
+				type = null
+				owner = null
 
 
 			}
-		}
 		then: "Should return updated values"
-			response.json.birthDate == '2015-01-02 12:59:55.55+0200'
+			response.json.birthDate == '2015-01-07T08:06:06Z'
 			response.json.name == 'name'
+			response.json.type?.id == null
+			response.json.owner?.id == null
 
 
-		response.status == OK.value()
+			response.status == OK.value()
+	}
+
+	void "Test updating unexisting Pet instance."() {
+		when: "Update unexisting pet"
+			response = sendUpdateWithData("9999999999"){
+					birthDate = '2015-01-07 10:06:06.088+0200'
+				name = 'name'
+				type = null
+				owner = null
 
 
-		when:"Get pet sorted list"
-		response = restBuilder.get("${baseUrl}/pets.json?order=desc&sort=id") {
-			header 'Authorization', 'Bearer '+authResponse.json.access_token
-			accept "application/json"
-		}
+			}
+		then:"Should not find"
+			response.status == NOT_FOUND.value()
+			
+		when: "Update unexisting pet id not a number"
+			response = sendUpdateWithData("nonexistent"){
+					birthDate = '2015-01-07 10:06:06.088+0200'
+				name = 'name'
+				type = null
+				owner = null
+
+
+			}
+		then:"Should not find"
+			response.status == NOT_FOUND.value()
+	}
+	
+	void "Test Pet list sorting."() {
+		when:"Get pet sorted list DESC"
+			response = queryListWithParams("order=desc&sort=id")
 
 		then:"First item should be just inserted object"
-		response.json[0].id == petId
-		response.status == OK.value()
+			response.json[0].id == domainId
+			response.status == OK.value()
+		
+		when:"Get pet sorted list ASC"
+			response = queryListWithParams("order=asc&sort=id")
 
-		
-		when:"Find unexisting pet"
-		response = restBuilder.get("${baseUrl}/pets/nonexistent") {
-			header 'Authorization', 'Bearer '+authResponse.json.access_token
-			accept "application/json"
-		}
-		then:"Should not find"
-		response.status == NOT_FOUND.value()
-
-		
-		when: "Delete pet"
-		response = restBuilder.delete("${baseUrl}/pets/${petId}") {
-			header 'Authorization', 'Bearer '+authResponse.json.access_token
-			accept "application/json"
-		}
-		then:
-		response.status == NO_CONTENT.value()
-		
+		then:"First item should not be just inserted object"
+			response.json[0].id != domainId
+			response.status == OK.value()
 	}
+	
+	
+	void "Test Pet list max property."() {
+		when:"Get pet list with max 2 items"
+			response = queryListWithParams("max=2")
+
+		then:"Should be only 2 items"
+			response.json.size() == 2
+	}
+	
+	@Ignore // have to have more then maxLimit items
+	void "Test Pet list max property."() {
+		given:
+			int maxLimit = 100// Set real max items limit
+			
+		when:"Get pet list with maximum items"
+			response = queryListWithParams("max=$maxLimit")
+
+		then:"Should contains maximum items"
+			response.json.size() == maxLimit
+			
+		when:"Get pet list with maximum + 1 items"
+			response = queryListWithParams("max=${maxLimit+1}")
+
+		then:"Should contains maximum items"
+			response.json.size() == maxLimit
+	}
+	
+	
+	void "Test excluding fields in Pet list."() {
+		when:"Get pet sorted list"
+			response = queryListWithParams("excludes=id")
+
+		then:"First item should be just inserted object"
+			response.json[0].id == null
+	}
+	
+	
+	void "Test including fields in Pet list."() {
+		when:"Get pet sorted list"
+			response = queryListWithParams("excludes=id&includes=id")
+
+		then:"First item should be just inserted object"
+			response.json[0].id != null
+	}
+	
+	void "Test filtering in Pet list."() {
+		when:"Get pet sorted list"
+			response = queryListWithParams("order=desc&sort=id")
+
+		then:"First item should be just inserted object"
+			response.json[0].id == domainId
+			response.status == OK.value()
+	}
+	
+	
+	void "Test deleting other Pet instance."() {//This is for creating some data to test list sorting
+		when: "Delete pet"
+			response = deleteDomainItem(otherDomainId.toString())
+		then:
+			response.status == NO_CONTENT.value()
+	}
+	
+	
+	void "Test deleting Pet instance."() {
+		when: "Delete pet"
+			response = deleteDomainItem(domainId.toString())
+		then:
+			response.status == NO_CONTENT.value()
+	}
+
 }

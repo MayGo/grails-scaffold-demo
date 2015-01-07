@@ -41,11 +41,11 @@ angular.module('angularDemoApp', [
  		
  		//Set defaults
 		var defaultConfig = {
- 				restUrl : 'http://localhost:8080/Scafmo',
- 	 			loginUrl : 'api/login',
- 	 			logoutUrl : 'api/logout',
- 	 			validationUrl: 'api/validate',
- 	 			securityEnabled: false,
+ 				restUrl : 'http://localhost:3333/Scafmo',
+ 	 			loginUrl : '/api/login',
+ 	 			logoutUrl : '/api/logout',
+ 	 			validationUrl: '/api/validate',
+ 	 			securityEnabled: true,
 		};
  		var loadSuccess = function( data ) {
 			 if(data){

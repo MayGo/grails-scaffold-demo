@@ -1,4 +1,4 @@
 {
-    "restUrl": "http://localhost:8080/Scafmo",
-    "securityEnabled": false
+    "restUrl": "http://localhost:3333/Scafmo",
+    "securityEnabled": true
 }

@@ -38,18 +38,19 @@ class OwnerSpec extends AbstractRestSpec implements RestQueries{
 				city = 'city'
 				firstName = 'firstName'
 				lastName = 'lastName'
-				telephone = 'telephone'
+				telephone = '555409'
 
 			}
+			
 			otherDomainId = response.json.id
 			
+			
 		then: "Should create and return created values"
-		
 			response.json.address == 'address'
 			response.json.city == 'city'
 			response.json.firstName == 'firstName'
 			response.json.lastName == 'lastName'
-			response.json.telephone == 'telephone'
+			response.json.telephone == '555409'
 
 			response.status == CREATED.value()
 	}
@@ -61,17 +62,20 @@ class OwnerSpec extends AbstractRestSpec implements RestQueries{
 				city = 'city'
 				firstName = 'firstName'
 				lastName = 'lastName'
-				telephone = 'telephone'
+				telephone = '555410'
 
 			}
+			
 			domainId = response.json.id
 			
+			
 		then: "Should create and return created values"
+			
 			response.json.address == 'address'
 			response.json.city == 'city'
 			response.json.firstName == 'firstName'
 			response.json.lastName == 'lastName'
-			response.json.telephone == 'telephone'
+			response.json.telephone == '555410'
 
 			response.status == CREATED.value()
 	}
@@ -84,11 +88,12 @@ class OwnerSpec extends AbstractRestSpec implements RestQueries{
 		when: "Read owner"
 			response = readDomainItemWithParams(domainId.toString(), "")
 		then: "Should return correct values"
+			
 			response.json.address == 'address'
 			response.json.city == 'city'
 			response.json.firstName == 'firstName'
 			response.json.lastName == 'lastName'
-			response.json.telephone == 'telephone'
+			response.json.telephone == '555410'
 
 			response.status == OK.value()
 	}
@@ -131,7 +136,7 @@ class OwnerSpec extends AbstractRestSpec implements RestQueries{
 				city = 'city'
 				firstName = 'firstName'
 				lastName = 'lastName'
-				telephone = 'telephone'
+				telephone = '555411'
 
 
 			}
@@ -140,7 +145,7 @@ class OwnerSpec extends AbstractRestSpec implements RestQueries{
 			response.json.city == 'city'
 			response.json.firstName == 'firstName'
 			response.json.lastName == 'lastName'
-			response.json.telephone == 'telephone'
+			response.json.telephone == '555411'
 
 
 			response.status == OK.value()
@@ -153,7 +158,7 @@ class OwnerSpec extends AbstractRestSpec implements RestQueries{
 				city = 'city'
 				firstName = 'firstName'
 				lastName = 'lastName'
-				telephone = 'telephone'
+				telephone = '555411'
 
 
 			}
@@ -166,7 +171,7 @@ class OwnerSpec extends AbstractRestSpec implements RestQueries{
 				city = 'city'
 				firstName = 'firstName'
 				lastName = 'lastName'
-				telephone = 'telephone'
+				telephone = '555411'
 
 
 			}

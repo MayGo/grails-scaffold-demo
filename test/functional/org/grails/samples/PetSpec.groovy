@@ -34,20 +34,21 @@ class PetSpec extends AbstractRestSpec implements RestQueries{
 	void "Test creating another Pet instance."() {//This is for creating some data to test list sorting
 		when: "Create pet"
 			response = sendCreateWithData(){
-				birthDate = '2015-01-07 10:06:06.072+0200'
-				name = 'name'
-				type = null
-				owner = null
+				birthDate = '2015-01-08 10:10:38.287+0200'
+				name = 'Pet 273'
+				type = 1
+				owner = 1
 
 			}
+			
 			otherDomainId = response.json.id
 			
+			
 		then: "Should create and return created values"
-		
-			response.json.birthDate == '2015-01-07T08:06:06Z'
-			response.json.name == 'name'
-			response.json.type?.id == null
-			response.json.owner?.id == null
+			response.json.birthDate == '2015-01-08T08:10:38Z'
+			response.json.name == 'Pet 273'
+			response.json.type?.id == 1
+			response.json.owner?.id == 1
 
 			response.status == CREATED.value()
 	}
@@ -55,19 +56,22 @@ class PetSpec extends AbstractRestSpec implements RestQueries{
 	void "Test creating Pet instance."() {
 		when: "Create pet"
 			response = sendCreateWithData(){
-				birthDate = '2015-01-07 10:06:06.072+0200'
-				name = 'name'
-				type = null
-				owner = null
+				birthDate = '2015-01-08 10:10:38.299+0200'
+				name = 'Pet 274'
+				type = 1
+				owner = 1
 
 			}
+			
 			domainId = response.json.id
 			
+			
 		then: "Should create and return created values"
-			response.json.birthDate == '2015-01-07T08:06:06Z'
-			response.json.name == 'name'
-			response.json.type?.id == null
-			response.json.owner?.id == null
+			
+			response.json.birthDate == '2015-01-08T08:10:38Z'
+			response.json.name == 'Pet 274'
+			response.json.type?.id == 1
+			response.json.owner?.id == 1
 
 			response.status == CREATED.value()
 	}
@@ -80,10 +84,11 @@ class PetSpec extends AbstractRestSpec implements RestQueries{
 		when: "Read pet"
 			response = readDomainItemWithParams(domainId.toString(), "")
 		then: "Should return correct values"
-			response.json.birthDate == '2015-01-07T08:06:06Z'
-			response.json.name == 'name'
-			response.json.type?.id == null
-			response.json.owner?.id == null
+			
+			response.json.birthDate == '2015-01-08T08:10:38Z'
+			response.json.name == 'Pet 274'
+			response.json.type?.id == 1
+			response.json.owner?.id == 1
 
 			response.status == OK.value()
 	}
@@ -122,18 +127,18 @@ class PetSpec extends AbstractRestSpec implements RestQueries{
 	void "Test updating Pet instance."() {
 		when: "Update pet"
 			response = sendUpdateWithData(domainId.toString()){
-				birthDate = '2015-01-07 10:06:06.088+0200'
-				name = 'name'
-				type = null
-				owner = null
+				birthDate = '2015-01-08 10:10:38.303+0200'
+				name = 'Pet 275'
+				type = 1
+				owner = 1
 
 
 			}
 		then: "Should return updated values"
-			response.json.birthDate == '2015-01-07T08:06:06Z'
-			response.json.name == 'name'
-			response.json.type?.id == null
-			response.json.owner?.id == null
+			response.json.birthDate == '2015-01-08T08:10:38Z'
+			response.json.name == 'Pet 275'
+			response.json.type?.id == 1
+			response.json.owner?.id == 1
 
 
 			response.status == OK.value()
@@ -142,10 +147,10 @@ class PetSpec extends AbstractRestSpec implements RestQueries{
 	void "Test updating unexisting Pet instance."() {
 		when: "Update unexisting pet"
 			response = sendUpdateWithData("9999999999"){
-					birthDate = '2015-01-07 10:06:06.088+0200'
-				name = 'name'
-				type = null
-				owner = null
+					birthDate = '2015-01-08 10:10:38.303+0200'
+				name = 'Pet 275'
+				type = 1
+				owner = 1
 
 
 			}
@@ -154,10 +159,10 @@ class PetSpec extends AbstractRestSpec implements RestQueries{
 			
 		when: "Update unexisting pet id not a number"
 			response = sendUpdateWithData("nonexistent"){
-					birthDate = '2015-01-07 10:06:06.088+0200'
-				name = 'name'
-				type = null
-				owner = null
+					birthDate = '2015-01-08 10:10:38.303+0200'
+				name = 'Pet 275'
+				type = 1
+				owner = 1
 
 
 			}

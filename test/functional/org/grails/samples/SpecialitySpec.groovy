@@ -34,14 +34,15 @@ class SpecialitySpec extends AbstractRestSpec implements RestQueries{
 	void "Test creating another Speciality instance."() {//This is for creating some data to test list sorting
 		when: "Create speciality"
 			response = sendCreateWithData(){
-				name = 'name'
+				name = 'Speciality 137'
 
 			}
+			
 			otherDomainId = response.json.id
 			
+			
 		then: "Should create and return created values"
-		
-			response.json.name == 'name'
+			response.json.name == 'Speciality 137'
 
 			response.status == CREATED.value()
 	}
@@ -49,13 +50,16 @@ class SpecialitySpec extends AbstractRestSpec implements RestQueries{
 	void "Test creating Speciality instance."() {
 		when: "Create speciality"
 			response = sendCreateWithData(){
-				name = 'name'
+				name = 'Speciality 138'
 
 			}
+			
 			domainId = response.json.id
 			
+			
 		then: "Should create and return created values"
-			response.json.name == 'name'
+			
+			response.json.name == 'Speciality 138'
 
 			response.status == CREATED.value()
 	}
@@ -68,7 +72,8 @@ class SpecialitySpec extends AbstractRestSpec implements RestQueries{
 		when: "Read speciality"
 			response = readDomainItemWithParams(domainId.toString(), "")
 		then: "Should return correct values"
-			response.json.name == 'name'
+			
+			response.json.name == 'Speciality 138'
 
 			response.status == OK.value()
 	}
@@ -107,12 +112,12 @@ class SpecialitySpec extends AbstractRestSpec implements RestQueries{
 	void "Test updating Speciality instance."() {
 		when: "Update speciality"
 			response = sendUpdateWithData(domainId.toString()){
-				name = 'name'
+				name = 'Speciality 139'
 
 
 			}
 		then: "Should return updated values"
-			response.json.name == 'name'
+			response.json.name == 'Speciality 139'
 
 
 			response.status == OK.value()
@@ -121,7 +126,7 @@ class SpecialitySpec extends AbstractRestSpec implements RestQueries{
 	void "Test updating unexisting Speciality instance."() {
 		when: "Update unexisting speciality"
 			response = sendUpdateWithData("9999999999"){
-					name = 'name'
+					name = 'Speciality 139'
 
 
 			}
@@ -130,7 +135,7 @@ class SpecialitySpec extends AbstractRestSpec implements RestQueries{
 			
 		when: "Update unexisting speciality id not a number"
 			response = sendUpdateWithData("nonexistent"){
-					name = 'name'
+					name = 'Speciality 139'
 
 
 			}

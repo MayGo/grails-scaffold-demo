@@ -34,18 +34,19 @@ class PersonCollectionlessSpec extends AbstractRestSpec implements RestQueries{
 	void "Test creating another PersonCollectionless instance."() {//This is for creating some data to test list sorting
 		when: "Create personCollectionless"
 			response = sendCreateWithData(){
-				age = 0
-				name = 'name'
-				division = null
+				age = 75
+				name = 'John273 Doe274'
+				division = 1
 
 			}
+			
 			otherDomainId = response.json.id
 			
+			
 		then: "Should create and return created values"
-		
-			response.json.age == 0
-			response.json.name == 'name'
-			response.json.division?.id == null
+			response.json.age == 75
+			response.json.name == 'John273 Doe274'
+			response.json.division?.id == 1
 
 			response.status == CREATED.value()
 	}
@@ -53,17 +54,20 @@ class PersonCollectionlessSpec extends AbstractRestSpec implements RestQueries{
 	void "Test creating PersonCollectionless instance."() {
 		when: "Create personCollectionless"
 			response = sendCreateWithData(){
-				age = 0
-				name = 'name'
-				division = null
+				age = 77
+				name = 'John275 Doe276'
+				division = 1
 
 			}
+			
 			domainId = response.json.id
 			
+			
 		then: "Should create and return created values"
-			response.json.age == 0
-			response.json.name == 'name'
-			response.json.division?.id == null
+			
+			response.json.age == 77
+			response.json.name == 'John275 Doe276'
+			response.json.division?.id == 1
 
 			response.status == CREATED.value()
 	}
@@ -76,9 +80,10 @@ class PersonCollectionlessSpec extends AbstractRestSpec implements RestQueries{
 		when: "Read personCollectionless"
 			response = readDomainItemWithParams(domainId.toString(), "")
 		then: "Should return correct values"
-			response.json.age == 0
-			response.json.name == 'name'
-			response.json.division?.id == null
+			
+			response.json.age == 77
+			response.json.name == 'John275 Doe276'
+			response.json.division?.id == 1
 
 			response.status == OK.value()
 	}
@@ -117,16 +122,16 @@ class PersonCollectionlessSpec extends AbstractRestSpec implements RestQueries{
 	void "Test updating PersonCollectionless instance."() {
 		when: "Update personCollectionless"
 			response = sendUpdateWithData(domainId.toString()){
-				age = 0
-				name = 'name'
-				division = null
+				age = 79
+				name = 'John277 Doe278'
+				division = 1
 
 
 			}
 		then: "Should return updated values"
-			response.json.age == 0
-			response.json.name == 'name'
-			response.json.division?.id == null
+			response.json.age == 79
+			response.json.name == 'John277 Doe278'
+			response.json.division?.id == 1
 
 
 			response.status == OK.value()
@@ -135,9 +140,9 @@ class PersonCollectionlessSpec extends AbstractRestSpec implements RestQueries{
 	void "Test updating unexisting PersonCollectionless instance."() {
 		when: "Update unexisting personCollectionless"
 			response = sendUpdateWithData("9999999999"){
-					age = 0
-				name = 'name'
-				division = null
+					age = 79
+				name = 'John277 Doe278'
+				division = 1
 
 
 			}
@@ -146,9 +151,9 @@ class PersonCollectionlessSpec extends AbstractRestSpec implements RestQueries{
 			
 		when: "Update unexisting personCollectionless id not a number"
 			response = sendUpdateWithData("nonexistent"){
-					age = 0
-				name = 'name'
-				division = null
+					age = 79
+				name = 'John277 Doe278'
+				division = 1
 
 
 			}

@@ -17,6 +17,7 @@ testDataConfig {
 		}
 		'org.grails.samples.Pet' {
 			def i = 1
+			name = {->"Pet ${i++}" }
 		}
 		'org.grails.samples.PetType' {
 			def i = 1
@@ -24,7 +25,7 @@ testDataConfig {
 		}
 		'org.grails.samples.Speciality' {
 			def i = 1
-			name = {->"Type ${i++}" }
+			name = {->"Speciality ${i++}" }
 		}
 		'org.grails.samples.Vet' {
 			def i = 1

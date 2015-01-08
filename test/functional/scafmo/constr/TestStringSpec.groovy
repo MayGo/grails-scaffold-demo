@@ -34,34 +34,35 @@ class TestStringSpec extends AbstractRestSpec implements RestQueries{
 	void "Test creating another TestString instance."() {//This is for creating some data to test list sorting
 		when: "Create testString"
 			response = sendCreateWithData(){
-				blankStr = 'blankStr'
-				creditCardStr = '378282246310005'
-				emailStr = 'a@b.com'
+				blankStr = 'Blank 681'
+				creditCardStr = '372886934857774'
+				emailStr = 'test682@test.com'
 				inListStr = 'test1'
-				matchesStr = 'matchesStr'
-				maxSizeStr = 'maxSi'
-				minSizeStr = 'minSizeStr'
-				notEqualStr = 'notEqualStr'
+				matchesStr = 'ABC'
+				maxSizeStr = 'ABCDE'
+				minSizeStr = 'ABC'
+				notEqualStr = 'notEqualStr 683'
 				sizeStr = 'sizeStr'
-				uniqueStr = 'uniqueStr'
-				urlStr = 'http://www.example.com'
+				uniqueStr = 'U 684'
+				urlStr = 'http://www.test685.com'
 
 			}
+			
 			otherDomainId = response.json.id
 			
+			
 		then: "Should create and return created values"
-		
-			response.json.blankStr == 'blankStr'
-			response.json.creditCardStr == '378282246310005'
-			response.json.emailStr == 'a@b.com'
+			response.json.blankStr == 'Blank 681'
+			response.json.creditCardStr == '372886934857774'
+			response.json.emailStr == 'test682@test.com'
 			response.json.inListStr == 'test1'
-			response.json.matchesStr == 'matchesStr'
-			response.json.maxSizeStr == 'maxSi'
-			response.json.minSizeStr == 'minSizeStr'
-			response.json.notEqualStr == 'notEqualStr'
+			response.json.matchesStr == 'ABC'
+			response.json.maxSizeStr == 'ABCDE'
+			response.json.minSizeStr == 'ABC'
+			response.json.notEqualStr == 'notEqualStr 683'
 			response.json.sizeStr == 'sizeStr'
-			response.json.uniqueStr == 'uniqueStr'
-			response.json.urlStr == 'http://www.example.com'
+			response.json.uniqueStr == 'U 684'
+			response.json.urlStr == 'http://www.test685.com'
 
 			response.status == CREATED.value()
 	}
@@ -69,33 +70,36 @@ class TestStringSpec extends AbstractRestSpec implements RestQueries{
 	void "Test creating TestString instance."() {
 		when: "Create testString"
 			response = sendCreateWithData(){
-				blankStr = 'blankStr'
-				creditCardStr = '378282246310005'
-				emailStr = 'a@b.com'
+				blankStr = 'Blank 686'
+				creditCardStr = '372886934857774'
+				emailStr = 'test687@test.com'
 				inListStr = 'test1'
-				matchesStr = 'matchesStr'
-				maxSizeStr = 'maxSi'
-				minSizeStr = 'minSizeStr'
-				notEqualStr = 'notEqualStr'
+				matchesStr = 'ABC'
+				maxSizeStr = 'ABCDE'
+				minSizeStr = 'ABC'
+				notEqualStr = 'notEqualStr 688'
 				sizeStr = 'sizeStr'
-				uniqueStr = 'uniqueStr'
-				urlStr = 'http://www.example.com'
+				uniqueStr = 'U 689'
+				urlStr = 'http://www.test690.com'
 
 			}
+			
 			domainId = response.json.id
 			
+			
 		then: "Should create and return created values"
-			response.json.blankStr == 'blankStr'
-			response.json.creditCardStr == '378282246310005'
-			response.json.emailStr == 'a@b.com'
+			
+			response.json.blankStr == 'Blank 686'
+			response.json.creditCardStr == '372886934857774'
+			response.json.emailStr == 'test687@test.com'
 			response.json.inListStr == 'test1'
-			response.json.matchesStr == 'matchesStr'
-			response.json.maxSizeStr == 'maxSi'
-			response.json.minSizeStr == 'minSizeStr'
-			response.json.notEqualStr == 'notEqualStr'
+			response.json.matchesStr == 'ABC'
+			response.json.maxSizeStr == 'ABCDE'
+			response.json.minSizeStr == 'ABC'
+			response.json.notEqualStr == 'notEqualStr 688'
 			response.json.sizeStr == 'sizeStr'
-			response.json.uniqueStr == 'uniqueStr'
-			response.json.urlStr == 'http://www.example.com'
+			response.json.uniqueStr == 'U 689'
+			response.json.urlStr == 'http://www.test690.com'
 
 			response.status == CREATED.value()
 	}
@@ -108,17 +112,18 @@ class TestStringSpec extends AbstractRestSpec implements RestQueries{
 		when: "Read testString"
 			response = readDomainItemWithParams(domainId.toString(), "")
 		then: "Should return correct values"
-			response.json.blankStr == 'blankStr'
-			response.json.creditCardStr == '378282246310005'
-			response.json.emailStr == 'a@b.com'
+			
+			response.json.blankStr == 'Blank 686'
+			response.json.creditCardStr == '372886934857774'
+			response.json.emailStr == 'test687@test.com'
 			response.json.inListStr == 'test1'
-			response.json.matchesStr == 'matchesStr'
-			response.json.maxSizeStr == 'maxSi'
-			response.json.minSizeStr == 'minSizeStr'
-			response.json.notEqualStr == 'notEqualStr'
+			response.json.matchesStr == 'ABC'
+			response.json.maxSizeStr == 'ABCDE'
+			response.json.minSizeStr == 'ABC'
+			response.json.notEqualStr == 'notEqualStr 688'
 			response.json.sizeStr == 'sizeStr'
-			response.json.uniqueStr == 'uniqueStr'
-			response.json.urlStr == 'http://www.example.com'
+			response.json.uniqueStr == 'U 689'
+			response.json.urlStr == 'http://www.test690.com'
 
 			response.status == OK.value()
 	}
@@ -157,32 +162,32 @@ class TestStringSpec extends AbstractRestSpec implements RestQueries{
 	void "Test updating TestString instance."() {
 		when: "Update testString"
 			response = sendUpdateWithData(domainId.toString()){
-				blankStr = 'blankStr'
-				creditCardStr = '378282246310005'
-				emailStr = 'a@b.com'
+				blankStr = 'Blank 691'
+				creditCardStr = '372886934857774'
+				emailStr = 'test692@test.com'
 				inListStr = 'test1'
-				matchesStr = 'matchesStr'
-				maxSizeStr = 'maxSi'
-				minSizeStr = 'minSizeStr'
-				notEqualStr = 'notEqualStr'
+				matchesStr = 'ABC'
+				maxSizeStr = 'ABCDE'
+				minSizeStr = 'ABC'
+				notEqualStr = 'notEqualStr 693'
 				sizeStr = 'sizeStr'
-				uniqueStr = 'uniqueStr'
-				urlStr = 'http://www.example.com'
+				uniqueStr = 'U 694'
+				urlStr = 'http://www.test695.com'
 
 
 			}
 		then: "Should return updated values"
-			response.json.blankStr == 'blankStr'
-			response.json.creditCardStr == '378282246310005'
-			response.json.emailStr == 'a@b.com'
+			response.json.blankStr == 'Blank 691'
+			response.json.creditCardStr == '372886934857774'
+			response.json.emailStr == 'test692@test.com'
 			response.json.inListStr == 'test1'
-			response.json.matchesStr == 'matchesStr'
-			response.json.maxSizeStr == 'maxSi'
-			response.json.minSizeStr == 'minSizeStr'
-			response.json.notEqualStr == 'notEqualStr'
+			response.json.matchesStr == 'ABC'
+			response.json.maxSizeStr == 'ABCDE'
+			response.json.minSizeStr == 'ABC'
+			response.json.notEqualStr == 'notEqualStr 693'
 			response.json.sizeStr == 'sizeStr'
-			response.json.uniqueStr == 'uniqueStr'
-			response.json.urlStr == 'http://www.example.com'
+			response.json.uniqueStr == 'U 694'
+			response.json.urlStr == 'http://www.test695.com'
 
 
 			response.status == OK.value()
@@ -191,17 +196,17 @@ class TestStringSpec extends AbstractRestSpec implements RestQueries{
 	void "Test updating unexisting TestString instance."() {
 		when: "Update unexisting testString"
 			response = sendUpdateWithData("9999999999"){
-					blankStr = 'blankStr'
-				creditCardStr = '378282246310005'
-				emailStr = 'a@b.com'
+					blankStr = 'Blank 691'
+				creditCardStr = '372886934857774'
+				emailStr = 'test692@test.com'
 				inListStr = 'test1'
-				matchesStr = 'matchesStr'
-				maxSizeStr = 'maxSi'
-				minSizeStr = 'minSizeStr'
-				notEqualStr = 'notEqualStr'
+				matchesStr = 'ABC'
+				maxSizeStr = 'ABCDE'
+				minSizeStr = 'ABC'
+				notEqualStr = 'notEqualStr 693'
 				sizeStr = 'sizeStr'
-				uniqueStr = 'uniqueStr'
-				urlStr = 'http://www.example.com'
+				uniqueStr = 'U 694'
+				urlStr = 'http://www.test695.com'
 
 
 			}
@@ -210,17 +215,17 @@ class TestStringSpec extends AbstractRestSpec implements RestQueries{
 			
 		when: "Update unexisting testString id not a number"
 			response = sendUpdateWithData("nonexistent"){
-					blankStr = 'blankStr'
-				creditCardStr = '378282246310005'
-				emailStr = 'a@b.com'
+					blankStr = 'Blank 691'
+				creditCardStr = '372886934857774'
+				emailStr = 'test692@test.com'
 				inListStr = 'test1'
-				matchesStr = 'matchesStr'
-				maxSizeStr = 'maxSi'
-				minSizeStr = 'minSizeStr'
-				notEqualStr = 'notEqualStr'
+				matchesStr = 'ABC'
+				maxSizeStr = 'ABCDE'
+				minSizeStr = 'ABC'
+				notEqualStr = 'notEqualStr 693'
 				sizeStr = 'sizeStr'
-				uniqueStr = 'uniqueStr'
-				urlStr = 'http://www.example.com'
+				uniqueStr = 'U 694'
+				urlStr = 'http://www.test695.com'
 
 
 			}

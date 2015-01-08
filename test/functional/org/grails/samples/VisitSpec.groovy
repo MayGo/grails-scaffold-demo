@@ -34,18 +34,19 @@ class VisitSpec extends AbstractRestSpec implements RestQueries{
 	void "Test creating another Visit instance."() {//This is for creating some data to test list sorting
 		when: "Create visit"
 			response = sendCreateWithData(){
-				date = '2015-01-07 10:06:06.566+0200'
+				date = '2015-01-08 10:10:38.815+0200'
 				description = 'description'
-				pet = null
+				pet = 1
 
 			}
+			
 			otherDomainId = response.json.id
 			
+			
 		then: "Should create and return created values"
-		
-			response.json.date == '2015-01-07T08:06:06Z'
+			response.json.date == '2015-01-08T08:10:38Z'
 			response.json.description == 'description'
-			response.json.pet?.id == null
+			response.json.pet?.id == 1
 
 			response.status == CREATED.value()
 	}
@@ -53,17 +54,20 @@ class VisitSpec extends AbstractRestSpec implements RestQueries{
 	void "Test creating Visit instance."() {
 		when: "Create visit"
 			response = sendCreateWithData(){
-				date = '2015-01-07 10:06:06.566+0200'
+				date = '2015-01-08 10:10:38.828+0200'
 				description = 'description'
-				pet = null
+				pet = 1
 
 			}
+			
 			domainId = response.json.id
 			
+			
 		then: "Should create and return created values"
-			response.json.date == '2015-01-07T08:06:06Z'
+			
+			response.json.date == '2015-01-08T08:10:38Z'
 			response.json.description == 'description'
-			response.json.pet?.id == null
+			response.json.pet?.id == 1
 
 			response.status == CREATED.value()
 	}
@@ -76,9 +80,10 @@ class VisitSpec extends AbstractRestSpec implements RestQueries{
 		when: "Read visit"
 			response = readDomainItemWithParams(domainId.toString(), "")
 		then: "Should return correct values"
-			response.json.date == '2015-01-07T08:06:06Z'
+			
+			response.json.date == '2015-01-08T08:10:38Z'
 			response.json.description == 'description'
-			response.json.pet?.id == null
+			response.json.pet?.id == 1
 
 			response.status == OK.value()
 	}
@@ -117,16 +122,16 @@ class VisitSpec extends AbstractRestSpec implements RestQueries{
 	void "Test updating Visit instance."() {
 		when: "Update visit"
 			response = sendUpdateWithData(domainId.toString()){
-				date = '2015-01-07 10:06:06.581+0200'
+				date = '2015-01-08 10:10:38.832+0200'
 				description = 'description'
-				pet = null
+				pet = 1
 
 
 			}
 		then: "Should return updated values"
-			response.json.date == '2015-01-07T08:06:06Z'
+			response.json.date == '2015-01-08T08:10:38Z'
 			response.json.description == 'description'
-			response.json.pet?.id == null
+			response.json.pet?.id == 1
 
 
 			response.status == OK.value()
@@ -135,9 +140,9 @@ class VisitSpec extends AbstractRestSpec implements RestQueries{
 	void "Test updating unexisting Visit instance."() {
 		when: "Update unexisting visit"
 			response = sendUpdateWithData("9999999999"){
-					date = '2015-01-07 10:06:06.581+0200'
+					date = '2015-01-08 10:10:38.832+0200'
 				description = 'description'
-				pet = null
+				pet = 1
 
 
 			}
@@ -146,9 +151,9 @@ class VisitSpec extends AbstractRestSpec implements RestQueries{
 			
 		when: "Update unexisting visit id not a number"
 			response = sendUpdateWithData("nonexistent"){
-					date = '2015-01-07 10:06:06.581+0200'
+					date = '2015-01-08 10:10:38.832+0200'
 				description = 'description'
-				pet = null
+				pet = 1
 
 
 			}

@@ -35,19 +35,20 @@ class TestOtherSpec extends AbstractRestSpec implements RestQueries{
 		when: "Create testOther"
 			response = sendCreateWithData(){
 				booleanNullable = true
-				testDate = '2015-01-07 10:06:07.170+0200'
+				testDate = '2015-01-08 10:10:39.609+0200'
 				testEnum = 'TEST_1'
-				testStringType = null
+				testStringType = 1
 
 			}
+			
 			otherDomainId = response.json.id
 			
+			
 		then: "Should create and return created values"
-		
 			response.json.booleanNullable == true
-			response.json.testDate == '2015-01-07T08:06:07Z'
+			response.json.testDate == '2015-01-08T08:10:39Z'
 			response.json.testEnum == 'TEST_1'
-			response.json.testStringType?.id == null
+			response.json.testStringType?.id == 1
 
 			response.status == CREATED.value()
 	}
@@ -56,18 +57,21 @@ class TestOtherSpec extends AbstractRestSpec implements RestQueries{
 		when: "Create testOther"
 			response = sendCreateWithData(){
 				booleanNullable = true
-				testDate = '2015-01-07 10:06:07.170+0200'
+				testDate = '2015-01-08 10:10:39.618+0200'
 				testEnum = 'TEST_1'
-				testStringType = null
+				testStringType = 1
 
 			}
+			
 			domainId = response.json.id
 			
+			
 		then: "Should create and return created values"
+			
 			response.json.booleanNullable == true
-			response.json.testDate == '2015-01-07T08:06:07Z'
+			response.json.testDate == '2015-01-08T08:10:39Z'
 			response.json.testEnum == 'TEST_1'
-			response.json.testStringType?.id == null
+			response.json.testStringType?.id == 1
 
 			response.status == CREATED.value()
 	}
@@ -80,10 +84,11 @@ class TestOtherSpec extends AbstractRestSpec implements RestQueries{
 		when: "Read testOther"
 			response = readDomainItemWithParams(domainId.toString(), "")
 		then: "Should return correct values"
+			
 			response.json.booleanNullable == true
-			response.json.testDate == '2015-01-07T08:06:07Z'
+			response.json.testDate == '2015-01-08T08:10:39Z'
 			response.json.testEnum == 'TEST_1'
-			response.json.testStringType?.id == null
+			response.json.testStringType?.id == 1
 
 			response.status == OK.value()
 	}
@@ -123,17 +128,17 @@ class TestOtherSpec extends AbstractRestSpec implements RestQueries{
 		when: "Update testOther"
 			response = sendUpdateWithData(domainId.toString()){
 				booleanNullable = true
-				testDate = '2015-01-07 10:06:07.185+0200'
+				testDate = '2015-01-08 10:10:39.620+0200'
 				testEnum = 'TEST_1'
-				testStringType = null
+				testStringType = 1
 
 
 			}
 		then: "Should return updated values"
 			response.json.booleanNullable == true
-			response.json.testDate == '2015-01-07T08:06:07Z'
+			response.json.testDate == '2015-01-08T08:10:39Z'
 			response.json.testEnum == 'TEST_1'
-			response.json.testStringType?.id == null
+			response.json.testStringType?.id == 1
 
 
 			response.status == OK.value()
@@ -143,9 +148,9 @@ class TestOtherSpec extends AbstractRestSpec implements RestQueries{
 		when: "Update unexisting testOther"
 			response = sendUpdateWithData("9999999999"){
 					booleanNullable = true
-				testDate = '2015-01-07 10:06:07.185+0200'
+				testDate = '2015-01-08 10:10:39.620+0200'
 				testEnum = 'TEST_1'
-				testStringType = null
+				testStringType = 1
 
 
 			}
@@ -155,9 +160,9 @@ class TestOtherSpec extends AbstractRestSpec implements RestQueries{
 		when: "Update unexisting testOther id not a number"
 			response = sendUpdateWithData("nonexistent"){
 					booleanNullable = true
-				testDate = '2015-01-07 10:06:07.185+0200'
+				testDate = '2015-01-08 10:10:39.620+0200'
 				testEnum = 'TEST_1'
-				testStringType = null
+				testStringType = 1
 
 
 			}

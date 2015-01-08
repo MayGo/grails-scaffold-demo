@@ -38,18 +38,19 @@ class UserSpec extends AbstractRestSpec implements RestQueries{
 				accountLocked = true
 				enabled = true
 				passwordExpired = true
-				username = 'username'
+				username = 'John Doe 261'
 
 			}
+			
 			otherDomainId = response.json.id
 			
+			
 		then: "Should create and return created values"
-		
 			response.json.accountExpired == true
 			response.json.accountLocked == true
 			response.json.enabled == true
 			response.json.passwordExpired == true
-			response.json.username == 'username'
+			response.json.username == 'John Doe 261'
 
 			response.status == CREATED.value()
 	}
@@ -61,17 +62,20 @@ class UserSpec extends AbstractRestSpec implements RestQueries{
 				accountLocked = true
 				enabled = true
 				passwordExpired = true
-				username = 'username'
+				username = 'John Doe 262'
 
 			}
+			
 			domainId = response.json.id
 			
+			
 		then: "Should create and return created values"
+			
 			response.json.accountExpired == true
 			response.json.accountLocked == true
 			response.json.enabled == true
 			response.json.passwordExpired == true
-			response.json.username == 'username'
+			response.json.username == 'John Doe 262'
 
 			response.status == CREATED.value()
 	}
@@ -84,11 +88,12 @@ class UserSpec extends AbstractRestSpec implements RestQueries{
 		when: "Read user"
 			response = readDomainItemWithParams(domainId.toString(), "")
 		then: "Should return correct values"
+			
 			response.json.accountExpired == true
 			response.json.accountLocked == true
 			response.json.enabled == true
 			response.json.passwordExpired == true
-			response.json.username == 'username'
+			response.json.username == 'John Doe 262'
 
 			response.status == OK.value()
 	}
@@ -131,7 +136,7 @@ class UserSpec extends AbstractRestSpec implements RestQueries{
 				accountLocked = true
 				enabled = true
 				passwordExpired = true
-				username = 'username'
+				username = 'John Doe 263'
 
 
 			}
@@ -140,7 +145,7 @@ class UserSpec extends AbstractRestSpec implements RestQueries{
 			response.json.accountLocked == true
 			response.json.enabled == true
 			response.json.passwordExpired == true
-			response.json.username == 'username'
+			response.json.username == 'John Doe 263'
 
 
 			response.status == OK.value()
@@ -153,7 +158,7 @@ class UserSpec extends AbstractRestSpec implements RestQueries{
 				accountLocked = true
 				enabled = true
 				passwordExpired = true
-				username = 'username'
+				username = 'John Doe 263'
 
 
 			}
@@ -166,7 +171,7 @@ class UserSpec extends AbstractRestSpec implements RestQueries{
 				accountLocked = true
 				enabled = true
 				passwordExpired = true
-				username = 'username'
+				username = 'John Doe 263'
 
 
 			}

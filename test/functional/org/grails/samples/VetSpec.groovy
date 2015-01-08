@@ -38,10 +38,11 @@ class VetSpec extends AbstractRestSpec implements RestQueries{
 				lastName = 'lastName'
 
 			}
+			
 			otherDomainId = response.json.id
 			
+			
 		then: "Should create and return created values"
-		
 			response.json.firstName == 'firstName'
 			response.json.lastName == 'lastName'
 
@@ -55,9 +56,12 @@ class VetSpec extends AbstractRestSpec implements RestQueries{
 				lastName = 'lastName'
 
 			}
+			
 			domainId = response.json.id
 			
+			
 		then: "Should create and return created values"
+			
 			response.json.firstName == 'firstName'
 			response.json.lastName == 'lastName'
 
@@ -72,6 +76,7 @@ class VetSpec extends AbstractRestSpec implements RestQueries{
 		when: "Read vet"
 			response = readDomainItemWithParams(domainId.toString(), "")
 		then: "Should return correct values"
+			
 			response.json.firstName == 'firstName'
 			response.json.lastName == 'lastName'
 

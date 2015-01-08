@@ -34,17 +34,18 @@ class PersonCollectionSpec extends AbstractRestSpec implements RestQueries{
 	void "Test creating another PersonCollection instance."() {//This is for creating some data to test list sorting
 		when: "Create personCollection"
 			response = sendCreateWithData(){
-				age = 0
-				name = 'name'
+				age = 75
+				name = 'John273 Doe274'
 				division = 1
 
 			}
+			
 			otherDomainId = response.json.id
 			
+			
 		then: "Should create and return created values"
-		
-			response.json.age == 0
-			response.json.name == 'name'
+			response.json.age == 75
+			response.json.name == 'John273 Doe274'
 			response.json.division?.id == 1
 
 			response.status == CREATED.value()
@@ -53,16 +54,19 @@ class PersonCollectionSpec extends AbstractRestSpec implements RestQueries{
 	void "Test creating PersonCollection instance."() {
 		when: "Create personCollection"
 			response = sendCreateWithData(){
-				age = 0
-				name = 'name'
+				age = 77
+				name = 'John275 Doe276'
 				division = 1
 
 			}
+			
 			domainId = response.json.id
 			
+			
 		then: "Should create and return created values"
-			response.json.age == 0
-			response.json.name == 'name'
+			
+			response.json.age == 77
+			response.json.name == 'John275 Doe276'
 			response.json.division?.id == 1
 
 			response.status == CREATED.value()
@@ -76,8 +80,9 @@ class PersonCollectionSpec extends AbstractRestSpec implements RestQueries{
 		when: "Read personCollection"
 			response = readDomainItemWithParams(domainId.toString(), "")
 		then: "Should return correct values"
-			response.json.age == 0
-			response.json.name == 'name'
+			
+			response.json.age == 77
+			response.json.name == 'John275 Doe276'
 			response.json.division?.id == 1
 
 			response.status == OK.value()
@@ -117,15 +122,15 @@ class PersonCollectionSpec extends AbstractRestSpec implements RestQueries{
 	void "Test updating PersonCollection instance."() {
 		when: "Update personCollection"
 			response = sendUpdateWithData(domainId.toString()){
-				age = 0
-				name = 'name'
+				age = 79
+				name = 'John277 Doe278'
 				division = 1
 
 
 			}
 		then: "Should return updated values"
-			response.json.age == 0
-			response.json.name == 'name'
+			response.json.age == 79
+			response.json.name == 'John277 Doe278'
 			response.json.division?.id == 1
 
 
@@ -135,8 +140,8 @@ class PersonCollectionSpec extends AbstractRestSpec implements RestQueries{
 	void "Test updating unexisting PersonCollection instance."() {
 		when: "Update unexisting personCollection"
 			response = sendUpdateWithData("9999999999"){
-					age = 0
-				name = 'name'
+					age = 79
+				name = 'John277 Doe278'
 				division = 1
 
 
@@ -146,8 +151,8 @@ class PersonCollectionSpec extends AbstractRestSpec implements RestQueries{
 			
 		when: "Update unexisting personCollection id not a number"
 			response = sendUpdateWithData("nonexistent"){
-					age = 0
-				name = 'name'
+					age = 79
+				name = 'John277 Doe278'
 				division = 1
 
 

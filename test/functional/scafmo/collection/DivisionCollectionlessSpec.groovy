@@ -34,16 +34,17 @@ class DivisionCollectionlessSpec extends AbstractRestSpec implements RestQueries
 	void "Test creating another DivisionCollectionless instance."() {//This is for creating some data to test list sorting
 		when: "Create divisionCollectionless"
 			response = sendCreateWithData(){
-				name = 'name'
-				headDivision = null
+				name = 'Division137'
+				headDivision = 1
 
 			}
+			
 			otherDomainId = response.json.id
 			
+			
 		then: "Should create and return created values"
-		
-			response.json.name == 'name'
-			response.json.headDivision?.id == null
+			response.json.name == 'Division137'
+			response.json.headDivision?.id == 1
 
 			response.status == CREATED.value()
 	}
@@ -51,15 +52,18 @@ class DivisionCollectionlessSpec extends AbstractRestSpec implements RestQueries
 	void "Test creating DivisionCollectionless instance."() {
 		when: "Create divisionCollectionless"
 			response = sendCreateWithData(){
-				name = 'name'
-				headDivision = null
+				name = 'Division138'
+				headDivision = 1
 
 			}
+			
 			domainId = response.json.id
 			
+			
 		then: "Should create and return created values"
-			response.json.name == 'name'
-			response.json.headDivision?.id == null
+			
+			response.json.name == 'Division138'
+			response.json.headDivision?.id == 1
 
 			response.status == CREATED.value()
 	}
@@ -72,8 +76,9 @@ class DivisionCollectionlessSpec extends AbstractRestSpec implements RestQueries
 		when: "Read divisionCollectionless"
 			response = readDomainItemWithParams(domainId.toString(), "")
 		then: "Should return correct values"
-			response.json.name == 'name'
-			response.json.headDivision?.id == null
+			
+			response.json.name == 'Division138'
+			response.json.headDivision?.id == 1
 
 			response.status == OK.value()
 	}
@@ -112,14 +117,14 @@ class DivisionCollectionlessSpec extends AbstractRestSpec implements RestQueries
 	void "Test updating DivisionCollectionless instance."() {
 		when: "Update divisionCollectionless"
 			response = sendUpdateWithData(domainId.toString()){
-				name = 'name'
-				headDivision = null
+				name = 'Division139'
+				headDivision = 1
 
 
 			}
 		then: "Should return updated values"
-			response.json.name == 'name'
-			response.json.headDivision?.id == null
+			response.json.name == 'Division139'
+			response.json.headDivision?.id == 1
 
 
 			response.status == OK.value()
@@ -128,8 +133,8 @@ class DivisionCollectionlessSpec extends AbstractRestSpec implements RestQueries
 	void "Test updating unexisting DivisionCollectionless instance."() {
 		when: "Update unexisting divisionCollectionless"
 			response = sendUpdateWithData("9999999999"){
-					name = 'name'
-				headDivision = null
+					name = 'Division139'
+				headDivision = 1
 
 
 			}
@@ -138,8 +143,8 @@ class DivisionCollectionlessSpec extends AbstractRestSpec implements RestQueries
 			
 		when: "Update unexisting divisionCollectionless id not a number"
 			response = sendUpdateWithData("nonexistent"){
-					name = 'name'
-				headDivision = null
+					name = 'Division139'
+				headDivision = 1
 
 
 			}

@@ -34,16 +34,15 @@ class UserRoleSpec extends AbstractRestSpec implements RestQueries{
 	void "Test creating another UserRole instance."() {//This is for creating some data to test list sorting
 		when: "Create userRole"
 			response = sendCreateWithData(){
-				role = null
-				user = null
+				role = 1
+				user = 1
 
 			}
-			otherDomainId = response.json.id
+			
 			
 		then: "Should create and return created values"
-		
-			response.json.role?.id == null
-			response.json.user?.id == null
+			response.json.role?.id == 1
+			response.json.user?.id == 1
 
 			response.status == CREATED.value()
 	}
@@ -51,15 +50,16 @@ class UserRoleSpec extends AbstractRestSpec implements RestQueries{
 	void "Test creating UserRole instance."() {
 		when: "Create userRole"
 			response = sendCreateWithData(){
-				role = null
-				user = null
+				role = 1
+				user = 1
 
 			}
-			domainId = response.json.id
+			
 			
 		then: "Should create and return created values"
-			response.json.role?.id == null
-			response.json.user?.id == null
+			
+			response.json.role?.id == 1
+			response.json.user?.id == 1
 
 			response.status == CREATED.value()
 	}

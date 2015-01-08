@@ -34,14 +34,15 @@ class PetTypeSpec extends AbstractRestSpec implements RestQueries{
 	void "Test creating another PetType instance."() {//This is for creating some data to test list sorting
 		when: "Create petType"
 			response = sendCreateWithData(){
-				name = 'name'
+				name = 'Type 412'
 
 			}
+			
 			otherDomainId = response.json.id
 			
+			
 		then: "Should create and return created values"
-		
-			response.json.name == 'name'
+			response.json.name == 'Type 412'
 
 			response.status == CREATED.value()
 	}
@@ -49,13 +50,16 @@ class PetTypeSpec extends AbstractRestSpec implements RestQueries{
 	void "Test creating PetType instance."() {
 		when: "Create petType"
 			response = sendCreateWithData(){
-				name = 'name'
+				name = 'Type 413'
 
 			}
+			
 			domainId = response.json.id
 			
+			
 		then: "Should create and return created values"
-			response.json.name == 'name'
+			
+			response.json.name == 'Type 413'
 
 			response.status == CREATED.value()
 	}
@@ -68,7 +72,8 @@ class PetTypeSpec extends AbstractRestSpec implements RestQueries{
 		when: "Read petType"
 			response = readDomainItemWithParams(domainId.toString(), "")
 		then: "Should return correct values"
-			response.json.name == 'name'
+			
+			response.json.name == 'Type 413'
 
 			response.status == OK.value()
 	}
@@ -107,12 +112,12 @@ class PetTypeSpec extends AbstractRestSpec implements RestQueries{
 	void "Test updating PetType instance."() {
 		when: "Update petType"
 			response = sendUpdateWithData(domainId.toString()){
-				name = 'name'
+				name = 'Type 414'
 
 
 			}
 		then: "Should return updated values"
-			response.json.name == 'name'
+			response.json.name == 'Type 414'
 
 
 			response.status == OK.value()
@@ -121,7 +126,7 @@ class PetTypeSpec extends AbstractRestSpec implements RestQueries{
 	void "Test updating unexisting PetType instance."() {
 		when: "Update unexisting petType"
 			response = sendUpdateWithData("9999999999"){
-					name = 'name'
+					name = 'Type 414'
 
 
 			}
@@ -130,7 +135,7 @@ class PetTypeSpec extends AbstractRestSpec implements RestQueries{
 			
 		when: "Update unexisting petType id not a number"
 			response = sendUpdateWithData("nonexistent"){
-					name = 'name'
+					name = 'Type 414'
 
 
 			}

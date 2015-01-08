@@ -34,34 +34,35 @@ class TestNumberSpec extends AbstractRestSpec implements RestQueries{
 	void "Test creating another TestNumber instance."() {//This is for creating some data to test list sorting
 		when: "Create testNumber"
 			response = sendCreateWithData(){
-				doubleNr = 0.0
-				floatNr = 0.0
-				floatNrScale = 0.0
-				integerNr = 0
-				integerNrInList = 1
-				integerNrMax = 0
-				integerNrMin = 2
-				integerNrNotEqual = 0
-				integerNrRange = 18
-				integerNrUnique = 0
-				longNr = 0
+				doubleNr = 123.123
+				floatNr = 123.123
+				floatNrScale = 2.34
+				integerNr = 273
+				integerNrInList = 3
+				integerNrMax = 2
+				integerNrMin = 3
+				integerNrNotEqual = 2
+				integerNrRange = 19
+				integerNrUnique = 274
+				longNr = 4
 
 			}
+			
 			otherDomainId = response.json.id
 			
+			
 		then: "Should create and return created values"
-		
-			response.json.doubleNr == 0.0
-			response.json.floatNr == 0.0
-			response.json.floatNrScale == 0.0
-			response.json.integerNr == 0
-			response.json.integerNrInList == 1
-			response.json.integerNrMax == 0
-			response.json.integerNrMin == 2
-			response.json.integerNrNotEqual == 0
-			response.json.integerNrRange == 18
-			response.json.integerNrUnique == 0
-			response.json.longNr == 0
+			response.json.doubleNr == 123.123
+			response.json.floatNr == 123.123
+			response.json.floatNrScale == 2.34
+			response.json.integerNr == 273
+			response.json.integerNrInList == 3
+			response.json.integerNrMax == 2
+			response.json.integerNrMin == 3
+			response.json.integerNrNotEqual == 2
+			response.json.integerNrRange == 19
+			response.json.integerNrUnique == 274
+			response.json.longNr == 4
 
 			response.status == CREATED.value()
 	}
@@ -69,33 +70,36 @@ class TestNumberSpec extends AbstractRestSpec implements RestQueries{
 	void "Test creating TestNumber instance."() {
 		when: "Create testNumber"
 			response = sendCreateWithData(){
-				doubleNr = 0.0
-				floatNr = 0.0
-				floatNrScale = 0.0
-				integerNr = 0
-				integerNrInList = 1
-				integerNrMax = 0
-				integerNrMin = 2
-				integerNrNotEqual = 0
-				integerNrRange = 18
-				integerNrUnique = 0
-				longNr = 0
+				doubleNr = 123.123
+				floatNr = 123.123
+				floatNrScale = 2.34
+				integerNr = 275
+				integerNrInList = 3
+				integerNrMax = 2
+				integerNrMin = 3
+				integerNrNotEqual = 2
+				integerNrRange = 19
+				integerNrUnique = 276
+				longNr = 4
 
 			}
+			
 			domainId = response.json.id
 			
+			
 		then: "Should create and return created values"
-			response.json.doubleNr == 0.0
-			response.json.floatNr == 0.0
-			response.json.floatNrScale == 0.0
-			response.json.integerNr == 0
-			response.json.integerNrInList == 1
-			response.json.integerNrMax == 0
-			response.json.integerNrMin == 2
-			response.json.integerNrNotEqual == 0
-			response.json.integerNrRange == 18
-			response.json.integerNrUnique == 0
-			response.json.longNr == 0
+			
+			response.json.doubleNr == 123.123
+			response.json.floatNr == 123.123
+			response.json.floatNrScale == 2.34
+			response.json.integerNr == 275
+			response.json.integerNrInList == 3
+			response.json.integerNrMax == 2
+			response.json.integerNrMin == 3
+			response.json.integerNrNotEqual == 2
+			response.json.integerNrRange == 19
+			response.json.integerNrUnique == 276
+			response.json.longNr == 4
 
 			response.status == CREATED.value()
 	}
@@ -108,17 +112,18 @@ class TestNumberSpec extends AbstractRestSpec implements RestQueries{
 		when: "Read testNumber"
 			response = readDomainItemWithParams(domainId.toString(), "")
 		then: "Should return correct values"
-			response.json.doubleNr == 0.0
-			response.json.floatNr == 0.0
-			response.json.floatNrScale == 0.0
-			response.json.integerNr == 0
-			response.json.integerNrInList == 1
-			response.json.integerNrMax == 0
-			response.json.integerNrMin == 2
-			response.json.integerNrNotEqual == 0
-			response.json.integerNrRange == 18
-			response.json.integerNrUnique == 0
-			response.json.longNr == 0
+			
+			response.json.doubleNr == 123.123
+			response.json.floatNr == 123.123
+			response.json.floatNrScale == 2.34
+			response.json.integerNr == 275
+			response.json.integerNrInList == 3
+			response.json.integerNrMax == 2
+			response.json.integerNrMin == 3
+			response.json.integerNrNotEqual == 2
+			response.json.integerNrRange == 19
+			response.json.integerNrUnique == 276
+			response.json.longNr == 4
 
 			response.status == OK.value()
 	}
@@ -157,32 +162,32 @@ class TestNumberSpec extends AbstractRestSpec implements RestQueries{
 	void "Test updating TestNumber instance."() {
 		when: "Update testNumber"
 			response = sendUpdateWithData(domainId.toString()){
-				doubleNr = 0.0
-				floatNr = 0.0
-				floatNrScale = 0.0
-				integerNr = 0
-				integerNrInList = 1
-				integerNrMax = 0
-				integerNrMin = 2
-				integerNrNotEqual = 0
-				integerNrRange = 18
-				integerNrUnique = 0
-				longNr = 0
+				doubleNr = 123.123
+				floatNr = 123.123
+				floatNrScale = 2.34
+				integerNr = 277
+				integerNrInList = 3
+				integerNrMax = 2
+				integerNrMin = 3
+				integerNrNotEqual = 2
+				integerNrRange = 19
+				integerNrUnique = 278
+				longNr = 4
 
 
 			}
 		then: "Should return updated values"
-			response.json.doubleNr == 0.0
-			response.json.floatNr == 0.0
-			response.json.floatNrScale == 0.0
-			response.json.integerNr == 0
-			response.json.integerNrInList == 1
-			response.json.integerNrMax == 0
-			response.json.integerNrMin == 2
-			response.json.integerNrNotEqual == 0
-			response.json.integerNrRange == 18
-			response.json.integerNrUnique == 0
-			response.json.longNr == 0
+			response.json.doubleNr == 123.123
+			response.json.floatNr == 123.123
+			response.json.floatNrScale == 2.34
+			response.json.integerNr == 277
+			response.json.integerNrInList == 3
+			response.json.integerNrMax == 2
+			response.json.integerNrMin == 3
+			response.json.integerNrNotEqual == 2
+			response.json.integerNrRange == 19
+			response.json.integerNrUnique == 278
+			response.json.longNr == 4
 
 
 			response.status == OK.value()
@@ -191,17 +196,17 @@ class TestNumberSpec extends AbstractRestSpec implements RestQueries{
 	void "Test updating unexisting TestNumber instance."() {
 		when: "Update unexisting testNumber"
 			response = sendUpdateWithData("9999999999"){
-					doubleNr = 0.0
-				floatNr = 0.0
-				floatNrScale = 0.0
-				integerNr = 0
-				integerNrInList = 1
-				integerNrMax = 0
-				integerNrMin = 2
-				integerNrNotEqual = 0
-				integerNrRange = 18
-				integerNrUnique = 0
-				longNr = 0
+					doubleNr = 123.123
+				floatNr = 123.123
+				floatNrScale = 2.34
+				integerNr = 277
+				integerNrInList = 3
+				integerNrMax = 2
+				integerNrMin = 3
+				integerNrNotEqual = 2
+				integerNrRange = 19
+				integerNrUnique = 278
+				longNr = 4
 
 
 			}
@@ -210,17 +215,17 @@ class TestNumberSpec extends AbstractRestSpec implements RestQueries{
 			
 		when: "Update unexisting testNumber id not a number"
 			response = sendUpdateWithData("nonexistent"){
-					doubleNr = 0.0
-				floatNr = 0.0
-				floatNrScale = 0.0
-				integerNr = 0
-				integerNrInList = 1
-				integerNrMax = 0
-				integerNrMin = 2
-				integerNrNotEqual = 0
-				integerNrRange = 18
-				integerNrUnique = 0
-				longNr = 0
+					doubleNr = 123.123
+				floatNr = 123.123
+				floatNrScale = 2.34
+				integerNr = 277
+				integerNrInList = 3
+				integerNrMax = 2
+				integerNrMin = 3
+				integerNrNotEqual = 2
+				integerNrRange = 19
+				integerNrUnique = 278
+				longNr = 4
 
 
 			}

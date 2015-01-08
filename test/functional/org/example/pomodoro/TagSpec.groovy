@@ -34,14 +34,15 @@ class TagSpec extends AbstractRestSpec implements RestQueries{
 	void "Test creating another Tag instance."() {//This is for creating some data to test list sorting
 		when: "Create tag"
 			response = sendCreateWithData(){
-				name = 'name'
+				name = 'Work Tag 137'
 
 			}
+			
 			otherDomainId = response.json.id
 			
+			
 		then: "Should create and return created values"
-		
-			response.json.name == 'name'
+			response.json.name == 'Work Tag 137'
 
 			response.status == CREATED.value()
 	}
@@ -49,13 +50,16 @@ class TagSpec extends AbstractRestSpec implements RestQueries{
 	void "Test creating Tag instance."() {
 		when: "Create tag"
 			response = sendCreateWithData(){
-				name = 'name'
+				name = 'Work Tag 138'
 
 			}
+			
 			domainId = response.json.id
 			
+			
 		then: "Should create and return created values"
-			response.json.name == 'name'
+			
+			response.json.name == 'Work Tag 138'
 
 			response.status == CREATED.value()
 	}
@@ -68,7 +72,8 @@ class TagSpec extends AbstractRestSpec implements RestQueries{
 		when: "Read tag"
 			response = readDomainItemWithParams(domainId.toString(), "")
 		then: "Should return correct values"
-			response.json.name == 'name'
+			
+			response.json.name == 'Work Tag 138'
 
 			response.status == OK.value()
 	}
@@ -107,12 +112,12 @@ class TagSpec extends AbstractRestSpec implements RestQueries{
 	void "Test updating Tag instance."() {
 		when: "Update tag"
 			response = sendUpdateWithData(domainId.toString()){
-				name = 'name'
+				name = 'Work Tag 139'
 
 
 			}
 		then: "Should return updated values"
-			response.json.name == 'name'
+			response.json.name == 'Work Tag 139'
 
 
 			response.status == OK.value()
@@ -121,7 +126,7 @@ class TagSpec extends AbstractRestSpec implements RestQueries{
 	void "Test updating unexisting Tag instance."() {
 		when: "Update unexisting tag"
 			response = sendUpdateWithData("9999999999"){
-					name = 'name'
+					name = 'Work Tag 139'
 
 
 			}
@@ -130,7 +135,7 @@ class TagSpec extends AbstractRestSpec implements RestQueries{
 			
 		when: "Update unexisting tag id not a number"
 			response = sendUpdateWithData("nonexistent"){
-					name = 'name'
+					name = 'Work Tag 139'
 
 
 			}

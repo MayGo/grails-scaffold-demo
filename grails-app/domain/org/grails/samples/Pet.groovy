@@ -16,7 +16,7 @@ class Pet {
 
 	static constraints = {
 		name blank: false, validator: { name, pet ->
-			if (!pet.id && pet.owner?.pets?.find { it.name == name })  {
+			if (!pet.id && pet.owner?.id && pet.owner?.pets?.find { it.id && it.name == name })  {
 				return 'pet.duplicate'
 			}
 		}

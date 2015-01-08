@@ -34,14 +34,15 @@ class RoleSpec extends AbstractRestSpec implements RestQueries{
 	void "Test creating another Role instance."() {//This is for creating some data to test list sorting
 		when: "Create role"
 			response = sendCreateWithData(){
-				authority = 'authority'
+				authority = 'ROLE_261'
 
 			}
+			
 			otherDomainId = response.json.id
 			
+			
 		then: "Should create and return created values"
-		
-			response.json.authority == 'authority'
+			response.json.authority == 'ROLE_261'
 
 			response.status == CREATED.value()
 	}
@@ -49,13 +50,16 @@ class RoleSpec extends AbstractRestSpec implements RestQueries{
 	void "Test creating Role instance."() {
 		when: "Create role"
 			response = sendCreateWithData(){
-				authority = 'authority'
+				authority = 'ROLE_262'
 
 			}
+			
 			domainId = response.json.id
 			
+			
 		then: "Should create and return created values"
-			response.json.authority == 'authority'
+			
+			response.json.authority == 'ROLE_262'
 
 			response.status == CREATED.value()
 	}
@@ -68,7 +72,8 @@ class RoleSpec extends AbstractRestSpec implements RestQueries{
 		when: "Read role"
 			response = readDomainItemWithParams(domainId.toString(), "")
 		then: "Should return correct values"
-			response.json.authority == 'authority'
+			
+			response.json.authority == 'ROLE_262'
 
 			response.status == OK.value()
 	}
@@ -107,12 +112,12 @@ class RoleSpec extends AbstractRestSpec implements RestQueries{
 	void "Test updating Role instance."() {
 		when: "Update role"
 			response = sendUpdateWithData(domainId.toString()){
-				authority = 'authority'
+				authority = 'ROLE_263'
 
 
 			}
 		then: "Should return updated values"
-			response.json.authority == 'authority'
+			response.json.authority == 'ROLE_263'
 
 
 			response.status == OK.value()
@@ -121,7 +126,7 @@ class RoleSpec extends AbstractRestSpec implements RestQueries{
 	void "Test updating unexisting Role instance."() {
 		when: "Update unexisting role"
 			response = sendUpdateWithData("9999999999"){
-					authority = 'authority'
+					authority = 'ROLE_263'
 
 
 			}
@@ -130,7 +135,7 @@ class RoleSpec extends AbstractRestSpec implements RestQueries{
 			
 		when: "Update unexisting role id not a number"
 			response = sendUpdateWithData("nonexistent"){
-					authority = 'authority'
+					authority = 'ROLE_263'
 
 
 			}

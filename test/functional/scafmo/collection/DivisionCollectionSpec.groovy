@@ -34,15 +34,16 @@ class DivisionCollectionSpec extends AbstractRestSpec implements RestQueries{
 	void "Test creating another DivisionCollection instance."() {//This is for creating some data to test list sorting
 		when: "Create divisionCollection"
 			response = sendCreateWithData(){
-				name = 'name'
+				name = 'Division137'
 				headDivision = 1
 
 			}
+			
 			otherDomainId = response.json.id
 			
+			
 		then: "Should create and return created values"
-		
-			response.json.name == 'name'
+			response.json.name == 'Division137'
 			response.json.headDivision?.id == 1
 
 			response.status == CREATED.value()
@@ -51,14 +52,17 @@ class DivisionCollectionSpec extends AbstractRestSpec implements RestQueries{
 	void "Test creating DivisionCollection instance."() {
 		when: "Create divisionCollection"
 			response = sendCreateWithData(){
-				name = 'name'
+				name = 'Division138'
 				headDivision = 1
 
 			}
+			
 			domainId = response.json.id
 			
+			
 		then: "Should create and return created values"
-			response.json.name == 'name'
+			
+			response.json.name == 'Division138'
 			response.json.headDivision?.id == 1
 
 			response.status == CREATED.value()
@@ -72,7 +76,8 @@ class DivisionCollectionSpec extends AbstractRestSpec implements RestQueries{
 		when: "Read divisionCollection"
 			response = readDomainItemWithParams(domainId.toString(), "")
 		then: "Should return correct values"
-			response.json.name == 'name'
+			
+			response.json.name == 'Division138'
 			response.json.headDivision?.id == 1
 
 			response.status == OK.value()
@@ -112,13 +117,13 @@ class DivisionCollectionSpec extends AbstractRestSpec implements RestQueries{
 	void "Test updating DivisionCollection instance."() {
 		when: "Update divisionCollection"
 			response = sendUpdateWithData(domainId.toString()){
-				name = 'name'
+				name = 'Division139'
 				headDivision = 1
 
 
 			}
 		then: "Should return updated values"
-			response.json.name == 'name'
+			response.json.name == 'Division139'
 			response.json.headDivision?.id == 1
 
 
@@ -128,7 +133,7 @@ class DivisionCollectionSpec extends AbstractRestSpec implements RestQueries{
 	void "Test updating unexisting DivisionCollection instance."() {
 		when: "Update unexisting divisionCollection"
 			response = sendUpdateWithData("9999999999"){
-					name = 'name'
+					name = 'Division139'
 				headDivision = 1
 
 
@@ -138,7 +143,7 @@ class DivisionCollectionSpec extends AbstractRestSpec implements RestQueries{
 			
 		when: "Update unexisting divisionCollection id not a number"
 			response = sendUpdateWithData("nonexistent"){
-					name = 'name'
+					name = 'Division139'
 				headDivision = 1
 
 

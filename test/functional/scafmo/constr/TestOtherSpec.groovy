@@ -35,7 +35,7 @@ class TestOtherSpec extends AbstractRestSpec implements RestQueries{
 		when: "Create testOther"
 			response = sendCreateWithData(){
 				booleanNullable = true
-				testDate = '2015-01-08 10:10:39.609+0200'
+				testDate = '2015-01-08 14:26:14.231+0200'
 				testEnum = 'TEST_1'
 				testStringType = 1
 
@@ -46,7 +46,7 @@ class TestOtherSpec extends AbstractRestSpec implements RestQueries{
 			
 		then: "Should create and return created values"
 			response.json.booleanNullable == true
-			response.json.testDate == '2015-01-08T08:10:39Z'
+			response.json.testDate == '2015-01-08T12:26:14Z'
 			response.json.testEnum == 'TEST_1'
 			response.json.testStringType?.id == 1
 
@@ -57,7 +57,7 @@ class TestOtherSpec extends AbstractRestSpec implements RestQueries{
 		when: "Create testOther"
 			response = sendCreateWithData(){
 				booleanNullable = true
-				testDate = '2015-01-08 10:10:39.618+0200'
+				testDate = '2015-01-08 14:26:14.249+0200'
 				testEnum = 'TEST_1'
 				testStringType = 1
 
@@ -69,7 +69,7 @@ class TestOtherSpec extends AbstractRestSpec implements RestQueries{
 		then: "Should create and return created values"
 			
 			response.json.booleanNullable == true
-			response.json.testDate == '2015-01-08T08:10:39Z'
+			response.json.testDate == '2015-01-08T12:26:14Z'
 			response.json.testEnum == 'TEST_1'
 			response.json.testStringType?.id == 1
 
@@ -86,7 +86,7 @@ class TestOtherSpec extends AbstractRestSpec implements RestQueries{
 		then: "Should return correct values"
 			
 			response.json.booleanNullable == true
-			response.json.testDate == '2015-01-08T08:10:39Z'
+			response.json.testDate == '2015-01-08T12:26:14Z'
 			response.json.testEnum == 'TEST_1'
 			response.json.testStringType?.id == 1
 
@@ -128,7 +128,7 @@ class TestOtherSpec extends AbstractRestSpec implements RestQueries{
 		when: "Update testOther"
 			response = sendUpdateWithData(domainId.toString()){
 				booleanNullable = true
-				testDate = '2015-01-08 10:10:39.620+0200'
+				testDate = '2015-01-08 14:26:14.254+0200'
 				testEnum = 'TEST_1'
 				testStringType = 1
 
@@ -136,7 +136,7 @@ class TestOtherSpec extends AbstractRestSpec implements RestQueries{
 			}
 		then: "Should return updated values"
 			response.json.booleanNullable == true
-			response.json.testDate == '2015-01-08T08:10:39Z'
+			response.json.testDate == '2015-01-08T12:26:14Z'
 			response.json.testEnum == 'TEST_1'
 			response.json.testStringType?.id == 1
 
@@ -148,7 +148,7 @@ class TestOtherSpec extends AbstractRestSpec implements RestQueries{
 		when: "Update unexisting testOther"
 			response = sendUpdateWithData("9999999999"){
 					booleanNullable = true
-				testDate = '2015-01-08 10:10:39.620+0200'
+				testDate = '2015-01-08 14:26:14.254+0200'
 				testEnum = 'TEST_1'
 				testStringType = 1
 
@@ -160,7 +160,7 @@ class TestOtherSpec extends AbstractRestSpec implements RestQueries{
 		when: "Update unexisting testOther id not a number"
 			response = sendUpdateWithData("nonexistent"){
 					booleanNullable = true
-				testDate = '2015-01-08 10:10:39.620+0200'
+				testDate = '2015-01-08 14:26:14.254+0200'
 				testEnum = 'TEST_1'
 				testStringType = 1
 
@@ -195,10 +195,17 @@ class TestOtherSpec extends AbstractRestSpec implements RestQueries{
 			response.json.size() == 2
 	}
 	
-	@Ignore // have to have more then maxLimit items
+	
+	 // have to have more then maxLimit items
 	void "Test TestOther list max property."() {
 		given:
 			int maxLimit = 100// Set real max items limit
+			
+		when:"Get testOther list without max param"
+			response = queryListWithParams("")
+
+		then:"Should return default maximum items"
+			response.json.size() == 10
 			
 		when:"Get testOther list with maximum items"
 			response = queryListWithParams("max=$maxLimit")
@@ -231,14 +238,40 @@ class TestOtherSpec extends AbstractRestSpec implements RestQueries{
 			response.json[0].id != null
 	}
 	
-	void "Test filtering in TestOther list."() {
-		when:"Get testOther sorted list"
-			response = queryListWithParams("order=desc&sort=id")
+	void "Test filtering in TestOther list by id."() {
+		when:"Get testOther list filtered by id"
 
-		then:"First item should be just inserted object"
+			response = queryListWithUrlVariables("filter={filter}", [filter:"{id:${domainId}}"])
+
+		then:"Should contains one item, just inserted item."
 			response.json[0].id == domainId
+			response.json.size() == 1
 			response.status == OK.value()
 	}
+	
+	void "Test filtering in TestOther list by all properties."() {
+		given:
+			response = queryListWithUrlVariables("filter={filter}", [filter:"${jsonVal}"])
+			
+			
+		expect:
+			response.json.size() == respSize
+		where:
+			jsonVal 	        || respSize
+			"{}"                || 10
+	
+			"""{"booleanNullable":false}"""     		|| 10
+
+	
+			"""{"testDate":"2015-01-08 14:26:14.254+0200"}"""     		|| 10
+
+	
+			"""{"testEnum":"TEST_1"}"""     		|| 10
+
+	
+	}
+	
+	
 	
 	
 	void "Test deleting other TestOther instance."() {//This is for creating some data to test list sorting

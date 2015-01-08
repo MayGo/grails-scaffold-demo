@@ -34,7 +34,7 @@ class PetTypeSpec extends AbstractRestSpec implements RestQueries{
 	void "Test creating another PetType instance."() {//This is for creating some data to test list sorting
 		when: "Create petType"
 			response = sendCreateWithData(){
-				name = 'Type 412'
+				name = 'Type 307'
 
 			}
 			
@@ -42,7 +42,7 @@ class PetTypeSpec extends AbstractRestSpec implements RestQueries{
 			
 			
 		then: "Should create and return created values"
-			response.json.name == 'Type 412'
+			response.json.name == 'Type 307'
 
 			response.status == CREATED.value()
 	}
@@ -50,7 +50,7 @@ class PetTypeSpec extends AbstractRestSpec implements RestQueries{
 	void "Test creating PetType instance."() {
 		when: "Create petType"
 			response = sendCreateWithData(){
-				name = 'Type 413'
+				name = 'Type 308'
 
 			}
 			
@@ -59,7 +59,7 @@ class PetTypeSpec extends AbstractRestSpec implements RestQueries{
 			
 		then: "Should create and return created values"
 			
-			response.json.name == 'Type 413'
+			response.json.name == 'Type 308'
 
 			response.status == CREATED.value()
 	}
@@ -73,7 +73,7 @@ class PetTypeSpec extends AbstractRestSpec implements RestQueries{
 			response = readDomainItemWithParams(domainId.toString(), "")
 		then: "Should return correct values"
 			
-			response.json.name == 'Type 413'
+			response.json.name == 'Type 308'
 
 			response.status == OK.value()
 	}
@@ -112,12 +112,12 @@ class PetTypeSpec extends AbstractRestSpec implements RestQueries{
 	void "Test updating PetType instance."() {
 		when: "Update petType"
 			response = sendUpdateWithData(domainId.toString()){
-				name = 'Type 414'
+				name = 'Type 309'
 
 
 			}
 		then: "Should return updated values"
-			response.json.name == 'Type 414'
+			response.json.name == 'Type 309'
 
 
 			response.status == OK.value()
@@ -126,7 +126,7 @@ class PetTypeSpec extends AbstractRestSpec implements RestQueries{
 	void "Test updating unexisting PetType instance."() {
 		when: "Update unexisting petType"
 			response = sendUpdateWithData("9999999999"){
-					name = 'Type 414'
+					name = 'Type 309'
 
 
 			}
@@ -135,7 +135,7 @@ class PetTypeSpec extends AbstractRestSpec implements RestQueries{
 			
 		when: "Update unexisting petType id not a number"
 			response = sendUpdateWithData("nonexistent"){
-					name = 'Type 414'
+					name = 'Type 309'
 
 
 			}
@@ -168,10 +168,17 @@ class PetTypeSpec extends AbstractRestSpec implements RestQueries{
 			response.json.size() == 2
 	}
 	
-	@Ignore // have to have more then maxLimit items
+	
+	 // have to have more then maxLimit items
 	void "Test PetType list max property."() {
 		given:
 			int maxLimit = 100// Set real max items limit
+			
+		when:"Get petType list without max param"
+			response = queryListWithParams("")
+
+		then:"Should return default maximum items"
+			response.json.size() == 10
 			
 		when:"Get petType list with maximum items"
 			response = queryListWithParams("max=$maxLimit")
@@ -204,14 +211,34 @@ class PetTypeSpec extends AbstractRestSpec implements RestQueries{
 			response.json[0].id != null
 	}
 	
-	void "Test filtering in PetType list."() {
-		when:"Get petType sorted list"
-			response = queryListWithParams("order=desc&sort=id")
+	void "Test filtering in PetType list by id."() {
+		when:"Get petType list filtered by id"
 
-		then:"First item should be just inserted object"
+			response = queryListWithUrlVariables("filter={filter}", [filter:"{id:${domainId}}"])
+
+		then:"Should contains one item, just inserted item."
 			response.json[0].id == domainId
+			response.json.size() == 1
 			response.status == OK.value()
 	}
+	
+	void "Test filtering in PetType list by all properties."() {
+		given:
+			response = queryListWithUrlVariables("filter={filter}", [filter:"${jsonVal}"])
+			
+			
+		expect:
+			response.json.size() == respSize
+		where:
+			jsonVal 	        || respSize
+			"{}"                || 10
+	
+		//Can't predict 'size'	"""{"name":"Type 309"}"""     		|| 1
+
+	
+	}
+	
+	
 	
 	
 	void "Test deleting other PetType instance."() {//This is for creating some data to test list sorting

@@ -34,7 +34,7 @@ class SpecialitySpec extends AbstractRestSpec implements RestQueries{
 	void "Test creating another Speciality instance."() {//This is for creating some data to test list sorting
 		when: "Create speciality"
 			response = sendCreateWithData(){
-				name = 'Speciality 137'
+				name = 'Speciality 102'
 
 			}
 			
@@ -42,7 +42,7 @@ class SpecialitySpec extends AbstractRestSpec implements RestQueries{
 			
 			
 		then: "Should create and return created values"
-			response.json.name == 'Speciality 137'
+			response.json.name == 'Speciality 102'
 
 			response.status == CREATED.value()
 	}
@@ -50,7 +50,7 @@ class SpecialitySpec extends AbstractRestSpec implements RestQueries{
 	void "Test creating Speciality instance."() {
 		when: "Create speciality"
 			response = sendCreateWithData(){
-				name = 'Speciality 138'
+				name = 'Speciality 103'
 
 			}
 			
@@ -59,7 +59,7 @@ class SpecialitySpec extends AbstractRestSpec implements RestQueries{
 			
 		then: "Should create and return created values"
 			
-			response.json.name == 'Speciality 138'
+			response.json.name == 'Speciality 103'
 
 			response.status == CREATED.value()
 	}
@@ -73,7 +73,7 @@ class SpecialitySpec extends AbstractRestSpec implements RestQueries{
 			response = readDomainItemWithParams(domainId.toString(), "")
 		then: "Should return correct values"
 			
-			response.json.name == 'Speciality 138'
+			response.json.name == 'Speciality 103'
 
 			response.status == OK.value()
 	}
@@ -112,12 +112,12 @@ class SpecialitySpec extends AbstractRestSpec implements RestQueries{
 	void "Test updating Speciality instance."() {
 		when: "Update speciality"
 			response = sendUpdateWithData(domainId.toString()){
-				name = 'Speciality 139'
+				name = 'Speciality 104'
 
 
 			}
 		then: "Should return updated values"
-			response.json.name == 'Speciality 139'
+			response.json.name == 'Speciality 104'
 
 
 			response.status == OK.value()
@@ -126,7 +126,7 @@ class SpecialitySpec extends AbstractRestSpec implements RestQueries{
 	void "Test updating unexisting Speciality instance."() {
 		when: "Update unexisting speciality"
 			response = sendUpdateWithData("9999999999"){
-					name = 'Speciality 139'
+					name = 'Speciality 104'
 
 
 			}
@@ -135,7 +135,7 @@ class SpecialitySpec extends AbstractRestSpec implements RestQueries{
 			
 		when: "Update unexisting speciality id not a number"
 			response = sendUpdateWithData("nonexistent"){
-					name = 'Speciality 139'
+					name = 'Speciality 104'
 
 
 			}
@@ -168,10 +168,17 @@ class SpecialitySpec extends AbstractRestSpec implements RestQueries{
 			response.json.size() == 2
 	}
 	
-	@Ignore // have to have more then maxLimit items
+	
+	 // have to have more then maxLimit items
 	void "Test Speciality list max property."() {
 		given:
 			int maxLimit = 100// Set real max items limit
+			
+		when:"Get speciality list without max param"
+			response = queryListWithParams("")
+
+		then:"Should return default maximum items"
+			response.json.size() == 10
 			
 		when:"Get speciality list with maximum items"
 			response = queryListWithParams("max=$maxLimit")
@@ -204,14 +211,34 @@ class SpecialitySpec extends AbstractRestSpec implements RestQueries{
 			response.json[0].id != null
 	}
 	
-	void "Test filtering in Speciality list."() {
-		when:"Get speciality sorted list"
-			response = queryListWithParams("order=desc&sort=id")
+	void "Test filtering in Speciality list by id."() {
+		when:"Get speciality list filtered by id"
 
-		then:"First item should be just inserted object"
+			response = queryListWithUrlVariables("filter={filter}", [filter:"{id:${domainId}}"])
+
+		then:"Should contains one item, just inserted item."
 			response.json[0].id == domainId
+			response.json.size() == 1
 			response.status == OK.value()
 	}
+	
+	void "Test filtering in Speciality list by all properties."() {
+		given:
+			response = queryListWithUrlVariables("filter={filter}", [filter:"${jsonVal}"])
+			
+			
+		expect:
+			response.json.size() == respSize
+		where:
+			jsonVal 	        || respSize
+			"{}"                || 10
+	
+		//Can't predict 'size'	"""{"name":"Speciality 104"}"""     		|| 1
+
+	
+	}
+	
+	
 	
 	
 	void "Test deleting other Speciality instance."() {//This is for creating some data to test list sorting

@@ -38,7 +38,7 @@ class UserSpec extends AbstractRestSpec implements RestQueries{
 				accountLocked = true
 				enabled = true
 				passwordExpired = true
-				username = 'John Doe 261'
+				username = 'John Doe 203'
 
 			}
 			
@@ -50,7 +50,7 @@ class UserSpec extends AbstractRestSpec implements RestQueries{
 			response.json.accountLocked == true
 			response.json.enabled == true
 			response.json.passwordExpired == true
-			response.json.username == 'John Doe 261'
+			response.json.username == 'John Doe 203'
 
 			response.status == CREATED.value()
 	}
@@ -62,7 +62,7 @@ class UserSpec extends AbstractRestSpec implements RestQueries{
 				accountLocked = true
 				enabled = true
 				passwordExpired = true
-				username = 'John Doe 262'
+				username = 'John Doe 204'
 
 			}
 			
@@ -75,7 +75,7 @@ class UserSpec extends AbstractRestSpec implements RestQueries{
 			response.json.accountLocked == true
 			response.json.enabled == true
 			response.json.passwordExpired == true
-			response.json.username == 'John Doe 262'
+			response.json.username == 'John Doe 204'
 
 			response.status == CREATED.value()
 	}
@@ -93,7 +93,7 @@ class UserSpec extends AbstractRestSpec implements RestQueries{
 			response.json.accountLocked == true
 			response.json.enabled == true
 			response.json.passwordExpired == true
-			response.json.username == 'John Doe 262'
+			response.json.username == 'John Doe 204'
 
 			response.status == OK.value()
 	}
@@ -136,7 +136,7 @@ class UserSpec extends AbstractRestSpec implements RestQueries{
 				accountLocked = true
 				enabled = true
 				passwordExpired = true
-				username = 'John Doe 263'
+				username = 'John Doe 205'
 
 
 			}
@@ -145,7 +145,7 @@ class UserSpec extends AbstractRestSpec implements RestQueries{
 			response.json.accountLocked == true
 			response.json.enabled == true
 			response.json.passwordExpired == true
-			response.json.username == 'John Doe 263'
+			response.json.username == 'John Doe 205'
 
 
 			response.status == OK.value()
@@ -158,7 +158,7 @@ class UserSpec extends AbstractRestSpec implements RestQueries{
 				accountLocked = true
 				enabled = true
 				passwordExpired = true
-				username = 'John Doe 263'
+				username = 'John Doe 205'
 
 
 			}
@@ -171,7 +171,7 @@ class UserSpec extends AbstractRestSpec implements RestQueries{
 				accountLocked = true
 				enabled = true
 				passwordExpired = true
-				username = 'John Doe 263'
+				username = 'John Doe 205'
 
 
 			}
@@ -204,10 +204,17 @@ class UserSpec extends AbstractRestSpec implements RestQueries{
 			response.json.size() == 2
 	}
 	
-	@Ignore // have to have more then maxLimit items
+	
+	 // have to have more then maxLimit items
 	void "Test User list max property."() {
 		given:
 			int maxLimit = 100// Set real max items limit
+			
+		when:"Get user list without max param"
+			response = queryListWithParams("")
+
+		then:"Should return default maximum items"
+			response.json.size() == 10
 			
 		when:"Get user list with maximum items"
 			response = queryListWithParams("max=$maxLimit")
@@ -240,14 +247,46 @@ class UserSpec extends AbstractRestSpec implements RestQueries{
 			response.json[0].id != null
 	}
 	
-	void "Test filtering in User list."() {
-		when:"Get user sorted list"
-			response = queryListWithParams("order=desc&sort=id")
+	void "Test filtering in User list by id."() {
+		when:"Get user list filtered by id"
 
-		then:"First item should be just inserted object"
+			response = queryListWithUrlVariables("filter={filter}", [filter:"{id:${domainId}}"])
+
+		then:"Should contains one item, just inserted item."
 			response.json[0].id == domainId
+			response.json.size() == 1
 			response.status == OK.value()
 	}
+	
+	void "Test filtering in User list by all properties."() {
+		given:
+			response = queryListWithUrlVariables("filter={filter}", [filter:"${jsonVal}"])
+			
+			
+		expect:
+			response.json.size() == respSize
+		where:
+			jsonVal 	        || respSize
+			"{}"                || 10
+	
+			"""{"accountExpired":false}"""     		|| 10
+
+	
+			"""{"accountLocked":false}"""     		|| 10
+
+	
+			"""{"enabled":true}"""     		|| 10
+
+	
+			"""{"passwordExpired":false}"""     		|| 10
+
+	
+		//Can't predict 'size'	"""{"username":"John Doe 205"}"""     		|| 1
+
+	
+	}
+	
+	
 	
 	
 	void "Test deleting other User instance."() {//This is for creating some data to test list sorting

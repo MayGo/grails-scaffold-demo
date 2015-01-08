@@ -34,10 +34,10 @@ class TaskSpec extends AbstractRestSpec implements RestQueries{
 	void "Test creating another Task instance."() {//This is for creating some data to test list sorting
 		when: "Create task"
 			response = sendCreateWithData(){
-				deadline = '2015-01-08 10:10:37.915+0200'
+				deadline = '2015-01-08 14:26:09.554+0200'
 				details = 'details'
 				status = 'Open'
-				summary = 'Work Summary 137'
+				summary = 'Work Summary 102'
 				timeSpent = 0
 
 			}
@@ -46,10 +46,10 @@ class TaskSpec extends AbstractRestSpec implements RestQueries{
 			
 			
 		then: "Should create and return created values"
-			response.json.deadline == '2015-01-08T08:10:37Z'
+			response.json.deadline == '2015-01-08T12:26:09Z'
 			response.json.details == 'details'
 			response.json.status == 'Open'
-			response.json.summary == 'Work Summary 137'
+			response.json.summary == 'Work Summary 102'
 			response.json.timeSpent == 0
 
 			response.status == CREATED.value()
@@ -58,10 +58,10 @@ class TaskSpec extends AbstractRestSpec implements RestQueries{
 	void "Test creating Task instance."() {
 		when: "Create task"
 			response = sendCreateWithData(){
-				deadline = '2015-01-08 10:10:37.923+0200'
+				deadline = '2015-01-08 14:26:09.591+0200'
 				details = 'details'
 				status = 'Open'
-				summary = 'Work Summary 138'
+				summary = 'Work Summary 103'
 				timeSpent = 0
 
 			}
@@ -71,10 +71,10 @@ class TaskSpec extends AbstractRestSpec implements RestQueries{
 			
 		then: "Should create and return created values"
 			
-			response.json.deadline == '2015-01-08T08:10:37Z'
+			response.json.deadline == '2015-01-08T12:26:09Z'
 			response.json.details == 'details'
 			response.json.status == 'Open'
-			response.json.summary == 'Work Summary 138'
+			response.json.summary == 'Work Summary 103'
 			response.json.timeSpent == 0
 
 			response.status == CREATED.value()
@@ -89,10 +89,10 @@ class TaskSpec extends AbstractRestSpec implements RestQueries{
 			response = readDomainItemWithParams(domainId.toString(), "")
 		then: "Should return correct values"
 			
-			response.json.deadline == '2015-01-08T08:10:37Z'
+			response.json.deadline == '2015-01-08T12:26:09Z'
 			response.json.details == 'details'
 			response.json.status == 'Open'
-			response.json.summary == 'Work Summary 138'
+			response.json.summary == 'Work Summary 103'
 			response.json.timeSpent == 0
 
 			response.status == OK.value()
@@ -132,19 +132,19 @@ class TaskSpec extends AbstractRestSpec implements RestQueries{
 	void "Test updating Task instance."() {
 		when: "Update task"
 			response = sendUpdateWithData(domainId.toString()){
-				deadline = '2015-01-08 10:10:37.925+0200'
+				deadline = '2015-01-08 14:26:09.596+0200'
 				details = 'details'
 				status = 'Open'
-				summary = 'Work Summary 139'
+				summary = 'Work Summary 104'
 				timeSpent = 0
 
 
 			}
 		then: "Should return updated values"
-			response.json.deadline == '2015-01-08T08:10:37Z'
+			response.json.deadline == '2015-01-08T12:26:09Z'
 			response.json.details == 'details'
 			response.json.status == 'Open'
-			response.json.summary == 'Work Summary 139'
+			response.json.summary == 'Work Summary 104'
 			response.json.timeSpent == 0
 
 
@@ -154,10 +154,10 @@ class TaskSpec extends AbstractRestSpec implements RestQueries{
 	void "Test updating unexisting Task instance."() {
 		when: "Update unexisting task"
 			response = sendUpdateWithData("9999999999"){
-					deadline = '2015-01-08 10:10:37.925+0200'
+					deadline = '2015-01-08 14:26:09.596+0200'
 				details = 'details'
 				status = 'Open'
-				summary = 'Work Summary 139'
+				summary = 'Work Summary 104'
 				timeSpent = 0
 
 
@@ -167,10 +167,10 @@ class TaskSpec extends AbstractRestSpec implements RestQueries{
 			
 		when: "Update unexisting task id not a number"
 			response = sendUpdateWithData("nonexistent"){
-					deadline = '2015-01-08 10:10:37.925+0200'
+					deadline = '2015-01-08 14:26:09.596+0200'
 				details = 'details'
 				status = 'Open'
-				summary = 'Work Summary 139'
+				summary = 'Work Summary 104'
 				timeSpent = 0
 
 
@@ -204,10 +204,17 @@ class TaskSpec extends AbstractRestSpec implements RestQueries{
 			response.json.size() == 2
 	}
 	
-	@Ignore // have to have more then maxLimit items
+	
+	 // have to have more then maxLimit items
 	void "Test Task list max property."() {
 		given:
 			int maxLimit = 100// Set real max items limit
+			
+		when:"Get task list without max param"
+			response = queryListWithParams("")
+
+		then:"Should return default maximum items"
+			response.json.size() == 10
 			
 		when:"Get task list with maximum items"
 			response = queryListWithParams("max=$maxLimit")
@@ -240,14 +247,46 @@ class TaskSpec extends AbstractRestSpec implements RestQueries{
 			response.json[0].id != null
 	}
 	
-	void "Test filtering in Task list."() {
-		when:"Get task sorted list"
-			response = queryListWithParams("order=desc&sort=id")
+	void "Test filtering in Task list by id."() {
+		when:"Get task list filtered by id"
 
-		then:"First item should be just inserted object"
+			response = queryListWithUrlVariables("filter={filter}", [filter:"{id:${domainId}}"])
+
+		then:"Should contains one item, just inserted item."
 			response.json[0].id == domainId
+			response.json.size() == 1
 			response.status == OK.value()
 	}
+	
+	void "Test filtering in Task list by all properties."() {
+		given:
+			response = queryListWithUrlVariables("filter={filter}", [filter:"${jsonVal}"])
+			
+			
+		expect:
+			response.json.size() == respSize
+		where:
+			jsonVal 	        || respSize
+			"{}"                || 10
+	
+			"""{"deadline":"2015-01-08 14:26:09.596+0200"}"""     		|| 10
+
+	
+			"""{"details":"details"}"""     		|| 10
+
+	
+			"""{"status":"Open"}"""     		|| 10
+
+	
+		//Can't predict 'size'	"""{"summary":"Work Summary 104"}"""     		|| 1
+
+	
+			"""{"timeSpent":0}"""     		|| 10
+
+	
+	}
+	
+	
 	
 	
 	void "Test deleting other Task instance."() {//This is for creating some data to test list sorting

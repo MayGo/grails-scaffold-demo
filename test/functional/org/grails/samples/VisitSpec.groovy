@@ -34,7 +34,7 @@ class VisitSpec extends AbstractRestSpec implements RestQueries{
 	void "Test creating another Visit instance."() {//This is for creating some data to test list sorting
 		when: "Create visit"
 			response = sendCreateWithData(){
-				date = '2015-01-08 10:10:38.815+0200'
+				date = '2015-01-08 14:26:12.352+0200'
 				description = 'description'
 				pet = 1
 
@@ -44,7 +44,7 @@ class VisitSpec extends AbstractRestSpec implements RestQueries{
 			
 			
 		then: "Should create and return created values"
-			response.json.date == '2015-01-08T08:10:38Z'
+			response.json.date == '2015-01-08T12:26:12Z'
 			response.json.description == 'description'
 			response.json.pet?.id == 1
 
@@ -54,7 +54,7 @@ class VisitSpec extends AbstractRestSpec implements RestQueries{
 	void "Test creating Visit instance."() {
 		when: "Create visit"
 			response = sendCreateWithData(){
-				date = '2015-01-08 10:10:38.828+0200'
+				date = '2015-01-08 14:26:12.378+0200'
 				description = 'description'
 				pet = 1
 
@@ -65,7 +65,7 @@ class VisitSpec extends AbstractRestSpec implements RestQueries{
 			
 		then: "Should create and return created values"
 			
-			response.json.date == '2015-01-08T08:10:38Z'
+			response.json.date == '2015-01-08T12:26:12Z'
 			response.json.description == 'description'
 			response.json.pet?.id == 1
 
@@ -81,7 +81,7 @@ class VisitSpec extends AbstractRestSpec implements RestQueries{
 			response = readDomainItemWithParams(domainId.toString(), "")
 		then: "Should return correct values"
 			
-			response.json.date == '2015-01-08T08:10:38Z'
+			response.json.date == '2015-01-08T12:26:12Z'
 			response.json.description == 'description'
 			response.json.pet?.id == 1
 
@@ -122,14 +122,14 @@ class VisitSpec extends AbstractRestSpec implements RestQueries{
 	void "Test updating Visit instance."() {
 		when: "Update visit"
 			response = sendUpdateWithData(domainId.toString()){
-				date = '2015-01-08 10:10:38.832+0200'
+				date = '2015-01-08 14:26:12.386+0200'
 				description = 'description'
 				pet = 1
 
 
 			}
 		then: "Should return updated values"
-			response.json.date == '2015-01-08T08:10:38Z'
+			response.json.date == '2015-01-08T12:26:12Z'
 			response.json.description == 'description'
 			response.json.pet?.id == 1
 
@@ -140,7 +140,7 @@ class VisitSpec extends AbstractRestSpec implements RestQueries{
 	void "Test updating unexisting Visit instance."() {
 		when: "Update unexisting visit"
 			response = sendUpdateWithData("9999999999"){
-					date = '2015-01-08 10:10:38.832+0200'
+					date = '2015-01-08 14:26:12.386+0200'
 				description = 'description'
 				pet = 1
 
@@ -151,7 +151,7 @@ class VisitSpec extends AbstractRestSpec implements RestQueries{
 			
 		when: "Update unexisting visit id not a number"
 			response = sendUpdateWithData("nonexistent"){
-					date = '2015-01-08 10:10:38.832+0200'
+					date = '2015-01-08 14:26:12.386+0200'
 				description = 'description'
 				pet = 1
 
@@ -186,10 +186,17 @@ class VisitSpec extends AbstractRestSpec implements RestQueries{
 			response.json.size() == 2
 	}
 	
-	@Ignore // have to have more then maxLimit items
+	
+	 // have to have more then maxLimit items
 	void "Test Visit list max property."() {
 		given:
 			int maxLimit = 100// Set real max items limit
+			
+		when:"Get visit list without max param"
+			response = queryListWithParams("")
+
+		then:"Should return default maximum items"
+			response.json.size() == 10
 			
 		when:"Get visit list with maximum items"
 			response = queryListWithParams("max=$maxLimit")
@@ -222,14 +229,37 @@ class VisitSpec extends AbstractRestSpec implements RestQueries{
 			response.json[0].id != null
 	}
 	
-	void "Test filtering in Visit list."() {
-		when:"Get visit sorted list"
-			response = queryListWithParams("order=desc&sort=id")
+	void "Test filtering in Visit list by id."() {
+		when:"Get visit list filtered by id"
 
-		then:"First item should be just inserted object"
+			response = queryListWithUrlVariables("filter={filter}", [filter:"{id:${domainId}}"])
+
+		then:"Should contains one item, just inserted item."
 			response.json[0].id == domainId
+			response.json.size() == 1
 			response.status == OK.value()
 	}
+	
+	void "Test filtering in Visit list by all properties."() {
+		given:
+			response = queryListWithUrlVariables("filter={filter}", [filter:"${jsonVal}"])
+			
+			
+		expect:
+			response.json.size() == respSize
+		where:
+			jsonVal 	        || respSize
+			"{}"                || 10
+	
+			"""{"date":"2015-01-08 14:26:12.386+0200"}"""     		|| 10
+
+	
+			"""{"description":"description"}"""     		|| 10
+
+	
+	}
+	
+	
 	
 	
 	void "Test deleting other Visit instance."() {//This is for creating some data to test list sorting

@@ -34,7 +34,7 @@ class RoleSpec extends AbstractRestSpec implements RestQueries{
 	void "Test creating another Role instance."() {//This is for creating some data to test list sorting
 		when: "Create role"
 			response = sendCreateWithData(){
-				authority = 'ROLE_261'
+				authority = 'ROLE_203'
 
 			}
 			
@@ -42,7 +42,7 @@ class RoleSpec extends AbstractRestSpec implements RestQueries{
 			
 			
 		then: "Should create and return created values"
-			response.json.authority == 'ROLE_261'
+			response.json.authority == 'ROLE_203'
 
 			response.status == CREATED.value()
 	}
@@ -50,7 +50,7 @@ class RoleSpec extends AbstractRestSpec implements RestQueries{
 	void "Test creating Role instance."() {
 		when: "Create role"
 			response = sendCreateWithData(){
-				authority = 'ROLE_262'
+				authority = 'ROLE_204'
 
 			}
 			
@@ -59,7 +59,7 @@ class RoleSpec extends AbstractRestSpec implements RestQueries{
 			
 		then: "Should create and return created values"
 			
-			response.json.authority == 'ROLE_262'
+			response.json.authority == 'ROLE_204'
 
 			response.status == CREATED.value()
 	}
@@ -73,7 +73,7 @@ class RoleSpec extends AbstractRestSpec implements RestQueries{
 			response = readDomainItemWithParams(domainId.toString(), "")
 		then: "Should return correct values"
 			
-			response.json.authority == 'ROLE_262'
+			response.json.authority == 'ROLE_204'
 
 			response.status == OK.value()
 	}
@@ -112,12 +112,12 @@ class RoleSpec extends AbstractRestSpec implements RestQueries{
 	void "Test updating Role instance."() {
 		when: "Update role"
 			response = sendUpdateWithData(domainId.toString()){
-				authority = 'ROLE_263'
+				authority = 'ROLE_205'
 
 
 			}
 		then: "Should return updated values"
-			response.json.authority == 'ROLE_263'
+			response.json.authority == 'ROLE_205'
 
 
 			response.status == OK.value()
@@ -126,7 +126,7 @@ class RoleSpec extends AbstractRestSpec implements RestQueries{
 	void "Test updating unexisting Role instance."() {
 		when: "Update unexisting role"
 			response = sendUpdateWithData("9999999999"){
-					authority = 'ROLE_263'
+					authority = 'ROLE_205'
 
 
 			}
@@ -135,7 +135,7 @@ class RoleSpec extends AbstractRestSpec implements RestQueries{
 			
 		when: "Update unexisting role id not a number"
 			response = sendUpdateWithData("nonexistent"){
-					authority = 'ROLE_263'
+					authority = 'ROLE_205'
 
 
 			}
@@ -168,10 +168,17 @@ class RoleSpec extends AbstractRestSpec implements RestQueries{
 			response.json.size() == 2
 	}
 	
-	@Ignore // have to have more then maxLimit items
+	
+	 // have to have more then maxLimit items
 	void "Test Role list max property."() {
 		given:
 			int maxLimit = 100// Set real max items limit
+			
+		when:"Get role list without max param"
+			response = queryListWithParams("")
+
+		then:"Should return default maximum items"
+			response.json.size() == 10
 			
 		when:"Get role list with maximum items"
 			response = queryListWithParams("max=$maxLimit")
@@ -204,14 +211,34 @@ class RoleSpec extends AbstractRestSpec implements RestQueries{
 			response.json[0].id != null
 	}
 	
-	void "Test filtering in Role list."() {
-		when:"Get role sorted list"
-			response = queryListWithParams("order=desc&sort=id")
+	void "Test filtering in Role list by id."() {
+		when:"Get role list filtered by id"
 
-		then:"First item should be just inserted object"
+			response = queryListWithUrlVariables("filter={filter}", [filter:"{id:${domainId}}"])
+
+		then:"Should contains one item, just inserted item."
 			response.json[0].id == domainId
+			response.json.size() == 1
 			response.status == OK.value()
 	}
+	
+	void "Test filtering in Role list by all properties."() {
+		given:
+			response = queryListWithUrlVariables("filter={filter}", [filter:"${jsonVal}"])
+			
+			
+		expect:
+			response.json.size() == respSize
+		where:
+			jsonVal 	        || respSize
+			"{}"                || 10
+	
+			"""{"authority":"ROLE_205"}"""     		|| 1
+
+	
+	}
+	
+	
 	
 	
 	void "Test deleting other Role instance."() {//This is for creating some data to test list sorting

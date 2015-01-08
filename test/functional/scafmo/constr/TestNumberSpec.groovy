@@ -37,13 +37,13 @@ class TestNumberSpec extends AbstractRestSpec implements RestQueries{
 				doubleNr = 123.123
 				floatNr = 123.123
 				floatNrScale = 2.34
-				integerNr = 273
+				integerNr = 203
 				integerNrInList = 3
 				integerNrMax = 2
 				integerNrMin = 3
 				integerNrNotEqual = 2
 				integerNrRange = 19
-				integerNrUnique = 274
+				integerNrUnique = 204
 				longNr = 4
 
 			}
@@ -55,13 +55,13 @@ class TestNumberSpec extends AbstractRestSpec implements RestQueries{
 			response.json.doubleNr == 123.123
 			response.json.floatNr == 123.123
 			response.json.floatNrScale == 2.34
-			response.json.integerNr == 273
+			response.json.integerNr == 203
 			response.json.integerNrInList == 3
 			response.json.integerNrMax == 2
 			response.json.integerNrMin == 3
 			response.json.integerNrNotEqual == 2
 			response.json.integerNrRange == 19
-			response.json.integerNrUnique == 274
+			response.json.integerNrUnique == 204
 			response.json.longNr == 4
 
 			response.status == CREATED.value()
@@ -73,13 +73,13 @@ class TestNumberSpec extends AbstractRestSpec implements RestQueries{
 				doubleNr = 123.123
 				floatNr = 123.123
 				floatNrScale = 2.34
-				integerNr = 275
+				integerNr = 205
 				integerNrInList = 3
 				integerNrMax = 2
 				integerNrMin = 3
 				integerNrNotEqual = 2
 				integerNrRange = 19
-				integerNrUnique = 276
+				integerNrUnique = 206
 				longNr = 4
 
 			}
@@ -92,13 +92,13 @@ class TestNumberSpec extends AbstractRestSpec implements RestQueries{
 			response.json.doubleNr == 123.123
 			response.json.floatNr == 123.123
 			response.json.floatNrScale == 2.34
-			response.json.integerNr == 275
+			response.json.integerNr == 205
 			response.json.integerNrInList == 3
 			response.json.integerNrMax == 2
 			response.json.integerNrMin == 3
 			response.json.integerNrNotEqual == 2
 			response.json.integerNrRange == 19
-			response.json.integerNrUnique == 276
+			response.json.integerNrUnique == 206
 			response.json.longNr == 4
 
 			response.status == CREATED.value()
@@ -116,13 +116,13 @@ class TestNumberSpec extends AbstractRestSpec implements RestQueries{
 			response.json.doubleNr == 123.123
 			response.json.floatNr == 123.123
 			response.json.floatNrScale == 2.34
-			response.json.integerNr == 275
+			response.json.integerNr == 205
 			response.json.integerNrInList == 3
 			response.json.integerNrMax == 2
 			response.json.integerNrMin == 3
 			response.json.integerNrNotEqual == 2
 			response.json.integerNrRange == 19
-			response.json.integerNrUnique == 276
+			response.json.integerNrUnique == 206
 			response.json.longNr == 4
 
 			response.status == OK.value()
@@ -165,13 +165,13 @@ class TestNumberSpec extends AbstractRestSpec implements RestQueries{
 				doubleNr = 123.123
 				floatNr = 123.123
 				floatNrScale = 2.34
-				integerNr = 277
+				integerNr = 207
 				integerNrInList = 3
 				integerNrMax = 2
 				integerNrMin = 3
 				integerNrNotEqual = 2
 				integerNrRange = 19
-				integerNrUnique = 278
+				integerNrUnique = 208
 				longNr = 4
 
 
@@ -180,13 +180,13 @@ class TestNumberSpec extends AbstractRestSpec implements RestQueries{
 			response.json.doubleNr == 123.123
 			response.json.floatNr == 123.123
 			response.json.floatNrScale == 2.34
-			response.json.integerNr == 277
+			response.json.integerNr == 207
 			response.json.integerNrInList == 3
 			response.json.integerNrMax == 2
 			response.json.integerNrMin == 3
 			response.json.integerNrNotEqual == 2
 			response.json.integerNrRange == 19
-			response.json.integerNrUnique == 278
+			response.json.integerNrUnique == 208
 			response.json.longNr == 4
 
 
@@ -199,13 +199,13 @@ class TestNumberSpec extends AbstractRestSpec implements RestQueries{
 					doubleNr = 123.123
 				floatNr = 123.123
 				floatNrScale = 2.34
-				integerNr = 277
+				integerNr = 207
 				integerNrInList = 3
 				integerNrMax = 2
 				integerNrMin = 3
 				integerNrNotEqual = 2
 				integerNrRange = 19
-				integerNrUnique = 278
+				integerNrUnique = 208
 				longNr = 4
 
 
@@ -218,13 +218,13 @@ class TestNumberSpec extends AbstractRestSpec implements RestQueries{
 					doubleNr = 123.123
 				floatNr = 123.123
 				floatNrScale = 2.34
-				integerNr = 277
+				integerNr = 207
 				integerNrInList = 3
 				integerNrMax = 2
 				integerNrMin = 3
 				integerNrNotEqual = 2
 				integerNrRange = 19
-				integerNrUnique = 278
+				integerNrUnique = 208
 				longNr = 4
 
 
@@ -258,10 +258,17 @@ class TestNumberSpec extends AbstractRestSpec implements RestQueries{
 			response.json.size() == 2
 	}
 	
-	@Ignore // have to have more then maxLimit items
+	
+	 // have to have more then maxLimit items
 	void "Test TestNumber list max property."() {
 		given:
 			int maxLimit = 100// Set real max items limit
+			
+		when:"Get testNumber list without max param"
+			response = queryListWithParams("")
+
+		then:"Should return default maximum items"
+			response.json.size() == 10
 			
 		when:"Get testNumber list with maximum items"
 			response = queryListWithParams("max=$maxLimit")
@@ -294,14 +301,64 @@ class TestNumberSpec extends AbstractRestSpec implements RestQueries{
 			response.json[0].id != null
 	}
 	
-	void "Test filtering in TestNumber list."() {
-		when:"Get testNumber sorted list"
-			response = queryListWithParams("order=desc&sort=id")
+	void "Test filtering in TestNumber list by id."() {
+		when:"Get testNumber list filtered by id"
 
-		then:"First item should be just inserted object"
+			response = queryListWithUrlVariables("filter={filter}", [filter:"{id:${domainId}}"])
+
+		then:"Should contains one item, just inserted item."
 			response.json[0].id == domainId
+			response.json.size() == 1
 			response.status == OK.value()
 	}
+	
+	void "Test filtering in TestNumber list by all properties."() {
+		given:
+			response = queryListWithUrlVariables("filter={filter}", [filter:"${jsonVal}"])
+			
+			
+		expect:
+			response.json.size() == respSize
+		where:
+			jsonVal 	        || respSize
+			"{}"                || 10
+	
+			"""{"doubleNr":123.123}"""     		|| 10
+
+	
+			"""{"floatNr":123.123}"""     		|| 10
+
+	
+			"""{"floatNrScale":2.34}"""     		|| 10
+
+	
+			"""{"integerNr":207}"""     		|| 1
+
+	
+			"""{"integerNrInList":3}"""     		|| 10
+
+	
+			"""{"integerNrMax":2}"""     		|| 10
+
+	
+			"""{"integerNrMin":3}"""     		|| 10
+
+	
+			"""{"integerNrNotEqual":2}"""     		|| 10
+
+	
+			"""{"integerNrRange":19}"""     		|| 10
+
+	
+			"""{"integerNrUnique":208}"""     		|| 1
+
+	
+			"""{"longNr":4}"""     		|| 10
+
+	
+	}
+	
+	
 	
 	
 	void "Test deleting other TestNumber instance."() {//This is for creating some data to test list sorting

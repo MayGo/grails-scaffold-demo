@@ -34,7 +34,7 @@ class DivisionCollectionlessSpec extends AbstractRestSpec implements RestQueries
 	void "Test creating another DivisionCollectionless instance."() {//This is for creating some data to test list sorting
 		when: "Create divisionCollectionless"
 			response = sendCreateWithData(){
-				name = 'Division137'
+				name = 'Division102'
 				headDivision = 1
 
 			}
@@ -43,7 +43,7 @@ class DivisionCollectionlessSpec extends AbstractRestSpec implements RestQueries
 			
 			
 		then: "Should create and return created values"
-			response.json.name == 'Division137'
+			response.json.name == 'Division102'
 			response.json.headDivision?.id == 1
 
 			response.status == CREATED.value()
@@ -52,7 +52,7 @@ class DivisionCollectionlessSpec extends AbstractRestSpec implements RestQueries
 	void "Test creating DivisionCollectionless instance."() {
 		when: "Create divisionCollectionless"
 			response = sendCreateWithData(){
-				name = 'Division138'
+				name = 'Division103'
 				headDivision = 1
 
 			}
@@ -62,7 +62,7 @@ class DivisionCollectionlessSpec extends AbstractRestSpec implements RestQueries
 			
 		then: "Should create and return created values"
 			
-			response.json.name == 'Division138'
+			response.json.name == 'Division103'
 			response.json.headDivision?.id == 1
 
 			response.status == CREATED.value()
@@ -77,7 +77,7 @@ class DivisionCollectionlessSpec extends AbstractRestSpec implements RestQueries
 			response = readDomainItemWithParams(domainId.toString(), "")
 		then: "Should return correct values"
 			
-			response.json.name == 'Division138'
+			response.json.name == 'Division103'
 			response.json.headDivision?.id == 1
 
 			response.status == OK.value()
@@ -117,13 +117,13 @@ class DivisionCollectionlessSpec extends AbstractRestSpec implements RestQueries
 	void "Test updating DivisionCollectionless instance."() {
 		when: "Update divisionCollectionless"
 			response = sendUpdateWithData(domainId.toString()){
-				name = 'Division139'
+				name = 'Division104'
 				headDivision = 1
 
 
 			}
 		then: "Should return updated values"
-			response.json.name == 'Division139'
+			response.json.name == 'Division104'
 			response.json.headDivision?.id == 1
 
 
@@ -133,7 +133,7 @@ class DivisionCollectionlessSpec extends AbstractRestSpec implements RestQueries
 	void "Test updating unexisting DivisionCollectionless instance."() {
 		when: "Update unexisting divisionCollectionless"
 			response = sendUpdateWithData("9999999999"){
-					name = 'Division139'
+					name = 'Division104'
 				headDivision = 1
 
 
@@ -143,7 +143,7 @@ class DivisionCollectionlessSpec extends AbstractRestSpec implements RestQueries
 			
 		when: "Update unexisting divisionCollectionless id not a number"
 			response = sendUpdateWithData("nonexistent"){
-					name = 'Division139'
+					name = 'Division104'
 				headDivision = 1
 
 
@@ -177,10 +177,17 @@ class DivisionCollectionlessSpec extends AbstractRestSpec implements RestQueries
 			response.json.size() == 2
 	}
 	
-	@Ignore // have to have more then maxLimit items
+	
+	 // have to have more then maxLimit items
 	void "Test DivisionCollectionless list max property."() {
 		given:
 			int maxLimit = 100// Set real max items limit
+			
+		when:"Get divisionCollectionless list without max param"
+			response = queryListWithParams("")
+
+		then:"Should return default maximum items"
+			response.json.size() == 10
 			
 		when:"Get divisionCollectionless list with maximum items"
 			response = queryListWithParams("max=$maxLimit")
@@ -213,14 +220,34 @@ class DivisionCollectionlessSpec extends AbstractRestSpec implements RestQueries
 			response.json[0].id != null
 	}
 	
-	void "Test filtering in DivisionCollectionless list."() {
-		when:"Get divisionCollectionless sorted list"
-			response = queryListWithParams("order=desc&sort=id")
+	void "Test filtering in DivisionCollectionless list by id."() {
+		when:"Get divisionCollectionless list filtered by id"
 
-		then:"First item should be just inserted object"
+			response = queryListWithUrlVariables("filter={filter}", [filter:"{id:${domainId}}"])
+
+		then:"Should contains one item, just inserted item."
 			response.json[0].id == domainId
+			response.json.size() == 1
 			response.status == OK.value()
 	}
+	
+	void "Test filtering in DivisionCollectionless list by all properties."() {
+		given:
+			response = queryListWithUrlVariables("filter={filter}", [filter:"${jsonVal}"])
+			
+			
+		expect:
+			response.json.size() == respSize
+		where:
+			jsonVal 	        || respSize
+			"{}"                || 10
+	
+			"""{"name":"Division104"}"""     		|| 1
+
+	
+	}
+	
+	
 	
 	
 	void "Test deleting other DivisionCollectionless instance."() {//This is for creating some data to test list sorting

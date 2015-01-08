@@ -27,7 +27,7 @@ class TestDataGeneratorService {
 			return
 		}
 
-		(1..100).each{index->
+		(1..101).each{index->
 			Tag.withNewTransaction{
 
 				Tag.build()

@@ -82,7 +82,7 @@ grails.project.dependency.resolution = {
         //runtime ":hibernate4:4.3.5.5" // or 
 		runtime ":hibernate:3.6.10.17"
 		
-		compile ":scaffold-angular-smit:0.4.4"// latest.integration"//run "grails list-plugin" before
+		compile ":scaffold-angular-smit:latest.integration"// latest.integration"//run "grails list-plugin" before
 		compile ':cache:1.1.8'
 
     }

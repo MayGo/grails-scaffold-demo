@@ -177,10 +177,17 @@ class PersonSpec extends AbstractRestSpec implements RestQueries{
 			response.json.size() == 2
 	}
 	
-	@Ignore // have to have more then maxLimit items
+	
+	 // have to have more then maxLimit items
 	void "Test Person list max property."() {
 		given:
 			int maxLimit = 100// Set real max items limit
+			
+		when:"Get person list without max param"
+			response = queryListWithParams("")
+
+		then:"Should return default maximum items"
+			response.json.size() == 10
 			
 		when:"Get person list with maximum items"
 			response = queryListWithParams("max=$maxLimit")
@@ -213,14 +220,37 @@ class PersonSpec extends AbstractRestSpec implements RestQueries{
 			response.json[0].id != null
 	}
 	
-	void "Test filtering in Person list."() {
-		when:"Get person sorted list"
-			response = queryListWithParams("order=desc&sort=id")
+	void "Test filtering in Person list by id."() {
+		when:"Get person list filtered by id"
 
-		then:"First item should be just inserted object"
+			response = queryListWithUrlVariables("filter={filter}", [filter:"{id:${domainId}}"])
+
+		then:"Should contains one item, just inserted item."
 			response.json[0].id == domainId
+			response.json.size() == 1
 			response.status == OK.value()
 	}
+	
+	void "Test filtering in Person list by all properties."() {
+		given:
+			response = queryListWithUrlVariables("filter={filter}", [filter:"${jsonVal}"])
+			
+			
+		expect:
+			response.json.size() == respSize
+		where:
+			jsonVal 	        || respSize
+			"{}"                || 10
+	
+			"""{"firstName":"firstName"}"""     		|| 10
+
+	
+			"""{"lastName":"lastName"}"""     		|| 10
+
+	
+	}
+	
+	
 	
 	
 	void "Test deleting other Person instance."() {//This is for creating some data to test list sorting

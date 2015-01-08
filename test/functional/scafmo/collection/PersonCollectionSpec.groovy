@@ -34,8 +34,8 @@ class PersonCollectionSpec extends AbstractRestSpec implements RestQueries{
 	void "Test creating another PersonCollection instance."() {//This is for creating some data to test list sorting
 		when: "Create personCollection"
 			response = sendCreateWithData(){
-				age = 75
-				name = 'John273 Doe274'
+				age = 306
+				name = 'John304 Doe305'
 				division = 1
 
 			}
@@ -44,8 +44,8 @@ class PersonCollectionSpec extends AbstractRestSpec implements RestQueries{
 			
 			
 		then: "Should create and return created values"
-			response.json.age == 75
-			response.json.name == 'John273 Doe274'
+			response.json.age == 306
+			response.json.name == 'John304 Doe305'
 			response.json.division?.id == 1
 
 			response.status == CREATED.value()
@@ -54,8 +54,8 @@ class PersonCollectionSpec extends AbstractRestSpec implements RestQueries{
 	void "Test creating PersonCollection instance."() {
 		when: "Create personCollection"
 			response = sendCreateWithData(){
-				age = 77
-				name = 'John275 Doe276'
+				age = 309
+				name = 'John307 Doe308'
 				division = 1
 
 			}
@@ -65,8 +65,8 @@ class PersonCollectionSpec extends AbstractRestSpec implements RestQueries{
 			
 		then: "Should create and return created values"
 			
-			response.json.age == 77
-			response.json.name == 'John275 Doe276'
+			response.json.age == 309
+			response.json.name == 'John307 Doe308'
 			response.json.division?.id == 1
 
 			response.status == CREATED.value()
@@ -81,8 +81,8 @@ class PersonCollectionSpec extends AbstractRestSpec implements RestQueries{
 			response = readDomainItemWithParams(domainId.toString(), "")
 		then: "Should return correct values"
 			
-			response.json.age == 77
-			response.json.name == 'John275 Doe276'
+			response.json.age == 309
+			response.json.name == 'John307 Doe308'
 			response.json.division?.id == 1
 
 			response.status == OK.value()
@@ -122,15 +122,15 @@ class PersonCollectionSpec extends AbstractRestSpec implements RestQueries{
 	void "Test updating PersonCollection instance."() {
 		when: "Update personCollection"
 			response = sendUpdateWithData(domainId.toString()){
-				age = 79
-				name = 'John277 Doe278'
+				age = 312
+				name = 'John310 Doe311'
 				division = 1
 
 
 			}
 		then: "Should return updated values"
-			response.json.age == 79
-			response.json.name == 'John277 Doe278'
+			response.json.age == 312
+			response.json.name == 'John310 Doe311'
 			response.json.division?.id == 1
 
 
@@ -140,8 +140,8 @@ class PersonCollectionSpec extends AbstractRestSpec implements RestQueries{
 	void "Test updating unexisting PersonCollection instance."() {
 		when: "Update unexisting personCollection"
 			response = sendUpdateWithData("9999999999"){
-					age = 79
-				name = 'John277 Doe278'
+					age = 312
+				name = 'John310 Doe311'
 				division = 1
 
 
@@ -151,8 +151,8 @@ class PersonCollectionSpec extends AbstractRestSpec implements RestQueries{
 			
 		when: "Update unexisting personCollection id not a number"
 			response = sendUpdateWithData("nonexistent"){
-					age = 79
-				name = 'John277 Doe278'
+					age = 312
+				name = 'John310 Doe311'
 				division = 1
 
 
@@ -186,10 +186,17 @@ class PersonCollectionSpec extends AbstractRestSpec implements RestQueries{
 			response.json.size() == 2
 	}
 	
-	@Ignore // have to have more then maxLimit items
+	
+	 // have to have more then maxLimit items
 	void "Test PersonCollection list max property."() {
 		given:
 			int maxLimit = 100// Set real max items limit
+			
+		when:"Get personCollection list without max param"
+			response = queryListWithParams("")
+
+		then:"Should return default maximum items"
+			response.json.size() == 10
 			
 		when:"Get personCollection list with maximum items"
 			response = queryListWithParams("max=$maxLimit")
@@ -222,14 +229,37 @@ class PersonCollectionSpec extends AbstractRestSpec implements RestQueries{
 			response.json[0].id != null
 	}
 	
-	void "Test filtering in PersonCollection list."() {
-		when:"Get personCollection sorted list"
-			response = queryListWithParams("order=desc&sort=id")
+	void "Test filtering in PersonCollection list by id."() {
+		when:"Get personCollection list filtered by id"
 
-		then:"First item should be just inserted object"
+			response = queryListWithUrlVariables("filter={filter}", [filter:"{id:${domainId}}"])
+
+		then:"Should contains one item, just inserted item."
 			response.json[0].id == domainId
+			response.json.size() == 1
 			response.status == OK.value()
 	}
+	
+	void "Test filtering in PersonCollection list by all properties."() {
+		given:
+			response = queryListWithUrlVariables("filter={filter}", [filter:"${jsonVal}"])
+			
+			
+		expect:
+			response.json.size() == respSize
+		where:
+			jsonVal 	        || respSize
+			"{}"                || 10
+	
+			"""{"age":312}"""     		|| 1
+
+	
+		//Can't predict 'size'	"""{"name":"John310 Doe311"}"""     		|| 1
+
+	
+	}
+	
+	
 	
 	
 	void "Test deleting other PersonCollection instance."() {//This is for creating some data to test list sorting

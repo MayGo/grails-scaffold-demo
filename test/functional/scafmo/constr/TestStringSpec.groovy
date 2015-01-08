@@ -34,17 +34,17 @@ class TestStringSpec extends AbstractRestSpec implements RestQueries{
 	void "Test creating another TestString instance."() {//This is for creating some data to test list sorting
 		when: "Create testString"
 			response = sendCreateWithData(){
-				blankStr = 'Blank 681'
+				blankStr = 'Blank 506'
 				creditCardStr = '372886934857774'
-				emailStr = 'test682@test.com'
+				emailStr = 'test507@test.com'
 				inListStr = 'test1'
 				matchesStr = 'ABC'
 				maxSizeStr = 'ABCDE'
 				minSizeStr = 'ABC'
-				notEqualStr = 'notEqualStr 683'
+				notEqualStr = 'notEqualStr 508'
 				sizeStr = 'sizeStr'
-				uniqueStr = 'U 684'
-				urlStr = 'http://www.test685.com'
+				uniqueStr = 'U 509'
+				urlStr = 'http://www.test510.com'
 
 			}
 			
@@ -52,17 +52,17 @@ class TestStringSpec extends AbstractRestSpec implements RestQueries{
 			
 			
 		then: "Should create and return created values"
-			response.json.blankStr == 'Blank 681'
+			response.json.blankStr == 'Blank 506'
 			response.json.creditCardStr == '372886934857774'
-			response.json.emailStr == 'test682@test.com'
+			response.json.emailStr == 'test507@test.com'
 			response.json.inListStr == 'test1'
 			response.json.matchesStr == 'ABC'
 			response.json.maxSizeStr == 'ABCDE'
 			response.json.minSizeStr == 'ABC'
-			response.json.notEqualStr == 'notEqualStr 683'
+			response.json.notEqualStr == 'notEqualStr 508'
 			response.json.sizeStr == 'sizeStr'
-			response.json.uniqueStr == 'U 684'
-			response.json.urlStr == 'http://www.test685.com'
+			response.json.uniqueStr == 'U 509'
+			response.json.urlStr == 'http://www.test510.com'
 
 			response.status == CREATED.value()
 	}
@@ -70,17 +70,17 @@ class TestStringSpec extends AbstractRestSpec implements RestQueries{
 	void "Test creating TestString instance."() {
 		when: "Create testString"
 			response = sendCreateWithData(){
-				blankStr = 'Blank 686'
+				blankStr = 'Blank 511'
 				creditCardStr = '372886934857774'
-				emailStr = 'test687@test.com'
+				emailStr = 'test512@test.com'
 				inListStr = 'test1'
 				matchesStr = 'ABC'
 				maxSizeStr = 'ABCDE'
 				minSizeStr = 'ABC'
-				notEqualStr = 'notEqualStr 688'
+				notEqualStr = 'notEqualStr 513'
 				sizeStr = 'sizeStr'
-				uniqueStr = 'U 689'
-				urlStr = 'http://www.test690.com'
+				uniqueStr = 'U 514'
+				urlStr = 'http://www.test515.com'
 
 			}
 			
@@ -89,17 +89,17 @@ class TestStringSpec extends AbstractRestSpec implements RestQueries{
 			
 		then: "Should create and return created values"
 			
-			response.json.blankStr == 'Blank 686'
+			response.json.blankStr == 'Blank 511'
 			response.json.creditCardStr == '372886934857774'
-			response.json.emailStr == 'test687@test.com'
+			response.json.emailStr == 'test512@test.com'
 			response.json.inListStr == 'test1'
 			response.json.matchesStr == 'ABC'
 			response.json.maxSizeStr == 'ABCDE'
 			response.json.minSizeStr == 'ABC'
-			response.json.notEqualStr == 'notEqualStr 688'
+			response.json.notEqualStr == 'notEqualStr 513'
 			response.json.sizeStr == 'sizeStr'
-			response.json.uniqueStr == 'U 689'
-			response.json.urlStr == 'http://www.test690.com'
+			response.json.uniqueStr == 'U 514'
+			response.json.urlStr == 'http://www.test515.com'
 
 			response.status == CREATED.value()
 	}
@@ -113,17 +113,17 @@ class TestStringSpec extends AbstractRestSpec implements RestQueries{
 			response = readDomainItemWithParams(domainId.toString(), "")
 		then: "Should return correct values"
 			
-			response.json.blankStr == 'Blank 686'
+			response.json.blankStr == 'Blank 511'
 			response.json.creditCardStr == '372886934857774'
-			response.json.emailStr == 'test687@test.com'
+			response.json.emailStr == 'test512@test.com'
 			response.json.inListStr == 'test1'
 			response.json.matchesStr == 'ABC'
 			response.json.maxSizeStr == 'ABCDE'
 			response.json.minSizeStr == 'ABC'
-			response.json.notEqualStr == 'notEqualStr 688'
+			response.json.notEqualStr == 'notEqualStr 513'
 			response.json.sizeStr == 'sizeStr'
-			response.json.uniqueStr == 'U 689'
-			response.json.urlStr == 'http://www.test690.com'
+			response.json.uniqueStr == 'U 514'
+			response.json.urlStr == 'http://www.test515.com'
 
 			response.status == OK.value()
 	}
@@ -162,32 +162,32 @@ class TestStringSpec extends AbstractRestSpec implements RestQueries{
 	void "Test updating TestString instance."() {
 		when: "Update testString"
 			response = sendUpdateWithData(domainId.toString()){
-				blankStr = 'Blank 691'
+				blankStr = 'Blank 516'
 				creditCardStr = '372886934857774'
-				emailStr = 'test692@test.com'
+				emailStr = 'test517@test.com'
 				inListStr = 'test1'
 				matchesStr = 'ABC'
 				maxSizeStr = 'ABCDE'
 				minSizeStr = 'ABC'
-				notEqualStr = 'notEqualStr 693'
+				notEqualStr = 'notEqualStr 518'
 				sizeStr = 'sizeStr'
-				uniqueStr = 'U 694'
-				urlStr = 'http://www.test695.com'
+				uniqueStr = 'U 519'
+				urlStr = 'http://www.test520.com'
 
 
 			}
 		then: "Should return updated values"
-			response.json.blankStr == 'Blank 691'
+			response.json.blankStr == 'Blank 516'
 			response.json.creditCardStr == '372886934857774'
-			response.json.emailStr == 'test692@test.com'
+			response.json.emailStr == 'test517@test.com'
 			response.json.inListStr == 'test1'
 			response.json.matchesStr == 'ABC'
 			response.json.maxSizeStr == 'ABCDE'
 			response.json.minSizeStr == 'ABC'
-			response.json.notEqualStr == 'notEqualStr 693'
+			response.json.notEqualStr == 'notEqualStr 518'
 			response.json.sizeStr == 'sizeStr'
-			response.json.uniqueStr == 'U 694'
-			response.json.urlStr == 'http://www.test695.com'
+			response.json.uniqueStr == 'U 519'
+			response.json.urlStr == 'http://www.test520.com'
 
 
 			response.status == OK.value()
@@ -196,17 +196,17 @@ class TestStringSpec extends AbstractRestSpec implements RestQueries{
 	void "Test updating unexisting TestString instance."() {
 		when: "Update unexisting testString"
 			response = sendUpdateWithData("9999999999"){
-					blankStr = 'Blank 691'
+					blankStr = 'Blank 516'
 				creditCardStr = '372886934857774'
-				emailStr = 'test692@test.com'
+				emailStr = 'test517@test.com'
 				inListStr = 'test1'
 				matchesStr = 'ABC'
 				maxSizeStr = 'ABCDE'
 				minSizeStr = 'ABC'
-				notEqualStr = 'notEqualStr 693'
+				notEqualStr = 'notEqualStr 518'
 				sizeStr = 'sizeStr'
-				uniqueStr = 'U 694'
-				urlStr = 'http://www.test695.com'
+				uniqueStr = 'U 519'
+				urlStr = 'http://www.test520.com'
 
 
 			}
@@ -215,17 +215,17 @@ class TestStringSpec extends AbstractRestSpec implements RestQueries{
 			
 		when: "Update unexisting testString id not a number"
 			response = sendUpdateWithData("nonexistent"){
-					blankStr = 'Blank 691'
+					blankStr = 'Blank 516'
 				creditCardStr = '372886934857774'
-				emailStr = 'test692@test.com'
+				emailStr = 'test517@test.com'
 				inListStr = 'test1'
 				matchesStr = 'ABC'
 				maxSizeStr = 'ABCDE'
 				minSizeStr = 'ABC'
-				notEqualStr = 'notEqualStr 693'
+				notEqualStr = 'notEqualStr 518'
 				sizeStr = 'sizeStr'
-				uniqueStr = 'U 694'
-				urlStr = 'http://www.test695.com'
+				uniqueStr = 'U 519'
+				urlStr = 'http://www.test520.com'
 
 
 			}
@@ -258,10 +258,17 @@ class TestStringSpec extends AbstractRestSpec implements RestQueries{
 			response.json.size() == 2
 	}
 	
-	@Ignore // have to have more then maxLimit items
+	
+	 // have to have more then maxLimit items
 	void "Test TestString list max property."() {
 		given:
 			int maxLimit = 100// Set real max items limit
+			
+		when:"Get testString list without max param"
+			response = queryListWithParams("")
+
+		then:"Should return default maximum items"
+			response.json.size() == 10
 			
 		when:"Get testString list with maximum items"
 			response = queryListWithParams("max=$maxLimit")
@@ -294,14 +301,64 @@ class TestStringSpec extends AbstractRestSpec implements RestQueries{
 			response.json[0].id != null
 	}
 	
-	void "Test filtering in TestString list."() {
-		when:"Get testString sorted list"
-			response = queryListWithParams("order=desc&sort=id")
+	void "Test filtering in TestString list by id."() {
+		when:"Get testString list filtered by id"
 
-		then:"First item should be just inserted object"
+			response = queryListWithUrlVariables("filter={filter}", [filter:"{id:${domainId}}"])
+
+		then:"Should contains one item, just inserted item."
 			response.json[0].id == domainId
+			response.json.size() == 1
 			response.status == OK.value()
 	}
+	
+	void "Test filtering in TestString list by all properties."() {
+		given:
+			response = queryListWithUrlVariables("filter={filter}", [filter:"${jsonVal}"])
+			
+			
+		expect:
+			response.json.size() == respSize
+		where:
+			jsonVal 	        || respSize
+			"{}"                || 10
+	
+		//Can't predict 'size'	"""{"blankStr":"Blank 516"}"""     		|| 1
+
+	
+			"""{"creditCardStr":"372886934857774"}"""     		|| 10
+
+	
+			"""{"emailStr":"test517@test.com"}"""     		|| 1
+
+	
+			"""{"inListStr":"test1"}"""     		|| 10
+
+	
+			"""{"matchesStr":"ABC"}"""     		|| 10
+
+	
+			"""{"maxSizeStr":"ABCDE"}"""     		|| 10
+
+	
+			"""{"minSizeStr":"ABC"}"""     		|| 10
+
+	
+		//Can't predict 'size'	"""{"notEqualStr":"notEqualStr 518"}"""     		|| 1
+
+	
+			"""{"sizeStr":"sizeStr"}"""     		|| 10
+
+	
+		//Can't predict 'size'	"""{"uniqueStr":"U 519"}"""     		|| 1
+
+	
+			"""{"urlStr":"http://www.test520.com"}"""     		|| 1
+
+	
+	}
+	
+	
 	
 	
 	void "Test deleting other TestString instance."() {//This is for creating some data to test list sorting

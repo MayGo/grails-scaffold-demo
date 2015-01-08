@@ -74,12 +74,12 @@ testDataConfig {
 		'scafmo.collection.PersonCollection' {
             def i = 1
             name = {-> "John${i++} Doe${i++}" }
-            age =  {-> i%100 }
+            age =  {-> i++ }
         }
         'scafmo.collection.PersonCollectionless' {
             def i = 1
             name = {-> "John${i++} Doe${i++}" }
-            age =  {-> i%100 }
+            age =  {-> i++ }
         }
         'scafmo.collection.DivisionCollection' {
             def i = 1

@@ -34,7 +34,7 @@ class TagSpec extends AbstractRestSpec implements RestQueries{
 	void "Test creating another Tag instance."() {//This is for creating some data to test list sorting
 		when: "Create tag"
 			response = sendCreateWithData(){
-				name = 'Work Tag 137'
+				name = 'Work Tag 102'
 
 			}
 			
@@ -42,7 +42,7 @@ class TagSpec extends AbstractRestSpec implements RestQueries{
 			
 			
 		then: "Should create and return created values"
-			response.json.name == 'Work Tag 137'
+			response.json.name == 'Work Tag 102'
 
 			response.status == CREATED.value()
 	}
@@ -50,7 +50,7 @@ class TagSpec extends AbstractRestSpec implements RestQueries{
 	void "Test creating Tag instance."() {
 		when: "Create tag"
 			response = sendCreateWithData(){
-				name = 'Work Tag 138'
+				name = 'Work Tag 103'
 
 			}
 			
@@ -59,7 +59,7 @@ class TagSpec extends AbstractRestSpec implements RestQueries{
 			
 		then: "Should create and return created values"
 			
-			response.json.name == 'Work Tag 138'
+			response.json.name == 'Work Tag 103'
 
 			response.status == CREATED.value()
 	}
@@ -73,7 +73,7 @@ class TagSpec extends AbstractRestSpec implements RestQueries{
 			response = readDomainItemWithParams(domainId.toString(), "")
 		then: "Should return correct values"
 			
-			response.json.name == 'Work Tag 138'
+			response.json.name == 'Work Tag 103'
 
 			response.status == OK.value()
 	}
@@ -112,12 +112,12 @@ class TagSpec extends AbstractRestSpec implements RestQueries{
 	void "Test updating Tag instance."() {
 		when: "Update tag"
 			response = sendUpdateWithData(domainId.toString()){
-				name = 'Work Tag 139'
+				name = 'Work Tag 104'
 
 
 			}
 		then: "Should return updated values"
-			response.json.name == 'Work Tag 139'
+			response.json.name == 'Work Tag 104'
 
 
 			response.status == OK.value()
@@ -126,7 +126,7 @@ class TagSpec extends AbstractRestSpec implements RestQueries{
 	void "Test updating unexisting Tag instance."() {
 		when: "Update unexisting tag"
 			response = sendUpdateWithData("9999999999"){
-					name = 'Work Tag 139'
+					name = 'Work Tag 104'
 
 
 			}
@@ -135,7 +135,7 @@ class TagSpec extends AbstractRestSpec implements RestQueries{
 			
 		when: "Update unexisting tag id not a number"
 			response = sendUpdateWithData("nonexistent"){
-					name = 'Work Tag 139'
+					name = 'Work Tag 104'
 
 
 			}
@@ -168,10 +168,17 @@ class TagSpec extends AbstractRestSpec implements RestQueries{
 			response.json.size() == 2
 	}
 	
-	@Ignore // have to have more then maxLimit items
+	
+	 // have to have more then maxLimit items
 	void "Test Tag list max property."() {
 		given:
 			int maxLimit = 100// Set real max items limit
+			
+		when:"Get tag list without max param"
+			response = queryListWithParams("")
+
+		then:"Should return default maximum items"
+			response.json.size() == 10
 			
 		when:"Get tag list with maximum items"
 			response = queryListWithParams("max=$maxLimit")
@@ -204,14 +211,34 @@ class TagSpec extends AbstractRestSpec implements RestQueries{
 			response.json[0].id != null
 	}
 	
-	void "Test filtering in Tag list."() {
-		when:"Get tag sorted list"
-			response = queryListWithParams("order=desc&sort=id")
+	void "Test filtering in Tag list by id."() {
+		when:"Get tag list filtered by id"
 
-		then:"First item should be just inserted object"
+			response = queryListWithUrlVariables("filter={filter}", [filter:"{id:${domainId}}"])
+
+		then:"Should contains one item, just inserted item."
 			response.json[0].id == domainId
+			response.json.size() == 1
 			response.status == OK.value()
 	}
+	
+	void "Test filtering in Tag list by all properties."() {
+		given:
+			response = queryListWithUrlVariables("filter={filter}", [filter:"${jsonVal}"])
+			
+			
+		expect:
+			response.json.size() == respSize
+		where:
+			jsonVal 	        || respSize
+			"{}"                || 10
+	
+		//Can't predict 'size'	"""{"name":"Work Tag 104"}"""     		|| 1
+
+	
+	}
+	
+	
 	
 	
 	void "Test deleting other Tag instance."() {//This is for creating some data to test list sorting

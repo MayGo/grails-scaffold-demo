@@ -38,7 +38,7 @@ class OwnerSpec extends AbstractRestSpec implements RestQueries{
 				city = 'city'
 				firstName = 'firstName'
 				lastName = 'lastName'
-				telephone = '555409'
+				telephone = '555304'
 
 			}
 			
@@ -50,7 +50,7 @@ class OwnerSpec extends AbstractRestSpec implements RestQueries{
 			response.json.city == 'city'
 			response.json.firstName == 'firstName'
 			response.json.lastName == 'lastName'
-			response.json.telephone == '555409'
+			response.json.telephone == '555304'
 
 			response.status == CREATED.value()
 	}
@@ -62,7 +62,7 @@ class OwnerSpec extends AbstractRestSpec implements RestQueries{
 				city = 'city'
 				firstName = 'firstName'
 				lastName = 'lastName'
-				telephone = '555410'
+				telephone = '555305'
 
 			}
 			
@@ -75,7 +75,7 @@ class OwnerSpec extends AbstractRestSpec implements RestQueries{
 			response.json.city == 'city'
 			response.json.firstName == 'firstName'
 			response.json.lastName == 'lastName'
-			response.json.telephone == '555410'
+			response.json.telephone == '555305'
 
 			response.status == CREATED.value()
 	}
@@ -93,7 +93,7 @@ class OwnerSpec extends AbstractRestSpec implements RestQueries{
 			response.json.city == 'city'
 			response.json.firstName == 'firstName'
 			response.json.lastName == 'lastName'
-			response.json.telephone == '555410'
+			response.json.telephone == '555305'
 
 			response.status == OK.value()
 	}
@@ -136,7 +136,7 @@ class OwnerSpec extends AbstractRestSpec implements RestQueries{
 				city = 'city'
 				firstName = 'firstName'
 				lastName = 'lastName'
-				telephone = '555411'
+				telephone = '555306'
 
 
 			}
@@ -145,7 +145,7 @@ class OwnerSpec extends AbstractRestSpec implements RestQueries{
 			response.json.city == 'city'
 			response.json.firstName == 'firstName'
 			response.json.lastName == 'lastName'
-			response.json.telephone == '555411'
+			response.json.telephone == '555306'
 
 
 			response.status == OK.value()
@@ -158,7 +158,7 @@ class OwnerSpec extends AbstractRestSpec implements RestQueries{
 				city = 'city'
 				firstName = 'firstName'
 				lastName = 'lastName'
-				telephone = '555411'
+				telephone = '555306'
 
 
 			}
@@ -171,7 +171,7 @@ class OwnerSpec extends AbstractRestSpec implements RestQueries{
 				city = 'city'
 				firstName = 'firstName'
 				lastName = 'lastName'
-				telephone = '555411'
+				telephone = '555306'
 
 
 			}
@@ -204,10 +204,17 @@ class OwnerSpec extends AbstractRestSpec implements RestQueries{
 			response.json.size() == 2
 	}
 	
-	@Ignore // have to have more then maxLimit items
+	
+	 // have to have more then maxLimit items
 	void "Test Owner list max property."() {
 		given:
 			int maxLimit = 100// Set real max items limit
+			
+		when:"Get owner list without max param"
+			response = queryListWithParams("")
+
+		then:"Should return default maximum items"
+			response.json.size() == 10
 			
 		when:"Get owner list with maximum items"
 			response = queryListWithParams("max=$maxLimit")
@@ -240,14 +247,46 @@ class OwnerSpec extends AbstractRestSpec implements RestQueries{
 			response.json[0].id != null
 	}
 	
-	void "Test filtering in Owner list."() {
-		when:"Get owner sorted list"
-			response = queryListWithParams("order=desc&sort=id")
+	void "Test filtering in Owner list by id."() {
+		when:"Get owner list filtered by id"
 
-		then:"First item should be just inserted object"
+			response = queryListWithUrlVariables("filter={filter}", [filter:"{id:${domainId}}"])
+
+		then:"Should contains one item, just inserted item."
 			response.json[0].id == domainId
+			response.json.size() == 1
 			response.status == OK.value()
 	}
+	
+	void "Test filtering in Owner list by all properties."() {
+		given:
+			response = queryListWithUrlVariables("filter={filter}", [filter:"${jsonVal}"])
+			
+			
+		expect:
+			response.json.size() == respSize
+		where:
+			jsonVal 	        || respSize
+			"{}"                || 10
+	
+			"""{"address":"address"}"""     		|| 10
+
+	
+			"""{"city":"city"}"""     		|| 10
+
+	
+			"""{"firstName":"firstName"}"""     		|| 10
+
+	
+			"""{"lastName":"lastName"}"""     		|| 10
+
+	
+			"""{"telephone":"555306"}"""     		|| 1
+
+	
+	}
+	
+	
 	
 	
 	void "Test deleting other Owner instance."() {//This is for creating some data to test list sorting

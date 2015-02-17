@@ -1,0 +1,188 @@
+
+
+
+
+
+
+
+
+<div ng-init="pageTitle = 'pages.TestString.list.title'" data-ng-include=" 'components/blocks/page_heading.html' " ng-hide="isEmbeddedView" ></div>
+
+<div class="wrapper-md ng-scope"  st-table="rowCollection" st-pipe="callServer" >
+<accordion close-others="false">
+    <accordion-group  heading="{{'pages.TestString.list.table.search' | translate}}"  is-open="isSearchOpen">
+      <div class="row">
+		 
+	   		<div class="col-lg-2 form-inline"><div class="input-group input-group-sm">
+                    <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
+                    <input 
+                    	name="blankStr" 
+                   		ng-model="search.blankStr" 
+                   		st-search="'blankStr'" 
+                   		class="form-control" 
+                   		type="text" 
+                   		placeholder="{{'pages.TestString.list.search.placeholder.blankStr' | translate}}"  ></div> </div>		 
+	   		<div class="col-lg-2 form-inline"><div class="input-group input-group-sm">
+                    <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
+                    <input 
+                    	name="creditCardStr" 
+                   		ng-model="search.creditCardStr" 
+                   		st-search="'creditCardStr'" 
+                   		class="form-control" 
+                   		type="text" 
+                   		placeholder="{{'pages.TestString.list.search.placeholder.creditCardStr' | translate}}"  ></div> </div>		 
+	   		<div class="col-lg-2 form-inline"><div class="input-group input-group-sm">
+                    <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
+                    <input 
+                    	name="emailStr" 
+                   		ng-model="search.emailStr" 
+                   		st-search="'emailStr'" 
+                   		class="form-control" 
+                   		type="text" 
+                   		placeholder="{{'pages.TestString.list.search.placeholder.emailStr' | translate}}"  ></div> </div>		 
+	   		<div class="col-lg-2 form-inline"><div class="input-group input-group-sm">
+                    <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
+                    <input 
+                    	name="inListStr" 
+                   		ng-model="search.inListStr" 
+                   		st-search="'inListStr'" 
+                   		class="form-control" 
+                   		type="text" 
+                   		placeholder="{{'pages.TestString.list.search.placeholder.inListStr' | translate}}"  ></div> </div>		 
+	   		<div class="col-lg-2 form-inline"><div class="input-group input-group-sm">
+                    <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
+                    <input 
+                    	name="matchesStr" 
+                   		ng-model="search.matchesStr" 
+                   		st-search="'matchesStr'" 
+                   		class="form-control" 
+                   		type="text" 
+                   		placeholder="{{'pages.TestString.list.search.placeholder.matchesStr' | translate}}"  ng-pattern="/[a-zA-Z]+/"  ></div> </div>		 
+	   		<div class="col-lg-2 form-inline"><div class="input-group input-group-sm">
+                    <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
+                    <input 
+                    	name="maxSizeStr" 
+                   		ng-model="search.maxSizeStr" 
+                   		st-search="'maxSizeStr'" 
+                   		class="form-control" 
+                   		type="text" 
+                   		placeholder="{{'pages.TestString.list.search.placeholder.maxSizeStr' | translate}}"  ></div> </div>		 
+	   		<div class="col-lg-2 form-inline"><div class="input-group input-group-sm">
+                    <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
+                    <input 
+                    	name="minSizeStr" 
+                   		ng-model="search.minSizeStr" 
+                   		st-search="'minSizeStr'" 
+                   		class="form-control" 
+                   		type="text" 
+                   		placeholder="{{'pages.TestString.list.search.placeholder.minSizeStr' | translate}}"  ></div> </div>		 
+	   		<div class="col-lg-2 form-inline"><div class="input-group input-group-sm">
+                    <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
+                    <input 
+                    	name="notEqualStr" 
+                   		ng-model="search.notEqualStr" 
+                   		st-search="'notEqualStr'" 
+                   		class="form-control" 
+                   		type="text" 
+                   		placeholder="{{'pages.TestString.list.search.placeholder.notEqualStr' | translate}}"  ></div> </div>		 
+	   		<div class="col-lg-2 form-inline"><div class="input-group input-group-sm">
+                    <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
+                    <input 
+                    	name="sizeStr" 
+                   		ng-model="search.sizeStr" 
+                   		st-search="'sizeStr'" 
+                   		class="form-control" 
+                   		type="text" 
+                   		placeholder="{{'pages.TestString.list.search.placeholder.sizeStr' | translate}}"  ></div> </div>		 
+	   		<div class="col-lg-2 form-inline"><div class="input-group input-group-sm">
+                    <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
+                    <input 
+                    	name="uniqueStr" 
+                   		ng-model="search.uniqueStr" 
+                   		st-search="'uniqueStr'" 
+                   		class="form-control" 
+                   		type="text" 
+                   		placeholder="{{'pages.TestString.list.search.placeholder.uniqueStr' | translate}}"  ></div> </div>		 
+	   		<div class="col-lg-2 form-inline"><div class="input-group input-group-sm">
+                    <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
+                    <input 
+                    	name="urlStr" 
+                   		ng-model="search.urlStr" 
+                   		st-search="'urlStr'" 
+                   		class="form-control" 
+                   		type="text" 
+                   		placeholder="{{'pages.TestString.list.search.placeholder.urlStr' | translate}}"  ></div> </div>		 
+		</div>
+    </accordion-group>
+</accordion>
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      	<span translate="pages.TestString.list.table.title"></span>
+      	<div class="box-tools pull-right">
+			<a class="btn btn-default btn-xs" ui-sref="app.testString.create">
+				<i class="fa fa-plus" translate="pages.TestString.list.new" mx-show-loading></i>
+	       	</a>
+		</div>
+    </div>
+    <div class="panel-body panel-body-with-table">
+		 <div>
+	      <table class="table table-responsive">
+	      	<thead>
+	      		<tr>
+	      			<th width='20' st-sort="id" translate="pages.TestString.list.table.header.id"></th>	      		
+			   		<th st-sort="blankStr" translate="pages.TestString.list.table.header.blankStr" ></th>				 
+			   		<th st-sort="creditCardStr" translate="pages.TestString.list.table.header.creditCardStr" ></th>				 
+			   		<th st-sort="emailStr" translate="pages.TestString.list.table.header.emailStr" ></th>				 
+			   		<th st-sort="inListStr" translate="pages.TestString.list.table.header.inListStr" ></th>				 
+			   		<th st-sort="matchesStr" translate="pages.TestString.list.table.header.matchesStr" ></th>				 
+			   		<th st-sort="maxSizeStr" translate="pages.TestString.list.table.header.maxSizeStr" ></th>				 
+			   		<th st-sort="minSizeStr" translate="pages.TestString.list.table.header.minSizeStr" ></th>				 
+			   		<th st-sort="notEqualStr" translate="pages.TestString.list.table.header.notEqualStr" ></th>				 
+			   		<th st-sort="sizeStr" translate="pages.TestString.list.table.header.sizeStr" ></th>				 
+			   		<th st-sort="uniqueStr" translate="pages.TestString.list.table.header.uniqueStr" ></th>				 
+			   		<th st-sort="urlStr" translate="pages.TestString.list.table.header.urlStr" ></th>				 
+				 	<th></th>
+				</tr>
+	      	</thead>
+	      
+	      	<tbody ng-hide="isLoading">
+	      		
+				<tr ng-repeat="testString in rowCollection">
+					 <td>{{testString.id}}</td>					
+			   		<td>{{testString.blankStr}}</td>				 	
+			   		<td>{{testString.creditCardStr}}</td>				 	
+			   		<td>{{testString.emailStr}}</td>				 	
+			   		<td>{{testString.inListStr}}</td>				 	
+			   		<td>{{testString.matchesStr}}</td>				 	
+			   		<td>{{testString.maxSizeStr}}</td>				 	
+			   		<td>{{testString.minSizeStr}}</td>				 	
+			   		<td>{{testString.notEqualStr}}</td>				 	
+			   		<td>{{testString.sizeStr}}</td>				 	
+			   		<td>{{testString.uniqueStr}}</td>				 	
+			   		<td>{{testString.urlStr}}</td>				 	
+				 	
+		            <td class="text-right">
+		            	<a class="btn btn-default btn-xs" ui-sref="app.testString.view({id:testString.id})">
+		            		<i class="fa fa-eye" translate="pages.TestString.list.view"></i>
+		            	</a>
+		            	<a class="btn btn-default btn-xs" ui-sref="app.testString.edit({id:testString.id})">
+		            		<i class="fa fa-edit" translate="pages.TestString.list.edit"></i>
+		            	</a>
+		            	<a class="btn btn-danger btn-xs" ng-click="deleteTestString(testString)" mx-show-loading>
+		            		<i class="fa fa-trash-o" translate="pages.TestString.list.delete" ></i>
+		            	</a>
+		            </td>
+				</tr>
+			</tbody>
+			<tfoot ng-hide="isLoading">
+	          <tr>
+	            <td colspan="10" class="text-center">
+	              <div st-pagination="" st-items-by-page="stTable.itemsByPage" st-displayed-pages="15" ></div>
+	            </td>
+	          </tr>
+	        </tfoot>
+	      </table>
+	    </div>
+	</div>
+  </div>
+</div>

@@ -1,0 +1,155 @@
+
+
+
+
+<div ng-init="pageTitle = (isEditForm)?'pages.TestNumber.edit.title':'pages.TestNumber.create.title'" data-ng-include=" 'components/blocks/page_heading.html' "></div>
+<div class="wrapper-md ng-scope">
+    <div class="row">
+        <div class="col-sm-6">
+            <form name="testNumberForm" class="form-validation form-horizontal"  
+            	novalidate>
+                <div class="panel panel-default">
+                	<div class="panel-heading">
+                      <span class="h4" translate="pages.TestNumber.edit.form.title"></span>
+                    </div>
+                    <div class="panel-body">
+                        <input name="version" type="hidden" ng-model="testNumber.version" />
+                        
+                
+	<div class="form-group">
+		<label class="col-sm-2 control-label" for="doubleNr" translate="pages.TestNumber.edit.form.field.doubleNr"></label>
+		<div class="col-sm-10">
+            <div class="input-group input-group-sm">
+	      				<span class="input-group-addon">nr</span>
+	      				<input name="doubleNr" class="form-control"  ng-model="testNumber.doubleNr"  type="number"  ></div>                      
+        </div>
+	</div>
+	<div class="line line-dashed b-b line-lg pull-in"></div>
+	                
+                
+	<div class="form-group">
+		<label class="col-sm-2 control-label" for="floatNr" translate="pages.TestNumber.edit.form.field.floatNr"></label>
+		<div class="col-sm-10">
+            <div class="input-group input-group-sm">
+	      				<span class="input-group-addon">nr</span>
+	      				<input name="floatNr" class="form-control"  ng-model="testNumber.floatNr"  type="number"  ></div>                      
+        </div>
+	</div>
+	<div class="line line-dashed b-b line-lg pull-in"></div>
+	                
+                
+	<div class="form-group">
+		<label class="col-sm-2 control-label" for="floatNrScale" translate="pages.TestNumber.edit.form.field.floatNrScale"></label>
+		<div class="col-sm-10">
+            <div class="input-group input-group-sm">
+	      				<span class="input-group-addon">nr</span>
+	      				<input name="floatNrScale" class="form-control"  ng-model="testNumber.floatNrScale"  type="number"  ></div>                      
+        </div>
+	</div>
+	<div class="line line-dashed b-b line-lg pull-in"></div>
+	                
+                
+	<div class="form-group">
+		<label class="col-sm-2 control-label" for="integerNr" translate="pages.TestNumber.edit.form.field.integerNr"></label>
+		<div class="col-sm-10">
+            <div class="input-group input-group-sm">
+	      				<span class="input-group-addon">nr</span>
+	      				<input name="integerNr" class="form-control"  ng-model="testNumber.integerNr"  type="number"  ></div>                      
+        </div>
+	</div>
+	<div class="line line-dashed b-b line-lg pull-in"></div>
+	                
+                
+	<div class="form-group">
+		<label class="col-sm-2 control-label" for="integerNrInList" translate="pages.TestNumber.edit.form.field.integerNrInList"></label>
+		<div class="col-sm-10">
+            
+	<select name="integerNrInList" ng-model="testNumber.integerNrInList" ng-options="obj as obj for obj in ['1', '2', '3']">
+      <option value=""></option>
+    </select>
+	                     
+        </div>
+	</div>
+	<div class="line line-dashed b-b line-lg pull-in"></div>
+	                
+                
+	<div class="form-group">
+		<label class="col-sm-2 control-label" for="integerNrMax" translate="pages.TestNumber.edit.form.field.integerNrMax"></label>
+		<div class="col-sm-10">
+            <div class="input-group input-group-sm">
+	      				<span class="input-group-addon">nr</span>
+	      				<input name="integerNrMax" class="form-control"  ng-model="testNumber.integerNrMax"  type="number"  max="3"  ></div>                      
+        </div>
+	</div>
+	<div class="line line-dashed b-b line-lg pull-in"></div>
+	                
+                
+	<div class="form-group">
+		<label class="col-sm-2 control-label" for="integerNrMin" translate="pages.TestNumber.edit.form.field.integerNrMin"></label>
+		<div class="col-sm-10">
+            <div class="input-group input-group-sm">
+	      				<span class="input-group-addon">nr</span>
+	      				<input name="integerNrMin" class="form-control"  ng-model="testNumber.integerNrMin"  type="number"  min="2"  ></div>                      
+        </div>
+	</div>
+	<div class="line line-dashed b-b line-lg pull-in"></div>
+	                
+                
+	<div class="form-group">
+		<label class="col-sm-2 control-label" for="integerNrNotEqual" translate="pages.TestNumber.edit.form.field.integerNrNotEqual"></label>
+		<div class="col-sm-10">
+            <div class="input-group input-group-sm">
+	      				<span class="input-group-addon">nr</span>
+	      				<input name="integerNrNotEqual" class="form-control"  ng-model="testNumber.integerNrNotEqual"  type="number"  ></div>                      
+        </div>
+	</div>
+	<div class="line line-dashed b-b line-lg pull-in"></div>
+	                
+                
+	<div class="form-group">
+		<label class="col-sm-2 control-label" for="integerNrRange" translate="pages.TestNumber.edit.form.field.integerNrRange"></label>
+		<div class="col-sm-10">
+            <div class="input-group input-group-sm">
+	      				<span class="input-group-addon">nr</span>
+	      				<input name="integerNrRange" class="form-control"  ng-model="testNumber.integerNrRange"  type="range"  min="18"  max="65"  ><span class="input-group-addon">{{testNumber.integerNrRange}}</span></div>                      
+        </div>
+	</div>
+	<div class="line line-dashed b-b line-lg pull-in"></div>
+	                
+                
+	<div class="form-group">
+		<label class="col-sm-2 control-label" for="integerNrUnique" translate="pages.TestNumber.edit.form.field.integerNrUnique"></label>
+		<div class="col-sm-10">
+            <div class="input-group input-group-sm">
+	      				<span class="input-group-addon">nr</span>
+	      				<input name="integerNrUnique" class="form-control"  ng-model="testNumber.integerNrUnique"  type="number"  ></div>                      
+        </div>
+	</div>
+	<div class="line line-dashed b-b line-lg pull-in"></div>
+	                
+                
+	<div class="form-group">
+		<label class="col-sm-2 control-label" for="longNr" translate="pages.TestNumber.edit.form.field.longNr"></label>
+		<div class="col-sm-10">
+            <div class="input-group input-group-sm">
+	      				<span class="input-group-addon">nr</span>
+	      				<input name="longNr" class="form-control"  ng-model="testNumber.longNr"  type="number"  ></div>                      
+        </div>
+	</div>
+	<div class="line line-dashed b-b line-lg pull-in"></div>
+	                
+                	</div>
+                    <footer class="panel-footer text-right bg-light lter">
+                      	<button id="testNumberSubmitBtn"
+                      		class="btn btn-success" 
+	                      	type='submit' 
+	                      	ng-disabled="testNumberForm.$invalid" 
+	                      	translate="pages.TestNumber.edit.form.submit" 
+	                      	mx-show-loading ng-click="submit(testNumberForm)"></button> 
+                		<a class="btn btn-default" ng-click="back()" translate="pages.TestNumber.edit.form.cancel" mx-show-loading></a> 
+                    </footer>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

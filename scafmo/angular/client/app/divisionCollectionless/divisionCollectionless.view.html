@@ -1,0 +1,82 @@
+
+
+
+<div ng-init="pageTitle = 'pages.DivisionCollectionless.view.title'" ng-include=" 'components/blocks/page_heading.html' "></div>
+<div class="wrapper-md ng-scope">
+    <div class="row">
+		<div class="col-sm-6">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+			      <span class="h4" translate="pages.DivisionCollectionless.view.title"></span>
+			    </div>
+			    <div class="panel-body">
+			    	<div class=" form-horizontal">		
+				
+				
+        <div class="form-group">
+            <label class="col-sm-2 control-label" translate="pages.DivisionCollectionless.view.field.name"></label>
+            <div class="col-sm-10 form-control-static" ng-bind="divisionCollectionless.name"></div>
+        </div>
+        <div class="line line-dashed b-b line-lg pull-in"></div>
+    					
+				
+				<!--ManyToOne-->
+        <div class="form-group">
+            <label class="col-sm-2 control-label" translate="pages.DivisionCollectionless.view.field.headDivision"></label>
+            <div class="col-sm-10 form-control-static">
+            <span ng-bind="divisionCollectionless.headDivision.id"></span> <span ng-bind="divisionCollectionless.headDivision.name"></span> </div></div>
+        <div class="line line-dashed b-b line-lg pull-in"></div>
+    					
+				
+					</div>
+			    </div>
+			    <footer class="panel-footer text-right bg-light lter">
+			      	<a id="editBtn" class="btn btn-default" ui-sref="app.divisionCollectionless.edit({id:divisionCollectionless.id})">
+				    	<i class="fa fa-edit" translate="pages.DivisionCollectionless.view.edit"></i>
+			       	</a>
+					<a id="deleteBtn" class="btn btn-danger" ng-click="deleteDivisionCollectionless(divisionCollectionless)" mx-show-loading>
+						<i class="fa fa-trash-o" translate="pages.DivisionCollectionless.view.delete"></i>
+			        </a>
+					
+					<a id="backBtn" class="btn btn-default" ng-click="back()">
+						<i class="fa fa-chevron-left" translate="pages.DivisionCollectionless.view.back"></i>
+					</a>
+					
+			    </footer>
+			 </div>
+		</div>
+        <div>
+            
+             <div class="form-group"    
+             ng-init="search={headDivisions:[autocompleteService.promiseToLabel(divisionCollectionless, ['id','name'])]}"
+                    ng-controller="DivisionCollectionlessEmbeddedListController" 
+                    >
+                <div class="col-sm-10 form-control-static" 
+                    ng-controller="DivisionCollectionlessListController" 
+                    ng-include="'app/divisionCollectionless/divisionCollectionless.list.html'">
+                   <a class="h4" href ui-sref="app.divisionCollectionless.list({search:{}})" 
+                        translate="pages.DivisionCollectionless.view.lists" 
+                        translate-value-isval="{{ 'pages.DivisionCollectionless.view.field.headDivision' | translate }}" translate-value-inval="{{ 'pages.DivisionCollectionless.name' | translate }}">
+                   </a>
+                </div>
+             </div>
+        
+             <div class="form-group"    
+             ng-init="search={divisions:[autocompleteService.promiseToLabel(divisionCollectionless, ['id','name'])]}"
+                    ng-controller="PersonCollectionlessEmbeddedListController" 
+                    >
+                <div class="col-sm-10 form-control-static" 
+                    ng-controller="PersonCollectionlessListController" 
+                    ng-include="'app/personCollectionless/personCollectionless.list.html'">
+                   <a class="h4" href ui-sref="app.personCollectionless.list({search:{}})" 
+                        translate="pages.PersonCollectionless.view.lists" 
+                        translate-value-isval="{{ 'pages.PersonCollectionless.view.field.division' | translate }}" translate-value-inval="{{ 'pages.PersonCollectionless.name' | translate }}">
+                   </a>
+                </div>
+             </div>
+        
+        </div>       
+		
+		
+	</div>
+</div>			

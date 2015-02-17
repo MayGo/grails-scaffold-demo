@@ -1,0 +1,43 @@
+
+
+
+
+<div ng-init="pageTitle = (isEditForm)?'pages.Role.edit.title':'pages.Role.create.title'" data-ng-include=" 'components/blocks/page_heading.html' "></div>
+<div class="wrapper-md ng-scope">
+    <div class="row">
+        <div class="col-sm-6">
+            <form name="roleForm" class="form-validation form-horizontal"  
+            	novalidate>
+                <div class="panel panel-default">
+                	<div class="panel-heading">
+                      <span class="h4" translate="pages.Role.edit.form.title"></span>
+                    </div>
+                    <div class="panel-body">
+                        <input name="version" type="hidden" ng-model="role.version" />
+                        
+                
+	<div class="form-group">
+		<label class="col-sm-2 control-label" for="authority" translate="pages.Role.edit.form.field.authority"></label>
+		<div class="col-sm-10">
+            <div class="input-group input-group-sm">
+                    <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
+                    <input name="authority" class="form-control" type="text" ng-model="role.authority"  required ></div>                      
+        </div>
+	</div>
+	<div class="line line-dashed b-b line-lg pull-in"></div>
+	                
+                	</div>
+                    <footer class="panel-footer text-right bg-light lter">
+                      	<button id="roleSubmitBtn"
+                      		class="btn btn-success" 
+	                      	type='submit' 
+	                      	ng-disabled="roleForm.$invalid" 
+	                      	translate="pages.Role.edit.form.submit" 
+	                      	mx-show-loading ng-click="submit(roleForm)"></button> 
+                		<a class="btn btn-default" ng-click="back()" translate="pages.Role.edit.form.cancel" mx-show-loading></a> 
+                    </footer>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

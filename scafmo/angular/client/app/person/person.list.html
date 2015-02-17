@@ -1,0 +1,89 @@
+
+
+
+
+
+
+
+
+<div ng-init="pageTitle = 'pages.Person.list.title'" data-ng-include=" 'components/blocks/page_heading.html' " ng-hide="isEmbeddedView" ></div>
+
+<div class="wrapper-md ng-scope"  st-table="rowCollection" st-pipe="callServer" >
+<accordion close-others="false">
+    <accordion-group  heading="{{'pages.Person.list.table.search' | translate}}"  is-open="isSearchOpen">
+      <div class="row">
+		 
+	   		<div class="col-lg-2 form-inline"><div class="input-group input-group-sm">
+                    <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
+                    <input 
+                    	name="firstName" 
+                   		ng-model="search.firstName" 
+                   		st-search="'firstName'" 
+                   		class="form-control" 
+                   		type="text" 
+                   		placeholder="{{'pages.Person.list.search.placeholder.firstName' | translate}}"  ></div> </div>		 
+	   		<div class="col-lg-2 form-inline"><div class="input-group input-group-sm">
+                    <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
+                    <input 
+                    	name="lastName" 
+                   		ng-model="search.lastName" 
+                   		st-search="'lastName'" 
+                   		class="form-control" 
+                   		type="text" 
+                   		placeholder="{{'pages.Person.list.search.placeholder.lastName' | translate}}"  ></div> </div>		 
+		</div>
+    </accordion-group>
+</accordion>
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      	<span translate="pages.Person.list.table.title"></span>
+      	<div class="box-tools pull-right">
+			<a class="btn btn-default btn-xs" ui-sref="app.person.create">
+				<i class="fa fa-plus" translate="pages.Person.list.new" mx-show-loading></i>
+	       	</a>
+		</div>
+    </div>
+    <div class="panel-body panel-body-with-table">
+		 <div>
+	      <table class="table table-responsive">
+	      	<thead>
+	      		<tr>
+	      			<th width='20' st-sort="id" translate="pages.Person.list.table.header.id"></th>	      		
+			   		<th st-sort="firstName" translate="pages.Person.list.table.header.firstName" ></th>				 
+			   		<th st-sort="lastName" translate="pages.Person.list.table.header.lastName" ></th>				 
+				 	<th></th>
+				</tr>
+	      	</thead>
+	      
+	      	<tbody ng-hide="isLoading">
+	      		
+				<tr ng-repeat="person in rowCollection">
+					 <td>{{person.id}}</td>					
+			   		<td>{{person.firstName}}</td>				 	
+			   		<td>{{person.lastName}}</td>				 	
+				 	
+		            <td class="text-right">
+		            	<a class="btn btn-default btn-xs" ui-sref="app.person.view({id:person.id})">
+		            		<i class="fa fa-eye" translate="pages.Person.list.view"></i>
+		            	</a>
+		            	<a class="btn btn-default btn-xs" ui-sref="app.person.edit({id:person.id})">
+		            		<i class="fa fa-edit" translate="pages.Person.list.edit"></i>
+		            	</a>
+		            	<a class="btn btn-danger btn-xs" ng-click="deletePerson(person)" mx-show-loading>
+		            		<i class="fa fa-trash-o" translate="pages.Person.list.delete" ></i>
+		            	</a>
+		            </td>
+				</tr>
+			</tbody>
+			<tfoot ng-hide="isLoading">
+	          <tr>
+	            <td colspan="10" class="text-center">
+	              <div st-pagination="" st-items-by-page="stTable.itemsByPage" st-displayed-pages="15" ></div>
+	            </td>
+	          </tr>
+	        </tfoot>
+	      </table>
+	    </div>
+	</div>
+  </div>
+</div>

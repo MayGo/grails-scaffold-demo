@@ -1,0 +1,88 @@
+
+
+
+
+
+
+
+
+<div ng-init="pageTitle = 'pages.DivisionCollection.list.title'" data-ng-include=" 'components/blocks/page_heading.html' " ng-hide="isEmbeddedView" ></div>
+
+<div class="wrapper-md ng-scope"  st-table="rowCollection" st-pipe="callServer" >
+<accordion close-others="false">
+    <accordion-group  heading="{{'pages.DivisionCollection.list.table.search' | translate}}"  is-open="isSearchOpen">
+      <div class="row">
+		 
+	   		<div class="col-lg-2 form-inline"><div class="input-group input-group-sm">
+                    <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
+                    <input 
+                    	name="name" 
+                   		ng-model="search.name" 
+                   		st-search="'name'" 
+                   		class="form-control" 
+                   		type="text" 
+                   		placeholder="{{'pages.DivisionCollection.list.search.placeholder.name' | translate}}"  ></div> </div>		 
+	   		<div class="col-lg-2 form-inline"><!--ManyToOne-->
+     <div class="input-group input-group-sm" style="width:100%">
+     	<tags-input
+            ng-model="search.headDivisions"
+            custom-st-search="headDivisions"
+            placeholder="{{'pages.DivisionCollection.list.search.placeholder.headDivision' | translate}}">
+              <auto-complete source="autocompleteService.divisionCollectionQuery($query, ['id','name'], true)" ></auto-complete>
+            </tags-input></div></div>		 
+		</div>
+    </accordion-group>
+</accordion>
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      	<span translate="pages.DivisionCollection.list.table.title"></span>
+      	<div class="box-tools pull-right">
+			<a class="btn btn-default btn-xs" ui-sref="app.divisionCollection.create">
+				<i class="fa fa-plus" translate="pages.DivisionCollection.list.new" mx-show-loading></i>
+	       	</a>
+		</div>
+    </div>
+    <div class="panel-body panel-body-with-table">
+		 <div>
+	      <table class="table table-responsive">
+	      	<thead>
+	      		<tr>
+	      			<th width='20' st-sort="id" translate="pages.DivisionCollection.list.table.header.id"></th>	      		
+			   		<th st-sort="name" translate="pages.DivisionCollection.list.table.header.name" ></th>				 
+			   		<th st-sort="headDivision" translate="pages.DivisionCollection.list.table.header.headDivision" ></th>				 
+				 	<th></th>
+				</tr>
+	      	</thead>
+	      
+	      	<tbody ng-hide="isLoading">
+	      		
+				<tr ng-repeat="divisionCollection in rowCollection">
+					 <td>{{divisionCollection.id}}</td>					
+			   		<td>{{divisionCollection.name}}</td>				 	
+			   		<td>{{divisionCollection.headDivision.id}} {{divisionCollection.headDivision.name}} </td>				 	
+				 	
+		            <td class="text-right">
+		            	<a class="btn btn-default btn-xs" ui-sref="app.divisionCollection.view({id:divisionCollection.id})">
+		            		<i class="fa fa-eye" translate="pages.DivisionCollection.list.view"></i>
+		            	</a>
+		            	<a class="btn btn-default btn-xs" ui-sref="app.divisionCollection.edit({id:divisionCollection.id})">
+		            		<i class="fa fa-edit" translate="pages.DivisionCollection.list.edit"></i>
+		            	</a>
+		            	<a class="btn btn-danger btn-xs" ng-click="deleteDivisionCollection(divisionCollection)" mx-show-loading>
+		            		<i class="fa fa-trash-o" translate="pages.DivisionCollection.list.delete" ></i>
+		            	</a>
+		            </td>
+				</tr>
+			</tbody>
+			<tfoot ng-hide="isLoading">
+	          <tr>
+	            <td colspan="10" class="text-center">
+	              <div st-pagination="" st-items-by-page="stTable.itemsByPage" st-displayed-pages="15" ></div>
+	            </td>
+	          </tr>
+	        </tfoot>
+	      </table>
+	    </div>
+	</div>
+  </div>
+</div>

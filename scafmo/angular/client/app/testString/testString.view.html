@@ -1,0 +1,140 @@
+
+
+
+<div ng-init="pageTitle = 'pages.TestString.view.title'" ng-include=" 'components/blocks/page_heading.html' "></div>
+<div class="wrapper-md ng-scope">
+    <div class="row">
+		<div class="col-sm-6">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+			      <span class="h4" translate="pages.TestString.view.title"></span>
+			    </div>
+			    <div class="panel-body">
+			    	<div class=" form-horizontal">		
+				
+				
+        <div class="form-group">
+            <label class="col-sm-2 control-label" translate="pages.TestString.view.field.blankStr"></label>
+            <div class="col-sm-10 form-control-static" ng-bind="testString.blankStr"></div>
+        </div>
+        <div class="line line-dashed b-b line-lg pull-in"></div>
+    					
+				
+				
+        <div class="form-group">
+            <label class="col-sm-2 control-label" translate="pages.TestString.view.field.creditCardStr"></label>
+            <div class="col-sm-10 form-control-static" ng-bind="testString.creditCardStr"></div>
+        </div>
+        <div class="line line-dashed b-b line-lg pull-in"></div>
+    					
+				
+				
+        <div class="form-group">
+            <label class="col-sm-2 control-label" translate="pages.TestString.view.field.emailStr"></label>
+            <div class="col-sm-10 form-control-static" ng-bind="testString.emailStr"></div>
+        </div>
+        <div class="line line-dashed b-b line-lg pull-in"></div>
+    					
+				
+				
+        <div class="form-group">
+            <label class="col-sm-2 control-label" translate="pages.TestString.view.field.inListStr"></label>
+            <div class="col-sm-10 form-control-static" ng-bind="testString.inListStr"></div>
+        </div>
+        <div class="line line-dashed b-b line-lg pull-in"></div>
+    					
+				
+				
+        <div class="form-group">
+            <label class="col-sm-2 control-label" translate="pages.TestString.view.field.matchesStr"></label>
+            <div class="col-sm-10 form-control-static" ng-bind="testString.matchesStr"></div>
+        </div>
+        <div class="line line-dashed b-b line-lg pull-in"></div>
+    					
+				
+				
+        <div class="form-group">
+            <label class="col-sm-2 control-label" translate="pages.TestString.view.field.maxSizeStr"></label>
+            <div class="col-sm-10 form-control-static" ng-bind="testString.maxSizeStr"></div>
+        </div>
+        <div class="line line-dashed b-b line-lg pull-in"></div>
+    					
+				
+				
+        <div class="form-group">
+            <label class="col-sm-2 control-label" translate="pages.TestString.view.field.minSizeStr"></label>
+            <div class="col-sm-10 form-control-static" ng-bind="testString.minSizeStr"></div>
+        </div>
+        <div class="line line-dashed b-b line-lg pull-in"></div>
+    					
+				
+				
+        <div class="form-group">
+            <label class="col-sm-2 control-label" translate="pages.TestString.view.field.notEqualStr"></label>
+            <div class="col-sm-10 form-control-static" ng-bind="testString.notEqualStr"></div>
+        </div>
+        <div class="line line-dashed b-b line-lg pull-in"></div>
+    					
+				
+				
+        <div class="form-group">
+            <label class="col-sm-2 control-label" translate="pages.TestString.view.field.sizeStr"></label>
+            <div class="col-sm-10 form-control-static" ng-bind="testString.sizeStr"></div>
+        </div>
+        <div class="line line-dashed b-b line-lg pull-in"></div>
+    					
+				
+				
+        <div class="form-group">
+            <label class="col-sm-2 control-label" translate="pages.TestString.view.field.uniqueStr"></label>
+            <div class="col-sm-10 form-control-static" ng-bind="testString.uniqueStr"></div>
+        </div>
+        <div class="line line-dashed b-b line-lg pull-in"></div>
+    					
+				
+				
+        <div class="form-group">
+            <label class="col-sm-2 control-label" translate="pages.TestString.view.field.urlStr"></label>
+            <div class="col-sm-10 form-control-static" ng-bind="testString.urlStr"></div>
+        </div>
+        <div class="line line-dashed b-b line-lg pull-in"></div>
+    					
+				
+					</div>
+			    </div>
+			    <footer class="panel-footer text-right bg-light lter">
+			      	<a id="editBtn" class="btn btn-default" ui-sref="app.testString.edit({id:testString.id})">
+				    	<i class="fa fa-edit" translate="pages.TestString.view.edit"></i>
+			       	</a>
+					<a id="deleteBtn" class="btn btn-danger" ng-click="deleteTestString(testString)" mx-show-loading>
+						<i class="fa fa-trash-o" translate="pages.TestString.view.delete"></i>
+			        </a>
+					
+					<a id="backBtn" class="btn btn-default" ng-click="back()">
+						<i class="fa fa-chevron-left" translate="pages.TestString.view.back"></i>
+					</a>
+					
+			    </footer>
+			 </div>
+		</div>
+        <div>
+            
+             <div class="form-group"    
+             ng-init="search={testStringTypes:[autocompleteService.promiseToLabel(testString, ['id','blankStr','creditCardStr','emailStr'])]}"
+                    ng-controller="TestOtherEmbeddedListController" 
+                    >
+                <div class="col-sm-10 form-control-static" 
+                    ng-controller="TestOtherListController" 
+                    ng-include="'app/testOther/testOther.list.html'">
+                   <a class="h4" href ui-sref="app.testOther.list({search:{}})" 
+                        translate="pages.TestOther.view.lists" 
+                        translate-value-isval="{{ 'pages.TestOther.view.field.testStringType' | translate }}" translate-value-inval="{{ 'pages.TestOther.name' | translate }}">
+                   </a>
+                </div>
+             </div>
+        
+        </div>       
+		
+		
+	</div>
+</div>			

@@ -1,0 +1,47 @@
+
+
+
+<div ng-init="pageTitle = 'pages.Tag.view.title'" ng-include=" 'components/blocks/page_heading.html' "></div>
+<div class="wrapper-md ng-scope">
+    <div class="row">
+		<div class="col-sm-6">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+			      <span class="h4" translate="pages.Tag.view.title"></span>
+			    </div>
+			    <div class="panel-body">
+			    	<div class=" form-horizontal">		
+				
+				
+        <div class="form-group">
+            <label class="col-sm-2 control-label" translate="pages.Tag.view.field.name"></label>
+            <div class="col-sm-10 form-control-static" ng-bind="tag.name"></div>
+        </div>
+        <div class="line line-dashed b-b line-lg pull-in"></div>
+    					
+				
+				
+					</div>
+			    </div>
+			    <footer class="panel-footer text-right bg-light lter">
+			      	<a id="editBtn" class="btn btn-default" ui-sref="app.tag.edit({id:tag.id})">
+				    	<i class="fa fa-edit" translate="pages.Tag.view.edit"></i>
+			       	</a>
+					<a id="deleteBtn" class="btn btn-danger" ng-click="deleteTag(tag)" mx-show-loading>
+						<i class="fa fa-trash-o" translate="pages.Tag.view.delete"></i>
+			        </a>
+					
+					<a id="backBtn" class="btn btn-default" ng-click="back()">
+						<i class="fa fa-chevron-left" translate="pages.Tag.view.back"></i>
+					</a>
+					
+			    </footer>
+			 </div>
+		</div>
+        <div>
+            
+        </div>       
+		
+		
+	</div>
+</div>			

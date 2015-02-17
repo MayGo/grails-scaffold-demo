@@ -1,0 +1,75 @@
+
+
+
+
+<div ng-init="pageTitle = (isEditForm)?'pages.DivisionCollection.edit.title':'pages.DivisionCollection.create.title'" data-ng-include=" 'components/blocks/page_heading.html' "></div>
+<div class="wrapper-md ng-scope">
+    <div class="row">
+        <div class="col-sm-6">
+            <form name="divisionCollectionForm" class="form-validation form-horizontal"  
+            	novalidate>
+                <div class="panel panel-default">
+                	<div class="panel-heading">
+                      <span class="h4" translate="pages.DivisionCollection.edit.form.title"></span>
+                    </div>
+                    <div class="panel-body">
+                        <input name="version" type="hidden" ng-model="divisionCollection.version" />
+                        
+                
+	<div class="form-group">
+		<label class="col-sm-2 control-label" for="name" translate="pages.DivisionCollection.edit.form.field.name"></label>
+		<div class="col-sm-10">
+            <div class="input-group input-group-sm">
+                    <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
+                    <input name="name" class="form-control" type="text" ng-model="divisionCollection.name"  required ></div>                      
+        </div>
+	</div>
+	<div class="line line-dashed b-b line-lg pull-in"></div>
+	                
+                
+	<div class="form-group">
+		<label class="col-sm-2 control-label" for="persons" translate="pages.DivisionCollection.edit.form.field.persons"></label>
+		<div class="col-sm-10">
+            <!--OneToMany-->
+          <tags-input ng-model="divisionCollection.persons">
+              <auto-complete source="autocompleteService.personCollectionQuery($viewValue, ['id','age','name'], true)" ></auto-complete>
+             </tags-input>                     
+        </div>
+	</div>
+	<div class="line line-dashed b-b line-lg pull-in"></div>
+	                
+                
+	<div class="form-group">
+		<label class="col-sm-2 control-label" for="headDivision" translate="pages.DivisionCollection.edit.form.field.headDivision"></label>
+		<div class="col-sm-10">
+            <!--ManyToOne-->
+     <div class="input-group input-group-sm">
+          <span class="input-group-addon"><i class="glyphicon glyphicon-flash"></i></span>  
+          <input name="headDivision" type="text" class="form-control" 
+          ng-model="divisionCollection.headDivision"   
+          typeahead-template-url="headDivisionAutocompleteTemplate.html" 
+          typeahead-editable="false" 
+          typeahead="b for b in autocompleteService.divisionCollectionQuery($viewValue, ['id','name'])" 
+         
+          typeahead-input-formatter="autocompleteService.divisionCollectionFormatLabel($model, ['id','name'])"
+      ></div> 
+     <script type="text/ng-template" id="headDivisionAutocompleteTemplate.html"><a><span bind-html-unsafe="match.model.id | typeaheadHighlight:query"></span> <span bind-html-unsafe="match.model.name | typeaheadHighlight:query"></span> </a></script>                     
+        </div>
+	</div>
+	<div class="line line-dashed b-b line-lg pull-in"></div>
+	                
+                	</div>
+                    <footer class="panel-footer text-right bg-light lter">
+                      	<button id="divisionCollectionSubmitBtn"
+                      		class="btn btn-success" 
+	                      	type='submit' 
+	                      	ng-disabled="divisionCollectionForm.$invalid" 
+	                      	translate="pages.DivisionCollection.edit.form.submit" 
+	                      	mx-show-loading ng-click="submit(divisionCollectionForm)"></button> 
+                		<a class="btn btn-default" ng-click="back()" translate="pages.DivisionCollection.edit.form.cancel" mx-show-loading></a> 
+                    </footer>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

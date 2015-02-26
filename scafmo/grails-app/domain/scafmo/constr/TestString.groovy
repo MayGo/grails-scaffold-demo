@@ -16,7 +16,7 @@ class TestString {
 	
 	
     static constraints = {
-		blankStr nullable:true, blank:false
+		blankStr blank:false
 		creditCardStr nullable:true, creditCard:true
 		emailStr nullable:true, email:true
 		inListStr nullable:true, inList: ["test1", "test2", "test3"]

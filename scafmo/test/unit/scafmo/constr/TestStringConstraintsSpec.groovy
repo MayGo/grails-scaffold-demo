@@ -14,8 +14,8 @@ class TestStringConstraintsSpec extends Specification {
 		mockForConstraintsTests( TestString, [ new TestString() ] )
 	}
 
-	@Unroll("TestString constraint on field '#field' with value '#val' gets error '#error'")
-	def "All TestString constraints fails"() {
+	@Unroll("TestString constraint on field '#field' with value '#val' gets '#error'")
+	def "All TestString constraints"() {
 		when:
 			def obj = new TestString("$field": val)
 
@@ -24,14 +24,22 @@ class TestStringConstraintsSpec extends Specification {
 
 		where:
 			error                  | field        | val
+			'valid' | 'id' | 1 // Keep always one here or remove test
 			'nullable' | 'blankStr' | ''
+			'nullable' | 'blankStr' | null
 			'creditCard' | 'creditCardStr' | ConstraintHelper.getCreditCard(false)
 			'email' | 'emailStr' | ConstraintHelper.getEmail(false)
-			'inList' | 'inListStr' | null
-			'matches' | 'matchesStr' | null
-			'maxSize' | 'maxSizeStr' | null
-			'minSize' | 'minSizeStr' | null
-			'notEqual' | 'notEqualStr' | null
+			'inList' | 'inListStr' | 'test1111111'
+			'valid' | 'inListStr' | 'test1'
+			'matches' | 'matchesStr' | 'DOES_NOT_MATCH'
+			'valid' | 'maxSizeStr' | ConstraintHelper.getLongString(5)
+			'maxSize' | 'maxSizeStr' | ConstraintHelper.getLongString(6)
+			'valid' | 'minSizeStr' | ConstraintHelper.getLongString(2)
+			'minSize' | 'minSizeStr' | ConstraintHelper.getLongString(1)
+			'notEqual' | 'notEqualStr' | 'test'
+			'valid' | 'notEqualStr' | 'test11111'
+			'valid' | 'sizeStr' | ConstraintHelper.getLongString(1)
+			'valid' | 'sizeStr' | ConstraintHelper.getLongString(100)
 			'size' | 'sizeStr' | ConstraintHelper.getLongString(101)
 			'url' | 'urlStr' | ConstraintHelper.getUrl(false)
 

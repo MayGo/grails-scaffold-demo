@@ -14,8 +14,8 @@ class OwnerConstraintsSpec extends Specification {
 		mockForConstraintsTests( Owner, [ new Owner() ] )
 	}
 
-	@Unroll("Owner constraint on field '#field' with value '#val' gets error '#error'")
-	def "All Owner constraints fails"() {
+	@Unroll("Owner constraint on field '#field' with value '#val' gets '#error'")
+	def "All Owner constraints"() {
 		when:
 			def obj = new Owner("$field": val)
 
@@ -24,6 +24,7 @@ class OwnerConstraintsSpec extends Specification {
 
 		where:
 			error                  | field        | val
+			'valid' | 'id' | 1 // Keep always one here or remove test
 			'nullable' | 'address' | ''
 			'nullable' | 'address' | null
 			'nullable' | 'city' | ''
@@ -32,7 +33,7 @@ class OwnerConstraintsSpec extends Specification {
 			'nullable' | 'firstName' | null
 			'nullable' | 'lastName' | ''
 			'nullable' | 'lastName' | null
-			'matches' | 'telephone' | null
+			'matches' | 'telephone' | 'DOES_NOT_MATCH'
 			'nullable' | 'telephone' | ''
 			'nullable' | 'telephone' | null
 

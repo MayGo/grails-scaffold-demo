@@ -14,8 +14,8 @@ class DivisionCollectionConstraintsSpec extends Specification {
 		mockForConstraintsTests( DivisionCollection, [ new DivisionCollection() ] )
 	}
 
-	@Unroll("DivisionCollection constraint on field '#field' with value '#val' gets error '#error'")
-	def "All DivisionCollection constraints fails"() {
+	@Unroll("DivisionCollection constraint on field '#field' with value '#val' gets '#error'")
+	def "All DivisionCollection constraints"() {
 		when:
 			def obj = new DivisionCollection("$field": val)
 
@@ -24,6 +24,7 @@ class DivisionCollectionConstraintsSpec extends Specification {
 
 		where:
 			error                  | field        | val
+			'valid' | 'id' | 1 // Keep always one here or remove test
 			'nullable' | 'name' | null
 			'nullable' | 'name' | ''
 

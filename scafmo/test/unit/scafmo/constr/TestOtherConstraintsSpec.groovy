@@ -14,8 +14,8 @@ class TestOtherConstraintsSpec extends Specification {
 		mockForConstraintsTests( TestOther, [ new TestOther() ] )
 	}
 
-	@Unroll("TestOther constraint on field '#field' with value '#val' gets error '#error'")
-	def "All TestOther constraints fails"() {
+	@Unroll("TestOther constraint on field '#field' with value '#val' gets '#error'")
+	def "All TestOther constraints"() {
 		when:
 			def obj = new TestOther("$field": val)
 
@@ -24,6 +24,7 @@ class TestOtherConstraintsSpec extends Specification {
 
 		where:
 			error                  | field        | val
+			'valid' | 'id' | 1 // Keep always one here or remove test
 
 	}
 }

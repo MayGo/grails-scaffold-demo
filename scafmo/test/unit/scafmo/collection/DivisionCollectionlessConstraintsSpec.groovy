@@ -14,8 +14,8 @@ class DivisionCollectionlessConstraintsSpec extends Specification {
 		mockForConstraintsTests( DivisionCollectionless, [ new DivisionCollectionless() ] )
 	}
 
-	@Unroll("DivisionCollectionless constraint on field '#field' with value '#val' gets error '#error'")
-	def "All DivisionCollectionless constraints fails"() {
+	@Unroll("DivisionCollectionless constraint on field '#field' with value '#val' gets '#error'")
+	def "All DivisionCollectionless constraints"() {
 		when:
 			def obj = new DivisionCollectionless("$field": val)
 
@@ -24,6 +24,7 @@ class DivisionCollectionlessConstraintsSpec extends Specification {
 
 		where:
 			error                  | field        | val
+			'valid' | 'id' | 1 // Keep always one here or remove test
 			'nullable' | 'name' | null
 			'nullable' | 'name' | ''
 

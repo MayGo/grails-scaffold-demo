@@ -14,8 +14,8 @@ class PetConstraintsSpec extends Specification {
 		mockForConstraintsTests( Pet, [ new Pet() ] )
 	}
 
-	@Unroll("Pet constraint on field '#field' with value '#val' gets error '#error'")
-	def "All Pet constraints fails"() {
+	@Unroll("Pet constraint on field '#field' with value '#val' gets '#error'")
+	def "All Pet constraints"() {
 		when:
 			def obj = new Pet("$field": val)
 
@@ -24,9 +24,10 @@ class PetConstraintsSpec extends Specification {
 
 		where:
 			error                  | field        | val
+			'valid' | 'id' | 1 // Keep always one here or remove test
 			'nullable' | 'birthDate' | null
 			'nullable' | 'name' | ''
-			'validator' | 'name' | null
+			//'validator' | 'name' | 'CUSTOM_VALIDATOR'
 			'nullable' | 'name' | null
 			'nullable' | 'type' | null
 			'nullable' | 'owner' | null

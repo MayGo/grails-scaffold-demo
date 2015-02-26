@@ -14,8 +14,8 @@ class UserRoleConstraintsSpec extends Specification {
 		mockForConstraintsTests( UserRole, [ new UserRole() ] )
 	}
 
-	@Unroll("UserRole constraint on field '#field' with value '#val' gets error '#error'")
-	def "All UserRole constraints fails"() {
+	@Unroll("UserRole constraint on field '#field' with value '#val' gets '#error'")
+	def "All UserRole constraints"() {
 		when:
 			def obj = new UserRole("$field": val)
 
@@ -24,6 +24,7 @@ class UserRoleConstraintsSpec extends Specification {
 
 		where:
 			error                  | field        | val
+			'valid' | 'id' | 1 // Keep always one here or remove test
 			'nullable' | 'role' | null
 			'nullable' | 'user' | null
 

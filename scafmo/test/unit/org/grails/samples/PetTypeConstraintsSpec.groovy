@@ -14,8 +14,8 @@ class PetTypeConstraintsSpec extends Specification {
 		mockForConstraintsTests( PetType, [ new PetType() ] )
 	}
 
-	@Unroll("PetType constraint on field '#field' with value '#val' gets error '#error'")
-	def "All PetType constraints fails"() {
+	@Unroll("PetType constraint on field '#field' with value '#val' gets '#error'")
+	def "All PetType constraints"() {
 		when:
 			def obj = new PetType("$field": val)
 
@@ -24,9 +24,12 @@ class PetTypeConstraintsSpec extends Specification {
 
 		where:
 			error                  | field        | val
+			'valid' | 'id' | 1 // Keep always one here or remove test
 			'nullable' | 'name' | ''
-			'minSize' | 'name' | null
-			'maxSize' | 'name' | null
+			'valid' | 'name' | ConstraintHelper.getLongString(3)
+			'minSize' | 'name' | ConstraintHelper.getLongString(2)
+			'valid' | 'name' | ConstraintHelper.getLongString(20)
+			'maxSize' | 'name' | ConstraintHelper.getLongString(21)
 			'nullable' | 'name' | null
 
 	}

@@ -14,8 +14,8 @@ class ClassifierConstraintsSpec extends Specification {
 		mockForConstraintsTests( Classifier, [ new Classifier() ] )
 	}
 
-	@Unroll("Classifier constraint on field '#field' with value '#val' gets error '#error'")
-	def "All Classifier constraints fails"() {
+	@Unroll("Classifier constraint on field '#field' with value '#val' gets '#error'")
+	def "All Classifier constraints"() {
 		when:
 			def obj = new Classifier("$field": val)
 
@@ -24,10 +24,15 @@ class ClassifierConstraintsSpec extends Specification {
 
 		where:
 			error                  | field        | val
+			'valid' | 'id' | 1 // Keep always one here or remove test
 			'nullable' | 'classname' | null
+			'valid' | 'constant' | ConstraintHelper.getLongString(1)
+			'valid' | 'constant' | ConstraintHelper.getLongString(100)
 			'size' | 'constant' | ConstraintHelper.getLongString(101)
 			'nullable' | 'constant' | ''
 			'nullable' | 'constant' | null
+			'valid' | 'description' | ConstraintHelper.getLongString(1)
+			'valid' | 'description' | ConstraintHelper.getLongString(500)
 			'size' | 'description' | ConstraintHelper.getLongString(501)
 			'nullable' | 'description' | ''
 			'nullable' | 'description' | null

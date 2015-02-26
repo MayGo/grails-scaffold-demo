@@ -14,8 +14,8 @@ class UserConstraintsSpec extends Specification {
 		mockForConstraintsTests( User, [ new User() ] )
 	}
 
-	@Unroll("User constraint on field '#field' with value '#val' gets error '#error'")
-	def "All User constraints fails"() {
+	@Unroll("User constraint on field '#field' with value '#val' gets '#error'")
+	def "All User constraints"() {
 		when:
 			def obj = new User("$field": val)
 
@@ -24,6 +24,7 @@ class UserConstraintsSpec extends Specification {
 
 		where:
 			error                  | field        | val
+			'valid' | 'id' | 1 // Keep always one here or remove test
 			'nullable' | 'username' | ''
 			'nullable' | 'username' | null
 

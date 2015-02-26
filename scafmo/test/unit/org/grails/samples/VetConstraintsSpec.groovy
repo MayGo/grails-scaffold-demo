@@ -14,8 +14,8 @@ class VetConstraintsSpec extends Specification {
 		mockForConstraintsTests( Vet, [ new Vet() ] )
 	}
 
-	@Unroll("Vet constraint on field '#field' with value '#val' gets error '#error'")
-	def "All Vet constraints fails"() {
+	@Unroll("Vet constraint on field '#field' with value '#val' gets '#error'")
+	def "All Vet constraints"() {
 		when:
 			def obj = new Vet("$field": val)
 
@@ -24,6 +24,7 @@ class VetConstraintsSpec extends Specification {
 
 		where:
 			error                  | field        | val
+			'valid' | 'id' | 1 // Keep always one here or remove test
 			'nullable' | 'firstName' | ''
 			'nullable' | 'firstName' | null
 			'nullable' | 'lastName' | ''

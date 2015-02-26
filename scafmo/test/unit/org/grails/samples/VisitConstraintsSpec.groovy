@@ -14,8 +14,8 @@ class VisitConstraintsSpec extends Specification {
 		mockForConstraintsTests( Visit, [ new Visit() ] )
 	}
 
-	@Unroll("Visit constraint on field '#field' with value '#val' gets error '#error'")
-	def "All Visit constraints fails"() {
+	@Unroll("Visit constraint on field '#field' with value '#val' gets '#error'")
+	def "All Visit constraints"() {
 		when:
 			def obj = new Visit("$field": val)
 
@@ -24,6 +24,7 @@ class VisitConstraintsSpec extends Specification {
 
 		where:
 			error                  | field        | val
+			'valid' | 'id' | 1 // Keep always one here or remove test
 			'nullable' | 'date' | null
 			'nullable' | 'description' | ''
 			'nullable' | 'description' | null

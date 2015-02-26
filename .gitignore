@@ -37,3 +37,4 @@ target-eclipse/
 .idea/
 scafmo/target/
 scafmo/web-app/WEB-INF/tld/
+*.iml

@@ -14,8 +14,8 @@ class RoleConstraintsSpec extends Specification {
 		mockForConstraintsTests( Role, [ new Role() ] )
 	}
 
-	@Unroll("Role constraint on field '#field' with value '#val' gets error '#error'")
-	def "All Role constraints fails"() {
+	@Unroll("Role constraint on field '#field' with value '#val' gets '#error'")
+	def "All Role constraints"() {
 		when:
 			def obj = new Role("$field": val)
 
@@ -24,6 +24,7 @@ class RoleConstraintsSpec extends Specification {
 
 		where:
 			error                  | field        | val
+			'valid' | 'id' | 1 // Keep always one here or remove test
 			'nullable' | 'authority' | ''
 			'nullable' | 'authority' | null
 

@@ -14,8 +14,8 @@ class TagConstraintsSpec extends Specification {
 		mockForConstraintsTests( Tag, [ new Tag() ] )
 	}
 
-	@Unroll("Tag constraint on field '#field' with value '#val' gets error '#error'")
-	def "All Tag constraints fails"() {
+	@Unroll("Tag constraint on field '#field' with value '#val' gets '#error'")
+	def "All Tag constraints"() {
 		when:
 			def obj = new Tag("$field": val)
 
@@ -24,6 +24,7 @@ class TagConstraintsSpec extends Specification {
 
 		where:
 			error                  | field        | val
+			'valid' | 'id' | 1 // Keep always one here or remove test
 			'nullable' | 'name' | ''
 			'nullable' | 'name' | null
 

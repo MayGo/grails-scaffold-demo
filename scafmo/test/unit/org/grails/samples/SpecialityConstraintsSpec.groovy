@@ -14,8 +14,8 @@ class SpecialityConstraintsSpec extends Specification {
 		mockForConstraintsTests( Speciality, [ new Speciality() ] )
 	}
 
-	@Unroll("Speciality constraint on field '#field' with value '#val' gets error '#error'")
-	def "All Speciality constraints fails"() {
+	@Unroll("Speciality constraint on field '#field' with value '#val' gets '#error'")
+	def "All Speciality constraints"() {
 		when:
 			def obj = new Speciality("$field": val)
 
@@ -24,9 +24,12 @@ class SpecialityConstraintsSpec extends Specification {
 
 		where:
 			error                  | field        | val
+			'valid' | 'id' | 1 // Keep always one here or remove test
 			'nullable' | 'name' | ''
-			'minSize' | 'name' | null
-			'maxSize' | 'name' | null
+			'valid' | 'name' | ConstraintHelper.getLongString(3)
+			'minSize' | 'name' | ConstraintHelper.getLongString(2)
+			'valid' | 'name' | ConstraintHelper.getLongString(20)
+			'maxSize' | 'name' | ConstraintHelper.getLongString(21)
 			'nullable' | 'name' | null
 
 	}

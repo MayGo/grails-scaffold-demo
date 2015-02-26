@@ -14,8 +14,8 @@ class PersonCollectionConstraintsSpec extends Specification {
 		mockForConstraintsTests( PersonCollection, [ new PersonCollection() ] )
 	}
 
-	@Unroll("PersonCollection constraint on field '#field' with value '#val' gets error '#error'")
-	def "All PersonCollection constraints fails"() {
+	@Unroll("PersonCollection constraint on field '#field' with value '#val' gets '#error'")
+	def "All PersonCollection constraints"() {
 		when:
 			def obj = new PersonCollection("$field": val)
 
@@ -24,6 +24,7 @@ class PersonCollectionConstraintsSpec extends Specification {
 
 		where:
 			error                  | field        | val
+			'valid' | 'id' | 1 // Keep always one here or remove test
 			'nullable' | 'age' | null
 			'nullable' | 'name' | null
 			'nullable' | 'name' | ''

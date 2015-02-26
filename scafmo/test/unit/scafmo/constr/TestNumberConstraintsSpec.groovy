@@ -14,8 +14,8 @@ class TestNumberConstraintsSpec extends Specification {
 		mockForConstraintsTests( TestNumber, [ new TestNumber() ] )
 	}
 
-	@Unroll("TestNumber constraint on field '#field' with value '#val' gets error '#error'")
-	def "All TestNumber constraints fails"() {
+	@Unroll("TestNumber constraint on field '#field' with value '#val' gets '#error'")
+	def "All TestNumber constraints"() {
 		when:
 			def obj = new TestNumber("$field": val)
 
@@ -24,12 +24,22 @@ class TestNumberConstraintsSpec extends Specification {
 
 		where:
 			error                  | field        | val
-			'scale' | 'floatNrScale' | null
-			'inList' | 'integerNrInList' | null
-			'max' | 'integerNrMax' | null
-			'min' | 'integerNrMin' | null
-			'notEqual' | 'integerNrNotEqual' | null
-			'range' | 'integerNrRange' | null
+			'valid' | 'id' | 1 // Keep always one here or remove test
+			'valid' | 'floatNrScale' | ConstraintHelper.getScale(1) 
+			'valid' | 'floatNrScale' | ConstraintHelper.getScale(2) 
+			'valid' | 'floatNrScale' | ConstraintHelper.getScale(3) 
+			'inList' | 'integerNrInList' | '111112'
+			'valid' | 'integerNrInList' | '1'
+			'valid' | 'integerNrMax' | 3
+			'max' | 'integerNrMax' | 4
+			'valid' | 'integerNrMin' | 2
+			'min' | 'integerNrMin' | 1
+			'notEqual' | 'integerNrNotEqual' | '1'
+			'valid' | 'integerNrNotEqual' | '11112'
+			'valid' | 'integerNrRange' | 18
+			'range' | 'integerNrRange' | 17
+			'valid' | 'integerNrRange' | 65
+			'range' | 'integerNrRange' | 66
 
 	}
 }

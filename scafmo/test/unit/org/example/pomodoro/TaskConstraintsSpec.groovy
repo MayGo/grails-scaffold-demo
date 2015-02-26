@@ -14,8 +14,8 @@ class TaskConstraintsSpec extends Specification {
 		mockForConstraintsTests( Task, [ new Task() ] )
 	}
 
-	@Unroll("Task constraint on field '#field' with value '#val' gets error '#error'")
-	def "All Task constraints fails"() {
+	@Unroll("Task constraint on field '#field' with value '#val' gets '#error'")
+	def "All Task constraints"() {
 		when:
 			def obj = new Task("$field": val)
 
@@ -24,14 +24,18 @@ class TaskConstraintsSpec extends Specification {
 
 		where:
 			error                  | field        | val
+			'valid' | 'id' | 1 // Keep always one here or remove test
 			'nullable' | 'details' | ''
-			'maxSize' | 'details' | null
+			'valid' | 'details' | ConstraintHelper.getLongString(1000)
+			'maxSize' | 'details' | ConstraintHelper.getLongString(1001)
 			'nullable' | 'details' | null
-			'inList' | 'status' | null
+			'inList' | 'status' | 'Open111111'
+			'valid' | 'status' | 'Open'
 			'nullable' | 'status' | null
 			'nullable' | 'summary' | ''
 			'nullable' | 'summary' | null
-			'min' | 'timeSpent' | null
+			'valid' | 'timeSpent' | 0
+			'min' | 'timeSpent' | -1
 			'nullable' | 'timeSpent' | null
 
 	}

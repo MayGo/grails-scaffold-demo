@@ -18,7 +18,7 @@ describe('Service: PersonService', function () {
 
   it('query() should respond', function () {
   	httpBackend.whenGET('l10n/en.js').respond();
-  	httpBackend.whenGET(config.restUrl + '/persons').respond([{"id":1},{"id":2}]);
+  	httpBackend.whenGET(config.restUrl + '/persons/v1').respond([{"id":1},{"id":2}]);
   	
     service.query({}, function(response, responseHeaders){
     	var ids = _.pluck(response, 'id');
@@ -31,7 +31,7 @@ describe('Service: PersonService', function () {
   
   it('get() should respond', function () {
   	httpBackend.whenGET('l10n/en.js').respond();
-  	httpBackend.whenGET(config.restUrl + '/persons/1').respond({"id":1});
+  	httpBackend.whenGET(config.restUrl + '/persons/v1/1').respond({"id":1});
   	
   	service.get({id:1}).$promise.then(
         function( response ){
@@ -46,7 +46,7 @@ describe('Service: PersonService', function () {
   
   it('update() should respond', function () {
   	httpBackend.whenGET('l10n/en.js').respond();
-  	httpBackend.whenPUT(config.restUrl + '/persons/1').respond({"id":1});
+  	httpBackend.whenPUT(config.restUrl + '/persons/v1/1').respond({"id":1});
   	
   	service.update({id:1}).$promise.then(
         function( response ){
@@ -60,7 +60,7 @@ describe('Service: PersonService', function () {
   
   it('save() should respond', function () {
   	httpBackend.whenGET('l10n/en.js').respond();
-  	httpBackend.whenPOST(config.restUrl + '/persons').respond({"id":1});
+  	httpBackend.whenPOST(config.restUrl + '/persons/v1').respond({"id":1});
   	
   	service.save({some:'prop'}).$promise.then(
         function( response ){

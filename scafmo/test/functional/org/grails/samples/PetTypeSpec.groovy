@@ -9,7 +9,7 @@ import spock.lang.Specification
 
 class PetTypeSpec extends Specification implements RestQueries, AuthQueries{
 
-	String REST_URL = "${APP_URL}/pettypes"
+	String REST_URL = "${APP_URL}/pettypes/v1"
 	
 	@Shared
 	Long domainId
@@ -30,7 +30,6 @@ class PetTypeSpec extends Specification implements RestQueries, AuthQueries{
 		when: 'Create petType'
 			response = sendCreateWithData(){
 				name = 'Type 454'
-
 			}
 			
 			otherDomainId = response.json.id
@@ -38,7 +37,6 @@ class PetTypeSpec extends Specification implements RestQueries, AuthQueries{
 			
 		then: 'Should create and return created values'
 			response.json.name == 'Type 454'
-
 			response.status == HttpStatus.CREATED.value()
 	}
 
@@ -46,7 +44,6 @@ class PetTypeSpec extends Specification implements RestQueries, AuthQueries{
 		when: 'Create petType'
 			response = sendCreateWithData(){
 				name = 'Type 455'
-
 			}
 			
 			domainId = response.json.id
@@ -55,7 +52,6 @@ class PetTypeSpec extends Specification implements RestQueries, AuthQueries{
 		then: 'Should create and return created values'
 			
 			response.json.name == 'Type 455'
-
 			response.status == HttpStatus.CREATED.value()
 	}
 	
@@ -69,7 +65,6 @@ class PetTypeSpec extends Specification implements RestQueries, AuthQueries{
 		then: 'Should return correct values'
 			
 			response.json.name == 'Type 455'
-
 			response.status == HttpStatus.OK.value()
 	}
 	
@@ -109,11 +104,9 @@ class PetTypeSpec extends Specification implements RestQueries, AuthQueries{
 			response = sendUpdateWithData(domainId.toString()){
 				name = 'Type 456'
 
-
 			}
 		then: 'Should return updated values'
 			response.json.name == 'Type 456'
-
 
 			response.status == HttpStatus.OK.value()
 	}
@@ -123,7 +116,6 @@ class PetTypeSpec extends Specification implements RestQueries, AuthQueries{
 			response = sendUpdateWithData('9999999999'){
 					name = 'Type 456'
 
-
 			}
 		then: 'Should not find'
 			response.status == HttpStatus.NOT_FOUND.value()
@@ -132,10 +124,9 @@ class PetTypeSpec extends Specification implements RestQueries, AuthQueries{
 			response = sendUpdateWithData('nonexistent'){
 					name = 'Type 456'
 
-
 			}
 		then: 'Should not find'
-			response.status == HttpStatus.NOT_FOUND.value()
+			response.status == HttpStatus.UNPROCESSABLE_ENTITY.value()
 	}
 	
 	void 'Test PetType list sorting.'() {

@@ -9,7 +9,7 @@ import spock.lang.Specification
 
 class UserRoleSpec extends Specification implements RestQueries, AuthQueries{
 
-	String REST_URL = "${APP_URL}/userroles"
+	String REST_URL = "${APP_URL}/userroles/v1"
 	
 	@Shared
 	Long domainId

@@ -9,7 +9,7 @@ import spock.lang.Specification
 
 class RoleSpec extends Specification implements RestQueries, AuthQueries{
 
-	String REST_URL = "${APP_URL}/roles"
+	String REST_URL = "${APP_URL}/roles/v1"
 	
 	@Shared
 	Long domainId
@@ -30,7 +30,6 @@ class RoleSpec extends Specification implements RestQueries, AuthQueries{
 		when: 'Create role'
 			response = sendCreateWithData(){
 				authority = 'ROLE_301'
-
 			}
 			
 			otherDomainId = response.json.id
@@ -38,7 +37,6 @@ class RoleSpec extends Specification implements RestQueries, AuthQueries{
 			
 		then: 'Should create and return created values'
 			response.json.authority == 'ROLE_301'
-
 			response.status == HttpStatus.CREATED.value()
 	}
 
@@ -46,7 +44,6 @@ class RoleSpec extends Specification implements RestQueries, AuthQueries{
 		when: 'Create role'
 			response = sendCreateWithData(){
 				authority = 'ROLE_302'
-
 			}
 			
 			domainId = response.json.id
@@ -55,7 +52,6 @@ class RoleSpec extends Specification implements RestQueries, AuthQueries{
 		then: 'Should create and return created values'
 			
 			response.json.authority == 'ROLE_302'
-
 			response.status == HttpStatus.CREATED.value()
 	}
 	
@@ -69,7 +65,6 @@ class RoleSpec extends Specification implements RestQueries, AuthQueries{
 		then: 'Should return correct values'
 			
 			response.json.authority == 'ROLE_302'
-
 			response.status == HttpStatus.OK.value()
 	}
 	
@@ -109,11 +104,9 @@ class RoleSpec extends Specification implements RestQueries, AuthQueries{
 			response = sendUpdateWithData(domainId.toString()){
 				authority = 'ROLE_303'
 
-
 			}
 		then: 'Should return updated values'
 			response.json.authority == 'ROLE_303'
-
 
 			response.status == HttpStatus.OK.value()
 	}
@@ -123,7 +116,6 @@ class RoleSpec extends Specification implements RestQueries, AuthQueries{
 			response = sendUpdateWithData('9999999999'){
 					authority = 'ROLE_303'
 
-
 			}
 		then: 'Should not find'
 			response.status == HttpStatus.NOT_FOUND.value()
@@ -132,10 +124,9 @@ class RoleSpec extends Specification implements RestQueries, AuthQueries{
 			response = sendUpdateWithData('nonexistent'){
 					authority = 'ROLE_303'
 
-
 			}
 		then: 'Should not find'
-			response.status == HttpStatus.NOT_FOUND.value()
+			response.status == HttpStatus.UNPROCESSABLE_ENTITY.value()
 	}
 	
 	void 'Test Role list sorting.'() {

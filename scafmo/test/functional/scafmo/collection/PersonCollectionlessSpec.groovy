@@ -9,7 +9,7 @@ import spock.lang.Specification
 
 class PersonCollectionlessSpec extends Specification implements RestQueries, AuthQueries{
 
-	String REST_URL = "${APP_URL}/personcollectionlesss"
+	String REST_URL = "${APP_URL}/personcollectionlesss/v1"
 	
 	@Shared
 	Long domainId
@@ -32,7 +32,6 @@ class PersonCollectionlessSpec extends Specification implements RestQueries, Aut
 				age = 453
 				name = 'John451 Doe452'
 				division = 1
-
 			}
 			
 			otherDomainId = response.json.id
@@ -42,7 +41,6 @@ class PersonCollectionlessSpec extends Specification implements RestQueries, Aut
 			response.json.age == 453
 			response.json.name == 'John451 Doe452'
 			response.json.division?.id == 1
-
 			response.status == HttpStatus.CREATED.value()
 	}
 
@@ -52,7 +50,6 @@ class PersonCollectionlessSpec extends Specification implements RestQueries, Aut
 				age = 456
 				name = 'John454 Doe455'
 				division = 1
-
 			}
 			
 			domainId = response.json.id
@@ -63,7 +60,6 @@ class PersonCollectionlessSpec extends Specification implements RestQueries, Aut
 			response.json.age == 456
 			response.json.name == 'John454 Doe455'
 			response.json.division?.id == 1
-
 			response.status == HttpStatus.CREATED.value()
 	}
 	
@@ -79,7 +75,6 @@ class PersonCollectionlessSpec extends Specification implements RestQueries, Aut
 			response.json.age == 456
 			response.json.name == 'John454 Doe455'
 			response.json.division?.id == 1
-
 			response.status == HttpStatus.OK.value()
 	}
 	
@@ -121,13 +116,11 @@ class PersonCollectionlessSpec extends Specification implements RestQueries, Aut
 				name = 'John457 Doe458'
 				division = 1
 
-
 			}
 		then: 'Should return updated values'
 			response.json.age == 459
 			response.json.name == 'John457 Doe458'
 			response.json.division?.id == 1
-
 
 			response.status == HttpStatus.OK.value()
 	}
@@ -139,7 +132,6 @@ class PersonCollectionlessSpec extends Specification implements RestQueries, Aut
 				name = 'John457 Doe458'
 				division = 1
 
-
 			}
 		then: 'Should not find'
 			response.status == HttpStatus.NOT_FOUND.value()
@@ -150,10 +142,9 @@ class PersonCollectionlessSpec extends Specification implements RestQueries, Aut
 				name = 'John457 Doe458'
 				division = 1
 
-
 			}
 		then: 'Should not find'
-			response.status == HttpStatus.NOT_FOUND.value()
+			response.status == HttpStatus.UNPROCESSABLE_ENTITY.value()
 	}
 	
 	void 'Test PersonCollectionless list sorting.'() {

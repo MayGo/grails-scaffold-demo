@@ -15,7 +15,7 @@
 	<link rel="stylesheet" href="assets/css/font.css" type="text/css" />
 	<link rel="stylesheet" href="assets/css/app.css" type="text/css" />
 	<link rel="stylesheet" href="app/app.css" type="text/css" />
-	<link rel="stylesheet" href="components/modal/modal.css" type="text/css" />
+	<link rel="stylesheet" href="shared/modal/modal.css" type="text/css" />
 	<link rel="stylesheet" href="bower_components/angular-loading-bar/build/loading-bar.min.css"type="text/css" />
 	<link rel="stylesheet" href="bower_components/angular-inform/dist/angular-inform.min.css" type="text/css"	/>
 	<link rel="stylesheet" href="bower_components/ng-tags-input/ng-tags-input.min.css" type="text/css" />
@@ -75,134 +75,133 @@
 	<script src="app/search/search.js"></script>
 	<script src="app/settings/settings.controller.js"></script>
 	<script src="app/settings/settings.js"></script>
-    <script src="components/directives/menu.directive.js"></script>
-    <script src="components/directives/smarttable.customstsearch.directive.js"></script>
-    <script src="components/directives/toggleclass.directive.js"></script>
-    <script src="components/directives/ui-shift.js"></script>
-	<script src="components/directives/show-loading.directive.js"></script>
+    <script src="shared/directives/menu.directive.js"></script>
+    <script src="shared/directives/smarttable.customstsearch.directive.js"></script>
+    <script src="shared/directives/toggleclass.directive.js"></script>
+    <script src="shared/directives/ui-shift.js"></script>
+	<script src="shared/directives/show-loading.directive.js"></script>
+    <script src="shared/modal/modal.service.js"></script>
 
-	<script src="app/tag/tag.js"></script>
+	<script src="app/tag/tag.routes.js"></script>
 	<script src="app/tag/tag.edit.controller.js"></script>
 	<script src="app/tag/tag.list.controller.js"></script>
 	<script src="app/tag/tag.view.controller.js"></script>
 	<script src="app/tag/tag.service.js"></script>
 
-	<script src="app/task/task.js"></script>
+	<script src="app/task/task.routes.js"></script>
 	<script src="app/task/task.edit.controller.js"></script>
 	<script src="app/task/task.list.controller.js"></script>
 	<script src="app/task/task.view.controller.js"></script>
 	<script src="app/task/task.service.js"></script>
 
-	<script src="app/owner/owner.js"></script>
+	<script src="app/owner/owner.routes.js"></script>
 	<script src="app/owner/owner.edit.controller.js"></script>
 	<script src="app/owner/owner.list.controller.js"></script>
 	<script src="app/owner/owner.view.controller.js"></script>
 	<script src="app/owner/owner.service.js"></script>
 
-	<script src="app/person/person.js"></script>
+	<script src="app/person/person.routes.js"></script>
 	<script src="app/person/person.edit.controller.js"></script>
 	<script src="app/person/person.list.controller.js"></script>
 	<script src="app/person/person.view.controller.js"></script>
 	<script src="app/person/person.service.js"></script>
 
-	<script src="app/pet/pet.js"></script>
+	<script src="app/pet/pet.routes.js"></script>
 	<script src="app/pet/pet.edit.controller.js"></script>
 	<script src="app/pet/pet.list.controller.js"></script>
 	<script src="app/pet/pet.view.controller.js"></script>
 	<script src="app/pet/pet.service.js"></script>
 
-	<script src="app/petType/petType.js"></script>
+	<script src="app/petType/petType.routes.js"></script>
 	<script src="app/petType/petType.edit.controller.js"></script>
 	<script src="app/petType/petType.list.controller.js"></script>
 	<script src="app/petType/petType.view.controller.js"></script>
 	<script src="app/petType/petType.service.js"></script>
 
-	<script src="app/speciality/speciality.js"></script>
+	<script src="app/speciality/speciality.routes.js"></script>
 	<script src="app/speciality/speciality.edit.controller.js"></script>
 	<script src="app/speciality/speciality.list.controller.js"></script>
 	<script src="app/speciality/speciality.view.controller.js"></script>
 	<script src="app/speciality/speciality.service.js"></script>
 
-	<script src="app/vet/vet.js"></script>
+	<script src="app/vet/vet.routes.js"></script>
 	<script src="app/vet/vet.edit.controller.js"></script>
 	<script src="app/vet/vet.list.controller.js"></script>
 	<script src="app/vet/vet.view.controller.js"></script>
 	<script src="app/vet/vet.service.js"></script>
 
-	<script src="app/visit/visit.js"></script>
+	<script src="app/visit/visit.routes.js"></script>
 	<script src="app/visit/visit.edit.controller.js"></script>
 	<script src="app/visit/visit.list.controller.js"></script>
 	<script src="app/visit/visit.view.controller.js"></script>
 	<script src="app/visit/visit.service.js"></script>
 
-	<script src="app/divisionCollection/divisionCollection.js"></script>
+	<script src="app/divisionCollection/divisionCollection.routes.js"></script>
 	<script src="app/divisionCollection/divisionCollection.edit.controller.js"></script>
 	<script src="app/divisionCollection/divisionCollection.list.controller.js"></script>
 	<script src="app/divisionCollection/divisionCollection.view.controller.js"></script>
 	<script src="app/divisionCollection/divisionCollection.service.js"></script>
 
-	<script src="app/divisionCollectionless/divisionCollectionless.js"></script>
+	<script src="app/divisionCollectionless/divisionCollectionless.routes.js"></script>
 	<script src="app/divisionCollectionless/divisionCollectionless.edit.controller.js"></script>
 	<script src="app/divisionCollectionless/divisionCollectionless.list.controller.js"></script>
 	<script src="app/divisionCollectionless/divisionCollectionless.view.controller.js"></script>
 	<script src="app/divisionCollectionless/divisionCollectionless.service.js"></script>
 
-	<script src="app/personCollection/personCollection.js"></script>
+	<script src="app/personCollection/personCollection.routes.js"></script>
 	<script src="app/personCollection/personCollection.edit.controller.js"></script>
 	<script src="app/personCollection/personCollection.list.controller.js"></script>
 	<script src="app/personCollection/personCollection.view.controller.js"></script>
 	<script src="app/personCollection/personCollection.service.js"></script>
 
-	<script src="app/personCollectionless/personCollectionless.js"></script>
+	<script src="app/personCollectionless/personCollectionless.routes.js"></script>
 	<script src="app/personCollectionless/personCollectionless.edit.controller.js"></script>
 	<script src="app/personCollectionless/personCollectionless.list.controller.js"></script>
 	<script src="app/personCollectionless/personCollectionless.view.controller.js"></script>
 	<script src="app/personCollectionless/personCollectionless.service.js"></script>
 
-	<script src="app/testNumber/testNumber.js"></script>
+	<script src="app/testNumber/testNumber.routes.js"></script>
 	<script src="app/testNumber/testNumber.edit.controller.js"></script>
 	<script src="app/testNumber/testNumber.list.controller.js"></script>
 	<script src="app/testNumber/testNumber.view.controller.js"></script>
 	<script src="app/testNumber/testNumber.service.js"></script>
 
-	<script src="app/testOther/testOther.js"></script>
+	<script src="app/testOther/testOther.routes.js"></script>
 	<script src="app/testOther/testOther.edit.controller.js"></script>
 	<script src="app/testOther/testOther.list.controller.js"></script>
 	<script src="app/testOther/testOther.view.controller.js"></script>
 	<script src="app/testOther/testOther.service.js"></script>
 
-	<script src="app/testString/testString.js"></script>
+	<script src="app/testString/testString.routes.js"></script>
 	<script src="app/testString/testString.edit.controller.js"></script>
 	<script src="app/testString/testString.list.controller.js"></script>
 	<script src="app/testString/testString.view.controller.js"></script>
 	<script src="app/testString/testString.service.js"></script>
 
-	<script src="app/role/role.js"></script>
+	<script src="app/role/role.routes.js"></script>
 	<script src="app/role/role.edit.controller.js"></script>
 	<script src="app/role/role.list.controller.js"></script>
 	<script src="app/role/role.view.controller.js"></script>
 	<script src="app/role/role.service.js"></script>
 
-	<script src="app/user/user.js"></script>
+	<script src="app/user/user.routes.js"></script>
 	<script src="app/user/user.edit.controller.js"></script>
 	<script src="app/user/user.list.controller.js"></script>
 	<script src="app/user/user.view.controller.js"></script>
 	<script src="app/user/user.service.js"></script>
 
-	<script src="app/userRole/userRole.js"></script>
+	<script src="app/userRole/userRole.routes.js"></script>
 	<script src="app/userRole/userRole.edit.controller.js"></script>
 	<script src="app/userRole/userRole.list.controller.js"></script>
 	<script src="app/userRole/userRole.view.controller.js"></script>
 	<script src="app/userRole/userRole.service.js"></script>
 
-	<script src="app/classifier/classifier.js"></script>
+	<script src="app/classifier/classifier.routes.js"></script>
 	<script src="app/classifier/classifier.edit.controller.js"></script>
 	<script src="app/classifier/classifier.list.controller.js"></script>
 	<script src="app/classifier/classifier.view.controller.js"></script>
 	<script src="app/classifier/classifier.service.js"></script>
 
-			
-	<script src="components/modal/modal.service.js"></script>
 	<!-- endinjector -->
 <!-- endbuild -->
 </body>

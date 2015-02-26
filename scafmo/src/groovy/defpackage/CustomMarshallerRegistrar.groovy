@@ -106,7 +106,7 @@ class CustomMarshallerRegistrar {
 	@javax.annotation.PostConstruct
     static void registerMarshallers() {
 		int priority = 10
-		
+
 		JSON.registerObjectMarshaller Tag, priority, { Tag instance, JSON json ->
 			Class cl = instance.getClass()
 			List defaultExcludes = [

@@ -9,7 +9,7 @@ import spock.lang.Specification
 
 class UserSpec extends Specification implements RestQueries, AuthQueries{
 
-	String REST_URL = "${APP_URL}/users"
+	String REST_URL = "${APP_URL}/users/v1"
 	
 	@Shared
 	Long domainId
@@ -34,7 +34,6 @@ class UserSpec extends Specification implements RestQueries, AuthQueries{
 				enabled = true
 				passwordExpired = true
 				username = 'John Doe 301'
-
 			}
 			
 			otherDomainId = response.json.id
@@ -46,7 +45,6 @@ class UserSpec extends Specification implements RestQueries, AuthQueries{
 			response.json.enabled == true
 			response.json.passwordExpired == true
 			response.json.username == 'John Doe 301'
-
 			response.status == HttpStatus.CREATED.value()
 	}
 
@@ -58,7 +56,6 @@ class UserSpec extends Specification implements RestQueries, AuthQueries{
 				enabled = true
 				passwordExpired = true
 				username = 'John Doe 302'
-
 			}
 			
 			domainId = response.json.id
@@ -71,7 +68,6 @@ class UserSpec extends Specification implements RestQueries, AuthQueries{
 			response.json.enabled == true
 			response.json.passwordExpired == true
 			response.json.username == 'John Doe 302'
-
 			response.status == HttpStatus.CREATED.value()
 	}
 	
@@ -89,7 +85,6 @@ class UserSpec extends Specification implements RestQueries, AuthQueries{
 			response.json.enabled == true
 			response.json.passwordExpired == true
 			response.json.username == 'John Doe 302'
-
 			response.status == HttpStatus.OK.value()
 	}
 	
@@ -133,7 +128,6 @@ class UserSpec extends Specification implements RestQueries, AuthQueries{
 				passwordExpired = true
 				username = 'John Doe 303'
 
-
 			}
 		then: 'Should return updated values'
 			response.json.accountExpired == true
@@ -141,7 +135,6 @@ class UserSpec extends Specification implements RestQueries, AuthQueries{
 			response.json.enabled == true
 			response.json.passwordExpired == true
 			response.json.username == 'John Doe 303'
-
 
 			response.status == HttpStatus.OK.value()
 	}
@@ -155,7 +148,6 @@ class UserSpec extends Specification implements RestQueries, AuthQueries{
 				passwordExpired = true
 				username = 'John Doe 303'
 
-
 			}
 		then: 'Should not find'
 			response.status == HttpStatus.NOT_FOUND.value()
@@ -168,10 +160,9 @@ class UserSpec extends Specification implements RestQueries, AuthQueries{
 				passwordExpired = true
 				username = 'John Doe 303'
 
-
 			}
 		then: 'Should not find'
-			response.status == HttpStatus.NOT_FOUND.value()
+			response.status == HttpStatus.UNPROCESSABLE_ENTITY.value()
 	}
 	
 	void 'Test User list sorting.'() {

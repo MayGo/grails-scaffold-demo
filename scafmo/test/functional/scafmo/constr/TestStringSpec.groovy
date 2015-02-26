@@ -9,7 +9,7 @@ import spock.lang.Specification
 
 class TestStringSpec extends Specification implements RestQueries, AuthQueries{
 
-	String REST_URL = "${APP_URL}/teststrings"
+	String REST_URL = "${APP_URL}/teststrings/v1"
 	
 	@Shared
 	Long domainId
@@ -40,7 +40,6 @@ class TestStringSpec extends Specification implements RestQueries, AuthQueries{
 				sizeStr = 'sizeStr'
 				uniqueStr = 'U 754'
 				urlStr = 'http://www.test755.com'
-
 			}
 			
 			otherDomainId = response.json.id
@@ -58,7 +57,6 @@ class TestStringSpec extends Specification implements RestQueries, AuthQueries{
 			response.json.sizeStr == 'sizeStr'
 			response.json.uniqueStr == 'U 754'
 			response.json.urlStr == 'http://www.test755.com'
-
 			response.status == HttpStatus.CREATED.value()
 	}
 
@@ -76,7 +74,6 @@ class TestStringSpec extends Specification implements RestQueries, AuthQueries{
 				sizeStr = 'sizeStr'
 				uniqueStr = 'U 759'
 				urlStr = 'http://www.test760.com'
-
 			}
 			
 			domainId = response.json.id
@@ -95,7 +92,6 @@ class TestStringSpec extends Specification implements RestQueries, AuthQueries{
 			response.json.sizeStr == 'sizeStr'
 			response.json.uniqueStr == 'U 759'
 			response.json.urlStr == 'http://www.test760.com'
-
 			response.status == HttpStatus.CREATED.value()
 	}
 	
@@ -119,7 +115,6 @@ class TestStringSpec extends Specification implements RestQueries, AuthQueries{
 			response.json.sizeStr == 'sizeStr'
 			response.json.uniqueStr == 'U 759'
 			response.json.urlStr == 'http://www.test760.com'
-
 			response.status == HttpStatus.OK.value()
 	}
 	
@@ -169,7 +164,6 @@ class TestStringSpec extends Specification implements RestQueries, AuthQueries{
 				uniqueStr = 'U 764'
 				urlStr = 'http://www.test765.com'
 
-
 			}
 		then: 'Should return updated values'
 			response.json.blankStr == 'Blank 761'
@@ -183,7 +177,6 @@ class TestStringSpec extends Specification implements RestQueries, AuthQueries{
 			response.json.sizeStr == 'sizeStr'
 			response.json.uniqueStr == 'U 764'
 			response.json.urlStr == 'http://www.test765.com'
-
 
 			response.status == HttpStatus.OK.value()
 	}
@@ -203,7 +196,6 @@ class TestStringSpec extends Specification implements RestQueries, AuthQueries{
 				uniqueStr = 'U 764'
 				urlStr = 'http://www.test765.com'
 
-
 			}
 		then: 'Should not find'
 			response.status == HttpStatus.NOT_FOUND.value()
@@ -222,10 +214,9 @@ class TestStringSpec extends Specification implements RestQueries, AuthQueries{
 				uniqueStr = 'U 764'
 				urlStr = 'http://www.test765.com'
 
-
 			}
 		then: 'Should not find'
-			response.status == HttpStatus.NOT_FOUND.value()
+			response.status == HttpStatus.UNPROCESSABLE_ENTITY.value()
 	}
 	
 	void 'Test TestString list sorting.'() {

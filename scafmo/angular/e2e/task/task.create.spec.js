@@ -40,7 +40,7 @@ describe('task create page', function() {
   it('after filling all the fields, should be ', function() {
 	expect(page.submitButton.isEnabled()).toBe(false);
 	//Fill the form
-		page.deadlineEl.sendKeys('18.02.2015')
+		page.deadlineEl.sendKeys('26.02.2015')
 		page.detailsEl.sendKeys('details')
 		page.statusEl.sendKeys('Open')
 		page.summaryEl.sendKeys('Work Summary 152')

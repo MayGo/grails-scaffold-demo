@@ -9,7 +9,7 @@ import spock.lang.Specification
 
 class VisitSpec extends Specification implements RestQueries, AuthQueries{
 
-	String REST_URL = "${APP_URL}/visits"
+	String REST_URL = "${APP_URL}/visits/v1"
 	
 	@Shared
 	Long domainId
@@ -29,30 +29,27 @@ class VisitSpec extends Specification implements RestQueries, AuthQueries{
 	void 'Test creating another Visit instance.'() {//This is for creating some data to test list sorting
 		when: 'Create visit'
 			response = sendCreateWithData(){
-				date = '2015-02-18 00:00:00.000+0200'
+				date = '2015-02-26 00:00:00.000+0200'
 				description = 'description'
 				pet = 1
-
 			}
 			
 			otherDomainId = response.json.id
 			
 			
 		then: 'Should create and return created values'
-			response.json.date == '2015-02-17T22:00:00Z'
+			response.json.date == '2015-02-25T22:00:00Z'
 			response.json.description == 'description'
 			response.json.pet?.id == 1
-
 			response.status == HttpStatus.CREATED.value()
 	}
 
 	void 'Test creating Visit instance.'() {
 		when: 'Create visit'
 			response = sendCreateWithData(){
-				date = '2015-02-18 00:00:00.000+0200'
+				date = '2015-02-26 00:00:00.000+0200'
 				description = 'description'
 				pet = 1
-
 			}
 			
 			domainId = response.json.id
@@ -60,10 +57,9 @@ class VisitSpec extends Specification implements RestQueries, AuthQueries{
 			
 		then: 'Should create and return created values'
 			
-			response.json.date == '2015-02-17T22:00:00Z'
+			response.json.date == '2015-02-25T22:00:00Z'
 			response.json.description == 'description'
 			response.json.pet?.id == 1
-
 			response.status == HttpStatus.CREATED.value()
 	}
 	
@@ -76,10 +72,9 @@ class VisitSpec extends Specification implements RestQueries, AuthQueries{
 			response = readDomainItemWithParams(domainId.toString(), "")
 		then: 'Should return correct values'
 			
-			response.json.date == '2015-02-17T22:00:00Z'
+			response.json.date == '2015-02-25T22:00:00Z'
 			response.json.description == 'description'
 			response.json.pet?.id == 1
-
 			response.status == HttpStatus.OK.value()
 	}
 	
@@ -117,17 +112,15 @@ class VisitSpec extends Specification implements RestQueries, AuthQueries{
 	void 'Test updating Visit instance.'() {
 		when: 'Update visit'
 			response = sendUpdateWithData(domainId.toString()){
-				date = '2015-02-18 00:00:00.000+0200'
+				date = '2015-02-26 00:00:00.000+0200'
 				description = 'description'
 				pet = 1
 
-
 			}
 		then: 'Should return updated values'
-			response.json.date == '2015-02-17T22:00:00Z'
+			response.json.date == '2015-02-25T22:00:00Z'
 			response.json.description == 'description'
 			response.json.pet?.id == 1
-
 
 			response.status == HttpStatus.OK.value()
 	}
@@ -135,10 +128,9 @@ class VisitSpec extends Specification implements RestQueries, AuthQueries{
 	void 'Test updating unexisting Visit instance.'() {
 		when: 'Update unexisting visit'
 			response = sendUpdateWithData('9999999999'){
-					date = '2015-02-18 00:00:00.000+0200'
+					date = '2015-02-26 00:00:00.000+0200'
 				description = 'description'
 				pet = 1
-
 
 			}
 		then: 'Should not find'
@@ -146,14 +138,13 @@ class VisitSpec extends Specification implements RestQueries, AuthQueries{
 			
 		when: 'Update unexisting visit id not a number'
 			response = sendUpdateWithData('nonexistent'){
-					date = '2015-02-18 00:00:00.000+0200'
+					date = '2015-02-26 00:00:00.000+0200'
 				description = 'description'
 				pet = 1
 
-
 			}
 		then: 'Should not find'
-			response.status == HttpStatus.NOT_FOUND.value()
+			response.status == HttpStatus.UNPROCESSABLE_ENTITY.value()
 	}
 	
 	void 'Test Visit list sorting.'() {
@@ -265,7 +256,7 @@ class VisitSpec extends Specification implements RestQueries, AuthQueries{
 		where:
 			jsonVal 	        || respSize
 			'{}'                || 10
-			'{"date":"2015-02-18 00:00:00.000+0200"}' || 10 
+			'{"date":"2015-02-26 00:00:00.000+0200"}' || 10 
 			'{"description":"description"}' || 10 
 			'{"pet":1}' || 2 
 			'{"pets":[1]}' || 2 

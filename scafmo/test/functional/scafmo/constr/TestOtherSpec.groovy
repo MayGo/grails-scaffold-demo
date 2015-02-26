@@ -9,7 +9,7 @@ import spock.lang.Specification
 
 class TestOtherSpec extends Specification implements RestQueries, AuthQueries{
 
-	String REST_URL = "${APP_URL}/testothers"
+	String REST_URL = "${APP_URL}/testothers/v1"
 	
 	@Shared
 	Long domainId
@@ -30,10 +30,9 @@ class TestOtherSpec extends Specification implements RestQueries, AuthQueries{
 		when: 'Create testOther'
 			response = sendCreateWithData(){
 				booleanNullable = true
-				testDate = '2015-02-18 00:00:00.000+0200'
+				testDate = '2015-02-26 00:00:00.000+0200'
 				testEnum = 'TEST_1'
 				testStringType = 1
-
 			}
 			
 			otherDomainId = response.json.id
@@ -41,10 +40,9 @@ class TestOtherSpec extends Specification implements RestQueries, AuthQueries{
 			
 		then: 'Should create and return created values'
 			response.json.booleanNullable == true
-			response.json.testDate == '2015-02-17T22:00:00Z'
+			response.json.testDate == '2015-02-25T22:00:00Z'
 			response.json.testEnum == 'TEST_1'
 			response.json.testStringType?.id == 1
-
 			response.status == HttpStatus.CREATED.value()
 	}
 
@@ -52,10 +50,9 @@ class TestOtherSpec extends Specification implements RestQueries, AuthQueries{
 		when: 'Create testOther'
 			response = sendCreateWithData(){
 				booleanNullable = true
-				testDate = '2015-02-18 00:00:00.000+0200'
+				testDate = '2015-02-26 00:00:00.000+0200'
 				testEnum = 'TEST_1'
 				testStringType = 1
-
 			}
 			
 			domainId = response.json.id
@@ -64,10 +61,9 @@ class TestOtherSpec extends Specification implements RestQueries, AuthQueries{
 		then: 'Should create and return created values'
 			
 			response.json.booleanNullable == true
-			response.json.testDate == '2015-02-17T22:00:00Z'
+			response.json.testDate == '2015-02-25T22:00:00Z'
 			response.json.testEnum == 'TEST_1'
 			response.json.testStringType?.id == 1
-
 			response.status == HttpStatus.CREATED.value()
 	}
 	
@@ -81,10 +77,9 @@ class TestOtherSpec extends Specification implements RestQueries, AuthQueries{
 		then: 'Should return correct values'
 			
 			response.json.booleanNullable == true
-			response.json.testDate == '2015-02-17T22:00:00Z'
+			response.json.testDate == '2015-02-25T22:00:00Z'
 			response.json.testEnum == 'TEST_1'
 			response.json.testStringType?.id == 1
-
 			response.status == HttpStatus.OK.value()
 	}
 	
@@ -123,18 +118,16 @@ class TestOtherSpec extends Specification implements RestQueries, AuthQueries{
 		when: 'Update testOther'
 			response = sendUpdateWithData(domainId.toString()){
 				booleanNullable = true
-				testDate = '2015-02-18 00:00:00.000+0200'
+				testDate = '2015-02-26 00:00:00.000+0200'
 				testEnum = 'TEST_1'
 				testStringType = 1
-
 
 			}
 		then: 'Should return updated values'
 			response.json.booleanNullable == true
-			response.json.testDate == '2015-02-17T22:00:00Z'
+			response.json.testDate == '2015-02-25T22:00:00Z'
 			response.json.testEnum == 'TEST_1'
 			response.json.testStringType?.id == 1
-
 
 			response.status == HttpStatus.OK.value()
 	}
@@ -143,10 +136,9 @@ class TestOtherSpec extends Specification implements RestQueries, AuthQueries{
 		when: 'Update unexisting testOther'
 			response = sendUpdateWithData('9999999999'){
 					booleanNullable = true
-				testDate = '2015-02-18 00:00:00.000+0200'
+				testDate = '2015-02-26 00:00:00.000+0200'
 				testEnum = 'TEST_1'
 				testStringType = 1
-
 
 			}
 		then: 'Should not find'
@@ -155,14 +147,13 @@ class TestOtherSpec extends Specification implements RestQueries, AuthQueries{
 		when: 'Update unexisting testOther id not a number'
 			response = sendUpdateWithData('nonexistent'){
 					booleanNullable = true
-				testDate = '2015-02-18 00:00:00.000+0200'
+				testDate = '2015-02-26 00:00:00.000+0200'
 				testEnum = 'TEST_1'
 				testStringType = 1
 
-
 			}
 		then: 'Should not find'
-			response.status == HttpStatus.NOT_FOUND.value()
+			response.status == HttpStatus.UNPROCESSABLE_ENTITY.value()
 	}
 	
 	void 'Test TestOther list sorting.'() {
@@ -275,7 +266,7 @@ class TestOtherSpec extends Specification implements RestQueries, AuthQueries{
 			jsonVal 	        || respSize
 			'{}'                || 10
 			'{"booleanNullable":false}' || 10 
-			'{"testDate":"2015-02-18 00:00:00.000+0200"}' || 10 
+			'{"testDate":"2015-02-26 00:00:00.000+0200"}' || 10 
 			'{"testEnum":"TEST_1"}' || 10 
 			'{"testStringType":1}' || 2 
 			'{"testStringTypes":[1]}' || 2 

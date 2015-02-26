@@ -4,7 +4,7 @@ angular.module('angularDemoApp')
   .service('OwnerService', function($resource, $translate, appConfig, inform){
   		var service = {};
   		
-  		var resource = $resource(appConfig.restUrl + '/owners/:id', { id: '@id' }, {
+  		var resource = $resource(appConfig.restUrl + '/owners/v1/:id', { id: '@id' }, {
             //query: {method:'GET',  params:{}, isArray:true},
             update: {
                 method: 'PUT' // this method issues a PUT request

@@ -4,7 +4,7 @@ angular.module('angularDemoApp')
   .service('PersonCollectionService', function($resource, $translate, appConfig, inform){
   		var service = {};
   		
-  		var resource = $resource(appConfig.restUrl + '/personcollections/:id', { id: '@id' }, {
+  		var resource = $resource(appConfig.restUrl + '/personcollections/v1/:id', { id: '@id' }, {
             //query: {method:'GET',  params:{}, isArray:true},
             update: {
                 method: 'PUT' // this method issues a PUT request

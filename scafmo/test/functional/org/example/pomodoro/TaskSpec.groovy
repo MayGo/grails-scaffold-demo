@@ -9,7 +9,7 @@ import spock.lang.Specification
 
 class TaskSpec extends Specification implements RestQueries, AuthQueries{
 
-	String REST_URL = "${APP_URL}/tasks"
+	String REST_URL = "${APP_URL}/tasks/v1"
 	
 	@Shared
 	Long domainId
@@ -29,36 +29,33 @@ class TaskSpec extends Specification implements RestQueries, AuthQueries{
 	void 'Test creating another Task instance.'() {//This is for creating some data to test list sorting
 		when: 'Create task'
 			response = sendCreateWithData(){
-				deadline = '2015-02-18 00:00:00.000+0200'
+				deadline = '2015-02-26 00:00:00.000+0200'
 				details = 'details'
 				status = 'Open'
 				summary = 'Work Summary 151'
 				timeSpent = 0
-
 			}
 			
 			otherDomainId = response.json.id
 			
 			
 		then: 'Should create and return created values'
-			response.json.deadline == '2015-02-17T22:00:00Z'
+			response.json.deadline == '2015-02-25T22:00:00Z'
 			response.json.details == 'details'
 			response.json.status == 'Open'
 			response.json.summary == 'Work Summary 151'
 			response.json.timeSpent == 0
-
 			response.status == HttpStatus.CREATED.value()
 	}
 
 	void 'Test creating Task instance.'() {
 		when: 'Create task'
 			response = sendCreateWithData(){
-				deadline = '2015-02-18 00:00:00.000+0200'
+				deadline = '2015-02-26 00:00:00.000+0200'
 				details = 'details'
 				status = 'Open'
 				summary = 'Work Summary 152'
 				timeSpent = 0
-
 			}
 			
 			domainId = response.json.id
@@ -66,12 +63,11 @@ class TaskSpec extends Specification implements RestQueries, AuthQueries{
 			
 		then: 'Should create and return created values'
 			
-			response.json.deadline == '2015-02-17T22:00:00Z'
+			response.json.deadline == '2015-02-25T22:00:00Z'
 			response.json.details == 'details'
 			response.json.status == 'Open'
 			response.json.summary == 'Work Summary 152'
 			response.json.timeSpent == 0
-
 			response.status == HttpStatus.CREATED.value()
 	}
 	
@@ -84,12 +80,11 @@ class TaskSpec extends Specification implements RestQueries, AuthQueries{
 			response = readDomainItemWithParams(domainId.toString(), "")
 		then: 'Should return correct values'
 			
-			response.json.deadline == '2015-02-17T22:00:00Z'
+			response.json.deadline == '2015-02-25T22:00:00Z'
 			response.json.details == 'details'
 			response.json.status == 'Open'
 			response.json.summary == 'Work Summary 152'
 			response.json.timeSpent == 0
-
 			response.status == HttpStatus.OK.value()
 	}
 	
@@ -127,21 +122,19 @@ class TaskSpec extends Specification implements RestQueries, AuthQueries{
 	void 'Test updating Task instance.'() {
 		when: 'Update task'
 			response = sendUpdateWithData(domainId.toString()){
-				deadline = '2015-02-18 00:00:00.000+0200'
+				deadline = '2015-02-26 00:00:00.000+0200'
 				details = 'details'
 				status = 'Open'
 				summary = 'Work Summary 153'
 				timeSpent = 0
 
-
 			}
 		then: 'Should return updated values'
-			response.json.deadline == '2015-02-17T22:00:00Z'
+			response.json.deadline == '2015-02-25T22:00:00Z'
 			response.json.details == 'details'
 			response.json.status == 'Open'
 			response.json.summary == 'Work Summary 153'
 			response.json.timeSpent == 0
-
 
 			response.status == HttpStatus.OK.value()
 	}
@@ -149,12 +142,11 @@ class TaskSpec extends Specification implements RestQueries, AuthQueries{
 	void 'Test updating unexisting Task instance.'() {
 		when: 'Update unexisting task'
 			response = sendUpdateWithData('9999999999'){
-					deadline = '2015-02-18 00:00:00.000+0200'
+					deadline = '2015-02-26 00:00:00.000+0200'
 				details = 'details'
 				status = 'Open'
 				summary = 'Work Summary 153'
 				timeSpent = 0
-
 
 			}
 		then: 'Should not find'
@@ -162,16 +154,15 @@ class TaskSpec extends Specification implements RestQueries, AuthQueries{
 			
 		when: 'Update unexisting task id not a number'
 			response = sendUpdateWithData('nonexistent'){
-					deadline = '2015-02-18 00:00:00.000+0200'
+					deadline = '2015-02-26 00:00:00.000+0200'
 				details = 'details'
 				status = 'Open'
 				summary = 'Work Summary 153'
 				timeSpent = 0
 
-
 			}
 		then: 'Should not find'
-			response.status == HttpStatus.NOT_FOUND.value()
+			response.status == HttpStatus.UNPROCESSABLE_ENTITY.value()
 	}
 	
 	void 'Test Task list sorting.'() {
@@ -283,7 +274,7 @@ class TaskSpec extends Specification implements RestQueries, AuthQueries{
 		where:
 			jsonVal 	        || respSize
 			'{}'                || 10
-			'{"deadline":"2015-02-18 00:00:00.000+0200"}' || 10 
+			'{"deadline":"2015-02-26 00:00:00.000+0200"}' || 10 
 			'{"details":"details"}' || 10 
 			'{"status":"Open"}' || 10 
 //Can't predict 'size'			'{"summary":"Work Summary 153"}' || 1 

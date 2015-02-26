@@ -4,7 +4,7 @@ angular.module('angularDemoApp')
   .service('TagService', function($resource, $translate, appConfig, inform){
   		var service = {};
   		
-  		var resource = $resource(appConfig.restUrl + '/tags/:id', { id: '@id' }, {
+  		var resource = $resource(appConfig.restUrl + '/tags/v1/:id', { id: '@id' }, {
             //query: {method:'GET',  params:{}, isArray:true},
             update: {
                 method: 'PUT' // this method issues a PUT request

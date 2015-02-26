@@ -9,7 +9,7 @@ import spock.lang.Specification
 
 class TestNumberSpec extends Specification implements RestQueries, AuthQueries{
 
-	String REST_URL = "${APP_URL}/testnumbers"
+	String REST_URL = "${APP_URL}/testnumbers/v1"
 	
 	@Shared
 	Long domainId
@@ -40,7 +40,6 @@ class TestNumberSpec extends Specification implements RestQueries, AuthQueries{
 				integerNrRange = 19
 				integerNrUnique = 302
 				longNr = 4
-
 			}
 			
 			otherDomainId = response.json.id
@@ -58,7 +57,6 @@ class TestNumberSpec extends Specification implements RestQueries, AuthQueries{
 			response.json.integerNrRange == 19
 			response.json.integerNrUnique == 302
 			response.json.longNr == 4
-
 			response.status == HttpStatus.CREATED.value()
 	}
 
@@ -76,7 +74,6 @@ class TestNumberSpec extends Specification implements RestQueries, AuthQueries{
 				integerNrRange = 19
 				integerNrUnique = 304
 				longNr = 4
-
 			}
 			
 			domainId = response.json.id
@@ -95,7 +92,6 @@ class TestNumberSpec extends Specification implements RestQueries, AuthQueries{
 			response.json.integerNrRange == 19
 			response.json.integerNrUnique == 304
 			response.json.longNr == 4
-
 			response.status == HttpStatus.CREATED.value()
 	}
 	
@@ -119,7 +115,6 @@ class TestNumberSpec extends Specification implements RestQueries, AuthQueries{
 			response.json.integerNrRange == 19
 			response.json.integerNrUnique == 304
 			response.json.longNr == 4
-
 			response.status == HttpStatus.OK.value()
 	}
 	
@@ -169,7 +164,6 @@ class TestNumberSpec extends Specification implements RestQueries, AuthQueries{
 				integerNrUnique = 306
 				longNr = 4
 
-
 			}
 		then: 'Should return updated values'
 			response.json.doubleNr == 123.123
@@ -183,7 +177,6 @@ class TestNumberSpec extends Specification implements RestQueries, AuthQueries{
 			response.json.integerNrRange == 19
 			response.json.integerNrUnique == 306
 			response.json.longNr == 4
-
 
 			response.status == HttpStatus.OK.value()
 	}
@@ -203,7 +196,6 @@ class TestNumberSpec extends Specification implements RestQueries, AuthQueries{
 				integerNrUnique = 306
 				longNr = 4
 
-
 			}
 		then: 'Should not find'
 			response.status == HttpStatus.NOT_FOUND.value()
@@ -222,10 +214,9 @@ class TestNumberSpec extends Specification implements RestQueries, AuthQueries{
 				integerNrUnique = 306
 				longNr = 4
 
-
 			}
 		then: 'Should not find'
-			response.status == HttpStatus.NOT_FOUND.value()
+			response.status == HttpStatus.UNPROCESSABLE_ENTITY.value()
 	}
 	
 	void 'Test TestNumber list sorting.'() {

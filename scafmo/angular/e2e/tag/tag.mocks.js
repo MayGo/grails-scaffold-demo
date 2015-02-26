@@ -2,7 +2,7 @@ module.exports = function(){
 	angular.module('httpBackendMock', ['ngMockE2E'])
     	.run(function($httpBackend, appConfig) {
 
-	     	var url = appConfig.restUrl + '/tags';
+	     	var url = appConfig.restUrl + '/tags/v1';
 	        $httpBackend.whenPOST(url).respond(function(method, url){return [200, {'id' : 1}];});//create
 	        $httpBackend.whenGET(url).respond(function(method, url){return [200, [{'id' : 1}]];});//list
 	        $httpBackend.whenPOST(url + "/1").respond(function(method, url){return [200, {'id' : 1}];});//edit

@@ -9,7 +9,7 @@ import spock.lang.Specification
 
 class DivisionCollectionSpec extends Specification implements RestQueries, AuthQueries{
 
-	String REST_URL = "${APP_URL}/divisioncollections"
+	String REST_URL = "${APP_URL}/divisioncollections/v1"
 	
 	@Shared
 	Long domainId
@@ -31,7 +31,6 @@ class DivisionCollectionSpec extends Specification implements RestQueries, AuthQ
 			response = sendCreateWithData(){
 				name = 'Division151'
 				headDivision = 1
-
 			}
 			
 			otherDomainId = response.json.id
@@ -40,7 +39,6 @@ class DivisionCollectionSpec extends Specification implements RestQueries, AuthQ
 		then: 'Should create and return created values'
 			response.json.name == 'Division151'
 			response.json.headDivision?.id == 1
-
 			response.status == HttpStatus.CREATED.value()
 	}
 
@@ -49,7 +47,6 @@ class DivisionCollectionSpec extends Specification implements RestQueries, AuthQ
 			response = sendCreateWithData(){
 				name = 'Division152'
 				headDivision = 1
-
 			}
 			
 			domainId = response.json.id
@@ -59,7 +56,6 @@ class DivisionCollectionSpec extends Specification implements RestQueries, AuthQ
 			
 			response.json.name == 'Division152'
 			response.json.headDivision?.id == 1
-
 			response.status == HttpStatus.CREATED.value()
 	}
 	
@@ -74,7 +70,6 @@ class DivisionCollectionSpec extends Specification implements RestQueries, AuthQ
 			
 			response.json.name == 'Division152'
 			response.json.headDivision?.id == 1
-
 			response.status == HttpStatus.OK.value()
 	}
 	
@@ -115,12 +110,10 @@ class DivisionCollectionSpec extends Specification implements RestQueries, AuthQ
 				name = 'Division153'
 				headDivision = 1
 
-
 			}
 		then: 'Should return updated values'
 			response.json.name == 'Division153'
 			response.json.headDivision?.id == 1
-
 
 			response.status == HttpStatus.OK.value()
 	}
@@ -131,7 +124,6 @@ class DivisionCollectionSpec extends Specification implements RestQueries, AuthQ
 					name = 'Division153'
 				headDivision = 1
 
-
 			}
 		then: 'Should not find'
 			response.status == HttpStatus.NOT_FOUND.value()
@@ -141,10 +133,9 @@ class DivisionCollectionSpec extends Specification implements RestQueries, AuthQ
 					name = 'Division153'
 				headDivision = 1
 
-
 			}
 		then: 'Should not find'
-			response.status == HttpStatus.NOT_FOUND.value()
+			response.status == HttpStatus.UNPROCESSABLE_ENTITY.value()
 	}
 	
 	void 'Test DivisionCollection list sorting.'() {

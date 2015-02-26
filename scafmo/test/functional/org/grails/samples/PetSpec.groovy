@@ -9,7 +9,7 @@ import spock.lang.Specification
 
 class PetSpec extends Specification implements RestQueries, AuthQueries{
 
-	String REST_URL = "${APP_URL}/pets"
+	String REST_URL = "${APP_URL}/pets/v1"
 	
 	@Shared
 	Long domainId
@@ -29,33 +29,30 @@ class PetSpec extends Specification implements RestQueries, AuthQueries{
 	void 'Test creating another Pet instance.'() {//This is for creating some data to test list sorting
 		when: 'Create pet'
 			response = sendCreateWithData(){
-				birthDate = '2015-02-18 00:00:00.000+0200'
+				birthDate = '2015-02-26 00:00:00.000+0200'
 				name = 'Pet 301'
 				type = 1
 				owner = 1
-
 			}
 			
 			otherDomainId = response.json.id
 			
 			
 		then: 'Should create and return created values'
-			response.json.birthDate == '2015-02-17T22:00:00Z'
+			response.json.birthDate == '2015-02-25T22:00:00Z'
 			response.json.name == 'Pet 301'
 			response.json.type?.id == 1
 			response.json.owner?.id == 1
-
 			response.status == HttpStatus.CREATED.value()
 	}
 
 	void 'Test creating Pet instance.'() {
 		when: 'Create pet'
 			response = sendCreateWithData(){
-				birthDate = '2015-02-18 00:00:00.000+0200'
+				birthDate = '2015-02-26 00:00:00.000+0200'
 				name = 'Pet 302'
 				type = 1
 				owner = 1
-
 			}
 			
 			domainId = response.json.id
@@ -63,11 +60,10 @@ class PetSpec extends Specification implements RestQueries, AuthQueries{
 			
 		then: 'Should create and return created values'
 			
-			response.json.birthDate == '2015-02-17T22:00:00Z'
+			response.json.birthDate == '2015-02-25T22:00:00Z'
 			response.json.name == 'Pet 302'
 			response.json.type?.id == 1
 			response.json.owner?.id == 1
-
 			response.status == HttpStatus.CREATED.value()
 	}
 	
@@ -80,11 +76,10 @@ class PetSpec extends Specification implements RestQueries, AuthQueries{
 			response = readDomainItemWithParams(domainId.toString(), "")
 		then: 'Should return correct values'
 			
-			response.json.birthDate == '2015-02-17T22:00:00Z'
+			response.json.birthDate == '2015-02-25T22:00:00Z'
 			response.json.name == 'Pet 302'
 			response.json.type?.id == 1
 			response.json.owner?.id == 1
-
 			response.status == HttpStatus.OK.value()
 	}
 	
@@ -122,19 +117,17 @@ class PetSpec extends Specification implements RestQueries, AuthQueries{
 	void 'Test updating Pet instance.'() {
 		when: 'Update pet'
 			response = sendUpdateWithData(domainId.toString()){
-				birthDate = '2015-02-18 00:00:00.000+0200'
+				birthDate = '2015-02-26 00:00:00.000+0200'
 				name = 'Pet 303'
 				type = 1
 				owner = 1
 
-
 			}
 		then: 'Should return updated values'
-			response.json.birthDate == '2015-02-17T22:00:00Z'
+			response.json.birthDate == '2015-02-25T22:00:00Z'
 			response.json.name == 'Pet 303'
 			response.json.type?.id == 1
 			response.json.owner?.id == 1
-
 
 			response.status == HttpStatus.OK.value()
 	}
@@ -142,11 +135,10 @@ class PetSpec extends Specification implements RestQueries, AuthQueries{
 	void 'Test updating unexisting Pet instance.'() {
 		when: 'Update unexisting pet'
 			response = sendUpdateWithData('9999999999'){
-					birthDate = '2015-02-18 00:00:00.000+0200'
+					birthDate = '2015-02-26 00:00:00.000+0200'
 				name = 'Pet 303'
 				type = 1
 				owner = 1
-
 
 			}
 		then: 'Should not find'
@@ -154,15 +146,14 @@ class PetSpec extends Specification implements RestQueries, AuthQueries{
 			
 		when: 'Update unexisting pet id not a number'
 			response = sendUpdateWithData('nonexistent'){
-					birthDate = '2015-02-18 00:00:00.000+0200'
+					birthDate = '2015-02-26 00:00:00.000+0200'
 				name = 'Pet 303'
 				type = 1
 				owner = 1
 
-
 			}
 		then: 'Should not find'
-			response.status == HttpStatus.NOT_FOUND.value()
+			response.status == HttpStatus.UNPROCESSABLE_ENTITY.value()
 	}
 	
 	void 'Test Pet list sorting.'() {
@@ -274,7 +265,7 @@ class PetSpec extends Specification implements RestQueries, AuthQueries{
 		where:
 			jsonVal 	        || respSize
 			'{}'                || 10
-			'{"birthDate":"2015-02-18 00:00:00.000+0200"}' || 10 
+			'{"birthDate":"2015-02-26 00:00:00.000+0200"}' || 10 
 //Can't predict 'size'			'{"name":"Pet 303"}' || 1 
 			'{"type":1}' || 2 
 			'{"types":[1]}' || 2 

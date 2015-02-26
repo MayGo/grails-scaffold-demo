@@ -49,140 +49,140 @@ angular.module('angularDemoApp')
 	
 	
   		tagQuery : function(val, labelProperties, tagsOutput){
-  			return resourceQuery(val, 'tags', labelProperties, 'tasks', tagsOutput);
+  			return resourceQuery(val, 'tags/v1', labelProperties, 'tasks', tagsOutput);
 	    },
 	    tagFormatLabel : function(model, labelProperties) {
 		    return toLabel(model, labelProperties);
 		},
     
   		taskQuery : function(val, labelProperties, tagsOutput){
-  			return resourceQuery(val, 'tasks', labelProperties, 'tags', tagsOutput);
+  			return resourceQuery(val, 'tasks/v1', labelProperties, 'tags', tagsOutput);
 	    },
 	    taskFormatLabel : function(model, labelProperties) {
 		    return toLabel(model, labelProperties);
 		},
     
   		ownerQuery : function(val, labelProperties, tagsOutput){
-  			return resourceQuery(val, 'owners', labelProperties, 'pets', tagsOutput);
+  			return resourceQuery(val, 'owners/v1', labelProperties, 'pets', tagsOutput);
 	    },
 	    ownerFormatLabel : function(model, labelProperties) {
 		    return toLabel(model, labelProperties);
 		},
     
   		personQuery : function(val, labelProperties, tagsOutput){
-  			return resourceQuery(val, 'persons', labelProperties, '', tagsOutput);
+  			return resourceQuery(val, 'persons/v1', labelProperties, '', tagsOutput);
 	    },
 	    personFormatLabel : function(model, labelProperties) {
 		    return toLabel(model, labelProperties);
 		},
     
   		petQuery : function(val, labelProperties, tagsOutput){
-  			return resourceQuery(val, 'pets', labelProperties, 'visits,type,owner', tagsOutput);
+  			return resourceQuery(val, 'pets/v1', labelProperties, 'visits,type,owner', tagsOutput);
 	    },
 	    petFormatLabel : function(model, labelProperties) {
 		    return toLabel(model, labelProperties);
 		},
     
   		petTypeQuery : function(val, labelProperties, tagsOutput){
-  			return resourceQuery(val, 'pettypes', labelProperties, '', tagsOutput);
+  			return resourceQuery(val, 'pettypes/v1', labelProperties, '', tagsOutput);
 	    },
 	    petTypeFormatLabel : function(model, labelProperties) {
 		    return toLabel(model, labelProperties);
 		},
     
   		specialityQuery : function(val, labelProperties, tagsOutput){
-  			return resourceQuery(val, 'specialitys', labelProperties, '', tagsOutput);
+  			return resourceQuery(val, 'specialitys/v1', labelProperties, '', tagsOutput);
 	    },
 	    specialityFormatLabel : function(model, labelProperties) {
 		    return toLabel(model, labelProperties);
 		},
     
   		vetQuery : function(val, labelProperties, tagsOutput){
-  			return resourceQuery(val, 'vets', labelProperties, 'specialities', tagsOutput);
+  			return resourceQuery(val, 'vets/v1', labelProperties, 'specialities', tagsOutput);
 	    },
 	    vetFormatLabel : function(model, labelProperties) {
 		    return toLabel(model, labelProperties);
 		},
     
   		visitQuery : function(val, labelProperties, tagsOutput){
-  			return resourceQuery(val, 'visits', labelProperties, 'pet', tagsOutput);
+  			return resourceQuery(val, 'visits/v1', labelProperties, 'pet', tagsOutput);
 	    },
 	    visitFormatLabel : function(model, labelProperties) {
 		    return toLabel(model, labelProperties);
 		},
     
   		divisionCollectionQuery : function(val, labelProperties, tagsOutput){
-  			return resourceQuery(val, 'divisioncollections', labelProperties, 'persons,headDivision', tagsOutput);
+  			return resourceQuery(val, 'divisioncollections/v1', labelProperties, 'persons,headDivision', tagsOutput);
 	    },
 	    divisionCollectionFormatLabel : function(model, labelProperties) {
 		    return toLabel(model, labelProperties);
 		},
     
   		divisionCollectionlessQuery : function(val, labelProperties, tagsOutput){
-  			return resourceQuery(val, 'divisioncollectionlesss', labelProperties, 'headDivision', tagsOutput);
+  			return resourceQuery(val, 'divisioncollectionlesss/v1', labelProperties, 'headDivision', tagsOutput);
 	    },
 	    divisionCollectionlessFormatLabel : function(model, labelProperties) {
 		    return toLabel(model, labelProperties);
 		},
     
   		personCollectionQuery : function(val, labelProperties, tagsOutput){
-  			return resourceQuery(val, 'personcollections', labelProperties, 'division', tagsOutput);
+  			return resourceQuery(val, 'personcollections/v1', labelProperties, 'division', tagsOutput);
 	    },
 	    personCollectionFormatLabel : function(model, labelProperties) {
 		    return toLabel(model, labelProperties);
 		},
     
   		personCollectionlessQuery : function(val, labelProperties, tagsOutput){
-  			return resourceQuery(val, 'personcollectionlesss', labelProperties, 'division', tagsOutput);
+  			return resourceQuery(val, 'personcollectionlesss/v1', labelProperties, 'division', tagsOutput);
 	    },
 	    personCollectionlessFormatLabel : function(model, labelProperties) {
 		    return toLabel(model, labelProperties);
 		},
     
   		testNumberQuery : function(val, labelProperties, tagsOutput){
-  			return resourceQuery(val, 'testnumbers', labelProperties, '', tagsOutput);
+  			return resourceQuery(val, 'testnumbers/v1', labelProperties, '', tagsOutput);
 	    },
 	    testNumberFormatLabel : function(model, labelProperties) {
 		    return toLabel(model, labelProperties);
 		},
     
   		testOtherQuery : function(val, labelProperties, tagsOutput){
-  			return resourceQuery(val, 'testothers', labelProperties, 'testStringType', tagsOutput);
+  			return resourceQuery(val, 'testothers/v1', labelProperties, 'testStringType', tagsOutput);
 	    },
 	    testOtherFormatLabel : function(model, labelProperties) {
 		    return toLabel(model, labelProperties);
 		},
     
   		testStringQuery : function(val, labelProperties, tagsOutput){
-  			return resourceQuery(val, 'teststrings', labelProperties, '', tagsOutput);
+  			return resourceQuery(val, 'teststrings/v1', labelProperties, '', tagsOutput);
 	    },
 	    testStringFormatLabel : function(model, labelProperties) {
 		    return toLabel(model, labelProperties);
 		},
     
   		roleQuery : function(val, labelProperties, tagsOutput){
-  			return resourceQuery(val, 'roles', labelProperties, '', tagsOutput);
+  			return resourceQuery(val, 'roles/v1', labelProperties, '', tagsOutput);
 	    },
 	    roleFormatLabel : function(model, labelProperties) {
 		    return toLabel(model, labelProperties);
 		},
     
   		userQuery : function(val, labelProperties, tagsOutput){
-  			return resourceQuery(val, 'users', labelProperties, '', tagsOutput);
+  			return resourceQuery(val, 'users/v1', labelProperties, '', tagsOutput);
 	    },
 	    userFormatLabel : function(model, labelProperties) {
 		    return toLabel(model, labelProperties);
 		},
     
   		userRoleQuery : function(val, labelProperties, tagsOutput){
-  			return resourceQuery(val, 'userroles', labelProperties, 'role,user', tagsOutput);
+  			return resourceQuery(val, 'userroles/v1', labelProperties, 'role,user', tagsOutput);
 	    },
 	    userRoleFormatLabel : function(model, labelProperties) {
 		    return toLabel(model, labelProperties);
 		},
     
   		classifierQuery : function(val, labelProperties, tagsOutput){
-  			return resourceQuery(val, 'classifiers', labelProperties, '', tagsOutput);
+  			return resourceQuery(val, 'classifiers/v1', labelProperties, '', tagsOutput);
 	    },
 	    classifierFormatLabel : function(model, labelProperties) {
 		    return toLabel(model, labelProperties);

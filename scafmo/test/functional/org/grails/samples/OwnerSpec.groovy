@@ -9,7 +9,7 @@ import spock.lang.Specification
 
 class OwnerSpec extends Specification implements RestQueries, AuthQueries{
 
-	String REST_URL = "${APP_URL}/owners"
+	String REST_URL = "${APP_URL}/owners/v1"
 	
 	@Shared
 	Long domainId
@@ -34,7 +34,6 @@ class OwnerSpec extends Specification implements RestQueries, AuthQueries{
 				firstName = 'firstName'
 				lastName = 'lastName'
 				telephone = '555451'
-
 			}
 			
 			otherDomainId = response.json.id
@@ -46,7 +45,6 @@ class OwnerSpec extends Specification implements RestQueries, AuthQueries{
 			response.json.firstName == 'firstName'
 			response.json.lastName == 'lastName'
 			response.json.telephone == '555451'
-
 			response.status == HttpStatus.CREATED.value()
 	}
 
@@ -58,7 +56,6 @@ class OwnerSpec extends Specification implements RestQueries, AuthQueries{
 				firstName = 'firstName'
 				lastName = 'lastName'
 				telephone = '555452'
-
 			}
 			
 			domainId = response.json.id
@@ -71,7 +68,6 @@ class OwnerSpec extends Specification implements RestQueries, AuthQueries{
 			response.json.firstName == 'firstName'
 			response.json.lastName == 'lastName'
 			response.json.telephone == '555452'
-
 			response.status == HttpStatus.CREATED.value()
 	}
 	
@@ -89,7 +85,6 @@ class OwnerSpec extends Specification implements RestQueries, AuthQueries{
 			response.json.firstName == 'firstName'
 			response.json.lastName == 'lastName'
 			response.json.telephone == '555452'
-
 			response.status == HttpStatus.OK.value()
 	}
 	
@@ -133,7 +128,6 @@ class OwnerSpec extends Specification implements RestQueries, AuthQueries{
 				lastName = 'lastName'
 				telephone = '555453'
 
-
 			}
 		then: 'Should return updated values'
 			response.json.address == 'address'
@@ -141,7 +135,6 @@ class OwnerSpec extends Specification implements RestQueries, AuthQueries{
 			response.json.firstName == 'firstName'
 			response.json.lastName == 'lastName'
 			response.json.telephone == '555453'
-
 
 			response.status == HttpStatus.OK.value()
 	}
@@ -155,7 +148,6 @@ class OwnerSpec extends Specification implements RestQueries, AuthQueries{
 				lastName = 'lastName'
 				telephone = '555453'
 
-
 			}
 		then: 'Should not find'
 			response.status == HttpStatus.NOT_FOUND.value()
@@ -168,10 +160,9 @@ class OwnerSpec extends Specification implements RestQueries, AuthQueries{
 				lastName = 'lastName'
 				telephone = '555453'
 
-
 			}
 		then: 'Should not find'
-			response.status == HttpStatus.NOT_FOUND.value()
+			response.status == HttpStatus.UNPROCESSABLE_ENTITY.value()
 	}
 	
 	void 'Test Owner list sorting.'() {

@@ -9,7 +9,7 @@ import spock.lang.Specification
 
 class PersonSpec extends Specification implements RestQueries, AuthQueries{
 
-	String REST_URL = "${APP_URL}/persons"
+	String REST_URL = "${APP_URL}/persons/v1"
 	
 	@Shared
 	Long domainId
@@ -31,7 +31,6 @@ class PersonSpec extends Specification implements RestQueries, AuthQueries{
 			response = sendCreateWithData(){
 				firstName = 'firstName'
 				lastName = 'lastName'
-
 			}
 			
 			otherDomainId = response.json.id
@@ -40,7 +39,6 @@ class PersonSpec extends Specification implements RestQueries, AuthQueries{
 		then: 'Should create and return created values'
 			response.json.firstName == 'firstName'
 			response.json.lastName == 'lastName'
-
 			response.status == HttpStatus.CREATED.value()
 	}
 
@@ -49,7 +47,6 @@ class PersonSpec extends Specification implements RestQueries, AuthQueries{
 			response = sendCreateWithData(){
 				firstName = 'firstName'
 				lastName = 'lastName'
-
 			}
 			
 			domainId = response.json.id
@@ -59,7 +56,6 @@ class PersonSpec extends Specification implements RestQueries, AuthQueries{
 			
 			response.json.firstName == 'firstName'
 			response.json.lastName == 'lastName'
-
 			response.status == HttpStatus.CREATED.value()
 	}
 	
@@ -74,7 +70,6 @@ class PersonSpec extends Specification implements RestQueries, AuthQueries{
 			
 			response.json.firstName == 'firstName'
 			response.json.lastName == 'lastName'
-
 			response.status == HttpStatus.OK.value()
 	}
 	
@@ -115,12 +110,10 @@ class PersonSpec extends Specification implements RestQueries, AuthQueries{
 				firstName = 'firstName'
 				lastName = 'lastName'
 
-
 			}
 		then: 'Should return updated values'
 			response.json.firstName == 'firstName'
 			response.json.lastName == 'lastName'
-
 
 			response.status == HttpStatus.OK.value()
 	}
@@ -131,7 +124,6 @@ class PersonSpec extends Specification implements RestQueries, AuthQueries{
 					firstName = 'firstName'
 				lastName = 'lastName'
 
-
 			}
 		then: 'Should not find'
 			response.status == HttpStatus.NOT_FOUND.value()
@@ -141,10 +133,9 @@ class PersonSpec extends Specification implements RestQueries, AuthQueries{
 					firstName = 'firstName'
 				lastName = 'lastName'
 
-
 			}
 		then: 'Should not find'
-			response.status == HttpStatus.NOT_FOUND.value()
+			response.status == HttpStatus.UNPROCESSABLE_ENTITY.value()
 	}
 	
 	void 'Test Person list sorting.'() {

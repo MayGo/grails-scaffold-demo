@@ -34,9 +34,9 @@ describe('visit create page', function() {
   it('after filling all the fields, should be ', function() {
 	expect(page.submitButton.isEnabled()).toBe(false);
 	//Fill the form
-		page.dateEl.sendKeys('18.02.2015')
+		page.dateEl.sendKeys('26.02.2015')
 		page.descriptionEl.sendKeys('description')
-		page.petEl.sendKeys('302Pet 305Wed Feb 18 00:00:00 EET 2015\uE015\n')
+		page.petEl.sendKeys('302Pet 305Thu Feb 26 00:00:00 EET 2015\uE015\n')
 
 
 	expect(page.submitButton.isEnabled()).toBe(true);

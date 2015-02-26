@@ -1,12 +1,13 @@
 package org.grails.samples
 
 import grails.compiler.GrailsCompileStatic
+import grails.gorm.PagedResultList
 import grails.converters.JSON
-import grails.orm.HibernateCriteriaBuilder
-import grails.orm.PagedResultList
 import grails.transaction.Transactional
 import org.codehaus.groovy.grails.web.json.JSONElement
 import org.codehaus.groovy.grails.web.json.JSONObject
+import org.grails.datastore.mapping.query.api.BuildableCriteria
+
 
 //@GrailsCompileStatic
 @Transactional(readOnly = true)
@@ -14,7 +15,7 @@ class PersonSearchService {
 
 	PagedResultList search(Map params) {
 
-		HibernateCriteriaBuilder criteriaBuilder = (HibernateCriteriaBuilder) Person.createCriteria()
+		BuildableCriteria criteriaBuilder = (BuildableCriteria) Person.createCriteria()
 		PagedResultList results = (PagedResultList) criteriaBuilder.list(
 				offset: params.offset,
 				max: params.max,
@@ -26,7 +27,7 @@ class PersonSearchService {
 		return results
 	}
 
-	private void searchCriteria(HibernateCriteriaBuilder builder, Map params) {
+	private void searchCriteria(BuildableCriteria builder, Map params) {
 		String searchString = params.searchString
 		JSONElement filter = params.filter ? JSON.parse(params.filter.toString()) : new JSONObject()
 
@@ -37,13 +38,11 @@ class PersonSearchService {
 				eq('id', filter['id'].toString().toLong())
 			}
 
-
 			if (searchString) {
 				or {
 					eq('id', -1L)
 
-
-					if(searchString.isLong()){
+					if (searchString.isLong()) {
 						eq('id', searchString.toLong())
 					}
 					like('firstName', searchString + '%')

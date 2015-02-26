@@ -9,7 +9,7 @@ import spock.lang.Specification
 
 class ClassifierSpec extends Specification implements RestQueries, AuthQueries{
 
-	String REST_URL = "${APP_URL}/classifiers"
+	String REST_URL = "${APP_URL}/classifiers/v1"
 	
 	@Shared
 	Long domainId
@@ -33,7 +33,6 @@ class ClassifierSpec extends Specification implements RestQueries, AuthQueries{
 				constant = 'constant'
 				description = 'description'
 				propertyname = 'propertyname'
-
 			}
 			
 			otherDomainId = response.json.id
@@ -44,7 +43,6 @@ class ClassifierSpec extends Specification implements RestQueries, AuthQueries{
 			response.json.constant == 'constant'
 			response.json.description == 'description'
 			response.json.propertyname == 'propertyname'
-
 			response.status == HttpStatus.CREATED.value()
 	}
 
@@ -55,7 +53,6 @@ class ClassifierSpec extends Specification implements RestQueries, AuthQueries{
 				constant = 'constant'
 				description = 'description'
 				propertyname = 'propertyname'
-
 			}
 			
 			domainId = response.json.id
@@ -67,7 +64,6 @@ class ClassifierSpec extends Specification implements RestQueries, AuthQueries{
 			response.json.constant == 'constant'
 			response.json.description == 'description'
 			response.json.propertyname == 'propertyname'
-
 			response.status == HttpStatus.CREATED.value()
 	}
 	
@@ -84,7 +80,6 @@ class ClassifierSpec extends Specification implements RestQueries, AuthQueries{
 			response.json.constant == 'constant'
 			response.json.description == 'description'
 			response.json.propertyname == 'propertyname'
-
 			response.status == HttpStatus.OK.value()
 	}
 	
@@ -127,14 +122,12 @@ class ClassifierSpec extends Specification implements RestQueries, AuthQueries{
 				description = 'description'
 				propertyname = 'propertyname'
 
-
 			}
 		then: 'Should return updated values'
 			response.json.classname == 'classname'
 			response.json.constant == 'constant'
 			response.json.description == 'description'
 			response.json.propertyname == 'propertyname'
-
 
 			response.status == HttpStatus.OK.value()
 	}
@@ -147,7 +140,6 @@ class ClassifierSpec extends Specification implements RestQueries, AuthQueries{
 				description = 'description'
 				propertyname = 'propertyname'
 
-
 			}
 		then: 'Should not find'
 			response.status == HttpStatus.NOT_FOUND.value()
@@ -159,10 +151,9 @@ class ClassifierSpec extends Specification implements RestQueries, AuthQueries{
 				description = 'description'
 				propertyname = 'propertyname'
 
-
 			}
 		then: 'Should not find'
-			response.status == HttpStatus.NOT_FOUND.value()
+			response.status == HttpStatus.UNPROCESSABLE_ENTITY.value()
 	}
 	
 	void 'Test Classifier list sorting.'() {

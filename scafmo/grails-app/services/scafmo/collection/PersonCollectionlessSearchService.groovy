@@ -8,7 +8,7 @@ import grails.transaction.Transactional
 import org.codehaus.groovy.grails.web.json.JSONElement
 import org.codehaus.groovy.grails.web.json.JSONObject
 
-@GrailsCompileStatic
+//@GrailsCompileStatic
 @Transactional(readOnly = true)
 class PersonCollectionlessSearchService {
 
@@ -37,17 +37,20 @@ class PersonCollectionlessSearchService {
 				eq('id', filter['id'].toString().toLong())
 			}
 
+
 			if (searchString) {
 				or {
+					eq('id', -1L)
+
 
 					if(searchString.isLong()){
 						eq('id', searchString.toLong())
 					}
+					like('name', searchString + '%')
 
-					if(searchString.isInteger()){
+					if(searchString.isInteger()) {
 						eq('age', searchString.toInteger())
 					}
-					like('name', searchString + '%')
 				}
 			}
 			if (filter['age']) {

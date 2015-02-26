@@ -57,7 +57,7 @@ angular.module('angularDemoApp')
 		        function( response ){
 			       	$scope.pet = angular.extend({}, $scope.pet);
 	     			$scope.pet.visits = response.map(function(item){
-                        return {id:item.id, name:item.id+ ', ' +item.date+ ', ' +item.description};
+                        return {id:item.id, name:item.id+ ', ' +item.description+ ', ' +item.date};
 				    });
 		       	}
 	     	);

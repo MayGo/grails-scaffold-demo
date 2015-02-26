@@ -8,7 +8,7 @@ import grails.transaction.Transactional
 import org.codehaus.groovy.grails.web.json.JSONElement
 import org.codehaus.groovy.grails.web.json.JSONObject
 
-@GrailsCompileStatic
+//@GrailsCompileStatic
 @Transactional(readOnly = true)
 class PetSearchService {
 
@@ -37,18 +37,24 @@ class PetSearchService {
 				eq('id', filter['id'].toString().toLong())
 			}
 
+
 			if (searchString) {
 				or {
+					eq('id', -1L)
+
 
 					if(searchString.isLong()){
 						eq('id', searchString.toLong())
 					}
-					// no type defined for birthDate 
 					like('name', searchString + '%')
+					// no type defined for birthDate 
 				}
 			}
+
 			if (filter['birthDate']) {
-				between('birthDate', filter['birthDate'], filter['birthDate'])
+				String inputFormat = "yyyy-MM-dd HH:mm:ss.SSSZ"
+				Date d = Date.parse(inputFormat, filter['birthDate'].toString())
+				between('birthDate', d, d)
 			}
 			if (filter['name']) {
 				ilike('name', "${filter['name']}%")

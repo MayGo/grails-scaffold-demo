@@ -36,7 +36,7 @@ describe('testOther create page', function() {
   it('after filling all the fields, should be ', function() {
 	expect(page.submitButton.isEnabled()).toBe(false);
 	//Fill the form
-		page.testDateEl.sendKeys('17.02.2015')
+		page.testDateEl.sendKeys('18.02.2015')
 		page.testEnumEl.sendKeys('TEST_1')
 
 

@@ -4,11 +4,11 @@ import spock.lang.Shared
 import spock.lang.Ignore
 import org.springframework.http.HttpStatus
 import defpackage.RestQueries
+import defpackage.AuthQueries
 import spock.lang.Specification
 
-class TaskSpec extends Specification implements RestQueries{
+class TaskSpec extends Specification implements RestQueries, AuthQueries{
 
-	
 	String REST_URL = "${APP_URL}/tasks"
 	
 	@Shared
@@ -29,10 +29,10 @@ class TaskSpec extends Specification implements RestQueries{
 	void 'Test creating another Task instance.'() {//This is for creating some data to test list sorting
 		when: 'Create task'
 			response = sendCreateWithData(){
-				deadline = '2015-02-17 10:05:22.214+0200'
+				deadline = '2015-02-18 00:00:00.000+0200'
 				details = 'details'
 				status = 'Open'
-				summary = 'summary2'
+				summary = 'Work Summary 151'
 				timeSpent = 0
 
 			}
@@ -41,10 +41,10 @@ class TaskSpec extends Specification implements RestQueries{
 			
 			
 		then: 'Should create and return created values'
-			response.json.deadline == '2015-02-17T08:05:22Z'
+			response.json.deadline == '2015-02-17T22:00:00Z'
 			response.json.details == 'details'
 			response.json.status == 'Open'
-			response.json.summary == 'summary2'
+			response.json.summary == 'Work Summary 151'
 			response.json.timeSpent == 0
 
 			response.status == HttpStatus.CREATED.value()
@@ -53,10 +53,10 @@ class TaskSpec extends Specification implements RestQueries{
 	void 'Test creating Task instance.'() {
 		when: 'Create task'
 			response = sendCreateWithData(){
-				deadline = '2015-02-17 10:05:22.242+0200'
+				deadline = '2015-02-18 00:00:00.000+0200'
 				details = 'details'
 				status = 'Open'
-				summary = 'summary3'
+				summary = 'Work Summary 152'
 				timeSpent = 0
 
 			}
@@ -66,10 +66,10 @@ class TaskSpec extends Specification implements RestQueries{
 			
 		then: 'Should create and return created values'
 			
-			response.json.deadline == '2015-02-17T08:05:22Z'
+			response.json.deadline == '2015-02-17T22:00:00Z'
 			response.json.details == 'details'
 			response.json.status == 'Open'
-			response.json.summary == 'summary3'
+			response.json.summary == 'Work Summary 152'
 			response.json.timeSpent == 0
 
 			response.status == HttpStatus.CREATED.value()
@@ -84,10 +84,10 @@ class TaskSpec extends Specification implements RestQueries{
 			response = readDomainItemWithParams(domainId.toString(), "")
 		then: 'Should return correct values'
 			
-			response.json.deadline == '2015-02-17T08:05:22Z'
+			response.json.deadline == '2015-02-17T22:00:00Z'
 			response.json.details == 'details'
 			response.json.status == 'Open'
-			response.json.summary == 'summary3'
+			response.json.summary == 'Work Summary 152'
 			response.json.timeSpent == 0
 
 			response.status == HttpStatus.OK.value()
@@ -127,19 +127,19 @@ class TaskSpec extends Specification implements RestQueries{
 	void 'Test updating Task instance.'() {
 		when: 'Update task'
 			response = sendUpdateWithData(domainId.toString()){
-				deadline = '2015-02-17 10:05:22.246+0200'
+				deadline = '2015-02-18 00:00:00.000+0200'
 				details = 'details'
 				status = 'Open'
-				summary = 'summary4'
+				summary = 'Work Summary 153'
 				timeSpent = 0
 
 
 			}
 		then: 'Should return updated values'
-			response.json.deadline == '2015-02-17T08:05:22Z'
+			response.json.deadline == '2015-02-17T22:00:00Z'
 			response.json.details == 'details'
 			response.json.status == 'Open'
-			response.json.summary == 'summary4'
+			response.json.summary == 'Work Summary 153'
 			response.json.timeSpent == 0
 
 
@@ -149,10 +149,10 @@ class TaskSpec extends Specification implements RestQueries{
 	void 'Test updating unexisting Task instance.'() {
 		when: 'Update unexisting task'
 			response = sendUpdateWithData('9999999999'){
-					deadline = '2015-02-17 10:05:22.246+0200'
+					deadline = '2015-02-18 00:00:00.000+0200'
 				details = 'details'
 				status = 'Open'
-				summary = 'summary4'
+				summary = 'Work Summary 153'
 				timeSpent = 0
 
 
@@ -162,10 +162,10 @@ class TaskSpec extends Specification implements RestQueries{
 			
 		when: 'Update unexisting task id not a number'
 			response = sendUpdateWithData('nonexistent'){
-					deadline = '2015-02-17 10:05:22.246+0200'
+					deadline = '2015-02-18 00:00:00.000+0200'
 				details = 'details'
 				status = 'Open'
-				summary = 'summary4'
+				summary = 'Work Summary 153'
 				timeSpent = 0
 
 
@@ -200,9 +200,7 @@ class TaskSpec extends Specification implements RestQueries{
 	}
 	
 	
-	@Ignoredeadline
-<org.example.pomodoro.Task@59f59a0a summary=summary4 details=details status=Open dateCreated=Tue Feb 17 10:05:22 EET 2015 deadline=Tue Feb 17 10:05:22 EET 2015 timeSpent=0 errors=grails.validation.ValidationErrors: 0 errors id=null version=null tags=null $changedProperties=null>
- // have to have more then maxLimit items
+	 // have to have more then maxLimit items
 	void 'Test Task list max property.'() {
 		given:
 			int maxLimit = 100// Set real max items limit
@@ -256,7 +254,7 @@ class TaskSpec extends Specification implements RestQueries{
 	void 'Test querying in Task list by real searchString.'() {
 		when: 'Get task list by searchString'
 			response = queryListWithUrlVariables('order=desc&sort=id&searchString={searchString}',
-					[searchString: "Tue Feb 17 10:05:22 EET 2015"])
+					[searchString: "details"])
 
 		then: 'Should at least last inserted item'
 			response.json[0].id == domainId
@@ -285,10 +283,10 @@ class TaskSpec extends Specification implements RestQueries{
 		where:
 			jsonVal 	        || respSize
 			'{}'                || 10
-			'{"deadline":"2015-02-17 10:05:22.246+0200"}' || 10 
+			'{"deadline":"2015-02-18 00:00:00.000+0200"}' || 10 
 			'{"details":"details"}' || 10 
 			'{"status":"Open"}' || 10 
-			'{"summary":"summary4"}' || 1 
+//Can't predict 'size'			'{"summary":"Work Summary 153"}' || 1 
 			'{"timeSpent":0}' || 10 
 
 	}

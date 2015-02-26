@@ -8,7 +8,7 @@ import grails.transaction.Transactional
 import org.codehaus.groovy.grails.web.json.JSONElement
 import org.codehaus.groovy.grails.web.json.JSONObject
 
-@GrailsCompileStatic
+//@GrailsCompileStatic
 @Transactional(readOnly = true)
 class TestOtherSearchService {
 
@@ -37,14 +37,19 @@ class TestOtherSearchService {
 				eq('id', filter['id'].toString().toLong())
 			}
 
+
 			if (searchString) {
 				or {
+					eq('id', -1L)
+
 
 					if(searchString.isLong()){
 						eq('id', searchString.toLong())
 					}
 
-					eq('booleanNullable', searchString.toBoolean())
+					if(searchString.equalsIgnoreCase("false") || searchString.equalsIgnoreCase("true")) {
+						eq('booleanNullable', searchString.toBoolean())
+					}
 					
 					// no type defined for testDate 
 					// no type defined for testEnum 
@@ -53,8 +58,11 @@ class TestOtherSearchService {
 			if (filter['booleanNullable']) {
 				eq('booleanNullable', filter['booleanNullable'].toString().toBoolean())
 			}
+
 			if (filter['testDate']) {
-				between('testDate', filter['testDate'], filter['testDate'])
+				String inputFormat = "yyyy-MM-dd HH:mm:ss.SSSZ"
+				Date d = Date.parse(inputFormat, filter['testDate'].toString())
+				between('testDate', d, d)
 			}
 			if (filter['testEnum']) {
 				//enum

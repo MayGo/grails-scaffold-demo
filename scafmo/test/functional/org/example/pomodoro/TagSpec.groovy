@@ -4,11 +4,11 @@ import spock.lang.Shared
 import spock.lang.Ignore
 import org.springframework.http.HttpStatus
 import defpackage.RestQueries
+import defpackage.AuthQueries
 import spock.lang.Specification
 
-class TagSpec extends Specification implements RestQueries{
+class TagSpec extends Specification implements RestQueries, AuthQueries{
 
-	
 	String REST_URL = "${APP_URL}/tags"
 	
 	@Shared
@@ -29,7 +29,7 @@ class TagSpec extends Specification implements RestQueries{
 	void 'Test creating another Tag instance.'() {//This is for creating some data to test list sorting
 		when: 'Create tag'
 			response = sendCreateWithData(){
-				name = 'name2'
+				name = 'Work Tag 151'
 
 			}
 			
@@ -37,7 +37,7 @@ class TagSpec extends Specification implements RestQueries{
 			
 			
 		then: 'Should create and return created values'
-			response.json.name == 'name2'
+			response.json.name == 'Work Tag 151'
 
 			response.status == HttpStatus.CREATED.value()
 	}
@@ -45,7 +45,7 @@ class TagSpec extends Specification implements RestQueries{
 	void 'Test creating Tag instance.'() {
 		when: 'Create tag'
 			response = sendCreateWithData(){
-				name = 'name3'
+				name = 'Work Tag 152'
 
 			}
 			
@@ -54,7 +54,7 @@ class TagSpec extends Specification implements RestQueries{
 			
 		then: 'Should create and return created values'
 			
-			response.json.name == 'name3'
+			response.json.name == 'Work Tag 152'
 
 			response.status == HttpStatus.CREATED.value()
 	}
@@ -68,7 +68,7 @@ class TagSpec extends Specification implements RestQueries{
 			response = readDomainItemWithParams(domainId.toString(), "")
 		then: 'Should return correct values'
 			
-			response.json.name == 'name3'
+			response.json.name == 'Work Tag 152'
 
 			response.status == HttpStatus.OK.value()
 	}
@@ -107,12 +107,12 @@ class TagSpec extends Specification implements RestQueries{
 	void 'Test updating Tag instance.'() {
 		when: 'Update tag'
 			response = sendUpdateWithData(domainId.toString()){
-				name = 'name4'
+				name = 'Work Tag 153'
 
 
 			}
 		then: 'Should return updated values'
-			response.json.name == 'name4'
+			response.json.name == 'Work Tag 153'
 
 
 			response.status == HttpStatus.OK.value()
@@ -121,7 +121,7 @@ class TagSpec extends Specification implements RestQueries{
 	void 'Test updating unexisting Tag instance.'() {
 		when: 'Update unexisting tag'
 			response = sendUpdateWithData('9999999999'){
-					name = 'name4'
+					name = 'Work Tag 153'
 
 
 			}
@@ -130,7 +130,7 @@ class TagSpec extends Specification implements RestQueries{
 			
 		when: 'Update unexisting tag id not a number'
 			response = sendUpdateWithData('nonexistent'){
-					name = 'name4'
+					name = 'Work Tag 153'
 
 
 			}
@@ -164,9 +164,7 @@ class TagSpec extends Specification implements RestQueries{
 	}
 	
 	
-	@Ignorename
-<org.example.pomodoro.Tag@25c6a9de name=name4 errors=grails.validation.ValidationErrors: 0 errors id=null version=null tasks=null $changedProperties=null>
- // have to have more then maxLimit items
+	 // have to have more then maxLimit items
 	void 'Test Tag list max property.'() {
 		given:
 			int maxLimit = 100// Set real max items limit
@@ -220,7 +218,7 @@ class TagSpec extends Specification implements RestQueries{
 	void 'Test querying in Tag list by real searchString.'() {
 		when: 'Get tag list by searchString'
 			response = queryListWithUrlVariables('order=desc&sort=id&searchString={searchString}',
-					[searchString: "name4"])
+					[searchString: "Work Tag 153"])
 
 		then: 'Should at least last inserted item'
 			response.json[0].id == domainId
@@ -249,7 +247,7 @@ class TagSpec extends Specification implements RestQueries{
 		where:
 			jsonVal 	        || respSize
 			'{}'                || 10
-			'{"name":"name4"}' || 1 
+//Can't predict 'size'			'{"name":"Work Tag 153"}' || 1 
 
 	}
 	

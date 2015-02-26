@@ -32,7 +32,7 @@ describe('tag create page', function() {
   it('after filling all the fields, should be ', function() {
 	expect(page.submitButton.isEnabled()).toBe(false);
 	//Fill the form
-		page.nameEl.sendKeys('name3')
+		page.nameEl.sendKeys('Work Tag 152')
 
 
 	expect(page.submitButton.isEnabled()).toBe(true);

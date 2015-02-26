@@ -4,11 +4,11 @@ import spock.lang.Shared
 import spock.lang.Ignore
 import org.springframework.http.HttpStatus
 import defpackage.RestQueries
+import defpackage.AuthQueries
 import spock.lang.Specification
 
-class SpecialitySpec extends Specification implements RestQueries{
+class SpecialitySpec extends Specification implements RestQueries, AuthQueries{
 
-	
 	String REST_URL = "${APP_URL}/specialitys"
 	
 	@Shared
@@ -29,7 +29,7 @@ class SpecialitySpec extends Specification implements RestQueries{
 	void 'Test creating another Speciality instance.'() {//This is for creating some data to test list sorting
 		when: 'Create speciality'
 			response = sendCreateWithData(){
-				name = 'name1'
+				name = 'Speciality 151'
 
 			}
 			
@@ -37,7 +37,7 @@ class SpecialitySpec extends Specification implements RestQueries{
 			
 			
 		then: 'Should create and return created values'
-			response.json.name == 'name1'
+			response.json.name == 'Speciality 151'
 
 			response.status == HttpStatus.CREATED.value()
 	}
@@ -45,7 +45,7 @@ class SpecialitySpec extends Specification implements RestQueries{
 	void 'Test creating Speciality instance.'() {
 		when: 'Create speciality'
 			response = sendCreateWithData(){
-				name = 'name2'
+				name = 'Speciality 152'
 
 			}
 			
@@ -54,7 +54,7 @@ class SpecialitySpec extends Specification implements RestQueries{
 			
 		then: 'Should create and return created values'
 			
-			response.json.name == 'name2'
+			response.json.name == 'Speciality 152'
 
 			response.status == HttpStatus.CREATED.value()
 	}
@@ -68,7 +68,7 @@ class SpecialitySpec extends Specification implements RestQueries{
 			response = readDomainItemWithParams(domainId.toString(), "")
 		then: 'Should return correct values'
 			
-			response.json.name == 'name2'
+			response.json.name == 'Speciality 152'
 
 			response.status == HttpStatus.OK.value()
 	}
@@ -107,12 +107,12 @@ class SpecialitySpec extends Specification implements RestQueries{
 	void 'Test updating Speciality instance.'() {
 		when: 'Update speciality'
 			response = sendUpdateWithData(domainId.toString()){
-				name = 'name3'
+				name = 'Speciality 153'
 
 
 			}
 		then: 'Should return updated values'
-			response.json.name == 'name3'
+			response.json.name == 'Speciality 153'
 
 
 			response.status == HttpStatus.OK.value()
@@ -121,7 +121,7 @@ class SpecialitySpec extends Specification implements RestQueries{
 	void 'Test updating unexisting Speciality instance.'() {
 		when: 'Update unexisting speciality'
 			response = sendUpdateWithData('9999999999'){
-					name = 'name3'
+					name = 'Speciality 153'
 
 
 			}
@@ -130,7 +130,7 @@ class SpecialitySpec extends Specification implements RestQueries{
 			
 		when: 'Update unexisting speciality id not a number'
 			response = sendUpdateWithData('nonexistent'){
-					name = 'name3'
+					name = 'Speciality 153'
 
 
 			}
@@ -164,9 +164,7 @@ class SpecialitySpec extends Specification implements RestQueries{
 	}
 	
 	
-	@Ignorename
-<org.grails.samples.Speciality@7902b006 name=name3 errors=grails.validation.ValidationErrors: 0 errors id=null version=null $changedProperties=null>
- // have to have more then maxLimit items
+	 // have to have more then maxLimit items
 	void 'Test Speciality list max property.'() {
 		given:
 			int maxLimit = 100// Set real max items limit
@@ -220,7 +218,7 @@ class SpecialitySpec extends Specification implements RestQueries{
 	void 'Test querying in Speciality list by real searchString.'() {
 		when: 'Get speciality list by searchString'
 			response = queryListWithUrlVariables('order=desc&sort=id&searchString={searchString}',
-					[searchString: "name3"])
+					[searchString: "Speciality 153"])
 
 		then: 'Should at least last inserted item'
 			response.json[0].id == domainId
@@ -249,7 +247,7 @@ class SpecialitySpec extends Specification implements RestQueries{
 		where:
 			jsonVal 	        || respSize
 			'{}'                || 10
-			'{"name":"name3"}' || 1 
+//Can't predict 'size'			'{"name":"Speciality 153"}' || 1 
 
 	}
 	

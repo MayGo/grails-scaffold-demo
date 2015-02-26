@@ -34,7 +34,7 @@ describe('divisionCollection create page', function() {
   it('after filling all the fields, should be ', function() {
 	expect(page.submitButton.isEnabled()).toBe(false);
 	//Fill the form
-		page.nameEl.sendKeys('name2')
+		page.nameEl.sendKeys('Division152')
 
 
 	expect(page.submitButton.isEnabled()).toBe(true);

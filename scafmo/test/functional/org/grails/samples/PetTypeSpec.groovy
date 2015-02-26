@@ -4,11 +4,11 @@ import spock.lang.Shared
 import spock.lang.Ignore
 import org.springframework.http.HttpStatus
 import defpackage.RestQueries
+import defpackage.AuthQueries
 import spock.lang.Specification
 
-class PetTypeSpec extends Specification implements RestQueries{
+class PetTypeSpec extends Specification implements RestQueries, AuthQueries{
 
-	
 	String REST_URL = "${APP_URL}/pettypes"
 	
 	@Shared
@@ -29,7 +29,7 @@ class PetTypeSpec extends Specification implements RestQueries{
 	void 'Test creating another PetType instance.'() {//This is for creating some data to test list sorting
 		when: 'Create petType'
 			response = sendCreateWithData(){
-				name = 'name1'
+				name = 'Type 454'
 
 			}
 			
@@ -37,7 +37,7 @@ class PetTypeSpec extends Specification implements RestQueries{
 			
 			
 		then: 'Should create and return created values'
-			response.json.name == 'name1'
+			response.json.name == 'Type 454'
 
 			response.status == HttpStatus.CREATED.value()
 	}
@@ -45,7 +45,7 @@ class PetTypeSpec extends Specification implements RestQueries{
 	void 'Test creating PetType instance.'() {
 		when: 'Create petType'
 			response = sendCreateWithData(){
-				name = 'name2'
+				name = 'Type 455'
 
 			}
 			
@@ -54,7 +54,7 @@ class PetTypeSpec extends Specification implements RestQueries{
 			
 		then: 'Should create and return created values'
 			
-			response.json.name == 'name2'
+			response.json.name == 'Type 455'
 
 			response.status == HttpStatus.CREATED.value()
 	}
@@ -68,7 +68,7 @@ class PetTypeSpec extends Specification implements RestQueries{
 			response = readDomainItemWithParams(domainId.toString(), "")
 		then: 'Should return correct values'
 			
-			response.json.name == 'name2'
+			response.json.name == 'Type 455'
 
 			response.status == HttpStatus.OK.value()
 	}
@@ -107,12 +107,12 @@ class PetTypeSpec extends Specification implements RestQueries{
 	void 'Test updating PetType instance.'() {
 		when: 'Update petType'
 			response = sendUpdateWithData(domainId.toString()){
-				name = 'name3'
+				name = 'Type 456'
 
 
 			}
 		then: 'Should return updated values'
-			response.json.name == 'name3'
+			response.json.name == 'Type 456'
 
 
 			response.status == HttpStatus.OK.value()
@@ -121,7 +121,7 @@ class PetTypeSpec extends Specification implements RestQueries{
 	void 'Test updating unexisting PetType instance.'() {
 		when: 'Update unexisting petType'
 			response = sendUpdateWithData('9999999999'){
-					name = 'name3'
+					name = 'Type 456'
 
 
 			}
@@ -130,7 +130,7 @@ class PetTypeSpec extends Specification implements RestQueries{
 			
 		when: 'Update unexisting petType id not a number'
 			response = sendUpdateWithData('nonexistent'){
-					name = 'name3'
+					name = 'Type 456'
 
 
 			}
@@ -164,9 +164,7 @@ class PetTypeSpec extends Specification implements RestQueries{
 	}
 	
 	
-	@Ignorename
-<org.grails.samples.PetType@6d95b51d name=name3 errors=grails.validation.ValidationErrors: 0 errors id=null version=null $changedProperties=null>
- // have to have more then maxLimit items
+	 // have to have more then maxLimit items
 	void 'Test PetType list max property.'() {
 		given:
 			int maxLimit = 100// Set real max items limit
@@ -220,7 +218,7 @@ class PetTypeSpec extends Specification implements RestQueries{
 	void 'Test querying in PetType list by real searchString.'() {
 		when: 'Get petType list by searchString'
 			response = queryListWithUrlVariables('order=desc&sort=id&searchString={searchString}',
-					[searchString: "name3"])
+					[searchString: "Type 456"])
 
 		then: 'Should at least last inserted item'
 			response.json[0].id == domainId
@@ -249,7 +247,7 @@ class PetTypeSpec extends Specification implements RestQueries{
 		where:
 			jsonVal 	        || respSize
 			'{}'                || 10
-			'{"name":"name3"}' || 1 
+//Can't predict 'size'			'{"name":"Type 456"}' || 1 
 
 	}
 	

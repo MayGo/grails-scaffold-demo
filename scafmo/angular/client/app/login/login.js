@@ -5,6 +5,7 @@ angular.module('angularDemoApp')
     $stateProvider
       .state('login', {
         url: '/login',
+        templateUrl: 'app/login/login.html',
         controller: 'LoginController'
       });
   });

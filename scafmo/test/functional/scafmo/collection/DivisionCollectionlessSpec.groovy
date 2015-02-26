@@ -4,11 +4,11 @@ import spock.lang.Shared
 import spock.lang.Ignore
 import org.springframework.http.HttpStatus
 import defpackage.RestQueries
+import defpackage.AuthQueries
 import spock.lang.Specification
 
-class DivisionCollectionlessSpec extends Specification implements RestQueries{
+class DivisionCollectionlessSpec extends Specification implements RestQueries, AuthQueries{
 
-	
 	String REST_URL = "${APP_URL}/divisioncollectionlesss"
 	
 	@Shared
@@ -29,8 +29,8 @@ class DivisionCollectionlessSpec extends Specification implements RestQueries{
 	void 'Test creating another DivisionCollectionless instance.'() {//This is for creating some data to test list sorting
 		when: 'Create divisionCollectionless'
 			response = sendCreateWithData(){
-				name = 'name1'
-				headDivision = null
+				name = 'Division151'
+				headDivision = 1
 
 			}
 			
@@ -38,8 +38,8 @@ class DivisionCollectionlessSpec extends Specification implements RestQueries{
 			
 			
 		then: 'Should create and return created values'
-			response.json.name == 'name1'
-			response.json.headDivision?.id == null
+			response.json.name == 'Division151'
+			response.json.headDivision?.id == 1
 
 			response.status == HttpStatus.CREATED.value()
 	}
@@ -47,8 +47,8 @@ class DivisionCollectionlessSpec extends Specification implements RestQueries{
 	void 'Test creating DivisionCollectionless instance.'() {
 		when: 'Create divisionCollectionless'
 			response = sendCreateWithData(){
-				name = 'name2'
-				headDivision = null
+				name = 'Division152'
+				headDivision = 1
 
 			}
 			
@@ -57,8 +57,8 @@ class DivisionCollectionlessSpec extends Specification implements RestQueries{
 			
 		then: 'Should create and return created values'
 			
-			response.json.name == 'name2'
-			response.json.headDivision?.id == null
+			response.json.name == 'Division152'
+			response.json.headDivision?.id == 1
 
 			response.status == HttpStatus.CREATED.value()
 	}
@@ -72,8 +72,8 @@ class DivisionCollectionlessSpec extends Specification implements RestQueries{
 			response = readDomainItemWithParams(domainId.toString(), "")
 		then: 'Should return correct values'
 			
-			response.json.name == 'name2'
-			response.json.headDivision?.id == null
+			response.json.name == 'Division152'
+			response.json.headDivision?.id == 1
 
 			response.status == HttpStatus.OK.value()
 	}
@@ -112,14 +112,14 @@ class DivisionCollectionlessSpec extends Specification implements RestQueries{
 	void 'Test updating DivisionCollectionless instance.'() {
 		when: 'Update divisionCollectionless'
 			response = sendUpdateWithData(domainId.toString()){
-				name = 'name3'
-				headDivision = null
+				name = 'Division153'
+				headDivision = 1
 
 
 			}
 		then: 'Should return updated values'
-			response.json.name == 'name3'
-			response.json.headDivision?.id == null
+			response.json.name == 'Division153'
+			response.json.headDivision?.id == 1
 
 
 			response.status == HttpStatus.OK.value()
@@ -128,8 +128,8 @@ class DivisionCollectionlessSpec extends Specification implements RestQueries{
 	void 'Test updating unexisting DivisionCollectionless instance.'() {
 		when: 'Update unexisting divisionCollectionless'
 			response = sendUpdateWithData('9999999999'){
-					name = 'name3'
-				headDivision = null
+					name = 'Division153'
+				headDivision = 1
 
 
 			}
@@ -138,8 +138,8 @@ class DivisionCollectionlessSpec extends Specification implements RestQueries{
 			
 		when: 'Update unexisting divisionCollectionless id not a number'
 			response = sendUpdateWithData('nonexistent'){
-					name = 'name3'
-				headDivision = null
+					name = 'Division153'
+				headDivision = 1
 
 
 			}
@@ -173,9 +173,7 @@ class DivisionCollectionlessSpec extends Specification implements RestQueries{
 	}
 	
 	
-	@Ignorename
-<scafmo.collection.DivisionCollectionless@c140e6b7 name=name3 headDivision=null errors=grails.validation.ValidationErrors: 0 errors id=null version=null $changedProperties=null>
- // have to have more then maxLimit items
+	 // have to have more then maxLimit items
 	void 'Test DivisionCollectionless list max property.'() {
 		given:
 			int maxLimit = 100// Set real max items limit
@@ -229,7 +227,7 @@ class DivisionCollectionlessSpec extends Specification implements RestQueries{
 	void 'Test querying in DivisionCollectionless list by real searchString.'() {
 		when: 'Get divisionCollectionless list by searchString'
 			response = queryListWithUrlVariables('order=desc&sort=id&searchString={searchString}',
-					[searchString: "name3"])
+					[searchString: "Division153"])
 
 		then: 'Should at least last inserted item'
 			response.json[0].id == domainId
@@ -258,9 +256,9 @@ class DivisionCollectionlessSpec extends Specification implements RestQueries{
 		where:
 			jsonVal 	        || respSize
 			'{}'                || 10
-			'{"name":"name3"}' || 1 
-			'{"headDivision":null}' || 3 
-			'{"headDivisions":[null]}' || 3 
+			'{"name":"Division153"}' || 1 
+			'{"headDivision":1}' || 2 
+			'{"headDivisions":[1]}' || 2 
 
 	}
 	

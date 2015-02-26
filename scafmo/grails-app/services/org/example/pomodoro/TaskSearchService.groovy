@@ -8,7 +8,7 @@ import grails.transaction.Transactional
 import org.codehaus.groovy.grails.web.json.JSONElement
 import org.codehaus.groovy.grails.web.json.JSONObject
 
-@GrailsCompileStatic
+//@GrailsCompileStatic
 @Transactional(readOnly = true)
 class TaskSearchService {
 
@@ -37,19 +37,25 @@ class TaskSearchService {
 				eq('id', filter['id'].toString().toLong())
 			}
 
+
 			if (searchString) {
 				or {
+					eq('id', -1L)
+
 
 					if(searchString.isLong()){
 						eq('id', searchString.toLong())
 					}
-					// no type defined for deadline 
 					like('details', searchString + '%')
 					like('status', searchString + '%')
+					like('summary', searchString + '%')
 				}
 			}
+
 			if (filter['deadline']) {
-				between('deadline', filter['deadline'], filter['deadline'])
+				String inputFormat = "yyyy-MM-dd HH:mm:ss.SSSZ"
+				Date d = Date.parse(inputFormat, filter['deadline'].toString())
+				between('deadline', d, d)
 			}
 			if (filter['details']) {
 				ilike('details', "${filter['details']}%")

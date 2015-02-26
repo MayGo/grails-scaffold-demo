@@ -50,3 +50,30 @@ describe('testNumber create page', function() {
   it('after filling all the fields, should be ', function() {
 	expect(page.submitButton.isEnabled()).toBe(false);
 	//Fill the form
+		page.doubleNrEl.sendKeys('123.123')
+		page.floatNrEl.sendKeys('123.123')
+		page.floatNrScaleEl.sendKeys('2.34')
+		page.integerNrEl.sendKeys('303')
+		page.integerNrInListEl.sendKeys('3')
+		page.integerNrMaxEl.sendKeys('2')
+		page.integerNrMinEl.sendKeys('3')
+		page.integerNrNotEqualEl.sendKeys('2')
+		page.integerNrRangeEl.sendKeys('19')
+		page.integerNrUniqueEl.sendKeys('304')
+		page.longNrEl.sendKeys('4')
+
+
+	expect(page.submitButton.isEnabled()).toBe(true);
+	page.submitButton.isEnabled().then(function(enabled){
+		if(enabled){
+			page.submitButton.click();
+			expect(browser.getCurrentUrl()).toContain("/#/app/testNumber/view/1");
+		}else{
+			console.log("(testNumber).Submit button not enabled. Not testing submiting.")
+		}
+	});
+
+  });
+  
+  
+});

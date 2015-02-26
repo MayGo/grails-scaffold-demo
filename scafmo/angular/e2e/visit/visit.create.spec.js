@@ -34,3 +34,22 @@ describe('visit create page', function() {
   it('after filling all the fields, should be ', function() {
 	expect(page.submitButton.isEnabled()).toBe(false);
 	//Fill the form
+		page.dateEl.sendKeys('18.02.2015')
+		page.descriptionEl.sendKeys('description')
+		page.petEl.sendKeys('302Pet 305Wed Feb 18 00:00:00 EET 2015\uE015\n')
+
+
+	expect(page.submitButton.isEnabled()).toBe(true);
+	page.submitButton.isEnabled().then(function(enabled){
+		if(enabled){
+			page.submitButton.click();
+			expect(browser.getCurrentUrl()).toContain("/#/app/visit/view/1");
+		}else{
+			console.log("(visit).Submit button not enabled. Not testing submiting.")
+		}
+	});
+
+  });
+  
+  
+});

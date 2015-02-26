@@ -38,3 +38,23 @@ describe('pet create page', function() {
   it('after filling all the fields, should be ', function() {
 	expect(page.submitButton.isEnabled()).toBe(false);
 	//Fill the form
+		page.birthDateEl.sendKeys('18.02.2015')
+		page.nameEl.sendKeys('Pet 302')
+		page.typeEl.sendKeys('Type 452\uE015\n')
+		page.ownerEl.sendKeys('752addresscityfirstName\uE015\n')
+
+
+	expect(page.submitButton.isEnabled()).toBe(true);
+	page.submitButton.isEnabled().then(function(enabled){
+		if(enabled){
+			page.submitButton.click();
+			expect(browser.getCurrentUrl()).toContain("/#/app/pet/view/1");
+		}else{
+			console.log("(pet).Submit button not enabled. Not testing submiting.")
+		}
+	});
+
+  });
+  
+  
+});

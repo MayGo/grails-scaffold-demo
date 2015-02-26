@@ -4,11 +4,11 @@ import spock.lang.Shared
 import spock.lang.Ignore
 import org.springframework.http.HttpStatus
 import defpackage.RestQueries
+import defpackage.AuthQueries
 import spock.lang.Specification
 
-class RoleSpec extends Specification implements RestQueries{
+class RoleSpec extends Specification implements RestQueries, AuthQueries{
 
-	
 	String REST_URL = "${APP_URL}/roles"
 	
 	@Shared
@@ -29,7 +29,7 @@ class RoleSpec extends Specification implements RestQueries{
 	void 'Test creating another Role instance.'() {//This is for creating some data to test list sorting
 		when: 'Create role'
 			response = sendCreateWithData(){
-				authority = 'authority1'
+				authority = 'ROLE_301'
 
 			}
 			
@@ -37,7 +37,7 @@ class RoleSpec extends Specification implements RestQueries{
 			
 			
 		then: 'Should create and return created values'
-			response.json.authority == 'authority1'
+			response.json.authority == 'ROLE_301'
 
 			response.status == HttpStatus.CREATED.value()
 	}
@@ -45,7 +45,7 @@ class RoleSpec extends Specification implements RestQueries{
 	void 'Test creating Role instance.'() {
 		when: 'Create role'
 			response = sendCreateWithData(){
-				authority = 'authority2'
+				authority = 'ROLE_302'
 
 			}
 			
@@ -54,7 +54,7 @@ class RoleSpec extends Specification implements RestQueries{
 			
 		then: 'Should create and return created values'
 			
-			response.json.authority == 'authority2'
+			response.json.authority == 'ROLE_302'
 
 			response.status == HttpStatus.CREATED.value()
 	}
@@ -68,7 +68,7 @@ class RoleSpec extends Specification implements RestQueries{
 			response = readDomainItemWithParams(domainId.toString(), "")
 		then: 'Should return correct values'
 			
-			response.json.authority == 'authority2'
+			response.json.authority == 'ROLE_302'
 
 			response.status == HttpStatus.OK.value()
 	}
@@ -107,12 +107,12 @@ class RoleSpec extends Specification implements RestQueries{
 	void 'Test updating Role instance.'() {
 		when: 'Update role'
 			response = sendUpdateWithData(domainId.toString()){
-				authority = 'authority3'
+				authority = 'ROLE_303'
 
 
 			}
 		then: 'Should return updated values'
-			response.json.authority == 'authority3'
+			response.json.authority == 'ROLE_303'
 
 
 			response.status == HttpStatus.OK.value()
@@ -121,7 +121,7 @@ class RoleSpec extends Specification implements RestQueries{
 	void 'Test updating unexisting Role instance.'() {
 		when: 'Update unexisting role'
 			response = sendUpdateWithData('9999999999'){
-					authority = 'authority3'
+					authority = 'ROLE_303'
 
 
 			}
@@ -130,7 +130,7 @@ class RoleSpec extends Specification implements RestQueries{
 			
 		when: 'Update unexisting role id not a number'
 			response = sendUpdateWithData('nonexistent'){
-					authority = 'authority3'
+					authority = 'ROLE_303'
 
 
 			}
@@ -164,9 +164,7 @@ class RoleSpec extends Specification implements RestQueries{
 	}
 	
 	
-	@Ignoreauthority
-<scafmo.security.Role@6415112c authority=authority3 errors=grails.validation.ValidationErrors: 0 errors id=null version=null $changedProperties=null>
- // have to have more then maxLimit items
+	 // have to have more then maxLimit items
 	void 'Test Role list max property.'() {
 		given:
 			int maxLimit = 100// Set real max items limit
@@ -220,7 +218,7 @@ class RoleSpec extends Specification implements RestQueries{
 	void 'Test querying in Role list by real searchString.'() {
 		when: 'Get role list by searchString'
 			response = queryListWithUrlVariables('order=desc&sort=id&searchString={searchString}',
-					[searchString: "authority3"])
+					[searchString: "ROLE_303"])
 
 		then: 'Should at least last inserted item'
 			response.json[0].id == domainId
@@ -249,7 +247,7 @@ class RoleSpec extends Specification implements RestQueries{
 		where:
 			jsonVal 	        || respSize
 			'{}'                || 10
-			'{"authority":"authority3"}' || 1 
+			'{"authority":"ROLE_303"}' || 1 
 
 	}
 	

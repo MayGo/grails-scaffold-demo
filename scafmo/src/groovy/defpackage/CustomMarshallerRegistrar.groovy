@@ -260,8 +260,8 @@ class CustomMarshallerRegistrar {
 			List defaultExcludes = [
 'roleId',
 'userId',
-'user.passwordExpired',
-'user.username']
+'user.enabled',
+'user.passwordExpired']
 			Map excludes = createMap(defaultExcludes + json.getExcludes(cl) - json.getIncludes(cl))
 			return filter(instance, excludes)
 		}

@@ -36,3 +36,23 @@ describe('classifier create page', function() {
   it('after filling all the fields, should be ', function() {
 	expect(page.submitButton.isEnabled()).toBe(false);
 	//Fill the form
+		page.classnameEl.sendKeys('classname')
+		page.constantEl.sendKeys('constant')
+		page.descriptionEl.sendKeys('description')
+		page.propertynameEl.sendKeys('propertyname')
+
+
+	expect(page.submitButton.isEnabled()).toBe(true);
+	page.submitButton.isEnabled().then(function(enabled){
+		if(enabled){
+			page.submitButton.click();
+			expect(browser.getCurrentUrl()).toContain("/#/app/classifier/view/1");
+		}else{
+			console.log("(classifier).Submit button not enabled. Not testing submiting.")
+		}
+	});
+
+  });
+  
+  
+});

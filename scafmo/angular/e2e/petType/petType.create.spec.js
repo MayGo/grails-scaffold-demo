@@ -30,7 +30,7 @@ describe('petType create page', function() {
   it('after filling all the fields, should be ', function() {
 	expect(page.submitButton.isEnabled()).toBe(false);
 	//Fill the form
-		page.nameEl.sendKeys('name2')
+		page.nameEl.sendKeys('Type 455')
 
 
 	expect(page.submitButton.isEnabled()).toBe(true);

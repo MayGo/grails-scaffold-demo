@@ -4,11 +4,11 @@ import spock.lang.Shared
 import spock.lang.Ignore
 import org.springframework.http.HttpStatus
 import defpackage.RestQueries
+import defpackage.AuthQueries
 import spock.lang.Specification
 
-class OwnerSpec extends Specification implements RestQueries{
+class OwnerSpec extends Specification implements RestQueries, AuthQueries{
 
-	
 	String REST_URL = "${APP_URL}/owners"
 	
 	@Shared
@@ -33,7 +33,7 @@ class OwnerSpec extends Specification implements RestQueries{
 				city = 'city'
 				firstName = 'firstName'
 				lastName = 'lastName'
-				telephone = 'telephone'
+				telephone = '555451'
 
 			}
 			
@@ -45,7 +45,7 @@ class OwnerSpec extends Specification implements RestQueries{
 			response.json.city == 'city'
 			response.json.firstName == 'firstName'
 			response.json.lastName == 'lastName'
-			response.json.telephone == 'telephone'
+			response.json.telephone == '555451'
 
 			response.status == HttpStatus.CREATED.value()
 	}
@@ -57,7 +57,7 @@ class OwnerSpec extends Specification implements RestQueries{
 				city = 'city'
 				firstName = 'firstName'
 				lastName = 'lastName'
-				telephone = 'telephone'
+				telephone = '555452'
 
 			}
 			
@@ -70,7 +70,7 @@ class OwnerSpec extends Specification implements RestQueries{
 			response.json.city == 'city'
 			response.json.firstName == 'firstName'
 			response.json.lastName == 'lastName'
-			response.json.telephone == 'telephone'
+			response.json.telephone == '555452'
 
 			response.status == HttpStatus.CREATED.value()
 	}
@@ -88,7 +88,7 @@ class OwnerSpec extends Specification implements RestQueries{
 			response.json.city == 'city'
 			response.json.firstName == 'firstName'
 			response.json.lastName == 'lastName'
-			response.json.telephone == 'telephone'
+			response.json.telephone == '555452'
 
 			response.status == HttpStatus.OK.value()
 	}
@@ -131,7 +131,7 @@ class OwnerSpec extends Specification implements RestQueries{
 				city = 'city'
 				firstName = 'firstName'
 				lastName = 'lastName'
-				telephone = 'telephone'
+				telephone = '555453'
 
 
 			}
@@ -140,7 +140,7 @@ class OwnerSpec extends Specification implements RestQueries{
 			response.json.city == 'city'
 			response.json.firstName == 'firstName'
 			response.json.lastName == 'lastName'
-			response.json.telephone == 'telephone'
+			response.json.telephone == '555453'
 
 
 			response.status == HttpStatus.OK.value()
@@ -153,7 +153,7 @@ class OwnerSpec extends Specification implements RestQueries{
 				city = 'city'
 				firstName = 'firstName'
 				lastName = 'lastName'
-				telephone = 'telephone'
+				telephone = '555453'
 
 
 			}
@@ -166,7 +166,7 @@ class OwnerSpec extends Specification implements RestQueries{
 				city = 'city'
 				firstName = 'firstName'
 				lastName = 'lastName'
-				telephone = 'telephone'
+				telephone = '555453'
 
 
 			}
@@ -200,10 +200,7 @@ class OwnerSpec extends Specification implements RestQueries{
 	}
 	
 	
-	@Ignoreaddress
-<org.grails.samples.Owner@38eb2140 address=address city=city telephone=telephone errors=grails.validation.ValidationErrors: 1 errors
-Field error in object 'org.grails.samples.Owner' on field 'telephone': rejected value [telephone]; codes [org.grails.samples.Owner.telephone.matches.error.org.grails.samples.Owner.telephone,org.grails.samples.Owner.telephone.matches.error.telephone,org.grails.samples.Owner.telephone.matches.error.java.lang.String,org.grails.samples.Owner.telephone.matches.error,owner.telephone.matches.error.org.grails.samples.Owner.telephone,owner.telephone.matches.error.telephone,owner.telephone.matches.error.java.lang.String,owner.telephone.matches.error,org.grails.samples.Owner.telephone.matches.invalid.org.grails.samples.Owner.telephone,org.grails.samples.Owner.telephone.matches.invalid.telephone,org.grails.samples.Owner.telephone.matches.invalid.java.lang.String,org.grails.samples.Owner.telephone.matches.invalid,owner.telephone.matches.invalid.org.grails.samples.Owner.telephone,owner.telephone.matches.invalid.telephone,owner.telephone.matches.invalid.java.lang.String,owner.telephone.matches.invalid,matches.invalid.org.grails.samples.Owner.telephone,matches.invalid.telephone,matches.invalid.java.lang.String,matches.invalid]; arguments [telephone,class org.grails.samples.Owner,telephone,\d+]; default message [Property [{0}] of class [{1}] with value [{2}] does not match the required pattern [{3}]] pets=null firstName=firstName lastName=lastName id=null version=null errors=null $changedProperties=null>
- // have to have more then maxLimit items
+	 // have to have more then maxLimit items
 	void 'Test Owner list max property.'() {
 		given:
 			int maxLimit = 100// Set real max items limit
@@ -290,7 +287,7 @@ Field error in object 'org.grails.samples.Owner' on field 'telephone': rejected 
 			'{"city":"city"}' || 10 
 			'{"firstName":"firstName"}' || 10 
 			'{"lastName":"lastName"}' || 10 
-			'{"telephone":"telephone"}' || 10 
+			'{"telephone":"555453"}' || 1 
 
 	}
 	

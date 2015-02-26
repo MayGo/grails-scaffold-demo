@@ -39,7 +39,7 @@ describe('user create page', function() {
 	expect(page.submitButton.isEnabled()).toBe(false);
 	//Fill the form
 		page.enabledEl.sendKeys('true')
-		page.usernameEl.sendKeys('username2')
+		page.usernameEl.sendKeys('John Doe 302')
 
 
 	expect(page.submitButton.isEnabled()).toBe(true);

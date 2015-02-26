@@ -56,7 +56,7 @@ angular.module('angularDemoApp')
 		        function( response ){
 			       	$scope.tag = angular.extend({}, $scope.tag);
 	     			$scope.tag.tasks = response.map(function(item){
-                        return {id:item.id, name:item.id+ ', ' +item.deadline+ ', ' +item.details+ ', ' +item.status};
+                        return {id:item.id, name:item.id+ ', ' +item.details+ ', ' +item.status+ ', ' +item.summary};
 				    });
 		       	}
 	     	);

@@ -32,7 +32,7 @@
 		<div class="col-sm-10">
             <!--ManyToMany-->
           <tags-input ng-model="tag.tasks">
-              <auto-complete source="autocompleteService.taskQuery($viewValue, ['id','deadline','details','status'], true)" ></auto-complete>
+              <auto-complete source="autocompleteService.taskQuery($viewValue, ['id','details','status','summary'], true)" ></auto-complete>
              </tags-input>                     
         </div>
 	</div>

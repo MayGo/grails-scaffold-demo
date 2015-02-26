@@ -4,11 +4,11 @@ import spock.lang.Shared
 import spock.lang.Ignore
 import org.springframework.http.HttpStatus
 import defpackage.RestQueries
+import defpackage.AuthQueries
 import spock.lang.Specification
 
-class TestStringSpec extends Specification implements RestQueries{
+class TestStringSpec extends Specification implements RestQueries, AuthQueries{
 
-	
 	String REST_URL = "${APP_URL}/teststrings"
 	
 	@Shared
@@ -29,17 +29,17 @@ class TestStringSpec extends Specification implements RestQueries{
 	void 'Test creating another TestString instance.'() {//This is for creating some data to test list sorting
 		when: 'Create testString'
 			response = sendCreateWithData(){
-				blankStr = 'blankStr'
-				creditCardStr = '378282246310005'
-				emailStr = 'a@b.com'
+				blankStr = 'Blank 751'
+				creditCardStr = '372886934857774'
+				emailStr = 'test752@test.com'
 				inListStr = 'test1'
-				matchesStr = 'matchesStr'
-				maxSizeStr = 'maxSi'
-				minSizeStr = 'minSizeStr'
-				notEqualStr = 'notEqualStr'
+				matchesStr = 'ABC'
+				maxSizeStr = 'ABCDE'
+				minSizeStr = 'ABC'
+				notEqualStr = 'notEqualStr 753'
 				sizeStr = 'sizeStr'
-				uniqueStr = 'uniqueStr1'
-				urlStr = 'http://www.example.com'
+				uniqueStr = 'U 754'
+				urlStr = 'http://www.test755.com'
 
 			}
 			
@@ -47,17 +47,17 @@ class TestStringSpec extends Specification implements RestQueries{
 			
 			
 		then: 'Should create and return created values'
-			response.json.blankStr == 'blankStr'
-			response.json.creditCardStr == '378282246310005'
-			response.json.emailStr == 'a@b.com'
+			response.json.blankStr == 'Blank 751'
+			response.json.creditCardStr == '372886934857774'
+			response.json.emailStr == 'test752@test.com'
 			response.json.inListStr == 'test1'
-			response.json.matchesStr == 'matchesStr'
-			response.json.maxSizeStr == 'maxSi'
-			response.json.minSizeStr == 'minSizeStr'
-			response.json.notEqualStr == 'notEqualStr'
+			response.json.matchesStr == 'ABC'
+			response.json.maxSizeStr == 'ABCDE'
+			response.json.minSizeStr == 'ABC'
+			response.json.notEqualStr == 'notEqualStr 753'
 			response.json.sizeStr == 'sizeStr'
-			response.json.uniqueStr == 'uniqueStr1'
-			response.json.urlStr == 'http://www.example.com'
+			response.json.uniqueStr == 'U 754'
+			response.json.urlStr == 'http://www.test755.com'
 
 			response.status == HttpStatus.CREATED.value()
 	}
@@ -65,17 +65,17 @@ class TestStringSpec extends Specification implements RestQueries{
 	void 'Test creating TestString instance.'() {
 		when: 'Create testString'
 			response = sendCreateWithData(){
-				blankStr = 'blankStr'
-				creditCardStr = '378282246310005'
-				emailStr = 'a@b.com'
+				blankStr = 'Blank 756'
+				creditCardStr = '372886934857774'
+				emailStr = 'test757@test.com'
 				inListStr = 'test1'
-				matchesStr = 'matchesStr'
-				maxSizeStr = 'maxSi'
-				minSizeStr = 'minSizeStr'
-				notEqualStr = 'notEqualStr'
+				matchesStr = 'ABC'
+				maxSizeStr = 'ABCDE'
+				minSizeStr = 'ABC'
+				notEqualStr = 'notEqualStr 758'
 				sizeStr = 'sizeStr'
-				uniqueStr = 'uniqueStr2'
-				urlStr = 'http://www.example.com'
+				uniqueStr = 'U 759'
+				urlStr = 'http://www.test760.com'
 
 			}
 			
@@ -84,17 +84,17 @@ class TestStringSpec extends Specification implements RestQueries{
 			
 		then: 'Should create and return created values'
 			
-			response.json.blankStr == 'blankStr'
-			response.json.creditCardStr == '378282246310005'
-			response.json.emailStr == 'a@b.com'
+			response.json.blankStr == 'Blank 756'
+			response.json.creditCardStr == '372886934857774'
+			response.json.emailStr == 'test757@test.com'
 			response.json.inListStr == 'test1'
-			response.json.matchesStr == 'matchesStr'
-			response.json.maxSizeStr == 'maxSi'
-			response.json.minSizeStr == 'minSizeStr'
-			response.json.notEqualStr == 'notEqualStr'
+			response.json.matchesStr == 'ABC'
+			response.json.maxSizeStr == 'ABCDE'
+			response.json.minSizeStr == 'ABC'
+			response.json.notEqualStr == 'notEqualStr 758'
 			response.json.sizeStr == 'sizeStr'
-			response.json.uniqueStr == 'uniqueStr2'
-			response.json.urlStr == 'http://www.example.com'
+			response.json.uniqueStr == 'U 759'
+			response.json.urlStr == 'http://www.test760.com'
 
 			response.status == HttpStatus.CREATED.value()
 	}
@@ -108,17 +108,17 @@ class TestStringSpec extends Specification implements RestQueries{
 			response = readDomainItemWithParams(domainId.toString(), "")
 		then: 'Should return correct values'
 			
-			response.json.blankStr == 'blankStr'
-			response.json.creditCardStr == '378282246310005'
-			response.json.emailStr == 'a@b.com'
+			response.json.blankStr == 'Blank 756'
+			response.json.creditCardStr == '372886934857774'
+			response.json.emailStr == 'test757@test.com'
 			response.json.inListStr == 'test1'
-			response.json.matchesStr == 'matchesStr'
-			response.json.maxSizeStr == 'maxSi'
-			response.json.minSizeStr == 'minSizeStr'
-			response.json.notEqualStr == 'notEqualStr'
+			response.json.matchesStr == 'ABC'
+			response.json.maxSizeStr == 'ABCDE'
+			response.json.minSizeStr == 'ABC'
+			response.json.notEqualStr == 'notEqualStr 758'
 			response.json.sizeStr == 'sizeStr'
-			response.json.uniqueStr == 'uniqueStr2'
-			response.json.urlStr == 'http://www.example.com'
+			response.json.uniqueStr == 'U 759'
+			response.json.urlStr == 'http://www.test760.com'
 
 			response.status == HttpStatus.OK.value()
 	}
@@ -157,32 +157,32 @@ class TestStringSpec extends Specification implements RestQueries{
 	void 'Test updating TestString instance.'() {
 		when: 'Update testString'
 			response = sendUpdateWithData(domainId.toString()){
-				blankStr = 'blankStr'
-				creditCardStr = '378282246310005'
-				emailStr = 'a@b.com'
+				blankStr = 'Blank 761'
+				creditCardStr = '372886934857774'
+				emailStr = 'test762@test.com'
 				inListStr = 'test1'
-				matchesStr = 'matchesStr'
-				maxSizeStr = 'maxSi'
-				minSizeStr = 'minSizeStr'
-				notEqualStr = 'notEqualStr'
+				matchesStr = 'ABC'
+				maxSizeStr = 'ABCDE'
+				minSizeStr = 'ABC'
+				notEqualStr = 'notEqualStr 763'
 				sizeStr = 'sizeStr'
-				uniqueStr = 'uniqueStr3'
-				urlStr = 'http://www.example.com'
+				uniqueStr = 'U 764'
+				urlStr = 'http://www.test765.com'
 
 
 			}
 		then: 'Should return updated values'
-			response.json.blankStr == 'blankStr'
-			response.json.creditCardStr == '378282246310005'
-			response.json.emailStr == 'a@b.com'
+			response.json.blankStr == 'Blank 761'
+			response.json.creditCardStr == '372886934857774'
+			response.json.emailStr == 'test762@test.com'
 			response.json.inListStr == 'test1'
-			response.json.matchesStr == 'matchesStr'
-			response.json.maxSizeStr == 'maxSi'
-			response.json.minSizeStr == 'minSizeStr'
-			response.json.notEqualStr == 'notEqualStr'
+			response.json.matchesStr == 'ABC'
+			response.json.maxSizeStr == 'ABCDE'
+			response.json.minSizeStr == 'ABC'
+			response.json.notEqualStr == 'notEqualStr 763'
 			response.json.sizeStr == 'sizeStr'
-			response.json.uniqueStr == 'uniqueStr3'
-			response.json.urlStr == 'http://www.example.com'
+			response.json.uniqueStr == 'U 764'
+			response.json.urlStr == 'http://www.test765.com'
 
 
 			response.status == HttpStatus.OK.value()
@@ -191,17 +191,17 @@ class TestStringSpec extends Specification implements RestQueries{
 	void 'Test updating unexisting TestString instance.'() {
 		when: 'Update unexisting testString'
 			response = sendUpdateWithData('9999999999'){
-					blankStr = 'blankStr'
-				creditCardStr = '378282246310005'
-				emailStr = 'a@b.com'
+					blankStr = 'Blank 761'
+				creditCardStr = '372886934857774'
+				emailStr = 'test762@test.com'
 				inListStr = 'test1'
-				matchesStr = 'matchesStr'
-				maxSizeStr = 'maxSi'
-				minSizeStr = 'minSizeStr'
-				notEqualStr = 'notEqualStr'
+				matchesStr = 'ABC'
+				maxSizeStr = 'ABCDE'
+				minSizeStr = 'ABC'
+				notEqualStr = 'notEqualStr 763'
 				sizeStr = 'sizeStr'
-				uniqueStr = 'uniqueStr3'
-				urlStr = 'http://www.example.com'
+				uniqueStr = 'U 764'
+				urlStr = 'http://www.test765.com'
 
 
 			}
@@ -210,17 +210,17 @@ class TestStringSpec extends Specification implements RestQueries{
 			
 		when: 'Update unexisting testString id not a number'
 			response = sendUpdateWithData('nonexistent'){
-					blankStr = 'blankStr'
-				creditCardStr = '378282246310005'
-				emailStr = 'a@b.com'
+					blankStr = 'Blank 761'
+				creditCardStr = '372886934857774'
+				emailStr = 'test762@test.com'
 				inListStr = 'test1'
-				matchesStr = 'matchesStr'
-				maxSizeStr = 'maxSi'
-				minSizeStr = 'minSizeStr'
-				notEqualStr = 'notEqualStr'
+				matchesStr = 'ABC'
+				maxSizeStr = 'ABCDE'
+				minSizeStr = 'ABC'
+				notEqualStr = 'notEqualStr 763'
 				sizeStr = 'sizeStr'
-				uniqueStr = 'uniqueStr3'
-				urlStr = 'http://www.example.com'
+				uniqueStr = 'U 764'
+				urlStr = 'http://www.test765.com'
 
 
 			}
@@ -254,9 +254,7 @@ class TestStringSpec extends Specification implements RestQueries{
 	}
 	
 	
-	@IgnoreblankStr
-<scafmo.constr.TestString@618b147b blankStr=blankStr creditCardStr=378282246310005 emailStr=a@b.com inListStr=test1 matchesStr=matchesStr maxSizeStr=maxSi minSizeStr=minSizeStr sizeStr=sizeStr notEqualStr=notEqualStr uniqueStr=uniqueStr3 urlStr=http://www.example.com errors=grails.validation.ValidationErrors: 0 errors id=null version=null $changedProperties=null>
- // have to have more then maxLimit items
+	 // have to have more then maxLimit items
 	void 'Test TestString list max property.'() {
 		given:
 			int maxLimit = 100// Set real max items limit
@@ -310,7 +308,7 @@ class TestStringSpec extends Specification implements RestQueries{
 	void 'Test querying in TestString list by real searchString.'() {
 		when: 'Get testString list by searchString'
 			response = queryListWithUrlVariables('order=desc&sort=id&searchString={searchString}',
-					[searchString: "blankStr"])
+					[searchString: "Blank 761"])
 
 		then: 'Should at least last inserted item'
 			response.json[0].id == domainId
@@ -339,17 +337,17 @@ class TestStringSpec extends Specification implements RestQueries{
 		where:
 			jsonVal 	        || respSize
 			'{}'                || 10
-			'{"blankStr":"blankStr"}' || 10 
-			'{"creditCardStr":"378282246310005"}' || 10 
-			'{"emailStr":"a@b.com"}' || 10 
+//Can't predict 'size'			'{"blankStr":"Blank 761"}' || 1 
+			'{"creditCardStr":"372886934857774"}' || 10 
+			'{"emailStr":"test762@test.com"}' || 1 
 			'{"inListStr":"test1"}' || 10 
-			'{"matchesStr":"matchesStr"}' || 10 
-			'{"maxSizeStr":"maxSi"}' || 10 
-			'{"minSizeStr":"minSizeStr"}' || 10 
-			'{"notEqualStr":"notEqualStr"}' || 10 
+			'{"matchesStr":"ABC"}' || 10 
+			'{"maxSizeStr":"ABCDE"}' || 10 
+			'{"minSizeStr":"ABC"}' || 10 
+//Can't predict 'size'			'{"notEqualStr":"notEqualStr 763"}' || 1 
 			'{"sizeStr":"sizeStr"}' || 10 
-			'{"uniqueStr":"uniqueStr3"}' || 1 
-			'{"urlStr":"http://www.example.com"}' || 10 
+//Can't predict 'size'			'{"uniqueStr":"U 764"}' || 1 
+			'{"urlStr":"http://www.test765.com"}' || 1 
 
 	}
 	

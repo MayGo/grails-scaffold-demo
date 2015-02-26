@@ -8,7 +8,7 @@ import grails.transaction.Transactional
 import org.codehaus.groovy.grails.web.json.JSONElement
 import org.codehaus.groovy.grails.web.json.JSONObject
 
-@GrailsCompileStatic
+//@GrailsCompileStatic
 @Transactional(readOnly = true)
 class VisitSearchService {
 
@@ -37,18 +37,24 @@ class VisitSearchService {
 				eq('id', filter['id'].toString().toLong())
 			}
 
+
 			if (searchString) {
 				or {
+					eq('id', -1L)
+
 
 					if(searchString.isLong()){
 						eq('id', searchString.toLong())
 					}
-					// no type defined for date 
 					like('description', searchString + '%')
+					// no type defined for date 
 				}
 			}
+
 			if (filter['date']) {
-				between('date', filter['date'], filter['date'])
+				String inputFormat = "yyyy-MM-dd HH:mm:ss.SSSZ"
+				Date d = Date.parse(inputFormat, filter['date'].toString())
+				between('date', d, d)
 			}
 			if (filter['description']) {
 				ilike('description', "${filter['description']}%")

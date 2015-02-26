@@ -4,11 +4,11 @@ import spock.lang.Shared
 import spock.lang.Ignore
 import org.springframework.http.HttpStatus
 import defpackage.RestQueries
+import defpackage.AuthQueries
 import spock.lang.Specification
 
-class PersonSpec extends Specification implements RestQueries{
+class PersonSpec extends Specification implements RestQueries, AuthQueries{
 
-	
 	String REST_URL = "${APP_URL}/persons"
 	
 	@Shared
@@ -173,9 +173,7 @@ class PersonSpec extends Specification implements RestQueries{
 	}
 	
 	
-	@IgnorefirstName
-<org.grails.samples.Person@4ae1ee85 firstName=firstName lastName=lastName id=null version=null errors=grails.validation.ValidationErrors: 0 errors $changedProperties=null>
- // have to have more then maxLimit items
+	 // have to have more then maxLimit items
 	void 'Test Person list max property.'() {
 		given:
 			int maxLimit = 100// Set real max items limit

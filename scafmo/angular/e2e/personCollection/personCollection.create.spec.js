@@ -34,7 +34,8 @@ describe('personCollection create page', function() {
   it('after filling all the fields, should be ', function() {
 	expect(page.submitButton.isEnabled()).toBe(false);
 	//Fill the form
-		page.nameEl.sendKeys('name')
+		page.ageEl.sendKeys('456')
+		page.nameEl.sendKeys('John454 Doe455')
 
 
 	expect(page.submitButton.isEnabled()).toBe(true);

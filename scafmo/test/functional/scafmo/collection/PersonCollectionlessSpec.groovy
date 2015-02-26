@@ -4,11 +4,11 @@ import spock.lang.Shared
 import spock.lang.Ignore
 import org.springframework.http.HttpStatus
 import defpackage.RestQueries
+import defpackage.AuthQueries
 import spock.lang.Specification
 
-class PersonCollectionlessSpec extends Specification implements RestQueries{
+class PersonCollectionlessSpec extends Specification implements RestQueries, AuthQueries{
 
-	
 	String REST_URL = "${APP_URL}/personcollectionlesss"
 	
 	@Shared
@@ -29,9 +29,9 @@ class PersonCollectionlessSpec extends Specification implements RestQueries{
 	void 'Test creating another PersonCollectionless instance.'() {//This is for creating some data to test list sorting
 		when: 'Create personCollectionless'
 			response = sendCreateWithData(){
-				age = 0
-				name = 'name'
-				division = null
+				age = 453
+				name = 'John451 Doe452'
+				division = 1
 
 			}
 			
@@ -39,9 +39,9 @@ class PersonCollectionlessSpec extends Specification implements RestQueries{
 			
 			
 		then: 'Should create and return created values'
-			response.json.age == 0
-			response.json.name == 'name'
-			response.json.division?.id == null
+			response.json.age == 453
+			response.json.name == 'John451 Doe452'
+			response.json.division?.id == 1
 
 			response.status == HttpStatus.CREATED.value()
 	}
@@ -49,9 +49,9 @@ class PersonCollectionlessSpec extends Specification implements RestQueries{
 	void 'Test creating PersonCollectionless instance.'() {
 		when: 'Create personCollectionless'
 			response = sendCreateWithData(){
-				age = 0
-				name = 'name'
-				division = null
+				age = 456
+				name = 'John454 Doe455'
+				division = 1
 
 			}
 			
@@ -60,9 +60,9 @@ class PersonCollectionlessSpec extends Specification implements RestQueries{
 			
 		then: 'Should create and return created values'
 			
-			response.json.age == 0
-			response.json.name == 'name'
-			response.json.division?.id == null
+			response.json.age == 456
+			response.json.name == 'John454 Doe455'
+			response.json.division?.id == 1
 
 			response.status == HttpStatus.CREATED.value()
 	}
@@ -76,9 +76,9 @@ class PersonCollectionlessSpec extends Specification implements RestQueries{
 			response = readDomainItemWithParams(domainId.toString(), "")
 		then: 'Should return correct values'
 			
-			response.json.age == 0
-			response.json.name == 'name'
-			response.json.division?.id == null
+			response.json.age == 456
+			response.json.name == 'John454 Doe455'
+			response.json.division?.id == 1
 
 			response.status == HttpStatus.OK.value()
 	}
@@ -117,16 +117,16 @@ class PersonCollectionlessSpec extends Specification implements RestQueries{
 	void 'Test updating PersonCollectionless instance.'() {
 		when: 'Update personCollectionless'
 			response = sendUpdateWithData(domainId.toString()){
-				age = 0
-				name = 'name'
-				division = null
+				age = 459
+				name = 'John457 Doe458'
+				division = 1
 
 
 			}
 		then: 'Should return updated values'
-			response.json.age == 0
-			response.json.name == 'name'
-			response.json.division?.id == null
+			response.json.age == 459
+			response.json.name == 'John457 Doe458'
+			response.json.division?.id == 1
 
 
 			response.status == HttpStatus.OK.value()
@@ -135,9 +135,9 @@ class PersonCollectionlessSpec extends Specification implements RestQueries{
 	void 'Test updating unexisting PersonCollectionless instance.'() {
 		when: 'Update unexisting personCollectionless'
 			response = sendUpdateWithData('9999999999'){
-					age = 0
-				name = 'name'
-				division = null
+					age = 459
+				name = 'John457 Doe458'
+				division = 1
 
 
 			}
@@ -146,9 +146,9 @@ class PersonCollectionlessSpec extends Specification implements RestQueries{
 			
 		when: 'Update unexisting personCollectionless id not a number'
 			response = sendUpdateWithData('nonexistent'){
-					age = 0
-				name = 'name'
-				division = null
+					age = 459
+				name = 'John457 Doe458'
+				division = 1
 
 
 			}
@@ -182,9 +182,7 @@ class PersonCollectionlessSpec extends Specification implements RestQueries{
 	}
 	
 	
-	@Ignoreage
-<scafmo.collection.PersonCollectionless@c178beec name=name age=0 division=null errors=grails.validation.ValidationErrors: 0 errors id=null version=null $changedProperties=null>
- // have to have more then maxLimit items
+	 // have to have more then maxLimit items
 	void 'Test PersonCollectionless list max property.'() {
 		given:
 			int maxLimit = 100// Set real max items limit
@@ -238,7 +236,7 @@ class PersonCollectionlessSpec extends Specification implements RestQueries{
 	void 'Test querying in PersonCollectionless list by real searchString.'() {
 		when: 'Get personCollectionless list by searchString'
 			response = queryListWithUrlVariables('order=desc&sort=id&searchString={searchString}',
-					[searchString: "0"])
+					[searchString: "John457 Doe458"])
 
 		then: 'Should at least last inserted item'
 			response.json[0].id == domainId
@@ -267,10 +265,10 @@ class PersonCollectionlessSpec extends Specification implements RestQueries{
 		where:
 			jsonVal 	        || respSize
 			'{}'                || 10
-			'{"age":0}' || 10 
-			'{"name":"name"}' || 10 
-			'{"division":null}' || 3 
-			'{"divisions":[null]}' || 3 
+			'{"age":459}' || 1 
+//Can't predict 'size'			'{"name":"John457 Doe458"}' || 1 
+			'{"division":1}' || 2 
+			'{"divisions":[1]}' || 2 
 
 	}
 	

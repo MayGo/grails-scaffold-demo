@@ -8,7 +8,7 @@ import grails.transaction.Transactional
 import org.codehaus.groovy.grails.web.json.JSONElement
 import org.codehaus.groovy.grails.web.json.JSONObject
 
-@GrailsCompileStatic
+//@GrailsCompileStatic
 @Transactional(readOnly = true)
 class UserSearchService {
 
@@ -37,20 +37,25 @@ class UserSearchService {
 				eq('id', filter['id'].toString().toLong())
 			}
 
+
 			if (searchString) {
 				or {
+					eq('id', -1L)
+
 
 					if(searchString.isLong()){
 						eq('id', searchString.toLong())
 					}
+					like('username', searchString + '%')
 
-					eq('accountExpired', searchString.toBoolean())
+					if(searchString.equalsIgnoreCase("false") || searchString.equalsIgnoreCase("true")) {
+						eq('accountExpired', searchString.toBoolean())
+					}
 					
 
-					eq('accountLocked', searchString.toBoolean())
-					
-
-					eq('enabled', searchString.toBoolean())
+					if(searchString.equalsIgnoreCase("false") || searchString.equalsIgnoreCase("true")) {
+						eq('accountLocked', searchString.toBoolean())
+					}
 					
 				}
 			}

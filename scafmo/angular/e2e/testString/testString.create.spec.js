@@ -50,17 +50,17 @@ describe('testString create page', function() {
   it('after filling all the fields, should be ', function() {
 	expect(page.submitButton.isEnabled()).toBe(false);
 	//Fill the form
-		page.blankStrEl.sendKeys('blankStr')
-		page.creditCardStrEl.sendKeys('378282246310005')
-		page.emailStrEl.sendKeys('a@b.com')
+		page.blankStrEl.sendKeys('Blank 756')
+		page.creditCardStrEl.sendKeys('372886934857774')
+		page.emailStrEl.sendKeys('test757@test.com')
 		page.inListStrEl.sendKeys('test1')
-		page.matchesStrEl.sendKeys('matchesStr')
-		page.maxSizeStrEl.sendKeys('maxSi')
-		page.minSizeStrEl.sendKeys('minSizeStr')
-		page.notEqualStrEl.sendKeys('notEqualStr')
+		page.matchesStrEl.sendKeys('ABC')
+		page.maxSizeStrEl.sendKeys('ABCDE')
+		page.minSizeStrEl.sendKeys('ABC')
+		page.notEqualStrEl.sendKeys('notEqualStr 758')
 		page.sizeStrEl.sendKeys('sizeStr')
-		page.uniqueStrEl.sendKeys('uniqueStr2')
-		page.urlStrEl.sendKeys('http://www.example.com')
+		page.uniqueStrEl.sendKeys('U 759')
+		page.urlStrEl.sendKeys('http://www.test760.com')
 
 
 	expect(page.submitButton.isEnabled()).toBe(true);

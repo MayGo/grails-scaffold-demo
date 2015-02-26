@@ -56,7 +56,7 @@ angular.module('angularDemoApp')
 		        function( response ){
 			       	$scope.divisionCollection = angular.extend({}, $scope.divisionCollection);
 	     			$scope.divisionCollection.persons = response.map(function(item){
-                        return {id:item.id, name:item.id+ ', ' +item.age+ ', ' +item.name};
+                        return {id:item.id, name:item.id+ ', ' +item.name+ ', ' +item.age};
 				    });
 		       	}
 	     	);

@@ -32,8 +32,8 @@ describe('userRole create page', function() {
   it('after filling all the fields, should be ', function() {
 	expect(page.submitButton.isEnabled()).toBe(false);
 	//Fill the form
-		page.roleEl.sendKeys('authority4\uE015\n')
-		page.userEl.sendKeys('true\uE015\n')
+		page.roleEl.sendKeys('ROLE_304\uE015\n')
+		page.userEl.sendKeys('John Doe 304\uE015\n')
 
 
 	expect(page.submitButton.isEnabled()).toBe(true);

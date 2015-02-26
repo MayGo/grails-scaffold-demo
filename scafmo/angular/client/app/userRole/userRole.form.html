@@ -46,11 +46,11 @@
           ng-model="userRole.user"   
           typeahead-template-url="userAutocompleteTemplate.html" 
           typeahead-editable="false" 
-          typeahead="b for b in autocompleteService.userQuery($viewValue, ['id','accountExpired','accountLocked','enabled'])" 
+          typeahead="b for b in autocompleteService.userQuery($viewValue, ['id','username','accountExpired','accountLocked'])" 
          
-          typeahead-input-formatter="autocompleteService.userFormatLabel($model, ['id','accountExpired','accountLocked','enabled'])"
+          typeahead-input-formatter="autocompleteService.userFormatLabel($model, ['id','username','accountExpired','accountLocked'])"
        required></div> 
-     <script type="text/ng-template" id="userAutocompleteTemplate.html"><a><span bind-html-unsafe="match.model.id | typeaheadHighlight:query"></span> <span bind-html-unsafe="match.model.accountExpired | typeaheadHighlight:query"></span> <span bind-html-unsafe="match.model.accountLocked | typeaheadHighlight:query"></span> <span bind-html-unsafe="match.model.enabled | typeaheadHighlight:query"></span> </a></script>                     
+     <script type="text/ng-template" id="userAutocompleteTemplate.html"><a><span bind-html-unsafe="match.model.id | typeaheadHighlight:query"></span> <span bind-html-unsafe="match.model.username | typeaheadHighlight:query"></span> <span bind-html-unsafe="match.model.accountExpired | typeaheadHighlight:query"></span> <span bind-html-unsafe="match.model.accountLocked | typeaheadHighlight:query"></span> </a></script>                     
         </div>
 	</div>
 	<div class="line line-dashed b-b line-lg pull-in"></div>

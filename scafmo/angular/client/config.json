@@ -1,3 +1,6 @@
 {
-   
+    "restUrl": "http://localhost:3333/scafmo",
+    "loginUrl": "http://localhost:3333/scafmo/api/login",
+    "logoutUrl": "http://localhost:3333/scafmo/api/logout",
+    "securityEnabled": true
 }

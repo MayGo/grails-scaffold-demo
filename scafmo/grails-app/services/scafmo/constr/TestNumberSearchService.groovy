@@ -8,7 +8,7 @@ import grails.transaction.Transactional
 import org.codehaus.groovy.grails.web.json.JSONElement
 import org.codehaus.groovy.grails.web.json.JSONObject
 
-@GrailsCompileStatic
+//@GrailsCompileStatic
 @Transactional(readOnly = true)
 class TestNumberSearchService {
 
@@ -37,22 +37,25 @@ class TestNumberSearchService {
 				eq('id', filter['id'].toString().toLong())
 			}
 
+
 			if (searchString) {
 				or {
+					eq('id', -1L)
+
 
 					if(searchString.isLong()){
 						eq('id', searchString.toLong())
 					}
 
-					if(searchString.isDouble()){
+					if(searchString.isDouble()) {
 						eq('doubleNr', searchString.toDouble())
 					}
 
-					if(searchString.isFloat()){
+					if(searchString.isFloat()) {
 						eq('floatNr', searchString.toFloat())
 					}
 
-					if(searchString.isFloat()){
+					if(searchString.isFloat()) {
 						eq('floatNrScale', searchString.toFloat())
 					}
 				}

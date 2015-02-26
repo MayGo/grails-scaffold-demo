@@ -27,7 +27,7 @@
             ng-model="search.users"
             custom-st-search="users"
             placeholder="{{'pages.UserRole.list.search.placeholder.user' | translate}}">
-              <auto-complete source="autocompleteService.userQuery($query, ['id','accountExpired','accountLocked','enabled'], true)" ></auto-complete>
+              <auto-complete source="autocompleteService.userQuery($query, ['id','username','accountExpired','accountLocked'], true)" ></auto-complete>
             </tags-input></div></div>		 
 		</div>
     </accordion-group>
@@ -58,7 +58,7 @@
 				<tr ng-repeat="userRole in rowCollection">
 					 <td>{{userRole.id}}</td>					
 			   		<td>{{userRole.role.id}} {{userRole.role.authority}} </td>				 	
-			   		<td>{{userRole.user.id}} {{userRole.user.accountExpired}} {{userRole.user.accountLocked}} {{userRole.user.enabled}} </td>				 	
+			   		<td>{{userRole.user.id}} {{userRole.user.username}} {{userRole.user.accountExpired}} {{userRole.user.accountLocked}} </td>				 	
 				 	
 		            <td class="text-right">
 		            	<a class="btn btn-default btn-xs" ui-sref="app.userRole.view({id:userRole.id})">

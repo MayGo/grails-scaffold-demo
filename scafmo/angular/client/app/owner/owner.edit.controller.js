@@ -60,7 +60,7 @@ angular.module('angularDemoApp')
 		        function( response ){
 			       	$scope.owner = angular.extend({}, $scope.owner);
 	     			$scope.owner.pets = response.map(function(item){
-                        return {id:item.id, name:item.id+ ', ' +item.birthDate+ ', ' +item.name};
+                        return {id:item.id, name:item.id+ ', ' +item.name+ ', ' +item.birthDate};
 				    });
 		       	}
 	     	);

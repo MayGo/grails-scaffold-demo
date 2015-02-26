@@ -4,11 +4,11 @@ import spock.lang.Shared
 import spock.lang.Ignore
 import org.springframework.http.HttpStatus
 import defpackage.RestQueries
+import defpackage.AuthQueries
 import spock.lang.Specification
 
-class UserSpec extends Specification implements RestQueries{
+class UserSpec extends Specification implements RestQueries, AuthQueries{
 
-	
 	String REST_URL = "${APP_URL}/users"
 	
 	@Shared
@@ -33,7 +33,7 @@ class UserSpec extends Specification implements RestQueries{
 				accountLocked = true
 				enabled = true
 				passwordExpired = true
-				username = 'username1'
+				username = 'John Doe 301'
 
 			}
 			
@@ -45,7 +45,7 @@ class UserSpec extends Specification implements RestQueries{
 			response.json.accountLocked == true
 			response.json.enabled == true
 			response.json.passwordExpired == true
-			response.json.username == 'username1'
+			response.json.username == 'John Doe 301'
 
 			response.status == HttpStatus.CREATED.value()
 	}
@@ -57,7 +57,7 @@ class UserSpec extends Specification implements RestQueries{
 				accountLocked = true
 				enabled = true
 				passwordExpired = true
-				username = 'username2'
+				username = 'John Doe 302'
 
 			}
 			
@@ -70,7 +70,7 @@ class UserSpec extends Specification implements RestQueries{
 			response.json.accountLocked == true
 			response.json.enabled == true
 			response.json.passwordExpired == true
-			response.json.username == 'username2'
+			response.json.username == 'John Doe 302'
 
 			response.status == HttpStatus.CREATED.value()
 	}
@@ -88,7 +88,7 @@ class UserSpec extends Specification implements RestQueries{
 			response.json.accountLocked == true
 			response.json.enabled == true
 			response.json.passwordExpired == true
-			response.json.username == 'username2'
+			response.json.username == 'John Doe 302'
 
 			response.status == HttpStatus.OK.value()
 	}
@@ -131,7 +131,7 @@ class UserSpec extends Specification implements RestQueries{
 				accountLocked = true
 				enabled = true
 				passwordExpired = true
-				username = 'username3'
+				username = 'John Doe 303'
 
 
 			}
@@ -140,7 +140,7 @@ class UserSpec extends Specification implements RestQueries{
 			response.json.accountLocked == true
 			response.json.enabled == true
 			response.json.passwordExpired == true
-			response.json.username == 'username3'
+			response.json.username == 'John Doe 303'
 
 
 			response.status == HttpStatus.OK.value()
@@ -153,7 +153,7 @@ class UserSpec extends Specification implements RestQueries{
 				accountLocked = true
 				enabled = true
 				passwordExpired = true
-				username = 'username3'
+				username = 'John Doe 303'
 
 
 			}
@@ -166,7 +166,7 @@ class UserSpec extends Specification implements RestQueries{
 				accountLocked = true
 				enabled = true
 				passwordExpired = true
-				username = 'username3'
+				username = 'John Doe 303'
 
 
 			}
@@ -200,9 +200,7 @@ class UserSpec extends Specification implements RestQueries{
 	}
 	
 	
-	@IgnoreaccountExpired
-<scafmo.security.User@294ffc88 username=username3 enabled=true accountExpired=false accountLocked=false passwordExpired=false errors=grails.validation.ValidationErrors: 0 errors id=null version=null $changedProperties=null>
- // have to have more then maxLimit items
+	 // have to have more then maxLimit items
 	void 'Test User list max property.'() {
 		given:
 			int maxLimit = 100// Set real max items limit
@@ -256,7 +254,7 @@ class UserSpec extends Specification implements RestQueries{
 	void 'Test querying in User list by real searchString.'() {
 		when: 'Get user list by searchString'
 			response = queryListWithUrlVariables('order=desc&sort=id&searchString={searchString}',
-					[searchString: "false"])
+					[searchString: "John Doe 303"])
 
 		then: 'Should at least last inserted item'
 			response.json[0].id == domainId
@@ -289,7 +287,7 @@ class UserSpec extends Specification implements RestQueries{
 			'{"accountLocked":false}' || 10 
 			'{"enabled":true}' || 10 
 			'{"passwordExpired":false}' || 10 
-			'{"username":"username3"}' || 1 
+//Can't predict 'size'			'{"username":"John Doe 303"}' || 1 
 
 	}
 	

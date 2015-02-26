@@ -4,11 +4,11 @@ import spock.lang.Shared
 import spock.lang.Ignore
 import org.springframework.http.HttpStatus
 import defpackage.RestQueries
+import defpackage.AuthQueries
 import spock.lang.Specification
 
-class TestOtherSpec extends Specification implements RestQueries{
+class TestOtherSpec extends Specification implements RestQueries, AuthQueries{
 
-	
 	String REST_URL = "${APP_URL}/testothers"
 	
 	@Shared
@@ -30,9 +30,9 @@ class TestOtherSpec extends Specification implements RestQueries{
 		when: 'Create testOther'
 			response = sendCreateWithData(){
 				booleanNullable = true
-				testDate = '2015-02-17 10:05:24.825+0200'
+				testDate = '2015-02-18 00:00:00.000+0200'
 				testEnum = 'TEST_1'
-				testStringType = null
+				testStringType = 1
 
 			}
 			
@@ -41,9 +41,9 @@ class TestOtherSpec extends Specification implements RestQueries{
 			
 		then: 'Should create and return created values'
 			response.json.booleanNullable == true
-			response.json.testDate == '2015-02-17T08:05:24Z'
+			response.json.testDate == '2015-02-17T22:00:00Z'
 			response.json.testEnum == 'TEST_1'
-			response.json.testStringType?.id == null
+			response.json.testStringType?.id == 1
 
 			response.status == HttpStatus.CREATED.value()
 	}
@@ -52,9 +52,9 @@ class TestOtherSpec extends Specification implements RestQueries{
 		when: 'Create testOther'
 			response = sendCreateWithData(){
 				booleanNullable = true
-				testDate = '2015-02-17 10:05:24.844+0200'
+				testDate = '2015-02-18 00:00:00.000+0200'
 				testEnum = 'TEST_1'
-				testStringType = null
+				testStringType = 1
 
 			}
 			
@@ -64,9 +64,9 @@ class TestOtherSpec extends Specification implements RestQueries{
 		then: 'Should create and return created values'
 			
 			response.json.booleanNullable == true
-			response.json.testDate == '2015-02-17T08:05:24Z'
+			response.json.testDate == '2015-02-17T22:00:00Z'
 			response.json.testEnum == 'TEST_1'
-			response.json.testStringType?.id == null
+			response.json.testStringType?.id == 1
 
 			response.status == HttpStatus.CREATED.value()
 	}
@@ -81,9 +81,9 @@ class TestOtherSpec extends Specification implements RestQueries{
 		then: 'Should return correct values'
 			
 			response.json.booleanNullable == true
-			response.json.testDate == '2015-02-17T08:05:24Z'
+			response.json.testDate == '2015-02-17T22:00:00Z'
 			response.json.testEnum == 'TEST_1'
-			response.json.testStringType?.id == null
+			response.json.testStringType?.id == 1
 
 			response.status == HttpStatus.OK.value()
 	}
@@ -123,17 +123,17 @@ class TestOtherSpec extends Specification implements RestQueries{
 		when: 'Update testOther'
 			response = sendUpdateWithData(domainId.toString()){
 				booleanNullable = true
-				testDate = '2015-02-17 10:05:24.850+0200'
+				testDate = '2015-02-18 00:00:00.000+0200'
 				testEnum = 'TEST_1'
-				testStringType = null
+				testStringType = 1
 
 
 			}
 		then: 'Should return updated values'
 			response.json.booleanNullable == true
-			response.json.testDate == '2015-02-17T08:05:24Z'
+			response.json.testDate == '2015-02-17T22:00:00Z'
 			response.json.testEnum == 'TEST_1'
-			response.json.testStringType?.id == null
+			response.json.testStringType?.id == 1
 
 
 			response.status == HttpStatus.OK.value()
@@ -143,9 +143,9 @@ class TestOtherSpec extends Specification implements RestQueries{
 		when: 'Update unexisting testOther'
 			response = sendUpdateWithData('9999999999'){
 					booleanNullable = true
-				testDate = '2015-02-17 10:05:24.850+0200'
+				testDate = '2015-02-18 00:00:00.000+0200'
 				testEnum = 'TEST_1'
-				testStringType = null
+				testStringType = 1
 
 
 			}
@@ -155,9 +155,9 @@ class TestOtherSpec extends Specification implements RestQueries{
 		when: 'Update unexisting testOther id not a number'
 			response = sendUpdateWithData('nonexistent'){
 					booleanNullable = true
-				testDate = '2015-02-17 10:05:24.850+0200'
+				testDate = '2015-02-18 00:00:00.000+0200'
 				testEnum = 'TEST_1'
-				testStringType = null
+				testStringType = 1
 
 
 			}
@@ -191,9 +191,7 @@ class TestOtherSpec extends Specification implements RestQueries{
 	}
 	
 	
-	@IgnorebooleanNullable
-<scafmo.constr.TestOther@11ed241c testStringType=null booleanNullable=false testEnum=TEST_1 testDate=Tue Feb 17 10:05:24 EET 2015 errors=grails.validation.ValidationErrors: 0 errors id=null version=null $changedProperties=null>
- // have to have more then maxLimit items
+	 // have to have more then maxLimit items
 	void 'Test TestOther list max property.'() {
 		given:
 			int maxLimit = 100// Set real max items limit
@@ -277,10 +275,10 @@ class TestOtherSpec extends Specification implements RestQueries{
 			jsonVal 	        || respSize
 			'{}'                || 10
 			'{"booleanNullable":false}' || 10 
-			'{"testDate":"2015-02-17 10:05:24.850+0200"}' || 10 
+			'{"testDate":"2015-02-18 00:00:00.000+0200"}' || 10 
 			'{"testEnum":"TEST_1"}' || 10 
-			'{"testStringType":null}' || 3 
-			'{"testStringTypes":[null]}' || 3 
+			'{"testStringType":1}' || 2 
+			'{"testStringTypes":[1]}' || 2 
 
 	}
 	

@@ -46,7 +46,7 @@
             ng-model="search.pets"
             custom-st-search="pets"
             placeholder="{{'pages.Visit.list.search.placeholder.pet' | translate}}">
-              <auto-complete source="autocompleteService.petQuery($query, ['id','birthDate','name'], true)" ></auto-complete>
+              <auto-complete source="autocompleteService.petQuery($query, ['id','name','birthDate'], true)" ></auto-complete>
             </tags-input></div></div>		 
 		</div>
     </accordion-group>
@@ -79,7 +79,7 @@
 					 <td>{{visit.id}}</td>					
 			   		<td>{{visit.date}}</td>				 	
 			   		<td>{{visit.description}}</td>				 	
-			   		<td>{{visit.pet.id}} {{visit.pet.birthDate}} {{visit.pet.name}} </td>				 	
+			   		<td>{{visit.pet.id}} {{visit.pet.name}} {{visit.pet.birthDate}} </td>				 	
 				 	
 		            <td class="text-right">
 		            	<a class="btn btn-default btn-xs" ui-sref="app.visit.view({id:visit.id})">

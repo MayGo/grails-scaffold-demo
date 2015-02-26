@@ -58,11 +58,11 @@
           ng-model="visit.pet"   
           typeahead-template-url="petAutocompleteTemplate.html" 
           typeahead-editable="false" 
-          typeahead="b for b in autocompleteService.petQuery($viewValue, ['id','birthDate','name'])" 
+          typeahead="b for b in autocompleteService.petQuery($viewValue, ['id','name','birthDate'])" 
          
-          typeahead-input-formatter="autocompleteService.petFormatLabel($model, ['id','birthDate','name'])"
+          typeahead-input-formatter="autocompleteService.petFormatLabel($model, ['id','name','birthDate'])"
        required></div> 
-     <script type="text/ng-template" id="petAutocompleteTemplate.html"><a><span bind-html-unsafe="match.model.id | typeaheadHighlight:query"></span> <span bind-html-unsafe="match.model.birthDate | typeaheadHighlight:query"></span> <span bind-html-unsafe="match.model.name | typeaheadHighlight:query"></span> </a></script>                     
+     <script type="text/ng-template" id="petAutocompleteTemplate.html"><a><span bind-html-unsafe="match.model.id | typeaheadHighlight:query"></span> <span bind-html-unsafe="match.model.name | typeaheadHighlight:query"></span> <span bind-html-unsafe="match.model.birthDate | typeaheadHighlight:query"></span> </a></script>                     
         </div>
 	</div>
 	<div class="line line-dashed b-b line-lg pull-in"></div>

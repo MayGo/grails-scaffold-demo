@@ -44,7 +44,7 @@ describe('owner create page', function() {
 		page.cityEl.sendKeys('city')
 		page.firstNameEl.sendKeys('firstName')
 		page.lastNameEl.sendKeys('lastName')
-		page.telephoneEl.sendKeys('telephone')
+		page.telephoneEl.sendKeys('555452')
 
 
 	expect(page.submitButton.isEnabled()).toBe(true);

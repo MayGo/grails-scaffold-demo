@@ -1,8 +1,12 @@
 'use strict';
 
 angular.module('angularDemoApp')
-    .controller('RoleViewController', function ($scope, $state, $stateParams, $translate, inform, RoleService) {
-	 	$scope.role = RoleService.get({id:$stateParams.id});
+    .controller('RoleViewController', function ($scope, $state, $stateParams, $translate, inform, RoleService, roleData) {
+	 	$scope.role = roleData;
+
+		if($state.current.data){
+			$scope.isModal = $state.current.data.isModal;
+		}
 
 		$scope.deleteRole = function(instance){
 			return RoleService.deleteInstance(instance).then(function(instance){
@@ -10,5 +14,7 @@ angular.module('angularDemoApp')
 				return instance;
 			});
 		};
-
+		$scope.go = function(route){
+			$state.go(route);
+		};
 	});

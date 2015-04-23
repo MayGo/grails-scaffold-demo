@@ -7,11 +7,22 @@ import grails.transaction.Transactional
 import org.codehaus.groovy.grails.web.json.JSONElement
 import org.codehaus.groovy.grails.web.json.JSONObject
 import org.grails.datastore.mapping.query.api.BuildableCriteria
-
+import defpackage.exceptions.ResourceNotFound
 
 //@GrailsCompileStatic
 @Transactional(readOnly = true)
 class PersonCollectionlessSearchService {
+
+	PersonCollectionless queryForPersonCollectionless(Long personCollectionlessId) {
+		if (!personCollectionlessId || personCollectionlessId < 0) {
+			throw new IllegalArgumentException('no.valid.id')
+		}
+		PersonCollectionless personCollectionless = PersonCollectionless.where { id == personCollectionlessId }.find()
+		if (!personCollectionless) {
+			throw new ResourceNotFound("No PersonCollectionless found with Id :[$personCollectionlessId]")
+		}
+		return personCollectionless
+	}
 
 	PagedResultList search(Map params) {
 

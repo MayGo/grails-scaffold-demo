@@ -156,9 +156,7 @@ environments {
         grails.plugin.springsecurity.active = false
     }
 }
-			
-
-
+	
 grails.plugin.springsecurity.filterChain.chainMap = [
     '/ng/**': 'nonAuthFilter',
     '/static/**': 'nonAuthFilter',
@@ -221,11 +219,12 @@ grails{
 			core{
 				overwrite = true // false = Ask before replacing file
 				ignoreStatic = true // Don't generate static files again
-				ignoreFileNames = ['TestDataGeneratorService.groovy', 'TestDataConfig.groovy']
-				// Map of domain class names. contains list of maps
-				//displayNames = ['Division2':['persons':['name':null]]]//e.g 'User':['group':['name']]
-				displayNames = ['Tag':['id', 'name'], 'Task':['id', 'details', 'status', 'summary'], 'Owner':['id', 'address', 'city', 'firstName'], 'Person':['id', 'firstName', 'lastName'], 'Pet':['id', 'name', 'birthDate'], 'PetType':['id', 'name'], 'Speciality':['id', 'name'], 'Vet':['id', 'firstName', 'lastName'], 'Visit':['id', 'description', 'date'], 'DivisionCollection':['id', 'name'], 'DivisionCollectionless':['id', 'name'], 'PersonCollection':['id', 'name', 'age'], 'PersonCollectionless':['id', 'name', 'age'], 'TestNumber':['id', 'doubleNr', 'floatNr', 'floatNrScale'], 'TestOther':['id', 'booleanNullable', 'testDate', 'testEnum'], 'TestString':['id', 'blankStr', 'creditCardStr', 'emailStr'], 'Role':['id', 'authority'], 'User':['id', 'username', 'accountExpired', 'accountLocked'], 'UserRole':['id'], 'Classifier':['id', 'classname', 'constant', 'description']]
+				ignoreFileNames = ['TestDataGeneratorService.groovy', 'TestDataConfig.groovy', 'config.json', '.gitignore']
+				// don't generate files or menu for domains
+				ignoreDomainNames = []
 			}
 		}
 	}
 }
+grails.plugin.scaffold.core.displayNames = ['Tag':['id', 'name'], 'Task':['id', 'timeSpent', 'summary', 'status'], 'Owner':['id', 'telephone', 'lastName', 'firstName'], 'Person':['id', 'lastName', 'firstName'], 'Pet':['id', 'name', 'birthDate'], 'PetType':['id', 'name'], 'Speciality':['id', 'name'], 'Vet':['id', 'lastName', 'firstName'], 'Visit':['id', 'description', 'date'], 'DivisionCollection':['id', 'name'], 'DivisionCollectionless':['id', 'name'], 'PersonCollection':['id', 'name', 'age'], 'PersonCollectionless':['id', 'name', 'age'], 'TestNumber':['id', 'longNr', 'integerNrUnique', 'integerNrRange'], 'TestOther':['id', 'testEnum', 'testDate', 'booleanNullable'], 'TestString':['id', 'urlStr', 'uniqueStr', 'sizeStr'], 'Role':['id', 'authority'], 'User':['id', 'username', 'passwordExpired', 'enabled'], 'UserRole':['id'], 'Classifier':['id', 'propertyname', 'description', 'constant']]
+			grails.databinding.dateFormats = ["yyyy-MM-dd'T'hh:mm:ssZ"]

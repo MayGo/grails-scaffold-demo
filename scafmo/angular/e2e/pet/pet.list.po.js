@@ -13,8 +13,8 @@ var EditPage = function() {
   this.birthDateEl = element(by.model('search.birthDate'));  
   this.nameEl = element(by.model('search.name'));  
   this.visitsEl = element(by.model('search.visits'));  
-  this.typeEl = element(by.model('search.type'));  
-  this.ownerEl = element(by.model('search.owner'));  
+  this.typeEl = element(by.model('search.types'));  
+  this.ownerEl = element(by.model('search.owners'));  
 };
 
 module.exports = new EditPage();

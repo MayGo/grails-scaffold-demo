@@ -14,14 +14,47 @@ $stateProvider
 		}).state('app.testString.create',{
 			url: '/create',
 			templateUrl: 'app/testString/testString.form.html',
-			controller: 'TestStringEditController'
+			controller: 'TestStringEditController',
+			resolve:{
+				testStringData: function($stateParams, TestStringService) {
+					return new TestStringService();
+				}
+			}
 		}).state('app.testString.edit',{
 			url: '/edit/:id',
 			templateUrl: 'app/testString/testString.form.html',
-			controller: 'TestStringEditController'
+			controller: 'TestStringEditController',
+			resolve:{
+				testStringData: function($stateParams, TestStringService){
+					return TestStringService.get({id:$stateParams.id}).$promise.then(
+						function( response ){
+							return response;
+						}
+					);
+				}
+			}
 		}).state('app.testString.view',{
 			url: '/view/:id',
 			templateUrl: 'app/testString/testString.view.html',
-			controller: 'TestStringViewController'
-		});		
+			controller: 'TestStringViewController',
+				resolve:{
+				testStringData: function($stateParams, TestStringService){
+					return TestStringService.get({id:$stateParams.id}).$promise.then(
+						function( response ){
+							return response;
+						}
+					);
+				}
+			}
+		})
+
+
+
+		.state('app.testString.view.testOther',{
+			url: '/testOther/:relationName',
+			templateUrl: 'app/testOther/testOther.list.html',
+			controller: 'TestOtherListController'
+		})
+	
+;
 });

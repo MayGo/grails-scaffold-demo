@@ -1,15 +1,22 @@
 'use strict';
 
 
+var helper = require('../utils/helper.js');
 describe('person view page', function() {
-  var page;
+	var page;
 
-  beforeEach(function() {
-    browser.get('/#/app/person/view/1');
-    page = require('./person.view.po');
-  });
+	beforeEach(function() {
+		var mockModule = require('./person.mocks');
+		browser.addMockModule('httpBackendMock', mockModule );
+		browser.get('/#/app/person/view/1');
+		page = require('./person.view.po');
+	});
+	afterEach(function() {
+		browser.clearMockModules();
+	});
 
-  
+
+
   it('should contain all fields.', function() {
     
     expect(page.firstNameEl).not.toBeNull()    
@@ -23,17 +30,38 @@ describe('person view page', function() {
   
   it('edit button changes path to /edit', function() {
 	  element(by.id('editBtn')).click();
-	  expect(browser.getCurrentUrl()).toContain("/#/app/person/edit/1");
+	  browser.wait(function() {
+			  return $('#person_form').isPresent(); // keeps waiting until this statement resolves to true
+		  },
+		  1000,
+		  'person_form element not visible'
+	  );
+	  helper.currentUrlContains('/#/app/person/edit/1');
+
   });
   
   it('back button changes path to /list', function() {
 	  element(by.id('backBtn')).click();
-	  expect(browser.getCurrentUrl()).toContain("/#/app/person/list");
+	  browser.wait(function() {
+			  return $('#person_list').isPresent(); // keeps waiting until this statement resolves to true
+		  },
+		  1000,
+		  'person_list element not visible'
+	  );
+	  helper.currentUrlContains('/#/app/person/list');
+
   });
   
   it('delete button changes path to /list and deletes item', function() {
 	  element(by.id('deleteBtn')).click();
-	  expect(browser.getCurrentUrl()).toContain("/#/app/person/list");
+	  browser.wait(function() {
+			  return $('#person_list').isPresent(); // keeps waiting until this statement resolves to true
+		  },
+		  1000,
+		  'person_list element not visible'
+	  );
+	  helper.currentUrlContains('/#/app/person/list');
+
   });
   
 });

@@ -7,11 +7,22 @@ import grails.transaction.Transactional
 import org.codehaus.groovy.grails.web.json.JSONElement
 import org.codehaus.groovy.grails.web.json.JSONObject
 import org.grails.datastore.mapping.query.api.BuildableCriteria
-
+import defpackage.exceptions.ResourceNotFound
 
 //@GrailsCompileStatic
 @Transactional(readOnly = true)
 class TagSearchService {
+
+	Tag queryForTag(Long tagId) {
+		if (!tagId || tagId < 0) {
+			throw new IllegalArgumentException('no.valid.id')
+		}
+		Tag tag = Tag.where { id == tagId }.find()
+		if (!tag) {
+			throw new ResourceNotFound("No Tag found with Id :[$tagId]")
+		}
+		return tag
+	}
 
 	PagedResultList search(Map params) {
 

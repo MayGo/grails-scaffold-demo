@@ -1,6 +1,5 @@
 package scafmo.collection.v1
 
-import grails.transaction.Transactional
 import grails.validation.ValidationException
 import org.codehaus.groovy.grails.web.servlet.HttpHeaders
 import org.springframework.http.HttpStatus
@@ -9,27 +8,22 @@ import org.restapidoc.annotation.RestApiParam
 import org.restapidoc.annotation.RestApiParams
 import org.restapidoc.annotation.RestApi
 import org.restapidoc.pojo.RestApiParamType
-import defpackage.CustomRestfulController
 import defpackage.exceptions.ResourceNotFound
 import scafmo.collection.PersonCollectionless
 import scafmo.collection.PersonCollectionlessModifyService
 import scafmo.collection.PersonCollectionlessSearchService
 
-
-@Transactional(readOnly = true)
 @RestApi(name = 'PersonCollectionless services', description = 'Methods for managing PersonCollectionlesss')
-class PersonCollectionlessController extends CustomRestfulController<PersonCollectionless> {
+class PersonCollectionlessController {
 
 	static namespace = 'v1'
+
+	static allowedMethods = [save: 'POST', update: 'PUT', delete: 'DELETE']
 
 	static responseFormats = ['json']
 
 	PersonCollectionlessSearchService personCollectionlessSearchService
 	PersonCollectionlessModifyService personCollectionlessModifyService
-
-	PersonCollectionlessController() {
-		super(PersonCollectionless, false /* read-only */)
-	}
 
 	@RestApiMethod(description = 'List all PersonCollectionlesss', listing = true)
 	@RestApiParams(params = [
@@ -55,22 +49,18 @@ class PersonCollectionlessController extends CustomRestfulController<PersonColle
 
 	@RestApiMethod(description='Get a PersonCollectionless')
 	@RestApiParams(params=[
-		@RestApiParam(name='id', type='long', paramType = RestApiParamType.PATH, description = 'The PersonCollectionless id')
+		@RestApiParam(
+				name='id', type='long',
+				paramType = RestApiParamType.PATH,
+				description = 'The PersonCollectionless id'
+		)
 	])
 	def show() {
-		// We pass which fields to be rendered with the includes attributes,
-		// we exclude the class property for all responses.
-		respond queryForResource(params.id), [includes: includes, excludes: excludes]
+		respond personCollectionlessSearchService.queryForPersonCollectionless(params.long('id')),
+				[includes: includes, excludes: excludes]
 	}
 
-	/**
-	 * Saves a PersonCollectionless
-	 */
-	@Transactional
 	@RestApiMethod(description = 'Save a PersonCollectionless')
-	@RestApiParams(params = [
-			@RestApiParam(name = 'id', type = 'long', paramType = RestApiParamType.PATH, description = 'The Object id')
-	])
 	def save() {
 
 		PersonCollectionless instance = personCollectionlessModifyService.createPersonCollectionless(request.JSON)
@@ -83,14 +73,28 @@ class PersonCollectionlessController extends CustomRestfulController<PersonColle
 
 	}
 
-	/**
-	 * Updates a PersonCollectionless for the given id
-	 * @param id
-	 */
-	@Transactional
+	@RestApiMethod(description = 'Edit a PersonCollectionless')
+	@RestApiParams(params = [
+		@RestApiParam(
+				name = 'id',
+				type = 'long',
+				paramType = RestApiParamType.PATH,
+				description = 'The PersonCollectionless id'
+		)
+	])
+	def edit() {
+		respond personCollectionlessSearchService.queryForPersonCollectionless(params.long('id')),
+				[includes: includes, excludes: excludes]
+	}
+
 	@RestApiMethod(description = 'Update a PersonCollectionless')
 	@RestApiParams(params = [
-			@RestApiParam(name = 'id', type = 'long', paramType = RestApiParamType.PATH, description = 'The PersonCollectionless id')
+			@RestApiParam(
+					name = 'id',
+					type = 'long',
+					paramType = RestApiParamType.PATH,
+					description = 'The PersonCollectionless id'
+			)
 	])
 	def update() {
 		request.JSON.id = params.long('id')
@@ -103,6 +107,19 @@ class PersonCollectionlessController extends CustomRestfulController<PersonColle
 		respond instance, [status: HttpStatus.OK]
 	}
 
+	@RestApiMethod(description = 'Delete a PersonCollectionless')
+	@RestApiParams(params = [
+			@RestApiParam(
+					name = 'id',
+					type = 'long',
+					paramType = RestApiParamType.PATH,
+					description = 'The PersonCollectionless id'
+			)
+	])
+	def delete() {
+		personCollectionlessModifyService.deletePersonCollectionless(params.long('id'))
+		render status: HttpStatus.NO_CONTENT
+	}
 
 	private getIncludes() {
 		params.includes?.tokenize(',')
@@ -112,26 +129,18 @@ class PersonCollectionlessController extends CustomRestfulController<PersonColle
 		params.excludes?.tokenize(',')
 	}
 
-	@Override
-	protected PersonCollectionless queryForResource(Serializable id) {
-		if (id.isNumber()) {
-			resource.get(id)
-		} else {
-			notFound()
-		}
-	}
-
-	def handleValidationException(ValidationException ex){
+	def handleValidationException(ValidationException ex) {
 		respond ex.errors, [status: HttpStatus.UNPROCESSABLE_ENTITY]
 	}
-	def handleResourceNotFoundException(ResourceNotFound ex){
+
+	def handleResourceNotFoundException(ResourceNotFound ex) {
 		log.error ex
 		render status: HttpStatus.NOT_FOUND
 	}
 
-	def handleIllegalArgumentExceptionn(IllegalArgumentException ex){
+	def handleIllegalArgumentExceptionn(IllegalArgumentException ex) {
 		log.error ex
-		respond ex, [status: HttpStatus.UNPROCESSABLE_ENTITY]
+		Map errors = ['error': ex.message]
+		respond errors as Object, [status: HttpStatus.UNPROCESSABLE_ENTITY]
 	}
-
 }

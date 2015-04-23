@@ -9,9 +9,9 @@
 
 
 var EditPage = function() {
-  
-  this.nameEl = element(by.model('divisionCollectionless.name'));  
-  this.headDivisionEl = element(by.model('divisionCollectionless.headDivision'));  
+			this.nameEl = element(by.model('divisionCollectionless.name'));
+		this.headDivisionEl = element(by.model('divisionCollectionless.headDivision'));
+
 };
 
 module.exports = new EditPage();

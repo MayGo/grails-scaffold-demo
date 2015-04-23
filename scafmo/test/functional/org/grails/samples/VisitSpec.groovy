@@ -5,23 +5,25 @@ import spock.lang.Ignore
 import org.springframework.http.HttpStatus
 import defpackage.RestQueries
 import defpackage.AuthQueries
+import defpackage.TestUtils
 import spock.lang.Specification
+import spock.lang.Unroll
 
-class VisitSpec extends Specification implements RestQueries, AuthQueries{
+class VisitSpec extends Specification implements RestQueries, AuthQueries, TestUtils{
 
 	String REST_URL = "${APP_URL}/visits/v1"
-	
+
 	@Shared
 	Long domainId
 	@Shared
 	Long otherDomainId
-	
+
 	@Shared
 	def authResponse
-	
+
 	@Shared
 	def response
-	
+
 	def setupSpec() {
 		authResponse = sendCorrectCredentials(APP_URL)
 	}
@@ -29,16 +31,16 @@ class VisitSpec extends Specification implements RestQueries, AuthQueries{
 	void 'Test creating another Visit instance.'() {//This is for creating some data to test list sorting
 		when: 'Create visit'
 			response = sendCreateWithData(){
-				date = '2015-02-26 00:00:00.000+0200'
+				date = getTodayForInput()
 				description = 'description'
 				pet = 1
 			}
 			
 			otherDomainId = response.json.id
 			
-			
+
 		then: 'Should create and return created values'
-			response.json.date == '2015-02-25T22:00:00Z'
+			response.json.date == getTodayForOutput()
 			response.json.description == 'description'
 			response.json.pet?.id == 1
 			response.status == HttpStatus.CREATED.value()
@@ -47,38 +49,38 @@ class VisitSpec extends Specification implements RestQueries, AuthQueries{
 	void 'Test creating Visit instance.'() {
 		when: 'Create visit'
 			response = sendCreateWithData(){
-				date = '2015-02-26 00:00:00.000+0200'
+				date = getTodayForInput()
 				description = 'description'
 				pet = 1
 			}
 			
 			domainId = response.json.id
 			
-			
+
 		then: 'Should create and return created values'
-			
-			response.json.date == '2015-02-25T22:00:00Z'
+
+			response.json.date == getTodayForOutput()
 			response.json.description == 'description'
 			response.json.pet?.id == 1
 			response.status == HttpStatus.CREATED.value()
 	}
-	
-	
-			
-		
+
+
+
+
 
 	void 'Test reading Visit instance.'() {
 		when: 'Read visit'
 			response = readDomainItemWithParams(domainId.toString(), "")
 		then: 'Should return correct values'
-			
-			response.json.date == '2015-02-25T22:00:00Z'
+
+			response.json.date == getTodayForOutput()
 			response.json.description == 'description'
 			response.json.pet?.id == 1
 			response.status == HttpStatus.OK.value()
 	}
-	
-	
+
+
 	void 'Test excluding fields from reading Visit instance.'() {
 		when: 'Read visit id excluded'
 			response = readDomainItemWithParams(domainId.toString(), 'excludes=id')
@@ -86,8 +88,8 @@ class VisitSpec extends Specification implements RestQueries, AuthQueries{
 			response.json.id == null
 			response.status == HttpStatus.OK.value()
 	}
-	
-	
+
+
 	void 'Test including fields from reading Visit instance.'() {
 		when: 'Read visit id excluded and then included'
 			response = readDomainItemWithParams(domainId.toString(), 'excludes=id&includes=id')
@@ -95,8 +97,8 @@ class VisitSpec extends Specification implements RestQueries, AuthQueries{
 			response.json.id != null
 			response.status == HttpStatus.OK.value()
 	}
-	
-	
+
+
 	void 'Test reading unexisting Visit instance.'() {
 		when: 'Find unexisting visit'
 			response = readDomainItemWithParams('9999999999', '')
@@ -105,20 +107,20 @@ class VisitSpec extends Specification implements RestQueries, AuthQueries{
 		when: 'Find unexisting visit id not a number'
 			response = readDomainItemWithParams('nonexistent', '')
 		then: 'Should not find'
-			response.status == HttpStatus.NOT_FOUND.value()
+			response.status == HttpStatus.UNPROCESSABLE_ENTITY.value()
 	}
 
-	
+
 	void 'Test updating Visit instance.'() {
 		when: 'Update visit'
 			response = sendUpdateWithData(domainId.toString()){
-				date = '2015-02-26 00:00:00.000+0200'
+				date = getTodayForInput()
 				description = 'description'
 				pet = 1
 
 			}
 		then: 'Should return updated values'
-			response.json.date == '2015-02-25T22:00:00Z'
+			response.json.date == getTodayForOutput()
 			response.json.description == 'description'
 			response.json.pet?.id == 1
 
@@ -128,17 +130,17 @@ class VisitSpec extends Specification implements RestQueries, AuthQueries{
 	void 'Test updating unexisting Visit instance.'() {
 		when: 'Update unexisting visit'
 			response = sendUpdateWithData('9999999999'){
-					date = '2015-02-26 00:00:00.000+0200'
+					date = getTodayForInput()
 				description = 'description'
 				pet = 1
 
 			}
 		then: 'Should not find'
 			response.status == HttpStatus.NOT_FOUND.value()
-			
+
 		when: 'Update unexisting visit id not a number'
 			response = sendUpdateWithData('nonexistent'){
-					date = '2015-02-26 00:00:00.000+0200'
+					date = getTodayForInput()
 				description = 'description'
 				pet = 1
 
@@ -146,7 +148,7 @@ class VisitSpec extends Specification implements RestQueries, AuthQueries{
 		then: 'Should not find'
 			response.status == HttpStatus.UNPROCESSABLE_ENTITY.value()
 	}
-	
+
 	void 'Test Visit list sorting.'() {
 		when: 'Get visit sorted list DESC'
 			response = queryListWithParams('order=desc&sort=id')
@@ -154,7 +156,7 @@ class VisitSpec extends Specification implements RestQueries, AuthQueries{
 		then: 'First item should be just inserted object'
 			response.json[0].id == domainId
 			response.status == HttpStatus.OK.value()
-		
+
 		when: 'Get visit sorted list ASC'
 			response = queryListWithParams('order=asc&sort=id')
 
@@ -162,8 +164,8 @@ class VisitSpec extends Specification implements RestQueries, AuthQueries{
 			response.json[0].id != domainId
 			response.status == HttpStatus.OK.value()
 	}
-	
-	
+
+
 	void 'Test Visit list max property query 2 items.'() {
 		when: 'Get visit list with max 2 items'
 			response = queryListWithParams('max=2')
@@ -171,33 +173,33 @@ class VisitSpec extends Specification implements RestQueries, AuthQueries{
 		then: 'Should be only 2 items'
 			response.json.size() == 2
 	}
-	
-	
+
+
 	 // have to have more then maxLimit items
 	void 'Test Visit list max property.'() {
 		given:
 			int maxLimit = 100// Set real max items limit
-			
+
 		when: 'Get visit list without max param'
 			response = queryListWithParams('')
 
 		then: 'Should return default maximum items'
 			response.json.size() == 10
-			
+
 		when: 'Get visit list with maximum items'
 			response = queryListWithParams("max=$maxLimit")
 
 		then: 'Should contains maximum items'
 			response.json.size() == maxLimit
-			
+
 		when: 'Get visit list with maximum + 1 items'
 			response = queryListWithParams("max=${maxLimit+1}")
 
 		then: 'Should contains maximum items'
 			response.json.size() == maxLimit
 	}
-	
-	
+
+
 	void 'Test excluding fields in Visit list.'() {
 		when: 'Get visit sorted list'
 			response = queryListWithParams('excludes=id')
@@ -205,8 +207,8 @@ class VisitSpec extends Specification implements RestQueries, AuthQueries{
 		then: 'First item should be just inserted object'
 			response.json[0].id == null
 	}
-	
-	
+
+
 	void 'Test including fields in Visit list.'() {
 		when: 'Get visit sorted list'
 			response = queryListWithParams('excludes=id&includes=id')
@@ -245,35 +247,36 @@ class VisitSpec extends Specification implements RestQueries, AuthQueries{
 			response.json.size() == 1
 			response.status == HttpStatus.OK.value()
 	}
-	
-	void 'Test filtering in Visit list by all properties.'() {
+
+	@Unroll("Visit list search with props '#jsonVal' returns '#respSize' items")
+	void 'Filtering in Visit list by all properties.'() {
 		given:
 			response = queryListWithUrlVariables('filter={filter}', [filter:"${jsonVal}"])
 			
-			
+
 		expect:
 			response.json.size() == respSize
 		where:
 			jsonVal 	        || respSize
 			'{}'                || 10
-			'{"date":"2015-02-26 00:00:00.000+0200"}' || 10 
+			'{"date":"' + getTodayForInput() + '"}' || 10 
 			'{"description":"description"}' || 10 
 			'{"pet":1}' || 2 
 			'{"pets":[1]}' || 2 
 
 	}
-	
-	
-	
-	
+
+
+
+
 	void "Test deleting other Visit instance."() {//This is for creating some data to test list sorting
 		when: "Delete visit"
 			response = deleteDomainItem(otherDomainId.toString())
 		then:
 			response.status == HttpStatus.NO_CONTENT.value()
 	}
-	
-	
+
+
 	void "Test deleting Visit instance."() {
 		when: "Delete visit"
 			response = deleteDomainItem(domainId.toString())

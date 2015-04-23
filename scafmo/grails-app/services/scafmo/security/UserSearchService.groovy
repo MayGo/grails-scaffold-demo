@@ -7,11 +7,22 @@ import grails.transaction.Transactional
 import org.codehaus.groovy.grails.web.json.JSONElement
 import org.codehaus.groovy.grails.web.json.JSONObject
 import org.grails.datastore.mapping.query.api.BuildableCriteria
-
+import defpackage.exceptions.ResourceNotFound
 
 //@GrailsCompileStatic
 @Transactional(readOnly = true)
 class UserSearchService {
+
+	User queryForUser(Long userId) {
+		if (!userId || userId < 0) {
+			throw new IllegalArgumentException('no.valid.id')
+		}
+		User user = User.where { id == userId }.find()
+		if (!user) {
+			throw new ResourceNotFound("No User found with Id :[$userId]")
+		}
+		return user
+	}
 
 	PagedResultList search(Map params) {
 
@@ -48,11 +59,11 @@ class UserSearchService {
 					like('username', searchString + '%')
 
 					if (searchString.equalsIgnoreCase('false') || searchString.equalsIgnoreCase('true')) {
-						eq('accountExpired', searchString.toBoolean())
+						eq('passwordExpired', searchString.toBoolean())
 					}
 
 					if (searchString.equalsIgnoreCase('false') || searchString.equalsIgnoreCase('true')) {
-						eq('accountLocked', searchString.toBoolean())
+						eq('enabled', searchString.toBoolean())
 					}
 				}
 			}

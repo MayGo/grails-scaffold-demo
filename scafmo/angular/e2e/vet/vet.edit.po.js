@@ -9,10 +9,10 @@
 
 
 var EditPage = function() {
-  
-  this.firstNameEl = element(by.model('vet.firstName'));  
-  this.lastNameEl = element(by.model('vet.lastName'));  
-  this.specialitiesEl = element(by.model('vet.specialities'));  
+			this.firstNameEl = element(by.model('vet.firstName'));
+		this.lastNameEl = element(by.model('vet.lastName'));
+		//this.specialitiesEl = element.all(by.repeater('item in vet.specialities'));
+
 };
 
 module.exports = new EditPage();

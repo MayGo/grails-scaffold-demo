@@ -10,37 +10,47 @@ import defpackage.exceptions.ResourceNotFound
 class TestStringModifyService {
 	def grailsWebDataBinder
 
-	TestString createTestString(Map data){
+	TestString createTestString(Map data) {
 		TestString testString = TestString.newInstance()
 		return createOrUpdate(testString, data)
 	}
 
-	TestString updateTestString(Map data){
-		if(!data.id || data.id < 0){
-			throw new IllegalArgumentException("There is no valid 'id'")
+	TestString updateTestString(Map data) {
+		if (!data.id || data.id < 0) {
+			throw new IllegalArgumentException('no.valid.id')
 		}
-		TestString testString = queryForTestString(data.id)
+		TestString testString = TestString.where { id == data.id }.find()
 
-		if(!testString){
+		if (!testString) {
 			throw new ResourceNotFound("No TestString found with Id :[${data.id}]")
 		}
 
 		return createOrUpdate(testString, data)
 	}
 
-	TestString createOrUpdate(TestString testString, Map data){
-		if(!data){
-			throw new IllegalArgumentException("Data map is empty.")
+	TestString createOrUpdate(TestString testString, Map data) {
+		if (!data) {
+			throw new IllegalArgumentException('no.data')
 		}
 
 		grailsWebDataBinder.bind testString, data as SimpleMapDataBindingSource
 
-		testString.save flush: true, failOnError: true
+		testString.save failOnError: true
 
 		return testString
 	}
 
-	TestString queryForTestString(long id){
-		return TestString.get(id)
+	void deleteTestString(Long testStringId) {
+		if (!testStringId || testStringId < 0) {
+			throw new IllegalArgumentException('no.valid.id')
+		}
+		TestString testString = TestString.where { id == testStringId }.find()
+
+		if (!testString) {
+			throw new ResourceNotFound("No TestString found with Id:$testStringId")
+		}
+
+		testString.delete()
 	}
 }
+

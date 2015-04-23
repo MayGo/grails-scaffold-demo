@@ -2,7 +2,7 @@ package scafmo.security
 
 import grails.test.mixin.TestFor
 import grails.test.mixin.Mock
-import spock.lang.Ignore
+
 import spock.lang.Specification
 import defpackage.exceptions.ResourceNotFound
 import grails.validation.ValidationException
@@ -11,8 +11,10 @@ import grails.validation.ValidationException
 @Mock(Role)
 class RoleModifyServiceSpec extends Specification {
 
-	void 'Creating Role with no data is not possible'() {
+	static final long ILLEGAL_ID = -1L
+	static final long FICTIONAL_ID = 99999999L
 
+	void 'Creating Role with no data is not possible'() {
 		setup:
 			Map data = [:]
 		when:
@@ -22,9 +24,7 @@ class RoleModifyServiceSpec extends Specification {
 	}
 
 	void 'Creating Role with invalid data is not possible'() {
-
 		setup:
-
 			Map data = invalidData()
 		when:
 			service.createRole(data)
@@ -33,7 +33,6 @@ class RoleModifyServiceSpec extends Specification {
 	}
 
 	void 'Creating Role with valid data returns Role instance'() {
-
 		setup:
 			Map data = validData()
 		when:
@@ -56,7 +55,7 @@ class RoleModifyServiceSpec extends Specification {
 	void 'Updating Role with illegal id is not possible'() {
 
 		setup:
-			Map data = [id:-1L]
+			Map data = [id: ILLEGAL_ID]
 		when:
 			service.updateRole(data)
 		then:
@@ -66,7 +65,7 @@ class RoleModifyServiceSpec extends Specification {
 	void 'Updating Role with fictional id is not possible'() {
 
 		setup:
-			Map data = [id:99999999L]
+			Map data = [id: FICTIONAL_ID]
 
 		when:
 			service.updateRole(data)
@@ -74,14 +73,13 @@ class RoleModifyServiceSpec extends Specification {
 			thrown(ResourceNotFound)
 	}
 
-	@Ignore //TODO: set invalid data first
 	void 'Updating Role with invalid data is not possible'() {
 
 		setup:
 			Map data = invalidData()
 			data.id = createValidRole().id
 		when:
-			Role role = service.updateRole(data)
+			service.updateRole(data)
 		then:
 			thrown(ValidationException)
 	}
@@ -98,20 +96,62 @@ class RoleModifyServiceSpec extends Specification {
 			role.id == 1
 	}
 
+	void 'Deleting Role without id is not possible'() {
+		when:
+			service.deleteRole(null)
+		then:
+			thrown(IllegalArgumentException)
+	}
+
+	void 'Deleting Role with illegal id is not possible'() {
+
+		setup:
+			long id = ILLEGAL_ID
+		when:
+			service.deleteRole(id)
+		then:
+			thrown(IllegalArgumentException)
+	}
+
+	void 'Deleting Role with fictional id is not possible'() {
+
+		setup:
+			long id = FICTIONAL_ID
+		when:
+			service.deleteRole(id)
+		then:
+			thrown(ResourceNotFound)
+	}
+
+	void 'Deleting saved Role is possible'() {
+		setup:
+			Long roleId = createValidRole().id
+			Role role = Role.findById(roleId).find()
+		when:
+			service.deleteRole(roleId)
+		then:
+			role != null
+			Role.findById(roleId) == null
+	}
+
 	Map invalidData() {
-		return ["foo": "bar"]//Sadisfy 'empty data' exception
+
+		return ['authority': null]
 	}
 
 	Map validData() {
-		
-		Map data = ["id":null,"version":null,"authority":"ROLE_302"]
 
+		Map data = [
+  'id':  null,
+  'version':  null,
+  'authority':  'ROLE_302'
+]
 		return data
 	}
 
-	Role createValidRole(){
+	Role createValidRole() {
 		Role role = new Role(validData())
-		role.save flush:true, failOnError: true
+		role.save flush: true, failOnError: true
 		return role
 	}
 

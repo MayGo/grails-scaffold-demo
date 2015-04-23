@@ -2,7 +2,7 @@
 "app":{
 	"name":"Scafmo",
 	"title":"Scafmo"
-},	
+},
 "header" : {
   "navbar" : {
     "UPLOAD" : "Upload",
@@ -16,6 +16,9 @@
     "NOTIFICATIONS" : "Notifications",
 	"logout":"Logout"
   }
+},
+"messages":{
+	"loading": "Loading ..."
 },
 "pages":{
 	"Dashboard":{
@@ -50,7 +53,6 @@
 			"logout-cas":"Logout from CAS"
 		}
 	},
-
 	"settings":{
 		"view":{
 			"title":"Settings",
@@ -72,6 +74,10 @@
 				"table":{
 					"title":"Tag Table",	
 					"search":"Search in Tag Table",
+					"embeddedSearch":{
+					
+						"all":"All"
+					},
 					"header":{
 						
 				   		"name":"Name",					    
@@ -82,8 +88,8 @@
 				"search":{
 					"placeholder":{
 						
-				   		"name":"Name",					    
-				   		"tasks":"Tasks",					    
+								"name":"Name",							
+								"tasks":"Tasks",							
 					    "id": "Id"
 					}
 				}
@@ -95,10 +101,11 @@
 				"delete": " Delete",
 				"back": " Back",
 				"lists": "{{isval}} in {{inval}}",
+				"selecttab": "Click on tab to show table",
 				"field":{
 					
-			   		"name":"Name",				    
-			   		"tasks":"Tasks",				    
+							"name":"Name",						
+							"tasks":"Tasks",						
 				    "id": "Id"
 				}
 			},
@@ -137,6 +144,10 @@
 				"table":{
 					"title":"Task Table",	
 					"search":"Search in Task Table",
+					"embeddedSearch":{
+					
+						"all":"All"
+					},
 					"header":{
 						
 				   		"dateCreated":"Date Created",					    
@@ -152,13 +163,13 @@
 				"search":{
 					"placeholder":{
 						
-				   		"dateCreated":"Date Created",					    
-				   		"deadline":"Deadline",					    
-				   		"details":"Details",					    
-				   		"status":"Status",					    
-				   		"summary":"Summary",					    
-				   		"tags":"Tags",					    
-				   		"timeSpent":"Time Spent",					    
+								"dateCreated":"Date Created",							
+								"deadline":"Deadline",							
+								"details":"Details",							
+								"status":"Status",							
+								"summary":"Summary",							
+								"tags":"Tags",							
+								"timeSpent":"Time Spent",							
 					    "id": "Id"
 					}
 				}
@@ -170,15 +181,16 @@
 				"delete": " Delete",
 				"back": " Back",
 				"lists": "{{isval}} in {{inval}}",
+				"selecttab": "Click on tab to show table",
 				"field":{
 					
-			   		"dateCreated":"Date Created",				    
-			   		"deadline":"Deadline",				    
-			   		"details":"Details",				    
-			   		"status":"Status",				    
-			   		"summary":"Summary",				    
-			   		"tags":"Tags",				    
-			   		"timeSpent":"Time Spent",				    
+							"dateCreated":"Date Created",						
+							"deadline":"Deadline",						
+							"details":"Details",						
+							"status":"Status",						
+							"summary":"Summary",						
+							"tags":"Tags",						
+							"timeSpent":"Time Spent",						
 				    "id": "Id"
 				}
 			},
@@ -222,6 +234,10 @@
 				"table":{
 					"title":"Owner Table",	
 					"search":"Search in Owner Table",
+					"embeddedSearch":{
+					
+						"all":"All"
+					},
 					"header":{
 						
 				   		"address":"Address",					    
@@ -236,12 +252,12 @@
 				"search":{
 					"placeholder":{
 						
-				   		"address":"Address",					    
-				   		"city":"City",					    
-				   		"firstName":"First Name",					    
-				   		"lastName":"Last Name",					    
-				   		"pets":"Pets",					    
-				   		"telephone":"Telephone",					    
+								"address":"Address",							
+								"city":"City",							
+								"firstName":"First Name",							
+								"lastName":"Last Name",							
+								"pets":"Pets",							
+								"telephone":"Telephone",							
 					    "id": "Id"
 					}
 				}
@@ -253,14 +269,15 @@
 				"delete": " Delete",
 				"back": " Back",
 				"lists": "{{isval}} in {{inval}}",
+				"selecttab": "Click on tab to show table",
 				"field":{
 					
-			   		"address":"Address",				    
-			   		"city":"City",				    
-			   		"firstName":"First Name",				    
-			   		"lastName":"Last Name",				    
-			   		"pets":"Pets",				    
-			   		"telephone":"Telephone",				    
+							"address":"Address",						
+							"city":"City",						
+							"firstName":"First Name",						
+							"lastName":"Last Name",						
+							"pets":"Pets",						
+							"telephone":"Telephone",						
 				    "id": "Id"
 				}
 			},
@@ -303,6 +320,10 @@
 				"table":{
 					"title":"Person Table",	
 					"search":"Search in Person Table",
+					"embeddedSearch":{
+					
+						"all":"All"
+					},
 					"header":{
 						
 				   		"firstName":"First Name",					    
@@ -313,8 +334,8 @@
 				"search":{
 					"placeholder":{
 						
-				   		"firstName":"First Name",					    
-				   		"lastName":"Last Name",					    
+								"firstName":"First Name",							
+								"lastName":"Last Name",							
 					    "id": "Id"
 					}
 				}
@@ -326,10 +347,11 @@
 				"delete": " Delete",
 				"back": " Back",
 				"lists": "{{isval}} in {{inval}}",
+				"selecttab": "Click on tab to show table",
 				"field":{
 					
-			   		"firstName":"First Name",				    
-			   		"lastName":"Last Name",				    
+							"firstName":"First Name",						
+							"lastName":"Last Name",						
 				    "id": "Id"
 				}
 			},
@@ -368,6 +390,10 @@
 				"table":{
 					"title":"Pet Table",	
 					"search":"Search in Pet Table",
+					"embeddedSearch":{
+					
+						"all":"All"
+					},
 					"header":{
 						
 				   		"birthDate":"Birth Date",					    
@@ -381,11 +407,11 @@
 				"search":{
 					"placeholder":{
 						
-				   		"birthDate":"Birth Date",					    
-				   		"name":"Name",					    
-				   		"owner":"Owner",					    
-				   		"type":"Type",					    
-				   		"visits":"Visits",					    
+								"birthDate":"Birth Date",							
+								"name":"Name",							
+								"owner":"Owner",							
+								"type":"Type",							
+								"visits":"Visits",							
 					    "id": "Id"
 					}
 				}
@@ -397,13 +423,14 @@
 				"delete": " Delete",
 				"back": " Back",
 				"lists": "{{isval}} in {{inval}}",
+				"selecttab": "Click on tab to show table",
 				"field":{
 					
-			   		"birthDate":"Birth Date",				    
-			   		"name":"Name",				    
-			   		"owner":"Owner",				    
-			   		"type":"Type",				    
-			   		"visits":"Visits",				    
+							"birthDate":"Birth Date",						
+							"name":"Name",						
+							"owner":"Owner",						
+							"type":"Type",						
+							"visits":"Visits",						
 				    "id": "Id"
 				}
 			},
@@ -445,6 +472,10 @@
 				"table":{
 					"title":"Pet Type Table",	
 					"search":"Search in Pet Type Table",
+					"embeddedSearch":{
+					
+						"all":"All"
+					},
 					"header":{
 						
 				   		"name":"Name",					    
@@ -454,7 +485,7 @@
 				"search":{
 					"placeholder":{
 						
-				   		"name":"Name",					    
+								"name":"Name",							
 					    "id": "Id"
 					}
 				}
@@ -466,9 +497,10 @@
 				"delete": " Delete",
 				"back": " Back",
 				"lists": "{{isval}} in {{inval}}",
+				"selecttab": "Click on tab to show table",
 				"field":{
 					
-			   		"name":"Name",				    
+							"name":"Name",						
 				    "id": "Id"
 				}
 			},
@@ -506,6 +538,10 @@
 				"table":{
 					"title":"Speciality Table",	
 					"search":"Search in Speciality Table",
+					"embeddedSearch":{
+					
+						"all":"All"
+					},
 					"header":{
 						
 				   		"name":"Name",					    
@@ -515,7 +551,7 @@
 				"search":{
 					"placeholder":{
 						
-				   		"name":"Name",					    
+								"name":"Name",							
 					    "id": "Id"
 					}
 				}
@@ -527,9 +563,10 @@
 				"delete": " Delete",
 				"back": " Back",
 				"lists": "{{isval}} in {{inval}}",
+				"selecttab": "Click on tab to show table",
 				"field":{
 					
-			   		"name":"Name",				    
+							"name":"Name",						
 				    "id": "Id"
 				}
 			},
@@ -567,6 +604,10 @@
 				"table":{
 					"title":"Vet Table",	
 					"search":"Search in Vet Table",
+					"embeddedSearch":{
+					
+						"all":"All"
+					},
 					"header":{
 						
 				   		"firstName":"First Name",					    
@@ -578,9 +619,9 @@
 				"search":{
 					"placeholder":{
 						
-				   		"firstName":"First Name",					    
-				   		"lastName":"Last Name",					    
-				   		"specialities":"Specialities",					    
+								"firstName":"First Name",							
+								"lastName":"Last Name",							
+								"specialities":"Specialities",							
 					    "id": "Id"
 					}
 				}
@@ -592,11 +633,12 @@
 				"delete": " Delete",
 				"back": " Back",
 				"lists": "{{isval}} in {{inval}}",
+				"selecttab": "Click on tab to show table",
 				"field":{
 					
-			   		"firstName":"First Name",				    
-			   		"lastName":"Last Name",				    
-			   		"specialities":"Specialities",				    
+							"firstName":"First Name",						
+							"lastName":"Last Name",						
+							"specialities":"Specialities",						
 				    "id": "Id"
 				}
 			},
@@ -636,6 +678,10 @@
 				"table":{
 					"title":"Visit Table",	
 					"search":"Search in Visit Table",
+					"embeddedSearch":{
+					
+						"all":"All"
+					},
 					"header":{
 						
 				   		"date":"Date",					    
@@ -647,9 +693,9 @@
 				"search":{
 					"placeholder":{
 						
-				   		"date":"Date",					    
-				   		"description":"Description",					    
-				   		"pet":"Pet",					    
+								"date":"Date",							
+								"description":"Description",							
+								"pet":"Pet",							
 					    "id": "Id"
 					}
 				}
@@ -661,11 +707,12 @@
 				"delete": " Delete",
 				"back": " Back",
 				"lists": "{{isval}} in {{inval}}",
+				"selecttab": "Click on tab to show table",
 				"field":{
 					
-			   		"date":"Date",				    
-			   		"description":"Description",				    
-			   		"pet":"Pet",				    
+							"date":"Date",						
+							"description":"Description",						
+							"pet":"Pet",						
 				    "id": "Id"
 				}
 			},
@@ -705,6 +752,10 @@
 				"table":{
 					"title":"Division Collection Table",	
 					"search":"Search in Division Collection Table",
+					"embeddedSearch":{
+					
+						"all":"All"
+					},
 					"header":{
 						
 				   		"headDivision":"Head Division",					    
@@ -716,9 +767,9 @@
 				"search":{
 					"placeholder":{
 						
-				   		"headDivision":"Head Division",					    
-				   		"name":"Name",					    
-				   		"persons":"Persons",					    
+								"headDivision":"Head Division",							
+								"name":"Name",							
+								"persons":"Persons",							
 					    "id": "Id"
 					}
 				}
@@ -730,11 +781,12 @@
 				"delete": " Delete",
 				"back": " Back",
 				"lists": "{{isval}} in {{inval}}",
+				"selecttab": "Click on tab to show table",
 				"field":{
 					
-			   		"headDivision":"Head Division",				    
-			   		"name":"Name",				    
-			   		"persons":"Persons",				    
+							"headDivision":"Head Division",						
+							"name":"Name",						
+							"persons":"Persons",						
 				    "id": "Id"
 				}
 			},
@@ -774,6 +826,10 @@
 				"table":{
 					"title":"Division Collectionless Table",	
 					"search":"Search in Division Collectionless Table",
+					"embeddedSearch":{
+					
+						"all":"All"
+					},
 					"header":{
 						
 				   		"headDivision":"Head Division",					    
@@ -784,8 +840,8 @@
 				"search":{
 					"placeholder":{
 						
-				   		"headDivision":"Head Division",					    
-				   		"name":"Name",					    
+								"headDivision":"Head Division",							
+								"name":"Name",							
 					    "id": "Id"
 					}
 				}
@@ -797,10 +853,11 @@
 				"delete": " Delete",
 				"back": " Back",
 				"lists": "{{isval}} in {{inval}}",
+				"selecttab": "Click on tab to show table",
 				"field":{
 					
-			   		"headDivision":"Head Division",				    
-			   		"name":"Name",				    
+							"headDivision":"Head Division",						
+							"name":"Name",						
 				    "id": "Id"
 				}
 			},
@@ -839,6 +896,10 @@
 				"table":{
 					"title":"Person Collection Table",	
 					"search":"Search in Person Collection Table",
+					"embeddedSearch":{
+					
+						"all":"All"
+					},
 					"header":{
 						
 				   		"age":"Age",					    
@@ -850,9 +911,9 @@
 				"search":{
 					"placeholder":{
 						
-				   		"age":"Age",					    
-				   		"division":"Division",					    
-				   		"name":"Name",					    
+								"age":"Age",							
+								"division":"Division",							
+								"name":"Name",							
 					    "id": "Id"
 					}
 				}
@@ -864,11 +925,12 @@
 				"delete": " Delete",
 				"back": " Back",
 				"lists": "{{isval}} in {{inval}}",
+				"selecttab": "Click on tab to show table",
 				"field":{
 					
-			   		"age":"Age",				    
-			   		"division":"Division",				    
-			   		"name":"Name",				    
+							"age":"Age",						
+							"division":"Division",						
+							"name":"Name",						
 				    "id": "Id"
 				}
 			},
@@ -908,6 +970,10 @@
 				"table":{
 					"title":"Person Collectionless Table",	
 					"search":"Search in Person Collectionless Table",
+					"embeddedSearch":{
+					
+						"all":"All"
+					},
 					"header":{
 						
 				   		"age":"Age",					    
@@ -919,9 +985,9 @@
 				"search":{
 					"placeholder":{
 						
-				   		"age":"Age",					    
-				   		"division":"Division",					    
-				   		"name":"Name",					    
+								"age":"Age",							
+								"division":"Division",							
+								"name":"Name",							
 					    "id": "Id"
 					}
 				}
@@ -933,11 +999,12 @@
 				"delete": " Delete",
 				"back": " Back",
 				"lists": "{{isval}} in {{inval}}",
+				"selecttab": "Click on tab to show table",
 				"field":{
 					
-			   		"age":"Age",				    
-			   		"division":"Division",				    
-			   		"name":"Name",				    
+							"age":"Age",						
+							"division":"Division",						
+							"name":"Name",						
 				    "id": "Id"
 				}
 			},
@@ -977,6 +1044,10 @@
 				"table":{
 					"title":"Test Number Table",	
 					"search":"Search in Test Number Table",
+					"embeddedSearch":{
+					
+						"all":"All"
+					},
 					"header":{
 						
 				   		"doubleNr":"Double Nr",					    
@@ -996,17 +1067,17 @@
 				"search":{
 					"placeholder":{
 						
-				   		"doubleNr":"Double Nr",					    
-				   		"floatNr":"Float Nr",					    
-				   		"floatNrScale":"Float Nr Scale",					    
-				   		"integerNr":"Integer Nr",					    
-				   		"integerNrInList":"Integer Nr In List",					    
-				   		"integerNrMax":"Integer Nr Max",					    
-				   		"integerNrMin":"Integer Nr Min",					    
-				   		"integerNrNotEqual":"Integer Nr Not Equal",					    
-				   		"integerNrRange":"Integer Nr Range",					    
-				   		"integerNrUnique":"Integer Nr Unique",					    
-				   		"longNr":"Long Nr",					    
+								"doubleNr":"Double Nr",							
+								"floatNr":"Float Nr",							
+								"floatNrScale":"Float Nr Scale",							
+								"integerNr":"Integer Nr",							
+								"integerNrInList":"Integer Nr In List",							
+								"integerNrMax":"Integer Nr Max",							
+								"integerNrMin":"Integer Nr Min",							
+								"integerNrNotEqual":"Integer Nr Not Equal",							
+								"integerNrRange":"Integer Nr Range",							
+								"integerNrUnique":"Integer Nr Unique",							
+								"longNr":"Long Nr",							
 					    "id": "Id"
 					}
 				}
@@ -1018,19 +1089,20 @@
 				"delete": " Delete",
 				"back": " Back",
 				"lists": "{{isval}} in {{inval}}",
+				"selecttab": "Click on tab to show table",
 				"field":{
 					
-			   		"doubleNr":"Double Nr",				    
-			   		"floatNr":"Float Nr",				    
-			   		"floatNrScale":"Float Nr Scale",				    
-			   		"integerNr":"Integer Nr",				    
-			   		"integerNrInList":"Integer Nr In List",				    
-			   		"integerNrMax":"Integer Nr Max",				    
-			   		"integerNrMin":"Integer Nr Min",				    
-			   		"integerNrNotEqual":"Integer Nr Not Equal",				    
-			   		"integerNrRange":"Integer Nr Range",				    
-			   		"integerNrUnique":"Integer Nr Unique",				    
-			   		"longNr":"Long Nr",				    
+							"doubleNr":"Double Nr",						
+							"floatNr":"Float Nr",						
+							"floatNrScale":"Float Nr Scale",						
+							"integerNr":"Integer Nr",						
+							"integerNrInList":"Integer Nr In List",						
+							"integerNrMax":"Integer Nr Max",						
+							"integerNrMin":"Integer Nr Min",						
+							"integerNrNotEqual":"Integer Nr Not Equal",						
+							"integerNrRange":"Integer Nr Range",						
+							"integerNrUnique":"Integer Nr Unique",						
+							"longNr":"Long Nr",						
 				    "id": "Id"
 				}
 			},
@@ -1078,6 +1150,10 @@
 				"table":{
 					"title":"Test Other Table",	
 					"search":"Search in Test Other Table",
+					"embeddedSearch":{
+					
+						"all":"All"
+					},
 					"header":{
 						
 				   		"booleanNullable":"Boolean Nullable",					    
@@ -1090,10 +1166,10 @@
 				"search":{
 					"placeholder":{
 						
-				   		"booleanNullable":"Boolean Nullable",					    
-				   		"testDate":"Test Date",					    
-				   		"testEnum":"Test Enum",					    
-				   		"testStringType":"Test String Type",					    
+								"booleanNullable":"Boolean Nullable",							
+								"testDate":"Test Date",							
+								"testEnum":"Test Enum",							
+								"testStringType":"Test String Type",							
 					    "id": "Id"
 					}
 				}
@@ -1105,12 +1181,13 @@
 				"delete": " Delete",
 				"back": " Back",
 				"lists": "{{isval}} in {{inval}}",
+				"selecttab": "Click on tab to show table",
 				"field":{
 					
-			   		"booleanNullable":"Boolean Nullable",				    
-			   		"testDate":"Test Date",				    
-			   		"testEnum":"Test Enum",				    
-			   		"testStringType":"Test String Type",				    
+							"booleanNullable":"Boolean Nullable",						
+							"testDate":"Test Date",						
+							"testEnum":"Test Enum",						
+							"testStringType":"Test String Type",						
 				    "id": "Id"
 				}
 			},
@@ -1151,6 +1228,10 @@
 				"table":{
 					"title":"Test String Table",	
 					"search":"Search in Test String Table",
+					"embeddedSearch":{
+					
+						"all":"All"
+					},
 					"header":{
 						
 				   		"blankStr":"Blank Str",					    
@@ -1170,17 +1251,17 @@
 				"search":{
 					"placeholder":{
 						
-				   		"blankStr":"Blank Str",					    
-				   		"creditCardStr":"Credit Card Str",					    
-				   		"emailStr":"Email Str",					    
-				   		"inListStr":"In List Str",					    
-				   		"matchesStr":"Matches Str",					    
-				   		"maxSizeStr":"Max Size Str",					    
-				   		"minSizeStr":"Min Size Str",					    
-				   		"notEqualStr":"Not Equal Str",					    
-				   		"sizeStr":"Size Str",					    
-				   		"uniqueStr":"Unique Str",					    
-				   		"urlStr":"Url Str",					    
+								"blankStr":"Blank Str",							
+								"creditCardStr":"Credit Card Str",							
+								"emailStr":"Email Str",							
+								"inListStr":"In List Str",							
+								"matchesStr":"Matches Str",							
+								"maxSizeStr":"Max Size Str",							
+								"minSizeStr":"Min Size Str",							
+								"notEqualStr":"Not Equal Str",							
+								"sizeStr":"Size Str",							
+								"uniqueStr":"Unique Str",							
+								"urlStr":"Url Str",							
 					    "id": "Id"
 					}
 				}
@@ -1192,19 +1273,20 @@
 				"delete": " Delete",
 				"back": " Back",
 				"lists": "{{isval}} in {{inval}}",
+				"selecttab": "Click on tab to show table",
 				"field":{
 					
-			   		"blankStr":"Blank Str",				    
-			   		"creditCardStr":"Credit Card Str",				    
-			   		"emailStr":"Email Str",				    
-			   		"inListStr":"In List Str",				    
-			   		"matchesStr":"Matches Str",				    
-			   		"maxSizeStr":"Max Size Str",				    
-			   		"minSizeStr":"Min Size Str",				    
-			   		"notEqualStr":"Not Equal Str",				    
-			   		"sizeStr":"Size Str",				    
-			   		"uniqueStr":"Unique Str",				    
-			   		"urlStr":"Url Str",				    
+							"blankStr":"Blank Str",						
+							"creditCardStr":"Credit Card Str",						
+							"emailStr":"Email Str",						
+							"inListStr":"In List Str",						
+							"matchesStr":"Matches Str",						
+							"maxSizeStr":"Max Size Str",						
+							"minSizeStr":"Min Size Str",						
+							"notEqualStr":"Not Equal Str",						
+							"sizeStr":"Size Str",						
+							"uniqueStr":"Unique Str",						
+							"urlStr":"Url Str",						
 				    "id": "Id"
 				}
 			},
@@ -1252,6 +1334,10 @@
 				"table":{
 					"title":"Role Table",	
 					"search":"Search in Role Table",
+					"embeddedSearch":{
+					
+						"all":"All"
+					},
 					"header":{
 						
 				   		"authority":"Authority",					    
@@ -1261,7 +1347,7 @@
 				"search":{
 					"placeholder":{
 						
-				   		"authority":"Authority",					    
+								"authority":"Authority",							
 					    "id": "Id"
 					}
 				}
@@ -1273,9 +1359,10 @@
 				"delete": " Delete",
 				"back": " Back",
 				"lists": "{{isval}} in {{inval}}",
+				"selecttab": "Click on tab to show table",
 				"field":{
 					
-			   		"authority":"Authority",				    
+							"authority":"Authority",						
 				    "id": "Id"
 				}
 			},
@@ -1313,6 +1400,10 @@
 				"table":{
 					"title":"User Table",	
 					"search":"Search in User Table",
+					"embeddedSearch":{
+					
+						"all":"All"
+					},
 					"header":{
 						
 				   		"accountExpired":"Account Expired",					    
@@ -1326,11 +1417,11 @@
 				"search":{
 					"placeholder":{
 						
-				   		"accountExpired":"Account Expired",					    
-				   		"accountLocked":"Account Locked",					    
-				   		"enabled":"Enabled",					    
-				   		"passwordExpired":"Password Expired",					    
-				   		"username":"Username",					    
+								"accountExpired":"Account Expired",							
+								"accountLocked":"Account Locked",							
+								"enabled":"Enabled",							
+								"passwordExpired":"Password Expired",							
+								"username":"Username",							
 					    "id": "Id"
 					}
 				}
@@ -1342,13 +1433,14 @@
 				"delete": " Delete",
 				"back": " Back",
 				"lists": "{{isval}} in {{inval}}",
+				"selecttab": "Click on tab to show table",
 				"field":{
 					
-			   		"accountExpired":"Account Expired",				    
-			   		"accountLocked":"Account Locked",				    
-			   		"enabled":"Enabled",				    
-			   		"passwordExpired":"Password Expired",				    
-			   		"username":"Username",				    
+							"accountExpired":"Account Expired",						
+							"accountLocked":"Account Locked",						
+							"enabled":"Enabled",						
+							"passwordExpired":"Password Expired",						
+							"username":"Username",						
 				    "id": "Id"
 				}
 			},
@@ -1390,6 +1482,10 @@
 				"table":{
 					"title":"User Role Table",	
 					"search":"Search in User Role Table",
+					"embeddedSearch":{
+					
+						"all":"All"
+					},
 					"header":{
 						
 				   		"role":"Role",					    
@@ -1400,8 +1496,8 @@
 				"search":{
 					"placeholder":{
 						
-				   		"role":"Role",					    
-				   		"user":"User",					    
+								"role":"Role",							
+								"user":"User",							
 					    "id": "Id"
 					}
 				}
@@ -1413,10 +1509,11 @@
 				"delete": " Delete",
 				"back": " Back",
 				"lists": "{{isval}} in {{inval}}",
+				"selecttab": "Click on tab to show table",
 				"field":{
 					
-			   		"role":"Role",				    
-			   		"user":"User",				    
+							"role":"Role",						
+							"user":"User",						
 				    "id": "Id"
 				}
 			},
@@ -1455,6 +1552,10 @@
 				"table":{
 					"title":"Classifier Table",	
 					"search":"Search in Classifier Table",
+					"embeddedSearch":{
+					
+						"all":"All"
+					},
 					"header":{
 						
 				   		"classname":"Classname",					    
@@ -1467,10 +1568,10 @@
 				"search":{
 					"placeholder":{
 						
-				   		"classname":"Classname",					    
-				   		"constant":"Constant",					    
-				   		"description":"Description",					    
-				   		"propertyname":"Propertyname",					    
+								"classname":"Classname",							
+								"constant":"Constant",							
+								"description":"Description",							
+								"propertyname":"Propertyname",							
 					    "id": "Id"
 					}
 				}
@@ -1482,12 +1583,13 @@
 				"delete": " Delete",
 				"back": " Back",
 				"lists": "{{isval}} in {{inval}}",
+				"selecttab": "Click on tab to show table",
 				"field":{
 					
-			   		"classname":"Classname",				    
-			   		"constant":"Constant",				    
-			   		"description":"Description",				    
-			   		"propertyname":"Propertyname",				    
+							"classname":"Classname",						
+							"constant":"Constant",						
+							"description":"Description",						
+							"propertyname":"Propertyname",						
 				    "id": "Id"
 				}
 			},

@@ -7,11 +7,22 @@ import grails.transaction.Transactional
 import org.codehaus.groovy.grails.web.json.JSONElement
 import org.codehaus.groovy.grails.web.json.JSONObject
 import org.grails.datastore.mapping.query.api.BuildableCriteria
-
+import defpackage.exceptions.ResourceNotFound
 
 //@GrailsCompileStatic
 @Transactional(readOnly = true)
 class DivisionCollectionSearchService {
+
+	DivisionCollection queryForDivisionCollection(Long divisionCollectionId) {
+		if (!divisionCollectionId || divisionCollectionId < 0) {
+			throw new IllegalArgumentException('no.valid.id')
+		}
+		DivisionCollection divisionCollection = DivisionCollection.where { id == divisionCollectionId }.find()
+		if (!divisionCollection) {
+			throw new ResourceNotFound("No DivisionCollection found with Id :[$divisionCollectionId]")
+		}
+		return divisionCollection
+	}
 
 	PagedResultList search(Map params) {
 

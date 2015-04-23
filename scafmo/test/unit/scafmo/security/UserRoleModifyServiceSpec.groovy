@@ -3,6 +3,7 @@ package scafmo.security
 import grails.test.mixin.TestFor
 import grails.test.mixin.Mock
 import spock.lang.Ignore
+
 import spock.lang.Specification
 import defpackage.exceptions.ResourceNotFound
 import grails.validation.ValidationException
@@ -11,8 +12,10 @@ import grails.validation.ValidationException
 @Mock(UserRole)
 class UserRoleModifyServiceSpec extends Specification {
 
-	void 'Creating UserRole with no data is not possible'() {
+	static final long ILLEGAL_ID = -1L
+	static final long FICTIONAL_ID = 99999999L
 
+	void 'Creating UserRole with no data is not possible'() {
 		setup:
 			Map data = [:]
 		when:
@@ -22,18 +25,15 @@ class UserRoleModifyServiceSpec extends Specification {
 	}
 
 	void 'Creating UserRole with invalid data is not possible'() {
-
 		setup:
-
 			Map data = invalidData()
 		when:
 			service.createUserRole(data)
 		then:
 			thrown(ValidationException)
 	}
-
+	@Ignore
 	void 'Creating UserRole with valid data returns UserRole instance'() {
-
 		setup:
 			Map data = validData()
 		when:
@@ -56,7 +56,7 @@ class UserRoleModifyServiceSpec extends Specification {
 	void 'Updating UserRole with illegal id is not possible'() {
 
 		setup:
-			Map data = [id:-1L]
+			Map data = [id: ILLEGAL_ID]
 		when:
 			service.updateUserRole(data)
 		then:
@@ -66,26 +66,25 @@ class UserRoleModifyServiceSpec extends Specification {
 	void 'Updating UserRole with fictional id is not possible'() {
 
 		setup:
-			Map data = [id:99999999L]
+			Map data = [id: FICTIONAL_ID]
 
 		when:
 			service.updateUserRole(data)
 		then:
 			thrown(ResourceNotFound)
 	}
-
-	@Ignore //TODO: set invalid data first
+	@Ignore
 	void 'Updating UserRole with invalid data is not possible'() {
 
 		setup:
 			Map data = invalidData()
 			data.id = createValidUserRole().id
 		when:
-			UserRole userRole = service.updateUserRole(data)
+			service.updateUserRole(data)
 		then:
 			thrown(ValidationException)
 	}
-
+	@Ignore
 	void 'Updating UserRole with valid data returns UserRole instance'() {
 
 		setup:
@@ -98,20 +97,70 @@ class UserRoleModifyServiceSpec extends Specification {
 			userRole.id == 1
 	}
 
+	void 'Deleting UserRole without id is not possible'() {
+		when:
+			service.deleteUserRole(null)
+		then:
+			thrown(IllegalArgumentException)
+	}
+
+	void 'Deleting UserRole with illegal id is not possible'() {
+
+		setup:
+			long id = ILLEGAL_ID
+		when:
+			service.deleteUserRole(id)
+		then:
+			thrown(IllegalArgumentException)
+	}
+
+	void 'Deleting UserRole with fictional id is not possible'() {
+
+		setup:
+			long id = FICTIONAL_ID
+		when:
+			service.deleteUserRole(id)
+		then:
+			thrown(ResourceNotFound)
+	}
+	@Ignore
+	void 'Deleting saved UserRole is possible'() {
+		setup:
+			Long userRoleId = createValidUserRole().id
+			UserRole userRole = UserRole.findById(userRoleId).find()
+		when:
+			service.deleteUserRole(userRoleId)
+		then:
+			userRole != null
+			UserRole.findById(userRoleId) == null
+	}
+
 	Map invalidData() {
-		return ["foo": "bar"]//Sadisfy 'empty data' exception
+
+		return ['role': null,
+ 'user': null]
 	}
 
 	Map validData() {
-		
-		Map data = ["id":null,"version":null,"role":["id":null,"version":null],"user":["id":null,"version":null]]
 
+		Map data = [
+  'id':  null,
+  'version':  null,
+  'role':  [
+    'id':  null,
+    'version':  null
+  ],
+  'user':  [
+    'id':  null,
+    'version':  null
+  ]
+]
 		return data
 	}
 
-	UserRole createValidUserRole(){
+	UserRole createValidUserRole() {
 		UserRole userRole = new UserRole(validData())
-		userRole.save flush:true, failOnError: true
+		userRole.save flush: true, failOnError: true
 		return userRole
 	}
 

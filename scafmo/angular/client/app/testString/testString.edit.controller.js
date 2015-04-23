@@ -3,32 +3,27 @@
 
 
 angular.module('angularDemoApp')
-    .controller('TestStringEditController', function ($scope, $state, $q, $stateParams, TestStringService, $translate, inform ) {
+    .controller('TestStringEditController', function ($scope, $state, $q, $stateParams, TestStringService, testStringData, $translate, inform ) {
     	$scope.isEditForm = ($stateParams.id)?true:false;
-    	
-    	if($scope.isEditForm){
-    		TestStringService.get({id:$stateParams.id}).$promise.then(
-		        function( response ){
-			       	$scope.testString = angular.extend({}, $scope.testString , response);
-			       	$scope.orig = angular.copy($scope.testString );
-		       	}
-	     	);
-    	}else{
-    		$scope.testString = new TestStringService();
-    	}
-		
-	
+
+		$scope.testString = testStringData;
+
+
 	    $scope.submit = function(frmController) {
 			var deferred = $q.defer();
 	    	var errorCallback = function(response){
 					if (response.data.errors) {
 		                angular.forEach(response.data.errors, function (error) {
-		                    frmController.setExternalValidation(error.field, undefined, error.message);
+							if(angular.element('#'+error.field).length) {
+								frmController.setExternalValidation(error.field, undefined, error.message);
+							} else {
+								inform.add(error.message, {ttl: -1,'type': 'warning'});
+							}
 		                });
 		            }
 					deferred.reject(response);
 		       };
-	       
+
 	    	if($scope.isEditForm){
 	    		TestStringService.update($scope.testString, function(response) {	
 	    			$translate('pages.TestString.messages.update').then(function (msg) {
@@ -42,8 +37,8 @@ angular.module('angularDemoApp')
     				$translate('pages.TestString.messages.create').then(function (msg) {
 				    	inform.add(msg, {'type': 'success'});
 					});
+					$state.go('^.view', { id: response.id }, {location: 'replace'});
 					deferred.resolve(response);
-            	 	$state.go('^.view', { id: response.id });
 		        },errorCallback);
 	    	}
 	        return deferred.promise;

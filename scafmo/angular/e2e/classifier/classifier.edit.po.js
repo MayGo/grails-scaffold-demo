@@ -9,11 +9,11 @@
 
 
 var EditPage = function() {
-  
-  this.classnameEl = element(by.model('classifier.classname'));  
-  this.constantEl = element(by.model('classifier.constant'));  
-  this.descriptionEl = element(by.model('classifier.description'));  
-  this.propertynameEl = element(by.model('classifier.propertyname'));  
+			this.classnameEl = element(by.model('classifier.classname'));
+		this.constantEl = element(by.model('classifier.constant'));
+		this.descriptionEl = element(by.model('classifier.description'));
+		this.propertynameEl = element(by.model('classifier.propertyname'));
+
 };
 
 module.exports = new EditPage();

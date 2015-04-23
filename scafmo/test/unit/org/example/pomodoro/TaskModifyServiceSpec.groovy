@@ -2,7 +2,7 @@ package org.example.pomodoro
 
 import grails.test.mixin.TestFor
 import grails.test.mixin.Mock
-import spock.lang.Ignore
+
 import spock.lang.Specification
 import defpackage.exceptions.ResourceNotFound
 import grails.validation.ValidationException
@@ -11,8 +11,10 @@ import grails.validation.ValidationException
 @Mock(Task)
 class TaskModifyServiceSpec extends Specification {
 
-	void 'Creating Task with no data is not possible'() {
+	static final long ILLEGAL_ID = -1L
+	static final long FICTIONAL_ID = 99999999L
 
+	void 'Creating Task with no data is not possible'() {
 		setup:
 			Map data = [:]
 		when:
@@ -22,9 +24,7 @@ class TaskModifyServiceSpec extends Specification {
 	}
 
 	void 'Creating Task with invalid data is not possible'() {
-
 		setup:
-
 			Map data = invalidData()
 		when:
 			service.createTask(data)
@@ -33,7 +33,6 @@ class TaskModifyServiceSpec extends Specification {
 	}
 
 	void 'Creating Task with valid data returns Task instance'() {
-
 		setup:
 			Map data = validData()
 		when:
@@ -56,7 +55,7 @@ class TaskModifyServiceSpec extends Specification {
 	void 'Updating Task with illegal id is not possible'() {
 
 		setup:
-			Map data = [id:-1L]
+			Map data = [id: ILLEGAL_ID]
 		when:
 			service.updateTask(data)
 		then:
@@ -66,7 +65,7 @@ class TaskModifyServiceSpec extends Specification {
 	void 'Updating Task with fictional id is not possible'() {
 
 		setup:
-			Map data = [id:99999999L]
+			Map data = [id: FICTIONAL_ID]
 
 		when:
 			service.updateTask(data)
@@ -74,14 +73,13 @@ class TaskModifyServiceSpec extends Specification {
 			thrown(ResourceNotFound)
 	}
 
-	@Ignore //TODO: set invalid data first
 	void 'Updating Task with invalid data is not possible'() {
 
 		setup:
 			Map data = invalidData()
 			data.id = createValidTask().id
 		when:
-			Task task = service.updateTask(data)
+			service.updateTask(data)
 		then:
 			thrown(ValidationException)
 	}
@@ -98,20 +96,70 @@ class TaskModifyServiceSpec extends Specification {
 			task.id == 1
 	}
 
+	void 'Deleting Task without id is not possible'() {
+		when:
+			service.deleteTask(null)
+		then:
+			thrown(IllegalArgumentException)
+	}
+
+	void 'Deleting Task with illegal id is not possible'() {
+
+		setup:
+			long id = ILLEGAL_ID
+		when:
+			service.deleteTask(id)
+		then:
+			thrown(IllegalArgumentException)
+	}
+
+	void 'Deleting Task with fictional id is not possible'() {
+
+		setup:
+			long id = FICTIONAL_ID
+		when:
+			service.deleteTask(id)
+		then:
+			thrown(ResourceNotFound)
+	}
+
+	void 'Deleting saved Task is possible'() {
+		setup:
+			Long taskId = createValidTask().id
+			Task task = Task.findById(taskId).find()
+		when:
+			service.deleteTask(taskId)
+		then:
+			task != null
+			Task.findById(taskId) == null
+	}
+
 	Map invalidData() {
-		return ["foo": "bar"]//Sadisfy 'empty data' exception
+
+		return ['details': null,
+ 'status': null,
+ 'summary': null,
+ 'timeSpent': null]
 	}
 
 	Map validData() {
-		
-		Map data = ["id":null,"version":null,"dateCreated":"2015-02-26T12:18:30Z","deadline":"2015-02-25T22:00:00Z","details":"details","status":"Open","summary":"Work Summary 152","timeSpent":0]
 
+		Map data = [
+  'id':  null,
+  'version':  null,
+  'dateCreated':  new Date().clearTime(),
+  'deadline':  new Date().clearTime(),
+  'details':  'details',
+  'status':  'Open',
+  'summary':  'Work Summary 152',
+  'timeSpent':  0
+]
 		return data
 	}
 
-	Task createValidTask(){
+	Task createValidTask() {
 		Task task = new Task(validData())
-		task.save flush:true, failOnError: true
+		task.save flush: true, failOnError: true
 		return task
 	}
 

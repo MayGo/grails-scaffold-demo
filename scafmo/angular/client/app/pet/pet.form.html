@@ -1,116 +1,128 @@
 
 
+<div id="pet_form"
+     ng-init="pageTitle = (isEditForm)?'pages.Pet.edit.title':'pages.Pet.create.title'" data-ng-include=" 'shared/blocks/page_heading.html' "></div>
+<div class="wrapper-md bg-white-only ng-scope">
+    <form name="petForm" class="form-validation form-horizontal" novalidate>
+        <input name="version" type="hidden" ng-model="pet.version" />
 
-
-<div ng-init="pageTitle = (isEditForm)?'pages.Pet.edit.title':'pages.Pet.create.title'" data-ng-include=" 'shared/blocks/page_heading.html' "></div>
-<div class="wrapper-md ng-scope">
-    <div class="row">
-        <div class="col-sm-6">
-            <form name="petForm" class="form-validation form-horizontal"  
-            	novalidate>
-                <div class="panel panel-default">
-                	<div class="panel-heading">
-                      <span class="h4" translate="pages.Pet.edit.form.title"></span>
-                    </div>
-                    <div class="panel-body">
-                        <input name="version" type="hidden" ng-model="pet.version" />
-                        
-                
 	<div class="form-group">
-		<label class="col-sm-2 control-label" for="birthDate" translate="pages.Pet.edit.form.field.birthDate"></label>
+		<label class="col-sm-2 control-label" for="birthDate"
+               translate="pages.Pet.edit.form.field.birthDate"></label>
 		<div class="col-sm-10">
             
-     <div class="input-group input-group-sm">
-     <input name="birthDate" type="text" class="form-control" ng-model="pet.birthDate" 
+     <div class="input-group input-group">
+     <input id="birthDate" name="birthDate" type="text" class="form-control"
+            ng-model="pet.birthDate"
 	     datepicker-popup
-	     is-open="pet.birthDateOpen" 
-	     ng-click="pet.birthDateOpen = true"
+	     is-open="pet._birthDateOpen"
+	     ng-click="pet._birthDateOpen = true"
        required
       />
      <span class="input-group-addon">
        <i class="glyphicon glyphicon-calendar"></i>
      </span>
      </div>
-                           
+      
         </div>
 	</div>
 	<div class="line line-dashed b-b line-lg pull-in"></div>
-	                
-                
+	
+
 	<div class="form-group">
-		<label class="col-sm-2 control-label" for="name" translate="pages.Pet.edit.form.field.name"></label>
+		<label class="col-sm-2 control-label" for="name"
+               translate="pages.Pet.edit.form.field.name"></label>
 		<div class="col-sm-10">
-            <div class="input-group input-group-sm">
+            <div class="input-group input-group">
                     <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
-                    <input name="name" class="form-control" type="text" ng-model="pet.name"  required ></div>                      
+                    
+                    <input id="name" name="name" class="form-control"
+                           type="text"
+                           ng-model="pet.name"
+                 required /></div> 
         </div>
 	</div>
 	<div class="line line-dashed b-b line-lg pull-in"></div>
-	                
-                
+	
+
 	<div class="form-group">
-		<label class="col-sm-2 control-label" for="visits" translate="pages.Pet.edit.form.field.visits"></label>
+		<label class="col-sm-2 control-label" for="visits"
+               translate="pages.Pet.edit.form.field.visits"></label>
 		<div class="col-sm-10">
             <!--OneToMany-->
-          <tags-input ng-model="pet.visits">
-              <auto-complete source="autocompleteService.visitQuery($viewValue, ['id','description','date'], true)" ></auto-complete>
-             </tags-input>                     
+          <tags-input
+                  name="visits"
+                  id="visits"
+                  ng-model="pet.visits">
+              <auto-complete source="autocompleteService.visitQuery($query, ['id','description','date'], true)" ></auto-complete>
+             </tags-input>
         </div>
 	</div>
 	<div class="line line-dashed b-b line-lg pull-in"></div>
-	                
-                
+	
+
 	<div class="form-group">
-		<label class="col-sm-2 control-label" for="type" translate="pages.Pet.edit.form.field.type"></label>
+		<label class="col-sm-2 control-label" for="type"
+               translate="pages.Pet.edit.form.field.type"></label>
 		<div class="col-sm-10">
             <!--ManyToOne-->
-     <div class="input-group input-group-sm">
+     <div class="input-group input-group">
           <span class="input-group-addon"><i class="glyphicon glyphicon-flash"></i></span>  
-          <input name="type" type="text" class="form-control" 
-          ng-model="pet.type"   
-          typeahead-template-url="typeAutocompleteTemplate.html" 
+          <input id="type" name="type" type="text" class="form-control"
+          ng-model="pet.type"
+          typeahead-template-url="typeAutocompleteTemplate.html"
           typeahead-editable="false" 
           typeahead="b for b in autocompleteService.petTypeQuery($viewValue, ['id','name'])" 
          
           typeahead-input-formatter="autocompleteService.petTypeFormatLabel($model, ['id','name'])"
-       required></div> 
-     <script type="text/ng-template" id="typeAutocompleteTemplate.html"><a><span bind-html-unsafe="match.model.id | typeaheadHighlight:query"></span> <span bind-html-unsafe="match.model.name | typeaheadHighlight:query"></span> </a></script>                     
+       required />
+         <span class="input-group-btn" item-selector update-model="pet.type"
+               ui-link="app.pet.edit.petTypeSearchModal" >
+         </span>
+     </div> 
+     <script type="text/ng-template" id="typeAutocompleteTemplate.html"><a><span bind-html-unsafe="match.model.id | typeaheadHighlight:query"></span> <span bind-html-unsafe="match.model.name | typeaheadHighlight:query"></span> </a></script>
         </div>
 	</div>
 	<div class="line line-dashed b-b line-lg pull-in"></div>
-	                
-                
+	
+
 	<div class="form-group">
-		<label class="col-sm-2 control-label" for="owner" translate="pages.Pet.edit.form.field.owner"></label>
+		<label class="col-sm-2 control-label" for="owner"
+               translate="pages.Pet.edit.form.field.owner"></label>
 		<div class="col-sm-10">
             <!--ManyToOne-->
-     <div class="input-group input-group-sm">
+     <div class="input-group input-group">
           <span class="input-group-addon"><i class="glyphicon glyphicon-flash"></i></span>  
-          <input name="owner" type="text" class="form-control" 
-          ng-model="pet.owner"   
-          typeahead-template-url="ownerAutocompleteTemplate.html" 
+          <input id="owner" name="owner" type="text" class="form-control"
+          ng-model="pet.owner"
+          typeahead-template-url="ownerAutocompleteTemplate.html"
           typeahead-editable="false" 
-          typeahead="b for b in autocompleteService.ownerQuery($viewValue, ['id','address','city','firstName'])" 
+          typeahead="b for b in autocompleteService.ownerQuery($viewValue, ['id','telephone','lastName','firstName'])" 
          
-          typeahead-input-formatter="autocompleteService.ownerFormatLabel($model, ['id','address','city','firstName'])"
-       required></div> 
-     <script type="text/ng-template" id="ownerAutocompleteTemplate.html"><a><span bind-html-unsafe="match.model.id | typeaheadHighlight:query"></span> <span bind-html-unsafe="match.model.address | typeaheadHighlight:query"></span> <span bind-html-unsafe="match.model.city | typeaheadHighlight:query"></span> <span bind-html-unsafe="match.model.firstName | typeaheadHighlight:query"></span> </a></script>                     
+          typeahead-input-formatter="autocompleteService.ownerFormatLabel($model, ['id','telephone','lastName','firstName'])"
+       required />
+         <span class="input-group-btn" item-selector update-model="pet.owner"
+               ui-link="app.pet.edit.ownerSearchModal" >
+         </span>
+     </div> 
+     <script type="text/ng-template" id="ownerAutocompleteTemplate.html"><a><span bind-html-unsafe="match.model.id | typeaheadHighlight:query"></span> <span bind-html-unsafe="match.model.telephone | typeaheadHighlight:query"></span> <span bind-html-unsafe="match.model.lastName | typeaheadHighlight:query"></span> <span bind-html-unsafe="match.model.firstName | typeaheadHighlight:query"></span> </a></script>
         </div>
 	</div>
 	<div class="line line-dashed b-b line-lg pull-in"></div>
-	                
-                	</div>
-                    <footer class="panel-footer text-right bg-light lter">
-                      	<button id="petSubmitBtn"
-                      		class="btn btn-success" 
-	                      	type='submit' 
-	                      	ng-disabled="petForm.$invalid" 
-	                      	translate="pages.Pet.edit.form.submit" 
-	                      	mx-show-loading ng-click="submit(petForm)"></button> 
-                		<a class="btn btn-default" ng-click="back()" translate="pages.Pet.edit.form.cancel" mx-show-loading></a> 
-                    </footer>
-                </div>
-            </form>
+	
+
+
+        <div class="form-group">
+            <div class="form-action pull-right">
+                <button id="petSubmitBtn"
+                    class="btn btn-success"
+                    type='submit'
+                    ng-disabled="petForm.$invalid"
+                    translate="pages.Pet.edit.form.submit"
+                    mx-show-loading ng-click="submit(petForm)"></button>
+                <a class="btn btn-default" ng-click="back()" translate="pages.Pet.edit.form.cancel" mx-show-loading></a>
+            </div>
+            <div class="clearfix"/>
         </div>
-    </div>
+    </form>
 </div>

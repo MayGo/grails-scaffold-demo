@@ -14,14 +14,47 @@ $stateProvider
 		}).state('app.user.create',{
 			url: '/create',
 			templateUrl: 'app/user/user.form.html',
-			controller: 'UserEditController'
+			controller: 'UserEditController',
+			resolve:{
+				userData: function($stateParams, UserService) {
+					return new UserService();
+				}
+			}
 		}).state('app.user.edit',{
 			url: '/edit/:id',
 			templateUrl: 'app/user/user.form.html',
-			controller: 'UserEditController'
+			controller: 'UserEditController',
+			resolve:{
+				userData: function($stateParams, UserService){
+					return UserService.get({id:$stateParams.id}).$promise.then(
+						function( response ){
+							return response;
+						}
+					);
+				}
+			}
 		}).state('app.user.view',{
 			url: '/view/:id',
 			templateUrl: 'app/user/user.view.html',
-			controller: 'UserViewController'
-		});		
+			controller: 'UserViewController',
+				resolve:{
+				userData: function($stateParams, UserService){
+					return UserService.get({id:$stateParams.id}).$promise.then(
+						function( response ){
+							return response;
+						}
+					);
+				}
+			}
+		})
+
+
+
+		.state('app.user.view.userRole',{
+			url: '/userRole/:relationName',
+			templateUrl: 'app/userRole/userRole.list.html',
+			controller: 'UserRoleListController'
+		})
+	
+;
 });

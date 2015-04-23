@@ -1,6 +1,5 @@
 package org.example.pomodoro.v1
 
-import grails.transaction.Transactional
 import grails.validation.ValidationException
 import org.codehaus.groovy.grails.web.servlet.HttpHeaders
 import org.springframework.http.HttpStatus
@@ -9,27 +8,22 @@ import org.restapidoc.annotation.RestApiParam
 import org.restapidoc.annotation.RestApiParams
 import org.restapidoc.annotation.RestApi
 import org.restapidoc.pojo.RestApiParamType
-import defpackage.CustomRestfulController
 import defpackage.exceptions.ResourceNotFound
 import org.example.pomodoro.Tag
 import org.example.pomodoro.TagModifyService
 import org.example.pomodoro.TagSearchService
 
-
-@Transactional(readOnly = true)
 @RestApi(name = 'Tag services', description = 'Methods for managing Tags')
-class TagController extends CustomRestfulController<Tag> {
+class TagController {
 
 	static namespace = 'v1'
+
+	static allowedMethods = [save: 'POST', update: 'PUT', delete: 'DELETE']
 
 	static responseFormats = ['json']
 
 	TagSearchService tagSearchService
 	TagModifyService tagModifyService
-
-	TagController() {
-		super(Tag, false /* read-only */)
-	}
 
 	@RestApiMethod(description = 'List all Tags', listing = true)
 	@RestApiParams(params = [
@@ -55,22 +49,18 @@ class TagController extends CustomRestfulController<Tag> {
 
 	@RestApiMethod(description='Get a Tag')
 	@RestApiParams(params=[
-		@RestApiParam(name='id', type='long', paramType = RestApiParamType.PATH, description = 'The Tag id')
+		@RestApiParam(
+				name='id', type='long',
+				paramType = RestApiParamType.PATH,
+				description = 'The Tag id'
+		)
 	])
 	def show() {
-		// We pass which fields to be rendered with the includes attributes,
-		// we exclude the class property for all responses.
-		respond queryForResource(params.id), [includes: includes, excludes: excludes]
+		respond tagSearchService.queryForTag(params.long('id')),
+				[includes: includes, excludes: excludes]
 	}
 
-	/**
-	 * Saves a Tag
-	 */
-	@Transactional
 	@RestApiMethod(description = 'Save a Tag')
-	@RestApiParams(params = [
-			@RestApiParam(name = 'id', type = 'long', paramType = RestApiParamType.PATH, description = 'The Object id')
-	])
 	def save() {
 
 		Tag instance = tagModifyService.createTag(request.JSON)
@@ -83,14 +73,28 @@ class TagController extends CustomRestfulController<Tag> {
 
 	}
 
-	/**
-	 * Updates a Tag for the given id
-	 * @param id
-	 */
-	@Transactional
+	@RestApiMethod(description = 'Edit a Tag')
+	@RestApiParams(params = [
+		@RestApiParam(
+				name = 'id',
+				type = 'long',
+				paramType = RestApiParamType.PATH,
+				description = 'The Tag id'
+		)
+	])
+	def edit() {
+		respond tagSearchService.queryForTag(params.long('id')),
+				[includes: includes, excludes: excludes]
+	}
+
 	@RestApiMethod(description = 'Update a Tag')
 	@RestApiParams(params = [
-			@RestApiParam(name = 'id', type = 'long', paramType = RestApiParamType.PATH, description = 'The Tag id')
+			@RestApiParam(
+					name = 'id',
+					type = 'long',
+					paramType = RestApiParamType.PATH,
+					description = 'The Tag id'
+			)
 	])
 	def update() {
 		request.JSON.id = params.long('id')
@@ -103,6 +107,19 @@ class TagController extends CustomRestfulController<Tag> {
 		respond instance, [status: HttpStatus.OK]
 	}
 
+	@RestApiMethod(description = 'Delete a Tag')
+	@RestApiParams(params = [
+			@RestApiParam(
+					name = 'id',
+					type = 'long',
+					paramType = RestApiParamType.PATH,
+					description = 'The Tag id'
+			)
+	])
+	def delete() {
+		tagModifyService.deleteTag(params.long('id'))
+		render status: HttpStatus.NO_CONTENT
+	}
 
 	private getIncludes() {
 		params.includes?.tokenize(',')
@@ -112,26 +129,18 @@ class TagController extends CustomRestfulController<Tag> {
 		params.excludes?.tokenize(',')
 	}
 
-	@Override
-	protected Tag queryForResource(Serializable id) {
-		if (id.isNumber()) {
-			resource.get(id)
-		} else {
-			notFound()
-		}
-	}
-
-	def handleValidationException(ValidationException ex){
+	def handleValidationException(ValidationException ex) {
 		respond ex.errors, [status: HttpStatus.UNPROCESSABLE_ENTITY]
 	}
-	def handleResourceNotFoundException(ResourceNotFound ex){
+
+	def handleResourceNotFoundException(ResourceNotFound ex) {
 		log.error ex
 		render status: HttpStatus.NOT_FOUND
 	}
 
-	def handleIllegalArgumentExceptionn(IllegalArgumentException ex){
+	def handleIllegalArgumentExceptionn(IllegalArgumentException ex) {
 		log.error ex
-		respond ex, [status: HttpStatus.UNPROCESSABLE_ENTITY]
+		Map errors = ['error': ex.message]
+		respond errors as Object, [status: HttpStatus.UNPROCESSABLE_ENTITY]
 	}
-
 }

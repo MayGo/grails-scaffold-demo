@@ -2,7 +2,7 @@ package scafmo.collection
 
 import grails.test.mixin.TestFor
 import grails.test.mixin.Mock
-import spock.lang.Ignore
+
 import spock.lang.Specification
 import defpackage.exceptions.ResourceNotFound
 import grails.validation.ValidationException
@@ -11,8 +11,10 @@ import grails.validation.ValidationException
 @Mock(PersonCollection)
 class PersonCollectionModifyServiceSpec extends Specification {
 
-	void 'Creating PersonCollection with no data is not possible'() {
+	static final long ILLEGAL_ID = -1L
+	static final long FICTIONAL_ID = 99999999L
 
+	void 'Creating PersonCollection with no data is not possible'() {
 		setup:
 			Map data = [:]
 		when:
@@ -22,9 +24,7 @@ class PersonCollectionModifyServiceSpec extends Specification {
 	}
 
 	void 'Creating PersonCollection with invalid data is not possible'() {
-
 		setup:
-
 			Map data = invalidData()
 		when:
 			service.createPersonCollection(data)
@@ -33,7 +33,6 @@ class PersonCollectionModifyServiceSpec extends Specification {
 	}
 
 	void 'Creating PersonCollection with valid data returns PersonCollection instance'() {
-
 		setup:
 			Map data = validData()
 		when:
@@ -56,7 +55,7 @@ class PersonCollectionModifyServiceSpec extends Specification {
 	void 'Updating PersonCollection with illegal id is not possible'() {
 
 		setup:
-			Map data = [id:-1L]
+			Map data = [id: ILLEGAL_ID]
 		when:
 			service.updatePersonCollection(data)
 		then:
@@ -66,7 +65,7 @@ class PersonCollectionModifyServiceSpec extends Specification {
 	void 'Updating PersonCollection with fictional id is not possible'() {
 
 		setup:
-			Map data = [id:99999999L]
+			Map data = [id: FICTIONAL_ID]
 
 		when:
 			service.updatePersonCollection(data)
@@ -74,14 +73,13 @@ class PersonCollectionModifyServiceSpec extends Specification {
 			thrown(ResourceNotFound)
 	}
 
-	@Ignore //TODO: set invalid data first
 	void 'Updating PersonCollection with invalid data is not possible'() {
 
 		setup:
 			Map data = invalidData()
 			data.id = createValidPersonCollection().id
 		when:
-			PersonCollection personCollection = service.updatePersonCollection(data)
+			service.updatePersonCollection(data)
 		then:
 			thrown(ValidationException)
 	}
@@ -98,20 +96,64 @@ class PersonCollectionModifyServiceSpec extends Specification {
 			personCollection.id == 1
 	}
 
+	void 'Deleting PersonCollection without id is not possible'() {
+		when:
+			service.deletePersonCollection(null)
+		then:
+			thrown(IllegalArgumentException)
+	}
+
+	void 'Deleting PersonCollection with illegal id is not possible'() {
+
+		setup:
+			long id = ILLEGAL_ID
+		when:
+			service.deletePersonCollection(id)
+		then:
+			thrown(IllegalArgumentException)
+	}
+
+	void 'Deleting PersonCollection with fictional id is not possible'() {
+
+		setup:
+			long id = FICTIONAL_ID
+		when:
+			service.deletePersonCollection(id)
+		then:
+			thrown(ResourceNotFound)
+	}
+
+	void 'Deleting saved PersonCollection is possible'() {
+		setup:
+			Long personCollectionId = createValidPersonCollection().id
+			PersonCollection personCollection = PersonCollection.findById(personCollectionId).find()
+		when:
+			service.deletePersonCollection(personCollectionId)
+		then:
+			personCollection != null
+			PersonCollection.findById(personCollectionId) == null
+	}
+
 	Map invalidData() {
-		return ["foo": "bar"]//Sadisfy 'empty data' exception
+
+		return ['age': null,
+ 'name': '']
 	}
 
 	Map validData() {
-		
-		Map data = ["id":null,"version":null,"age":456,"name":"John454 Doe455"]
 
+		Map data = [
+  'id':  null,
+  'version':  null,
+  'age':  456,
+  'name':  'John454 Doe455'
+]
 		return data
 	}
 
-	PersonCollection createValidPersonCollection(){
+	PersonCollection createValidPersonCollection() {
 		PersonCollection personCollection = new PersonCollection(validData())
-		personCollection.save flush:true, failOnError: true
+		personCollection.save flush: true, failOnError: true
 		return personCollection
 	}
 

@@ -1,6 +1,5 @@
 package org.grails.samples.v1
 
-import grails.transaction.Transactional
 import grails.validation.ValidationException
 import org.codehaus.groovy.grails.web.servlet.HttpHeaders
 import org.springframework.http.HttpStatus
@@ -9,27 +8,22 @@ import org.restapidoc.annotation.RestApiParam
 import org.restapidoc.annotation.RestApiParams
 import org.restapidoc.annotation.RestApi
 import org.restapidoc.pojo.RestApiParamType
-import defpackage.CustomRestfulController
 import defpackage.exceptions.ResourceNotFound
 import org.grails.samples.Pet
 import org.grails.samples.PetModifyService
 import org.grails.samples.PetSearchService
 
-
-@Transactional(readOnly = true)
 @RestApi(name = 'Pet services', description = 'Methods for managing Pets')
-class PetController extends CustomRestfulController<Pet> {
+class PetController {
 
 	static namespace = 'v1'
+
+	static allowedMethods = [save: 'POST', update: 'PUT', delete: 'DELETE']
 
 	static responseFormats = ['json']
 
 	PetSearchService petSearchService
 	PetModifyService petModifyService
-
-	PetController() {
-		super(Pet, false /* read-only */)
-	}
 
 	@RestApiMethod(description = 'List all Pets', listing = true)
 	@RestApiParams(params = [
@@ -55,22 +49,18 @@ class PetController extends CustomRestfulController<Pet> {
 
 	@RestApiMethod(description='Get a Pet')
 	@RestApiParams(params=[
-		@RestApiParam(name='id', type='long', paramType = RestApiParamType.PATH, description = 'The Pet id')
+		@RestApiParam(
+				name='id', type='long',
+				paramType = RestApiParamType.PATH,
+				description = 'The Pet id'
+		)
 	])
 	def show() {
-		// We pass which fields to be rendered with the includes attributes,
-		// we exclude the class property for all responses.
-		respond queryForResource(params.id), [includes: includes, excludes: excludes]
+		respond petSearchService.queryForPet(params.long('id')),
+				[includes: includes, excludes: excludes]
 	}
 
-	/**
-	 * Saves a Pet
-	 */
-	@Transactional
 	@RestApiMethod(description = 'Save a Pet')
-	@RestApiParams(params = [
-			@RestApiParam(name = 'id', type = 'long', paramType = RestApiParamType.PATH, description = 'The Object id')
-	])
 	def save() {
 
 		Pet instance = petModifyService.createPet(request.JSON)
@@ -83,14 +73,28 @@ class PetController extends CustomRestfulController<Pet> {
 
 	}
 
-	/**
-	 * Updates a Pet for the given id
-	 * @param id
-	 */
-	@Transactional
+	@RestApiMethod(description = 'Edit a Pet')
+	@RestApiParams(params = [
+		@RestApiParam(
+				name = 'id',
+				type = 'long',
+				paramType = RestApiParamType.PATH,
+				description = 'The Pet id'
+		)
+	])
+	def edit() {
+		respond petSearchService.queryForPet(params.long('id')),
+				[includes: includes, excludes: excludes]
+	}
+
 	@RestApiMethod(description = 'Update a Pet')
 	@RestApiParams(params = [
-			@RestApiParam(name = 'id', type = 'long', paramType = RestApiParamType.PATH, description = 'The Pet id')
+			@RestApiParam(
+					name = 'id',
+					type = 'long',
+					paramType = RestApiParamType.PATH,
+					description = 'The Pet id'
+			)
 	])
 	def update() {
 		request.JSON.id = params.long('id')
@@ -103,6 +107,19 @@ class PetController extends CustomRestfulController<Pet> {
 		respond instance, [status: HttpStatus.OK]
 	}
 
+	@RestApiMethod(description = 'Delete a Pet')
+	@RestApiParams(params = [
+			@RestApiParam(
+					name = 'id',
+					type = 'long',
+					paramType = RestApiParamType.PATH,
+					description = 'The Pet id'
+			)
+	])
+	def delete() {
+		petModifyService.deletePet(params.long('id'))
+		render status: HttpStatus.NO_CONTENT
+	}
 
 	private getIncludes() {
 		params.includes?.tokenize(',')
@@ -112,26 +129,18 @@ class PetController extends CustomRestfulController<Pet> {
 		params.excludes?.tokenize(',')
 	}
 
-	@Override
-	protected Pet queryForResource(Serializable id) {
-		if (id.isNumber()) {
-			resource.get(id)
-		} else {
-			notFound()
-		}
-	}
-
-	def handleValidationException(ValidationException ex){
+	def handleValidationException(ValidationException ex) {
 		respond ex.errors, [status: HttpStatus.UNPROCESSABLE_ENTITY]
 	}
-	def handleResourceNotFoundException(ResourceNotFound ex){
+
+	def handleResourceNotFoundException(ResourceNotFound ex) {
 		log.error ex
 		render status: HttpStatus.NOT_FOUND
 	}
 
-	def handleIllegalArgumentExceptionn(IllegalArgumentException ex){
+	def handleIllegalArgumentExceptionn(IllegalArgumentException ex) {
 		log.error ex
-		respond ex, [status: HttpStatus.UNPROCESSABLE_ENTITY]
+		Map errors = ['error': ex.message]
+		respond errors as Object, [status: HttpStatus.UNPROCESSABLE_ENTITY]
 	}
-
 }

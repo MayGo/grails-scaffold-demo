@@ -5,19 +5,20 @@ import spock.lang.Unroll
 import spock.lang.Specification
 import defpackage.ConstraintHelper
 
-
 @TestFor(TestNumber)
 class TestNumberConstraintsSpec extends Specification {
 
 	def setup() {
-		//mock a TestNumber with some data (put unique violations in here so they can be tested, the others aren't needed)
+		//mock a TestNumber with some data
+		//(put unique violations in here so they can be tested, the others aren't needed)
 		mockForConstraintsTests( TestNumber, [ new TestNumber() ] )
 	}
 
 	@Unroll("TestNumber constraint on field '#field' with value '#val' gets '#error'")
 	def "All TestNumber constraints"() {
 		when:
-			def obj = new TestNumber("$field": val)
+			TestNumber obj = new TestNumber()
+			obj."$field" = val
 
 		then:
 			ConstraintHelper.validateConstraints(obj, field, error)
@@ -31,9 +32,9 @@ class TestNumberConstraintsSpec extends Specification {
 			'inList' | 'integerNrInList' | '111112'
 			'valid' | 'integerNrInList' | '1'
 			'valid' | 'integerNrMax' | 3
-			'max' | 'integerNrMax' | 4
+			'max' | 'integerNrMax' | 3 + 1
 			'valid' | 'integerNrMin' | 2
-			'min' | 'integerNrMin' | 1
+			'min' | 'integerNrMin' | 2 - 1
 			'notEqual' | 'integerNrNotEqual' | '1'
 			'valid' | 'integerNrNotEqual' | '11112'
 			'valid' | 'integerNrRange' | 18

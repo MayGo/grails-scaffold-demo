@@ -1,5 +1,6 @@
 package defpackage
 
+import grails.util.Holders
 import org.example.pomodoro.Tag
 import org.example.pomodoro.Task
 import org.grails.samples.Owner
@@ -28,6 +29,8 @@ class TestDataGeneratorService {
 	def sessionFactory
 	def propertyInstanceMap = org.codehaus.groovy.grails.plugins.DomainClassGrailsPlugin.PROPERTY_INSTANCE_MAP
 
+	static final int GENERATE_N_ITEMS = (Holders.config.generateTestDataAmount)?:150
+
 	void generate() {
 		log.info 'Generating test data.'
 		boolean generateTestData = true
@@ -40,7 +43,7 @@ class TestDataGeneratorService {
 			return
 		}
 
-		(1..150).each { index ->
+		(1..GENERATE_N_ITEMS).each { index ->
 			Tag.withNewTransaction {
 
 				Tag.build()

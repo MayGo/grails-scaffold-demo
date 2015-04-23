@@ -10,6 +10,7 @@
 
 var EditPage = function() {
   
+  this.dateCreatedEl = element(by.model('search.dateCreated'));  
   this.deadlineEl = element(by.model('search.deadline'));  
   this.detailsEl = element(by.model('search.details'));  
   this.statusEl = element(by.model('search.status'));  

@@ -9,9 +9,9 @@
 
 
 var EditPage = function() {
-  
-  this.firstNameEl = element(by.model('person.firstName'));  
-  this.lastNameEl = element(by.model('person.lastName'));  
+			this.firstNameEl = element(by.model('person.firstName'));
+		this.lastNameEl = element(by.model('person.lastName'));
+
 };
 
 module.exports = new EditPage();

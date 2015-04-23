@@ -7,11 +7,22 @@ import grails.transaction.Transactional
 import org.codehaus.groovy.grails.web.json.JSONElement
 import org.codehaus.groovy.grails.web.json.JSONObject
 import org.grails.datastore.mapping.query.api.BuildableCriteria
-
+import defpackage.exceptions.ResourceNotFound
 
 //@GrailsCompileStatic
 @Transactional(readOnly = true)
 class PetTypeSearchService {
+
+	PetType queryForPetType(Long petTypeId) {
+		if (!petTypeId || petTypeId < 0) {
+			throw new IllegalArgumentException('no.valid.id')
+		}
+		PetType petType = PetType.where { id == petTypeId }.find()
+		if (!petType) {
+			throw new ResourceNotFound("No PetType found with Id :[$petTypeId]")
+		}
+		return petType
+	}
 
 	PagedResultList search(Map params) {
 

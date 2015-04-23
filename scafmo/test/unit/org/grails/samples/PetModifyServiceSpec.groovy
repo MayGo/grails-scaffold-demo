@@ -2,7 +2,7 @@ package org.grails.samples
 
 import grails.test.mixin.TestFor
 import grails.test.mixin.Mock
-import spock.lang.Ignore
+
 import spock.lang.Specification
 import defpackage.exceptions.ResourceNotFound
 import grails.validation.ValidationException
@@ -11,8 +11,10 @@ import grails.validation.ValidationException
 @Mock(Pet)
 class PetModifyServiceSpec extends Specification {
 
-	void 'Creating Pet with no data is not possible'() {
+	static final long ILLEGAL_ID = -1L
+	static final long FICTIONAL_ID = 99999999L
 
+	void 'Creating Pet with no data is not possible'() {
 		setup:
 			Map data = [:]
 		when:
@@ -22,9 +24,7 @@ class PetModifyServiceSpec extends Specification {
 	}
 
 	void 'Creating Pet with invalid data is not possible'() {
-
 		setup:
-
 			Map data = invalidData()
 		when:
 			service.createPet(data)
@@ -33,7 +33,6 @@ class PetModifyServiceSpec extends Specification {
 	}
 
 	void 'Creating Pet with valid data returns Pet instance'() {
-
 		setup:
 			Map data = validData()
 		when:
@@ -56,7 +55,7 @@ class PetModifyServiceSpec extends Specification {
 	void 'Updating Pet with illegal id is not possible'() {
 
 		setup:
-			Map data = [id:-1L]
+			Map data = [id: ILLEGAL_ID]
 		when:
 			service.updatePet(data)
 		then:
@@ -66,7 +65,7 @@ class PetModifyServiceSpec extends Specification {
 	void 'Updating Pet with fictional id is not possible'() {
 
 		setup:
-			Map data = [id:99999999L]
+			Map data = [id: FICTIONAL_ID]
 
 		when:
 			service.updatePet(data)
@@ -74,14 +73,13 @@ class PetModifyServiceSpec extends Specification {
 			thrown(ResourceNotFound)
 	}
 
-	@Ignore //TODO: set invalid data first
 	void 'Updating Pet with invalid data is not possible'() {
 
 		setup:
 			Map data = invalidData()
 			data.id = createValidPet().id
 		when:
-			Pet pet = service.updatePet(data)
+			service.updatePet(data)
 		then:
 			thrown(ValidationException)
 	}
@@ -98,20 +96,74 @@ class PetModifyServiceSpec extends Specification {
 			pet.id == 1
 	}
 
+	void 'Deleting Pet without id is not possible'() {
+		when:
+			service.deletePet(null)
+		then:
+			thrown(IllegalArgumentException)
+	}
+
+	void 'Deleting Pet with illegal id is not possible'() {
+
+		setup:
+			long id = ILLEGAL_ID
+		when:
+			service.deletePet(id)
+		then:
+			thrown(IllegalArgumentException)
+	}
+
+	void 'Deleting Pet with fictional id is not possible'() {
+
+		setup:
+			long id = FICTIONAL_ID
+		when:
+			service.deletePet(id)
+		then:
+			thrown(ResourceNotFound)
+	}
+
+	void 'Deleting saved Pet is possible'() {
+		setup:
+			Long petId = createValidPet().id
+			Pet pet = Pet.findById(petId).find()
+		when:
+			service.deletePet(petId)
+		then:
+			pet != null
+			Pet.findById(petId) == null
+	}
+
 	Map invalidData() {
-		return ["foo": "bar"]//Sadisfy 'empty data' exception
+
+		return ['birthDate': null,
+ 'name': null,
+ 'type': null,
+ 'owner': null]
 	}
 
 	Map validData() {
-		
-		Map data = ["id":null,"version":null,"birthDate":"2015-02-25T22:00:00Z","name":"Pet 302","owner":["id":752,"version":0],"type":["id":null,"version":null]]
 
+		Map data = [
+  'id':  null,
+  'version':  null,
+  'birthDate':  new Date().clearTime(),
+  'name':  'Pet 302',
+  'owner':  [
+    'id':  752,
+    'version':  0
+  ],
+  'type':  [
+    'id':  null,
+    'version':  null
+  ]
+]
 		return data
 	}
 
-	Pet createValidPet(){
+	Pet createValidPet() {
 		Pet pet = new Pet(validData())
-		pet.save flush:true, failOnError: true
+		pet.save flush: true, failOnError: true
 		return pet
 	}
 

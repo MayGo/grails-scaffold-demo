@@ -1,99 +1,119 @@
 
 
+<div id="owner_form"
+     ng-init="pageTitle = (isEditForm)?'pages.Owner.edit.title':'pages.Owner.create.title'" data-ng-include=" 'shared/blocks/page_heading.html' "></div>
+<div class="wrapper-md bg-white-only ng-scope">
+    <form name="ownerForm" class="form-validation form-horizontal" novalidate>
+        <input name="version" type="hidden" ng-model="owner.version" />
 
+	<div class="form-group">
+		<label class="col-sm-2 control-label" for="address"
+               translate="pages.Owner.edit.form.field.address"></label>
+		<div class="col-sm-10">
+            <div class="input-group input-group">
+                    <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
+                    
+                    <input id="address" name="address" class="form-control"
+                           type="text"
+                           ng-model="owner.address"
+                 required /></div> 
+        </div>
+	</div>
+	<div class="line line-dashed b-b line-lg pull-in"></div>
+	
 
-<div ng-init="pageTitle = (isEditForm)?'pages.Owner.edit.title':'pages.Owner.create.title'" data-ng-include=" 'shared/blocks/page_heading.html' "></div>
-<div class="wrapper-md ng-scope">
-    <div class="row">
-        <div class="col-sm-6">
-            <form name="ownerForm" class="form-validation form-horizontal"  
-            	novalidate>
-                <div class="panel panel-default">
-                	<div class="panel-heading">
-                      <span class="h4" translate="pages.Owner.edit.form.title"></span>
-                    </div>
-                    <div class="panel-body">
-                        <input name="version" type="hidden" ng-model="owner.version" />
-                        
-                
 	<div class="form-group">
-		<label class="col-sm-2 control-label" for="address" translate="pages.Owner.edit.form.field.address"></label>
+		<label class="col-sm-2 control-label" for="city"
+               translate="pages.Owner.edit.form.field.city"></label>
 		<div class="col-sm-10">
-            <div class="input-group input-group-sm">
+            <div class="input-group input-group">
                     <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
-                    <input name="address" class="form-control" type="text" ng-model="owner.address"  required ></div>                      
+                    
+                    <input id="city" name="city" class="form-control"
+                           type="text"
+                           ng-model="owner.city"
+                 required /></div> 
         </div>
 	</div>
 	<div class="line line-dashed b-b line-lg pull-in"></div>
-	                
-                
+	
+
 	<div class="form-group">
-		<label class="col-sm-2 control-label" for="city" translate="pages.Owner.edit.form.field.city"></label>
+		<label class="col-sm-2 control-label" for="firstName"
+               translate="pages.Owner.edit.form.field.firstName"></label>
 		<div class="col-sm-10">
-            <div class="input-group input-group-sm">
+            <div class="input-group input-group">
                     <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
-                    <input name="city" class="form-control" type="text" ng-model="owner.city"  required ></div>                      
+                    
+                    <input id="firstName" name="firstName" class="form-control"
+                           type="text"
+                           ng-model="owner.firstName"
+                 required /></div> 
         </div>
 	</div>
 	<div class="line line-dashed b-b line-lg pull-in"></div>
-	                
-                
+	
+
 	<div class="form-group">
-		<label class="col-sm-2 control-label" for="firstName" translate="pages.Owner.edit.form.field.firstName"></label>
+		<label class="col-sm-2 control-label" for="lastName"
+               translate="pages.Owner.edit.form.field.lastName"></label>
 		<div class="col-sm-10">
-            <div class="input-group input-group-sm">
+            <div class="input-group input-group">
                     <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
-                    <input name="firstName" class="form-control" type="text" ng-model="owner.firstName"  required ></div>                      
+                    
+                    <input id="lastName" name="lastName" class="form-control"
+                           type="text"
+                           ng-model="owner.lastName"
+                 required /></div> 
         </div>
 	</div>
 	<div class="line line-dashed b-b line-lg pull-in"></div>
-	                
-                
+	
+
 	<div class="form-group">
-		<label class="col-sm-2 control-label" for="lastName" translate="pages.Owner.edit.form.field.lastName"></label>
+		<label class="col-sm-2 control-label" for="telephone"
+               translate="pages.Owner.edit.form.field.telephone"></label>
 		<div class="col-sm-10">
-            <div class="input-group input-group-sm">
+            <div class="input-group input-group">
                     <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
-                    <input name="lastName" class="form-control" type="text" ng-model="owner.lastName"  required ></div>                      
+                    
+                    <input id="telephone" name="telephone" class="form-control"
+                           type="text"
+                           ng-model="owner.telephone"
+                 ng-pattern="/\d+/"  required /></div> 
         </div>
 	</div>
 	<div class="line line-dashed b-b line-lg pull-in"></div>
-	                
-                
+	
+
 	<div class="form-group">
-		<label class="col-sm-2 control-label" for="telephone" translate="pages.Owner.edit.form.field.telephone"></label>
-		<div class="col-sm-10">
-            <div class="input-group input-group-sm">
-                    <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
-                    <input name="telephone" class="form-control" type="text" ng-model="owner.telephone"  ng-pattern="/\d+/"  required ></div>                      
-        </div>
-	</div>
-	<div class="line line-dashed b-b line-lg pull-in"></div>
-	                
-                
-	<div class="form-group">
-		<label class="col-sm-2 control-label" for="pets" translate="pages.Owner.edit.form.field.pets"></label>
+		<label class="col-sm-2 control-label" for="pets"
+               translate="pages.Owner.edit.form.field.pets"></label>
 		<div class="col-sm-10">
             <!--OneToMany-->
-          <tags-input ng-model="owner.pets">
-              <auto-complete source="autocompleteService.petQuery($viewValue, ['id','name','birthDate'], true)" ></auto-complete>
-             </tags-input>                     
+          <tags-input
+                  name="pets"
+                  id="pets"
+                  ng-model="owner.pets">
+              <auto-complete source="autocompleteService.petQuery($query, ['id','name','birthDate'], true)" ></auto-complete>
+             </tags-input>
         </div>
 	</div>
 	<div class="line line-dashed b-b line-lg pull-in"></div>
-	                
-                	</div>
-                    <footer class="panel-footer text-right bg-light lter">
-                      	<button id="ownerSubmitBtn"
-                      		class="btn btn-success" 
-	                      	type='submit' 
-	                      	ng-disabled="ownerForm.$invalid" 
-	                      	translate="pages.Owner.edit.form.submit" 
-	                      	mx-show-loading ng-click="submit(ownerForm)"></button> 
-                		<a class="btn btn-default" ng-click="back()" translate="pages.Owner.edit.form.cancel" mx-show-loading></a> 
-                    </footer>
-                </div>
-            </form>
+	
+
+
+        <div class="form-group">
+            <div class="form-action pull-right">
+                <button id="ownerSubmitBtn"
+                    class="btn btn-success"
+                    type='submit'
+                    ng-disabled="ownerForm.$invalid"
+                    translate="pages.Owner.edit.form.submit"
+                    mx-show-loading ng-click="submit(ownerForm)"></button>
+                <a class="btn btn-default" ng-click="back()" translate="pages.Owner.edit.form.cancel" mx-show-loading></a>
+            </div>
+            <div class="clearfix"/>
         </div>
-    </div>
+    </form>
 </div>

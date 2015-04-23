@@ -3,32 +3,27 @@
 
 
 angular.module('angularDemoApp')
-    .controller('PetTypeEditController', function ($scope, $state, $q, $stateParams, PetTypeService, $translate, inform ) {
+    .controller('PetTypeEditController', function ($scope, $state, $q, $stateParams, PetTypeService, petTypeData, $translate, inform ) {
     	$scope.isEditForm = ($stateParams.id)?true:false;
-    	
-    	if($scope.isEditForm){
-    		PetTypeService.get({id:$stateParams.id}).$promise.then(
-		        function( response ){
-			       	$scope.petType = angular.extend({}, $scope.petType , response);
-			       	$scope.orig = angular.copy($scope.petType );
-		       	}
-	     	);
-    	}else{
-    		$scope.petType = new PetTypeService();
-    	}
-		
-	
+
+		$scope.petType = petTypeData;
+
+
 	    $scope.submit = function(frmController) {
 			var deferred = $q.defer();
 	    	var errorCallback = function(response){
 					if (response.data.errors) {
 		                angular.forEach(response.data.errors, function (error) {
-		                    frmController.setExternalValidation(error.field, undefined, error.message);
+							if(angular.element('#'+error.field).length) {
+								frmController.setExternalValidation(error.field, undefined, error.message);
+							} else {
+								inform.add(error.message, {ttl: -1,'type': 'warning'});
+							}
 		                });
 		            }
 					deferred.reject(response);
 		       };
-	       
+
 	    	if($scope.isEditForm){
 	    		PetTypeService.update($scope.petType, function(response) {	
 	    			$translate('pages.PetType.messages.update').then(function (msg) {
@@ -42,8 +37,8 @@ angular.module('angularDemoApp')
     				$translate('pages.PetType.messages.create').then(function (msg) {
 				    	inform.add(msg, {'type': 'success'});
 					});
+					$state.go('^.view', { id: response.id }, {location: 'replace'});
 					deferred.resolve(response);
-            	 	$state.go('^.view', { id: response.id });
 		        },errorCallback);
 	    	}
 	        return deferred.promise;

@@ -1,83 +1,83 @@
 
 
+<div id="divisionCollection_view" ng-init="pageTitle = 'pages.DivisionCollection.view.title'"
+     ng-include=" 'shared/blocks/page_heading.html' "></div>
+<div class="wrapper-md bg-white-only ng-scope">
+    <div class="form-horizontal">
 
-<div ng-init="pageTitle = 'pages.DivisionCollection.view.title'" ng-include=" 'shared/blocks/page_heading.html' "></div>
-<div class="wrapper-md ng-scope">
-    <div class="row">
-		<div class="col-sm-6">
-			<div class="panel panel-default">
-				<div class="panel-heading">
-			      <span class="h4" translate="pages.DivisionCollection.view.title"></span>
-			    </div>
-			    <div class="panel-body">
-			    	<div class=" form-horizontal">		
-				
-				
         <div class="form-group">
-            <label class="col-sm-2 control-label" translate="pages.DivisionCollection.view.field.name"></label>
-            <div class="col-sm-10 form-control-static" ng-bind="divisionCollection.name"></div>
+            <label class="col-sm-2 control-label"
+                   translate="pages.DivisionCollection.view.field.name"></label>
+            <div class="col-sm-10 form-control-static"
+                 ng-bind="divisionCollection.name"></div>
         </div>
         <div class="line line-dashed b-b line-lg pull-in"></div>
-    					
-				
-				
-				<!--ManyToOne-->
+    
+<!--OneToMany-->
+        <div class="form-group">
+            <label class="col-sm-2 control-label" translate="pages.DivisionCollection.view.field.persons"></label>
+            <div class="col-sm-10 form-control-static"
+               ng-bind="divisionCollection.persons"></dvi>
+
+        </div>
+        <div class="line line-dashed b-b line-lg pull-in"></div>
+    
+<!--ManyToOne-->
         <div class="form-group">
             <label class="col-sm-2 control-label" translate="pages.DivisionCollection.view.field.headDivision"></label>
+            <a ui-sref="app.divisionCollection.view.divisionCollectionModal({modalId:divisionCollection.headDivision.id})" >
             <div class="col-sm-10 form-control-static">
-            <span ng-bind="divisionCollection.headDivision.id"></span> <span ng-bind="divisionCollection.headDivision.name"></span> </div></div>
+            <span ng-bind="divisionCollection.headDivision.id"></span> <span ng-bind="divisionCollection.headDivision.name"></span> </div></a></div>
         <div class="line line-dashed b-b line-lg pull-in"></div>
-    					
-				
-					</div>
-			    </div>
-			    <footer class="panel-footer text-right bg-light lter">
-			      	<a id="editBtn" class="btn btn-default" ui-sref="app.divisionCollection.edit({id:divisionCollection.id})">
-				    	<i class="fa fa-edit" translate="pages.DivisionCollection.view.edit"></i>
-			       	</a>
-					<a id="deleteBtn" class="btn btn-danger" ng-click="deleteDivisionCollection(divisionCollection)" mx-show-loading>
-						<i class="fa fa-trash-o" translate="pages.DivisionCollection.view.delete"></i>
-			        </a>
-					
-					<a id="backBtn" class="btn btn-default" ng-click="back()">
-						<i class="fa fa-chevron-left" translate="pages.DivisionCollection.view.back"></i>
-					</a>
-					
-			    </footer>
-			 </div>
-		</div>
-        <div>
-            
-             <div class="form-group"    
-             ng-init="search={headDivisions:[autocompleteService.promiseToLabel(divisionCollection, ['id','name'])]}"
-                    ng-controller="DivisionCollectionEmbeddedListController" 
-                    >
-                <div class="col-sm-10 form-control-static" 
-                    ng-controller="DivisionCollectionListController" 
-                    ng-include="'app/divisionCollection/divisionCollection.list.html'">
-                   <a class="h4" href ui-sref="app.divisionCollection.list({search:{}})" 
-                        translate="pages.DivisionCollection.view.lists" 
-                        translate-value-isval="{{ 'pages.DivisionCollection.view.field.headDivision' | translate }}" translate-value-inval="{{ 'pages.DivisionCollection.name' | translate }}">
-                   </a>
-                </div>
-             </div>
-        
-             <div class="form-group"    
-             ng-init="search={divisions:[autocompleteService.promiseToLabel(divisionCollection, ['id','name'])]}"
-                    ng-controller="PersonCollectionEmbeddedListController" 
-                    >
-                <div class="col-sm-10 form-control-static" 
-                    ng-controller="PersonCollectionListController" 
-                    ng-include="'app/personCollection/personCollection.list.html'">
-                   <a class="h4" href ui-sref="app.personCollection.list({search:{}})" 
-                        translate="pages.PersonCollection.view.lists" 
-                        translate-value-isval="{{ 'pages.PersonCollection.view.field.division' | translate }}" translate-value-inval="{{ 'pages.PersonCollection.name' | translate }}">
-                   </a>
-                </div>
-             </div>
-        
-        </div>       
-		
-		
-	</div>
-</div>			
+    
+
+    </div>
+    <div class="line line-dashed b-b line-lg pull-in"></div>
+    <div class="form-group" ng-if="!isModal">
+
+        <div class="form-action pull-right">
+            <a id="editBtn" class="btn btn-default"
+               ui-sref="app.divisionCollection.edit({id:divisionCollection.id})">
+                <i class="fa fa-edit" translate="pages.DivisionCollection.view.edit"></i>
+            </a>
+            <a id="deleteBtn" class="btn btn-danger"
+               ng-click="deleteDivisionCollection(divisionCollection)" mx-show-loading>
+                <i class="fa fa-trash-o" translate="pages.DivisionCollection.view.delete"></i>
+            </a>
+
+            <a id="backBtn" class="btn btn-default" ng-click="back()">
+                <i class="fa fa-chevron-left" translate="pages.DivisionCollection.view.back"></i>
+            </a>
+        </div>
+        <div class="clearfix"/>
+    </div>
+</div>
+
+
+<div ng-if="!isModal">
+    <tabset>
+
+
+        <tab ui-sref="app.divisionCollection.view.divisionCollection({relationName:'headDivisions'})"
+             ui-sref-active="active">
+            <tab-heading
+                   translate="pages.DivisionCollection.view.lists"
+                   translate-value-isval="{{::'pages.DivisionCollection.view.field.headDivision' | translate }}"
+                   translate-value-inval="{{::'pages.DivisionCollection.name' | translate }}">
+            </tab-heading>
+        </tab>
+
+        <tab ui-sref="app.divisionCollection.view.personCollection({relationName:'divisions'})"
+             ui-sref-active="active">
+            <tab-heading
+                   translate="pages.PersonCollection.view.lists"
+                   translate-value-isval="{{::'pages.PersonCollection.view.field.division' | translate }}"
+                   translate-value-inval="{{::'pages.PersonCollection.name' | translate }}">
+            </tab-heading>
+        </tab>
+
+    </tabset>
+    <div ui-view ><div class="wrapper-md bg-white-only ng-scope">{{::'pages.DivisionCollection.view.selecttab' | translate}}</div></div>
+</div>
+    
+

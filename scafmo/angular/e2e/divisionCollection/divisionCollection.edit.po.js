@@ -9,10 +9,10 @@
 
 
 var EditPage = function() {
-  
-  this.nameEl = element(by.model('divisionCollection.name'));  
-  this.personsEl = element(by.model('divisionCollection.persons'));  
-  this.headDivisionEl = element(by.model('divisionCollection.headDivision'));  
+			this.nameEl = element(by.model('divisionCollection.name'));
+		this.personsEl = element(by.model('divisionCollection.persons'));
+		this.headDivisionEl = element(by.model('divisionCollection.headDivision'));
+
 };
 
 module.exports = new EditPage();

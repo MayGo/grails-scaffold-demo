@@ -1,13 +1,18 @@
 module.exports = function(){
 	angular.module('httpBackendMock', ['ngMockE2E'])
-    	.run(function($httpBackend, appConfig) {
+		.run(function($httpBackend, appConfig) {
+			console.log("running module specialityHttpBackendMock")
+			function quote(str) {
+				return str.replace(/(?=[\/\\^$*+?.()|{}[\]])/g, "\\");
+			}
 
-	     	var url = appConfig.restUrl + '/specialitys/v1';
-	        $httpBackend.whenPOST(url).respond(function(method, url){return [200, {'id' : 1}];});//create
-	        $httpBackend.whenGET(url).respond(function(method, url){return [200, [{'id' : 1}]];});//list
-	        $httpBackend.whenPOST(url + "/1").respond(function(method, url){return [200, {'id' : 1}];});//edit
-	        $httpBackend.whenGET(url + "/1").respond(function(method, url){return [200, {'id' : 1}];});//view
-	        
+			var url = appConfig.restUrl + '/specialitys/v1';
+			$httpBackend.whenPOST(new RegExp(quote(url + "/1"))).respond(function(method, url){return [200, {id : 1}];});//edit
+			$httpBackend.whenPOST(new RegExp(quote(url))).respond(function(method, url){return [200, {'id' : 1}];});//create
+			$httpBackend.whenGET(new RegExp(quote(url + "/1"))).respond(function(method, url){return [200, {'id' : 1}];});//view
+			$httpBackend.whenDELETE(new RegExp(quote(url + "/1"))).respond(function(method, url){return [204];});//delete
+			$httpBackend.whenGET(new RegExp(quote(url) + ".*")).respond(function(method, url){return [200, [{'id' : 1}]];});//list
+			//Mock relations
 
 			//For everything else, don't mock
 			$httpBackend.whenGET(/.*/).passThrough();
@@ -19,15 +24,5 @@ module.exports = function(){
 			$httpBackend.whenJSONP(/.*/).passThrough();
 
 			
-        });
-	
+	});
 }
-
-/*
-exports.create_request = function(){
-    var expected_response = {'id' : 1};
-    angular.module('angularDemoApp.httpBackendMock', ['ngMockE2E'])
-        .run(function ($httpBackend, appConfig) {
-        	
-    });
-}*/

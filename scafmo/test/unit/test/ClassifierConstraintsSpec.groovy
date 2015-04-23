@@ -5,19 +5,20 @@ import spock.lang.Unroll
 import spock.lang.Specification
 import defpackage.ConstraintHelper
 
-
 @TestFor(Classifier)
 class ClassifierConstraintsSpec extends Specification {
 
 	def setup() {
-		//mock a Classifier with some data (put unique violations in here so they can be tested, the others aren't needed)
+		//mock a Classifier with some data
+		//(put unique violations in here so they can be tested, the others aren't needed)
 		mockForConstraintsTests( Classifier, [ new Classifier() ] )
 	}
 
 	@Unroll("Classifier constraint on field '#field' with value '#val' gets '#error'")
 	def "All Classifier constraints"() {
 		when:
-			def obj = new Classifier("$field": val)
+			Classifier obj = new Classifier()
+			obj."$field" = val
 
 		then:
 			ConstraintHelper.validateConstraints(obj, field, error)
@@ -29,12 +30,12 @@ class ClassifierConstraintsSpec extends Specification {
 			'valid' | 'constant' | ConstraintHelper.getLongString(1)
 			'valid' | 'constant' | ConstraintHelper.getLongString(100)
 			'size' | 'constant' | ConstraintHelper.getLongString(101)
-			'nullable' | 'constant' | ''
+			'blank' | 'constant' | ''
 			'nullable' | 'constant' | null
 			'valid' | 'description' | ConstraintHelper.getLongString(1)
 			'valid' | 'description' | ConstraintHelper.getLongString(500)
 			'size' | 'description' | ConstraintHelper.getLongString(501)
-			'nullable' | 'description' | ''
+			'blank' | 'description' | ''
 			'nullable' | 'description' | null
 			'nullable' | 'propertyname' | null
 

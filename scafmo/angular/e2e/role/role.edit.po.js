@@ -9,8 +9,8 @@
 
 
 var EditPage = function() {
-  
-  this.authorityEl = element(by.model('role.authority'));  
+			this.authorityEl = element(by.model('role.authority'));
+
 };
 
 module.exports = new EditPage();

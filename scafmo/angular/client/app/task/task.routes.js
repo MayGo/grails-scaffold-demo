@@ -14,14 +14,41 @@ $stateProvider
 		}).state('app.task.create',{
 			url: '/create',
 			templateUrl: 'app/task/task.form.html',
-			controller: 'TaskEditController'
+			controller: 'TaskEditController',
+			resolve:{
+				taskData: function($stateParams, TaskService) {
+					return new TaskService();
+				}
+			}
 		}).state('app.task.edit',{
 			url: '/edit/:id',
 			templateUrl: 'app/task/task.form.html',
-			controller: 'TaskEditController'
+			controller: 'TaskEditController',
+			resolve:{
+				taskData: function($stateParams, TaskService){
+					return TaskService.get({id:$stateParams.id}).$promise.then(
+						function( response ){
+							return response;
+						}
+					);
+				}
+			}
 		}).state('app.task.view',{
 			url: '/view/:id',
 			templateUrl: 'app/task/task.view.html',
-			controller: 'TaskViewController'
-		});		
+			controller: 'TaskViewController',
+				resolve:{
+				taskData: function($stateParams, TaskService){
+					return TaskService.get({id:$stateParams.id}).$promise.then(
+						function( response ){
+							return response;
+						}
+					);
+				}
+			}
+		})
+
+
+
+;
 });

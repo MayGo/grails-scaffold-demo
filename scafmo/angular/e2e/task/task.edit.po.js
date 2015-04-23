@@ -9,13 +9,14 @@
 
 
 var EditPage = function() {
-  
-  this.deadlineEl = element(by.model('task.deadline'));  
-  this.detailsEl = element(by.model('task.details'));  
-  this.statusEl = element(by.model('task.status'));  
-  this.summaryEl = element(by.model('task.summary'));  
-  this.timeSpentEl = element(by.model('task.timeSpent'));  
-  this.tagsEl = element(by.model('task.tags'));  
+			this.dateCreatedEl = element(by.model('task.dateCreated'));
+		this.deadlineEl = element(by.model('task.deadline'));
+		this.detailsEl = element(by.model('task.details'));
+		this.statusEl = element(by.model('task.status'));
+		this.summaryEl = element(by.model('task.summary'));
+		this.timeSpentEl = element(by.model('task.timeSpent'));
+		//this.tagsEl = element.all(by.repeater('item in task.tags'));
+
 };
 
 module.exports = new EditPage();

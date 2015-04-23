@@ -1,118 +1,123 @@
 
-
-
-
-
-
-
-
-<div ng-init="pageTitle = 'pages.Pet.list.title'" data-ng-include=" 'shared/blocks/page_heading.html' " ng-hide="isEmbeddedView" ></div>
-
-<div class="wrapper-md ng-scope"  st-table="rowCollection" st-pipe="callServer" >
+<div id="pet_list" ng-init="pageTitle = 'pages.Pet.list.title'"
+     data-ng-include=" 'shared/blocks/page_heading.html' "></div>
+<div class="wrapper-md bg-white-only ">
+<div class="list-search"  st-table="rowCollection" st-pipe="callServer" >
 <accordion close-others="false">
-    <accordion-group  heading="{{'pages.Pet.list.table.search' | translate}}"  is-open="isSearchOpen">
-      <div class="row">
-		 
-	   		<div class="col-lg-2 form-inline">
+    <accordion-group  heading="{{::'pages.Pet.list.table.search' | translate}}"  is-open="isSearchOpen">
+        <div class="row form-inline">
+            
+                  <div class="col-lg-2 form-group">
      <div class="input-group input-group-sm">
      <input 
-     	name="birthDate" 
-     	ng-model="search.birthDate" 
+     	name="birthDate"
+     	ng-model="search.birthDate"
+        custom-st-search="birthDate"
      	type="text" 
      	class="form-control" 
-     	placeholder="{{'pages.Pet.list.search.placeholder.birthDate' | translate}}"
+     	placeholder="{{::'pages.Pet.list.search.placeholder.birthDate' | translate}}"
         datepicker-popup
-        is-open="pet.birthDateOpen" 
-        ng-click="pet.birthDateOpen = true"
+        is-open="pet._birthDateOpen"
+        ng-click="pet._birthDateOpen = true"
       
       />
      <span class="input-group-addon">
        <i class="glyphicon glyphicon-calendar"></i>
      </span>
      </div>
-      </div>		 
-	   		<div class="col-lg-2 form-inline"><div class="input-group input-group-sm">
+      </div>
+            
+                  <div class="col-lg-2 form-group"><div class="input-group input-group-sm">
                     <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
                     <input 
-                    	name="name" 
-                   		ng-model="search.name" 
-                   		st-search="'name'" 
+                    	name="name"
+                   		ng-model="search.name"
+                   		st-search="'name'"
                    		class="form-control" 
                    		type="text" 
-                   		placeholder="{{'pages.Pet.list.search.placeholder.name' | translate}}"  ></div> </div>		 
-	   		<div class="col-lg-2 form-inline"><!--ManyToOne-->
+                   		placeholder="{{::'pages.Pet.list.search.placeholder.name' | translate}}"  ></div> </div>
+            
+                  <div class="col-lg-2 form-group"><!--ManyToOne-->
      <div class="input-group input-group-sm" style="width:100%">
      	<tags-input
             ng-model="search.types"
             custom-st-search="types"
-            placeholder="{{'pages.Pet.list.search.placeholder.type' | translate}}">
-              <auto-complete source="autocompleteService.petTypeQuery($query, ['id','name'], true)" ></auto-complete>
-            </tags-input></div></div>		 
-	   		<div class="col-lg-2 form-inline"><!--ManyToOne-->
+            placeholder="{{::'pages.Pet.list.search.placeholder.type' | translate}}">
+              <auto-complete
+                      source="autocompleteService.petTypeQuery($query, ['id','name'], true)" ></auto-complete>
+            </tags-input></div></div>
+            
+                  <div class="col-lg-2 form-group"><!--ManyToOne-->
      <div class="input-group input-group-sm" style="width:100%">
      	<tags-input
             ng-model="search.owners"
             custom-st-search="owners"
-            placeholder="{{'pages.Pet.list.search.placeholder.owner' | translate}}">
-              <auto-complete source="autocompleteService.ownerQuery($query, ['id','address','city','firstName'], true)" ></auto-complete>
-            </tags-input></div></div>		 
-		</div>
-    </accordion-group>
-</accordion>
-  <div class="panel panel-default">
-    <div class="panel-heading">
-      	<span translate="pages.Pet.list.table.title"></span>
-      	<div class="box-tools pull-right">
-			<a class="btn btn-default btn-xs" ui-sref="app.pet.create">
-				<i class="fa fa-plus" translate="pages.Pet.list.new" mx-show-loading></i>
-	       	</a>
-		</div>
-    </div>
-    <div class="panel-body panel-body-with-table">
-		 <div>
+            placeholder="{{::'pages.Pet.list.search.placeholder.owner' | translate}}">
+              <auto-complete
+                      source="autocompleteService.ownerQuery($query, ['id','telephone','lastName','firstName'], true)" ></auto-complete>
+            </tags-input></div></div>
+            
+        </div>
+    
+            </accordion-group>
+        </accordion>
+        <div class="box-tools pull-right" ng-if="!isModal">
+            <a class="btn btn-default btn-xs" ui-sref="app.pet.create">
+                <i class="fa fa-plus" translate="pages.Pet.list.new" mx-show-loading></i>
+            </a>
+        </div>
+
+        <div class="clearfix"></div>
+        <div class="list-search-table">
 	      <table class="table table-responsive">
 	      	<thead>
 	      		<tr>
+                    <th></th>
 	      			<th width='20' st-sort="id" translate="pages.Pet.list.table.header.id"></th>	      		
 			   		<th st-sort="birthDate" translate="pages.Pet.list.table.header.birthDate" ></th>				 
 			   		<th st-sort="name" translate="pages.Pet.list.table.header.name" ></th>				 
 			   		<th st-sort="type" translate="pages.Pet.list.table.header.type" ></th>				 
 			   		<th st-sort="owner" translate="pages.Pet.list.table.header.owner" ></th>				 
-				 	<th></th>
+
 				</tr>
 	      	</thead>
-	      
 	      	<tbody ng-hide="isLoading">
-	      		
 				<tr ng-repeat="pet in rowCollection">
-					 <td>{{pet.id}}</td>					
-			   		<td>{{pet.birthDate}}</td>				 	
-			   		<td>{{pet.name}}</td>				 	
-			   		<td>{{pet.type.id}} {{pet.type.name}} </td>				 	
-			   		<td>{{pet.owner.id}} {{pet.owner.address}} {{pet.owner.city}} {{pet.owner.firstName}} </td>				 	
-				 	
-		            <td class="text-right">
-		            	<a class="btn btn-default btn-xs" ui-sref="app.pet.view({id:pet.id})">
-		            		<i class="fa fa-eye" translate="pages.Pet.list.view"></i>
-		            	</a>
-		            	<a class="btn btn-default btn-xs" ui-sref="app.pet.edit({id:pet.id})">
-		            		<i class="fa fa-edit" translate="pages.Pet.list.edit"></i>
-		            	</a>
-		            	<a class="btn btn-danger btn-xs" ng-click="deletePet(pet)" mx-show-loading>
-		            		<i class="fa fa-trash-o" translate="pages.Pet.list.delete" ></i>
-		            	</a>
-		            </td>
+                    <td class="text-left" >
+                        <a class="btn btn-default btn-xs" ui-sref="app.pet.view({id:pet.id})" ng-if="!isModal">
+                            <i class="fa fa-eye"></i>
+                        </a>
+                        <a class="btn btn-default btn-xs" ui-sref="app.pet.edit({id:pet.id})" ng-if="!isModal">
+                            <i class="fa fa-edit"></i>
+                        </a>
+                        <a class="btn btn-danger btn-xs" ng-click="deletePet(pet)" mx-show-loading ng-if="!isModal">
+                            <i class="fa fa-trash-o"></i>
+                        </a>
+                        <a class="btn btn-default btn-xs" ng-click="selectItem(pet)" ng-if="isModal">
+                            <i class="fa fa-edit"></i>
+                        </a>
+                    </td>
+					 <td>{{::pet.id}}</td>					
+			   		<td>{{pet.birthDate | date:'yyyy-MM-dd HH:mm'}}</td>				 	
+			   		<td>{{::pet.name}}</td>				 	
+			   		<td>{{::pet.type.id}} {{::pet.type.name}} </td>				 	
+			   		<td>{{::pet.owner.id}} {{::pet.owner.telephone}} {{::pet.owner.lastName}} {{::pet.owner.firstName}} </td>				 	
+
 				</tr>
 			</tbody>
+              <tbody ng-show="isLoading">
+                  <tr>
+                      <td class="text-center" translate="messages.loading"></td>
+                  </tr>
+              </tbody>
 			<tfoot ng-hide="isLoading">
 	          <tr>
-	            <td colspan="10" class="text-center">
+	            <td colspan="10" class="text-center" >
 	              <div st-pagination="" st-items-by-page="stTable.itemsByPage" st-displayed-pages="15" ></div>
 	            </td>
 	          </tr>
 	        </tfoot>
 	      </table>
-	    </div>
-	</div>
-  </div>
+        </div>
+    </div>
 </div>

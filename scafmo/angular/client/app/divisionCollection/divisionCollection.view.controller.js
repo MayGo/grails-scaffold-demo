@@ -1,8 +1,12 @@
 'use strict';
 
 angular.module('angularDemoApp')
-    .controller('DivisionCollectionViewController', function ($scope, $state, $stateParams, $translate, inform, DivisionCollectionService) {
-	 	$scope.divisionCollection = DivisionCollectionService.get({id:$stateParams.id});
+    .controller('DivisionCollectionViewController', function ($scope, $state, $stateParams, $translate, inform, DivisionCollectionService, divisionCollectionData) {
+	 	$scope.divisionCollection = divisionCollectionData;
+
+		if($state.current.data){
+			$scope.isModal = $state.current.data.isModal;
+		}
 
 		$scope.deleteDivisionCollection = function(instance){
 			return DivisionCollectionService.deleteInstance(instance).then(function(instance){
@@ -10,5 +14,7 @@ angular.module('angularDemoApp')
 				return instance;
 			});
 		};
-
+		$scope.go = function(route){
+			$state.go(route);
+		};
 	});

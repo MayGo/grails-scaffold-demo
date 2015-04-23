@@ -1,15 +1,22 @@
 'use strict';
 
 
+var helper = require('../utils/helper.js');
 describe('user view page', function() {
-  var page;
+	var page;
 
-  beforeEach(function() {
-    browser.get('/#/app/user/view/1');
-    page = require('./user.view.po');
-  });
+	beforeEach(function() {
+		var mockModule = require('./user.mocks');
+		browser.addMockModule('httpBackendMock', mockModule );
+		browser.get('/#/app/user/view/1');
+		page = require('./user.view.po');
+	});
+	afterEach(function() {
+		browser.clearMockModules();
+	});
 
-  
+
+
   it('should contain all fields.', function() {
     
     expect(page.accountExpiredEl).not.toBeNull()    
@@ -26,17 +33,38 @@ describe('user view page', function() {
   
   it('edit button changes path to /edit', function() {
 	  element(by.id('editBtn')).click();
-	  expect(browser.getCurrentUrl()).toContain("/#/app/user/edit/1");
+	  browser.wait(function() {
+			  return $('#user_form').isPresent(); // keeps waiting until this statement resolves to true
+		  },
+		  1000,
+		  'user_form element not visible'
+	  );
+	  helper.currentUrlContains('/#/app/user/edit/1');
+
   });
   
   it('back button changes path to /list', function() {
 	  element(by.id('backBtn')).click();
-	  expect(browser.getCurrentUrl()).toContain("/#/app/user/list");
+	  browser.wait(function() {
+			  return $('#user_list').isPresent(); // keeps waiting until this statement resolves to true
+		  },
+		  1000,
+		  'user_list element not visible'
+	  );
+	  helper.currentUrlContains('/#/app/user/list');
+
   });
   
   it('delete button changes path to /list and deletes item', function() {
 	  element(by.id('deleteBtn')).click();
-	  expect(browser.getCurrentUrl()).toContain("/#/app/user/list");
+	  browser.wait(function() {
+			  return $('#user_list').isPresent(); // keeps waiting until this statement resolves to true
+		  },
+		  1000,
+		  'user_list element not visible'
+	  );
+	  helper.currentUrlContains('/#/app/user/list');
+
   });
   
 });

@@ -1,6 +1,5 @@
 package org.grails.samples.v1
 
-import grails.transaction.Transactional
 import grails.validation.ValidationException
 import org.codehaus.groovy.grails.web.servlet.HttpHeaders
 import org.springframework.http.HttpStatus
@@ -9,27 +8,22 @@ import org.restapidoc.annotation.RestApiParam
 import org.restapidoc.annotation.RestApiParams
 import org.restapidoc.annotation.RestApi
 import org.restapidoc.pojo.RestApiParamType
-import defpackage.CustomRestfulController
 import defpackage.exceptions.ResourceNotFound
 import org.grails.samples.Visit
 import org.grails.samples.VisitModifyService
 import org.grails.samples.VisitSearchService
 
-
-@Transactional(readOnly = true)
 @RestApi(name = 'Visit services', description = 'Methods for managing Visits')
-class VisitController extends CustomRestfulController<Visit> {
+class VisitController {
 
 	static namespace = 'v1'
+
+	static allowedMethods = [save: 'POST', update: 'PUT', delete: 'DELETE']
 
 	static responseFormats = ['json']
 
 	VisitSearchService visitSearchService
 	VisitModifyService visitModifyService
-
-	VisitController() {
-		super(Visit, false /* read-only */)
-	}
 
 	@RestApiMethod(description = 'List all Visits', listing = true)
 	@RestApiParams(params = [
@@ -55,22 +49,18 @@ class VisitController extends CustomRestfulController<Visit> {
 
 	@RestApiMethod(description='Get a Visit')
 	@RestApiParams(params=[
-		@RestApiParam(name='id', type='long', paramType = RestApiParamType.PATH, description = 'The Visit id')
+		@RestApiParam(
+				name='id', type='long',
+				paramType = RestApiParamType.PATH,
+				description = 'The Visit id'
+		)
 	])
 	def show() {
-		// We pass which fields to be rendered with the includes attributes,
-		// we exclude the class property for all responses.
-		respond queryForResource(params.id), [includes: includes, excludes: excludes]
+		respond visitSearchService.queryForVisit(params.long('id')),
+				[includes: includes, excludes: excludes]
 	}
 
-	/**
-	 * Saves a Visit
-	 */
-	@Transactional
 	@RestApiMethod(description = 'Save a Visit')
-	@RestApiParams(params = [
-			@RestApiParam(name = 'id', type = 'long', paramType = RestApiParamType.PATH, description = 'The Object id')
-	])
 	def save() {
 
 		Visit instance = visitModifyService.createVisit(request.JSON)
@@ -83,14 +73,28 @@ class VisitController extends CustomRestfulController<Visit> {
 
 	}
 
-	/**
-	 * Updates a Visit for the given id
-	 * @param id
-	 */
-	@Transactional
+	@RestApiMethod(description = 'Edit a Visit')
+	@RestApiParams(params = [
+		@RestApiParam(
+				name = 'id',
+				type = 'long',
+				paramType = RestApiParamType.PATH,
+				description = 'The Visit id'
+		)
+	])
+	def edit() {
+		respond visitSearchService.queryForVisit(params.long('id')),
+				[includes: includes, excludes: excludes]
+	}
+
 	@RestApiMethod(description = 'Update a Visit')
 	@RestApiParams(params = [
-			@RestApiParam(name = 'id', type = 'long', paramType = RestApiParamType.PATH, description = 'The Visit id')
+			@RestApiParam(
+					name = 'id',
+					type = 'long',
+					paramType = RestApiParamType.PATH,
+					description = 'The Visit id'
+			)
 	])
 	def update() {
 		request.JSON.id = params.long('id')
@@ -103,6 +107,19 @@ class VisitController extends CustomRestfulController<Visit> {
 		respond instance, [status: HttpStatus.OK]
 	}
 
+	@RestApiMethod(description = 'Delete a Visit')
+	@RestApiParams(params = [
+			@RestApiParam(
+					name = 'id',
+					type = 'long',
+					paramType = RestApiParamType.PATH,
+					description = 'The Visit id'
+			)
+	])
+	def delete() {
+		visitModifyService.deleteVisit(params.long('id'))
+		render status: HttpStatus.NO_CONTENT
+	}
 
 	private getIncludes() {
 		params.includes?.tokenize(',')
@@ -112,26 +129,18 @@ class VisitController extends CustomRestfulController<Visit> {
 		params.excludes?.tokenize(',')
 	}
 
-	@Override
-	protected Visit queryForResource(Serializable id) {
-		if (id.isNumber()) {
-			resource.get(id)
-		} else {
-			notFound()
-		}
-	}
-
-	def handleValidationException(ValidationException ex){
+	def handleValidationException(ValidationException ex) {
 		respond ex.errors, [status: HttpStatus.UNPROCESSABLE_ENTITY]
 	}
-	def handleResourceNotFoundException(ResourceNotFound ex){
+
+	def handleResourceNotFoundException(ResourceNotFound ex) {
 		log.error ex
 		render status: HttpStatus.NOT_FOUND
 	}
 
-	def handleIllegalArgumentExceptionn(IllegalArgumentException ex){
+	def handleIllegalArgumentExceptionn(IllegalArgumentException ex) {
 		log.error ex
-		respond ex, [status: HttpStatus.UNPROCESSABLE_ENTITY]
+		Map errors = ['error': ex.message]
+		respond errors as Object, [status: HttpStatus.UNPROCESSABLE_ENTITY]
 	}
-
 }

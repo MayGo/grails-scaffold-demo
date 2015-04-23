@@ -9,8 +9,8 @@
 
 
 var EditPage = function() {
-  
-  this.nameEl = element(by.model('petType.name'));  
+			this.nameEl = element(by.model('petType.name'));
+
 };
 
 module.exports = new EditPage();

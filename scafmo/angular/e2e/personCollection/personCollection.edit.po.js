@@ -9,10 +9,10 @@
 
 
 var EditPage = function() {
-  
-  this.ageEl = element(by.model('personCollection.age'));  
-  this.nameEl = element(by.model('personCollection.name'));  
-  this.divisionEl = element(by.model('personCollection.division'));  
+			this.ageEl = element(by.model('personCollection.age'));
+		this.nameEl = element(by.model('personCollection.name'));
+		this.divisionEl = element(by.model('personCollection.division'));
+
 };
 
 module.exports = new EditPage();

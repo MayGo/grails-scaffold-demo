@@ -12,7 +12,7 @@ var EditPage = function() {
   
   this.ageEl = element(by.model('search.age'));  
   this.nameEl = element(by.model('search.name'));  
-  this.divisionEl = element(by.model('search.division'));  
+  this.divisionEl = element(by.model('search.divisions'));  
 };
 
 module.exports = new EditPage();

@@ -2,7 +2,7 @@ package scafmo.constr
 
 import grails.test.mixin.TestFor
 import grails.test.mixin.Mock
-import spock.lang.Ignore
+
 import spock.lang.Specification
 import defpackage.exceptions.ResourceNotFound
 import grails.validation.ValidationException
@@ -11,8 +11,10 @@ import grails.validation.ValidationException
 @Mock(TestNumber)
 class TestNumberModifyServiceSpec extends Specification {
 
-	void 'Creating TestNumber with no data is not possible'() {
+	static final long ILLEGAL_ID = -1L
+	static final long FICTIONAL_ID = 99999999L
 
+	void 'Creating TestNumber with no data is not possible'() {
 		setup:
 			Map data = [:]
 		when:
@@ -22,9 +24,7 @@ class TestNumberModifyServiceSpec extends Specification {
 	}
 
 	void 'Creating TestNumber with invalid data is not possible'() {
-
 		setup:
-
 			Map data = invalidData()
 		when:
 			service.createTestNumber(data)
@@ -33,7 +33,6 @@ class TestNumberModifyServiceSpec extends Specification {
 	}
 
 	void 'Creating TestNumber with valid data returns TestNumber instance'() {
-
 		setup:
 			Map data = validData()
 		when:
@@ -56,7 +55,7 @@ class TestNumberModifyServiceSpec extends Specification {
 	void 'Updating TestNumber with illegal id is not possible'() {
 
 		setup:
-			Map data = [id:-1L]
+			Map data = [id: ILLEGAL_ID]
 		when:
 			service.updateTestNumber(data)
 		then:
@@ -66,7 +65,7 @@ class TestNumberModifyServiceSpec extends Specification {
 	void 'Updating TestNumber with fictional id is not possible'() {
 
 		setup:
-			Map data = [id:99999999L]
+			Map data = [id: FICTIONAL_ID]
 
 		when:
 			service.updateTestNumber(data)
@@ -74,14 +73,13 @@ class TestNumberModifyServiceSpec extends Specification {
 			thrown(ResourceNotFound)
 	}
 
-	@Ignore //TODO: set invalid data first
 	void 'Updating TestNumber with invalid data is not possible'() {
 
 		setup:
 			Map data = invalidData()
 			data.id = createValidTestNumber().id
 		when:
-			TestNumber testNumber = service.updateTestNumber(data)
+			service.updateTestNumber(data)
 		then:
 			thrown(ValidationException)
 	}
@@ -98,20 +96,72 @@ class TestNumberModifyServiceSpec extends Specification {
 			testNumber.id == 1
 	}
 
+	void 'Deleting TestNumber without id is not possible'() {
+		when:
+			service.deleteTestNumber(null)
+		then:
+			thrown(IllegalArgumentException)
+	}
+
+	void 'Deleting TestNumber with illegal id is not possible'() {
+
+		setup:
+			long id = ILLEGAL_ID
+		when:
+			service.deleteTestNumber(id)
+		then:
+			thrown(IllegalArgumentException)
+	}
+
+	void 'Deleting TestNumber with fictional id is not possible'() {
+
+		setup:
+			long id = FICTIONAL_ID
+		when:
+			service.deleteTestNumber(id)
+		then:
+			thrown(ResourceNotFound)
+	}
+
+	void 'Deleting saved TestNumber is possible'() {
+		setup:
+			Long testNumberId = createValidTestNumber().id
+			TestNumber testNumber = TestNumber.findById(testNumberId).find()
+		when:
+			service.deleteTestNumber(testNumberId)
+		then:
+			testNumber != null
+			TestNumber.findById(testNumberId) == null
+	}
+
 	Map invalidData() {
-		return ["foo": "bar"]//Sadisfy 'empty data' exception
+
+		return ['foo': 'Sadisfy empty data exception']
 	}
 
 	Map validData() {
-		
-		Map data = ["id":null,"version":null,"doubleNr":123.123,"floatNr":123.123,"floatNrScale":2.34,"integerNr":303,"integerNrInList":3,"integerNrMax":2,"integerNrMin":3,"integerNrNotEqual":2,"integerNrRange":19,"integerNrUnique":304,"longNr":4]
 
+		Map data = [
+  'id':  null,
+  'version':  null,
+  'doubleNr':  123.123,
+  'floatNr':  123.123,
+  'floatNrScale':  2.34,
+  'integerNr':  303,
+  'integerNrInList':  3,
+  'integerNrMax':  2,
+  'integerNrMin':  3,
+  'integerNrNotEqual':  2,
+  'integerNrRange':  19,
+  'integerNrUnique':  304,
+  'longNr':  4
+]
 		return data
 	}
 
-	TestNumber createValidTestNumber(){
+	TestNumber createValidTestNumber() {
 		TestNumber testNumber = new TestNumber(validData())
-		testNumber.save flush:true, failOnError: true
+		testNumber.save flush: true, failOnError: true
 		return testNumber
 	}
 

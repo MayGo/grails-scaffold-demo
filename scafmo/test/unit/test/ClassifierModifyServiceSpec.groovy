@@ -2,7 +2,7 @@ package test
 
 import grails.test.mixin.TestFor
 import grails.test.mixin.Mock
-import spock.lang.Ignore
+
 import spock.lang.Specification
 import defpackage.exceptions.ResourceNotFound
 import grails.validation.ValidationException
@@ -11,8 +11,10 @@ import grails.validation.ValidationException
 @Mock(Classifier)
 class ClassifierModifyServiceSpec extends Specification {
 
-	void 'Creating Classifier with no data is not possible'() {
+	static final long ILLEGAL_ID = -1L
+	static final long FICTIONAL_ID = 99999999L
 
+	void 'Creating Classifier with no data is not possible'() {
 		setup:
 			Map data = [:]
 		when:
@@ -22,9 +24,7 @@ class ClassifierModifyServiceSpec extends Specification {
 	}
 
 	void 'Creating Classifier with invalid data is not possible'() {
-
 		setup:
-
 			Map data = invalidData()
 		when:
 			service.createClassifier(data)
@@ -33,7 +33,6 @@ class ClassifierModifyServiceSpec extends Specification {
 	}
 
 	void 'Creating Classifier with valid data returns Classifier instance'() {
-
 		setup:
 			Map data = validData()
 		when:
@@ -56,7 +55,7 @@ class ClassifierModifyServiceSpec extends Specification {
 	void 'Updating Classifier with illegal id is not possible'() {
 
 		setup:
-			Map data = [id:-1L]
+			Map data = [id: ILLEGAL_ID]
 		when:
 			service.updateClassifier(data)
 		then:
@@ -66,7 +65,7 @@ class ClassifierModifyServiceSpec extends Specification {
 	void 'Updating Classifier with fictional id is not possible'() {
 
 		setup:
-			Map data = [id:99999999L]
+			Map data = [id: FICTIONAL_ID]
 
 		when:
 			service.updateClassifier(data)
@@ -74,14 +73,13 @@ class ClassifierModifyServiceSpec extends Specification {
 			thrown(ResourceNotFound)
 	}
 
-	@Ignore //TODO: set invalid data first
 	void 'Updating Classifier with invalid data is not possible'() {
 
 		setup:
 			Map data = invalidData()
 			data.id = createValidClassifier().id
 		when:
-			Classifier classifier = service.updateClassifier(data)
+			service.updateClassifier(data)
 		then:
 			thrown(ValidationException)
 	}
@@ -98,20 +96,68 @@ class ClassifierModifyServiceSpec extends Specification {
 			classifier.id == 1
 	}
 
+	void 'Deleting Classifier without id is not possible'() {
+		when:
+			service.deleteClassifier(null)
+		then:
+			thrown(IllegalArgumentException)
+	}
+
+	void 'Deleting Classifier with illegal id is not possible'() {
+
+		setup:
+			long id = ILLEGAL_ID
+		when:
+			service.deleteClassifier(id)
+		then:
+			thrown(IllegalArgumentException)
+	}
+
+	void 'Deleting Classifier with fictional id is not possible'() {
+
+		setup:
+			long id = FICTIONAL_ID
+		when:
+			service.deleteClassifier(id)
+		then:
+			thrown(ResourceNotFound)
+	}
+
+	void 'Deleting saved Classifier is possible'() {
+		setup:
+			Long classifierId = createValidClassifier().id
+			Classifier classifier = Classifier.findById(classifierId).find()
+		when:
+			service.deleteClassifier(classifierId)
+		then:
+			classifier != null
+			Classifier.findById(classifierId) == null
+	}
+
 	Map invalidData() {
-		return ["foo": "bar"]//Sadisfy 'empty data' exception
+
+		return ['classname': null,
+ 'constant': null,
+ 'description': null,
+ 'propertyname': null]
 	}
 
 	Map validData() {
-		
-		Map data = ["id":null,"version":null,"classname":"classname","constant":"constant","description":"description","propertyname":"propertyname"]
 
+		Map data = [
+  'id':  null,
+  'version':  null,
+  'classname':  'classname',
+  'constant':  'constant',
+  'description':  'description',
+  'propertyname':  'propertyname'
+]
 		return data
 	}
 
-	Classifier createValidClassifier(){
+	Classifier createValidClassifier() {
 		Classifier classifier = new Classifier(validData())
-		classifier.save flush:true, failOnError: true
+		classifier.save flush: true, failOnError: true
 		return classifier
 	}
 

@@ -14,14 +14,47 @@ $stateProvider
 		}).state('app.role.create',{
 			url: '/create',
 			templateUrl: 'app/role/role.form.html',
-			controller: 'RoleEditController'
+			controller: 'RoleEditController',
+			resolve:{
+				roleData: function($stateParams, RoleService) {
+					return new RoleService();
+				}
+			}
 		}).state('app.role.edit',{
 			url: '/edit/:id',
 			templateUrl: 'app/role/role.form.html',
-			controller: 'RoleEditController'
+			controller: 'RoleEditController',
+			resolve:{
+				roleData: function($stateParams, RoleService){
+					return RoleService.get({id:$stateParams.id}).$promise.then(
+						function( response ){
+							return response;
+						}
+					);
+				}
+			}
 		}).state('app.role.view',{
 			url: '/view/:id',
 			templateUrl: 'app/role/role.view.html',
-			controller: 'RoleViewController'
-		});		
+			controller: 'RoleViewController',
+				resolve:{
+				roleData: function($stateParams, RoleService){
+					return RoleService.get({id:$stateParams.id}).$promise.then(
+						function( response ){
+							return response;
+						}
+					);
+				}
+			}
+		})
+
+
+
+		.state('app.role.view.userRole',{
+			url: '/userRole/:relationName',
+			templateUrl: 'app/userRole/userRole.list.html',
+			controller: 'UserRoleListController'
+		})
+	
+;
 });

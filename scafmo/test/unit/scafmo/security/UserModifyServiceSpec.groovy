@@ -2,7 +2,7 @@ package scafmo.security
 
 import grails.test.mixin.TestFor
 import grails.test.mixin.Mock
-import spock.lang.Ignore
+
 import spock.lang.Specification
 import defpackage.exceptions.ResourceNotFound
 import grails.validation.ValidationException
@@ -11,8 +11,10 @@ import grails.validation.ValidationException
 @Mock(User)
 class UserModifyServiceSpec extends Specification {
 
-	void 'Creating User with no data is not possible'() {
+	static final long ILLEGAL_ID = -1L
+	static final long FICTIONAL_ID = 99999999L
 
+	void 'Creating User with no data is not possible'() {
 		setup:
 			Map data = [:]
 		when:
@@ -22,9 +24,7 @@ class UserModifyServiceSpec extends Specification {
 	}
 
 	void 'Creating User with invalid data is not possible'() {
-
 		setup:
-
 			Map data = invalidData()
 		when:
 			service.createUser(data)
@@ -33,7 +33,6 @@ class UserModifyServiceSpec extends Specification {
 	}
 
 	void 'Creating User with valid data returns User instance'() {
-
 		setup:
 			Map data = validData()
 		when:
@@ -56,7 +55,7 @@ class UserModifyServiceSpec extends Specification {
 	void 'Updating User with illegal id is not possible'() {
 
 		setup:
-			Map data = [id:-1L]
+			Map data = [id: ILLEGAL_ID]
 		when:
 			service.updateUser(data)
 		then:
@@ -66,7 +65,7 @@ class UserModifyServiceSpec extends Specification {
 	void 'Updating User with fictional id is not possible'() {
 
 		setup:
-			Map data = [id:99999999L]
+			Map data = [id: FICTIONAL_ID]
 
 		when:
 			service.updateUser(data)
@@ -74,14 +73,13 @@ class UserModifyServiceSpec extends Specification {
 			thrown(ResourceNotFound)
 	}
 
-	@Ignore //TODO: set invalid data first
 	void 'Updating User with invalid data is not possible'() {
 
 		setup:
 			Map data = invalidData()
 			data.id = createValidUser().id
 		when:
-			User user = service.updateUser(data)
+			service.updateUser(data)
 		then:
 			thrown(ValidationException)
 	}
@@ -98,20 +96,66 @@ class UserModifyServiceSpec extends Specification {
 			user.id == 1
 	}
 
+	void 'Deleting User without id is not possible'() {
+		when:
+			service.deleteUser(null)
+		then:
+			thrown(IllegalArgumentException)
+	}
+
+	void 'Deleting User with illegal id is not possible'() {
+
+		setup:
+			long id = ILLEGAL_ID
+		when:
+			service.deleteUser(id)
+		then:
+			thrown(IllegalArgumentException)
+	}
+
+	void 'Deleting User with fictional id is not possible'() {
+
+		setup:
+			long id = FICTIONAL_ID
+		when:
+			service.deleteUser(id)
+		then:
+			thrown(ResourceNotFound)
+	}
+
+	void 'Deleting saved User is possible'() {
+		setup:
+			Long userId = createValidUser().id
+			User user = User.findById(userId).find()
+		when:
+			service.deleteUser(userId)
+		then:
+			user != null
+			User.findById(userId) == null
+	}
+
 	Map invalidData() {
-		return ["foo": "bar"]//Sadisfy 'empty data' exception
+
+		return ['username': null]
 	}
 
 	Map validData() {
-		
-		Map data = ["id":null,"version":null,"accountExpired":false,"accountLocked":false,"enabled":true,"passwordExpired":false,"username":"John Doe 302"]
 
+		Map data = [
+  'id':  null,
+  'version':  null,
+  'accountExpired':  false,
+  'accountLocked':  false,
+  'enabled':  true,
+  'passwordExpired':  false,
+  'username':  'John Doe 302'
+]
 		return data
 	}
 
-	User createValidUser(){
+	User createValidUser() {
 		User user = new User(validData())
-		user.save flush:true, failOnError: true
+		user.save flush: true, failOnError: true
 		return user
 	}
 

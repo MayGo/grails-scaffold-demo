@@ -5,23 +5,25 @@ import spock.lang.Ignore
 import org.springframework.http.HttpStatus
 import defpackage.RestQueries
 import defpackage.AuthQueries
+import defpackage.TestUtils
 import spock.lang.Specification
+import spock.lang.Unroll
 
-class TestStringSpec extends Specification implements RestQueries, AuthQueries{
+class TestStringSpec extends Specification implements RestQueries, AuthQueries, TestUtils{
 
 	String REST_URL = "${APP_URL}/teststrings/v1"
-	
+
 	@Shared
 	Long domainId
 	@Shared
 	Long otherDomainId
-	
+
 	@Shared
 	def authResponse
-	
+
 	@Shared
 	def response
-	
+
 	def setupSpec() {
 		authResponse = sendCorrectCredentials(APP_URL)
 	}
@@ -44,7 +46,7 @@ class TestStringSpec extends Specification implements RestQueries, AuthQueries{
 			
 			otherDomainId = response.json.id
 			
-			
+
 		then: 'Should create and return created values'
 			response.json.blankStr == 'Blank 751'
 			response.json.creditCardStr == '372886934857774'
@@ -78,9 +80,9 @@ class TestStringSpec extends Specification implements RestQueries, AuthQueries{
 			
 			domainId = response.json.id
 			
-			
+
 		then: 'Should create and return created values'
-			
+
 			response.json.blankStr == 'Blank 756'
 			response.json.creditCardStr == '372886934857774'
 			response.json.emailStr == 'test757@test.com'
@@ -94,16 +96,16 @@ class TestStringSpec extends Specification implements RestQueries, AuthQueries{
 			response.json.urlStr == 'http://www.test760.com'
 			response.status == HttpStatus.CREATED.value()
 	}
-	
-	
-			
-		
+
+
+
+
 
 	void 'Test reading TestString instance.'() {
 		when: 'Read testString'
 			response = readDomainItemWithParams(domainId.toString(), "")
 		then: 'Should return correct values'
-			
+
 			response.json.blankStr == 'Blank 756'
 			response.json.creditCardStr == '372886934857774'
 			response.json.emailStr == 'test757@test.com'
@@ -117,8 +119,8 @@ class TestStringSpec extends Specification implements RestQueries, AuthQueries{
 			response.json.urlStr == 'http://www.test760.com'
 			response.status == HttpStatus.OK.value()
 	}
-	
-	
+
+
 	void 'Test excluding fields from reading TestString instance.'() {
 		when: 'Read testString id excluded'
 			response = readDomainItemWithParams(domainId.toString(), 'excludes=id')
@@ -126,8 +128,8 @@ class TestStringSpec extends Specification implements RestQueries, AuthQueries{
 			response.json.id == null
 			response.status == HttpStatus.OK.value()
 	}
-	
-	
+
+
 	void 'Test including fields from reading TestString instance.'() {
 		when: 'Read testString id excluded and then included'
 			response = readDomainItemWithParams(domainId.toString(), 'excludes=id&includes=id')
@@ -135,8 +137,8 @@ class TestStringSpec extends Specification implements RestQueries, AuthQueries{
 			response.json.id != null
 			response.status == HttpStatus.OK.value()
 	}
-	
-	
+
+
 	void 'Test reading unexisting TestString instance.'() {
 		when: 'Find unexisting testString'
 			response = readDomainItemWithParams('9999999999', '')
@@ -145,10 +147,10 @@ class TestStringSpec extends Specification implements RestQueries, AuthQueries{
 		when: 'Find unexisting testString id not a number'
 			response = readDomainItemWithParams('nonexistent', '')
 		then: 'Should not find'
-			response.status == HttpStatus.NOT_FOUND.value()
+			response.status == HttpStatus.UNPROCESSABLE_ENTITY.value()
 	}
 
-	
+
 	void 'Test updating TestString instance.'() {
 		when: 'Update testString'
 			response = sendUpdateWithData(domainId.toString()){
@@ -199,7 +201,7 @@ class TestStringSpec extends Specification implements RestQueries, AuthQueries{
 			}
 		then: 'Should not find'
 			response.status == HttpStatus.NOT_FOUND.value()
-			
+
 		when: 'Update unexisting testString id not a number'
 			response = sendUpdateWithData('nonexistent'){
 					blankStr = 'Blank 761'
@@ -218,7 +220,7 @@ class TestStringSpec extends Specification implements RestQueries, AuthQueries{
 		then: 'Should not find'
 			response.status == HttpStatus.UNPROCESSABLE_ENTITY.value()
 	}
-	
+
 	void 'Test TestString list sorting.'() {
 		when: 'Get testString sorted list DESC'
 			response = queryListWithParams('order=desc&sort=id')
@@ -226,7 +228,7 @@ class TestStringSpec extends Specification implements RestQueries, AuthQueries{
 		then: 'First item should be just inserted object'
 			response.json[0].id == domainId
 			response.status == HttpStatus.OK.value()
-		
+
 		when: 'Get testString sorted list ASC'
 			response = queryListWithParams('order=asc&sort=id')
 
@@ -234,8 +236,8 @@ class TestStringSpec extends Specification implements RestQueries, AuthQueries{
 			response.json[0].id != domainId
 			response.status == HttpStatus.OK.value()
 	}
-	
-	
+
+
 	void 'Test TestString list max property query 2 items.'() {
 		when: 'Get testString list with max 2 items'
 			response = queryListWithParams('max=2')
@@ -243,33 +245,33 @@ class TestStringSpec extends Specification implements RestQueries, AuthQueries{
 		then: 'Should be only 2 items'
 			response.json.size() == 2
 	}
-	
-	
+
+
 	 // have to have more then maxLimit items
 	void 'Test TestString list max property.'() {
 		given:
 			int maxLimit = 100// Set real max items limit
-			
+
 		when: 'Get testString list without max param'
 			response = queryListWithParams('')
 
 		then: 'Should return default maximum items'
 			response.json.size() == 10
-			
+
 		when: 'Get testString list with maximum items'
 			response = queryListWithParams("max=$maxLimit")
 
 		then: 'Should contains maximum items'
 			response.json.size() == maxLimit
-			
+
 		when: 'Get testString list with maximum + 1 items'
 			response = queryListWithParams("max=${maxLimit+1}")
 
 		then: 'Should contains maximum items'
 			response.json.size() == maxLimit
 	}
-	
-	
+
+
 	void 'Test excluding fields in TestString list.'() {
 		when: 'Get testString sorted list'
 			response = queryListWithParams('excludes=id')
@@ -277,8 +279,8 @@ class TestStringSpec extends Specification implements RestQueries, AuthQueries{
 		then: 'First item should be just inserted object'
 			response.json[0].id == null
 	}
-	
-	
+
+
 	void 'Test including fields in TestString list.'() {
 		when: 'Get testString sorted list'
 			response = queryListWithParams('excludes=id&includes=id')
@@ -299,7 +301,7 @@ class TestStringSpec extends Specification implements RestQueries, AuthQueries{
 	void 'Test querying in TestString list by real searchString.'() {
 		when: 'Get testString list by searchString'
 			response = queryListWithUrlVariables('order=desc&sort=id&searchString={searchString}',
-					[searchString: "Blank 761"])
+					[searchString: "http://www.test765.com"])
 
 		then: 'Should at least last inserted item'
 			response.json[0].id == domainId
@@ -317,12 +319,13 @@ class TestStringSpec extends Specification implements RestQueries, AuthQueries{
 			response.json.size() == 1
 			response.status == HttpStatus.OK.value()
 	}
-	
-	void 'Test filtering in TestString list by all properties.'() {
+
+	@Unroll("TestString list search with props '#jsonVal' returns '#respSize' items")
+	void 'Filtering in TestString list by all properties.'() {
 		given:
 			response = queryListWithUrlVariables('filter={filter}', [filter:"${jsonVal}"])
 			
-			
+
 		expect:
 			response.json.size() == respSize
 		where:
@@ -341,18 +344,18 @@ class TestStringSpec extends Specification implements RestQueries, AuthQueries{
 			'{"urlStr":"http://www.test765.com"}' || 1 
 
 	}
-	
-	
-	
-	
+
+
+
+
 	void "Test deleting other TestString instance."() {//This is for creating some data to test list sorting
 		when: "Delete testString"
 			response = deleteDomainItem(otherDomainId.toString())
 		then:
 			response.status == HttpStatus.NO_CONTENT.value()
 	}
-	
-	
+
+
 	void "Test deleting TestString instance."() {
 		when: "Delete testString"
 			response = deleteDomainItem(domainId.toString())

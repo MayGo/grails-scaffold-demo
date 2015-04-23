@@ -10,6 +10,7 @@
 
 var ViewPage = function() {
   
+  this.dateCreatedEl = element(by.binding('task.dateCreated'));  
   this.deadlineEl = element(by.binding('task.deadline'));  
   this.detailsEl = element(by.binding('task.details'));  
   this.statusEl = element(by.binding('task.status'));  

@@ -7,11 +7,22 @@ import grails.transaction.Transactional
 import org.codehaus.groovy.grails.web.json.JSONElement
 import org.codehaus.groovy.grails.web.json.JSONObject
 import org.grails.datastore.mapping.query.api.BuildableCriteria
-
+import defpackage.exceptions.ResourceNotFound
 
 //@GrailsCompileStatic
 @Transactional(readOnly = true)
 class TaskSearchService {
+
+	Task queryForTask(Long taskId) {
+		if (!taskId || taskId < 0) {
+			throw new IllegalArgumentException('no.valid.id')
+		}
+		Task task = Task.where { id == taskId }.find()
+		if (!task) {
+			throw new ResourceNotFound("No Task found with Id :[$taskId]")
+		}
+		return task
+	}
 
 	PagedResultList search(Map params) {
 
@@ -45,16 +56,37 @@ class TaskSearchService {
 					if (searchString.isLong()) {
 						eq('id', searchString.toLong())
 					}
-					like('details', searchString + '%')
-					like('status', searchString + '%')
+
+					if (searchString.isLong()) {
+						eq('timeSpent', searchString.toLong())
+					}
 					like('summary', searchString + '%')
+					like('status', searchString + '%')
 				}
 			}
 
+			if (filter['dateCreated']) {
+				Date d
+				if (filter['dateCreated'].toString().isNumber()) {
+					d = new Date(filter['dateCreated'].toString().toLong())
+				} else {
+					String inputFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
+					d = Date.parse(inputFormat, filter['dateCreated'].toString())
+				}
+
+				between('dateCreated', d, d + 1)
+			}
+
 			if (filter['deadline']) {
-				String inputFormat = "yyyy-MM-dd HH:mm:ss.SSSZ"
-				Date d = Date.parse(inputFormat, filter['deadline'].toString())
-				between('deadline', d, d)
+				Date d
+				if (filter['deadline'].toString().isNumber()) {
+					d = new Date(filter['deadline'].toString().toLong())
+				} else {
+					String inputFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
+					d = Date.parse(inputFormat, filter['deadline'].toString())
+				}
+
+				between('deadline', d, d + 1)
 			}
 			if (filter['details']) {
 				ilike('details', "${filter['details']}%")

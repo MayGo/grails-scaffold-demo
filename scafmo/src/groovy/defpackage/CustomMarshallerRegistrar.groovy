@@ -1,7 +1,10 @@
 package defpackage
 
 import grails.converters.JSON
+import org.apache.commons.lang.time.FastDateFormat
 import org.codehaus.groovy.grails.commons.DefaultGrailsDomainClass
+import org.codehaus.groovy.grails.web.converters.marshaller.json.DateMarshaller
+
 import org.example.pomodoro.Tag
 import org.example.pomodoro.Task
 import org.grails.samples.Owner
@@ -66,10 +69,10 @@ class CustomMarshallerRegistrar {
 
 		Map res = [:]
 
-		if (!excludes.containsKey('id')) {
+		if (!excludes.containsKey('id') && domain.hasProperty('id')) {
 			res << [id: domain.id]
 		}
-		if (!excludes.containsKey('version')) {
+		if (!excludes.containsKey('version') && domain.hasProperty('version')) {
 			res << [version: domain.version]
 		}
 		for (String key in getDomainProperties(domain.class)) {
@@ -106,6 +109,9 @@ class CustomMarshallerRegistrar {
 	@javax.annotation.PostConstruct
     static void registerMarshallers() {
 		int priority = 10
+		def customDateMarshaller = new DateMarshaller(FastDateFormat.getInstance("yyyy-MM-dd'T'HH:mm:ssZ",
+				TimeZone.default, Locale.default))
+		JSON.registerObjectMarshaller(customDateMarshaller)
 
 		JSON.registerObjectMarshaller Tag, priority, { Tag instance, JSON json ->
 			Class cl = instance.getClass()
@@ -138,9 +144,9 @@ class CustomMarshallerRegistrar {
 			Class cl = instance.getClass()
 			List defaultExcludes = [
 'ownerId',
-'owner.lastName',
+'owner.address',
+'owner.city',
 'owner.pets',
-'owner.telephone',
 'typeId',
 'visits']
 			Map excludes = createMap(defaultExcludes + json.getExcludes(cl) - json.getIncludes(cl))
@@ -160,8 +166,7 @@ class CustomMarshallerRegistrar {
 		}
 		JSON.registerObjectMarshaller Vet, priority, { Vet instance, JSON json ->
 			Class cl = instance.getClass()
-			List defaultExcludes = [
-'specialities']
+			List defaultExcludes = []
 			Map excludes = createMap(defaultExcludes + json.getExcludes(cl) - json.getIncludes(cl))
 			return filter(instance, excludes)
 		}
@@ -226,14 +231,14 @@ class CustomMarshallerRegistrar {
 			Class cl = instance.getClass()
 			List defaultExcludes = [
 'testStringTypeId',
+'testStringType.blankStr',
+'testStringType.creditCardStr',
+'testStringType.emailStr',
 'testStringType.inListStr',
 'testStringType.matchesStr',
 'testStringType.maxSizeStr',
 'testStringType.minSizeStr',
-'testStringType.notEqualStr',
-'testStringType.sizeStr',
-'testStringType.uniqueStr',
-'testStringType.urlStr']
+'testStringType.notEqualStr']
 			Map excludes = createMap(defaultExcludes + json.getExcludes(cl) - json.getIncludes(cl))
 			return filter(instance, excludes)
 		}
@@ -260,8 +265,8 @@ class CustomMarshallerRegistrar {
 			List defaultExcludes = [
 'roleId',
 'userId',
-'user.enabled',
-'user.passwordExpired']
+'user.accountExpired',
+'user.accountLocked']
 			Map excludes = createMap(defaultExcludes + json.getExcludes(cl) - json.getIncludes(cl))
 			return filter(instance, excludes)
 		}

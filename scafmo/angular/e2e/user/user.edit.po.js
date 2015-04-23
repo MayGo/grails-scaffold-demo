@@ -9,12 +9,12 @@
 
 
 var EditPage = function() {
-  
-  this.accountExpiredEl = element(by.model('user.accountExpired'));  
-  this.accountLockedEl = element(by.model('user.accountLocked'));  
-  this.enabledEl = element(by.model('user.enabled'));  
-  this.passwordExpiredEl = element(by.model('user.passwordExpired'));  
-  this.usernameEl = element(by.model('user.username'));  
+			this.accountExpiredEl = element(by.model('user.accountExpired'));
+		this.accountLockedEl = element(by.model('user.accountLocked'));
+		this.enabledEl = element(by.model('user.enabled'));
+		this.passwordExpiredEl = element(by.model('user.passwordExpired'));
+		this.usernameEl = element(by.model('user.username'));
+
 };
 
 module.exports = new EditPage();

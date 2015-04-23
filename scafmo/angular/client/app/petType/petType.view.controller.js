@@ -1,8 +1,12 @@
 'use strict';
 
 angular.module('angularDemoApp')
-    .controller('PetTypeViewController', function ($scope, $state, $stateParams, $translate, inform, PetTypeService) {
-	 	$scope.petType = PetTypeService.get({id:$stateParams.id});
+    .controller('PetTypeViewController', function ($scope, $state, $stateParams, $translate, inform, PetTypeService, petTypeData) {
+	 	$scope.petType = petTypeData;
+
+		if($state.current.data){
+			$scope.isModal = $state.current.data.isModal;
+		}
 
 		$scope.deletePetType = function(instance){
 			return PetTypeService.deleteInstance(instance).then(function(instance){
@@ -10,5 +14,7 @@ angular.module('angularDemoApp')
 				return instance;
 			});
 		};
-
+		$scope.go = function(route){
+			$state.go(route);
+		};
 	});

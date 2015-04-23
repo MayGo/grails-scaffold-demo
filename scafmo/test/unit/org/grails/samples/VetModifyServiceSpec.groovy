@@ -2,7 +2,7 @@ package org.grails.samples
 
 import grails.test.mixin.TestFor
 import grails.test.mixin.Mock
-import spock.lang.Ignore
+
 import spock.lang.Specification
 import defpackage.exceptions.ResourceNotFound
 import grails.validation.ValidationException
@@ -11,8 +11,10 @@ import grails.validation.ValidationException
 @Mock(Vet)
 class VetModifyServiceSpec extends Specification {
 
-	void 'Creating Vet with no data is not possible'() {
+	static final long ILLEGAL_ID = -1L
+	static final long FICTIONAL_ID = 99999999L
 
+	void 'Creating Vet with no data is not possible'() {
 		setup:
 			Map data = [:]
 		when:
@@ -22,9 +24,7 @@ class VetModifyServiceSpec extends Specification {
 	}
 
 	void 'Creating Vet with invalid data is not possible'() {
-
 		setup:
-
 			Map data = invalidData()
 		when:
 			service.createVet(data)
@@ -33,7 +33,6 @@ class VetModifyServiceSpec extends Specification {
 	}
 
 	void 'Creating Vet with valid data returns Vet instance'() {
-
 		setup:
 			Map data = validData()
 		when:
@@ -56,7 +55,7 @@ class VetModifyServiceSpec extends Specification {
 	void 'Updating Vet with illegal id is not possible'() {
 
 		setup:
-			Map data = [id:-1L]
+			Map data = [id: ILLEGAL_ID]
 		when:
 			service.updateVet(data)
 		then:
@@ -66,7 +65,7 @@ class VetModifyServiceSpec extends Specification {
 	void 'Updating Vet with fictional id is not possible'() {
 
 		setup:
-			Map data = [id:99999999L]
+			Map data = [id: FICTIONAL_ID]
 
 		when:
 			service.updateVet(data)
@@ -74,14 +73,13 @@ class VetModifyServiceSpec extends Specification {
 			thrown(ResourceNotFound)
 	}
 
-	@Ignore //TODO: set invalid data first
 	void 'Updating Vet with invalid data is not possible'() {
 
 		setup:
 			Map data = invalidData()
 			data.id = createValidVet().id
 		when:
-			Vet vet = service.updateVet(data)
+			service.updateVet(data)
 		then:
 			thrown(ValidationException)
 	}
@@ -98,20 +96,64 @@ class VetModifyServiceSpec extends Specification {
 			vet.id == 1
 	}
 
+	void 'Deleting Vet without id is not possible'() {
+		when:
+			service.deleteVet(null)
+		then:
+			thrown(IllegalArgumentException)
+	}
+
+	void 'Deleting Vet with illegal id is not possible'() {
+
+		setup:
+			long id = ILLEGAL_ID
+		when:
+			service.deleteVet(id)
+		then:
+			thrown(IllegalArgumentException)
+	}
+
+	void 'Deleting Vet with fictional id is not possible'() {
+
+		setup:
+			long id = FICTIONAL_ID
+		when:
+			service.deleteVet(id)
+		then:
+			thrown(ResourceNotFound)
+	}
+
+	void 'Deleting saved Vet is possible'() {
+		setup:
+			Long vetId = createValidVet().id
+			Vet vet = Vet.findById(vetId).find()
+		when:
+			service.deleteVet(vetId)
+		then:
+			vet != null
+			Vet.findById(vetId) == null
+	}
+
 	Map invalidData() {
-		return ["foo": "bar"]//Sadisfy 'empty data' exception
+
+		return ['firstName': null,
+ 'lastName': null]
 	}
 
 	Map validData() {
-		
-		Map data = ["id":null,"version":null,"firstName":"firstName","lastName":"lastName"]
 
+		Map data = [
+  'id':  null,
+  'version':  null,
+  'firstName':  'firstName',
+  'lastName':  'lastName'
+]
 		return data
 	}
 
-	Vet createValidVet(){
+	Vet createValidVet() {
 		Vet vet = new Vet(validData())
-		vet.save flush:true, failOnError: true
+		vet.save flush: true, failOnError: true
 		return vet
 	}
 

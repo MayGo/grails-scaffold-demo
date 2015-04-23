@@ -7,11 +7,22 @@ import grails.transaction.Transactional
 import org.codehaus.groovy.grails.web.json.JSONElement
 import org.codehaus.groovy.grails.web.json.JSONObject
 import org.grails.datastore.mapping.query.api.BuildableCriteria
-
+import defpackage.exceptions.ResourceNotFound
 
 //@GrailsCompileStatic
 @Transactional(readOnly = true)
 class SpecialitySearchService {
+
+	Speciality queryForSpeciality(Long specialityId) {
+		if (!specialityId || specialityId < 0) {
+			throw new IllegalArgumentException('no.valid.id')
+		}
+		Speciality speciality = Speciality.where { id == specialityId }.find()
+		if (!speciality) {
+			throw new ResourceNotFound("No Speciality found with Id :[$specialityId]")
+		}
+		return speciality
+	}
 
 	PagedResultList search(Map params) {
 

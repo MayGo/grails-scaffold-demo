@@ -14,14 +14,47 @@ $stateProvider
 		}).state('app.owner.create',{
 			url: '/create',
 			templateUrl: 'app/owner/owner.form.html',
-			controller: 'OwnerEditController'
+			controller: 'OwnerEditController',
+			resolve:{
+				ownerData: function($stateParams, OwnerService) {
+					return new OwnerService();
+				}
+			}
 		}).state('app.owner.edit',{
 			url: '/edit/:id',
 			templateUrl: 'app/owner/owner.form.html',
-			controller: 'OwnerEditController'
+			controller: 'OwnerEditController',
+			resolve:{
+				ownerData: function($stateParams, OwnerService){
+					return OwnerService.get({id:$stateParams.id}).$promise.then(
+						function( response ){
+							return response;
+						}
+					);
+				}
+			}
 		}).state('app.owner.view',{
 			url: '/view/:id',
 			templateUrl: 'app/owner/owner.view.html',
-			controller: 'OwnerViewController'
-		});		
+			controller: 'OwnerViewController',
+				resolve:{
+				ownerData: function($stateParams, OwnerService){
+					return OwnerService.get({id:$stateParams.id}).$promise.then(
+						function( response ){
+							return response;
+						}
+					);
+				}
+			}
+		})
+
+
+
+		.state('app.owner.view.pet',{
+			url: '/pet/:relationName',
+			templateUrl: 'app/pet/pet.list.html',
+			controller: 'PetListController'
+		})
+	
+;
 });

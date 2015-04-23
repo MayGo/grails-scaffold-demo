@@ -14,14 +14,41 @@ $stateProvider
 		}).state('app.person.create',{
 			url: '/create',
 			templateUrl: 'app/person/person.form.html',
-			controller: 'PersonEditController'
+			controller: 'PersonEditController',
+			resolve:{
+				personData: function($stateParams, PersonService) {
+					return new PersonService();
+				}
+			}
 		}).state('app.person.edit',{
 			url: '/edit/:id',
 			templateUrl: 'app/person/person.form.html',
-			controller: 'PersonEditController'
+			controller: 'PersonEditController',
+			resolve:{
+				personData: function($stateParams, PersonService){
+					return PersonService.get({id:$stateParams.id}).$promise.then(
+						function( response ){
+							return response;
+						}
+					);
+				}
+			}
 		}).state('app.person.view',{
 			url: '/view/:id',
 			templateUrl: 'app/person/person.view.html',
-			controller: 'PersonViewController'
-		});		
+			controller: 'PersonViewController',
+				resolve:{
+				personData: function($stateParams, PersonService){
+					return PersonService.get({id:$stateParams.id}).$promise.then(
+						function( response ){
+							return response;
+						}
+					);
+				}
+			}
+		})
+
+
+
+;
 });

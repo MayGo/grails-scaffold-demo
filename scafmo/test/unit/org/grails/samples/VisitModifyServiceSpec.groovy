@@ -2,7 +2,7 @@ package org.grails.samples
 
 import grails.test.mixin.TestFor
 import grails.test.mixin.Mock
-import spock.lang.Ignore
+
 import spock.lang.Specification
 import defpackage.exceptions.ResourceNotFound
 import grails.validation.ValidationException
@@ -11,8 +11,10 @@ import grails.validation.ValidationException
 @Mock(Visit)
 class VisitModifyServiceSpec extends Specification {
 
-	void 'Creating Visit with no data is not possible'() {
+	static final long ILLEGAL_ID = -1L
+	static final long FICTIONAL_ID = 99999999L
 
+	void 'Creating Visit with no data is not possible'() {
 		setup:
 			Map data = [:]
 		when:
@@ -22,9 +24,7 @@ class VisitModifyServiceSpec extends Specification {
 	}
 
 	void 'Creating Visit with invalid data is not possible'() {
-
 		setup:
-
 			Map data = invalidData()
 		when:
 			service.createVisit(data)
@@ -33,7 +33,6 @@ class VisitModifyServiceSpec extends Specification {
 	}
 
 	void 'Creating Visit with valid data returns Visit instance'() {
-
 		setup:
 			Map data = validData()
 		when:
@@ -56,7 +55,7 @@ class VisitModifyServiceSpec extends Specification {
 	void 'Updating Visit with illegal id is not possible'() {
 
 		setup:
-			Map data = [id:-1L]
+			Map data = [id: ILLEGAL_ID]
 		when:
 			service.updateVisit(data)
 		then:
@@ -66,7 +65,7 @@ class VisitModifyServiceSpec extends Specification {
 	void 'Updating Visit with fictional id is not possible'() {
 
 		setup:
-			Map data = [id:99999999L]
+			Map data = [id: FICTIONAL_ID]
 
 		when:
 			service.updateVisit(data)
@@ -74,14 +73,13 @@ class VisitModifyServiceSpec extends Specification {
 			thrown(ResourceNotFound)
 	}
 
-	@Ignore //TODO: set invalid data first
 	void 'Updating Visit with invalid data is not possible'() {
 
 		setup:
 			Map data = invalidData()
 			data.id = createValidVisit().id
 		when:
-			Visit visit = service.updateVisit(data)
+			service.updateVisit(data)
 		then:
 			thrown(ValidationException)
 	}
@@ -98,20 +96,69 @@ class VisitModifyServiceSpec extends Specification {
 			visit.id == 1
 	}
 
+	void 'Deleting Visit without id is not possible'() {
+		when:
+			service.deleteVisit(null)
+		then:
+			thrown(IllegalArgumentException)
+	}
+
+	void 'Deleting Visit with illegal id is not possible'() {
+
+		setup:
+			long id = ILLEGAL_ID
+		when:
+			service.deleteVisit(id)
+		then:
+			thrown(IllegalArgumentException)
+	}
+
+	void 'Deleting Visit with fictional id is not possible'() {
+
+		setup:
+			long id = FICTIONAL_ID
+		when:
+			service.deleteVisit(id)
+		then:
+			thrown(ResourceNotFound)
+	}
+
+	void 'Deleting saved Visit is possible'() {
+		setup:
+			Long visitId = createValidVisit().id
+			Visit visit = Visit.findById(visitId).find()
+		when:
+			service.deleteVisit(visitId)
+		then:
+			visit != null
+			Visit.findById(visitId) == null
+	}
+
 	Map invalidData() {
-		return ["foo": "bar"]//Sadisfy 'empty data' exception
+
+		return ['date': null,
+ 'description': null,
+ 'pet': null]
 	}
 
 	Map validData() {
-		
-		Map data = ["id":null,"version":null,"date":"2015-02-25T22:00:00Z","description":"description","pet":["id":302,"version":0]]
 
+		Map data = [
+  'id':  null,
+  'version':  null,
+  'date':  new Date().clearTime(),
+  'description':  'description',
+  'pet':  [
+    'id':  302,
+    'version':  0
+  ]
+]
 		return data
 	}
 
-	Visit createValidVisit(){
+	Visit createValidVisit() {
 		Visit visit = new Visit(validData())
-		visit.save flush:true, failOnError: true
+		visit.save flush: true, failOnError: true
 		return visit
 	}
 

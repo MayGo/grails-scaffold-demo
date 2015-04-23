@@ -9,9 +9,9 @@
 
 
 var EditPage = function() {
-  
-  this.roleEl = element(by.model('userRole.role'));  
-  this.userEl = element(by.model('userRole.user'));  
+			this.roleEl = element(by.model('userRole.role'));
+		this.userEl = element(by.model('userRole.user'));
+
 };
 
 module.exports = new EditPage();

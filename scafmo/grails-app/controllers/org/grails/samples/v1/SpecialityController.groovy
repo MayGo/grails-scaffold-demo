@@ -1,6 +1,5 @@
 package org.grails.samples.v1
 
-import grails.transaction.Transactional
 import grails.validation.ValidationException
 import org.codehaus.groovy.grails.web.servlet.HttpHeaders
 import org.springframework.http.HttpStatus
@@ -9,27 +8,22 @@ import org.restapidoc.annotation.RestApiParam
 import org.restapidoc.annotation.RestApiParams
 import org.restapidoc.annotation.RestApi
 import org.restapidoc.pojo.RestApiParamType
-import defpackage.CustomRestfulController
 import defpackage.exceptions.ResourceNotFound
 import org.grails.samples.Speciality
 import org.grails.samples.SpecialityModifyService
 import org.grails.samples.SpecialitySearchService
 
-
-@Transactional(readOnly = true)
 @RestApi(name = 'Speciality services', description = 'Methods for managing Specialitys')
-class SpecialityController extends CustomRestfulController<Speciality> {
+class SpecialityController {
 
 	static namespace = 'v1'
+
+	static allowedMethods = [save: 'POST', update: 'PUT', delete: 'DELETE']
 
 	static responseFormats = ['json']
 
 	SpecialitySearchService specialitySearchService
 	SpecialityModifyService specialityModifyService
-
-	SpecialityController() {
-		super(Speciality, false /* read-only */)
-	}
 
 	@RestApiMethod(description = 'List all Specialitys', listing = true)
 	@RestApiParams(params = [
@@ -55,22 +49,18 @@ class SpecialityController extends CustomRestfulController<Speciality> {
 
 	@RestApiMethod(description='Get a Speciality')
 	@RestApiParams(params=[
-		@RestApiParam(name='id', type='long', paramType = RestApiParamType.PATH, description = 'The Speciality id')
+		@RestApiParam(
+				name='id', type='long',
+				paramType = RestApiParamType.PATH,
+				description = 'The Speciality id'
+		)
 	])
 	def show() {
-		// We pass which fields to be rendered with the includes attributes,
-		// we exclude the class property for all responses.
-		respond queryForResource(params.id), [includes: includes, excludes: excludes]
+		respond specialitySearchService.queryForSpeciality(params.long('id')),
+				[includes: includes, excludes: excludes]
 	}
 
-	/**
-	 * Saves a Speciality
-	 */
-	@Transactional
 	@RestApiMethod(description = 'Save a Speciality')
-	@RestApiParams(params = [
-			@RestApiParam(name = 'id', type = 'long', paramType = RestApiParamType.PATH, description = 'The Object id')
-	])
 	def save() {
 
 		Speciality instance = specialityModifyService.createSpeciality(request.JSON)
@@ -83,14 +73,28 @@ class SpecialityController extends CustomRestfulController<Speciality> {
 
 	}
 
-	/**
-	 * Updates a Speciality for the given id
-	 * @param id
-	 */
-	@Transactional
+	@RestApiMethod(description = 'Edit a Speciality')
+	@RestApiParams(params = [
+		@RestApiParam(
+				name = 'id',
+				type = 'long',
+				paramType = RestApiParamType.PATH,
+				description = 'The Speciality id'
+		)
+	])
+	def edit() {
+		respond specialitySearchService.queryForSpeciality(params.long('id')),
+				[includes: includes, excludes: excludes]
+	}
+
 	@RestApiMethod(description = 'Update a Speciality')
 	@RestApiParams(params = [
-			@RestApiParam(name = 'id', type = 'long', paramType = RestApiParamType.PATH, description = 'The Speciality id')
+			@RestApiParam(
+					name = 'id',
+					type = 'long',
+					paramType = RestApiParamType.PATH,
+					description = 'The Speciality id'
+			)
 	])
 	def update() {
 		request.JSON.id = params.long('id')
@@ -103,6 +107,19 @@ class SpecialityController extends CustomRestfulController<Speciality> {
 		respond instance, [status: HttpStatus.OK]
 	}
 
+	@RestApiMethod(description = 'Delete a Speciality')
+	@RestApiParams(params = [
+			@RestApiParam(
+					name = 'id',
+					type = 'long',
+					paramType = RestApiParamType.PATH,
+					description = 'The Speciality id'
+			)
+	])
+	def delete() {
+		specialityModifyService.deleteSpeciality(params.long('id'))
+		render status: HttpStatus.NO_CONTENT
+	}
 
 	private getIncludes() {
 		params.includes?.tokenize(',')
@@ -112,26 +129,18 @@ class SpecialityController extends CustomRestfulController<Speciality> {
 		params.excludes?.tokenize(',')
 	}
 
-	@Override
-	protected Speciality queryForResource(Serializable id) {
-		if (id.isNumber()) {
-			resource.get(id)
-		} else {
-			notFound()
-		}
-	}
-
-	def handleValidationException(ValidationException ex){
+	def handleValidationException(ValidationException ex) {
 		respond ex.errors, [status: HttpStatus.UNPROCESSABLE_ENTITY]
 	}
-	def handleResourceNotFoundException(ResourceNotFound ex){
+
+	def handleResourceNotFoundException(ResourceNotFound ex) {
 		log.error ex
 		render status: HttpStatus.NOT_FOUND
 	}
 
-	def handleIllegalArgumentExceptionn(IllegalArgumentException ex){
+	def handleIllegalArgumentExceptionn(IllegalArgumentException ex) {
 		log.error ex
-		respond ex, [status: HttpStatus.UNPROCESSABLE_ENTITY]
+		Map errors = ['error': ex.message]
+		respond errors as Object, [status: HttpStatus.UNPROCESSABLE_ENTITY]
 	}
-
 }

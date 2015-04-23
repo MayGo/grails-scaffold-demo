@@ -3,32 +3,27 @@
 
 
 angular.module('angularDemoApp')
-    .controller('RoleEditController', function ($scope, $state, $q, $stateParams, RoleService, $translate, inform ) {
+    .controller('RoleEditController', function ($scope, $state, $q, $stateParams, RoleService, roleData, $translate, inform ) {
     	$scope.isEditForm = ($stateParams.id)?true:false;
-    	
-    	if($scope.isEditForm){
-    		RoleService.get({id:$stateParams.id}).$promise.then(
-		        function( response ){
-			       	$scope.role = angular.extend({}, $scope.role , response);
-			       	$scope.orig = angular.copy($scope.role );
-		       	}
-	     	);
-    	}else{
-    		$scope.role = new RoleService();
-    	}
-		
-	
+
+		$scope.role = roleData;
+
+
 	    $scope.submit = function(frmController) {
 			var deferred = $q.defer();
 	    	var errorCallback = function(response){
 					if (response.data.errors) {
 		                angular.forEach(response.data.errors, function (error) {
-		                    frmController.setExternalValidation(error.field, undefined, error.message);
+							if(angular.element('#'+error.field).length) {
+								frmController.setExternalValidation(error.field, undefined, error.message);
+							} else {
+								inform.add(error.message, {ttl: -1,'type': 'warning'});
+							}
 		                });
 		            }
 					deferred.reject(response);
 		       };
-	       
+
 	    	if($scope.isEditForm){
 	    		RoleService.update($scope.role, function(response) {	
 	    			$translate('pages.Role.messages.update').then(function (msg) {
@@ -42,8 +37,8 @@ angular.module('angularDemoApp')
     				$translate('pages.Role.messages.create').then(function (msg) {
 				    	inform.add(msg, {'type': 'success'});
 					});
+					$state.go('^.view', { id: response.id }, {location: 'replace'});
 					deferred.resolve(response);
-            	 	$state.go('^.view', { id: response.id });
 		        },errorCallback);
 	    	}
 	        return deferred.promise;

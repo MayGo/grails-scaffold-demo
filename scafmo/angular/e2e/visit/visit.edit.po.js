@@ -9,10 +9,10 @@
 
 
 var EditPage = function() {
-  
-  this.dateEl = element(by.model('visit.date'));  
-  this.descriptionEl = element(by.model('visit.description'));  
-  this.petEl = element(by.model('visit.pet'));  
+			this.dateEl = element(by.model('visit.date'));
+		this.descriptionEl = element(by.model('visit.description'));
+		this.petEl = element(by.model('visit.pet'));
+
 };
 
 module.exports = new EditPage();

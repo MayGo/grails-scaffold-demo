@@ -21,7 +21,8 @@ angular.module('angularDemoApp', [
   'satellizer',
   //'mgcrea.ngStrap',
   'ngToggle',
-  'permission'
+  'permission',
+	'JSONedit'
 ])
 	.constant('appConfig', (function() {
 
@@ -32,19 +33,12 @@ angular.module('angularDemoApp', [
  			return str;
  		};
 
- 		var appendSlash = function(str){
- 			if(str.substr(-1) !== '/' ){
- 				str += '/';
- 			}
- 			return str;
- 		};
-
  		//Set defaults
 		var defaultConfig = {
  				restUrl : 'http://localhost:8080/scafmo',
- 	 			loginUrl : '/api/login',
- 	 			logoutUrl : '/api/logout',
- 	 			validationUrl: '/api/validate',
+ 	 			loginUrl : 'http://localhost:8080/scafmo/api/login',
+ 	 			logoutUrl : 'http://localhost:8080/scafmo/api/logout',
+ 	 			validationUrl: 'http://localhost:8080/scafmo/api/validate',
  	 			securityEnabled: false
 		};
  		var loadSuccess = function( data ) {
@@ -62,23 +56,32 @@ angular.module('angularDemoApp', [
 		    async: false
 		});
 
+		if(defaultConfig.restUrl === undefined){
+			console.error('Define restUrl in config.json.');
+		}
+		if(defaultConfig.loginUrl === undefined){
+			console.error('Define loginUrl in config.json.');
+		}
+		if(defaultConfig.logoutUrl === undefined){
+			console.error('Define logoutUrl in config.json.');
+		}
+		/*if(defaultConfig.validationUrl === undefined){
+			console.error('Define validationUrl in config.json.');
+		}*/
+		if(defaultConfig.securityEnabled === undefined){
+			console.error('Define securityEnabled in config.json.');
+		}
 		// Return correct config
-		var restUrl = removeSlash(defaultConfig.restUrl);
-		var config = {
-			restUrl : restUrl,
-			loginUrl: defaultConfig.loginUrl,
-			logoutUrl: defaultConfig.logoutUrl,
-			securityEnabled: defaultConfig.securityEnabled
-		};
+		defaultConfig.restUrl = removeSlash(defaultConfig.restUrl);
 
- 	    return config;
+ 	    return defaultConfig;
    })())
 
   .config(function ($stateProvider, $urlRouterProvider, $locationProvider, cfpLoadingBarProvider, datepickerConfig, datepickerPopupConfig) {
   	// Override default config from custom config  file
   	$stateProvider
 		.state('app', {
-			//abstract: true,
+			abstract: true,
 			url: '/app',
 			templateUrl: 'app/app.html',
 			controller: 'AppController',
@@ -134,7 +137,6 @@ angular.module('angularDemoApp', [
       });
   })
 	.factory('AuthHttpInterceptor', function ($q, $injector, $rootScope, $translate, inform) {
-
 		function interceptor(rejection) {
 			try {
 				if(rejection.status === 401){
@@ -144,7 +146,7 @@ angular.module('angularDemoApp', [
 						inform.add(msg  , {'type': 'danger', ttl: 0});
 					});
 				}else{
-					var msg = 'Network error (' + rejection.status + '): ' + rejection.statusText;
+					var msg = 'Network error (' + rejection.status + '): ' + rejection.statusText + ' for url:' + rejection.config.url;
 					inform.add(msg, { type: 'danger', ttl: 0});
 				}
 
@@ -154,7 +156,6 @@ angular.module('angularDemoApp', [
 
 			return $q.reject( rejection );
 		}
-
 		return {
 			requestError: interceptor,
 			responseError: interceptor
@@ -162,6 +163,7 @@ angular.module('angularDemoApp', [
 
 	})
 	.config(function ($httpProvider) {
+
 		$httpProvider.interceptors.push('AuthHttpInterceptor');
 	})
 
@@ -172,23 +174,27 @@ angular.module('angularDemoApp', [
         increaseArea: '20%' // optional
     }
   })
-  .run(function($filter, validator) {
-  		validator.setValidElementStyling(false);
+	.run(function($filter, validator) {
+		validator.setValidElementStyling(false);
 
+		//Set date to timestamp to ignore users locale
 		Date.prototype.toJSON = function() {
-	    	var grailsAcceptableFormat = 'yyyy-MM-dd HH:mm:ss.sssZ';
-	    	return $filter('date')(this, grailsAcceptableFormat);
-	    };
+			var d = this
+			d.setHours(0, 0, 0);
+			var grailsAcceptableFormat = "yyyy-MM-dd'T'HH:mm:ssZ";
+			return $filter('date')(d, grailsAcceptableFormat, 'UTC');
+		};
   }).run(function ($rootScope, $state) {
-		$rootScope.$on('$stateChangeError', function (e, toPage, toParams, from, fromParams, error) {
-			console.log("State Change Error");
+		$rootScope.$on('$stateChangeError', function (e, toPage) {
+			console.log('State Change Error');
+			var stateParams = { };
 			stateParams.messageCode = 'pages.session.messages.state-change-error';
 			stateParams.url = toPage.url;
 			$state.go('app.error', stateParams, {location: false});
 		});
 
 	$rootScope.$on('$stateChangePermissionDenied', function (e, toPage) {
-		console.log("State Change Permission Denied");
+		console.log('State Change Permission Denied');
 
 		var stateParams = { };
 		stateParams.messageCode = 'pages.session.messages.permission-denied';
@@ -196,12 +202,12 @@ angular.module('angularDemoApp', [
 		$state.go('app.error', stateParams, {location: false});
 	});
 
-	}).run(function (Permission, SessionService, $q) {
+	}).run(function (Permission, SessionService) {
 		Permission
-			.defineRole('ROLE_USER', function (stateParams) {
+			.defineRole('ROLE_USER', function () {
 				return SessionService.hasRole('ROLE_USER');
 			})
-			.defineRole('ROLE_ADMIN', function (stateParams) {
+			.defineRole('ROLE_ADMIN', function () {
 				return SessionService.hasRole('ROLE_ADMIN');
 			});
 	});

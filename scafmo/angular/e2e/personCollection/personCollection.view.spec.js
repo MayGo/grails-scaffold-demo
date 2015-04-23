@@ -1,15 +1,22 @@
 'use strict';
 
 
+var helper = require('../utils/helper.js');
 describe('personCollection view page', function() {
-  var page;
+	var page;
 
-  beforeEach(function() {
-    browser.get('/#/app/personCollection/view/1');
-    page = require('./personCollection.view.po');
-  });
+	beforeEach(function() {
+		var mockModule = require('./personCollection.mocks');
+		browser.addMockModule('httpBackendMock', mockModule );
+		browser.get('/#/app/personCollection/view/1');
+		page = require('./personCollection.view.po');
+	});
+	afterEach(function() {
+		browser.clearMockModules();
+	});
 
-  
+
+
   it('should contain all fields.', function() {
     
     expect(page.ageEl).not.toBeNull()    
@@ -24,17 +31,38 @@ describe('personCollection view page', function() {
   
   it('edit button changes path to /edit', function() {
 	  element(by.id('editBtn')).click();
-	  expect(browser.getCurrentUrl()).toContain("/#/app/personCollection/edit/1");
+	  browser.wait(function() {
+			  return $('#personCollection_form').isPresent(); // keeps waiting until this statement resolves to true
+		  },
+		  1000,
+		  'personCollection_form element not visible'
+	  );
+	  helper.currentUrlContains('/#/app/personCollection/edit/1');
+
   });
   
   it('back button changes path to /list', function() {
 	  element(by.id('backBtn')).click();
-	  expect(browser.getCurrentUrl()).toContain("/#/app/personCollection/list");
+	  browser.wait(function() {
+			  return $('#personCollection_list').isPresent(); // keeps waiting until this statement resolves to true
+		  },
+		  1000,
+		  'personCollection_list element not visible'
+	  );
+	  helper.currentUrlContains('/#/app/personCollection/list');
+
   });
   
   it('delete button changes path to /list and deletes item', function() {
 	  element(by.id('deleteBtn')).click();
-	  expect(browser.getCurrentUrl()).toContain("/#/app/personCollection/list");
+	  browser.wait(function() {
+			  return $('#personCollection_list').isPresent(); // keeps waiting until this statement resolves to true
+		  },
+		  1000,
+		  'personCollection_list element not visible'
+	  );
+	  helper.currentUrlContains('/#/app/personCollection/list');
+
   });
   
 });

@@ -2,7 +2,7 @@ package scafmo.constr
 
 import grails.test.mixin.TestFor
 import grails.test.mixin.Mock
-import spock.lang.Ignore
+
 import spock.lang.Specification
 import defpackage.exceptions.ResourceNotFound
 import grails.validation.ValidationException
@@ -11,8 +11,10 @@ import grails.validation.ValidationException
 @Mock(TestOther)
 class TestOtherModifyServiceSpec extends Specification {
 
-	void 'Creating TestOther with no data is not possible'() {
+	static final long ILLEGAL_ID = -1L
+	static final long FICTIONAL_ID = 99999999L
 
+	void 'Creating TestOther with no data is not possible'() {
 		setup:
 			Map data = [:]
 		when:
@@ -22,9 +24,7 @@ class TestOtherModifyServiceSpec extends Specification {
 	}
 
 	void 'Creating TestOther with invalid data is not possible'() {
-
 		setup:
-
 			Map data = invalidData()
 		when:
 			service.createTestOther(data)
@@ -33,7 +33,6 @@ class TestOtherModifyServiceSpec extends Specification {
 	}
 
 	void 'Creating TestOther with valid data returns TestOther instance'() {
-
 		setup:
 			Map data = validData()
 		when:
@@ -56,7 +55,7 @@ class TestOtherModifyServiceSpec extends Specification {
 	void 'Updating TestOther with illegal id is not possible'() {
 
 		setup:
-			Map data = [id:-1L]
+			Map data = [id: ILLEGAL_ID]
 		when:
 			service.updateTestOther(data)
 		then:
@@ -66,7 +65,7 @@ class TestOtherModifyServiceSpec extends Specification {
 	void 'Updating TestOther with fictional id is not possible'() {
 
 		setup:
-			Map data = [id:99999999L]
+			Map data = [id: FICTIONAL_ID]
 
 		when:
 			service.updateTestOther(data)
@@ -74,14 +73,13 @@ class TestOtherModifyServiceSpec extends Specification {
 			thrown(ResourceNotFound)
 	}
 
-	@Ignore //TODO: set invalid data first
 	void 'Updating TestOther with invalid data is not possible'() {
 
 		setup:
 			Map data = invalidData()
 			data.id = createValidTestOther().id
 		when:
-			TestOther testOther = service.updateTestOther(data)
+			service.updateTestOther(data)
 		then:
 			thrown(ValidationException)
 	}
@@ -98,20 +96,64 @@ class TestOtherModifyServiceSpec extends Specification {
 			testOther.id == 1
 	}
 
+	void 'Deleting TestOther without id is not possible'() {
+		when:
+			service.deleteTestOther(null)
+		then:
+			thrown(IllegalArgumentException)
+	}
+
+	void 'Deleting TestOther with illegal id is not possible'() {
+
+		setup:
+			long id = ILLEGAL_ID
+		when:
+			service.deleteTestOther(id)
+		then:
+			thrown(IllegalArgumentException)
+	}
+
+	void 'Deleting TestOther with fictional id is not possible'() {
+
+		setup:
+			long id = FICTIONAL_ID
+		when:
+			service.deleteTestOther(id)
+		then:
+			thrown(ResourceNotFound)
+	}
+
+	void 'Deleting saved TestOther is possible'() {
+		setup:
+			Long testOtherId = createValidTestOther().id
+			TestOther testOther = TestOther.findById(testOtherId).find()
+		when:
+			service.deleteTestOther(testOtherId)
+		then:
+			testOther != null
+			TestOther.findById(testOtherId) == null
+	}
+
 	Map invalidData() {
-		return ["foo": "bar"]//Sadisfy 'empty data' exception
+
+		return ['foo': 'Sadisfy empty data exception']
 	}
 
 	Map validData() {
-		
-		Map data = ["id":null,"version":null,"booleanNullable":false,"testDate":"2015-02-25T22:00:00Z","testEnum":"TEST_1"]
 
+		Map data = [
+  'id':  null,
+  'version':  null,
+  'booleanNullable':  false,
+  'testDate':  new Date().clearTime(),
+  'testEnum':  'TEST_1'
+]
 		return data
 	}
 
-	TestOther createValidTestOther(){
+	TestOther createValidTestOther() {
 		TestOther testOther = new TestOther(validData())
-		testOther.save flush:true, failOnError: true
+		testOther.save flush: true, failOnError: true
 		return testOther
 	}
 

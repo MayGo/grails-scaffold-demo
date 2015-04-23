@@ -1,15 +1,22 @@
 'use strict';
 
 
+var helper = require('../utils/helper.js');
 describe('testNumber view page', function() {
-  var page;
+	var page;
 
-  beforeEach(function() {
-    browser.get('/#/app/testNumber/view/1');
-    page = require('./testNumber.view.po');
-  });
+	beforeEach(function() {
+		var mockModule = require('./testNumber.mocks');
+		browser.addMockModule('httpBackendMock', mockModule );
+		browser.get('/#/app/testNumber/view/1');
+		page = require('./testNumber.view.po');
+	});
+	afterEach(function() {
+		browser.clearMockModules();
+	});
 
-  
+
+
   it('should contain all fields.', function() {
     
     expect(page.doubleNrEl).not.toBeNull()    
@@ -32,17 +39,38 @@ describe('testNumber view page', function() {
   
   it('edit button changes path to /edit', function() {
 	  element(by.id('editBtn')).click();
-	  expect(browser.getCurrentUrl()).toContain("/#/app/testNumber/edit/1");
+	  browser.wait(function() {
+			  return $('#testNumber_form').isPresent(); // keeps waiting until this statement resolves to true
+		  },
+		  1000,
+		  'testNumber_form element not visible'
+	  );
+	  helper.currentUrlContains('/#/app/testNumber/edit/1');
+
   });
   
   it('back button changes path to /list', function() {
 	  element(by.id('backBtn')).click();
-	  expect(browser.getCurrentUrl()).toContain("/#/app/testNumber/list");
+	  browser.wait(function() {
+			  return $('#testNumber_list').isPresent(); // keeps waiting until this statement resolves to true
+		  },
+		  1000,
+		  'testNumber_list element not visible'
+	  );
+	  helper.currentUrlContains('/#/app/testNumber/list');
+
   });
   
   it('delete button changes path to /list and deletes item', function() {
 	  element(by.id('deleteBtn')).click();
-	  expect(browser.getCurrentUrl()).toContain("/#/app/testNumber/list");
+	  browser.wait(function() {
+			  return $('#testNumber_list').isPresent(); // keeps waiting until this statement resolves to true
+		  },
+		  1000,
+		  'testNumber_list element not visible'
+	  );
+	  helper.currentUrlContains('/#/app/testNumber/list');
+
   });
   
 });

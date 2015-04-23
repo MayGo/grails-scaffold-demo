@@ -12,7 +12,7 @@ var EditPage = function() {
   
   this.nameEl = element(by.model('search.name'));  
   this.personsEl = element(by.model('search.persons'));  
-  this.headDivisionEl = element(by.model('search.headDivision'));  
+  this.headDivisionEl = element(by.model('search.headDivisions'));  
 };
 
 module.exports = new EditPage();

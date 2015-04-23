@@ -14,14 +14,41 @@ $stateProvider
 		}).state('app.speciality.create',{
 			url: '/create',
 			templateUrl: 'app/speciality/speciality.form.html',
-			controller: 'SpecialityEditController'
+			controller: 'SpecialityEditController',
+			resolve:{
+				specialityData: function($stateParams, SpecialityService) {
+					return new SpecialityService();
+				}
+			}
 		}).state('app.speciality.edit',{
 			url: '/edit/:id',
 			templateUrl: 'app/speciality/speciality.form.html',
-			controller: 'SpecialityEditController'
+			controller: 'SpecialityEditController',
+			resolve:{
+				specialityData: function($stateParams, SpecialityService){
+					return SpecialityService.get({id:$stateParams.id}).$promise.then(
+						function( response ){
+							return response;
+						}
+					);
+				}
+			}
 		}).state('app.speciality.view',{
 			url: '/view/:id',
 			templateUrl: 'app/speciality/speciality.view.html',
-			controller: 'SpecialityViewController'
-		});		
+			controller: 'SpecialityViewController',
+				resolve:{
+				specialityData: function($stateParams, SpecialityService){
+					return SpecialityService.get({id:$stateParams.id}).$promise.then(
+						function( response ){
+							return response;
+						}
+					);
+				}
+			}
+		})
+
+
+
+;
 });

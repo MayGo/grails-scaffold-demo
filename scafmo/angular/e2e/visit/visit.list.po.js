@@ -12,7 +12,7 @@ var EditPage = function() {
   
   this.dateEl = element(by.model('search.date'));  
   this.descriptionEl = element(by.model('search.description'));  
-  this.petEl = element(by.model('search.pet'));  
+  this.petEl = element(by.model('search.pets'));  
 };
 
 module.exports = new EditPage();

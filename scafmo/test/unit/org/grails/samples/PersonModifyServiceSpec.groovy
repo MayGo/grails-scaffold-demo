@@ -2,7 +2,7 @@ package org.grails.samples
 
 import grails.test.mixin.TestFor
 import grails.test.mixin.Mock
-import spock.lang.Ignore
+
 import spock.lang.Specification
 import defpackage.exceptions.ResourceNotFound
 import grails.validation.ValidationException
@@ -11,8 +11,10 @@ import grails.validation.ValidationException
 @Mock(Person)
 class PersonModifyServiceSpec extends Specification {
 
-	void 'Creating Person with no data is not possible'() {
+	static final long ILLEGAL_ID = -1L
+	static final long FICTIONAL_ID = 99999999L
 
+	void 'Creating Person with no data is not possible'() {
 		setup:
 			Map data = [:]
 		when:
@@ -22,9 +24,7 @@ class PersonModifyServiceSpec extends Specification {
 	}
 
 	void 'Creating Person with invalid data is not possible'() {
-
 		setup:
-
 			Map data = invalidData()
 		when:
 			service.createPerson(data)
@@ -33,7 +33,6 @@ class PersonModifyServiceSpec extends Specification {
 	}
 
 	void 'Creating Person with valid data returns Person instance'() {
-
 		setup:
 			Map data = validData()
 		when:
@@ -56,7 +55,7 @@ class PersonModifyServiceSpec extends Specification {
 	void 'Updating Person with illegal id is not possible'() {
 
 		setup:
-			Map data = [id:-1L]
+			Map data = [id: ILLEGAL_ID]
 		when:
 			service.updatePerson(data)
 		then:
@@ -66,7 +65,7 @@ class PersonModifyServiceSpec extends Specification {
 	void 'Updating Person with fictional id is not possible'() {
 
 		setup:
-			Map data = [id:99999999L]
+			Map data = [id: FICTIONAL_ID]
 
 		when:
 			service.updatePerson(data)
@@ -74,14 +73,13 @@ class PersonModifyServiceSpec extends Specification {
 			thrown(ResourceNotFound)
 	}
 
-	@Ignore //TODO: set invalid data first
 	void 'Updating Person with invalid data is not possible'() {
 
 		setup:
 			Map data = invalidData()
 			data.id = createValidPerson().id
 		when:
-			Person person = service.updatePerson(data)
+			service.updatePerson(data)
 		then:
 			thrown(ValidationException)
 	}
@@ -98,20 +96,64 @@ class PersonModifyServiceSpec extends Specification {
 			person.id == 1
 	}
 
+	void 'Deleting Person without id is not possible'() {
+		when:
+			service.deletePerson(null)
+		then:
+			thrown(IllegalArgumentException)
+	}
+
+	void 'Deleting Person with illegal id is not possible'() {
+
+		setup:
+			long id = ILLEGAL_ID
+		when:
+			service.deletePerson(id)
+		then:
+			thrown(IllegalArgumentException)
+	}
+
+	void 'Deleting Person with fictional id is not possible'() {
+
+		setup:
+			long id = FICTIONAL_ID
+		when:
+			service.deletePerson(id)
+		then:
+			thrown(ResourceNotFound)
+	}
+
+	void 'Deleting saved Person is possible'() {
+		setup:
+			Long personId = createValidPerson().id
+			Person person = Person.findById(personId).find()
+		when:
+			service.deletePerson(personId)
+		then:
+			person != null
+			Person.findById(personId) == null
+	}
+
 	Map invalidData() {
-		return ["foo": "bar"]//Sadisfy 'empty data' exception
+
+		return ['firstName': null,
+ 'lastName': null]
 	}
 
 	Map validData() {
-		
-		Map data = ["id":null,"version":null,"firstName":"firstName","lastName":"lastName"]
 
+		Map data = [
+  'id':  null,
+  'version':  null,
+  'firstName':  'firstName',
+  'lastName':  'lastName'
+]
 		return data
 	}
 
-	Person createValidPerson(){
+	Person createValidPerson() {
 		Person person = new Person(validData())
-		person.save flush:true, failOnError: true
+		person.save flush: true, failOnError: true
 		return person
 	}
 

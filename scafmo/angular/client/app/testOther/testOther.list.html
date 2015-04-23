@@ -1,128 +1,133 @@
 
-
-
-
-
-
-
-
-<div ng-init="pageTitle = 'pages.TestOther.list.title'" data-ng-include=" 'shared/blocks/page_heading.html' " ng-hide="isEmbeddedView" ></div>
-
-<div class="wrapper-md ng-scope"  st-table="rowCollection" st-pipe="callServer" >
+<div id="testOther_list" ng-init="pageTitle = 'pages.TestOther.list.title'"
+     data-ng-include=" 'shared/blocks/page_heading.html' "></div>
+<div class="wrapper-md bg-white-only ">
+<div class="list-search"  st-table="rowCollection" st-pipe="callServer" >
 <accordion close-others="false">
-    <accordion-group  heading="{{'pages.TestOther.list.table.search' | translate}}"  is-open="isSearchOpen">
-      <div class="row">
-		 
-	   		<div class="col-lg-2 form-inline">
-	
-	  <label for="booleanNullable" class="input-group"> {{'pages.TestOther.edit.form.field.booleanNullable' | translate}}</label>
+    <accordion-group  heading="{{::'pages.TestOther.list.table.search' | translate}}"  is-open="isSearchOpen">
+        <div class="row form-inline">
+            
+                  <div class="col-lg-2 form-group">
+    <div class="form-group">
+	  <label for="booleanNullable" class="control-label">
+          {{::'pages.TestOther.list.search.placeholder.booleanNullable' | translate}}</label>
 	  <div class="input-group input-group-sm">
 		<ng-toggle 
 			tri-toggle 
-			name="booleanNullable"  
+			name="booleanNullable"
 			ng-model="search.booleanNullable"
-			custom-st-search="booleanNullable" 
+			custom-st-search="booleanNullable"
 			ng-true-val="'true'" 
 			ng-false-val="'false'" 
 			></ng-toggle> 
 	  </div>
-	 
-     </div>		 
-	   		<div class="col-lg-2 form-inline">
+	 </div>
+     </div>
+            
+                  <div class="col-lg-2 form-group">
      <div class="input-group input-group-sm">
      <input 
-     	name="testDate" 
-     	ng-model="search.testDate" 
+     	name="testDate"
+     	ng-model="search.testDate"
+        custom-st-search="testDate"
      	type="text" 
      	class="form-control" 
-     	placeholder="{{'pages.TestOther.list.search.placeholder.testDate' | translate}}"
+     	placeholder="{{::'pages.TestOther.list.search.placeholder.testDate' | translate}}"
         datepicker-popup
-        is-open="testOther.testDateOpen" 
-        ng-click="testOther.testDateOpen = true"
+        is-open="testOther._testDateOpen"
+        ng-click="testOther._testDateOpen = true"
       
       />
      <span class="input-group-addon">
        <i class="glyphicon glyphicon-calendar"></i>
      </span>
      </div>
-      </div>		 
-	   		<div class="col-lg-2 form-inline">
+      </div>
+            
+                  <div class="col-lg-2 form-group">
      <div class="input-group input-group-sm">
           <span class="input-group-addon">enum</span>   
           <input 
-          	name="testEnum" 
+          	name="testEnum"
           	ng-model="search.testEnum"
-          	st-search="'testEnum'" 
+          	st-search="'testEnum'"
           	type="text" 
           	class="form-control" 
-            placeholder="{{'pages.TestOther.list.search.placeholder.testEnum' | translate}}" 
+            placeholder="{{::'pages.TestOther.list.search.placeholder.testEnum' | translate}}"
             typeahead="b for b in autocompleteService.testOtherTestEnumList | filter:$viewValue" ></div> 
-           </div>		 
-	   		<div class="col-lg-2 form-inline"><!--ManyToOne-->
+           </div>
+            
+                  <div class="col-lg-2 form-group"><!--ManyToOne-->
      <div class="input-group input-group-sm" style="width:100%">
      	<tags-input
             ng-model="search.testStringTypes"
             custom-st-search="testStringTypes"
-            placeholder="{{'pages.TestOther.list.search.placeholder.testStringType' | translate}}">
-              <auto-complete source="autocompleteService.testStringQuery($query, ['id','blankStr','creditCardStr','emailStr'], true)" ></auto-complete>
-            </tags-input></div></div>		 
-		</div>
-    </accordion-group>
-</accordion>
-  <div class="panel panel-default">
-    <div class="panel-heading">
-      	<span translate="pages.TestOther.list.table.title"></span>
-      	<div class="box-tools pull-right">
-			<a class="btn btn-default btn-xs" ui-sref="app.testOther.create">
-				<i class="fa fa-plus" translate="pages.TestOther.list.new" mx-show-loading></i>
-	       	</a>
-		</div>
-    </div>
-    <div class="panel-body panel-body-with-table">
-		 <div>
+            placeholder="{{::'pages.TestOther.list.search.placeholder.testStringType' | translate}}">
+              <auto-complete
+                      source="autocompleteService.testStringQuery($query, ['id','urlStr','uniqueStr','sizeStr'], true)" ></auto-complete>
+            </tags-input></div></div>
+            
+        </div>
+    
+            </accordion-group>
+        </accordion>
+        <div class="box-tools pull-right" ng-if="!isModal">
+            <a class="btn btn-default btn-xs" ui-sref="app.testOther.create">
+                <i class="fa fa-plus" translate="pages.TestOther.list.new" mx-show-loading></i>
+            </a>
+        </div>
+
+        <div class="clearfix"></div>
+        <div class="list-search-table">
 	      <table class="table table-responsive">
 	      	<thead>
 	      		<tr>
+                    <th></th>
 	      			<th width='20' st-sort="id" translate="pages.TestOther.list.table.header.id"></th>	      		
 			   		<th st-sort="booleanNullable" translate="pages.TestOther.list.table.header.booleanNullable" ></th>				 
 			   		<th st-sort="testDate" translate="pages.TestOther.list.table.header.testDate" ></th>				 
 			   		<th st-sort="testEnum" translate="pages.TestOther.list.table.header.testEnum" ></th>				 
 			   		<th st-sort="testStringType" translate="pages.TestOther.list.table.header.testStringType" ></th>				 
-				 	<th></th>
+
 				</tr>
 	      	</thead>
-	      
 	      	<tbody ng-hide="isLoading">
-	      		
 				<tr ng-repeat="testOther in rowCollection">
-					 <td>{{testOther.id}}</td>					
-			   		<td>{{testOther.booleanNullable}}</td>				 	
-			   		<td>{{testOther.testDate}}</td>				 	
-			   		<td>{{testOther.testEnum}}</td>				 	
-			   		<td>{{testOther.testStringType.id}} {{testOther.testStringType.blankStr}} {{testOther.testStringType.creditCardStr}} {{testOther.testStringType.emailStr}} </td>				 	
-				 	
-		            <td class="text-right">
-		            	<a class="btn btn-default btn-xs" ui-sref="app.testOther.view({id:testOther.id})">
-		            		<i class="fa fa-eye" translate="pages.TestOther.list.view"></i>
-		            	</a>
-		            	<a class="btn btn-default btn-xs" ui-sref="app.testOther.edit({id:testOther.id})">
-		            		<i class="fa fa-edit" translate="pages.TestOther.list.edit"></i>
-		            	</a>
-		            	<a class="btn btn-danger btn-xs" ng-click="deleteTestOther(testOther)" mx-show-loading>
-		            		<i class="fa fa-trash-o" translate="pages.TestOther.list.delete" ></i>
-		            	</a>
-		            </td>
+                    <td class="text-left" >
+                        <a class="btn btn-default btn-xs" ui-sref="app.testOther.view({id:testOther.id})" ng-if="!isModal">
+                            <i class="fa fa-eye"></i>
+                        </a>
+                        <a class="btn btn-default btn-xs" ui-sref="app.testOther.edit({id:testOther.id})" ng-if="!isModal">
+                            <i class="fa fa-edit"></i>
+                        </a>
+                        <a class="btn btn-danger btn-xs" ng-click="deleteTestOther(testOther)" mx-show-loading ng-if="!isModal">
+                            <i class="fa fa-trash-o"></i>
+                        </a>
+                        <a class="btn btn-default btn-xs" ng-click="selectItem(testOther)" ng-if="isModal">
+                            <i class="fa fa-edit"></i>
+                        </a>
+                    </td>
+					 <td>{{::testOther.id}}</td>					
+			   		<td>{{::testOther.booleanNullable}}</td>				 	
+			   		<td>{{testOther.testDate | date:'yyyy-MM-dd HH:mm'}}</td>				 	
+			   		<td>{{::testOther.testEnum}}</td>				 	
+			   		<td>{{::testOther.testStringType.id}} {{::testOther.testStringType.urlStr}} {{::testOther.testStringType.uniqueStr}} {{::testOther.testStringType.sizeStr}} </td>				 	
+
 				</tr>
 			</tbody>
+              <tbody ng-show="isLoading">
+                  <tr>
+                      <td class="text-center" translate="messages.loading"></td>
+                  </tr>
+              </tbody>
 			<tfoot ng-hide="isLoading">
 	          <tr>
-	            <td colspan="10" class="text-center">
+	            <td colspan="10" class="text-center" >
 	              <div st-pagination="" st-items-by-page="stTable.itemsByPage" st-displayed-pages="15" ></div>
 	            </td>
 	          </tr>
 	        </tfoot>
 	      </table>
-	    </div>
-	</div>
-  </div>
+        </div>
+    </div>
 </div>

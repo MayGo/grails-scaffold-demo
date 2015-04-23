@@ -3,32 +3,27 @@
 
 
 angular.module('angularDemoApp')
-    .controller('PersonEditController', function ($scope, $state, $q, $stateParams, PersonService, $translate, inform ) {
+    .controller('PersonEditController', function ($scope, $state, $q, $stateParams, PersonService, personData, $translate, inform ) {
     	$scope.isEditForm = ($stateParams.id)?true:false;
-    	
-    	if($scope.isEditForm){
-    		PersonService.get({id:$stateParams.id}).$promise.then(
-		        function( response ){
-			       	$scope.person = angular.extend({}, $scope.person , response);
-			       	$scope.orig = angular.copy($scope.person );
-		       	}
-	     	);
-    	}else{
-    		$scope.person = new PersonService();
-    	}
-		
-	
+
+		$scope.person = personData;
+
+
 	    $scope.submit = function(frmController) {
 			var deferred = $q.defer();
 	    	var errorCallback = function(response){
 					if (response.data.errors) {
 		                angular.forEach(response.data.errors, function (error) {
-		                    frmController.setExternalValidation(error.field, undefined, error.message);
+							if(angular.element('#'+error.field).length) {
+								frmController.setExternalValidation(error.field, undefined, error.message);
+							} else {
+								inform.add(error.message, {ttl: -1,'type': 'warning'});
+							}
 		                });
 		            }
 					deferred.reject(response);
 		       };
-	       
+
 	    	if($scope.isEditForm){
 	    		PersonService.update($scope.person, function(response) {	
 	    			$translate('pages.Person.messages.update').then(function (msg) {
@@ -42,8 +37,8 @@ angular.module('angularDemoApp')
     				$translate('pages.Person.messages.create').then(function (msg) {
 				    	inform.add(msg, {'type': 'success'});
 					});
+					$state.go('^.view', { id: response.id }, {location: 'replace'});
 					deferred.resolve(response);
-            	 	$state.go('^.view', { id: response.id });
 		        },errorCallback);
 	    	}
 	        return deferred.promise;

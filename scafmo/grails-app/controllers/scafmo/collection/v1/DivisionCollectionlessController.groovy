@@ -1,6 +1,5 @@
 package scafmo.collection.v1
 
-import grails.transaction.Transactional
 import grails.validation.ValidationException
 import org.codehaus.groovy.grails.web.servlet.HttpHeaders
 import org.springframework.http.HttpStatus
@@ -9,27 +8,22 @@ import org.restapidoc.annotation.RestApiParam
 import org.restapidoc.annotation.RestApiParams
 import org.restapidoc.annotation.RestApi
 import org.restapidoc.pojo.RestApiParamType
-import defpackage.CustomRestfulController
 import defpackage.exceptions.ResourceNotFound
 import scafmo.collection.DivisionCollectionless
 import scafmo.collection.DivisionCollectionlessModifyService
 import scafmo.collection.DivisionCollectionlessSearchService
 
-
-@Transactional(readOnly = true)
 @RestApi(name = 'DivisionCollectionless services', description = 'Methods for managing DivisionCollectionlesss')
-class DivisionCollectionlessController extends CustomRestfulController<DivisionCollectionless> {
+class DivisionCollectionlessController {
 
 	static namespace = 'v1'
+
+	static allowedMethods = [save: 'POST', update: 'PUT', delete: 'DELETE']
 
 	static responseFormats = ['json']
 
 	DivisionCollectionlessSearchService divisionCollectionlessSearchService
 	DivisionCollectionlessModifyService divisionCollectionlessModifyService
-
-	DivisionCollectionlessController() {
-		super(DivisionCollectionless, false /* read-only */)
-	}
 
 	@RestApiMethod(description = 'List all DivisionCollectionlesss', listing = true)
 	@RestApiParams(params = [
@@ -55,22 +49,18 @@ class DivisionCollectionlessController extends CustomRestfulController<DivisionC
 
 	@RestApiMethod(description='Get a DivisionCollectionless')
 	@RestApiParams(params=[
-		@RestApiParam(name='id', type='long', paramType = RestApiParamType.PATH, description = 'The DivisionCollectionless id')
+		@RestApiParam(
+				name='id', type='long',
+				paramType = RestApiParamType.PATH,
+				description = 'The DivisionCollectionless id'
+		)
 	])
 	def show() {
-		// We pass which fields to be rendered with the includes attributes,
-		// we exclude the class property for all responses.
-		respond queryForResource(params.id), [includes: includes, excludes: excludes]
+		respond divisionCollectionlessSearchService.queryForDivisionCollectionless(params.long('id')),
+				[includes: includes, excludes: excludes]
 	}
 
-	/**
-	 * Saves a DivisionCollectionless
-	 */
-	@Transactional
 	@RestApiMethod(description = 'Save a DivisionCollectionless')
-	@RestApiParams(params = [
-			@RestApiParam(name = 'id', type = 'long', paramType = RestApiParamType.PATH, description = 'The Object id')
-	])
 	def save() {
 
 		DivisionCollectionless instance = divisionCollectionlessModifyService.createDivisionCollectionless(request.JSON)
@@ -83,14 +73,28 @@ class DivisionCollectionlessController extends CustomRestfulController<DivisionC
 
 	}
 
-	/**
-	 * Updates a DivisionCollectionless for the given id
-	 * @param id
-	 */
-	@Transactional
+	@RestApiMethod(description = 'Edit a DivisionCollectionless')
+	@RestApiParams(params = [
+		@RestApiParam(
+				name = 'id',
+				type = 'long',
+				paramType = RestApiParamType.PATH,
+				description = 'The DivisionCollectionless id'
+		)
+	])
+	def edit() {
+		respond divisionCollectionlessSearchService.queryForDivisionCollectionless(params.long('id')),
+				[includes: includes, excludes: excludes]
+	}
+
 	@RestApiMethod(description = 'Update a DivisionCollectionless')
 	@RestApiParams(params = [
-			@RestApiParam(name = 'id', type = 'long', paramType = RestApiParamType.PATH, description = 'The DivisionCollectionless id')
+			@RestApiParam(
+					name = 'id',
+					type = 'long',
+					paramType = RestApiParamType.PATH,
+					description = 'The DivisionCollectionless id'
+			)
 	])
 	def update() {
 		request.JSON.id = params.long('id')
@@ -103,6 +107,19 @@ class DivisionCollectionlessController extends CustomRestfulController<DivisionC
 		respond instance, [status: HttpStatus.OK]
 	}
 
+	@RestApiMethod(description = 'Delete a DivisionCollectionless')
+	@RestApiParams(params = [
+			@RestApiParam(
+					name = 'id',
+					type = 'long',
+					paramType = RestApiParamType.PATH,
+					description = 'The DivisionCollectionless id'
+			)
+	])
+	def delete() {
+		divisionCollectionlessModifyService.deleteDivisionCollectionless(params.long('id'))
+		render status: HttpStatus.NO_CONTENT
+	}
 
 	private getIncludes() {
 		params.includes?.tokenize(',')
@@ -112,26 +129,18 @@ class DivisionCollectionlessController extends CustomRestfulController<DivisionC
 		params.excludes?.tokenize(',')
 	}
 
-	@Override
-	protected DivisionCollectionless queryForResource(Serializable id) {
-		if (id.isNumber()) {
-			resource.get(id)
-		} else {
-			notFound()
-		}
-	}
-
-	def handleValidationException(ValidationException ex){
+	def handleValidationException(ValidationException ex) {
 		respond ex.errors, [status: HttpStatus.UNPROCESSABLE_ENTITY]
 	}
-	def handleResourceNotFoundException(ResourceNotFound ex){
+
+	def handleResourceNotFoundException(ResourceNotFound ex) {
 		log.error ex
 		render status: HttpStatus.NOT_FOUND
 	}
 
-	def handleIllegalArgumentExceptionn(IllegalArgumentException ex){
+	def handleIllegalArgumentExceptionn(IllegalArgumentException ex) {
 		log.error ex
-		respond ex, [status: HttpStatus.UNPROCESSABLE_ENTITY]
+		Map errors = ['error': ex.message]
+		respond errors as Object, [status: HttpStatus.UNPROCESSABLE_ENTITY]
 	}
-
 }

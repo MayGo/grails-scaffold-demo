@@ -10,37 +10,47 @@ import defpackage.exceptions.ResourceNotFound
 class ClassifierModifyService {
 	def grailsWebDataBinder
 
-	Classifier createClassifier(Map data){
+	Classifier createClassifier(Map data) {
 		Classifier classifier = Classifier.newInstance()
 		return createOrUpdate(classifier, data)
 	}
 
-	Classifier updateClassifier(Map data){
-		if(!data.id || data.id < 0){
-			throw new IllegalArgumentException("There is no valid 'id'")
+	Classifier updateClassifier(Map data) {
+		if (!data.id || data.id < 0) {
+			throw new IllegalArgumentException('no.valid.id')
 		}
-		Classifier classifier = queryForClassifier(data.id)
+		Classifier classifier = Classifier.where { id == data.id }.find()
 
-		if(!classifier){
+		if (!classifier) {
 			throw new ResourceNotFound("No Classifier found with Id :[${data.id}]")
 		}
 
 		return createOrUpdate(classifier, data)
 	}
 
-	Classifier createOrUpdate(Classifier classifier, Map data){
-		if(!data){
-			throw new IllegalArgumentException("Data map is empty.")
+	Classifier createOrUpdate(Classifier classifier, Map data) {
+		if (!data) {
+			throw new IllegalArgumentException('no.data')
 		}
 
 		grailsWebDataBinder.bind classifier, data as SimpleMapDataBindingSource
 
-		classifier.save flush: true, failOnError: true
+		classifier.save failOnError: true
 
 		return classifier
 	}
 
-	Classifier queryForClassifier(long id){
-		return Classifier.get(id)
+	void deleteClassifier(Long classifierId) {
+		if (!classifierId || classifierId < 0) {
+			throw new IllegalArgumentException('no.valid.id')
+		}
+		Classifier classifier = Classifier.where { id == classifierId }.find()
+
+		if (!classifier) {
+			throw new ResourceNotFound("No Classifier found with Id:$classifierId")
+		}
+
+		classifier.delete()
 	}
 }
+

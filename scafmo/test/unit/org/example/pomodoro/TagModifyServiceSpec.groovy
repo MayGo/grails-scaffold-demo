@@ -2,7 +2,7 @@ package org.example.pomodoro
 
 import grails.test.mixin.TestFor
 import grails.test.mixin.Mock
-import spock.lang.Ignore
+
 import spock.lang.Specification
 import defpackage.exceptions.ResourceNotFound
 import grails.validation.ValidationException
@@ -11,8 +11,10 @@ import grails.validation.ValidationException
 @Mock(Tag)
 class TagModifyServiceSpec extends Specification {
 
-	void 'Creating Tag with no data is not possible'() {
+	static final long ILLEGAL_ID = -1L
+	static final long FICTIONAL_ID = 99999999L
 
+	void 'Creating Tag with no data is not possible'() {
 		setup:
 			Map data = [:]
 		when:
@@ -22,9 +24,7 @@ class TagModifyServiceSpec extends Specification {
 	}
 
 	void 'Creating Tag with invalid data is not possible'() {
-
 		setup:
-
 			Map data = invalidData()
 		when:
 			service.createTag(data)
@@ -33,7 +33,6 @@ class TagModifyServiceSpec extends Specification {
 	}
 
 	void 'Creating Tag with valid data returns Tag instance'() {
-
 		setup:
 			Map data = validData()
 		when:
@@ -56,7 +55,7 @@ class TagModifyServiceSpec extends Specification {
 	void 'Updating Tag with illegal id is not possible'() {
 
 		setup:
-			Map data = [id:-1L]
+			Map data = [id: ILLEGAL_ID]
 		when:
 			service.updateTag(data)
 		then:
@@ -66,7 +65,7 @@ class TagModifyServiceSpec extends Specification {
 	void 'Updating Tag with fictional id is not possible'() {
 
 		setup:
-			Map data = [id:99999999L]
+			Map data = [id: FICTIONAL_ID]
 
 		when:
 			service.updateTag(data)
@@ -74,14 +73,13 @@ class TagModifyServiceSpec extends Specification {
 			thrown(ResourceNotFound)
 	}
 
-	@Ignore //TODO: set invalid data first
 	void 'Updating Tag with invalid data is not possible'() {
 
 		setup:
 			Map data = invalidData()
 			data.id = createValidTag().id
 		when:
-			Tag tag = service.updateTag(data)
+			service.updateTag(data)
 		then:
 			thrown(ValidationException)
 	}
@@ -98,20 +96,62 @@ class TagModifyServiceSpec extends Specification {
 			tag.id == 1
 	}
 
+	void 'Deleting Tag without id is not possible'() {
+		when:
+			service.deleteTag(null)
+		then:
+			thrown(IllegalArgumentException)
+	}
+
+	void 'Deleting Tag with illegal id is not possible'() {
+
+		setup:
+			long id = ILLEGAL_ID
+		when:
+			service.deleteTag(id)
+		then:
+			thrown(IllegalArgumentException)
+	}
+
+	void 'Deleting Tag with fictional id is not possible'() {
+
+		setup:
+			long id = FICTIONAL_ID
+		when:
+			service.deleteTag(id)
+		then:
+			thrown(ResourceNotFound)
+	}
+
+	void 'Deleting saved Tag is possible'() {
+		setup:
+			Long tagId = createValidTag().id
+			Tag tag = Tag.findById(tagId).find()
+		when:
+			service.deleteTag(tagId)
+		then:
+			tag != null
+			Tag.findById(tagId) == null
+	}
+
 	Map invalidData() {
-		return ["foo": "bar"]//Sadisfy 'empty data' exception
+
+		return ['name': null]
 	}
 
 	Map validData() {
-		
-		Map data = ["id":null,"version":null,"name":"Work Tag 152"]
 
+		Map data = [
+  'id':  null,
+  'version':  null,
+  'name':  'Work Tag 152'
+]
 		return data
 	}
 
-	Tag createValidTag(){
+	Tag createValidTag() {
 		Tag tag = new Tag(validData())
-		tag.save flush:true, failOnError: true
+		tag.save flush: true, failOnError: true
 		return tag
 	}
 

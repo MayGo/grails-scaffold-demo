@@ -3,8 +3,8 @@
 
 'use strict';
 
-var HtmlReporter = require('protractor-html-screenshot-reporter');
 
+var HtmlReporter = require('protractor-html-screenshot-reporter');
 
 exports.config = {
   // The timeout for each script run on the browser. This should be longer
@@ -13,17 +13,13 @@ exports.config = {
 
   // A base URL for your application under test. Calls to protractor.get()
   // with relative paths will be prepended with this.
-  baseUrl: 'http://localhost:' + (process.env.PORT || '9000'),
-
-  directConnect: true,
-
-
+  baseUrl: 'http://localhost:' + (process.env.PORT || '9006'),
   // list of files / patterns to load in the browser
   specs: [
-    'e2e/**/pet.create.spec.js'
+    'e2e/**/*.spec.js'
   ],
 
-  // Patterns to exclude.
+  // Patterns to exclude.jun
   exclude: [],
 
   // ----- Capabilities to be passed to the webdriver instance ----
@@ -32,52 +28,56 @@ exports.config = {
   // https://code.google.com/p/selenium/wiki/DesiredCapabilities
   // and
   // https://code.google.com/p/selenium/source/browse/javascript/webdriver/capabilities.js
-//  capabilities: {
-//    'browserName': 'chrome',
-//    shardTestFiles: true,
-//    maxInstances: 3
-//  },
-  capabilities: {
-	    'browserName': 'chrome'
-  },
+  //capabilities: {
+ //   shardTestFiles: true,
+  //  maxInstances: 3
+  //},
 
   // ----- The test framework -----
   //
   // Jasmine and Cucumber are fully supported as a test and assertion framework.
   // Mocha has limited beta support. You will need to include your own
   // assertion framework if working with mocha.
-  framework: 'jasmine',
+  framework: 'jasmine2',
 
   // ----- Options to be passed to minijasminenode -----
   //
   // See the full list at https://github.com/juliemr/minijasminenode
   jasmineNodeOpts: {
-    defaultTimeoutInterval: 5000
+    // If true, display suite and spec names.
+    isVerbose: false,
+    // If true, print colors to the terminal.
+    showColors: true,
+    // If true, include stack traces in failures.
+    includeStackTrace: false,
+    // Time to wait in milliseconds before a test automatically fails
+    defaultTimeoutInterval: 150000,
+    realtimeFailure: true
   },
-  onPrepare: function() {
-	  browser.manage().window().setSize(1600, 1000);
-	  //var mockModule = require('./e2e/mock/mock-data');
-	  //browser.addMockModule('httpBackendMock', mockModule );
-	  
-	  var path = require('path');
-	  jasmine.getEnv().addReporter(new HtmlReporter({
-	         baseDirectory: 'test/e2e/test-results/screenshots/',
-	         pathBuilder: function pathBuilder(spec, descriptions, results, capabilities) {
-	          
-	            var currentDate = new Date(),
-	                currentHoursIn24Hour = currentDate.getHours(),
-	                currentTimeInHours = currentHoursIn24Hour>12? currentHoursIn24Hour-12: currentHoursIn24Hour,
-	                totalDateString = currentDate.getDate()+ '-' + currentDate.getMonth() + '-'+(currentDate.getYear()+1900) + 
-	                                      '-'+ currentDate.getHours()+'h-' + Math.round(currentDate.getMinutes()*0.2)+'m';
+  onPrepare: function () {
+    browser.manage().window().setSize(1600, 1000);
 
-	            return path.join(totalDateString,capabilities.caps_.browserName, descriptions.join('-'));
-	         }
-      }));
+    var path = require('path');
+    jasmine.getEnv().addReporter(new HtmlReporter({
+      docName: 'index.html',
+      baseDirectory: './test-results/e2e/',
+      preserveDirectory: false,
+      pathBuilder: function pathBuilder(spec, descriptions, results, capabilities) {
+        // Return '<browser>/<specname>' as path for screenshots:
+        // Example: 'firefox/list-should work'.
+        var p = descriptions.join('-');
+        p = p.replace("/", "-")
+        return path.join(capabilities.caps_.browserName, p);
+      }
+    }));
 
     require('jasmine-reporters');
     jasmine.getEnv().addReporter(
-        new jasmine.JUnitXmlReporter('test/e2e/test-results/JUnitXML/', true, true)
+      new jasmine.JUnitXmlReporter('./test-results/e2e/JUnitXML/', true, true)
     );
+    var SpecReporter = require('jasmine-spec-reporter');
+    // add jasmine spec reporter
+    jasmine.getEnv().addReporter(new SpecReporter({displayStacktrace: false}));
 
   }
 };

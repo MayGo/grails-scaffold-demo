@@ -1,62 +1,68 @@
 'use strict';
 
-
+var helper = require('../utils/helper.js');
 describe('task create page', function() {
-  var page;
-  var mockModule = require('./task.mocks');
-  
+	var page;
 
-  beforeEach(function() {
-	  browser.addMockModule('httpBackendMock', mockModule ); 
-    browser.get('/#/app/task/create');
-    page = require('./task.create.po');
-  });
-  
-  afterEach(function() {
-    browser.manage().logs().get('browser').then(function(browserLog) {
-      expect(browserLog.length).toEqual(0);
-      // Uncomment to actually see the log.
-      //console.log('log: ' + require('util').inspect(browserLog));
-    });
-  });
-
-  
-/*  it('should contain all fields.', function() {
-	
-    println "expect(page.deadlineEl).not.toBeNull()"
-    
-    println "expect(page.detailsEl).not.toBeNull()"
-    
-    println "expect(page.statusEl).not.toBeNull()"
-    
-    println "expect(page.summaryEl).not.toBeNull()"
-    
-    println "expect(page.timeSpentEl).not.toBeNull()"
-    
-    println "expect(page.tagsEl).not.toBeNull()"
-    
-  });
-  */
-  it('after filling all the fields, should be ', function() {
-	expect(page.submitButton.isEnabled()).toBe(false);
-	//Fill the form
-		page.deadlineEl.sendKeys('26.02.2015')
-		page.detailsEl.sendKeys('details')
-		page.statusEl.sendKeys('Open')
-		page.summaryEl.sendKeys('Work Summary 152')
-
-
-	expect(page.submitButton.isEnabled()).toBe(true);
-	page.submitButton.isEnabled().then(function(enabled){
-		if(enabled){
-			page.submitButton.click();
-			expect(browser.getCurrentUrl()).toContain("/#/app/task/view/1");
-		}else{
-			console.log("(task).Submit button not enabled. Not testing submiting.")
-		}
+	beforeEach(function() {
+		var mockModule = require('./task.mocks');
+		browser.addMockModule('httpBackendMock', mockModule );
+		browser.get('/#/app/task/create');
+		page = require('./task.create.po');
+	});
+	afterEach(function() {
+		browser.clearMockModules();
 	});
 
-  });
-  
-  
+/*
+	it('should contain all fields.', function() {
+	
+		expect(page.dateCreatedEl).not.toBeNull()
+	
+		expect(page.deadlineEl).not.toBeNull()
+	
+		expect(page.detailsEl).not.toBeNull()
+	
+		expect(page.statusEl).not.toBeNull()
+	
+		expect(page.summaryEl).not.toBeNull()
+	
+		expect(page.timeSpentEl).not.toBeNull()
+	
+		expect(page.tagsEl).not.toBeNull()
+	
+	});
+*/
+	it('after filling all the fields, should submit and change route to view', function() {
+		expect(page.submitButton.isEnabled()).toBe(false);
+		//Fill the form
+		page.dateCreatedEl.sendKeys('23.04.2015');
+		page.deadlineEl.sendKeys('23.04.2015');
+		page.detailsEl.sendKeys('details');
+		page.statusEl.sendKeys('Open');
+		page.summaryEl.sendKeys('Work Summary 152');
+		page.timeSpentEl.sendKeys('0');
+		page.tagsEl.sendKeys('');//no val for tags
+
+		expect(page.submitButton.isEnabled()).toBe(true);
+		page.submitButton.click();
+		helper.currentUrlContains('/#/app/task/view/1');
+		browser.wait(function() {
+				return $('#task_view').isPresent(); // keeps waiting until this statement resolves to true
+			},
+			1000,
+			'task_view element not visible'
+		);
+
+				expect(page.dateCreatedViewEl).toBeDefined()
+		expect(page.deadlineViewEl).toBeDefined()
+		expect(page.detailsViewEl).toBeDefined()
+		expect(page.statusViewEl).toBeDefined()
+		expect(page.summaryViewEl).toBeDefined()
+		expect(page.timeSpentViewEl).toBeDefined()
+		//expect(page.tagsViewEl).toBeDefined()
+
+
+
+	});
 });

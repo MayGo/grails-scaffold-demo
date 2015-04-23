@@ -5,19 +5,20 @@ import spock.lang.Unroll
 import spock.lang.Specification
 import defpackage.ConstraintHelper
 
-
 @TestFor(TestString)
 class TestStringConstraintsSpec extends Specification {
 
 	def setup() {
-		//mock a TestString with some data (put unique violations in here so they can be tested, the others aren't needed)
+		//mock a TestString with some data
+		//(put unique violations in here so they can be tested, the others aren't needed)
 		mockForConstraintsTests( TestString, [ new TestString() ] )
 	}
 
 	@Unroll("TestString constraint on field '#field' with value '#val' gets '#error'")
 	def "All TestString constraints"() {
 		when:
-			def obj = new TestString("$field": val)
+			TestString obj = new TestString()
+			obj."$field" = val
 
 		then:
 			ConstraintHelper.validateConstraints(obj, field, error)
@@ -25,8 +26,7 @@ class TestStringConstraintsSpec extends Specification {
 		where:
 			error                  | field        | val
 			'valid' | 'id' | 1 // Keep always one here or remove test
-			'nullable' | 'blankStr' | ''
-			'nullable' | 'blankStr' | null
+			'blank' | 'blankStr' | ''
 			'creditCard' | 'creditCardStr' | ConstraintHelper.getCreditCard(false)
 			'email' | 'emailStr' | ConstraintHelper.getEmail(false)
 			'inList' | 'inListStr' | 'test1111111'

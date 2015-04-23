@@ -1,15 +1,22 @@
 'use strict';
 
 
+var helper = require('../utils/helper.js');
 describe('testString view page', function() {
-  var page;
+	var page;
 
-  beforeEach(function() {
-    browser.get('/#/app/testString/view/1');
-    page = require('./testString.view.po');
-  });
+	beforeEach(function() {
+		var mockModule = require('./testString.mocks');
+		browser.addMockModule('httpBackendMock', mockModule );
+		browser.get('/#/app/testString/view/1');
+		page = require('./testString.view.po');
+	});
+	afterEach(function() {
+		browser.clearMockModules();
+	});
 
-  
+
+
   it('should contain all fields.', function() {
     
     expect(page.blankStrEl).not.toBeNull()    
@@ -32,17 +39,38 @@ describe('testString view page', function() {
   
   it('edit button changes path to /edit', function() {
 	  element(by.id('editBtn')).click();
-	  expect(browser.getCurrentUrl()).toContain("/#/app/testString/edit/1");
+	  browser.wait(function() {
+			  return $('#testString_form').isPresent(); // keeps waiting until this statement resolves to true
+		  },
+		  1000,
+		  'testString_form element not visible'
+	  );
+	  helper.currentUrlContains('/#/app/testString/edit/1');
+
   });
   
   it('back button changes path to /list', function() {
 	  element(by.id('backBtn')).click();
-	  expect(browser.getCurrentUrl()).toContain("/#/app/testString/list");
+	  browser.wait(function() {
+			  return $('#testString_list').isPresent(); // keeps waiting until this statement resolves to true
+		  },
+		  1000,
+		  'testString_list element not visible'
+	  );
+	  helper.currentUrlContains('/#/app/testString/list');
+
   });
   
   it('delete button changes path to /list and deletes item', function() {
 	  element(by.id('deleteBtn')).click();
-	  expect(browser.getCurrentUrl()).toContain("/#/app/testString/list");
+	  browser.wait(function() {
+			  return $('#testString_list').isPresent(); // keeps waiting until this statement resolves to true
+		  },
+		  1000,
+		  'testString_list element not visible'
+	  );
+	  helper.currentUrlContains('/#/app/testString/list');
+
   });
   
 });

@@ -1,8 +1,12 @@
 'use strict';
 
 angular.module('angularDemoApp')
-    .controller('VisitViewController', function ($scope, $state, $stateParams, $translate, inform, VisitService) {
-	 	$scope.visit = VisitService.get({id:$stateParams.id});
+    .controller('VisitViewController', function ($scope, $state, $stateParams, $translate, inform, VisitService, visitData) {
+	 	$scope.visit = visitData;
+
+		if($state.current.data){
+			$scope.isModal = $state.current.data.isModal;
+		}
 
 		$scope.deleteVisit = function(instance){
 			return VisitService.deleteInstance(instance).then(function(instance){
@@ -10,5 +14,7 @@ angular.module('angularDemoApp')
 				return instance;
 			});
 		};
-
+		$scope.go = function(route){
+			$state.go(route);
+		};
 	});

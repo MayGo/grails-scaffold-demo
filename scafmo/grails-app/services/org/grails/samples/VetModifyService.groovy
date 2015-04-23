@@ -10,37 +10,47 @@ import defpackage.exceptions.ResourceNotFound
 class VetModifyService {
 	def grailsWebDataBinder
 
-	Vet createVet(Map data){
+	Vet createVet(Map data) {
 		Vet vet = Vet.newInstance()
 		return createOrUpdate(vet, data)
 	}
 
-	Vet updateVet(Map data){
-		if(!data.id || data.id < 0){
-			throw new IllegalArgumentException("There is no valid 'id'")
+	Vet updateVet(Map data) {
+		if (!data.id || data.id < 0) {
+			throw new IllegalArgumentException('no.valid.id')
 		}
-		Vet vet = queryForVet(data.id)
+		Vet vet = Vet.where { id == data.id }.find()
 
-		if(!vet){
+		if (!vet) {
 			throw new ResourceNotFound("No Vet found with Id :[${data.id}]")
 		}
 
 		return createOrUpdate(vet, data)
 	}
 
-	Vet createOrUpdate(Vet vet, Map data){
-		if(!data){
-			throw new IllegalArgumentException("Data map is empty.")
+	Vet createOrUpdate(Vet vet, Map data) {
+		if (!data) {
+			throw new IllegalArgumentException('no.data')
 		}
 
 		grailsWebDataBinder.bind vet, data as SimpleMapDataBindingSource
 
-		vet.save flush: true, failOnError: true
+		vet.save failOnError: true
 
 		return vet
 	}
 
-	Vet queryForVet(long id){
-		return Vet.get(id)
+	void deleteVet(Long vetId) {
+		if (!vetId || vetId < 0) {
+			throw new IllegalArgumentException('no.valid.id')
+		}
+		Vet vet = Vet.where { id == vetId }.find()
+
+		if (!vet) {
+			throw new ResourceNotFound("No Vet found with Id:$vetId")
+		}
+
+		vet.delete()
 	}
 }
+

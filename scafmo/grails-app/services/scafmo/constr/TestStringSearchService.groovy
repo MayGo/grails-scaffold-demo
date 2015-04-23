@@ -7,11 +7,22 @@ import grails.transaction.Transactional
 import org.codehaus.groovy.grails.web.json.JSONElement
 import org.codehaus.groovy.grails.web.json.JSONObject
 import org.grails.datastore.mapping.query.api.BuildableCriteria
-
+import defpackage.exceptions.ResourceNotFound
 
 //@GrailsCompileStatic
 @Transactional(readOnly = true)
 class TestStringSearchService {
+
+	TestString queryForTestString(Long testStringId) {
+		if (!testStringId || testStringId < 0) {
+			throw new IllegalArgumentException('no.valid.id')
+		}
+		TestString testString = TestString.where { id == testStringId }.find()
+		if (!testString) {
+			throw new ResourceNotFound("No TestString found with Id :[$testStringId]")
+		}
+		return testString
+	}
 
 	PagedResultList search(Map params) {
 
@@ -45,9 +56,9 @@ class TestStringSearchService {
 					if (searchString.isLong()) {
 						eq('id', searchString.toLong())
 					}
-					like('blankStr', searchString + '%')
-					like('creditCardStr', searchString + '%')
-					like('emailStr', searchString + '%')
+					like('urlStr', searchString + '%')
+					like('uniqueStr', searchString + '%')
+					like('sizeStr', searchString + '%')
 				}
 			}
 			if (filter['blankStr']) {

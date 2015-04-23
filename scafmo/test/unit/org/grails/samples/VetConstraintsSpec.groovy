@@ -5,19 +5,20 @@ import spock.lang.Unroll
 import spock.lang.Specification
 import defpackage.ConstraintHelper
 
-
 @TestFor(Vet)
 class VetConstraintsSpec extends Specification {
 
 	def setup() {
-		//mock a Vet with some data (put unique violations in here so they can be tested, the others aren't needed)
+		//mock a Vet with some data
+		//(put unique violations in here so they can be tested, the others aren't needed)
 		mockForConstraintsTests( Vet, [ new Vet() ] )
 	}
 
 	@Unroll("Vet constraint on field '#field' with value '#val' gets '#error'")
 	def "All Vet constraints"() {
 		when:
-			def obj = new Vet("$field": val)
+			Vet obj = new Vet()
+			obj."$field" = val
 
 		then:
 			ConstraintHelper.validateConstraints(obj, field, error)
@@ -25,9 +26,9 @@ class VetConstraintsSpec extends Specification {
 		where:
 			error                  | field        | val
 			'valid' | 'id' | 1 // Keep always one here or remove test
-			'nullable' | 'firstName' | ''
+			'blank' | 'firstName' | ''
 			'nullable' | 'firstName' | null
-			'nullable' | 'lastName' | ''
+			'blank' | 'lastName' | ''
 			'nullable' | 'lastName' | null
 
 	}

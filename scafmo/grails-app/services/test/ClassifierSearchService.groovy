@@ -7,11 +7,22 @@ import grails.transaction.Transactional
 import org.codehaus.groovy.grails.web.json.JSONElement
 import org.codehaus.groovy.grails.web.json.JSONObject
 import org.grails.datastore.mapping.query.api.BuildableCriteria
-
+import defpackage.exceptions.ResourceNotFound
 
 //@GrailsCompileStatic
 @Transactional(readOnly = true)
 class ClassifierSearchService {
+
+	Classifier queryForClassifier(Long classifierId) {
+		if (!classifierId || classifierId < 0) {
+			throw new IllegalArgumentException('no.valid.id')
+		}
+		Classifier classifier = Classifier.where { id == classifierId }.find()
+		if (!classifier) {
+			throw new ResourceNotFound("No Classifier found with Id :[$classifierId]")
+		}
+		return classifier
+	}
 
 	PagedResultList search(Map params) {
 
@@ -45,9 +56,9 @@ class ClassifierSearchService {
 					if (searchString.isLong()) {
 						eq('id', searchString.toLong())
 					}
-					like('classname', searchString + '%')
-					like('constant', searchString + '%')
+					like('propertyname', searchString + '%')
 					like('description', searchString + '%')
+					like('constant', searchString + '%')
 				}
 			}
 			if (filter['classname']) {

@@ -1,8 +1,12 @@
 'use strict';
 
 angular.module('angularDemoApp')
-    .controller('TaskViewController', function ($scope, $state, $stateParams, $translate, inform, TaskService) {
-	 	$scope.task = TaskService.get({id:$stateParams.id});
+    .controller('TaskViewController', function ($scope, $state, $stateParams, $translate, inform, TaskService, taskData) {
+	 	$scope.task = taskData;
+
+		if($state.current.data){
+			$scope.isModal = $state.current.data.isModal;
+		}
 
 		$scope.deleteTask = function(instance){
 			return TaskService.deleteInstance(instance).then(function(instance){
@@ -10,5 +14,7 @@ angular.module('angularDemoApp')
 				return instance;
 			});
 		};
-
+		$scope.go = function(route){
+			$state.go(route);
+		};
 	});

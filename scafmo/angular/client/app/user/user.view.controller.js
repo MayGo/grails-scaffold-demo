@@ -1,8 +1,12 @@
 'use strict';
 
 angular.module('angularDemoApp')
-    .controller('UserViewController', function ($scope, $state, $stateParams, $translate, inform, UserService) {
-	 	$scope.user = UserService.get({id:$stateParams.id});
+    .controller('UserViewController', function ($scope, $state, $stateParams, $translate, inform, UserService, userData) {
+	 	$scope.user = userData;
+
+		if($state.current.data){
+			$scope.isModal = $state.current.data.isModal;
+		}
 
 		$scope.deleteUser = function(instance){
 			return UserService.deleteInstance(instance).then(function(instance){
@@ -10,5 +14,7 @@ angular.module('angularDemoApp')
 				return instance;
 			});
 		};
-
+		$scope.go = function(route){
+			$state.go(route);
+		};
 	});

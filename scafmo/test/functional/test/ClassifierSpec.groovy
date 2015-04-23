@@ -5,23 +5,25 @@ import spock.lang.Ignore
 import org.springframework.http.HttpStatus
 import defpackage.RestQueries
 import defpackage.AuthQueries
+import defpackage.TestUtils
 import spock.lang.Specification
+import spock.lang.Unroll
 
-class ClassifierSpec extends Specification implements RestQueries, AuthQueries{
+class ClassifierSpec extends Specification implements RestQueries, AuthQueries, TestUtils{
 
 	String REST_URL = "${APP_URL}/classifiers/v1"
-	
+
 	@Shared
 	Long domainId
 	@Shared
 	Long otherDomainId
-	
+
 	@Shared
 	def authResponse
-	
+
 	@Shared
 	def response
-	
+
 	def setupSpec() {
 		authResponse = sendCorrectCredentials(APP_URL)
 	}
@@ -37,7 +39,7 @@ class ClassifierSpec extends Specification implements RestQueries, AuthQueries{
 			
 			otherDomainId = response.json.id
 			
-			
+
 		then: 'Should create and return created values'
 			response.json.classname == 'classname'
 			response.json.constant == 'constant'
@@ -57,33 +59,33 @@ class ClassifierSpec extends Specification implements RestQueries, AuthQueries{
 			
 			domainId = response.json.id
 			
-			
+
 		then: 'Should create and return created values'
-			
+
 			response.json.classname == 'classname'
 			response.json.constant == 'constant'
 			response.json.description == 'description'
 			response.json.propertyname == 'propertyname'
 			response.status == HttpStatus.CREATED.value()
 	}
-	
-	
-			
-		
+
+
+
+
 
 	void 'Test reading Classifier instance.'() {
 		when: 'Read classifier'
 			response = readDomainItemWithParams(domainId.toString(), "")
 		then: 'Should return correct values'
-			
+
 			response.json.classname == 'classname'
 			response.json.constant == 'constant'
 			response.json.description == 'description'
 			response.json.propertyname == 'propertyname'
 			response.status == HttpStatus.OK.value()
 	}
-	
-	
+
+
 	void 'Test excluding fields from reading Classifier instance.'() {
 		when: 'Read classifier id excluded'
 			response = readDomainItemWithParams(domainId.toString(), 'excludes=id')
@@ -91,8 +93,8 @@ class ClassifierSpec extends Specification implements RestQueries, AuthQueries{
 			response.json.id == null
 			response.status == HttpStatus.OK.value()
 	}
-	
-	
+
+
 	void 'Test including fields from reading Classifier instance.'() {
 		when: 'Read classifier id excluded and then included'
 			response = readDomainItemWithParams(domainId.toString(), 'excludes=id&includes=id')
@@ -100,8 +102,8 @@ class ClassifierSpec extends Specification implements RestQueries, AuthQueries{
 			response.json.id != null
 			response.status == HttpStatus.OK.value()
 	}
-	
-	
+
+
 	void 'Test reading unexisting Classifier instance.'() {
 		when: 'Find unexisting classifier'
 			response = readDomainItemWithParams('9999999999', '')
@@ -110,10 +112,10 @@ class ClassifierSpec extends Specification implements RestQueries, AuthQueries{
 		when: 'Find unexisting classifier id not a number'
 			response = readDomainItemWithParams('nonexistent', '')
 		then: 'Should not find'
-			response.status == HttpStatus.NOT_FOUND.value()
+			response.status == HttpStatus.UNPROCESSABLE_ENTITY.value()
 	}
 
-	
+
 	void 'Test updating Classifier instance.'() {
 		when: 'Update classifier'
 			response = sendUpdateWithData(domainId.toString()){
@@ -143,7 +145,7 @@ class ClassifierSpec extends Specification implements RestQueries, AuthQueries{
 			}
 		then: 'Should not find'
 			response.status == HttpStatus.NOT_FOUND.value()
-			
+
 		when: 'Update unexisting classifier id not a number'
 			response = sendUpdateWithData('nonexistent'){
 					classname = 'classname'
@@ -155,7 +157,7 @@ class ClassifierSpec extends Specification implements RestQueries, AuthQueries{
 		then: 'Should not find'
 			response.status == HttpStatus.UNPROCESSABLE_ENTITY.value()
 	}
-	
+
 	void 'Test Classifier list sorting.'() {
 		when: 'Get classifier sorted list DESC'
 			response = queryListWithParams('order=desc&sort=id')
@@ -163,7 +165,7 @@ class ClassifierSpec extends Specification implements RestQueries, AuthQueries{
 		then: 'First item should be just inserted object'
 			response.json[0].id == domainId
 			response.status == HttpStatus.OK.value()
-		
+
 		when: 'Get classifier sorted list ASC'
 			response = queryListWithParams('order=asc&sort=id')
 
@@ -171,8 +173,8 @@ class ClassifierSpec extends Specification implements RestQueries, AuthQueries{
 			response.json[0].id != domainId
 			response.status == HttpStatus.OK.value()
 	}
-	
-	
+
+
 	void 'Test Classifier list max property query 2 items.'() {
 		when: 'Get classifier list with max 2 items'
 			response = queryListWithParams('max=2')
@@ -180,33 +182,33 @@ class ClassifierSpec extends Specification implements RestQueries, AuthQueries{
 		then: 'Should be only 2 items'
 			response.json.size() == 2
 	}
-	
-	
+
+
 	 // have to have more then maxLimit items
 	void 'Test Classifier list max property.'() {
 		given:
 			int maxLimit = 100// Set real max items limit
-			
+
 		when: 'Get classifier list without max param'
 			response = queryListWithParams('')
 
 		then: 'Should return default maximum items'
 			response.json.size() == 10
-			
+
 		when: 'Get classifier list with maximum items'
 			response = queryListWithParams("max=$maxLimit")
 
 		then: 'Should contains maximum items'
 			response.json.size() == maxLimit
-			
+
 		when: 'Get classifier list with maximum + 1 items'
 			response = queryListWithParams("max=${maxLimit+1}")
 
 		then: 'Should contains maximum items'
 			response.json.size() == maxLimit
 	}
-	
-	
+
+
 	void 'Test excluding fields in Classifier list.'() {
 		when: 'Get classifier sorted list'
 			response = queryListWithParams('excludes=id')
@@ -214,8 +216,8 @@ class ClassifierSpec extends Specification implements RestQueries, AuthQueries{
 		then: 'First item should be just inserted object'
 			response.json[0].id == null
 	}
-	
-	
+
+
 	void 'Test including fields in Classifier list.'() {
 		when: 'Get classifier sorted list'
 			response = queryListWithParams('excludes=id&includes=id')
@@ -236,7 +238,7 @@ class ClassifierSpec extends Specification implements RestQueries, AuthQueries{
 	void 'Test querying in Classifier list by real searchString.'() {
 		when: 'Get classifier list by searchString'
 			response = queryListWithUrlVariables('order=desc&sort=id&searchString={searchString}',
-					[searchString: "classname"])
+					[searchString: "propertyname"])
 
 		then: 'Should at least last inserted item'
 			response.json[0].id == domainId
@@ -254,12 +256,13 @@ class ClassifierSpec extends Specification implements RestQueries, AuthQueries{
 			response.json.size() == 1
 			response.status == HttpStatus.OK.value()
 	}
-	
-	void 'Test filtering in Classifier list by all properties.'() {
+
+	@Unroll("Classifier list search with props '#jsonVal' returns '#respSize' items")
+	void 'Filtering in Classifier list by all properties.'() {
 		given:
 			response = queryListWithUrlVariables('filter={filter}', [filter:"${jsonVal}"])
 			
-			
+
 		expect:
 			response.json.size() == respSize
 		where:
@@ -271,18 +274,18 @@ class ClassifierSpec extends Specification implements RestQueries, AuthQueries{
 			'{"propertyname":"propertyname"}' || 10 
 
 	}
-	
-	
-	
-	
+
+
+
+
 	void "Test deleting other Classifier instance."() {//This is for creating some data to test list sorting
 		when: "Delete classifier"
 			response = deleteDomainItem(otherDomainId.toString())
 		then:
 			response.status == HttpStatus.NO_CONTENT.value()
 	}
-	
-	
+
+
 	void "Test deleting Classifier instance."() {
 		when: "Delete classifier"
 			response = deleteDomainItem(domainId.toString())

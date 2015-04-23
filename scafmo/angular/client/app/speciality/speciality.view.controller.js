@@ -1,8 +1,12 @@
 'use strict';
 
 angular.module('angularDemoApp')
-    .controller('SpecialityViewController', function ($scope, $state, $stateParams, $translate, inform, SpecialityService) {
-	 	$scope.speciality = SpecialityService.get({id:$stateParams.id});
+    .controller('SpecialityViewController', function ($scope, $state, $stateParams, $translate, inform, SpecialityService, specialityData) {
+	 	$scope.speciality = specialityData;
+
+		if($state.current.data){
+			$scope.isModal = $state.current.data.isModal;
+		}
 
 		$scope.deleteSpeciality = function(instance){
 			return SpecialityService.deleteInstance(instance).then(function(instance){
@@ -10,5 +14,7 @@ angular.module('angularDemoApp')
 				return instance;
 			});
 		};
-
+		$scope.go = function(route){
+			$state.go(route);
+		};
 	});

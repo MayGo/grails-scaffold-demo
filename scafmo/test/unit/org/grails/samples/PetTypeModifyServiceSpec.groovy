@@ -2,7 +2,7 @@ package org.grails.samples
 
 import grails.test.mixin.TestFor
 import grails.test.mixin.Mock
-import spock.lang.Ignore
+
 import spock.lang.Specification
 import defpackage.exceptions.ResourceNotFound
 import grails.validation.ValidationException
@@ -11,8 +11,10 @@ import grails.validation.ValidationException
 @Mock(PetType)
 class PetTypeModifyServiceSpec extends Specification {
 
-	void 'Creating PetType with no data is not possible'() {
+	static final long ILLEGAL_ID = -1L
+	static final long FICTIONAL_ID = 99999999L
 
+	void 'Creating PetType with no data is not possible'() {
 		setup:
 			Map data = [:]
 		when:
@@ -22,9 +24,7 @@ class PetTypeModifyServiceSpec extends Specification {
 	}
 
 	void 'Creating PetType with invalid data is not possible'() {
-
 		setup:
-
 			Map data = invalidData()
 		when:
 			service.createPetType(data)
@@ -33,7 +33,6 @@ class PetTypeModifyServiceSpec extends Specification {
 	}
 
 	void 'Creating PetType with valid data returns PetType instance'() {
-
 		setup:
 			Map data = validData()
 		when:
@@ -56,7 +55,7 @@ class PetTypeModifyServiceSpec extends Specification {
 	void 'Updating PetType with illegal id is not possible'() {
 
 		setup:
-			Map data = [id:-1L]
+			Map data = [id: ILLEGAL_ID]
 		when:
 			service.updatePetType(data)
 		then:
@@ -66,7 +65,7 @@ class PetTypeModifyServiceSpec extends Specification {
 	void 'Updating PetType with fictional id is not possible'() {
 
 		setup:
-			Map data = [id:99999999L]
+			Map data = [id: FICTIONAL_ID]
 
 		when:
 			service.updatePetType(data)
@@ -74,14 +73,13 @@ class PetTypeModifyServiceSpec extends Specification {
 			thrown(ResourceNotFound)
 	}
 
-	@Ignore //TODO: set invalid data first
 	void 'Updating PetType with invalid data is not possible'() {
 
 		setup:
 			Map data = invalidData()
 			data.id = createValidPetType().id
 		when:
-			PetType petType = service.updatePetType(data)
+			service.updatePetType(data)
 		then:
 			thrown(ValidationException)
 	}
@@ -98,20 +96,62 @@ class PetTypeModifyServiceSpec extends Specification {
 			petType.id == 1
 	}
 
+	void 'Deleting PetType without id is not possible'() {
+		when:
+			service.deletePetType(null)
+		then:
+			thrown(IllegalArgumentException)
+	}
+
+	void 'Deleting PetType with illegal id is not possible'() {
+
+		setup:
+			long id = ILLEGAL_ID
+		when:
+			service.deletePetType(id)
+		then:
+			thrown(IllegalArgumentException)
+	}
+
+	void 'Deleting PetType with fictional id is not possible'() {
+
+		setup:
+			long id = FICTIONAL_ID
+		when:
+			service.deletePetType(id)
+		then:
+			thrown(ResourceNotFound)
+	}
+
+	void 'Deleting saved PetType is possible'() {
+		setup:
+			Long petTypeId = createValidPetType().id
+			PetType petType = PetType.findById(petTypeId).find()
+		when:
+			service.deletePetType(petTypeId)
+		then:
+			petType != null
+			PetType.findById(petTypeId) == null
+	}
+
 	Map invalidData() {
-		return ["foo": "bar"]//Sadisfy 'empty data' exception
+
+		return ['name': null]
 	}
 
 	Map validData() {
-		
-		Map data = ["id":null,"version":null,"name":"Type 455"]
 
+		Map data = [
+  'id':  null,
+  'version':  null,
+  'name':  'Type 455'
+]
 		return data
 	}
 
-	PetType createValidPetType(){
+	PetType createValidPetType() {
 		PetType petType = new PetType(validData())
-		petType.save flush:true, failOnError: true
+		petType.save flush: true, failOnError: true
 		return petType
 	}
 

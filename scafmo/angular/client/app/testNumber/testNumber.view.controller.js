@@ -1,8 +1,12 @@
 'use strict';
 
 angular.module('angularDemoApp')
-    .controller('TestNumberViewController', function ($scope, $state, $stateParams, $translate, inform, TestNumberService) {
-	 	$scope.testNumber = TestNumberService.get({id:$stateParams.id});
+    .controller('TestNumberViewController', function ($scope, $state, $stateParams, $translate, inform, TestNumberService, testNumberData) {
+	 	$scope.testNumber = testNumberData;
+
+		if($state.current.data){
+			$scope.isModal = $state.current.data.isModal;
+		}
 
 		$scope.deleteTestNumber = function(instance){
 			return TestNumberService.deleteInstance(instance).then(function(instance){
@@ -10,5 +14,7 @@ angular.module('angularDemoApp')
 				return instance;
 			});
 		};
-
+		$scope.go = function(route){
+			$state.go(route);
+		};
 	});

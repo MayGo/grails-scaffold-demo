@@ -9,9 +9,9 @@
 
 
 var EditPage = function() {
-  
-  this.nameEl = element(by.model('tag.name'));  
-  this.tasksEl = element(by.model('tag.tasks'));  
+			this.nameEl = element(by.model('tag.name'));
+		//this.tasksEl = element.all(by.repeater('item in tag.tasks'));
+
 };
 
 module.exports = new EditPage();

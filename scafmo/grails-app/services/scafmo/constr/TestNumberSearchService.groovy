@@ -7,11 +7,22 @@ import grails.transaction.Transactional
 import org.codehaus.groovy.grails.web.json.JSONElement
 import org.codehaus.groovy.grails.web.json.JSONObject
 import org.grails.datastore.mapping.query.api.BuildableCriteria
-
+import defpackage.exceptions.ResourceNotFound
 
 //@GrailsCompileStatic
 @Transactional(readOnly = true)
 class TestNumberSearchService {
+
+	TestNumber queryForTestNumber(Long testNumberId) {
+		if (!testNumberId || testNumberId < 0) {
+			throw new IllegalArgumentException('no.valid.id')
+		}
+		TestNumber testNumber = TestNumber.where { id == testNumberId }.find()
+		if (!testNumber) {
+			throw new ResourceNotFound("No TestNumber found with Id :[$testNumberId]")
+		}
+		return testNumber
+	}
 
 	PagedResultList search(Map params) {
 
@@ -46,16 +57,16 @@ class TestNumberSearchService {
 						eq('id', searchString.toLong())
 					}
 
-					if (searchString.isDouble()) {
-						eq('doubleNr', searchString.toDouble())
+					if (searchString.isLong()) {
+						eq('longNr', searchString.toLong())
 					}
 
-					if (searchString.isFloat()) {
-						eq('floatNr', searchString.toFloat())
+					if (searchString.isInteger()) {
+						eq('integerNrUnique', searchString.toInteger())
 					}
 
-					if (searchString.isFloat()) {
-						eq('floatNrScale', searchString.toFloat())
+					if (searchString.isInteger()) {
+						eq('integerNrRange', searchString.toInteger())
 					}
 				}
 			}

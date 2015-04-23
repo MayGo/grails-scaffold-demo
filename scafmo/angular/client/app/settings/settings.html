@@ -9,11 +9,14 @@
                 <div class="panel-body">
                 <h3 translate="pages.settings.view.info.permissions"></h3>
                 <ul>
-                  <li ng-repeat="perm in user.permissions">{{perm}}</li>
+                  <li ng-repeat="perm in user.permissions">{{::perm}}</li>
                 </ul>
                 </div>
              </div>
         </div>
     </div>
+
+  <div data-ng-include=" 'shared/blocks/settings.html' " class="settings panel panel-default">
+  </div>
 </div>
 

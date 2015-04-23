@@ -10,37 +10,47 @@ import defpackage.exceptions.ResourceNotFound
 class PetTypeModifyService {
 	def grailsWebDataBinder
 
-	PetType createPetType(Map data){
+	PetType createPetType(Map data) {
 		PetType petType = PetType.newInstance()
 		return createOrUpdate(petType, data)
 	}
 
-	PetType updatePetType(Map data){
-		if(!data.id || data.id < 0){
-			throw new IllegalArgumentException("There is no valid 'id'")
+	PetType updatePetType(Map data) {
+		if (!data.id || data.id < 0) {
+			throw new IllegalArgumentException('no.valid.id')
 		}
-		PetType petType = queryForPetType(data.id)
+		PetType petType = PetType.where { id == data.id }.find()
 
-		if(!petType){
+		if (!petType) {
 			throw new ResourceNotFound("No PetType found with Id :[${data.id}]")
 		}
 
 		return createOrUpdate(petType, data)
 	}
 
-	PetType createOrUpdate(PetType petType, Map data){
-		if(!data){
-			throw new IllegalArgumentException("Data map is empty.")
+	PetType createOrUpdate(PetType petType, Map data) {
+		if (!data) {
+			throw new IllegalArgumentException('no.data')
 		}
 
 		grailsWebDataBinder.bind petType, data as SimpleMapDataBindingSource
 
-		petType.save flush: true, failOnError: true
+		petType.save failOnError: true
 
 		return petType
 	}
 
-	PetType queryForPetType(long id){
-		return PetType.get(id)
+	void deletePetType(Long petTypeId) {
+		if (!petTypeId || petTypeId < 0) {
+			throw new IllegalArgumentException('no.valid.id')
+		}
+		PetType petType = PetType.where { id == petTypeId }.find()
+
+		if (!petType) {
+			throw new ResourceNotFound("No PetType found with Id:$petTypeId")
+		}
+
+		petType.delete()
 	}
 }
+

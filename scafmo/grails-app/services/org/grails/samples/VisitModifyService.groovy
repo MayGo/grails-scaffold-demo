@@ -10,37 +10,47 @@ import defpackage.exceptions.ResourceNotFound
 class VisitModifyService {
 	def grailsWebDataBinder
 
-	Visit createVisit(Map data){
+	Visit createVisit(Map data) {
 		Visit visit = Visit.newInstance()
 		return createOrUpdate(visit, data)
 	}
 
-	Visit updateVisit(Map data){
-		if(!data.id || data.id < 0){
-			throw new IllegalArgumentException("There is no valid 'id'")
+	Visit updateVisit(Map data) {
+		if (!data.id || data.id < 0) {
+			throw new IllegalArgumentException('no.valid.id')
 		}
-		Visit visit = queryForVisit(data.id)
+		Visit visit = Visit.where { id == data.id }.find()
 
-		if(!visit){
+		if (!visit) {
 			throw new ResourceNotFound("No Visit found with Id :[${data.id}]")
 		}
 
 		return createOrUpdate(visit, data)
 	}
 
-	Visit createOrUpdate(Visit visit, Map data){
-		if(!data){
-			throw new IllegalArgumentException("Data map is empty.")
+	Visit createOrUpdate(Visit visit, Map data) {
+		if (!data) {
+			throw new IllegalArgumentException('no.data')
 		}
 
 		grailsWebDataBinder.bind visit, data as SimpleMapDataBindingSource
 
-		visit.save flush: true, failOnError: true
+		visit.save failOnError: true
 
 		return visit
 	}
 
-	Visit queryForVisit(long id){
-		return Visit.get(id)
+	void deleteVisit(Long visitId) {
+		if (!visitId || visitId < 0) {
+			throw new IllegalArgumentException('no.valid.id')
+		}
+		Visit visit = Visit.where { id == visitId }.find()
+
+		if (!visit) {
+			throw new ResourceNotFound("No Visit found with Id:$visitId")
+		}
+
+		visit.delete()
 	}
 }
+

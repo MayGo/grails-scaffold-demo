@@ -10,37 +10,47 @@ import defpackage.exceptions.ResourceNotFound
 class SpecialityModifyService {
 	def grailsWebDataBinder
 
-	Speciality createSpeciality(Map data){
+	Speciality createSpeciality(Map data) {
 		Speciality speciality = Speciality.newInstance()
 		return createOrUpdate(speciality, data)
 	}
 
-	Speciality updateSpeciality(Map data){
-		if(!data.id || data.id < 0){
-			throw new IllegalArgumentException("There is no valid 'id'")
+	Speciality updateSpeciality(Map data) {
+		if (!data.id || data.id < 0) {
+			throw new IllegalArgumentException('no.valid.id')
 		}
-		Speciality speciality = queryForSpeciality(data.id)
+		Speciality speciality = Speciality.where { id == data.id }.find()
 
-		if(!speciality){
+		if (!speciality) {
 			throw new ResourceNotFound("No Speciality found with Id :[${data.id}]")
 		}
 
 		return createOrUpdate(speciality, data)
 	}
 
-	Speciality createOrUpdate(Speciality speciality, Map data){
-		if(!data){
-			throw new IllegalArgumentException("Data map is empty.")
+	Speciality createOrUpdate(Speciality speciality, Map data) {
+		if (!data) {
+			throw new IllegalArgumentException('no.data')
 		}
 
 		grailsWebDataBinder.bind speciality, data as SimpleMapDataBindingSource
 
-		speciality.save flush: true, failOnError: true
+		speciality.save failOnError: true
 
 		return speciality
 	}
 
-	Speciality queryForSpeciality(long id){
-		return Speciality.get(id)
+	void deleteSpeciality(Long specialityId) {
+		if (!specialityId || specialityId < 0) {
+			throw new IllegalArgumentException('no.valid.id')
+		}
+		Speciality speciality = Speciality.where { id == specialityId }.find()
+
+		if (!speciality) {
+			throw new ResourceNotFound("No Speciality found with Id:$specialityId")
+		}
+
+		speciality.delete()
 	}
 }
+

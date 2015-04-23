@@ -7,11 +7,22 @@ import grails.transaction.Transactional
 import org.codehaus.groovy.grails.web.json.JSONElement
 import org.codehaus.groovy.grails.web.json.JSONObject
 import org.grails.datastore.mapping.query.api.BuildableCriteria
-
+import defpackage.exceptions.ResourceNotFound
 
 //@GrailsCompileStatic
 @Transactional(readOnly = true)
 class UserRoleSearchService {
+
+	UserRole queryForUserRole(Long userRoleId) {
+		if (!userRoleId || userRoleId < 0) {
+			throw new IllegalArgumentException('no.valid.id')
+		}
+		UserRole userRole = UserRole.where { id == userRoleId }.find()
+		if (!userRole) {
+			throw new ResourceNotFound("No UserRole found with Id :[$userRoleId]")
+		}
+		return userRole
+	}
 
 	PagedResultList search(Map params) {
 

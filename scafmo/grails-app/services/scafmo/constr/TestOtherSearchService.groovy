@@ -7,11 +7,22 @@ import grails.transaction.Transactional
 import org.codehaus.groovy.grails.web.json.JSONElement
 import org.codehaus.groovy.grails.web.json.JSONObject
 import org.grails.datastore.mapping.query.api.BuildableCriteria
-
+import defpackage.exceptions.ResourceNotFound
 
 //@GrailsCompileStatic
 @Transactional(readOnly = true)
 class TestOtherSearchService {
+
+	TestOther queryForTestOther(Long testOtherId) {
+		if (!testOtherId || testOtherId < 0) {
+			throw new IllegalArgumentException('no.valid.id')
+		}
+		TestOther testOther = TestOther.where { id == testOtherId }.find()
+		if (!testOther) {
+			throw new ResourceNotFound("No TestOther found with Id :[$testOtherId]")
+		}
+		return testOther
+	}
 
 	PagedResultList search(Map params) {
 
@@ -45,12 +56,12 @@ class TestOtherSearchService {
 					if (searchString.isLong()) {
 						eq('id', searchString.toLong())
 					}
+					// no type defined for testEnum 
+					// no type defined for testDate 
 
 					if (searchString.equalsIgnoreCase('false') || searchString.equalsIgnoreCase('true')) {
 						eq('booleanNullable', searchString.toBoolean())
 					}
-					// no type defined for testDate 
-					// no type defined for testEnum 
 				}
 			}
 			if (filter['booleanNullable']) {
@@ -58,9 +69,15 @@ class TestOtherSearchService {
 			}
 
 			if (filter['testDate']) {
-				String inputFormat = "yyyy-MM-dd HH:mm:ss.SSSZ"
-				Date d = Date.parse(inputFormat, filter['testDate'].toString())
-				between('testDate', d, d)
+				Date d
+				if (filter['testDate'].toString().isNumber()) {
+					d = new Date(filter['testDate'].toString().toLong())
+				} else {
+					String inputFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
+					d = Date.parse(inputFormat, filter['testDate'].toString())
+				}
+
+				between('testDate', d, d + 1)
 			}
 			if (filter['testEnum']) {
 				//enum

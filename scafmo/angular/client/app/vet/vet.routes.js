@@ -14,14 +14,41 @@ $stateProvider
 		}).state('app.vet.create',{
 			url: '/create',
 			templateUrl: 'app/vet/vet.form.html',
-			controller: 'VetEditController'
+			controller: 'VetEditController',
+			resolve:{
+				vetData: function($stateParams, VetService) {
+					return new VetService();
+				}
+			}
 		}).state('app.vet.edit',{
 			url: '/edit/:id',
 			templateUrl: 'app/vet/vet.form.html',
-			controller: 'VetEditController'
+			controller: 'VetEditController',
+			resolve:{
+				vetData: function($stateParams, VetService){
+					return VetService.get({id:$stateParams.id}).$promise.then(
+						function( response ){
+							return response;
+						}
+					);
+				}
+			}
 		}).state('app.vet.view',{
 			url: '/view/:id',
 			templateUrl: 'app/vet/vet.view.html',
-			controller: 'VetViewController'
-		});		
+			controller: 'VetViewController',
+				resolve:{
+				vetData: function($stateParams, VetService){
+					return VetService.get({id:$stateParams.id}).$promise.then(
+						function( response ){
+							return response;
+						}
+					);
+				}
+			}
+		})
+
+
+
+;
 });

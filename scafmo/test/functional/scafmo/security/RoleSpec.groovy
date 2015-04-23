@@ -5,23 +5,25 @@ import spock.lang.Ignore
 import org.springframework.http.HttpStatus
 import defpackage.RestQueries
 import defpackage.AuthQueries
+import defpackage.TestUtils
 import spock.lang.Specification
+import spock.lang.Unroll
 
-class RoleSpec extends Specification implements RestQueries, AuthQueries{
+class RoleSpec extends Specification implements RestQueries, AuthQueries, TestUtils{
 
 	String REST_URL = "${APP_URL}/roles/v1"
-	
+
 	@Shared
 	Long domainId
 	@Shared
 	Long otherDomainId
-	
+
 	@Shared
 	def authResponse
-	
+
 	@Shared
 	def response
-	
+
 	def setupSpec() {
 		authResponse = sendCorrectCredentials(APP_URL)
 	}
@@ -34,7 +36,7 @@ class RoleSpec extends Specification implements RestQueries, AuthQueries{
 			
 			otherDomainId = response.json.id
 			
-			
+
 		then: 'Should create and return created values'
 			response.json.authority == 'ROLE_301'
 			response.status == HttpStatus.CREATED.value()
@@ -48,27 +50,27 @@ class RoleSpec extends Specification implements RestQueries, AuthQueries{
 			
 			domainId = response.json.id
 			
-			
+
 		then: 'Should create and return created values'
-			
+
 			response.json.authority == 'ROLE_302'
 			response.status == HttpStatus.CREATED.value()
 	}
-	
-	
-			
-		
+
+
+
+
 
 	void 'Test reading Role instance.'() {
 		when: 'Read role'
 			response = readDomainItemWithParams(domainId.toString(), "")
 		then: 'Should return correct values'
-			
+
 			response.json.authority == 'ROLE_302'
 			response.status == HttpStatus.OK.value()
 	}
-	
-	
+
+
 	void 'Test excluding fields from reading Role instance.'() {
 		when: 'Read role id excluded'
 			response = readDomainItemWithParams(domainId.toString(), 'excludes=id')
@@ -76,8 +78,8 @@ class RoleSpec extends Specification implements RestQueries, AuthQueries{
 			response.json.id == null
 			response.status == HttpStatus.OK.value()
 	}
-	
-	
+
+
 	void 'Test including fields from reading Role instance.'() {
 		when: 'Read role id excluded and then included'
 			response = readDomainItemWithParams(domainId.toString(), 'excludes=id&includes=id')
@@ -85,8 +87,8 @@ class RoleSpec extends Specification implements RestQueries, AuthQueries{
 			response.json.id != null
 			response.status == HttpStatus.OK.value()
 	}
-	
-	
+
+
 	void 'Test reading unexisting Role instance.'() {
 		when: 'Find unexisting role'
 			response = readDomainItemWithParams('9999999999', '')
@@ -95,10 +97,10 @@ class RoleSpec extends Specification implements RestQueries, AuthQueries{
 		when: 'Find unexisting role id not a number'
 			response = readDomainItemWithParams('nonexistent', '')
 		then: 'Should not find'
-			response.status == HttpStatus.NOT_FOUND.value()
+			response.status == HttpStatus.UNPROCESSABLE_ENTITY.value()
 	}
 
-	
+
 	void 'Test updating Role instance.'() {
 		when: 'Update role'
 			response = sendUpdateWithData(domainId.toString()){
@@ -119,7 +121,7 @@ class RoleSpec extends Specification implements RestQueries, AuthQueries{
 			}
 		then: 'Should not find'
 			response.status == HttpStatus.NOT_FOUND.value()
-			
+
 		when: 'Update unexisting role id not a number'
 			response = sendUpdateWithData('nonexistent'){
 					authority = 'ROLE_303'
@@ -128,7 +130,7 @@ class RoleSpec extends Specification implements RestQueries, AuthQueries{
 		then: 'Should not find'
 			response.status == HttpStatus.UNPROCESSABLE_ENTITY.value()
 	}
-	
+
 	void 'Test Role list sorting.'() {
 		when: 'Get role sorted list DESC'
 			response = queryListWithParams('order=desc&sort=id')
@@ -136,7 +138,7 @@ class RoleSpec extends Specification implements RestQueries, AuthQueries{
 		then: 'First item should be just inserted object'
 			response.json[0].id == domainId
 			response.status == HttpStatus.OK.value()
-		
+
 		when: 'Get role sorted list ASC'
 			response = queryListWithParams('order=asc&sort=id')
 
@@ -144,8 +146,8 @@ class RoleSpec extends Specification implements RestQueries, AuthQueries{
 			response.json[0].id != domainId
 			response.status == HttpStatus.OK.value()
 	}
-	
-	
+
+
 	void 'Test Role list max property query 2 items.'() {
 		when: 'Get role list with max 2 items'
 			response = queryListWithParams('max=2')
@@ -153,33 +155,33 @@ class RoleSpec extends Specification implements RestQueries, AuthQueries{
 		then: 'Should be only 2 items'
 			response.json.size() == 2
 	}
-	
-	
+
+
 	 // have to have more then maxLimit items
 	void 'Test Role list max property.'() {
 		given:
 			int maxLimit = 100// Set real max items limit
-			
+
 		when: 'Get role list without max param'
 			response = queryListWithParams('')
 
 		then: 'Should return default maximum items'
 			response.json.size() == 10
-			
+
 		when: 'Get role list with maximum items'
 			response = queryListWithParams("max=$maxLimit")
 
 		then: 'Should contains maximum items'
 			response.json.size() == maxLimit
-			
+
 		when: 'Get role list with maximum + 1 items'
 			response = queryListWithParams("max=${maxLimit+1}")
 
 		then: 'Should contains maximum items'
 			response.json.size() == maxLimit
 	}
-	
-	
+
+
 	void 'Test excluding fields in Role list.'() {
 		when: 'Get role sorted list'
 			response = queryListWithParams('excludes=id')
@@ -187,8 +189,8 @@ class RoleSpec extends Specification implements RestQueries, AuthQueries{
 		then: 'First item should be just inserted object'
 			response.json[0].id == null
 	}
-	
-	
+
+
 	void 'Test including fields in Role list.'() {
 		when: 'Get role sorted list'
 			response = queryListWithParams('excludes=id&includes=id')
@@ -227,12 +229,13 @@ class RoleSpec extends Specification implements RestQueries, AuthQueries{
 			response.json.size() == 1
 			response.status == HttpStatus.OK.value()
 	}
-	
-	void 'Test filtering in Role list by all properties.'() {
+
+	@Unroll("Role list search with props '#jsonVal' returns '#respSize' items")
+	void 'Filtering in Role list by all properties.'() {
 		given:
 			response = queryListWithUrlVariables('filter={filter}', [filter:"${jsonVal}"])
 			
-			
+
 		expect:
 			response.json.size() == respSize
 		where:
@@ -241,18 +244,18 @@ class RoleSpec extends Specification implements RestQueries, AuthQueries{
 			'{"authority":"ROLE_303"}' || 1 
 
 	}
-	
-	
-	
-	
+
+
+
+
 	void "Test deleting other Role instance."() {//This is for creating some data to test list sorting
 		when: "Delete role"
 			response = deleteDomainItem(otherDomainId.toString())
 		then:
 			response.status == HttpStatus.NO_CONTENT.value()
 	}
-	
-	
+
+
 	void "Test deleting Role instance."() {
 		when: "Delete role"
 			response = deleteDomainItem(domainId.toString())

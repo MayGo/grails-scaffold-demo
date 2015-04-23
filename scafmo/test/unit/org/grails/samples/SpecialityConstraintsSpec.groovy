@@ -5,19 +5,20 @@ import spock.lang.Unroll
 import spock.lang.Specification
 import defpackage.ConstraintHelper
 
-
 @TestFor(Speciality)
 class SpecialityConstraintsSpec extends Specification {
 
 	def setup() {
-		//mock a Speciality with some data (put unique violations in here so they can be tested, the others aren't needed)
+		//mock a Speciality with some data
+		//(put unique violations in here so they can be tested, the others aren't needed)
 		mockForConstraintsTests( Speciality, [ new Speciality() ] )
 	}
 
 	@Unroll("Speciality constraint on field '#field' with value '#val' gets '#error'")
 	def "All Speciality constraints"() {
 		when:
-			def obj = new Speciality("$field": val)
+			Speciality obj = new Speciality()
+			obj."$field" = val
 
 		then:
 			ConstraintHelper.validateConstraints(obj, field, error)
@@ -25,7 +26,7 @@ class SpecialityConstraintsSpec extends Specification {
 		where:
 			error                  | field        | val
 			'valid' | 'id' | 1 // Keep always one here or remove test
-			'nullable' | 'name' | ''
+			'blank' | 'name' | ''
 			'valid' | 'name' | ConstraintHelper.getLongString(3)
 			'minSize' | 'name' | ConstraintHelper.getLongString(2)
 			'valid' | 'name' | ConstraintHelper.getLongString(20)

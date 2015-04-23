@@ -59,7 +59,7 @@ grails.project.dependency.resolution = {
 		compile ":dirserve:0.4"
 		compile ":rest-api-doc:0.5"
 		runtime ":resources:1.2.13"//needed for rest-api-doc
-		compile ":build-test-data:2.2.2"
+		compile ":build-test-data:2.4.0"
 		test ":geb:0.9.2"
 		compile ":rest-client-builder:2.0.3"
 		
@@ -79,7 +79,7 @@ grails.project.dependency.resolution = {
 		//runtime ":hibernate:3.6.10.17"
         //runtime ":database-migration:1.4.0"
 
-		compile ':scaffold-angular-smit:0.4.39'
+		compile ':scaffold-angular:0.7.2'
     }
 }
 

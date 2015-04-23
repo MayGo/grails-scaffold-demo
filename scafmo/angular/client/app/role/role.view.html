@@ -1,60 +1,57 @@
 
 
+<div id="role_view" ng-init="pageTitle = 'pages.Role.view.title'"
+     ng-include=" 'shared/blocks/page_heading.html' "></div>
+<div class="wrapper-md bg-white-only ng-scope">
+    <div class="form-horizontal">
 
-<div ng-init="pageTitle = 'pages.Role.view.title'" ng-include=" 'shared/blocks/page_heading.html' "></div>
-<div class="wrapper-md ng-scope">
-    <div class="row">
-		<div class="col-sm-6">
-			<div class="panel panel-default">
-				<div class="panel-heading">
-			      <span class="h4" translate="pages.Role.view.title"></span>
-			    </div>
-			    <div class="panel-body">
-			    	<div class=" form-horizontal">		
-				
-				
         <div class="form-group">
-            <label class="col-sm-2 control-label" translate="pages.Role.view.field.authority"></label>
-            <div class="col-sm-10 form-control-static" ng-bind="role.authority"></div>
+            <label class="col-sm-2 control-label"
+                   translate="pages.Role.view.field.authority"></label>
+            <div class="col-sm-10 form-control-static"
+                 ng-bind="role.authority"></div>
         </div>
         <div class="line line-dashed b-b line-lg pull-in"></div>
-    					
-				
-					</div>
-			    </div>
-			    <footer class="panel-footer text-right bg-light lter">
-			      	<a id="editBtn" class="btn btn-default" ui-sref="app.role.edit({id:role.id})">
-				    	<i class="fa fa-edit" translate="pages.Role.view.edit"></i>
-			       	</a>
-					<a id="deleteBtn" class="btn btn-danger" ng-click="deleteRole(role)" mx-show-loading>
-						<i class="fa fa-trash-o" translate="pages.Role.view.delete"></i>
-			        </a>
-					
-					<a id="backBtn" class="btn btn-default" ng-click="back()">
-						<i class="fa fa-chevron-left" translate="pages.Role.view.back"></i>
-					</a>
-					
-			    </footer>
-			 </div>
-		</div>
-        <div>
-            
-             <div class="form-group"    
-             ng-init="search={roles:[autocompleteService.promiseToLabel(role, ['id','authority'])]}"
-                    ng-controller="UserRoleEmbeddedListController" 
-                    >
-                <div class="col-sm-10 form-control-static" 
-                    ng-controller="UserRoleListController" 
-                    ng-include="'app/userRole/userRole.list.html'">
-                   <a class="h4" href ui-sref="app.userRole.list({search:{}})" 
-                        translate="pages.UserRole.view.lists" 
-                        translate-value-isval="{{ 'pages.UserRole.view.field.role' | translate }}" translate-value-inval="{{ 'pages.UserRole.name' | translate }}">
-                   </a>
-                </div>
-             </div>
-        
-        </div>       
-		
-		
-	</div>
-</div>			
+    
+
+    </div>
+    <div class="line line-dashed b-b line-lg pull-in"></div>
+    <div class="form-group" ng-if="!isModal">
+
+        <div class="form-action pull-right">
+            <a id="editBtn" class="btn btn-default"
+               ui-sref="app.role.edit({id:role.id})">
+                <i class="fa fa-edit" translate="pages.Role.view.edit"></i>
+            </a>
+            <a id="deleteBtn" class="btn btn-danger"
+               ng-click="deleteRole(role)" mx-show-loading>
+                <i class="fa fa-trash-o" translate="pages.Role.view.delete"></i>
+            </a>
+
+            <a id="backBtn" class="btn btn-default" ng-click="back()">
+                <i class="fa fa-chevron-left" translate="pages.Role.view.back"></i>
+            </a>
+        </div>
+        <div class="clearfix"/>
+    </div>
+</div>
+
+
+<div ng-if="!isModal">
+    <tabset>
+
+
+        <tab ui-sref="app.role.view.userRole({relationName:'roles'})"
+             ui-sref-active="active">
+            <tab-heading
+                   translate="pages.UserRole.view.lists"
+                   translate-value-isval="{{::'pages.UserRole.view.field.role' | translate }}"
+                   translate-value-inval="{{::'pages.UserRole.name' | translate }}">
+            </tab-heading>
+        </tab>
+
+    </tabset>
+    <div ui-view ><div class="wrapper-md bg-white-only ng-scope">{{::'pages.Role.view.selecttab' | translate}}</div></div>
+</div>
+    
+

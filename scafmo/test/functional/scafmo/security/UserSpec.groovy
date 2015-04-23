@@ -5,23 +5,25 @@ import spock.lang.Ignore
 import org.springframework.http.HttpStatus
 import defpackage.RestQueries
 import defpackage.AuthQueries
+import defpackage.TestUtils
 import spock.lang.Specification
+import spock.lang.Unroll
 
-class UserSpec extends Specification implements RestQueries, AuthQueries{
+class UserSpec extends Specification implements RestQueries, AuthQueries, TestUtils{
 
 	String REST_URL = "${APP_URL}/users/v1"
-	
+
 	@Shared
 	Long domainId
 	@Shared
 	Long otherDomainId
-	
+
 	@Shared
 	def authResponse
-	
+
 	@Shared
 	def response
-	
+
 	def setupSpec() {
 		authResponse = sendCorrectCredentials(APP_URL)
 	}
@@ -38,7 +40,7 @@ class UserSpec extends Specification implements RestQueries, AuthQueries{
 			
 			otherDomainId = response.json.id
 			
-			
+
 		then: 'Should create and return created values'
 			response.json.accountExpired == true
 			response.json.accountLocked == true
@@ -60,9 +62,9 @@ class UserSpec extends Specification implements RestQueries, AuthQueries{
 			
 			domainId = response.json.id
 			
-			
+
 		then: 'Should create and return created values'
-			
+
 			response.json.accountExpired == true
 			response.json.accountLocked == true
 			response.json.enabled == true
@@ -70,16 +72,16 @@ class UserSpec extends Specification implements RestQueries, AuthQueries{
 			response.json.username == 'John Doe 302'
 			response.status == HttpStatus.CREATED.value()
 	}
-	
-	
-			
-		
+
+
+
+
 
 	void 'Test reading User instance.'() {
 		when: 'Read user'
 			response = readDomainItemWithParams(domainId.toString(), "")
 		then: 'Should return correct values'
-			
+
 			response.json.accountExpired == true
 			response.json.accountLocked == true
 			response.json.enabled == true
@@ -87,8 +89,8 @@ class UserSpec extends Specification implements RestQueries, AuthQueries{
 			response.json.username == 'John Doe 302'
 			response.status == HttpStatus.OK.value()
 	}
-	
-	
+
+
 	void 'Test excluding fields from reading User instance.'() {
 		when: 'Read user id excluded'
 			response = readDomainItemWithParams(domainId.toString(), 'excludes=id')
@@ -96,8 +98,8 @@ class UserSpec extends Specification implements RestQueries, AuthQueries{
 			response.json.id == null
 			response.status == HttpStatus.OK.value()
 	}
-	
-	
+
+
 	void 'Test including fields from reading User instance.'() {
 		when: 'Read user id excluded and then included'
 			response = readDomainItemWithParams(domainId.toString(), 'excludes=id&includes=id')
@@ -105,8 +107,8 @@ class UserSpec extends Specification implements RestQueries, AuthQueries{
 			response.json.id != null
 			response.status == HttpStatus.OK.value()
 	}
-	
-	
+
+
 	void 'Test reading unexisting User instance.'() {
 		when: 'Find unexisting user'
 			response = readDomainItemWithParams('9999999999', '')
@@ -115,10 +117,10 @@ class UserSpec extends Specification implements RestQueries, AuthQueries{
 		when: 'Find unexisting user id not a number'
 			response = readDomainItemWithParams('nonexistent', '')
 		then: 'Should not find'
-			response.status == HttpStatus.NOT_FOUND.value()
+			response.status == HttpStatus.UNPROCESSABLE_ENTITY.value()
 	}
 
-	
+
 	void 'Test updating User instance.'() {
 		when: 'Update user'
 			response = sendUpdateWithData(domainId.toString()){
@@ -151,7 +153,7 @@ class UserSpec extends Specification implements RestQueries, AuthQueries{
 			}
 		then: 'Should not find'
 			response.status == HttpStatus.NOT_FOUND.value()
-			
+
 		when: 'Update unexisting user id not a number'
 			response = sendUpdateWithData('nonexistent'){
 					accountExpired = true
@@ -164,7 +166,7 @@ class UserSpec extends Specification implements RestQueries, AuthQueries{
 		then: 'Should not find'
 			response.status == HttpStatus.UNPROCESSABLE_ENTITY.value()
 	}
-	
+
 	void 'Test User list sorting.'() {
 		when: 'Get user sorted list DESC'
 			response = queryListWithParams('order=desc&sort=id')
@@ -172,7 +174,7 @@ class UserSpec extends Specification implements RestQueries, AuthQueries{
 		then: 'First item should be just inserted object'
 			response.json[0].id == domainId
 			response.status == HttpStatus.OK.value()
-		
+
 		when: 'Get user sorted list ASC'
 			response = queryListWithParams('order=asc&sort=id')
 
@@ -180,8 +182,8 @@ class UserSpec extends Specification implements RestQueries, AuthQueries{
 			response.json[0].id != domainId
 			response.status == HttpStatus.OK.value()
 	}
-	
-	
+
+
 	void 'Test User list max property query 2 items.'() {
 		when: 'Get user list with max 2 items'
 			response = queryListWithParams('max=2')
@@ -189,33 +191,33 @@ class UserSpec extends Specification implements RestQueries, AuthQueries{
 		then: 'Should be only 2 items'
 			response.json.size() == 2
 	}
-	
-	
+
+
 	 // have to have more then maxLimit items
 	void 'Test User list max property.'() {
 		given:
 			int maxLimit = 100// Set real max items limit
-			
+
 		when: 'Get user list without max param'
 			response = queryListWithParams('')
 
 		then: 'Should return default maximum items'
 			response.json.size() == 10
-			
+
 		when: 'Get user list with maximum items'
 			response = queryListWithParams("max=$maxLimit")
 
 		then: 'Should contains maximum items'
 			response.json.size() == maxLimit
-			
+
 		when: 'Get user list with maximum + 1 items'
 			response = queryListWithParams("max=${maxLimit+1}")
 
 		then: 'Should contains maximum items'
 			response.json.size() == maxLimit
 	}
-	
-	
+
+
 	void 'Test excluding fields in User list.'() {
 		when: 'Get user sorted list'
 			response = queryListWithParams('excludes=id')
@@ -223,8 +225,8 @@ class UserSpec extends Specification implements RestQueries, AuthQueries{
 		then: 'First item should be just inserted object'
 			response.json[0].id == null
 	}
-	
-	
+
+
 	void 'Test including fields in User list.'() {
 		when: 'Get user sorted list'
 			response = queryListWithParams('excludes=id&includes=id')
@@ -263,12 +265,13 @@ class UserSpec extends Specification implements RestQueries, AuthQueries{
 			response.json.size() == 1
 			response.status == HttpStatus.OK.value()
 	}
-	
-	void 'Test filtering in User list by all properties.'() {
+
+	@Unroll("User list search with props '#jsonVal' returns '#respSize' items")
+	void 'Filtering in User list by all properties.'() {
 		given:
 			response = queryListWithUrlVariables('filter={filter}', [filter:"${jsonVal}"])
 			
-			
+
 		expect:
 			response.json.size() == respSize
 		where:
@@ -281,18 +284,18 @@ class UserSpec extends Specification implements RestQueries, AuthQueries{
 //Can't predict 'size'			'{"username":"John Doe 303"}' || 1 
 
 	}
-	
-	
-	
-	
+
+
+
+
 	void "Test deleting other User instance."() {//This is for creating some data to test list sorting
 		when: "Delete user"
 			response = deleteDomainItem(otherDomainId.toString())
 		then:
 			response.status == HttpStatus.NO_CONTENT.value()
 	}
-	
-	
+
+
 	void "Test deleting User instance."() {
 		when: "Delete user"
 			response = deleteDomainItem(domainId.toString())

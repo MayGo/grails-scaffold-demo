@@ -1,8 +1,12 @@
 'use strict';
 
 angular.module('angularDemoApp')
-    .controller('PersonCollectionlessViewController', function ($scope, $state, $stateParams, $translate, inform, PersonCollectionlessService) {
-	 	$scope.personCollectionless = PersonCollectionlessService.get({id:$stateParams.id});
+    .controller('PersonCollectionlessViewController', function ($scope, $state, $stateParams, $translate, inform, PersonCollectionlessService, personCollectionlessData) {
+	 	$scope.personCollectionless = personCollectionlessData;
+
+		if($state.current.data){
+			$scope.isModal = $state.current.data.isModal;
+		}
 
 		$scope.deletePersonCollectionless = function(instance){
 			return PersonCollectionlessService.deleteInstance(instance).then(function(instance){
@@ -10,5 +14,7 @@ angular.module('angularDemoApp')
 				return instance;
 			});
 		};
-
+		$scope.go = function(route){
+			$state.go(route);
+		};
 	});

@@ -1,131 +1,157 @@
 
-
-
-
-
-
-
-
-<div ng-init="pageTitle = 'pages.Task.list.title'" data-ng-include=" 'shared/blocks/page_heading.html' " ng-hide="isEmbeddedView" ></div>
-
-<div class="wrapper-md ng-scope"  st-table="rowCollection" st-pipe="callServer" >
+<div id="task_list" ng-init="pageTitle = 'pages.Task.list.title'"
+     data-ng-include=" 'shared/blocks/page_heading.html' "></div>
+<div class="wrapper-md bg-white-only ">
+<div class="list-search"  st-table="rowCollection" st-pipe="callServer" >
 <accordion close-others="false">
-    <accordion-group  heading="{{'pages.Task.list.table.search' | translate}}"  is-open="isSearchOpen">
-      <div class="row">
-		 
-	   		<div class="col-lg-2 form-inline">
+    <accordion-group  heading="{{::'pages.Task.list.table.search' | translate}}"  is-open="isSearchOpen">
+        <div class="row form-inline">
+            
+                  <div class="col-lg-2 form-group">
      <div class="input-group input-group-sm">
      <input 
-     	name="deadline" 
-     	ng-model="search.deadline" 
+     	name="dateCreated"
+     	ng-model="search.dateCreated"
+        custom-st-search="dateCreated"
      	type="text" 
      	class="form-control" 
-     	placeholder="{{'pages.Task.list.search.placeholder.deadline' | translate}}"
+     	placeholder="{{::'pages.Task.list.search.placeholder.dateCreated' | translate}}"
         datepicker-popup
-        is-open="task.deadlineOpen" 
-        ng-click="task.deadlineOpen = true"
+        is-open="task._dateCreatedOpen"
+        ng-click="task._dateCreatedOpen = true"
       
       />
      <span class="input-group-addon">
        <i class="glyphicon glyphicon-calendar"></i>
      </span>
      </div>
-      </div>		 
-	   		<div class="col-lg-2 form-inline"><div class="input-group input-group-sm">
+      </div>
+            
+                  <div class="col-lg-2 form-group">
+     <div class="input-group input-group-sm">
+     <input 
+     	name="deadline"
+     	ng-model="search.deadline"
+        custom-st-search="deadline"
+     	type="text" 
+     	class="form-control" 
+     	placeholder="{{::'pages.Task.list.search.placeholder.deadline' | translate}}"
+        datepicker-popup
+        is-open="task._deadlineOpen"
+        ng-click="task._deadlineOpen = true"
+      
+      />
+     <span class="input-group-addon">
+       <i class="glyphicon glyphicon-calendar"></i>
+     </span>
+     </div>
+      </div>
+            
+                  <div class="col-lg-2 form-group"><div class="input-group input-group-sm">
                     <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
                     <input 
-                    	name="details" 
-                   		ng-model="search.details" 
-                   		st-search="'details'" 
+                    	name="details"
+                   		ng-model="search.details"
+                   		st-search="'details'"
                    		class="form-control" 
                    		type="text" 
-                   		placeholder="{{'pages.Task.list.search.placeholder.details' | translate}}"  ></div> </div>		 
-	   		<div class="col-lg-2 form-inline"><div class="input-group input-group-sm">
+                   		placeholder="{{::'pages.Task.list.search.placeholder.details' | translate}}"  ></div> </div>
+            
+                  <div class="col-lg-2 form-group"><div class="input-group input-group-sm">
                     <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
                     <input 
-                    	name="status" 
-                   		ng-model="search.status" 
-                   		st-search="'status'" 
+                    	name="status"
+                   		ng-model="search.status"
+                   		st-search="'status'"
                    		class="form-control" 
                    		type="text" 
-                   		placeholder="{{'pages.Task.list.search.placeholder.status' | translate}}"  ></div> </div>		 
-	   		<div class="col-lg-2 form-inline"><div class="input-group input-group-sm">
+                   		placeholder="{{::'pages.Task.list.search.placeholder.status' | translate}}"  ></div> </div>
+            
+                  <div class="col-lg-2 form-group"><div class="input-group input-group-sm">
                     <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
                     <input 
-                    	name="summary" 
-                   		ng-model="search.summary" 
-                   		st-search="'summary'" 
+                    	name="summary"
+                   		ng-model="search.summary"
+                   		st-search="'summary'"
                    		class="form-control" 
                    		type="text" 
-                   		placeholder="{{'pages.Task.list.search.placeholder.summary' | translate}}"  ></div> </div>		 
-	   		<div class="col-lg-2 form-inline"><div class="input-group input-group-sm">
+                   		placeholder="{{::'pages.Task.list.search.placeholder.summary' | translate}}"  ></div> </div>
+            
+                  <div class="col-lg-2 form-group"><div class="input-group input-group-sm">
                         <span class="input-group-addon">nr</span>
                         <input 
-                        	name="timeSpent" 
-                        	ng-model="search.timeSpent" 
+                        	name="timeSpent"
+                        	ng-model="search.timeSpent"
                         	st-search="'timeSpent'"
                         	class="form-control" 
-                        	placeholder="{{'pages.Task.list.search.placeholder.timeSpent' | translate}}" 
-                        	  type="number"  min="0"  ></div> </div>		 
-		</div>
-    </accordion-group>
-</accordion>
-  <div class="panel panel-default">
-    <div class="panel-heading">
-      	<span translate="pages.Task.list.table.title"></span>
-      	<div class="box-tools pull-right">
-			<a class="btn btn-default btn-xs" ui-sref="app.task.create">
-				<i class="fa fa-plus" translate="pages.Task.list.new" mx-show-loading></i>
-	       	</a>
-		</div>
-    </div>
-    <div class="panel-body panel-body-with-table">
-		 <div>
+                        	placeholder="{{::'pages.Task.list.search.placeholder.timeSpent' | translate}}"
+                        	  type="number"  min="0"  ></div> </div>
+            
+        </div>
+    
+            </accordion-group>
+        </accordion>
+        <div class="box-tools pull-right" ng-if="!isModal">
+            <a class="btn btn-default btn-xs" ui-sref="app.task.create">
+                <i class="fa fa-plus" translate="pages.Task.list.new" mx-show-loading></i>
+            </a>
+        </div>
+
+        <div class="clearfix"></div>
+        <div class="list-search-table">
 	      <table class="table table-responsive">
 	      	<thead>
 	      		<tr>
+                    <th></th>
 	      			<th width='20' st-sort="id" translate="pages.Task.list.table.header.id"></th>	      		
+			   		<th st-sort="dateCreated" translate="pages.Task.list.table.header.dateCreated" ></th>				 
 			   		<th st-sort="deadline" translate="pages.Task.list.table.header.deadline" ></th>				 
 			   		<th st-sort="details" translate="pages.Task.list.table.header.details" ></th>				 
 			   		<th st-sort="status" translate="pages.Task.list.table.header.status" ></th>				 
 			   		<th st-sort="summary" translate="pages.Task.list.table.header.summary" ></th>				 
 			   		<th st-sort="timeSpent" translate="pages.Task.list.table.header.timeSpent" ></th>				 
-				 	<th></th>
+
 				</tr>
 	      	</thead>
-	      
 	      	<tbody ng-hide="isLoading">
-	      		
 				<tr ng-repeat="task in rowCollection">
-					 <td>{{task.id}}</td>					
-			   		<td>{{task.deadline}}</td>				 	
-			   		<td>{{task.details}}</td>				 	
-			   		<td>{{task.status}}</td>				 	
-			   		<td>{{task.summary}}</td>				 	
-			   		<td>{{task.timeSpent}}</td>				 	
-				 	
-		            <td class="text-right">
-		            	<a class="btn btn-default btn-xs" ui-sref="app.task.view({id:task.id})">
-		            		<i class="fa fa-eye" translate="pages.Task.list.view"></i>
-		            	</a>
-		            	<a class="btn btn-default btn-xs" ui-sref="app.task.edit({id:task.id})">
-		            		<i class="fa fa-edit" translate="pages.Task.list.edit"></i>
-		            	</a>
-		            	<a class="btn btn-danger btn-xs" ng-click="deleteTask(task)" mx-show-loading>
-		            		<i class="fa fa-trash-o" translate="pages.Task.list.delete" ></i>
-		            	</a>
-		            </td>
+                    <td class="text-left" >
+                        <a class="btn btn-default btn-xs" ui-sref="app.task.view({id:task.id})" ng-if="!isModal">
+                            <i class="fa fa-eye"></i>
+                        </a>
+                        <a class="btn btn-default btn-xs" ui-sref="app.task.edit({id:task.id})" ng-if="!isModal">
+                            <i class="fa fa-edit"></i>
+                        </a>
+                        <a class="btn btn-danger btn-xs" ng-click="deleteTask(task)" mx-show-loading ng-if="!isModal">
+                            <i class="fa fa-trash-o"></i>
+                        </a>
+                        <a class="btn btn-default btn-xs" ng-click="selectItem(task)" ng-if="isModal">
+                            <i class="fa fa-edit"></i>
+                        </a>
+                    </td>
+					 <td>{{::task.id}}</td>					
+			   		<td>{{task.dateCreated | date:'yyyy-MM-dd HH:mm'}}</td>				 	
+			   		<td>{{task.deadline | date:'yyyy-MM-dd HH:mm'}}</td>				 	
+			   		<td>{{::task.details}}</td>				 	
+			   		<td>{{::task.status}}</td>				 	
+			   		<td>{{::task.summary}}</td>				 	
+			   		<td>{{::task.timeSpent}}</td>				 	
+
 				</tr>
 			</tbody>
+              <tbody ng-show="isLoading">
+                  <tr>
+                      <td class="text-center" translate="messages.loading"></td>
+                  </tr>
+              </tbody>
 			<tfoot ng-hide="isLoading">
 	          <tr>
-	            <td colspan="10" class="text-center">
+	            <td colspan="10" class="text-center" >
 	              <div st-pagination="" st-items-by-page="stTable.itemsByPage" st-displayed-pages="15" ></div>
 	            </td>
 	          </tr>
 	        </tfoot>
 	      </table>
-	    </div>
-	</div>
-  </div>
+        </div>
+    </div>
 </div>

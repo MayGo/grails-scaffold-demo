@@ -10,8 +10,8 @@
 
 var EditPage = function() {
   
-  this.roleEl = element(by.model('search.role'));  
-  this.userEl = element(by.model('search.user'));  
+  this.roleEl = element(by.model('search.roles'));  
+  this.userEl = element(by.model('search.users'));  
 };
 
 module.exports = new EditPage();

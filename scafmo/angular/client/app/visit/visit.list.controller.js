@@ -3,6 +3,10 @@
 angular.module('angularDemoApp')
 	.controller('VisitListController', function ($scope, $rootScope, $state, $q, VisitService, $stateParams, $timeout) {
 
+	if($state.current.data){
+		$scope.isTab = $state.current.data.isTab;
+	}
+
 	$scope.deleteVisit = function(instance){
 		return VisitService.deleteInstance(instance).then(function(instance){
 			var index = $scope.rowCollection.indexOf(instance);

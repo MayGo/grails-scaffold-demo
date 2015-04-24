@@ -3,6 +3,10 @@
 angular.module('angularDemoApp')
 	.controller('PetTypeListController', function ($scope, $rootScope, $state, $q, PetTypeService, $stateParams, $timeout) {
 
+	if($state.current.data){
+		$scope.isTab = $state.current.data.isTab;
+	}
+
 	$scope.deletePetType = function(instance){
 		return PetTypeService.deleteInstance(instance).then(function(instance){
 			var index = $scope.rowCollection.indexOf(instance);

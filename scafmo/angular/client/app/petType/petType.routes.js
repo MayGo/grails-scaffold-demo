@@ -52,6 +52,9 @@ $stateProvider
 
 		.state('app.petType.view.pet',{
 			url: '/pet/:relationName',
+			data:{
+				isTab:true
+			},
 			templateUrl: 'app/pet/pet.list.html',
 			controller: 'PetListController'
 		})

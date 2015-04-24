@@ -3,6 +3,10 @@
 angular.module('angularDemoApp')
 	.controller('DivisionCollectionlessListController', function ($scope, $rootScope, $state, $q, DivisionCollectionlessService, $stateParams, $timeout) {
 
+	if($state.current.data){
+		$scope.isTab = $state.current.data.isTab;
+	}
+
 	$scope.deleteDivisionCollectionless = function(instance){
 		return DivisionCollectionlessService.deleteInstance(instance).then(function(instance){
 			var index = $scope.rowCollection.indexOf(instance);

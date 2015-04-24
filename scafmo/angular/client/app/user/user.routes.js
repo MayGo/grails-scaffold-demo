@@ -52,6 +52,9 @@ $stateProvider
 
 		.state('app.user.view.userRole',{
 			url: '/userRole/:relationName',
+			data:{
+				isTab:true
+			},
 			templateUrl: 'app/userRole/userRole.list.html',
 			controller: 'UserRoleListController'
 		})

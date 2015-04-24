@@ -3,6 +3,10 @@
 angular.module('angularDemoApp')
 	.controller('RoleListController', function ($scope, $rootScope, $state, $q, RoleService, $stateParams, $timeout) {
 
+	if($state.current.data){
+		$scope.isTab = $state.current.data.isTab;
+	}
+
 	$scope.deleteRole = function(instance){
 		return RoleService.deleteInstance(instance).then(function(instance){
 			var index = $scope.rowCollection.indexOf(instance);

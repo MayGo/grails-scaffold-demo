@@ -1,12 +1,12 @@
-<!-- sidebar: style can be found in sidebar.less -->
+<!-- Content Header (Page header) -->
 <section class="sidebar">
 	<!-- Sidebar user panel -->
 	<div class="user-panel">
 		<div class="pull-left image">
-			<img src="assets/img/avatar3.png" class="img-circle" alt="User Image" />
+			<img src="assets/AdminLTE/img/avatar2.png" class="img-circle" alt="User Image"/>
 		</div>
 		<div class="pull-left info">
-			<p>Hello, Jane</p>
+			<p>Jane Doe</p>
 
 			<a href="#"><i class="fa fa-circle text-success"></i> Online</a>
 		</div>
@@ -15,144 +15,147 @@
 	<form action="#" method="get" class="sidebar-form">
 		<div class="input-group">
 			<input type="text" name="q" class="form-control" placeholder="Search..."/>
-			<span class="input-group-btn">
-				<button type='submit' name='search' id='search-btn' class="btn btn-flat"><i class="fa fa-search"></i></button>
-			</span>
+              <span class="input-group-btn">
+                <button type='submit' name='search' id='search-btn' class="btn btn-flat"><i class="fa fa-search"></i>
+				</button>
+              </span>
 		</div>
 	</form>
 	<!-- /.search form -->
 	<!-- sidebar menu: : style can be found in sidebar.less -->
 	<ul class="sidebar-menu"  ng-menu>
+		<li class="header">MAIN NAVIGATION</li>
 		<li ui-sref-active="active">
 			<a ui-sref="app.dashboard">
 				<i class="fa fa-dashboard"></i> <span translate="menu.static.DASHBOARD"></span>
 			</a>
-		</li>	
-
+		</li>
+		
 		<li>
 			<a href class="auto">
 				<span class="pull-right text-muted">
 			        <i class="fa fa-fw fa-angle-right text"></i>
 			        <i class="fa fa-fw fa-angle-down text-active"></i>
 			    </span>
-			    <i class="glyphicon glyphicon-cloud icon text-success"></i>
+				<i class="glyphicon glyphicon-cloud icon"></i>
 				<span class="font-bold" translate="menu.package.pomodoro"></span>
 			</a>
-			<ul>
-			
-				<li ui-sref-active="active"><a ui-sref="app.tag.list" translate="menu.domain.Tag"><i class="fa fa-angle-double-right"></i></a></li>
-			
-				<li ui-sref-active="active"><a ui-sref="app.task.list" translate="menu.domain.Task"><i class="fa fa-angle-double-right"></i></a></li>
-			
+			<ul class="treeview-menu">
+				
+				<li ui-sref-active="active"><a ui-sref="app.tag.list" ><i class="fa fa-circle-o"></i> {{ 'menu.domain.Tag' | translate}}</a></li>
+				
+				<li ui-sref-active="active"><a ui-sref="app.task.list" ><i class="fa fa-circle-o"></i> {{ 'menu.domain.Task' | translate}}</a></li>
+				
 			</ul>
 		</li>
-	
+		
 		<li>
 			<a href class="auto">
 				<span class="pull-right text-muted">
 			        <i class="fa fa-fw fa-angle-right text"></i>
 			        <i class="fa fa-fw fa-angle-down text-active"></i>
 			    </span>
-			    <i class="glyphicon glyphicon-envelope icon text-success"></i>
+				<i class="glyphicon glyphicon-envelope icon"></i>
 				<span class="font-bold" translate="menu.package.samples"></span>
 			</a>
-			<ul>
-			
-				<li ui-sref-active="active"><a ui-sref="app.owner.list" translate="menu.domain.Owner"><i class="fa fa-angle-double-right"></i></a></li>
-			
-				<li ui-sref-active="active"><a ui-sref="app.person.list" translate="menu.domain.Person"><i class="fa fa-angle-double-right"></i></a></li>
-			
-				<li ui-sref-active="active"><a ui-sref="app.pet.list" translate="menu.domain.Pet"><i class="fa fa-angle-double-right"></i></a></li>
-			
-				<li ui-sref-active="active"><a ui-sref="app.petType.list" translate="menu.domain.PetType"><i class="fa fa-angle-double-right"></i></a></li>
-			
-				<li ui-sref-active="active"><a ui-sref="app.speciality.list" translate="menu.domain.Speciality"><i class="fa fa-angle-double-right"></i></a></li>
-			
-				<li ui-sref-active="active"><a ui-sref="app.vet.list" translate="menu.domain.Vet"><i class="fa fa-angle-double-right"></i></a></li>
-			
-				<li ui-sref-active="active"><a ui-sref="app.visit.list" translate="menu.domain.Visit"><i class="fa fa-angle-double-right"></i></a></li>
-			
+			<ul class="treeview-menu">
+				
+				<li ui-sref-active="active"><a ui-sref="app.owner.list" ><i class="fa fa-circle-o"></i> {{ 'menu.domain.Owner' | translate}}</a></li>
+				
+				<li ui-sref-active="active"><a ui-sref="app.person.list" ><i class="fa fa-circle-o"></i> {{ 'menu.domain.Person' | translate}}</a></li>
+				
+				<li ui-sref-active="active"><a ui-sref="app.pet.list" ><i class="fa fa-circle-o"></i> {{ 'menu.domain.Pet' | translate}}</a></li>
+				
+				<li ui-sref-active="active"><a ui-sref="app.petType.list" ><i class="fa fa-circle-o"></i> {{ 'menu.domain.PetType' | translate}}</a></li>
+				
+				<li ui-sref-active="active"><a ui-sref="app.speciality.list" ><i class="fa fa-circle-o"></i> {{ 'menu.domain.Speciality' | translate}}</a></li>
+				
+				<li ui-sref-active="active"><a ui-sref="app.vet.list" ><i class="fa fa-circle-o"></i> {{ 'menu.domain.Vet' | translate}}</a></li>
+				
+				<li ui-sref-active="active"><a ui-sref="app.visit.list" ><i class="fa fa-circle-o"></i> {{ 'menu.domain.Visit' | translate}}</a></li>
+				
 			</ul>
 		</li>
-	
+		
 		<li>
 			<a href class="auto">
 				<span class="pull-right text-muted">
 			        <i class="fa fa-fw fa-angle-right text"></i>
 			        <i class="fa fa-fw fa-angle-down text-active"></i>
 			    </span>
-			    <i class="glyphicon glyphicon-glass icon text-success"></i>
+				<i class="glyphicon glyphicon-glass icon"></i>
 				<span class="font-bold" translate="menu.package.collection"></span>
 			</a>
-			<ul>
-			
-				<li ui-sref-active="active"><a ui-sref="app.divisionCollection.list" translate="menu.domain.DivisionCollection"><i class="fa fa-angle-double-right"></i></a></li>
-			
-				<li ui-sref-active="active"><a ui-sref="app.divisionCollectionless.list" translate="menu.domain.DivisionCollectionless"><i class="fa fa-angle-double-right"></i></a></li>
-			
-				<li ui-sref-active="active"><a ui-sref="app.personCollection.list" translate="menu.domain.PersonCollection"><i class="fa fa-angle-double-right"></i></a></li>
-			
-				<li ui-sref-active="active"><a ui-sref="app.personCollectionless.list" translate="menu.domain.PersonCollectionless"><i class="fa fa-angle-double-right"></i></a></li>
-			
+			<ul class="treeview-menu">
+				
+				<li ui-sref-active="active"><a ui-sref="app.divisionCollection.list" ><i class="fa fa-circle-o"></i> {{ 'menu.domain.DivisionCollection' | translate}}</a></li>
+				
+				<li ui-sref-active="active"><a ui-sref="app.divisionCollectionless.list" ><i class="fa fa-circle-o"></i> {{ 'menu.domain.DivisionCollectionless' | translate}}</a></li>
+				
+				<li ui-sref-active="active"><a ui-sref="app.personCollection.list" ><i class="fa fa-circle-o"></i> {{ 'menu.domain.PersonCollection' | translate}}</a></li>
+				
+				<li ui-sref-active="active"><a ui-sref="app.personCollectionless.list" ><i class="fa fa-circle-o"></i> {{ 'menu.domain.PersonCollectionless' | translate}}</a></li>
+				
 			</ul>
 		</li>
-	
+		
 		<li>
 			<a href class="auto">
 				<span class="pull-right text-muted">
 			        <i class="fa fa-fw fa-angle-right text"></i>
 			        <i class="fa fa-fw fa-angle-down text-active"></i>
 			    </span>
-			    <i class="glyphicon glyphicon-music icon text-success"></i>
+				<i class="glyphicon glyphicon-music icon"></i>
 				<span class="font-bold" translate="menu.package.constr"></span>
 			</a>
-			<ul>
-			
-				<li ui-sref-active="active"><a ui-sref="app.testNumber.list" translate="menu.domain.TestNumber"><i class="fa fa-angle-double-right"></i></a></li>
-			
-				<li ui-sref-active="active"><a ui-sref="app.testOther.list" translate="menu.domain.TestOther"><i class="fa fa-angle-double-right"></i></a></li>
-			
-				<li ui-sref-active="active"><a ui-sref="app.testString.list" translate="menu.domain.TestString"><i class="fa fa-angle-double-right"></i></a></li>
-			
+			<ul class="treeview-menu">
+				
+				<li ui-sref-active="active"><a ui-sref="app.testNumber.list" ><i class="fa fa-circle-o"></i> {{ 'menu.domain.TestNumber' | translate}}</a></li>
+				
+				<li ui-sref-active="active"><a ui-sref="app.testOther.list" ><i class="fa fa-circle-o"></i> {{ 'menu.domain.TestOther' | translate}}</a></li>
+				
+				<li ui-sref-active="active"><a ui-sref="app.testString.list" ><i class="fa fa-circle-o"></i> {{ 'menu.domain.TestString' | translate}}</a></li>
+				
 			</ul>
 		</li>
-	
+		
 		<li>
 			<a href class="auto">
 				<span class="pull-right text-muted">
 			        <i class="fa fa-fw fa-angle-right text"></i>
 			        <i class="fa fa-fw fa-angle-down text-active"></i>
 			    </span>
-			    <i class="glyphicon glyphicon-user icon text-success"></i>
+				<i class="glyphicon glyphicon-user icon"></i>
 				<span class="font-bold" translate="menu.package.security"></span>
 			</a>
-			<ul>
-			
-				<li ui-sref-active="active"><a ui-sref="app.role.list" translate="menu.domain.Role"><i class="fa fa-angle-double-right"></i></a></li>
-			
-				<li ui-sref-active="active"><a ui-sref="app.user.list" translate="menu.domain.User"><i class="fa fa-angle-double-right"></i></a></li>
-			
-				<li ui-sref-active="active"><a ui-sref="app.userRole.list" translate="menu.domain.UserRole"><i class="fa fa-angle-double-right"></i></a></li>
-			
+			<ul class="treeview-menu">
+				
+				<li ui-sref-active="active"><a ui-sref="app.role.list" ><i class="fa fa-circle-o"></i> {{ 'menu.domain.Role' | translate}}</a></li>
+				
+				<li ui-sref-active="active"><a ui-sref="app.user.list" ><i class="fa fa-circle-o"></i> {{ 'menu.domain.User' | translate}}</a></li>
+				
+				<li ui-sref-active="active"><a ui-sref="app.userRole.list" ><i class="fa fa-circle-o"></i> {{ 'menu.domain.UserRole' | translate}}</a></li>
+				
 			</ul>
 		</li>
-	
+		
 		<li>
 			<a href class="auto">
 				<span class="pull-right text-muted">
 			        <i class="fa fa-fw fa-angle-right text"></i>
 			        <i class="fa fa-fw fa-angle-down text-active"></i>
 			    </span>
-			    <i class="glyphicon glyphicon-film icon text-success"></i>
+				<i class="glyphicon glyphicon-film icon"></i>
 				<span class="font-bold" translate="menu.package.test"></span>
 			</a>
-			<ul>
-			
-				<li ui-sref-active="active"><a ui-sref="app.classifier.list" translate="menu.domain.Classifier"><i class="fa fa-angle-double-right"></i></a></li>
-			
+			<ul class="treeview-menu">
+				
+				<li ui-sref-active="active"><a ui-sref="app.classifier.list" ><i class="fa fa-circle-o"></i> {{ 'menu.domain.Classifier' | translate}}</a></li>
+				
 			</ul>
 		</li>
-	
-
+		
+		
 	</ul>
 </section>
+

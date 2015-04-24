@@ -3,6 +3,10 @@
 angular.module('angularDemoApp')
 	.controller('SpecialityListController', function ($scope, $rootScope, $state, $q, SpecialityService, $stateParams, $timeout) {
 
+	if($state.current.data){
+		$scope.isTab = $state.current.data.isTab;
+	}
+
 	$scope.deleteSpeciality = function(instance){
 		return SpecialityService.deleteInstance(instance).then(function(instance){
 			var index = $scope.rowCollection.indexOf(instance);

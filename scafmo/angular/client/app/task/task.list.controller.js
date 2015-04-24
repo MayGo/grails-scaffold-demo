@@ -3,6 +3,10 @@
 angular.module('angularDemoApp')
 	.controller('TaskListController', function ($scope, $rootScope, $state, $q, TaskService, $stateParams, $timeout) {
 
+	if($state.current.data){
+		$scope.isTab = $state.current.data.isTab;
+	}
+
 	$scope.deleteTask = function(instance){
 		return TaskService.deleteInstance(instance).then(function(instance){
 			var index = $scope.rowCollection.indexOf(instance);

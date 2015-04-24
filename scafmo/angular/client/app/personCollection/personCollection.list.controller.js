@@ -3,6 +3,10 @@
 angular.module('angularDemoApp')
 	.controller('PersonCollectionListController', function ($scope, $rootScope, $state, $q, PersonCollectionService, $stateParams, $timeout) {
 
+	if($state.current.data){
+		$scope.isTab = $state.current.data.isTab;
+	}
+
 	$scope.deletePersonCollection = function(instance){
 		return PersonCollectionService.deleteInstance(instance).then(function(instance){
 			var index = $scope.rowCollection.indexOf(instance);

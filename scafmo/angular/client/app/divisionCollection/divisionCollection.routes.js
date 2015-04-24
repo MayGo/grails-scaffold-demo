@@ -86,12 +86,18 @@ $stateProvider
 
 		.state('app.divisionCollection.view.divisionCollection',{
 			url: '/divisionCollection/:relationName',
+			data:{
+				isTab:true
+			},
 			templateUrl: 'app/divisionCollection/divisionCollection.list.html',
 			controller: 'DivisionCollectionListController'
 		})
 	
 		.state('app.divisionCollection.view.personCollection',{
 			url: '/personCollection/:relationName',
+			data:{
+				isTab:true
+			},
 			templateUrl: 'app/personCollection/personCollection.list.html',
 			controller: 'PersonCollectionListController'
 		})

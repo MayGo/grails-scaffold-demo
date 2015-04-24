@@ -3,6 +3,10 @@
 angular.module('angularDemoApp')
 	.controller('TagListController', function ($scope, $rootScope, $state, $q, TagService, $stateParams, $timeout) {
 
+	if($state.current.data){
+		$scope.isTab = $state.current.data.isTab;
+	}
+
 	$scope.deleteTag = function(instance){
 		return TagService.deleteInstance(instance).then(function(instance){
 			var index = $scope.rowCollection.indexOf(instance);

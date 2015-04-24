@@ -86,12 +86,18 @@ $stateProvider
 
 		.state('app.divisionCollectionless.view.divisionCollectionless',{
 			url: '/divisionCollectionless/:relationName',
+			data:{
+				isTab:true
+			},
 			templateUrl: 'app/divisionCollectionless/divisionCollectionless.list.html',
 			controller: 'DivisionCollectionlessListController'
 		})
 	
 		.state('app.divisionCollectionless.view.personCollectionless',{
 			url: '/personCollectionless/:relationName',
+			data:{
+				isTab:true
+			},
 			templateUrl: 'app/personCollectionless/personCollectionless.list.html',
 			controller: 'PersonCollectionlessListController'
 		})

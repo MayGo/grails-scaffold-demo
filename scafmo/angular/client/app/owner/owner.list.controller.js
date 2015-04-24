@@ -3,6 +3,10 @@
 angular.module('angularDemoApp')
 	.controller('OwnerListController', function ($scope, $rootScope, $state, $q, OwnerService, $stateParams, $timeout) {
 
+	if($state.current.data){
+		$scope.isTab = $state.current.data.isTab;
+	}
+
 	$scope.deleteOwner = function(instance){
 		return OwnerService.deleteInstance(instance).then(function(instance){
 			var index = $scope.rowCollection.indexOf(instance);

@@ -120,6 +120,9 @@ $stateProvider
 
 		.state('app.pet.view.visit',{
 			url: '/visit/:relationName',
+			data:{
+				isTab:true
+			},
 			templateUrl: 'app/visit/visit.list.html',
 			controller: 'VisitListController'
 		})

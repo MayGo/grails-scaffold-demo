@@ -3,6 +3,10 @@
 angular.module('angularDemoApp')
 	.controller('VetListController', function ($scope, $rootScope, $state, $q, VetService, $stateParams, $timeout) {
 
+	if($state.current.data){
+		$scope.isTab = $state.current.data.isTab;
+	}
+
 	$scope.deleteVet = function(instance){
 		return VetService.deleteInstance(instance).then(function(instance){
 			var index = $scope.rowCollection.indexOf(instance);

@@ -3,6 +3,10 @@
 angular.module('angularDemoApp')
 	.controller('ClassifierListController', function ($scope, $rootScope, $state, $q, ClassifierService, $stateParams, $timeout) {
 
+	if($state.current.data){
+		$scope.isTab = $state.current.data.isTab;
+	}
+
 	$scope.deleteClassifier = function(instance){
 		return ClassifierService.deleteInstance(instance).then(function(instance){
 			var index = $scope.rowCollection.indexOf(instance);

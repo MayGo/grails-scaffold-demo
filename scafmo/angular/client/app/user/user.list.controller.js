@@ -3,6 +3,10 @@
 angular.module('angularDemoApp')
 	.controller('UserListController', function ($scope, $rootScope, $state, $q, UserService, $stateParams, $timeout) {
 
+	if($state.current.data){
+		$scope.isTab = $state.current.data.isTab;
+	}
+
 	$scope.deleteUser = function(instance){
 		return UserService.deleteInstance(instance).then(function(instance){
 			var index = $scope.rowCollection.indexOf(instance);

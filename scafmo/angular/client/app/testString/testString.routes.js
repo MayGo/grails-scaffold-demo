@@ -52,6 +52,9 @@ $stateProvider
 
 		.state('app.testString.view.testOther',{
 			url: '/testOther/:relationName',
+			data:{
+				isTab:true
+			},
 			templateUrl: 'app/testOther/testOther.list.html',
 			controller: 'TestOtherListController'
 		})

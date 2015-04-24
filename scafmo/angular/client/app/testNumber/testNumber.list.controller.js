@@ -3,6 +3,10 @@
 angular.module('angularDemoApp')
 	.controller('TestNumberListController', function ($scope, $rootScope, $state, $q, TestNumberService, $stateParams, $timeout) {
 
+	if($state.current.data){
+		$scope.isTab = $state.current.data.isTab;
+	}
+
 	$scope.deleteTestNumber = function(instance){
 		return TestNumberService.deleteInstance(instance).then(function(instance){
 			var index = $scope.rowCollection.indexOf(instance);

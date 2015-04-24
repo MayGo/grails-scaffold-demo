@@ -3,6 +3,10 @@
 angular.module('angularDemoApp')
 	.controller('UserRoleListController', function ($scope, $rootScope, $state, $q, UserRoleService, $stateParams, $timeout) {
 
+	if($state.current.data){
+		$scope.isTab = $state.current.data.isTab;
+	}
+
 	$scope.deleteUserRole = function(instance){
 		return UserRoleService.deleteInstance(instance).then(function(instance){
 			var index = $scope.rowCollection.indexOf(instance);

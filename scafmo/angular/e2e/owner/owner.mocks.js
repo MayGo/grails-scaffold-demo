@@ -15,7 +15,7 @@ module.exports = function(){
 			//Mock relations
 
 			var petsUrl =/.*\/pets\/v1.*/;
-			$httpBackend.whenGET(petsUrl).respond(function(method, url){return [200, [{'id': '1','name': 'Pet 302','birthDate': 'Thu Apr 23 00:00:00 EEST 2015'}]]});//list
+			$httpBackend.whenGET(petsUrl).respond(function(method, url){return [200, [{'id': '1','name': 'Pet 302','birthDate': 'Fri Apr 24 00:00:00 EEST 2015'}]]});//list
 
 			//For everything else, don't mock
 			$httpBackend.whenGET(/.*/).passThrough();

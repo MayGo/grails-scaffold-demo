@@ -12,6 +12,7 @@ import defpackage.exceptions.ResourceNotFound
 import org.grails.samples.Speciality
 import org.grails.samples.SpecialityModifyService
 import org.grails.samples.SpecialitySearchService
+import org.grails.samples.SpecialitySearchCommand
 
 @RestApi(name = 'Speciality services', description = 'Methods for managing Specialitys')
 class SpecialityController {
@@ -36,10 +37,15 @@ class SpecialityController {
 		@RestApiParam(name = 'sort', type='string', paramType = RestApiParamType.QUERY,
 				description = 'Retrieved Speciality list sort')
 	])
-	def index(final Integer max) {
-		params.max = Math.min(max ?: 10, 100)
+	def index(SpecialitySearchCommand cmd) {
+		params.max = Math.min(params.int('max') ?: 10, 100)
 
-		def result = specialitySearchService.search(params)
+		if (cmd.hasErrors()) {
+			throw new ValidationException("Search does not validate.", cmd.errors)
+		}
+
+
+		def result = specialitySearchService.search(cmd, params)
 
 		header 'Access-Control-Expose-Headers', 'total'
 		header 'total', result.totalCount

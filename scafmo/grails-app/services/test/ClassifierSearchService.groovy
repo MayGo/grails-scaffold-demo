@@ -2,10 +2,7 @@ package test
 
 import grails.compiler.GrailsCompileStatic
 import grails.gorm.PagedResultList
-import grails.converters.JSON
 import grails.transaction.Transactional
-import org.codehaus.groovy.grails.web.json.JSONElement
-import org.codehaus.groovy.grails.web.json.JSONObject
 import org.grails.datastore.mapping.query.api.BuildableCriteria
 import defpackage.exceptions.ResourceNotFound
 
@@ -24,31 +21,28 @@ class ClassifierSearchService {
 		return classifier
 	}
 
-	PagedResultList search(Map params) {
+	PagedResultList search(ClassifierSearchCommand cmd, Map pagingParams) {
 
 		BuildableCriteria criteriaBuilder = (BuildableCriteria) Classifier.createCriteria()
 		PagedResultList results = (PagedResultList) criteriaBuilder.list(
-				offset: params.offset,
-				max: params.max,
-				order: params.order,
-				sort: params.sort
+				offset: pagingParams.offset,
+				max: pagingParams.max,
+				order: pagingParams.order,
+				sort: pagingParams.sort
 		) {
-			searchCriteria criteriaBuilder, params
+			searchCriteria criteriaBuilder, cmd
 		}
 		return results
 	}
 
-	private void searchCriteria(BuildableCriteria builder, Map params) {
-		String searchString = params.searchString
-		JSONElement filter = params.filter ? JSON.parse(params.filter.toString()) : new JSONObject()
+	private void searchCriteria(BuildableCriteria builder, ClassifierSearchCommand cmd) {
+		String searchString = cmd.searchString
 
 		builder.with {
 			//readOnly true
-
-			if (filter['id']) {
-				eq('id', filter['id'].toString().toLong())
+			if (cmd.id) {
+				eq('id', cmd.id)
 			}
-
 			if (searchString) {
 				or {
 					eq('id', -1L)
@@ -61,17 +55,17 @@ class ClassifierSearchService {
 					like('constant', searchString + '%')
 				}
 			}
-			if (filter['classname']) {
-				ilike('classname', "${filter['classname']}%")
+			if (cmd.classname){
+				ilike('classname', cmd.classname + '%')
 			}
-			if (filter['constant']) {
-				ilike('constant', "${filter['constant']}%")
+			if (cmd.constant){
+				ilike('constant', cmd.constant + '%')
 			}
-			if (filter['description']) {
-				ilike('description', "${filter['description']}%")
+			if (cmd.description){
+				ilike('description', cmd.description + '%')
 			}
-			if (filter['propertyname']) {
-				ilike('propertyname', "${filter['propertyname']}%")
+			if (cmd.propertyname){
+				ilike('propertyname', cmd.propertyname + '%')
 			}
 		}
 	}

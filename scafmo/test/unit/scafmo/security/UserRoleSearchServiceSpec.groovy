@@ -54,11 +54,15 @@ class UserRoleSearchServiceSpec extends Specification {
   'version':  null,
   'role':  [
     'id':  null,
-    'version':  null
+    'version':  null,
+    'authority':  'ROLE_304'
   ],
   'user':  [
     'id':  null,
-    'version':  null
+    'version':  null,
+    'enabled':  true,
+    'passwordExpired':  false,
+    'username':  'John Doe 304'
   ]
 ]
 		return data

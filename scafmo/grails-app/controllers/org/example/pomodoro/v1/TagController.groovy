@@ -12,6 +12,7 @@ import defpackage.exceptions.ResourceNotFound
 import org.example.pomodoro.Tag
 import org.example.pomodoro.TagModifyService
 import org.example.pomodoro.TagSearchService
+import org.example.pomodoro.TagSearchCommand
 
 @RestApi(name = 'Tag services', description = 'Methods for managing Tags')
 class TagController {
@@ -36,10 +37,15 @@ class TagController {
 		@RestApiParam(name = 'sort', type='string', paramType = RestApiParamType.QUERY,
 				description = 'Retrieved Tag list sort')
 	])
-	def index(final Integer max) {
-		params.max = Math.min(max ?: 10, 100)
+	def index(TagSearchCommand cmd) {
+		params.max = Math.min(params.int('max') ?: 10, 100)
 
-		def result = tagSearchService.search(params)
+		if (cmd.hasErrors()) {
+			throw new ValidationException("Search does not validate.", cmd.errors)
+		}
+
+
+		def result = tagSearchService.search(cmd, params)
 
 		header 'Access-Control-Expose-Headers', 'total'
 		header 'total', result.totalCount

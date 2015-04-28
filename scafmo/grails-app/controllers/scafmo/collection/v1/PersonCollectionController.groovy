@@ -12,6 +12,7 @@ import defpackage.exceptions.ResourceNotFound
 import scafmo.collection.PersonCollection
 import scafmo.collection.PersonCollectionModifyService
 import scafmo.collection.PersonCollectionSearchService
+import scafmo.collection.PersonCollectionSearchCommand
 
 @RestApi(name = 'PersonCollection services', description = 'Methods for managing PersonCollections')
 class PersonCollectionController {
@@ -36,10 +37,15 @@ class PersonCollectionController {
 		@RestApiParam(name = 'sort', type='string', paramType = RestApiParamType.QUERY,
 				description = 'Retrieved PersonCollection list sort')
 	])
-	def index(final Integer max) {
-		params.max = Math.min(max ?: 10, 100)
+	def index(PersonCollectionSearchCommand cmd) {
+		params.max = Math.min(params.int('max') ?: 10, 100)
 
-		def result = personCollectionSearchService.search(params)
+		if (cmd.hasErrors()) {
+			throw new ValidationException("Search does not validate.", cmd.errors)
+		}
+
+
+		def result = personCollectionSearchService.search(cmd, params)
 
 		header 'Access-Control-Expose-Headers', 'total'
 		header 'total', result.totalCount

@@ -2,10 +2,7 @@ package scafmo.security
 
 import grails.compiler.GrailsCompileStatic
 import grails.gorm.PagedResultList
-import grails.converters.JSON
 import grails.transaction.Transactional
-import org.codehaus.groovy.grails.web.json.JSONElement
-import org.codehaus.groovy.grails.web.json.JSONObject
 import org.grails.datastore.mapping.query.api.BuildableCriteria
 import defpackage.exceptions.ResourceNotFound
 
@@ -24,31 +21,28 @@ class UserSearchService {
 		return user
 	}
 
-	PagedResultList search(Map params) {
+	PagedResultList search(UserSearchCommand cmd, Map pagingParams) {
 
 		BuildableCriteria criteriaBuilder = (BuildableCriteria) User.createCriteria()
 		PagedResultList results = (PagedResultList) criteriaBuilder.list(
-				offset: params.offset,
-				max: params.max,
-				order: params.order,
-				sort: params.sort
+				offset: pagingParams.offset,
+				max: pagingParams.max,
+				order: pagingParams.order,
+				sort: pagingParams.sort
 		) {
-			searchCriteria criteriaBuilder, params
+			searchCriteria criteriaBuilder, cmd
 		}
 		return results
 	}
 
-	private void searchCriteria(BuildableCriteria builder, Map params) {
-		String searchString = params.searchString
-		JSONElement filter = params.filter ? JSON.parse(params.filter.toString()) : new JSONObject()
+	private void searchCriteria(BuildableCriteria builder, UserSearchCommand cmd) {
+		String searchString = cmd.searchString
 
 		builder.with {
 			//readOnly true
-
-			if (filter['id']) {
-				eq('id', filter['id'].toString().toLong())
+			if (cmd.id) {
+				eq('id', cmd.id)
 			}
-
 			if (searchString) {
 				or {
 					eq('id', -1L)
@@ -67,20 +61,20 @@ class UserSearchService {
 					}
 				}
 			}
-			if (filter['accountExpired']) {
-				eq('accountExpired', filter['accountExpired'].toString().toBoolean())
+			if (cmd.accountExpired != null) {
+				eq('accountExpired', cmd.accountExpired)
 			}
-			if (filter['accountLocked']) {
-				eq('accountLocked', filter['accountLocked'].toString().toBoolean())
+			if (cmd.accountLocked != null) {
+				eq('accountLocked', cmd.accountLocked)
 			}
-			if (filter['enabled']) {
-				eq('enabled', filter['enabled'].toString().toBoolean())
+			if (cmd.enabled != null) {
+				eq('enabled', cmd.enabled)
 			}
-			if (filter['passwordExpired']) {
-				eq('passwordExpired', filter['passwordExpired'].toString().toBoolean())
+			if (cmd.passwordExpired != null) {
+				eq('passwordExpired', cmd.passwordExpired)
 			}
-			if (filter['username']) {
-				ilike('username', "${filter['username']}%")
+			if (cmd.username){
+				ilike('username', cmd.username + '%')
 			}
 		}
 	}

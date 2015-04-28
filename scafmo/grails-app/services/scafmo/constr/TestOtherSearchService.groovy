@@ -2,10 +2,7 @@ package scafmo.constr
 
 import grails.compiler.GrailsCompileStatic
 import grails.gorm.PagedResultList
-import grails.converters.JSON
 import grails.transaction.Transactional
-import org.codehaus.groovy.grails.web.json.JSONElement
-import org.codehaus.groovy.grails.web.json.JSONObject
 import org.grails.datastore.mapping.query.api.BuildableCriteria
 import defpackage.exceptions.ResourceNotFound
 
@@ -24,31 +21,28 @@ class TestOtherSearchService {
 		return testOther
 	}
 
-	PagedResultList search(Map params) {
+	PagedResultList search(TestOtherSearchCommand cmd, Map pagingParams) {
 
 		BuildableCriteria criteriaBuilder = (BuildableCriteria) TestOther.createCriteria()
 		PagedResultList results = (PagedResultList) criteriaBuilder.list(
-				offset: params.offset,
-				max: params.max,
-				order: params.order,
-				sort: params.sort
+				offset: pagingParams.offset,
+				max: pagingParams.max,
+				order: pagingParams.order,
+				sort: pagingParams.sort
 		) {
-			searchCriteria criteriaBuilder, params
+			searchCriteria criteriaBuilder, cmd
 		}
 		return results
 	}
 
-	private void searchCriteria(BuildableCriteria builder, Map params) {
-		String searchString = params.searchString
-		JSONElement filter = params.filter ? JSON.parse(params.filter.toString()) : new JSONObject()
+	private void searchCriteria(BuildableCriteria builder, TestOtherSearchCommand cmd) {
+		String searchString = cmd.searchString
 
 		builder.with {
 			//readOnly true
-
-			if (filter['id']) {
-				eq('id', filter['id'].toString().toLong())
+			if (cmd.id) {
+				eq('id', cmd.id)
 			}
-
 			if (searchString) {
 				or {
 					eq('id', -1L)
@@ -64,30 +58,21 @@ class TestOtherSearchService {
 					}
 				}
 			}
-			if (filter['booleanNullable']) {
-				eq('booleanNullable', filter['booleanNullable'].toString().toBoolean())
+			if (cmd.booleanNullable != null) {
+				eq('booleanNullable', cmd.booleanNullable)
 			}
-
-			if (filter['testDate']) {
-				Date d
-				if (filter['testDate'].toString().isNumber()) {
-					d = new Date(filter['testDate'].toString().toLong())
-				} else {
-					String inputFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
-					d = Date.parse(inputFormat, filter['testDate'].toString())
-				}
-
+			if (cmd.testDate != null) {
+				Date d = cmd.testDate
 				between('testDate', d, d + 1)
 			}
-			if (filter['testEnum']) {
-				//enum
+			if (cmd.testEnum != null) {
+				//enum - testEnum
 			}
-
-			if (filter['testStringTypes']) {
-				'in'('testStringType.id', filter['testStringTypes'].collect { (long) it })
+			if (cmd.testStringTypes) {
+				'in'('testStringType.id', cmd.testStringTypes.collect { (long) it })
 			}
-			if (filter['testStringType']) {
-				eq('testStringType.id', (long) filter['testStringType'])
+			if (cmd.testStringType != null) {
+				eq('testStringType.id', cmd.testStringType)
 			}
 		}
 	}

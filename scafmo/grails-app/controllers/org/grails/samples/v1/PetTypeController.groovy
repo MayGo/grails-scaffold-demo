@@ -12,6 +12,7 @@ import defpackage.exceptions.ResourceNotFound
 import org.grails.samples.PetType
 import org.grails.samples.PetTypeModifyService
 import org.grails.samples.PetTypeSearchService
+import org.grails.samples.PetTypeSearchCommand
 
 @RestApi(name = 'PetType services', description = 'Methods for managing PetTypes')
 class PetTypeController {
@@ -36,10 +37,15 @@ class PetTypeController {
 		@RestApiParam(name = 'sort', type='string', paramType = RestApiParamType.QUERY,
 				description = 'Retrieved PetType list sort')
 	])
-	def index(final Integer max) {
-		params.max = Math.min(max ?: 10, 100)
+	def index(PetTypeSearchCommand cmd) {
+		params.max = Math.min(params.int('max') ?: 10, 100)
 
-		def result = petTypeSearchService.search(params)
+		if (cmd.hasErrors()) {
+			throw new ValidationException("Search does not validate.", cmd.errors)
+		}
+
+
+		def result = petTypeSearchService.search(cmd, params)
 
 		header 'Access-Control-Expose-Headers', 'total'
 		header 'total', result.totalCount

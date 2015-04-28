@@ -2,10 +2,7 @@ package scafmo.constr
 
 import grails.compiler.GrailsCompileStatic
 import grails.gorm.PagedResultList
-import grails.converters.JSON
 import grails.transaction.Transactional
-import org.codehaus.groovy.grails.web.json.JSONElement
-import org.codehaus.groovy.grails.web.json.JSONObject
 import org.grails.datastore.mapping.query.api.BuildableCriteria
 import defpackage.exceptions.ResourceNotFound
 
@@ -24,31 +21,28 @@ class TestNumberSearchService {
 		return testNumber
 	}
 
-	PagedResultList search(Map params) {
+	PagedResultList search(TestNumberSearchCommand cmd, Map pagingParams) {
 
 		BuildableCriteria criteriaBuilder = (BuildableCriteria) TestNumber.createCriteria()
 		PagedResultList results = (PagedResultList) criteriaBuilder.list(
-				offset: params.offset,
-				max: params.max,
-				order: params.order,
-				sort: params.sort
+				offset: pagingParams.offset,
+				max: pagingParams.max,
+				order: pagingParams.order,
+				sort: pagingParams.sort
 		) {
-			searchCriteria criteriaBuilder, params
+			searchCriteria criteriaBuilder, cmd
 		}
 		return results
 	}
 
-	private void searchCriteria(BuildableCriteria builder, Map params) {
-		String searchString = params.searchString
-		JSONElement filter = params.filter ? JSON.parse(params.filter.toString()) : new JSONObject()
+	private void searchCriteria(BuildableCriteria builder, TestNumberSearchCommand cmd) {
+		String searchString = cmd.searchString
 
 		builder.with {
 			//readOnly true
-
-			if (filter['id']) {
-				eq('id', filter['id'].toString().toLong())
+			if (cmd.id) {
+				eq('id', cmd.id)
 			}
-
 			if (searchString) {
 				or {
 					eq('id', -1L)
@@ -70,38 +64,38 @@ class TestNumberSearchService {
 					}
 				}
 			}
-			if (filter['doubleNr']) {
-				eq('doubleNr', filter['doubleNr'].toString().toDouble())
+			if (cmd.doubleNr != null) {
+				eq('doubleNr', cmd.doubleNr)
 			}
-			if (filter['floatNr']) {
-				eq('floatNr', filter['floatNr'].toString().toFloat())
+			if (cmd.floatNr != null) {
+				eq('floatNr', cmd.floatNr)
 			}
-			if (filter['floatNrScale']) {
-				eq('floatNrScale', filter['floatNrScale'].toString().toFloat())
+			if (cmd.floatNrScale != null) {
+				eq('floatNrScale', cmd.floatNrScale)
 			}
-			if (filter['integerNr']) {
-				eq('integerNr', filter['integerNr'].toString().toInteger())
+			if (cmd.integerNr != null) {
+				eq('integerNr', cmd.integerNr)
 			}
-			if (filter['integerNrInList']) {
-				//inList
+			if (cmd.integerNrInList != null) {
+				//inList - integerNrInList
 			}
-			if (filter['integerNrMax']) {
-				eq('integerNrMax', filter['integerNrMax'].toString().toInteger())
+			if (cmd.integerNrMax != null) {
+				eq('integerNrMax', cmd.integerNrMax)
 			}
-			if (filter['integerNrMin']) {
-				eq('integerNrMin', filter['integerNrMin'].toString().toInteger())
+			if (cmd.integerNrMin != null) {
+				eq('integerNrMin', cmd.integerNrMin)
 			}
-			if (filter['integerNrNotEqual']) {
-				eq('integerNrNotEqual', filter['integerNrNotEqual'].toString().toInteger())
+			if (cmd.integerNrNotEqual != null) {
+				eq('integerNrNotEqual', cmd.integerNrNotEqual)
 			}
-			if (filter['integerNrRange']) {
-				eq('integerNrRange', filter['integerNrRange'].toString().toInteger())
+			if (cmd.integerNrRange != null) {
+				eq('integerNrRange', cmd.integerNrRange)
 			}
-			if (filter['integerNrUnique']) {
-				eq('integerNrUnique', filter['integerNrUnique'].toString().toInteger())
+			if (cmd.integerNrUnique != null) {
+				eq('integerNrUnique', cmd.integerNrUnique)
 			}
-			if (filter['longNr']) {
-				eq('longNr', filter['longNr'].toString().toLong())
+			if (cmd.longNr != null) {
+				eq('longNr', cmd.longNr)
 			}
 		}
 	}

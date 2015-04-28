@@ -12,6 +12,7 @@ import defpackage.exceptions.ResourceNotFound
 import scafmo.security.Role
 import scafmo.security.RoleModifyService
 import scafmo.security.RoleSearchService
+import scafmo.security.RoleSearchCommand
 
 @RestApi(name = 'Role services', description = 'Methods for managing Roles')
 class RoleController {
@@ -36,10 +37,15 @@ class RoleController {
 		@RestApiParam(name = 'sort', type='string', paramType = RestApiParamType.QUERY,
 				description = 'Retrieved Role list sort')
 	])
-	def index(final Integer max) {
-		params.max = Math.min(max ?: 10, 100)
+	def index(RoleSearchCommand cmd) {
+		params.max = Math.min(params.int('max') ?: 10, 100)
 
-		def result = roleSearchService.search(params)
+		if (cmd.hasErrors()) {
+			throw new ValidationException("Search does not validate.", cmd.errors)
+		}
+
+
+		def result = roleSearchService.search(cmd, params)
 
 		header 'Access-Control-Expose-Headers', 'total'
 		header 'total', result.totalCount

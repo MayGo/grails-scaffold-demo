@@ -12,6 +12,7 @@ import defpackage.exceptions.ResourceNotFound
 import scafmo.security.User
 import scafmo.security.UserModifyService
 import scafmo.security.UserSearchService
+import scafmo.security.UserSearchCommand
 
 @RestApi(name = 'User services', description = 'Methods for managing Users')
 class UserController {
@@ -36,10 +37,15 @@ class UserController {
 		@RestApiParam(name = 'sort', type='string', paramType = RestApiParamType.QUERY,
 				description = 'Retrieved User list sort')
 	])
-	def index(final Integer max) {
-		params.max = Math.min(max ?: 10, 100)
+	def index(UserSearchCommand cmd) {
+		params.max = Math.min(params.int('max') ?: 10, 100)
 
-		def result = userSearchService.search(params)
+		if (cmd.hasErrors()) {
+			throw new ValidationException("Search does not validate.", cmd.errors)
+		}
+
+
+		def result = userSearchService.search(cmd, params)
 
 		header 'Access-Control-Expose-Headers', 'total'
 		header 'total', result.totalCount

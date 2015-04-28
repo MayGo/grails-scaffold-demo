@@ -12,6 +12,7 @@ import defpackage.exceptions.ResourceNotFound
 import scafmo.security.UserRole
 import scafmo.security.UserRoleModifyService
 import scafmo.security.UserRoleSearchService
+import scafmo.security.UserRoleSearchCommand
 
 @RestApi(name = 'UserRole services', description = 'Methods for managing UserRoles')
 class UserRoleController {
@@ -36,10 +37,15 @@ class UserRoleController {
 		@RestApiParam(name = 'sort', type='string', paramType = RestApiParamType.QUERY,
 				description = 'Retrieved UserRole list sort')
 	])
-	def index(final Integer max) {
-		params.max = Math.min(max ?: 10, 100)
+	def index(UserRoleSearchCommand cmd) {
+		params.max = Math.min(params.int('max') ?: 10, 100)
 
-		def result = userRoleSearchService.search(params)
+		if (cmd.hasErrors()) {
+			throw new ValidationException("Search does not validate.", cmd.errors)
+		}
+
+
+		def result = userRoleSearchService.search(cmd, params)
 
 		header 'Access-Control-Expose-Headers', 'total'
 		header 'total', result.totalCount

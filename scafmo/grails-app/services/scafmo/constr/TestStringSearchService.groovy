@@ -2,10 +2,7 @@ package scafmo.constr
 
 import grails.compiler.GrailsCompileStatic
 import grails.gorm.PagedResultList
-import grails.converters.JSON
 import grails.transaction.Transactional
-import org.codehaus.groovy.grails.web.json.JSONElement
-import org.codehaus.groovy.grails.web.json.JSONObject
 import org.grails.datastore.mapping.query.api.BuildableCriteria
 import defpackage.exceptions.ResourceNotFound
 
@@ -24,31 +21,28 @@ class TestStringSearchService {
 		return testString
 	}
 
-	PagedResultList search(Map params) {
+	PagedResultList search(TestStringSearchCommand cmd, Map pagingParams) {
 
 		BuildableCriteria criteriaBuilder = (BuildableCriteria) TestString.createCriteria()
 		PagedResultList results = (PagedResultList) criteriaBuilder.list(
-				offset: params.offset,
-				max: params.max,
-				order: params.order,
-				sort: params.sort
+				offset: pagingParams.offset,
+				max: pagingParams.max,
+				order: pagingParams.order,
+				sort: pagingParams.sort
 		) {
-			searchCriteria criteriaBuilder, params
+			searchCriteria criteriaBuilder, cmd
 		}
 		return results
 	}
 
-	private void searchCriteria(BuildableCriteria builder, Map params) {
-		String searchString = params.searchString
-		JSONElement filter = params.filter ? JSON.parse(params.filter.toString()) : new JSONObject()
+	private void searchCriteria(BuildableCriteria builder, TestStringSearchCommand cmd) {
+		String searchString = cmd.searchString
 
 		builder.with {
 			//readOnly true
-
-			if (filter['id']) {
-				eq('id', filter['id'].toString().toLong())
+			if (cmd.id) {
+				eq('id', cmd.id)
 			}
-
 			if (searchString) {
 				or {
 					eq('id', -1L)
@@ -61,38 +55,38 @@ class TestStringSearchService {
 					like('sizeStr', searchString + '%')
 				}
 			}
-			if (filter['blankStr']) {
-				ilike('blankStr', "${filter['blankStr']}%")
+			if (cmd.blankStr){
+				ilike('blankStr', cmd.blankStr + '%')
 			}
-			if (filter['creditCardStr']) {
-				ilike('creditCardStr', "${filter['creditCardStr']}%")
+			if (cmd.creditCardStr){
+				ilike('creditCardStr', cmd.creditCardStr + '%')
 			}
-			if (filter['emailStr']) {
-				ilike('emailStr', "${filter['emailStr']}%")
+			if (cmd.emailStr){
+				ilike('emailStr', cmd.emailStr + '%')
 			}
-			if (filter['inListStr']) {
-				//inList
+			if (cmd.inListStr != null) {
+				//inList - inListStr
 			}
-			if (filter['matchesStr']) {
-				ilike('matchesStr', "${filter['matchesStr']}%")
+			if (cmd.matchesStr){
+				ilike('matchesStr', cmd.matchesStr + '%')
 			}
-			if (filter['maxSizeStr']) {
-				ilike('maxSizeStr', "${filter['maxSizeStr']}%")
+			if (cmd.maxSizeStr){
+				ilike('maxSizeStr', cmd.maxSizeStr + '%')
 			}
-			if (filter['minSizeStr']) {
-				ilike('minSizeStr', "${filter['minSizeStr']}%")
+			if (cmd.minSizeStr){
+				ilike('minSizeStr', cmd.minSizeStr + '%')
 			}
-			if (filter['notEqualStr']) {
-				ilike('notEqualStr', "${filter['notEqualStr']}%")
+			if (cmd.notEqualStr){
+				ilike('notEqualStr', cmd.notEqualStr + '%')
 			}
-			if (filter['sizeStr']) {
-				ilike('sizeStr', "${filter['sizeStr']}%")
+			if (cmd.sizeStr){
+				ilike('sizeStr', cmd.sizeStr + '%')
 			}
-			if (filter['uniqueStr']) {
-				ilike('uniqueStr', "${filter['uniqueStr']}%")
+			if (cmd.uniqueStr){
+				ilike('uniqueStr', cmd.uniqueStr + '%')
 			}
-			if (filter['urlStr']) {
-				ilike('urlStr', "${filter['urlStr']}%")
+			if (cmd.urlStr){
+				ilike('urlStr', cmd.urlStr + '%')
 			}
 		}
 	}

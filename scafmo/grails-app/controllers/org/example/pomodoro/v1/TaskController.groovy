@@ -12,6 +12,7 @@ import defpackage.exceptions.ResourceNotFound
 import org.example.pomodoro.Task
 import org.example.pomodoro.TaskModifyService
 import org.example.pomodoro.TaskSearchService
+import org.example.pomodoro.TaskSearchCommand
 
 @RestApi(name = 'Task services', description = 'Methods for managing Tasks')
 class TaskController {
@@ -36,10 +37,15 @@ class TaskController {
 		@RestApiParam(name = 'sort', type='string', paramType = RestApiParamType.QUERY,
 				description = 'Retrieved Task list sort')
 	])
-	def index(final Integer max) {
-		params.max = Math.min(max ?: 10, 100)
+	def index(TaskSearchCommand cmd) {
+		params.max = Math.min(params.int('max') ?: 10, 100)
 
-		def result = taskSearchService.search(params)
+		if (cmd.hasErrors()) {
+			throw new ValidationException("Search does not validate.", cmd.errors)
+		}
+
+
+		def result = taskSearchService.search(cmd, params)
 
 		header 'Access-Control-Expose-Headers', 'total'
 		header 'total', result.totalCount

@@ -12,6 +12,7 @@ import defpackage.exceptions.ResourceNotFound
 import scafmo.constr.TestNumber
 import scafmo.constr.TestNumberModifyService
 import scafmo.constr.TestNumberSearchService
+import scafmo.constr.TestNumberSearchCommand
 
 @RestApi(name = 'TestNumber services', description = 'Methods for managing TestNumbers')
 class TestNumberController {
@@ -36,10 +37,15 @@ class TestNumberController {
 		@RestApiParam(name = 'sort', type='string', paramType = RestApiParamType.QUERY,
 				description = 'Retrieved TestNumber list sort')
 	])
-	def index(final Integer max) {
-		params.max = Math.min(max ?: 10, 100)
+	def index(TestNumberSearchCommand cmd) {
+		params.max = Math.min(params.int('max') ?: 10, 100)
 
-		def result = testNumberSearchService.search(params)
+		if (cmd.hasErrors()) {
+			throw new ValidationException("Search does not validate.", cmd.errors)
+		}
+
+
+		def result = testNumberSearchService.search(cmd, params)
 
 		header 'Access-Control-Expose-Headers', 'total'
 		header 'total', result.totalCount

@@ -48,7 +48,7 @@ angular.module('angularDemoApp')
 			   
 		
 			 if($scope.isEditForm){
-				VisitService.query({max:50, filter:{pet:$stateParams.id}, excludes:'pet'}).$promise.then(
+				VisitService.query({max:50, pet:$stateParams.id, excludes:'pet'}).$promise.then(
 					function( response ){
 						$scope.pet.visits = response.map(function(item){
 							return {id:item.id, name:item.id+ ', ' +item.description+ ', ' +item.date};

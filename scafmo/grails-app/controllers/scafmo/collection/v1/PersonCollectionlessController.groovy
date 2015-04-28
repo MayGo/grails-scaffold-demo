@@ -12,6 +12,7 @@ import defpackage.exceptions.ResourceNotFound
 import scafmo.collection.PersonCollectionless
 import scafmo.collection.PersonCollectionlessModifyService
 import scafmo.collection.PersonCollectionlessSearchService
+import scafmo.collection.PersonCollectionlessSearchCommand
 
 @RestApi(name = 'PersonCollectionless services', description = 'Methods for managing PersonCollectionlesss')
 class PersonCollectionlessController {
@@ -36,10 +37,15 @@ class PersonCollectionlessController {
 		@RestApiParam(name = 'sort', type='string', paramType = RestApiParamType.QUERY,
 				description = 'Retrieved PersonCollectionless list sort')
 	])
-	def index(final Integer max) {
-		params.max = Math.min(max ?: 10, 100)
+	def index(PersonCollectionlessSearchCommand cmd) {
+		params.max = Math.min(params.int('max') ?: 10, 100)
 
-		def result = personCollectionlessSearchService.search(params)
+		if (cmd.hasErrors()) {
+			throw new ValidationException("Search does not validate.", cmd.errors)
+		}
+
+
+		def result = personCollectionlessSearchService.search(cmd, params)
 
 		header 'Access-Control-Expose-Headers', 'total'
 		header 'total', result.totalCount

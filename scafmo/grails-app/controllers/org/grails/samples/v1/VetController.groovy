@@ -12,6 +12,7 @@ import defpackage.exceptions.ResourceNotFound
 import org.grails.samples.Vet
 import org.grails.samples.VetModifyService
 import org.grails.samples.VetSearchService
+import org.grails.samples.VetSearchCommand
 
 @RestApi(name = 'Vet services', description = 'Methods for managing Vets')
 class VetController {
@@ -36,10 +37,15 @@ class VetController {
 		@RestApiParam(name = 'sort', type='string', paramType = RestApiParamType.QUERY,
 				description = 'Retrieved Vet list sort')
 	])
-	def index(final Integer max) {
-		params.max = Math.min(max ?: 10, 100)
+	def index(VetSearchCommand cmd) {
+		params.max = Math.min(params.int('max') ?: 10, 100)
 
-		def result = vetSearchService.search(params)
+		if (cmd.hasErrors()) {
+			throw new ValidationException("Search does not validate.", cmd.errors)
+		}
+
+
+		def result = vetSearchService.search(cmd, params)
 
 		header 'Access-Control-Expose-Headers', 'total'
 		header 'total', result.totalCount

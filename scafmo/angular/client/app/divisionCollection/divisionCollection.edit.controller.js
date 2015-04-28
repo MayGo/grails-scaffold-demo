@@ -47,7 +47,7 @@ angular.module('angularDemoApp')
 			   
 		
 			 if($scope.isEditForm){
-				PersonCollectionService.query({max:50, filter:{division:$stateParams.id}, excludes:'division'}).$promise.then(
+				PersonCollectionService.query({max:50, division:$stateParams.id, excludes:'division'}).$promise.then(
 					function( response ){
 						$scope.divisionCollection.persons = response.map(function(item){
 							return {id:item.id, name:item.id+ ', ' +item.name+ ', ' +item.age};

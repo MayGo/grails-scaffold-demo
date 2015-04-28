@@ -12,6 +12,7 @@ import defpackage.exceptions.ResourceNotFound
 import org.grails.samples.Person
 import org.grails.samples.PersonModifyService
 import org.grails.samples.PersonSearchService
+import org.grails.samples.PersonSearchCommand
 
 @RestApi(name = 'Person services', description = 'Methods for managing Persons')
 class PersonController {
@@ -36,10 +37,15 @@ class PersonController {
 		@RestApiParam(name = 'sort', type='string', paramType = RestApiParamType.QUERY,
 				description = 'Retrieved Person list sort')
 	])
-	def index(final Integer max) {
-		params.max = Math.min(max ?: 10, 100)
+	def index(PersonSearchCommand cmd) {
+		params.max = Math.min(params.int('max') ?: 10, 100)
 
-		def result = personSearchService.search(params)
+		if (cmd.hasErrors()) {
+			throw new ValidationException("Search does not validate.", cmd.errors)
+		}
+
+
+		def result = personSearchService.search(cmd, params)
 
 		header 'Access-Control-Expose-Headers', 'total'
 		header 'total', result.totalCount

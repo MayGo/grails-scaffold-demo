@@ -2,10 +2,7 @@ package scafmo.collection
 
 import grails.compiler.GrailsCompileStatic
 import grails.gorm.PagedResultList
-import grails.converters.JSON
 import grails.transaction.Transactional
-import org.codehaus.groovy.grails.web.json.JSONElement
-import org.codehaus.groovy.grails.web.json.JSONObject
 import org.grails.datastore.mapping.query.api.BuildableCriteria
 import defpackage.exceptions.ResourceNotFound
 
@@ -24,31 +21,28 @@ class DivisionCollectionSearchService {
 		return divisionCollection
 	}
 
-	PagedResultList search(Map params) {
+	PagedResultList search(DivisionCollectionSearchCommand cmd, Map pagingParams) {
 
 		BuildableCriteria criteriaBuilder = (BuildableCriteria) DivisionCollection.createCriteria()
 		PagedResultList results = (PagedResultList) criteriaBuilder.list(
-				offset: params.offset,
-				max: params.max,
-				order: params.order,
-				sort: params.sort
+				offset: pagingParams.offset,
+				max: pagingParams.max,
+				order: pagingParams.order,
+				sort: pagingParams.sort
 		) {
-			searchCriteria criteriaBuilder, params
+			searchCriteria criteriaBuilder, cmd
 		}
 		return results
 	}
 
-	private void searchCriteria(BuildableCriteria builder, Map params) {
-		String searchString = params.searchString
-		JSONElement filter = params.filter ? JSON.parse(params.filter.toString()) : new JSONObject()
+	private void searchCriteria(BuildableCriteria builder, DivisionCollectionSearchCommand cmd) {
+		String searchString = cmd.searchString
 
 		builder.with {
 			//readOnly true
-
-			if (filter['id']) {
-				eq('id', filter['id'].toString().toLong())
+			if (cmd.id) {
+				eq('id', cmd.id)
 			}
-
 			if (searchString) {
 				or {
 					eq('id', -1L)
@@ -59,15 +53,14 @@ class DivisionCollectionSearchService {
 					like('name', searchString + '%')
 				}
 			}
-			if (filter['name']) {
-				ilike('name', "${filter['name']}%")
+			if (cmd.name){
+				ilike('name', cmd.name + '%')
 			}
-
-			if (filter['headDivisions']) {
-				'in'('headDivision.id', filter['headDivisions'].collect { (long) it })
+			if (cmd.headDivisions) {
+				'in'('headDivision.id', cmd.headDivisions.collect { (long) it })
 			}
-			if (filter['headDivision']) {
-				eq('headDivision.id', (long) filter['headDivision'])
+			if (cmd.headDivision != null) {
+				eq('headDivision.id', cmd.headDivision)
 			}
 		}
 	}

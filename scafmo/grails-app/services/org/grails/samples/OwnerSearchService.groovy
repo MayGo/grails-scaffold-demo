@@ -2,10 +2,7 @@ package org.grails.samples
 
 import grails.compiler.GrailsCompileStatic
 import grails.gorm.PagedResultList
-import grails.converters.JSON
 import grails.transaction.Transactional
-import org.codehaus.groovy.grails.web.json.JSONElement
-import org.codehaus.groovy.grails.web.json.JSONObject
 import org.grails.datastore.mapping.query.api.BuildableCriteria
 import defpackage.exceptions.ResourceNotFound
 
@@ -24,31 +21,28 @@ class OwnerSearchService {
 		return owner
 	}
 
-	PagedResultList search(Map params) {
+	PagedResultList search(OwnerSearchCommand cmd, Map pagingParams) {
 
 		BuildableCriteria criteriaBuilder = (BuildableCriteria) Owner.createCriteria()
 		PagedResultList results = (PagedResultList) criteriaBuilder.list(
-				offset: params.offset,
-				max: params.max,
-				order: params.order,
-				sort: params.sort
+				offset: pagingParams.offset,
+				max: pagingParams.max,
+				order: pagingParams.order,
+				sort: pagingParams.sort
 		) {
-			searchCriteria criteriaBuilder, params
+			searchCriteria criteriaBuilder, cmd
 		}
 		return results
 	}
 
-	private void searchCriteria(BuildableCriteria builder, Map params) {
-		String searchString = params.searchString
-		JSONElement filter = params.filter ? JSON.parse(params.filter.toString()) : new JSONObject()
+	private void searchCriteria(BuildableCriteria builder, OwnerSearchCommand cmd) {
+		String searchString = cmd.searchString
 
 		builder.with {
 			//readOnly true
-
-			if (filter['id']) {
-				eq('id', filter['id'].toString().toLong())
+			if (cmd.id) {
+				eq('id', cmd.id)
 			}
-
 			if (searchString) {
 				or {
 					eq('id', -1L)
@@ -61,20 +55,20 @@ class OwnerSearchService {
 					like('firstName', searchString + '%')
 				}
 			}
-			if (filter['address']) {
-				ilike('address', "${filter['address']}%")
+			if (cmd.address){
+				ilike('address', cmd.address + '%')
 			}
-			if (filter['city']) {
-				ilike('city', "${filter['city']}%")
+			if (cmd.city){
+				ilike('city', cmd.city + '%')
 			}
-			if (filter['firstName']) {
-				ilike('firstName', "${filter['firstName']}%")
+			if (cmd.firstName){
+				ilike('firstName', cmd.firstName + '%')
 			}
-			if (filter['lastName']) {
-				ilike('lastName', "${filter['lastName']}%")
+			if (cmd.lastName){
+				ilike('lastName', cmd.lastName + '%')
 			}
-			if (filter['telephone']) {
-				ilike('telephone', "${filter['telephone']}%")
+			if (cmd.telephone){
+				ilike('telephone', cmd.telephone + '%')
 			}
 		}
 	}

@@ -5,6 +5,7 @@
 <div class="list-search"  st-table="rowCollection" st-pipe="callServer" >
 <accordion close-others="false">
     <accordion-group  heading="{{::'pages.DivisionCollection.list.table.search' | translate}}"  is-open="isSearchOpen">
+         <form name="divisionCollectionForm" class="form-validation form-horizontal" novalidate>
         <div class="row form-inline">
             
                   <div class="col-lg-2 form-group"><div class="input-group input-group-sm">
@@ -29,6 +30,7 @@
             
         </div>
     
+                </form>
             </accordion-group>
         </accordion>
         <div class="box-tools pull-right" ng-if="!isModal">

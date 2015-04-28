@@ -51,7 +51,7 @@ angular.module('angularDemoApp')
 			   
 		
 			 if($scope.isEditForm){
-				PetService.query({max:50, filter:{owner:$stateParams.id}, excludes:'visits,type,owner'}).$promise.then(
+				PetService.query({max:50, owner:$stateParams.id, excludes:'visits,type,owner'}).$promise.then(
 					function( response ){
 						$scope.owner.pets = response.map(function(item){
 							return {id:item.id, name:item.id+ ', ' +item.name+ ', ' +item.birthDate};

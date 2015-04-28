@@ -2,10 +2,7 @@ package scafmo.security
 
 import grails.compiler.GrailsCompileStatic
 import grails.gorm.PagedResultList
-import grails.converters.JSON
 import grails.transaction.Transactional
-import org.codehaus.groovy.grails.web.json.JSONElement
-import org.codehaus.groovy.grails.web.json.JSONObject
 import org.grails.datastore.mapping.query.api.BuildableCriteria
 import defpackage.exceptions.ResourceNotFound
 
@@ -24,31 +21,28 @@ class UserRoleSearchService {
 		return userRole
 	}
 
-	PagedResultList search(Map params) {
+	PagedResultList search(UserRoleSearchCommand cmd, Map pagingParams) {
 
 		BuildableCriteria criteriaBuilder = (BuildableCriteria) UserRole.createCriteria()
 		PagedResultList results = (PagedResultList) criteriaBuilder.list(
-				offset: params.offset,
-				max: params.max,
-				order: params.order,
-				sort: params.sort
+				offset: pagingParams.offset,
+				max: pagingParams.max,
+				order: pagingParams.order,
+				sort: pagingParams.sort
 		) {
-			searchCriteria criteriaBuilder, params
+			searchCriteria criteriaBuilder, cmd
 		}
 		return results
 	}
 
-	private void searchCriteria(BuildableCriteria builder, Map params) {
-		String searchString = params.searchString
-		JSONElement filter = params.filter ? JSON.parse(params.filter.toString()) : new JSONObject()
+	private void searchCriteria(BuildableCriteria builder, UserRoleSearchCommand cmd) {
+		String searchString = cmd.searchString
 
 		builder.with {
 			//readOnly true
-
-			if (filter['id']) {
-				eq('id', filter['id'].toString().toLong())
+			if (cmd.id) {
+				eq('id', cmd.id)
 			}
-
 			if (searchString) {
 				or {
 					eq('id', -1L)
@@ -58,19 +52,17 @@ class UserRoleSearchService {
 					}
 				}
 			}
-
-			if (filter['roles']) {
-				'in'('role.id', filter['roles'].collect { (long) it })
+			if (cmd.roles) {
+				'in'('role.id', cmd.roles.collect { (long) it })
 			}
-			if (filter['role']) {
-				eq('role.id', (long) filter['role'])
+			if (cmd.role != null) {
+				eq('role.id', cmd.role)
 			}
-
-			if (filter['users']) {
-				'in'('user.id', filter['users'].collect { (long) it })
+			if (cmd.users) {
+				'in'('user.id', cmd.users.collect { (long) it })
 			}
-			if (filter['user']) {
-				eq('user.id', (long) filter['user'])
+			if (cmd.user != null) {
+				eq('user.id', cmd.user)
 			}
 		}
 	}

@@ -2,10 +2,7 @@ package org.example.pomodoro
 
 import grails.compiler.GrailsCompileStatic
 import grails.gorm.PagedResultList
-import grails.converters.JSON
 import grails.transaction.Transactional
-import org.codehaus.groovy.grails.web.json.JSONElement
-import org.codehaus.groovy.grails.web.json.JSONObject
 import org.grails.datastore.mapping.query.api.BuildableCriteria
 import defpackage.exceptions.ResourceNotFound
 
@@ -24,31 +21,28 @@ class TaskSearchService {
 		return task
 	}
 
-	PagedResultList search(Map params) {
+	PagedResultList search(TaskSearchCommand cmd, Map pagingParams) {
 
 		BuildableCriteria criteriaBuilder = (BuildableCriteria) Task.createCriteria()
 		PagedResultList results = (PagedResultList) criteriaBuilder.list(
-				offset: params.offset,
-				max: params.max,
-				order: params.order,
-				sort: params.sort
+				offset: pagingParams.offset,
+				max: pagingParams.max,
+				order: pagingParams.order,
+				sort: pagingParams.sort
 		) {
-			searchCriteria criteriaBuilder, params
+			searchCriteria criteriaBuilder, cmd
 		}
 		return results
 	}
 
-	private void searchCriteria(BuildableCriteria builder, Map params) {
-		String searchString = params.searchString
-		JSONElement filter = params.filter ? JSON.parse(params.filter.toString()) : new JSONObject()
+	private void searchCriteria(BuildableCriteria builder, TaskSearchCommand cmd) {
+		String searchString = cmd.searchString
 
 		builder.with {
 			//readOnly true
-
-			if (filter['id']) {
-				eq('id', filter['id'].toString().toLong())
+			if (cmd.id) {
+				eq('id', cmd.id)
 			}
-
 			if (searchString) {
 				or {
 					eq('id', -1L)
@@ -64,41 +58,25 @@ class TaskSearchService {
 					like('status', searchString + '%')
 				}
 			}
-
-			if (filter['dateCreated']) {
-				Date d
-				if (filter['dateCreated'].toString().isNumber()) {
-					d = new Date(filter['dateCreated'].toString().toLong())
-				} else {
-					String inputFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
-					d = Date.parse(inputFormat, filter['dateCreated'].toString())
-				}
-
+			if (cmd.dateCreated != null) {
+				Date d = cmd.dateCreated
 				between('dateCreated', d, d + 1)
 			}
-
-			if (filter['deadline']) {
-				Date d
-				if (filter['deadline'].toString().isNumber()) {
-					d = new Date(filter['deadline'].toString().toLong())
-				} else {
-					String inputFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
-					d = Date.parse(inputFormat, filter['deadline'].toString())
-				}
-
+			if (cmd.deadline != null) {
+				Date d = cmd.deadline
 				between('deadline', d, d + 1)
 			}
-			if (filter['details']) {
-				ilike('details', "${filter['details']}%")
+			if (cmd.details){
+				ilike('details', cmd.details + '%')
 			}
-			if (filter['status']) {
-				//inList
+			if (cmd.status != null) {
+				//inList - status
 			}
-			if (filter['summary']) {
-				ilike('summary', "${filter['summary']}%")
+			if (cmd.summary){
+				ilike('summary', cmd.summary + '%')
 			}
-			if (filter['timeSpent']) {
-				eq('timeSpent', filter['timeSpent'].toString().toLong())
+			if (cmd.timeSpent != null) {
+				eq('timeSpent', cmd.timeSpent)
 			}
 		}
 	}

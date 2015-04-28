@@ -12,6 +12,7 @@ import defpackage.exceptions.ResourceNotFound
 import scafmo.collection.DivisionCollection
 import scafmo.collection.DivisionCollectionModifyService
 import scafmo.collection.DivisionCollectionSearchService
+import scafmo.collection.DivisionCollectionSearchCommand
 
 @RestApi(name = 'DivisionCollection services', description = 'Methods for managing DivisionCollections')
 class DivisionCollectionController {
@@ -36,10 +37,15 @@ class DivisionCollectionController {
 		@RestApiParam(name = 'sort', type='string', paramType = RestApiParamType.QUERY,
 				description = 'Retrieved DivisionCollection list sort')
 	])
-	def index(final Integer max) {
-		params.max = Math.min(max ?: 10, 100)
+	def index(DivisionCollectionSearchCommand cmd) {
+		params.max = Math.min(params.int('max') ?: 10, 100)
 
-		def result = divisionCollectionSearchService.search(params)
+		if (cmd.hasErrors()) {
+			throw new ValidationException("Search does not validate.", cmd.errors)
+		}
+
+
+		def result = divisionCollectionSearchService.search(cmd, params)
 
 		header 'Access-Control-Expose-Headers', 'total'
 		header 'total', result.totalCount

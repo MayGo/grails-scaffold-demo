@@ -12,6 +12,7 @@ import defpackage.exceptions.ResourceNotFound
 import org.grails.samples.Visit
 import org.grails.samples.VisitModifyService
 import org.grails.samples.VisitSearchService
+import org.grails.samples.VisitSearchCommand
 
 @RestApi(name = 'Visit services', description = 'Methods for managing Visits')
 class VisitController {
@@ -36,10 +37,15 @@ class VisitController {
 		@RestApiParam(name = 'sort', type='string', paramType = RestApiParamType.QUERY,
 				description = 'Retrieved Visit list sort')
 	])
-	def index(final Integer max) {
-		params.max = Math.min(max ?: 10, 100)
+	def index(VisitSearchCommand cmd) {
+		params.max = Math.min(params.int('max') ?: 10, 100)
 
-		def result = visitSearchService.search(params)
+		if (cmd.hasErrors()) {
+			throw new ValidationException("Search does not validate.", cmd.errors)
+		}
+
+
+		def result = visitSearchService.search(cmd, params)
 
 		header 'Access-Control-Expose-Headers', 'total'
 		header 'total', result.totalCount

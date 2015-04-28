@@ -12,6 +12,7 @@ import defpackage.exceptions.ResourceNotFound
 import scafmo.constr.TestOther
 import scafmo.constr.TestOtherModifyService
 import scafmo.constr.TestOtherSearchService
+import scafmo.constr.TestOtherSearchCommand
 
 @RestApi(name = 'TestOther services', description = 'Methods for managing TestOthers')
 class TestOtherController {
@@ -36,10 +37,15 @@ class TestOtherController {
 		@RestApiParam(name = 'sort', type='string', paramType = RestApiParamType.QUERY,
 				description = 'Retrieved TestOther list sort')
 	])
-	def index(final Integer max) {
-		params.max = Math.min(max ?: 10, 100)
+	def index(TestOtherSearchCommand cmd) {
+		params.max = Math.min(params.int('max') ?: 10, 100)
 
-		def result = testOtherSearchService.search(params)
+		if (cmd.hasErrors()) {
+			throw new ValidationException("Search does not validate.", cmd.errors)
+		}
+
+
+		def result = testOtherSearchService.search(cmd, params)
 
 		header 'Access-Control-Expose-Headers', 'total'
 		header 'total', result.totalCount

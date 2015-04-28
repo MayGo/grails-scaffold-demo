@@ -55,11 +55,15 @@ class PetSearchServiceSpec extends Specification {
   'name':  'Pet 302',
   'owner':  [
     'id':  752,
-    'version':  0
+    'version':  0,
+    'firstName':  'firstName',
+    'lastName':  'lastName',
+    'telephone':  '555455'
   ],
   'type':  [
     'id':  null,
-    'version':  null
+    'version':  null,
+    'name':  'Type 452'
   ]
 ]
 		return data

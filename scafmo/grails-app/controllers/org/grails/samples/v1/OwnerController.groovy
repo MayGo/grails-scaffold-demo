@@ -12,6 +12,7 @@ import defpackage.exceptions.ResourceNotFound
 import org.grails.samples.Owner
 import org.grails.samples.OwnerModifyService
 import org.grails.samples.OwnerSearchService
+import org.grails.samples.OwnerSearchCommand
 
 @RestApi(name = 'Owner services', description = 'Methods for managing Owners')
 class OwnerController {
@@ -36,10 +37,15 @@ class OwnerController {
 		@RestApiParam(name = 'sort', type='string', paramType = RestApiParamType.QUERY,
 				description = 'Retrieved Owner list sort')
 	])
-	def index(final Integer max) {
-		params.max = Math.min(max ?: 10, 100)
+	def index(OwnerSearchCommand cmd) {
+		params.max = Math.min(params.int('max') ?: 10, 100)
 
-		def result = ownerSearchService.search(params)
+		if (cmd.hasErrors()) {
+			throw new ValidationException("Search does not validate.", cmd.errors)
+		}
+
+
+		def result = ownerSearchService.search(cmd, params)
 
 		header 'Access-Control-Expose-Headers', 'total'
 		header 'total', result.totalCount

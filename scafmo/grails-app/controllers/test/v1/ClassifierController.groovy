@@ -12,6 +12,7 @@ import defpackage.exceptions.ResourceNotFound
 import test.Classifier
 import test.ClassifierModifyService
 import test.ClassifierSearchService
+import test.ClassifierSearchCommand
 
 @RestApi(name = 'Classifier services', description = 'Methods for managing Classifiers')
 class ClassifierController {
@@ -36,10 +37,15 @@ class ClassifierController {
 		@RestApiParam(name = 'sort', type='string', paramType = RestApiParamType.QUERY,
 				description = 'Retrieved Classifier list sort')
 	])
-	def index(final Integer max) {
-		params.max = Math.min(max ?: 10, 100)
+	def index(ClassifierSearchCommand cmd) {
+		params.max = Math.min(params.int('max') ?: 10, 100)
 
-		def result = classifierSearchService.search(params)
+		if (cmd.hasErrors()) {
+			throw new ValidationException("Search does not validate.", cmd.errors)
+		}
+
+
+		def result = classifierSearchService.search(cmd, params)
 
 		header 'Access-Control-Expose-Headers', 'total'
 		header 'total', result.totalCount

@@ -5,6 +5,7 @@
 <div class="list-search"  st-table="rowCollection" st-pipe="callServer" >
 <accordion close-others="false">
     <accordion-group  heading="{{::'pages.Pet.list.table.search' | translate}}"  is-open="isSearchOpen">
+         <form name="petForm" class="form-validation form-horizontal" novalidate>
         <div class="row form-inline">
             
                   <div class="col-lg-2 form-group">
@@ -59,6 +60,7 @@
             
         </div>
     
+                </form>
             </accordion-group>
         </accordion>
         <div class="box-tools pull-right" ng-if="!isModal">

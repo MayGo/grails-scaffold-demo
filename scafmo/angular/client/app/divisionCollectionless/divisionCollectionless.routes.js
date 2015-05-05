@@ -5,25 +5,44 @@ angular.module('angularDemoApp')
 $stateProvider
 		.state('app.divisionCollectionless', {
 		    url: '/divisionCollectionless',
-		    template: '<div ui-view class="fade-in-up"></div>'
+			abstract: true,
+		    template: '<div ui-view="page" class="fade-in-up"></div>'
 		})
 		.state('app.divisionCollectionless.list', {
 			url: '/list?search',//TODO: search so that search is not an object in url
-			templateUrl: 'app/divisionCollectionless/divisionCollectionless.list.html',
-			controller: 'DivisionCollectionlessListController'
+			views: {
+				"page@app.divisionCollectionless": {
+					templateUrl: 'app/divisionCollectionless/divisionCollectionless.list.html',
+					controller: 'DivisionCollectionlessListController'
+				}
+			}
 		}).state('app.divisionCollectionless.create',{
 			url: '/create',
-			templateUrl: 'app/divisionCollectionless/divisionCollectionless.form.html',
-			controller: 'DivisionCollectionlessEditController',
+			ncyBreadcrumb: {
+				parent: 'app.divisionCollectionless.list'
+			},
+			views: {
+				"page@app.divisionCollectionless": {
+					templateUrl: 'app/divisionCollectionless/divisionCollectionless.form.html',
+					controller: 'DivisionCollectionlessEditController'
+				}
+			},
 			resolve:{
 				divisionCollectionlessData: function($stateParams, DivisionCollectionlessService) {
 					return new DivisionCollectionlessService();
 				}
 			}
-		}).state('app.divisionCollectionless.edit',{
-			url: '/edit/:id',
-			templateUrl: 'app/divisionCollectionless/divisionCollectionless.form.html',
-			controller: 'DivisionCollectionlessEditController',
+		}).state('app.divisionCollectionless.view',{
+			url: '/view/:id',
+			ncyBreadcrumb: {
+				parent: 'app.divisionCollectionless.list'
+			},
+			views: {
+				"page@app.divisionCollectionless": {
+					templateUrl: 'app/divisionCollectionless/divisionCollectionless.view.html',
+					controller: 'DivisionCollectionlessViewController'
+				}
+			},
 			resolve:{
 				divisionCollectionlessData: function($stateParams, DivisionCollectionlessService){
 					return DivisionCollectionlessService.get({id:$stateParams.id}).$promise.then(
@@ -33,15 +52,19 @@ $stateProvider
 					);
 				}
 			}
-		}).state('app.divisionCollectionless.view',{
-			url: '/view/:id',
-			templateUrl: 'app/divisionCollectionless/divisionCollectionless.view.html',
-			controller: 'DivisionCollectionlessViewController',
-				resolve:{
+		}).state('app.divisionCollectionless.view.edit',{
+			url: '/edit',
+			views: {
+				"page@app.divisionCollectionless": {
+					templateUrl: 'app/divisionCollectionless/divisionCollectionless.form.html',
+					controller: 'DivisionCollectionlessEditController',
+				}
+			},
+			resolve:{
 				divisionCollectionlessData: function($stateParams, DivisionCollectionlessService){
 					return DivisionCollectionlessService.get({id:$stateParams.id}).$promise.then(
 						function( response ){
-							return response;
+								return response;
 						}
 					);
 				}
@@ -78,7 +101,7 @@ $stateProvider
 
 		}
 
-	}).state('app.divisionCollectionless.edit.divisionCollectionlessSearchModal',{
+	}).state('app.divisionCollectionless.view.edit.divisionCollectionlessSearchModal',{
 		templateUrl: 'app/divisionCollectionless/divisionCollectionless.list.html',
 		controller: 'DivisionCollectionlessListController'
 	})
@@ -86,20 +109,34 @@ $stateProvider
 
 		.state('app.divisionCollectionless.view.divisionCollectionless',{
 			url: '/divisionCollectionless/:relationName',
+			ncyBreadcrumb: {
+				skip: true
+			},
 			data:{
 				isTab:true
 			},
-			templateUrl: 'app/divisionCollectionless/divisionCollectionless.list.html',
-			controller: 'DivisionCollectionlessListController'
+			views: {
+				"tabs": {
+					templateUrl: 'app/divisionCollectionless/divisionCollectionless.list.html',
+					controller: 'DivisionCollectionlessListController'
+				}
+			}
 		})
 	
 		.state('app.divisionCollectionless.view.personCollectionless',{
 			url: '/personCollectionless/:relationName',
+			ncyBreadcrumb: {
+				skip: true
+			},
 			data:{
 				isTab:true
 			},
-			templateUrl: 'app/personCollectionless/personCollectionless.list.html',
-			controller: 'PersonCollectionlessListController'
+			views: {
+				"tabs": {
+					templateUrl: 'app/personCollectionless/personCollectionless.list.html',
+					controller: 'PersonCollectionlessListController'
+				}
+			}
 		})
 	
 ;

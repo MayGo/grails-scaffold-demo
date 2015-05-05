@@ -1,10 +1,7 @@
 package scafmo.security
 
-
-import grails.util.GrailsNameUtils
 import grails.validation.Validateable
 import groovy.transform.ToString
-
 
 @Validateable
 @ToString

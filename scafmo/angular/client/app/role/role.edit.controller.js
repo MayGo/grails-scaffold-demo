@@ -26,7 +26,7 @@ angular.module('angularDemoApp')
 
 	    	if($scope.isEditForm){
 	    		RoleService.update($scope.role, function(response) {	
-	    			$translate('pages.Role.messages.update').then(function (msg) {
+	    			$translate('pages.role.messages.update').then(function (msg) {
 				    	inform.add(msg, {'type': 'success'});
 					});
 	            	deferred.resolve(response);
@@ -34,7 +34,7 @@ angular.module('angularDemoApp')
 	    	}else{
     			RoleService.save($scope.role,function(response) {
 					
-    				$translate('pages.Role.messages.create').then(function (msg) {
+    				$translate('pages.role.messages.create').then(function (msg) {
 				    	inform.add(msg, {'type': 'success'});
 					});
 					$state.go('^.view', { id: response.id }, {location: 'replace'});

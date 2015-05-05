@@ -1,14 +1,14 @@
 
 
 <div id="userRole_form"
-     ng-init="pageTitle = (isEditForm)?'pages.UserRole.edit.title':'pages.UserRole.create.title'" data-ng-include=" 'shared/blocks/page_heading.html' "></div>
+     ng-init="pageTitle = (isEditForm)?'pages.userRole.view.edit.title':'pages.userRole.create.title'" data-ng-include=" 'shared/blocks/page_heading.html' "></div>
 <div class="content-body">
     <form name="userRoleForm" class="form-validation form-horizontal" novalidate>
         <input name="version" type="hidden" ng-model="userRole.version" />
 
 	<div class="form-group">
 		<label class="col-sm-2 control-label" for="role"
-               translate="pages.UserRole.edit.form.field.role"></label>
+               translate="pages.userRole.view.edit.form.field.role"></label>
 		<div class="col-sm-10">
             <!--ManyToOne-->
      <div class="input-group input-group">
@@ -22,7 +22,7 @@
           typeahead-input-formatter="autocompleteService.roleFormatLabel($model, ['id','authority'])"
        required />
          <span class="input-group-btn" item-selector update-model="userRole.role"
-               ui-link="app.userRole.edit.roleSearchModal" >
+               ui-link="app.userRole.view.edit.roleSearchModal" >
          </span>
      </div> 
      <script type="text/ng-template" id="roleAutocompleteTemplate.html"><a><span bind-html-unsafe="match.model.id | typeaheadHighlight:query"></span> <span bind-html-unsafe="match.model.authority | typeaheadHighlight:query"></span> </a></script>
@@ -33,7 +33,7 @@
 
 	<div class="form-group">
 		<label class="col-sm-2 control-label" for="user"
-               translate="pages.UserRole.edit.form.field.user"></label>
+               translate="pages.userRole.view.edit.form.field.user"></label>
 		<div class="col-sm-10">
             <!--ManyToOne-->
      <div class="input-group input-group">
@@ -47,7 +47,7 @@
           typeahead-input-formatter="autocompleteService.userFormatLabel($model, ['id','username','passwordExpired','enabled'])"
        required />
          <span class="input-group-btn" item-selector update-model="userRole.user"
-               ui-link="app.userRole.edit.userSearchModal" >
+               ui-link="app.userRole.view.edit.userSearchModal" >
          </span>
      </div> 
      <script type="text/ng-template" id="userAutocompleteTemplate.html"><a><span bind-html-unsafe="match.model.id | typeaheadHighlight:query"></span> <span bind-html-unsafe="match.model.username | typeaheadHighlight:query"></span> <span bind-html-unsafe="match.model.passwordExpired | typeaheadHighlight:query"></span> <span bind-html-unsafe="match.model.enabled | typeaheadHighlight:query"></span> </a></script>
@@ -63,9 +63,9 @@
                     class="btn btn-success"
                     type='submit'
                     ng-disabled="userRoleForm.$invalid"
-                    translate="pages.UserRole.edit.form.submit"
+                    translate="pages.userRole.view.edit.form.submit"
                     mx-show-loading ng-click="submit(userRoleForm)"></button>
-                <a class="btn btn-default" ng-click="back()" translate="pages.UserRole.edit.form.cancel" mx-show-loading></a>
+                <a class="btn btn-default" ng-click="back()" translate="pages.userRole.view.edit.form.cancel" mx-show-loading></a>
             </div>
             <div class="clearfix"/>
         </div>

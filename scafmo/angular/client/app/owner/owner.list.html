@@ -1,11 +1,11 @@
 
-<div id="owner_list" ng-init="pageTitle = 'pages.Owner.list.title'"
+<div id="owner_list" ng-init="pageTitle = 'pages.owner.list.title'"
      data-ng-include=" 'shared/blocks/page_heading.html' "></div>
 <div class="content-body">
-<div class="list-search"  st-table="rowCollection" st-pipe="callServer" >
+<div class="list-search">
 <accordion close-others="false">
-    <accordion-group  heading="{{::'pages.Owner.list.table.search' | translate}}"  is-open="isSearchOpen">
-         <form name="ownerForm" class="form-validation form-horizontal" novalidate>
+    <accordion-group  heading="{{::'pages.owner.list.table.search' | translate}}"  is-open="isSearchOpen">
+         <form name="ownerForm" novalidate>
         <div class="row form-inline">
             
                   <div class="col-lg-2 form-group"><div class="input-group input-group-sm">
@@ -13,50 +13,45 @@
                     <input 
                     	name="address"
                    		ng-model="search.address"
-                   		st-search="'address'"
-                   		class="form-control" 
+                   		class="form-control"
                    		type="text" 
-                   		placeholder="{{::'pages.Owner.list.search.placeholder.address' | translate}}"  ></div> </div>
+                   		placeholder="{{::'pages.owner.list.search.placeholder.address' | translate}}"  ></div> </div>
             
                   <div class="col-lg-2 form-group"><div class="input-group input-group-sm">
                     <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
                     <input 
                     	name="city"
                    		ng-model="search.city"
-                   		st-search="'city'"
-                   		class="form-control" 
+                   		class="form-control"
                    		type="text" 
-                   		placeholder="{{::'pages.Owner.list.search.placeholder.city' | translate}}"  ></div> </div>
+                   		placeholder="{{::'pages.owner.list.search.placeholder.city' | translate}}"  ></div> </div>
             
                   <div class="col-lg-2 form-group"><div class="input-group input-group-sm">
                     <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
                     <input 
                     	name="firstName"
                    		ng-model="search.firstName"
-                   		st-search="'firstName'"
-                   		class="form-control" 
+                   		class="form-control"
                    		type="text" 
-                   		placeholder="{{::'pages.Owner.list.search.placeholder.firstName' | translate}}"  ></div> </div>
+                   		placeholder="{{::'pages.owner.list.search.placeholder.firstName' | translate}}"  ></div> </div>
             
                   <div class="col-lg-2 form-group"><div class="input-group input-group-sm">
                     <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
                     <input 
                     	name="lastName"
                    		ng-model="search.lastName"
-                   		st-search="'lastName'"
-                   		class="form-control" 
+                   		class="form-control"
                    		type="text" 
-                   		placeholder="{{::'pages.Owner.list.search.placeholder.lastName' | translate}}"  ></div> </div>
+                   		placeholder="{{::'pages.owner.list.search.placeholder.lastName' | translate}}"  ></div> </div>
             
                   <div class="col-lg-2 form-group"><div class="input-group input-group-sm">
                     <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
                     <input 
                     	name="telephone"
                    		ng-model="search.telephone"
-                   		st-search="'telephone'"
-                   		class="form-control" 
+                   		class="form-control"
                    		type="text" 
-                   		placeholder="{{::'pages.Owner.list.search.placeholder.telephone' | translate}}"  ng-pattern="/\d+/"  ></div> </div>
+                   		placeholder="{{::'pages.owner.list.search.placeholder.telephone' | translate}}"  ng-pattern="/\d+/"  ></div> </div>
             
         </div>
     
@@ -65,32 +60,20 @@
         </accordion>
         <div class="box-tools pull-right" ng-if="!isModal">
             <a class="btn btn-default btn-xs" ui-sref="app.owner.create">
-                <i class="fa fa-plus" translate="pages.Owner.list.new" mx-show-loading></i>
+                <i class="fa fa-plus" translate="pages.owner.list.new" mx-show-loading></i>
             </a>
         </div>
 
         <div class="clearfix"></div>
         <div class="list-search-table">
-	      <table class="table table-responsive">
-	      	<thead>
-	      		<tr>
-                    <th></th>
-	      			<th width='20' st-sort="id" translate="pages.Owner.list.table.header.id"></th>	      		
-			   		<th st-sort="address" translate="pages.Owner.list.table.header.address" ></th>				 
-			   		<th st-sort="city" translate="pages.Owner.list.table.header.city" ></th>				 
-			   		<th st-sort="firstName" translate="pages.Owner.list.table.header.firstName" ></th>				 
-			   		<th st-sort="lastName" translate="pages.Owner.list.table.header.lastName" ></th>				 
-			   		<th st-sort="telephone" translate="pages.Owner.list.table.header.telephone" ></th>				 
-
-				</tr>
-	      	</thead>
-	      	<tbody ng-hide="isLoading">
-				<tr ng-repeat="owner in rowCollection">
+	      <table class="table table-responsive" ng-table="tableParams" show-filter="true" >
+	      	<tbody ng-hide="tableParams.settings().$loading">
+				<tr ng-repeat="owner in $data">
                     <td class="text-left" >
                         <a class="btn btn-default btn-xs" ui-sref="app.owner.view({id:owner.id})" ng-if="!isModal">
                             <i class="fa fa-eye"></i>
                         </a>
-                        <a class="btn btn-default btn-xs" ui-sref="app.owner.edit({id:owner.id})" ng-if="!isModal">
+                        <a class="btn btn-default btn-xs" ui-sref="app.owner.view.edit({id:owner.id})" ng-if="!isModal">
                             <i class="fa fa-edit"></i>
                         </a>
                         <a class="btn btn-danger btn-xs" ng-click="deleteOwner(owner)" mx-show-loading ng-if="!isModal">
@@ -100,27 +83,31 @@
                             <i class="fa fa-plus"></i>
                         </a>
                     </td>
-					 <td>{{::owner.id}}</td>					
-			   		<td>{{::owner.address}}</td>				 	
-			   		<td>{{::owner.city}}</td>				 	
-			   		<td>{{::owner.firstName}}</td>				 	
-			   		<td>{{::owner.lastName}}</td>				 	
-			   		<td>{{::owner.telephone}}</td>				 	
+
+                    <td data-title="'pages.owner.list.table.header.id' | translate" sortable="'id'">{{::owner.id}}</td>					
+			   		
+        <td data-title="'pages.owner.list.table.header.address' | translate" sortable="'address'">
+{{::owner.address}}</td>				 	
+			   		
+        <td data-title="'pages.owner.list.table.header.city' | translate" sortable="'city'">
+{{::owner.city}}</td>				 	
+			   		
+        <td data-title="'pages.owner.list.table.header.firstName' | translate" sortable="'firstName'">
+{{::owner.firstName}}</td>				 	
+			   		
+        <td data-title="'pages.owner.list.table.header.lastName' | translate" sortable="'lastName'">
+{{::owner.lastName}}</td>				 	
+			   		
+        <td data-title="'pages.owner.list.table.header.telephone' | translate" sortable="'telephone'">
+{{::owner.telephone}}</td>				 	
 
 				</tr>
 			</tbody>
-              <tbody ng-show="isLoading">
+              <tbody ng-show="tableParams.settings().$loading">
                   <tr>
                       <td class="text-center" translate="messages.loading"></td>
                   </tr>
               </tbody>
-			<tfoot ng-hide="isLoading">
-	          <tr>
-	            <td colspan="10" class="text-center" >
-	              <div st-pagination="" st-items-by-page="stTable.itemsByPage" st-displayed-pages="15" ></div>
-	            </td>
-	          </tr>
-	        </tfoot>
 	      </table>
         </div>
     </div>

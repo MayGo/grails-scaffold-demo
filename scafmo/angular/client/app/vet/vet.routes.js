@@ -5,25 +5,44 @@ angular.module('angularDemoApp')
 $stateProvider
 		.state('app.vet', {
 		    url: '/vet',
-		    template: '<div ui-view class="fade-in-up"></div>'
+			abstract: true,
+		    template: '<div ui-view="page" class="fade-in-up"></div>'
 		})
 		.state('app.vet.list', {
 			url: '/list?search',//TODO: search so that search is not an object in url
-			templateUrl: 'app/vet/vet.list.html',
-			controller: 'VetListController'
+			views: {
+				"page@app.vet": {
+					templateUrl: 'app/vet/vet.list.html',
+					controller: 'VetListController'
+				}
+			}
 		}).state('app.vet.create',{
 			url: '/create',
-			templateUrl: 'app/vet/vet.form.html',
-			controller: 'VetEditController',
+			ncyBreadcrumb: {
+				parent: 'app.vet.list'
+			},
+			views: {
+				"page@app.vet": {
+					templateUrl: 'app/vet/vet.form.html',
+					controller: 'VetEditController'
+				}
+			},
 			resolve:{
 				vetData: function($stateParams, VetService) {
 					return new VetService();
 				}
 			}
-		}).state('app.vet.edit',{
-			url: '/edit/:id',
-			templateUrl: 'app/vet/vet.form.html',
-			controller: 'VetEditController',
+		}).state('app.vet.view',{
+			url: '/view/:id',
+			ncyBreadcrumb: {
+				parent: 'app.vet.list'
+			},
+			views: {
+				"page@app.vet": {
+					templateUrl: 'app/vet/vet.view.html',
+					controller: 'VetViewController'
+				}
+			},
 			resolve:{
 				vetData: function($stateParams, VetService){
 					return VetService.get({id:$stateParams.id}).$promise.then(
@@ -33,15 +52,19 @@ $stateProvider
 					);
 				}
 			}
-		}).state('app.vet.view',{
-			url: '/view/:id',
-			templateUrl: 'app/vet/vet.view.html',
-			controller: 'VetViewController',
-				resolve:{
+		}).state('app.vet.view.edit',{
+			url: '/edit',
+			views: {
+				"page@app.vet": {
+					templateUrl: 'app/vet/vet.form.html',
+					controller: 'VetEditController',
+				}
+			},
+			resolve:{
 				vetData: function($stateParams, VetService){
 					return VetService.get({id:$stateParams.id}).$promise.then(
 						function( response ){
-							return response;
+								return response;
 						}
 					);
 				}

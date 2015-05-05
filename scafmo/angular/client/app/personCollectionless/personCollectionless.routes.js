@@ -5,25 +5,44 @@ angular.module('angularDemoApp')
 $stateProvider
 		.state('app.personCollectionless', {
 		    url: '/personCollectionless',
-		    template: '<div ui-view class="fade-in-up"></div>'
+			abstract: true,
+		    template: '<div ui-view="page" class="fade-in-up"></div>'
 		})
 		.state('app.personCollectionless.list', {
 			url: '/list?search',//TODO: search so that search is not an object in url
-			templateUrl: 'app/personCollectionless/personCollectionless.list.html',
-			controller: 'PersonCollectionlessListController'
+			views: {
+				"page@app.personCollectionless": {
+					templateUrl: 'app/personCollectionless/personCollectionless.list.html',
+					controller: 'PersonCollectionlessListController'
+				}
+			}
 		}).state('app.personCollectionless.create',{
 			url: '/create',
-			templateUrl: 'app/personCollectionless/personCollectionless.form.html',
-			controller: 'PersonCollectionlessEditController',
+			ncyBreadcrumb: {
+				parent: 'app.personCollectionless.list'
+			},
+			views: {
+				"page@app.personCollectionless": {
+					templateUrl: 'app/personCollectionless/personCollectionless.form.html',
+					controller: 'PersonCollectionlessEditController'
+				}
+			},
 			resolve:{
 				personCollectionlessData: function($stateParams, PersonCollectionlessService) {
 					return new PersonCollectionlessService();
 				}
 			}
-		}).state('app.personCollectionless.edit',{
-			url: '/edit/:id',
-			templateUrl: 'app/personCollectionless/personCollectionless.form.html',
-			controller: 'PersonCollectionlessEditController',
+		}).state('app.personCollectionless.view',{
+			url: '/view/:id',
+			ncyBreadcrumb: {
+				parent: 'app.personCollectionless.list'
+			},
+			views: {
+				"page@app.personCollectionless": {
+					templateUrl: 'app/personCollectionless/personCollectionless.view.html',
+					controller: 'PersonCollectionlessViewController'
+				}
+			},
 			resolve:{
 				personCollectionlessData: function($stateParams, PersonCollectionlessService){
 					return PersonCollectionlessService.get({id:$stateParams.id}).$promise.then(
@@ -33,15 +52,19 @@ $stateProvider
 					);
 				}
 			}
-		}).state('app.personCollectionless.view',{
-			url: '/view/:id',
-			templateUrl: 'app/personCollectionless/personCollectionless.view.html',
-			controller: 'PersonCollectionlessViewController',
-				resolve:{
+		}).state('app.personCollectionless.view.edit',{
+			url: '/edit',
+			views: {
+				"page@app.personCollectionless": {
+					templateUrl: 'app/personCollectionless/personCollectionless.form.html',
+					controller: 'PersonCollectionlessEditController',
+				}
+			},
+			resolve:{
 				personCollectionlessData: function($stateParams, PersonCollectionlessService){
 					return PersonCollectionlessService.get({id:$stateParams.id}).$promise.then(
 						function( response ){
-							return response;
+								return response;
 						}
 					);
 				}
@@ -78,7 +101,7 @@ $stateProvider
 
 		}
 
-	}).state('app.personCollectionless.edit.divisionCollectionlessSearchModal',{
+	}).state('app.personCollectionless.view.edit.divisionCollectionlessSearchModal',{
 		templateUrl: 'app/divisionCollectionless/divisionCollectionless.list.html',
 		controller: 'DivisionCollectionlessListController'
 	})

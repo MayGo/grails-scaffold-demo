@@ -1,11 +1,11 @@
 
-<div id="person_list" ng-init="pageTitle = 'pages.Person.list.title'"
+<div id="person_list" ng-init="pageTitle = 'pages.person.list.title'"
      data-ng-include=" 'shared/blocks/page_heading.html' "></div>
 <div class="content-body">
-<div class="list-search"  st-table="rowCollection" st-pipe="callServer" >
+<div class="list-search">
 <accordion close-others="false">
-    <accordion-group  heading="{{::'pages.Person.list.table.search' | translate}}"  is-open="isSearchOpen">
-         <form name="personForm" class="form-validation form-horizontal" novalidate>
+    <accordion-group  heading="{{::'pages.person.list.table.search' | translate}}"  is-open="isSearchOpen">
+         <form name="personForm" novalidate>
         <div class="row form-inline">
             
                   <div class="col-lg-2 form-group"><div class="input-group input-group-sm">
@@ -13,20 +13,18 @@
                     <input 
                     	name="firstName"
                    		ng-model="search.firstName"
-                   		st-search="'firstName'"
-                   		class="form-control" 
+                   		class="form-control"
                    		type="text" 
-                   		placeholder="{{::'pages.Person.list.search.placeholder.firstName' | translate}}"  ></div> </div>
+                   		placeholder="{{::'pages.person.list.search.placeholder.firstName' | translate}}"  ></div> </div>
             
                   <div class="col-lg-2 form-group"><div class="input-group input-group-sm">
                     <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
                     <input 
                     	name="lastName"
                    		ng-model="search.lastName"
-                   		st-search="'lastName'"
-                   		class="form-control" 
+                   		class="form-control"
                    		type="text" 
-                   		placeholder="{{::'pages.Person.list.search.placeholder.lastName' | translate}}"  ></div> </div>
+                   		placeholder="{{::'pages.person.list.search.placeholder.lastName' | translate}}"  ></div> </div>
             
         </div>
     
@@ -35,29 +33,20 @@
         </accordion>
         <div class="box-tools pull-right" ng-if="!isModal">
             <a class="btn btn-default btn-xs" ui-sref="app.person.create">
-                <i class="fa fa-plus" translate="pages.Person.list.new" mx-show-loading></i>
+                <i class="fa fa-plus" translate="pages.person.list.new" mx-show-loading></i>
             </a>
         </div>
 
         <div class="clearfix"></div>
         <div class="list-search-table">
-	      <table class="table table-responsive">
-	      	<thead>
-	      		<tr>
-                    <th></th>
-	      			<th width='20' st-sort="id" translate="pages.Person.list.table.header.id"></th>	      		
-			   		<th st-sort="firstName" translate="pages.Person.list.table.header.firstName" ></th>				 
-			   		<th st-sort="lastName" translate="pages.Person.list.table.header.lastName" ></th>				 
-
-				</tr>
-	      	</thead>
-	      	<tbody ng-hide="isLoading">
-				<tr ng-repeat="person in rowCollection">
+	      <table class="table table-responsive" ng-table="tableParams" show-filter="true" >
+	      	<tbody ng-hide="tableParams.settings().$loading">
+				<tr ng-repeat="person in $data">
                     <td class="text-left" >
                         <a class="btn btn-default btn-xs" ui-sref="app.person.view({id:person.id})" ng-if="!isModal">
                             <i class="fa fa-eye"></i>
                         </a>
-                        <a class="btn btn-default btn-xs" ui-sref="app.person.edit({id:person.id})" ng-if="!isModal">
+                        <a class="btn btn-default btn-xs" ui-sref="app.person.view.edit({id:person.id})" ng-if="!isModal">
                             <i class="fa fa-edit"></i>
                         </a>
                         <a class="btn btn-danger btn-xs" ng-click="deletePerson(person)" mx-show-loading ng-if="!isModal">
@@ -67,24 +56,22 @@
                             <i class="fa fa-plus"></i>
                         </a>
                     </td>
-					 <td>{{::person.id}}</td>					
-			   		<td>{{::person.firstName}}</td>				 	
-			   		<td>{{::person.lastName}}</td>				 	
+
+                    <td data-title="'pages.person.list.table.header.id' | translate" sortable="'id'">{{::person.id}}</td>					
+			   		
+        <td data-title="'pages.person.list.table.header.firstName' | translate" sortable="'firstName'">
+{{::person.firstName}}</td>				 	
+			   		
+        <td data-title="'pages.person.list.table.header.lastName' | translate" sortable="'lastName'">
+{{::person.lastName}}</td>				 	
 
 				</tr>
 			</tbody>
-              <tbody ng-show="isLoading">
+              <tbody ng-show="tableParams.settings().$loading">
                   <tr>
                       <td class="text-center" translate="messages.loading"></td>
                   </tr>
               </tbody>
-			<tfoot ng-hide="isLoading">
-	          <tr>
-	            <td colspan="10" class="text-center" >
-	              <div st-pagination="" st-items-by-page="stTable.itemsByPage" st-displayed-pages="15" ></div>
-	            </td>
-	          </tr>
-	        </tfoot>
 	      </table>
         </div>
     </div>

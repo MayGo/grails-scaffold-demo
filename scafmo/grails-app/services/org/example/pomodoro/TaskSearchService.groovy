@@ -69,9 +69,7 @@ class TaskSearchService {
 			if (cmd.details){
 				ilike('details', cmd.details + '%')
 			}
-			if (cmd.status != null) {
-				//inList - status
-			}
+//inList - status
 			if (cmd.summary){
 				ilike('summary', cmd.summary + '%')
 			}

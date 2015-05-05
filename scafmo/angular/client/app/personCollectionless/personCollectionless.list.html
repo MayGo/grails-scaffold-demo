@@ -1,11 +1,11 @@
 
-<div id="personCollectionless_list" ng-init="pageTitle = 'pages.PersonCollectionless.list.title'"
+<div id="personCollectionless_list" ng-init="pageTitle = 'pages.personCollectionless.list.title'"
      data-ng-include=" 'shared/blocks/page_heading.html' "></div>
 <div class="content-body">
-<div class="list-search"  st-table="rowCollection" st-pipe="callServer" >
+<div class="list-search">
 <accordion close-others="false">
-    <accordion-group  heading="{{::'pages.PersonCollectionless.list.table.search' | translate}}"  is-open="isSearchOpen">
-         <form name="personCollectionlessForm" class="form-validation form-horizontal" novalidate>
+    <accordion-group  heading="{{::'pages.personCollectionless.list.table.search' | translate}}"  is-open="isSearchOpen">
+         <form name="personCollectionlessForm" novalidate>
         <div class="row form-inline">
             
                   <div class="col-lg-2 form-group"><div class="input-group input-group-sm">
@@ -13,9 +13,8 @@
                         <input 
                         	name="age"
                         	ng-model="search.age"
-                        	st-search="'age'"
-                        	class="form-control" 
-                        	placeholder="{{::'pages.PersonCollectionless.list.search.placeholder.age' | translate}}"
+                        	class="form-control"
+                        	placeholder="{{::'pages.personCollectionless.list.search.placeholder.age' | translate}}"
                         	  type="number"  ></div> </div>
             
                   <div class="col-lg-2 form-group"><div class="input-group input-group-sm">
@@ -23,17 +22,16 @@
                     <input 
                     	name="name"
                    		ng-model="search.name"
-                   		st-search="'name'"
-                   		class="form-control" 
+                   		class="form-control"
                    		type="text" 
-                   		placeholder="{{::'pages.PersonCollectionless.list.search.placeholder.name' | translate}}"  ></div> </div>
+                   		placeholder="{{::'pages.personCollectionless.list.search.placeholder.name' | translate}}"  ></div> </div>
             
                   <div class="col-lg-2 form-group"><!--ManyToOne-->
      <div class="input-group input-group-sm" style="width:100%">
      	<tags-input
             ng-model="search.divisions"
             custom-st-search="divisions"
-            placeholder="{{::'pages.PersonCollectionless.list.search.placeholder.division' | translate}}">
+            placeholder="{{::'pages.personCollectionless.list.search.placeholder.division' | translate}}">
               <auto-complete
                       source="autocompleteService.divisionCollectionlessQuery($query, ['id','name'], true)" ></auto-complete>
             </tags-input></div></div>
@@ -45,30 +43,20 @@
         </accordion>
         <div class="box-tools pull-right" ng-if="!isModal">
             <a class="btn btn-default btn-xs" ui-sref="app.personCollectionless.create">
-                <i class="fa fa-plus" translate="pages.PersonCollectionless.list.new" mx-show-loading></i>
+                <i class="fa fa-plus" translate="pages.personCollectionless.list.new" mx-show-loading></i>
             </a>
         </div>
 
         <div class="clearfix"></div>
         <div class="list-search-table">
-	      <table class="table table-responsive">
-	      	<thead>
-	      		<tr>
-                    <th></th>
-	      			<th width='20' st-sort="id" translate="pages.PersonCollectionless.list.table.header.id"></th>	      		
-			   		<th st-sort="age" translate="pages.PersonCollectionless.list.table.header.age" ></th>				 
-			   		<th st-sort="name" translate="pages.PersonCollectionless.list.table.header.name" ></th>				 
-			   		<th st-sort="division" translate="pages.PersonCollectionless.list.table.header.division" ></th>				 
-
-				</tr>
-	      	</thead>
-	      	<tbody ng-hide="isLoading">
-				<tr ng-repeat="personCollectionless in rowCollection">
+	      <table class="table table-responsive" ng-table="tableParams" show-filter="true" >
+	      	<tbody ng-hide="tableParams.settings().$loading">
+				<tr ng-repeat="personCollectionless in $data">
                     <td class="text-left" >
                         <a class="btn btn-default btn-xs" ui-sref="app.personCollectionless.view({id:personCollectionless.id})" ng-if="!isModal">
                             <i class="fa fa-eye"></i>
                         </a>
-                        <a class="btn btn-default btn-xs" ui-sref="app.personCollectionless.edit({id:personCollectionless.id})" ng-if="!isModal">
+                        <a class="btn btn-default btn-xs" ui-sref="app.personCollectionless.view.edit({id:personCollectionless.id})" ng-if="!isModal">
                             <i class="fa fa-edit"></i>
                         </a>
                         <a class="btn btn-danger btn-xs" ng-click="deletePersonCollectionless(personCollectionless)" mx-show-loading ng-if="!isModal">
@@ -78,25 +66,25 @@
                             <i class="fa fa-plus"></i>
                         </a>
                     </td>
-					 <td>{{::personCollectionless.id}}</td>					
-			   		<td>{{::personCollectionless.age}}</td>				 	
-			   		<td>{{::personCollectionless.name}}</td>				 	
-			   		<td>{{::personCollectionless.division.id}} {{::personCollectionless.division.name}} </td>				 	
+
+                    <td data-title="'pages.personCollectionless.list.table.header.id' | translate" sortable="'id'">{{::personCollectionless.id}}</td>					
+			   		
+        <td data-title="'pages.personCollectionless.list.table.header.age' | translate" sortable="'age'">
+{{::personCollectionless.age}}</td>				 	
+			   		
+        <td data-title="'pages.personCollectionless.list.table.header.name' | translate" sortable="'name'">
+{{::personCollectionless.name}}</td>				 	
+			   		
+        <td data-title="'pages.personCollectionless.list.table.header.division' | translate" sortable="'division'">
+{{::personCollectionless.division.id}} {{::personCollectionless.division.name}} </td>				 	
 
 				</tr>
 			</tbody>
-              <tbody ng-show="isLoading">
+              <tbody ng-show="tableParams.settings().$loading">
                   <tr>
                       <td class="text-center" translate="messages.loading"></td>
                   </tr>
               </tbody>
-			<tfoot ng-hide="isLoading">
-	          <tr>
-	            <td colspan="10" class="text-center" >
-	              <div st-pagination="" st-items-by-page="stTable.itemsByPage" st-displayed-pages="15" ></div>
-	            </td>
-	          </tr>
-	        </tfoot>
 	      </table>
         </div>
     </div>

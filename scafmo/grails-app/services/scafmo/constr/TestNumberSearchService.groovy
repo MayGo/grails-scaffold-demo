@@ -76,9 +76,7 @@ class TestNumberSearchService {
 			if (cmd.integerNr != null) {
 				eq('integerNr', cmd.integerNr)
 			}
-			if (cmd.integerNrInList != null) {
-				//inList - integerNrInList
-			}
+//inList - integerNrInList
 			if (cmd.integerNrMax != null) {
 				eq('integerNrMax', cmd.integerNrMax)
 			}

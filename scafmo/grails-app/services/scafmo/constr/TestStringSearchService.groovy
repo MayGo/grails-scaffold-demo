@@ -64,9 +64,7 @@ class TestStringSearchService {
 			if (cmd.emailStr){
 				ilike('emailStr', cmd.emailStr + '%')
 			}
-			if (cmd.inListStr != null) {
-				//inList - inListStr
-			}
+//inList - inListStr
 			if (cmd.matchesStr){
 				ilike('matchesStr', cmd.matchesStr + '%')
 			}

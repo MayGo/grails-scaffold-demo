@@ -1,11 +1,11 @@
 
-<div id="divisionCollection_list" ng-init="pageTitle = 'pages.DivisionCollection.list.title'"
+<div id="divisionCollection_list" ng-init="pageTitle = 'pages.divisionCollection.list.title'"
      data-ng-include=" 'shared/blocks/page_heading.html' "></div>
 <div class="content-body">
-<div class="list-search"  st-table="rowCollection" st-pipe="callServer" >
+<div class="list-search">
 <accordion close-others="false">
-    <accordion-group  heading="{{::'pages.DivisionCollection.list.table.search' | translate}}"  is-open="isSearchOpen">
-         <form name="divisionCollectionForm" class="form-validation form-horizontal" novalidate>
+    <accordion-group  heading="{{::'pages.divisionCollection.list.table.search' | translate}}"  is-open="isSearchOpen">
+         <form name="divisionCollectionForm" novalidate>
         <div class="row form-inline">
             
                   <div class="col-lg-2 form-group"><div class="input-group input-group-sm">
@@ -13,17 +13,16 @@
                     <input 
                     	name="name"
                    		ng-model="search.name"
-                   		st-search="'name'"
-                   		class="form-control" 
+                   		class="form-control"
                    		type="text" 
-                   		placeholder="{{::'pages.DivisionCollection.list.search.placeholder.name' | translate}}"  ></div> </div>
+                   		placeholder="{{::'pages.divisionCollection.list.search.placeholder.name' | translate}}"  ></div> </div>
             
                   <div class="col-lg-2 form-group"><!--ManyToOne-->
      <div class="input-group input-group-sm" style="width:100%">
      	<tags-input
             ng-model="search.headDivisions"
             custom-st-search="headDivisions"
-            placeholder="{{::'pages.DivisionCollection.list.search.placeholder.headDivision' | translate}}">
+            placeholder="{{::'pages.divisionCollection.list.search.placeholder.headDivision' | translate}}">
               <auto-complete
                       source="autocompleteService.divisionCollectionQuery($query, ['id','name'], true)" ></auto-complete>
             </tags-input></div></div>
@@ -35,29 +34,20 @@
         </accordion>
         <div class="box-tools pull-right" ng-if="!isModal">
             <a class="btn btn-default btn-xs" ui-sref="app.divisionCollection.create">
-                <i class="fa fa-plus" translate="pages.DivisionCollection.list.new" mx-show-loading></i>
+                <i class="fa fa-plus" translate="pages.divisionCollection.list.new" mx-show-loading></i>
             </a>
         </div>
 
         <div class="clearfix"></div>
         <div class="list-search-table">
-	      <table class="table table-responsive">
-	      	<thead>
-	      		<tr>
-                    <th></th>
-	      			<th width='20' st-sort="id" translate="pages.DivisionCollection.list.table.header.id"></th>	      		
-			   		<th st-sort="name" translate="pages.DivisionCollection.list.table.header.name" ></th>				 
-			   		<th st-sort="headDivision" translate="pages.DivisionCollection.list.table.header.headDivision" ></th>				 
-
-				</tr>
-	      	</thead>
-	      	<tbody ng-hide="isLoading">
-				<tr ng-repeat="divisionCollection in rowCollection">
+	      <table class="table table-responsive" ng-table="tableParams" show-filter="true" >
+	      	<tbody ng-hide="tableParams.settings().$loading">
+				<tr ng-repeat="divisionCollection in $data">
                     <td class="text-left" >
                         <a class="btn btn-default btn-xs" ui-sref="app.divisionCollection.view({id:divisionCollection.id})" ng-if="!isModal">
                             <i class="fa fa-eye"></i>
                         </a>
-                        <a class="btn btn-default btn-xs" ui-sref="app.divisionCollection.edit({id:divisionCollection.id})" ng-if="!isModal">
+                        <a class="btn btn-default btn-xs" ui-sref="app.divisionCollection.view.edit({id:divisionCollection.id})" ng-if="!isModal">
                             <i class="fa fa-edit"></i>
                         </a>
                         <a class="btn btn-danger btn-xs" ng-click="deleteDivisionCollection(divisionCollection)" mx-show-loading ng-if="!isModal">
@@ -67,24 +57,22 @@
                             <i class="fa fa-plus"></i>
                         </a>
                     </td>
-					 <td>{{::divisionCollection.id}}</td>					
-			   		<td>{{::divisionCollection.name}}</td>				 	
-			   		<td>{{::divisionCollection.headDivision.id}} {{::divisionCollection.headDivision.name}} </td>				 	
+
+                    <td data-title="'pages.divisionCollection.list.table.header.id' | translate" sortable="'id'">{{::divisionCollection.id}}</td>					
+			   		
+        <td data-title="'pages.divisionCollection.list.table.header.name' | translate" sortable="'name'">
+{{::divisionCollection.name}}</td>				 	
+			   		
+        <td data-title="'pages.divisionCollection.list.table.header.headDivision' | translate" sortable="'headDivision'">
+{{::divisionCollection.headDivision.id}} {{::divisionCollection.headDivision.name}} </td>				 	
 
 				</tr>
 			</tbody>
-              <tbody ng-show="isLoading">
+              <tbody ng-show="tableParams.settings().$loading">
                   <tr>
                       <td class="text-center" translate="messages.loading"></td>
                   </tr>
               </tbody>
-			<tfoot ng-hide="isLoading">
-	          <tr>
-	            <td colspan="10" class="text-center" >
-	              <div st-pagination="" st-items-by-page="stTable.itemsByPage" st-displayed-pages="15" ></div>
-	            </td>
-	          </tr>
-	        </tfoot>
 	      </table>
         </div>
     </div>

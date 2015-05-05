@@ -1,14 +1,14 @@
 
 
 <div id="divisionCollection_form"
-     ng-init="pageTitle = (isEditForm)?'pages.DivisionCollection.edit.title':'pages.DivisionCollection.create.title'" data-ng-include=" 'shared/blocks/page_heading.html' "></div>
+     ng-init="pageTitle = (isEditForm)?'pages.divisionCollection.view.edit.title':'pages.divisionCollection.create.title'" data-ng-include=" 'shared/blocks/page_heading.html' "></div>
 <div class="content-body">
     <form name="divisionCollectionForm" class="form-validation form-horizontal" novalidate>
         <input name="version" type="hidden" ng-model="divisionCollection.version" />
 
 	<div class="form-group">
 		<label class="col-sm-2 control-label" for="name"
-               translate="pages.DivisionCollection.edit.form.field.name"></label>
+               translate="pages.divisionCollection.view.edit.form.field.name"></label>
 		<div class="col-sm-10">
             <div class="input-group input-group">
                     <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
@@ -24,7 +24,7 @@
 
 	<div class="form-group">
 		<label class="col-sm-2 control-label" for="persons"
-               translate="pages.DivisionCollection.edit.form.field.persons"></label>
+               translate="pages.divisionCollection.view.edit.form.field.persons"></label>
 		<div class="col-sm-10">
             <!--OneToMany-->
           <tags-input
@@ -40,7 +40,7 @@
 
 	<div class="form-group">
 		<label class="col-sm-2 control-label" for="headDivision"
-               translate="pages.DivisionCollection.edit.form.field.headDivision"></label>
+               translate="pages.divisionCollection.view.edit.form.field.headDivision"></label>
 		<div class="col-sm-10">
             <!--ManyToOne-->
      <div class="input-group input-group">
@@ -54,7 +54,7 @@
           typeahead-input-formatter="autocompleteService.divisionCollectionFormatLabel($model, ['id','name'])"
        />
          <span class="input-group-btn" item-selector update-model="divisionCollection.headDivision"
-               ui-link="app.divisionCollection.edit.divisionCollectionSearchModal" >
+               ui-link="app.divisionCollection.view.edit.divisionCollectionSearchModal" >
          </span>
      </div> 
      <script type="text/ng-template" id="headDivisionAutocompleteTemplate.html"><a><span bind-html-unsafe="match.model.id | typeaheadHighlight:query"></span> <span bind-html-unsafe="match.model.name | typeaheadHighlight:query"></span> </a></script>
@@ -70,9 +70,9 @@
                     class="btn btn-success"
                     type='submit'
                     ng-disabled="divisionCollectionForm.$invalid"
-                    translate="pages.DivisionCollection.edit.form.submit"
+                    translate="pages.divisionCollection.view.edit.form.submit"
                     mx-show-loading ng-click="submit(divisionCollectionForm)"></button>
-                <a class="btn btn-default" ng-click="back()" translate="pages.DivisionCollection.edit.form.cancel" mx-show-loading></a>
+                <a class="btn btn-default" ng-click="back()" translate="pages.divisionCollection.view.edit.form.cancel" mx-show-loading></a>
             </div>
             <div class="clearfix"/>
         </div>

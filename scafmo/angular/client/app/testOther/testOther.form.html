@@ -1,14 +1,14 @@
 
 
 <div id="testOther_form"
-     ng-init="pageTitle = (isEditForm)?'pages.TestOther.edit.title':'pages.TestOther.create.title'" data-ng-include=" 'shared/blocks/page_heading.html' "></div>
+     ng-init="pageTitle = (isEditForm)?'pages.testOther.view.edit.title':'pages.testOther.create.title'" data-ng-include=" 'shared/blocks/page_heading.html' "></div>
 <div class="content-body">
     <form name="testOtherForm" class="form-validation form-horizontal" novalidate>
         <input name="version" type="hidden" ng-model="testOther.version" />
 
 	<div class="form-group">
 		<label class="col-sm-2 control-label" for="booleanNullable"
-               translate="pages.TestOther.edit.form.field.booleanNullable"></label>
+               translate="pages.testOther.view.edit.form.field.booleanNullable"></label>
 		<div class="col-sm-10">
             
 		<div class="input-group input-group">
@@ -27,7 +27,7 @@
 
 	<div class="form-group">
 		<label class="col-sm-2 control-label" for="testDate"
-               translate="pages.TestOther.edit.form.field.testDate"></label>
+               translate="pages.testOther.view.edit.form.field.testDate"></label>
 		<div class="col-sm-10">
             
      <div class="input-group input-group">
@@ -50,7 +50,7 @@
 
 	<div class="form-group">
 		<label class="col-sm-2 control-label" for="testEnum"
-               translate="pages.TestOther.edit.form.field.testEnum"></label>
+               translate="pages.testOther.view.edit.form.field.testEnum"></label>
 		<div class="col-sm-10">
             
      <div class="input-group input-group">
@@ -65,7 +65,7 @@
 
 	<div class="form-group">
 		<label class="col-sm-2 control-label" for="testStringType"
-               translate="pages.TestOther.edit.form.field.testStringType"></label>
+               translate="pages.testOther.view.edit.form.field.testStringType"></label>
 		<div class="col-sm-10">
             <!--ManyToOne-->
      <div class="input-group input-group">
@@ -79,7 +79,7 @@
           typeahead-input-formatter="autocompleteService.testStringFormatLabel($model, ['id','urlStr','uniqueStr','sizeStr'])"
        />
          <span class="input-group-btn" item-selector update-model="testOther.testStringType"
-               ui-link="app.testOther.edit.testStringSearchModal" >
+               ui-link="app.testOther.view.edit.testStringSearchModal" >
          </span>
      </div> 
      <script type="text/ng-template" id="testStringTypeAutocompleteTemplate.html"><a><span bind-html-unsafe="match.model.id | typeaheadHighlight:query"></span> <span bind-html-unsafe="match.model.urlStr | typeaheadHighlight:query"></span> <span bind-html-unsafe="match.model.uniqueStr | typeaheadHighlight:query"></span> <span bind-html-unsafe="match.model.sizeStr | typeaheadHighlight:query"></span> </a></script>
@@ -95,9 +95,9 @@
                     class="btn btn-success"
                     type='submit'
                     ng-disabled="testOtherForm.$invalid"
-                    translate="pages.TestOther.edit.form.submit"
+                    translate="pages.testOther.view.edit.form.submit"
                     mx-show-loading ng-click="submit(testOtherForm)"></button>
-                <a class="btn btn-default" ng-click="back()" translate="pages.TestOther.edit.form.cancel" mx-show-loading></a>
+                <a class="btn btn-default" ng-click="back()" translate="pages.testOther.view.edit.form.cancel" mx-show-loading></a>
             </div>
             <div class="clearfix"/>
         </div>

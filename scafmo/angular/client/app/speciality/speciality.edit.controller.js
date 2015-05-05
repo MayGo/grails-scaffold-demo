@@ -26,7 +26,7 @@ angular.module('angularDemoApp')
 
 	    	if($scope.isEditForm){
 	    		SpecialityService.update($scope.speciality, function(response) {	
-	    			$translate('pages.Speciality.messages.update').then(function (msg) {
+	    			$translate('pages.speciality.messages.update').then(function (msg) {
 				    	inform.add(msg, {'type': 'success'});
 					});
 	            	deferred.resolve(response);
@@ -34,7 +34,7 @@ angular.module('angularDemoApp')
 	    	}else{
     			SpecialityService.save($scope.speciality,function(response) {
 					
-    				$translate('pages.Speciality.messages.create').then(function (msg) {
+    				$translate('pages.speciality.messages.create').then(function (msg) {
 				    	inform.add(msg, {'type': 'success'});
 					});
 					$state.go('^.view', { id: response.id }, {location: 'replace'});

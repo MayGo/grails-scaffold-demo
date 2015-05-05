@@ -1,13 +1,13 @@
 
 
-<div id="personCollectionless_view" ng-init="pageTitle = 'pages.PersonCollectionless.view.title'"
+<div id="personCollectionless_view" ng-init="pageTitle = 'pages.personCollectionless.view.title'"
      ng-include=" 'shared/blocks/page_heading.html' "></div>
 <div class="content-body">
     <div class="form-horizontal">
 
         <div class="form-group">
             <label class="col-sm-2 control-label"
-                   translate="pages.PersonCollectionless.view.field.age"></label>
+                   translate="pages.personCollectionless.view.field.age"></label>
             <div class="col-sm-10 form-control-static"
                  ng-bind="personCollectionless.age"></div>
         </div>
@@ -16,7 +16,7 @@
 
         <div class="form-group">
             <label class="col-sm-2 control-label"
-                   translate="pages.PersonCollectionless.view.field.name"></label>
+                   translate="pages.personCollectionless.view.field.name"></label>
             <div class="col-sm-10 form-control-static"
                  ng-bind="personCollectionless.name"></div>
         </div>
@@ -24,7 +24,7 @@
     
 <!--ManyToOne-->
         <div class="form-group">
-            <label class="col-sm-2 control-label" translate="pages.PersonCollectionless.view.field.division"></label>
+            <label class="col-sm-2 control-label" translate="pages.personCollectionless.view.field.division"></label>
             <a ui-sref="app.personCollectionless.view.divisionCollectionlessModal({modalId:personCollectionless.division.id})" >
             <div class="col-sm-10 form-control-static">
             <span ng-bind="personCollectionless.division.id"></span> <span ng-bind="personCollectionless.division.name"></span> </div></a></div>
@@ -37,16 +37,16 @@
 
         <div class="form-action pull-right">
             <a id="editBtn" class="btn btn-default"
-               ui-sref="app.personCollectionless.edit({id:personCollectionless.id})">
-                <i class="fa fa-edit" translate="pages.PersonCollectionless.view.edit"></i>
+               ui-sref="app.personCollectionless.view.edit({id:personCollectionless.id})">
+                <i class="fa fa-edit" translate="pages.personCollectionless.view.buttons.edit"></i>
             </a>
             <a id="deleteBtn" class="btn btn-danger"
                ng-click="deletePersonCollectionless(personCollectionless)" mx-show-loading>
-                <i class="fa fa-trash-o" translate="pages.PersonCollectionless.view.delete"></i>
+                <i class="fa fa-trash-o" translate="pages.personCollectionless.view.buttons.delete"></i>
             </a>
 
             <a id="backBtn" class="btn btn-default" ng-click="back()">
-                <i class="fa fa-chevron-left" translate="pages.PersonCollectionless.view.back"></i>
+                <i class="fa fa-chevron-left" translate="pages.personCollectionless.view.buttons.back"></i>
             </a>
         </div>
         <div class="clearfix"/>

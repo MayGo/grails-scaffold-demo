@@ -5,25 +5,44 @@ angular.module('angularDemoApp')
 $stateProvider
 		.state('app.pet', {
 		    url: '/pet',
-		    template: '<div ui-view class="fade-in-up"></div>'
+			abstract: true,
+		    template: '<div ui-view="page" class="fade-in-up"></div>'
 		})
 		.state('app.pet.list', {
 			url: '/list?search',//TODO: search so that search is not an object in url
-			templateUrl: 'app/pet/pet.list.html',
-			controller: 'PetListController'
+			views: {
+				"page@app.pet": {
+					templateUrl: 'app/pet/pet.list.html',
+					controller: 'PetListController'
+				}
+			}
 		}).state('app.pet.create',{
 			url: '/create',
-			templateUrl: 'app/pet/pet.form.html',
-			controller: 'PetEditController',
+			ncyBreadcrumb: {
+				parent: 'app.pet.list'
+			},
+			views: {
+				"page@app.pet": {
+					templateUrl: 'app/pet/pet.form.html',
+					controller: 'PetEditController'
+				}
+			},
 			resolve:{
 				petData: function($stateParams, PetService) {
 					return new PetService();
 				}
 			}
-		}).state('app.pet.edit',{
-			url: '/edit/:id',
-			templateUrl: 'app/pet/pet.form.html',
-			controller: 'PetEditController',
+		}).state('app.pet.view',{
+			url: '/view/:id',
+			ncyBreadcrumb: {
+				parent: 'app.pet.list'
+			},
+			views: {
+				"page@app.pet": {
+					templateUrl: 'app/pet/pet.view.html',
+					controller: 'PetViewController'
+				}
+			},
 			resolve:{
 				petData: function($stateParams, PetService){
 					return PetService.get({id:$stateParams.id}).$promise.then(
@@ -33,15 +52,19 @@ $stateProvider
 					);
 				}
 			}
-		}).state('app.pet.view',{
-			url: '/view/:id',
-			templateUrl: 'app/pet/pet.view.html',
-			controller: 'PetViewController',
-				resolve:{
+		}).state('app.pet.view.edit',{
+			url: '/edit',
+			views: {
+				"page@app.pet": {
+					templateUrl: 'app/pet/pet.form.html',
+					controller: 'PetEditController',
+				}
+			},
+			resolve:{
 				petData: function($stateParams, PetService){
 					return PetService.get({id:$stateParams.id}).$promise.then(
 						function( response ){
-							return response;
+								return response;
 						}
 					);
 				}
@@ -78,7 +101,7 @@ $stateProvider
 
 		}
 
-	}).state('app.pet.edit.petTypeSearchModal',{
+	}).state('app.pet.view.edit.petTypeSearchModal',{
 		templateUrl: 'app/petType/petType.list.html',
 		controller: 'PetTypeListController'
 	})
@@ -112,7 +135,7 @@ $stateProvider
 
 		}
 
-	}).state('app.pet.edit.ownerSearchModal',{
+	}).state('app.pet.view.edit.ownerSearchModal',{
 		templateUrl: 'app/owner/owner.list.html',
 		controller: 'OwnerListController'
 	})
@@ -120,11 +143,18 @@ $stateProvider
 
 		.state('app.pet.view.visit',{
 			url: '/visit/:relationName',
+			ncyBreadcrumb: {
+				skip: true
+			},
 			data:{
 				isTab:true
 			},
-			templateUrl: 'app/visit/visit.list.html',
-			controller: 'VisitListController'
+			views: {
+				"tabs": {
+					templateUrl: 'app/visit/visit.list.html',
+					controller: 'VisitListController'
+				}
+			}
 		})
 	
 ;

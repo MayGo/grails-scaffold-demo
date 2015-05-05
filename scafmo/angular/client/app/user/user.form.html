@@ -1,14 +1,14 @@
 
 
 <div id="user_form"
-     ng-init="pageTitle = (isEditForm)?'pages.User.edit.title':'pages.User.create.title'" data-ng-include=" 'shared/blocks/page_heading.html' "></div>
+     ng-init="pageTitle = (isEditForm)?'pages.user.view.edit.title':'pages.user.create.title'" data-ng-include=" 'shared/blocks/page_heading.html' "></div>
 <div class="content-body">
     <form name="userForm" class="form-validation form-horizontal" novalidate>
         <input name="version" type="hidden" ng-model="user.version" />
 
 	<div class="form-group">
 		<label class="col-sm-2 control-label" for="accountExpired"
-               translate="pages.User.edit.form.field.accountExpired"></label>
+               translate="pages.user.view.edit.form.field.accountExpired"></label>
 		<div class="col-sm-10">
             
 		<div class="input-group input-group">
@@ -27,7 +27,7 @@
 
 	<div class="form-group">
 		<label class="col-sm-2 control-label" for="accountLocked"
-               translate="pages.User.edit.form.field.accountLocked"></label>
+               translate="pages.user.view.edit.form.field.accountLocked"></label>
 		<div class="col-sm-10">
             
 		<div class="input-group input-group">
@@ -46,7 +46,7 @@
 
 	<div class="form-group">
 		<label class="col-sm-2 control-label" for="enabled"
-               translate="pages.User.edit.form.field.enabled"></label>
+               translate="pages.user.view.edit.form.field.enabled"></label>
 		<div class="col-sm-10">
             
 		<div class="input-group input-group">
@@ -65,7 +65,7 @@
 
 	<div class="form-group">
 		<label class="col-sm-2 control-label" for="passwordExpired"
-               translate="pages.User.edit.form.field.passwordExpired"></label>
+               translate="pages.user.view.edit.form.field.passwordExpired"></label>
 		<div class="col-sm-10">
             
 		<div class="input-group input-group">
@@ -84,7 +84,7 @@
 
 	<div class="form-group">
 		<label class="col-sm-2 control-label" for="username"
-               translate="pages.User.edit.form.field.username"></label>
+               translate="pages.user.view.edit.form.field.username"></label>
 		<div class="col-sm-10">
             <div class="input-group input-group">
                     <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
@@ -105,9 +105,9 @@
                     class="btn btn-success"
                     type='submit'
                     ng-disabled="userForm.$invalid"
-                    translate="pages.User.edit.form.submit"
+                    translate="pages.user.view.edit.form.submit"
                     mx-show-loading ng-click="submit(userForm)"></button>
-                <a class="btn btn-default" ng-click="back()" translate="pages.User.edit.form.cancel" mx-show-loading></a>
+                <a class="btn btn-default" ng-click="back()" translate="pages.user.view.edit.form.cancel" mx-show-loading></a>
             </div>
             <div class="clearfix"/>
         </div>

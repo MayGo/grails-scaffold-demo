@@ -1,11 +1,11 @@
 
-<div id="tag_list" ng-init="pageTitle = 'pages.Tag.list.title'"
+<div id="tag_list" ng-init="pageTitle = 'pages.tag.list.title'"
      data-ng-include=" 'shared/blocks/page_heading.html' "></div>
 <div class="content-body">
-<div class="list-search"  st-table="rowCollection" st-pipe="callServer" >
+<div class="list-search">
 <accordion close-others="false">
-    <accordion-group  heading="{{::'pages.Tag.list.table.search' | translate}}"  is-open="isSearchOpen">
-         <form name="tagForm" class="form-validation form-horizontal" novalidate>
+    <accordion-group  heading="{{::'pages.tag.list.table.search' | translate}}"  is-open="isSearchOpen">
+         <form name="tagForm" novalidate>
         <div class="row form-inline">
             
                   <div class="col-lg-2 form-group"><div class="input-group input-group-sm">
@@ -13,10 +13,9 @@
                     <input 
                     	name="name"
                    		ng-model="search.name"
-                   		st-search="'name'"
-                   		class="form-control" 
+                   		class="form-control"
                    		type="text" 
-                   		placeholder="{{::'pages.Tag.list.search.placeholder.name' | translate}}"  ></div> </div>
+                   		placeholder="{{::'pages.tag.list.search.placeholder.name' | translate}}"  ></div> </div>
             
         </div>
     
@@ -25,28 +24,20 @@
         </accordion>
         <div class="box-tools pull-right" ng-if="!isModal">
             <a class="btn btn-default btn-xs" ui-sref="app.tag.create">
-                <i class="fa fa-plus" translate="pages.Tag.list.new" mx-show-loading></i>
+                <i class="fa fa-plus" translate="pages.tag.list.new" mx-show-loading></i>
             </a>
         </div>
 
         <div class="clearfix"></div>
         <div class="list-search-table">
-	      <table class="table table-responsive">
-	      	<thead>
-	      		<tr>
-                    <th></th>
-	      			<th width='20' st-sort="id" translate="pages.Tag.list.table.header.id"></th>	      		
-			   		<th st-sort="name" translate="pages.Tag.list.table.header.name" ></th>				 
-
-				</tr>
-	      	</thead>
-	      	<tbody ng-hide="isLoading">
-				<tr ng-repeat="tag in rowCollection">
+	      <table class="table table-responsive" ng-table="tableParams" show-filter="true" >
+	      	<tbody ng-hide="tableParams.settings().$loading">
+				<tr ng-repeat="tag in $data">
                     <td class="text-left" >
                         <a class="btn btn-default btn-xs" ui-sref="app.tag.view({id:tag.id})" ng-if="!isModal">
                             <i class="fa fa-eye"></i>
                         </a>
-                        <a class="btn btn-default btn-xs" ui-sref="app.tag.edit({id:tag.id})" ng-if="!isModal">
+                        <a class="btn btn-default btn-xs" ui-sref="app.tag.view.edit({id:tag.id})" ng-if="!isModal">
                             <i class="fa fa-edit"></i>
                         </a>
                         <a class="btn btn-danger btn-xs" ng-click="deleteTag(tag)" mx-show-loading ng-if="!isModal">
@@ -56,23 +47,19 @@
                             <i class="fa fa-plus"></i>
                         </a>
                     </td>
-					 <td>{{::tag.id}}</td>					
-			   		<td>{{::tag.name}}</td>				 	
+
+                    <td data-title="'pages.tag.list.table.header.id' | translate" sortable="'id'">{{::tag.id}}</td>					
+			   		
+        <td data-title="'pages.tag.list.table.header.name' | translate" sortable="'name'">
+{{::tag.name}}</td>				 	
 
 				</tr>
 			</tbody>
-              <tbody ng-show="isLoading">
+              <tbody ng-show="tableParams.settings().$loading">
                   <tr>
                       <td class="text-center" translate="messages.loading"></td>
                   </tr>
               </tbody>
-			<tfoot ng-hide="isLoading">
-	          <tr>
-	            <td colspan="10" class="text-center" >
-	              <div st-pagination="" st-items-by-page="stTable.itemsByPage" st-displayed-pages="15" ></div>
-	            </td>
-	          </tr>
-	        </tfoot>
 	      </table>
         </div>
     </div>

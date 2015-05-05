@@ -65,9 +65,7 @@ class TestOtherSearchService {
 				Date d = cmd.testDate
 				between('testDate', d, d + 1)
 			}
-			if (cmd.testEnum != null) {
-				//enum - testEnum
-			}
+//enum - testEnum
 			if (cmd.testStringTypes) {
 				'in'('testStringType.id', cmd.testStringTypes.collect { (long) it })
 			}

@@ -1,14 +1,14 @@
 
 
 <div id="classifier_form"
-     ng-init="pageTitle = (isEditForm)?'pages.Classifier.edit.title':'pages.Classifier.create.title'" data-ng-include=" 'shared/blocks/page_heading.html' "></div>
+     ng-init="pageTitle = (isEditForm)?'pages.classifier.view.edit.title':'pages.classifier.create.title'" data-ng-include=" 'shared/blocks/page_heading.html' "></div>
 <div class="content-body">
     <form name="classifierForm" class="form-validation form-horizontal" novalidate>
         <input name="version" type="hidden" ng-model="classifier.version" />
 
 	<div class="form-group">
 		<label class="col-sm-2 control-label" for="classname"
-               translate="pages.Classifier.edit.form.field.classname"></label>
+               translate="pages.classifier.view.edit.form.field.classname"></label>
 		<div class="col-sm-10">
             <div class="input-group input-group">
                     <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
@@ -24,7 +24,7 @@
 
 	<div class="form-group">
 		<label class="col-sm-2 control-label" for="constant"
-               translate="pages.Classifier.edit.form.field.constant"></label>
+               translate="pages.classifier.view.edit.form.field.constant"></label>
 		<div class="col-sm-10">
             <div class="input-group input-group">
                     <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
@@ -40,7 +40,7 @@
 
 	<div class="form-group">
 		<label class="col-sm-2 control-label" for="description"
-               translate="pages.Classifier.edit.form.field.description"></label>
+               translate="pages.classifier.view.edit.form.field.description"></label>
 		<div class="col-sm-10">
             <div class="input-group input-group">
                     <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
@@ -57,7 +57,7 @@
 
 	<div class="form-group">
 		<label class="col-sm-2 control-label" for="propertyname"
-               translate="pages.Classifier.edit.form.field.propertyname"></label>
+               translate="pages.classifier.view.edit.form.field.propertyname"></label>
 		<div class="col-sm-10">
             <div class="input-group input-group">
                     <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
@@ -78,9 +78,9 @@
                     class="btn btn-success"
                     type='submit'
                     ng-disabled="classifierForm.$invalid"
-                    translate="pages.Classifier.edit.form.submit"
+                    translate="pages.classifier.view.edit.form.submit"
                     mx-show-loading ng-click="submit(classifierForm)"></button>
-                <a class="btn btn-default" ng-click="back()" translate="pages.Classifier.edit.form.cancel" mx-show-loading></a>
+                <a class="btn btn-default" ng-click="back()" translate="pages.classifier.view.edit.form.cancel" mx-show-loading></a>
             </div>
             <div class="clearfix"/>
         </div>

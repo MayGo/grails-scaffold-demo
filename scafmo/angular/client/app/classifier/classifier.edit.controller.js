@@ -26,7 +26,7 @@ angular.module('angularDemoApp')
 
 	    	if($scope.isEditForm){
 	    		ClassifierService.update($scope.classifier, function(response) {	
-	    			$translate('pages.Classifier.messages.update').then(function (msg) {
+	    			$translate('pages.classifier.messages.update').then(function (msg) {
 				    	inform.add(msg, {'type': 'success'});
 					});
 	            	deferred.resolve(response);
@@ -34,7 +34,7 @@ angular.module('angularDemoApp')
 	    	}else{
     			ClassifierService.save($scope.classifier,function(response) {
 					
-    				$translate('pages.Classifier.messages.create').then(function (msg) {
+    				$translate('pages.classifier.messages.create').then(function (msg) {
 				    	inform.add(msg, {'type': 'success'});
 					});
 					$state.go('^.view', { id: response.id }, {location: 'replace'});

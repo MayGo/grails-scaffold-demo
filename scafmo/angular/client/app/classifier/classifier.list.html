@@ -1,11 +1,11 @@
 
-<div id="classifier_list" ng-init="pageTitle = 'pages.Classifier.list.title'"
+<div id="classifier_list" ng-init="pageTitle = 'pages.classifier.list.title'"
      data-ng-include=" 'shared/blocks/page_heading.html' "></div>
 <div class="content-body">
-<div class="list-search"  st-table="rowCollection" st-pipe="callServer" >
+<div class="list-search">
 <accordion close-others="false">
-    <accordion-group  heading="{{::'pages.Classifier.list.table.search' | translate}}"  is-open="isSearchOpen">
-         <form name="classifierForm" class="form-validation form-horizontal" novalidate>
+    <accordion-group  heading="{{::'pages.classifier.list.table.search' | translate}}"  is-open="isSearchOpen">
+         <form name="classifierForm" novalidate>
         <div class="row form-inline">
             
                   <div class="col-lg-2 form-group"><div class="input-group input-group-sm">
@@ -13,40 +13,36 @@
                     <input 
                     	name="classname"
                    		ng-model="search.classname"
-                   		st-search="'classname'"
-                   		class="form-control" 
+                   		class="form-control"
                    		type="text" 
-                   		placeholder="{{::'pages.Classifier.list.search.placeholder.classname' | translate}}"  ></div> </div>
+                   		placeholder="{{::'pages.classifier.list.search.placeholder.classname' | translate}}"  ></div> </div>
             
                   <div class="col-lg-2 form-group"><div class="input-group input-group-sm">
                     <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
                     <input 
                     	name="constant"
                    		ng-model="search.constant"
-                   		st-search="'constant'"
-                   		class="form-control" 
+                   		class="form-control"
                    		type="text" 
-                   		placeholder="{{::'pages.Classifier.list.search.placeholder.constant' | translate}}"  ></div> </div>
+                   		placeholder="{{::'pages.classifier.list.search.placeholder.constant' | translate}}"  ></div> </div>
             
                   <div class="col-lg-2 form-group"><div class="input-group input-group-sm">
                     <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
                     <input 
                     	name="description"
                    		ng-model="search.description"
-                   		st-search="'description'"
-                   		class="form-control" 
+                   		class="form-control"
                    		type="text" 
-                   		placeholder="{{::'pages.Classifier.list.search.placeholder.description' | translate}}"  ></div> </div>
+                   		placeholder="{{::'pages.classifier.list.search.placeholder.description' | translate}}"  ></div> </div>
             
                   <div class="col-lg-2 form-group"><div class="input-group input-group-sm">
                     <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
                     <input 
                     	name="propertyname"
                    		ng-model="search.propertyname"
-                   		st-search="'propertyname'"
-                   		class="form-control" 
+                   		class="form-control"
                    		type="text" 
-                   		placeholder="{{::'pages.Classifier.list.search.placeholder.propertyname' | translate}}"  ></div> </div>
+                   		placeholder="{{::'pages.classifier.list.search.placeholder.propertyname' | translate}}"  ></div> </div>
             
         </div>
     
@@ -55,31 +51,20 @@
         </accordion>
         <div class="box-tools pull-right" ng-if="!isModal">
             <a class="btn btn-default btn-xs" ui-sref="app.classifier.create">
-                <i class="fa fa-plus" translate="pages.Classifier.list.new" mx-show-loading></i>
+                <i class="fa fa-plus" translate="pages.classifier.list.new" mx-show-loading></i>
             </a>
         </div>
 
         <div class="clearfix"></div>
         <div class="list-search-table">
-	      <table class="table table-responsive">
-	      	<thead>
-	      		<tr>
-                    <th></th>
-	      			<th width='20' st-sort="id" translate="pages.Classifier.list.table.header.id"></th>	      		
-			   		<th st-sort="classname" translate="pages.Classifier.list.table.header.classname" ></th>				 
-			   		<th st-sort="constant" translate="pages.Classifier.list.table.header.constant" ></th>				 
-			   		<th st-sort="description" translate="pages.Classifier.list.table.header.description" ></th>				 
-			   		<th st-sort="propertyname" translate="pages.Classifier.list.table.header.propertyname" ></th>				 
-
-				</tr>
-	      	</thead>
-	      	<tbody ng-hide="isLoading">
-				<tr ng-repeat="classifier in rowCollection">
+	      <table class="table table-responsive" ng-table="tableParams" show-filter="true" >
+	      	<tbody ng-hide="tableParams.settings().$loading">
+				<tr ng-repeat="classifier in $data">
                     <td class="text-left" >
                         <a class="btn btn-default btn-xs" ui-sref="app.classifier.view({id:classifier.id})" ng-if="!isModal">
                             <i class="fa fa-eye"></i>
                         </a>
-                        <a class="btn btn-default btn-xs" ui-sref="app.classifier.edit({id:classifier.id})" ng-if="!isModal">
+                        <a class="btn btn-default btn-xs" ui-sref="app.classifier.view.edit({id:classifier.id})" ng-if="!isModal">
                             <i class="fa fa-edit"></i>
                         </a>
                         <a class="btn btn-danger btn-xs" ng-click="deleteClassifier(classifier)" mx-show-loading ng-if="!isModal">
@@ -89,26 +74,28 @@
                             <i class="fa fa-plus"></i>
                         </a>
                     </td>
-					 <td>{{::classifier.id}}</td>					
-			   		<td>{{::classifier.classname}}</td>				 	
-			   		<td>{{::classifier.constant}}</td>				 	
-			   		<td>{{::classifier.description}}</td>				 	
-			   		<td>{{::classifier.propertyname}}</td>				 	
+
+                    <td data-title="'pages.classifier.list.table.header.id' | translate" sortable="'id'">{{::classifier.id}}</td>					
+			   		
+        <td data-title="'pages.classifier.list.table.header.classname' | translate" sortable="'classname'">
+{{::classifier.classname}}</td>				 	
+			   		
+        <td data-title="'pages.classifier.list.table.header.constant' | translate" sortable="'constant'">
+{{::classifier.constant}}</td>				 	
+			   		
+        <td data-title="'pages.classifier.list.table.header.description' | translate" sortable="'description'">
+{{::classifier.description}}</td>				 	
+			   		
+        <td data-title="'pages.classifier.list.table.header.propertyname' | translate" sortable="'propertyname'">
+{{::classifier.propertyname}}</td>				 	
 
 				</tr>
 			</tbody>
-              <tbody ng-show="isLoading">
+              <tbody ng-show="tableParams.settings().$loading">
                   <tr>
                       <td class="text-center" translate="messages.loading"></td>
                   </tr>
               </tbody>
-			<tfoot ng-hide="isLoading">
-	          <tr>
-	            <td colspan="10" class="text-center" >
-	              <div st-pagination="" st-items-by-page="stTable.itemsByPage" st-displayed-pages="15" ></div>
-	            </td>
-	          </tr>
-	        </tfoot>
 	      </table>
         </div>
     </div>

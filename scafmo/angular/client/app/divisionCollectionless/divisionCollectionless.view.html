@@ -1,13 +1,13 @@
 
 
-<div id="divisionCollectionless_view" ng-init="pageTitle = 'pages.DivisionCollectionless.view.title'"
+<div id="divisionCollectionless_view" ng-init="pageTitle = 'pages.divisionCollectionless.view.title'"
      ng-include=" 'shared/blocks/page_heading.html' "></div>
 <div class="content-body">
     <div class="form-horizontal">
 
         <div class="form-group">
             <label class="col-sm-2 control-label"
-                   translate="pages.DivisionCollectionless.view.field.name"></label>
+                   translate="pages.divisionCollectionless.view.field.name"></label>
             <div class="col-sm-10 form-control-static"
                  ng-bind="divisionCollectionless.name"></div>
         </div>
@@ -15,7 +15,7 @@
     
 <!--ManyToOne-->
         <div class="form-group">
-            <label class="col-sm-2 control-label" translate="pages.DivisionCollectionless.view.field.headDivision"></label>
+            <label class="col-sm-2 control-label" translate="pages.divisionCollectionless.view.field.headDivision"></label>
             <a ui-sref="app.divisionCollectionless.view.divisionCollectionlessModal({modalId:divisionCollectionless.headDivision.id})" >
             <div class="col-sm-10 form-control-static">
             <span ng-bind="divisionCollectionless.headDivision.id"></span> <span ng-bind="divisionCollectionless.headDivision.name"></span> </div></a></div>
@@ -28,16 +28,16 @@
 
         <div class="form-action pull-right">
             <a id="editBtn" class="btn btn-default"
-               ui-sref="app.divisionCollectionless.edit({id:divisionCollectionless.id})">
-                <i class="fa fa-edit" translate="pages.DivisionCollectionless.view.edit"></i>
+               ui-sref="app.divisionCollectionless.view.edit({id:divisionCollectionless.id})">
+                <i class="fa fa-edit" translate="pages.divisionCollectionless.view.buttons.edit"></i>
             </a>
             <a id="deleteBtn" class="btn btn-danger"
                ng-click="deleteDivisionCollectionless(divisionCollectionless)" mx-show-loading>
-                <i class="fa fa-trash-o" translate="pages.DivisionCollectionless.view.delete"></i>
+                <i class="fa fa-trash-o" translate="pages.divisionCollectionless.view.buttons.delete"></i>
             </a>
 
             <a id="backBtn" class="btn btn-default" ng-click="back()">
-                <i class="fa fa-chevron-left" translate="pages.DivisionCollectionless.view.back"></i>
+                <i class="fa fa-chevron-left" translate="pages.divisionCollectionless.view.buttons.back"></i>
             </a>
         </div>
         <div class="clearfix"/>
@@ -52,23 +52,24 @@
         <tab ui-sref="app.divisionCollectionless.view.divisionCollectionless({relationName:'headDivisions'})"
              ui-sref-active="active">
             <tab-heading
-                   translate="pages.DivisionCollectionless.view.lists"
-                   translate-value-isval="{{::'pages.DivisionCollectionless.view.field.headDivision' | translate }}"
-                   translate-value-inval="{{::'pages.DivisionCollectionless.name' | translate }}">
+                   translate="pages.divisionCollectionless.view.lists"
+                   translate-value-isval="{{::'pages.divisionCollectionless.view.field.headDivision' | translate }}"
+                   translate-value-inval="{{::'pages.divisionCollectionless.name' | translate }}">
             </tab-heading>
         </tab>
 
         <tab ui-sref="app.divisionCollectionless.view.personCollectionless({relationName:'divisions'})"
              ui-sref-active="active">
             <tab-heading
-                   translate="pages.PersonCollectionless.view.lists"
-                   translate-value-isval="{{::'pages.PersonCollectionless.view.field.division' | translate }}"
-                   translate-value-inval="{{::'pages.PersonCollectionless.name' | translate }}">
+                   translate="pages.personCollectionless.view.lists"
+                   translate-value-isval="{{::'pages.personCollectionless.view.field.division' | translate }}"
+                   translate-value-inval="{{::'pages.personCollectionless.name' | translate }}">
             </tab-heading>
         </tab>
 
     </tabset>
-    <div ui-view ><div class="content-body">{{::'pages.DivisionCollectionless.view.selecttab' | translate}}</div></div>
+
+    <div ui-view="tabs" ><div class="content-body">{{::'pages.divisionCollectionless.view.selecttab' | translate}}</div></div>
 </div>
     
 

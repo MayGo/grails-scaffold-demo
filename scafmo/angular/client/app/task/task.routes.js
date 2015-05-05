@@ -5,25 +5,44 @@ angular.module('angularDemoApp')
 $stateProvider
 		.state('app.task', {
 		    url: '/task',
-		    template: '<div ui-view class="fade-in-up"></div>'
+			abstract: true,
+		    template: '<div ui-view="page" class="fade-in-up"></div>'
 		})
 		.state('app.task.list', {
 			url: '/list?search',//TODO: search so that search is not an object in url
-			templateUrl: 'app/task/task.list.html',
-			controller: 'TaskListController'
+			views: {
+				"page@app.task": {
+					templateUrl: 'app/task/task.list.html',
+					controller: 'TaskListController'
+				}
+			}
 		}).state('app.task.create',{
 			url: '/create',
-			templateUrl: 'app/task/task.form.html',
-			controller: 'TaskEditController',
+			ncyBreadcrumb: {
+				parent: 'app.task.list'
+			},
+			views: {
+				"page@app.task": {
+					templateUrl: 'app/task/task.form.html',
+					controller: 'TaskEditController'
+				}
+			},
 			resolve:{
 				taskData: function($stateParams, TaskService) {
 					return new TaskService();
 				}
 			}
-		}).state('app.task.edit',{
-			url: '/edit/:id',
-			templateUrl: 'app/task/task.form.html',
-			controller: 'TaskEditController',
+		}).state('app.task.view',{
+			url: '/view/:id',
+			ncyBreadcrumb: {
+				parent: 'app.task.list'
+			},
+			views: {
+				"page@app.task": {
+					templateUrl: 'app/task/task.view.html',
+					controller: 'TaskViewController'
+				}
+			},
 			resolve:{
 				taskData: function($stateParams, TaskService){
 					return TaskService.get({id:$stateParams.id}).$promise.then(
@@ -33,15 +52,19 @@ $stateProvider
 					);
 				}
 			}
-		}).state('app.task.view',{
-			url: '/view/:id',
-			templateUrl: 'app/task/task.view.html',
-			controller: 'TaskViewController',
-				resolve:{
+		}).state('app.task.view.edit',{
+			url: '/edit',
+			views: {
+				"page@app.task": {
+					templateUrl: 'app/task/task.form.html',
+					controller: 'TaskEditController',
+				}
+			},
+			resolve:{
 				taskData: function($stateParams, TaskService){
 					return TaskService.get({id:$stateParams.id}).$promise.then(
 						function( response ){
-							return response;
+								return response;
 						}
 					);
 				}

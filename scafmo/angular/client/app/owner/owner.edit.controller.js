@@ -26,7 +26,7 @@ angular.module('angularDemoApp')
 
 	    	if($scope.isEditForm){
 	    		OwnerService.update($scope.owner, function(response) {	
-	    			$translate('pages.Owner.messages.update').then(function (msg) {
+	    			$translate('pages.owner.messages.update').then(function (msg) {
 				    	inform.add(msg, {'type': 'success'});
 					});
 	            	deferred.resolve(response);
@@ -34,7 +34,7 @@ angular.module('angularDemoApp')
 	    	}else{
     			OwnerService.save($scope.owner,function(response) {
 					
-    				$translate('pages.Owner.messages.create').then(function (msg) {
+    				$translate('pages.owner.messages.create').then(function (msg) {
 				    	inform.add(msg, {'type': 'success'});
 					});
 					$state.go('^.view', { id: response.id }, {location: 'replace'});

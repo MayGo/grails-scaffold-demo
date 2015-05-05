@@ -5,25 +5,44 @@ angular.module('angularDemoApp')
 $stateProvider
 		.state('app.divisionCollection', {
 		    url: '/divisionCollection',
-		    template: '<div ui-view class="fade-in-up"></div>'
+			abstract: true,
+		    template: '<div ui-view="page" class="fade-in-up"></div>'
 		})
 		.state('app.divisionCollection.list', {
 			url: '/list?search',//TODO: search so that search is not an object in url
-			templateUrl: 'app/divisionCollection/divisionCollection.list.html',
-			controller: 'DivisionCollectionListController'
+			views: {
+				"page@app.divisionCollection": {
+					templateUrl: 'app/divisionCollection/divisionCollection.list.html',
+					controller: 'DivisionCollectionListController'
+				}
+			}
 		}).state('app.divisionCollection.create',{
 			url: '/create',
-			templateUrl: 'app/divisionCollection/divisionCollection.form.html',
-			controller: 'DivisionCollectionEditController',
+			ncyBreadcrumb: {
+				parent: 'app.divisionCollection.list'
+			},
+			views: {
+				"page@app.divisionCollection": {
+					templateUrl: 'app/divisionCollection/divisionCollection.form.html',
+					controller: 'DivisionCollectionEditController'
+				}
+			},
 			resolve:{
 				divisionCollectionData: function($stateParams, DivisionCollectionService) {
 					return new DivisionCollectionService();
 				}
 			}
-		}).state('app.divisionCollection.edit',{
-			url: '/edit/:id',
-			templateUrl: 'app/divisionCollection/divisionCollection.form.html',
-			controller: 'DivisionCollectionEditController',
+		}).state('app.divisionCollection.view',{
+			url: '/view/:id',
+			ncyBreadcrumb: {
+				parent: 'app.divisionCollection.list'
+			},
+			views: {
+				"page@app.divisionCollection": {
+					templateUrl: 'app/divisionCollection/divisionCollection.view.html',
+					controller: 'DivisionCollectionViewController'
+				}
+			},
 			resolve:{
 				divisionCollectionData: function($stateParams, DivisionCollectionService){
 					return DivisionCollectionService.get({id:$stateParams.id}).$promise.then(
@@ -33,15 +52,19 @@ $stateProvider
 					);
 				}
 			}
-		}).state('app.divisionCollection.view',{
-			url: '/view/:id',
-			templateUrl: 'app/divisionCollection/divisionCollection.view.html',
-			controller: 'DivisionCollectionViewController',
-				resolve:{
+		}).state('app.divisionCollection.view.edit',{
+			url: '/edit',
+			views: {
+				"page@app.divisionCollection": {
+					templateUrl: 'app/divisionCollection/divisionCollection.form.html',
+					controller: 'DivisionCollectionEditController',
+				}
+			},
+			resolve:{
 				divisionCollectionData: function($stateParams, DivisionCollectionService){
 					return DivisionCollectionService.get({id:$stateParams.id}).$promise.then(
 						function( response ){
-							return response;
+								return response;
 						}
 					);
 				}
@@ -78,7 +101,7 @@ $stateProvider
 
 		}
 
-	}).state('app.divisionCollection.edit.divisionCollectionSearchModal',{
+	}).state('app.divisionCollection.view.edit.divisionCollectionSearchModal',{
 		templateUrl: 'app/divisionCollection/divisionCollection.list.html',
 		controller: 'DivisionCollectionListController'
 	})
@@ -86,20 +109,34 @@ $stateProvider
 
 		.state('app.divisionCollection.view.divisionCollection',{
 			url: '/divisionCollection/:relationName',
+			ncyBreadcrumb: {
+				skip: true
+			},
 			data:{
 				isTab:true
 			},
-			templateUrl: 'app/divisionCollection/divisionCollection.list.html',
-			controller: 'DivisionCollectionListController'
+			views: {
+				"tabs": {
+					templateUrl: 'app/divisionCollection/divisionCollection.list.html',
+					controller: 'DivisionCollectionListController'
+				}
+			}
 		})
 	
 		.state('app.divisionCollection.view.personCollection',{
 			url: '/personCollection/:relationName',
+			ncyBreadcrumb: {
+				skip: true
+			},
 			data:{
 				isTab:true
 			},
-			templateUrl: 'app/personCollection/personCollection.list.html',
-			controller: 'PersonCollectionListController'
+			views: {
+				"tabs": {
+					templateUrl: 'app/personCollection/personCollection.list.html',
+					controller: 'PersonCollectionListController'
+				}
+			}
 		})
 	
 ;

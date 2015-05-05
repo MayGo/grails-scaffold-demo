@@ -1,13 +1,13 @@
 
 
-<div id="classifier_view" ng-init="pageTitle = 'pages.Classifier.view.title'"
+<div id="classifier_view" ng-init="pageTitle = 'pages.classifier.view.title'"
      ng-include=" 'shared/blocks/page_heading.html' "></div>
 <div class="content-body">
     <div class="form-horizontal">
 
         <div class="form-group">
             <label class="col-sm-2 control-label"
-                   translate="pages.Classifier.view.field.classname"></label>
+                   translate="pages.classifier.view.field.classname"></label>
             <div class="col-sm-10 form-control-static"
                  ng-bind="classifier.classname"></div>
         </div>
@@ -16,7 +16,7 @@
 
         <div class="form-group">
             <label class="col-sm-2 control-label"
-                   translate="pages.Classifier.view.field.constant"></label>
+                   translate="pages.classifier.view.field.constant"></label>
             <div class="col-sm-10 form-control-static"
                  ng-bind="classifier.constant"></div>
         </div>
@@ -25,7 +25,7 @@
 
         <div class="form-group">
             <label class="col-sm-2 control-label"
-                   translate="pages.Classifier.view.field.description"></label>
+                   translate="pages.classifier.view.field.description"></label>
             <div class="col-sm-10 form-control-static"
                  ng-bind="classifier.description"></div>
         </div>
@@ -34,7 +34,7 @@
 
         <div class="form-group">
             <label class="col-sm-2 control-label"
-                   translate="pages.Classifier.view.field.propertyname"></label>
+                   translate="pages.classifier.view.field.propertyname"></label>
             <div class="col-sm-10 form-control-static"
                  ng-bind="classifier.propertyname"></div>
         </div>
@@ -47,16 +47,16 @@
 
         <div class="form-action pull-right">
             <a id="editBtn" class="btn btn-default"
-               ui-sref="app.classifier.edit({id:classifier.id})">
-                <i class="fa fa-edit" translate="pages.Classifier.view.edit"></i>
+               ui-sref="app.classifier.view.edit({id:classifier.id})">
+                <i class="fa fa-edit" translate="pages.classifier.view.buttons.edit"></i>
             </a>
             <a id="deleteBtn" class="btn btn-danger"
                ng-click="deleteClassifier(classifier)" mx-show-loading>
-                <i class="fa fa-trash-o" translate="pages.Classifier.view.delete"></i>
+                <i class="fa fa-trash-o" translate="pages.classifier.view.buttons.delete"></i>
             </a>
 
             <a id="backBtn" class="btn btn-default" ng-click="back()">
-                <i class="fa fa-chevron-left" translate="pages.Classifier.view.back"></i>
+                <i class="fa fa-chevron-left" translate="pages.classifier.view.buttons.back"></i>
             </a>
         </div>
         <div class="clearfix"/>

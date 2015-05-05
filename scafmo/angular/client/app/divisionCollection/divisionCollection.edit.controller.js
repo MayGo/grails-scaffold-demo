@@ -26,7 +26,7 @@ angular.module('angularDemoApp')
 
 	    	if($scope.isEditForm){
 	    		DivisionCollectionService.update($scope.divisionCollection, function(response) {	
-	    			$translate('pages.DivisionCollection.messages.update').then(function (msg) {
+	    			$translate('pages.divisionCollection.messages.update').then(function (msg) {
 				    	inform.add(msg, {'type': 'success'});
 					});
 	            	deferred.resolve(response);
@@ -34,7 +34,7 @@ angular.module('angularDemoApp')
 	    	}else{
     			DivisionCollectionService.save($scope.divisionCollection,function(response) {
 					
-    				$translate('pages.DivisionCollection.messages.create').then(function (msg) {
+    				$translate('pages.divisionCollection.messages.create').then(function (msg) {
 				    	inform.add(msg, {'type': 'success'});
 					});
 					$state.go('^.view', { id: response.id }, {location: 'replace'});

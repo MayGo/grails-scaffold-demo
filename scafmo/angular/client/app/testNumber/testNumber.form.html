@@ -1,14 +1,14 @@
 
 
 <div id="testNumber_form"
-     ng-init="pageTitle = (isEditForm)?'pages.TestNumber.edit.title':'pages.TestNumber.create.title'" data-ng-include=" 'shared/blocks/page_heading.html' "></div>
+     ng-init="pageTitle = (isEditForm)?'pages.testNumber.view.edit.title':'pages.testNumber.create.title'" data-ng-include=" 'shared/blocks/page_heading.html' "></div>
 <div class="content-body">
     <form name="testNumberForm" class="form-validation form-horizontal" novalidate>
         <input name="version" type="hidden" ng-model="testNumber.version" />
 
 	<div class="form-group">
 		<label class="col-sm-2 control-label" for="doubleNr"
-               translate="pages.TestNumber.edit.form.field.doubleNr"></label>
+               translate="pages.testNumber.view.edit.form.field.doubleNr"></label>
 		<div class="col-sm-10">
             <div class="input-group input-group">
 	      				<span class="input-group-addon">nr</span>
@@ -21,7 +21,7 @@
 
 	<div class="form-group">
 		<label class="col-sm-2 control-label" for="floatNr"
-               translate="pages.TestNumber.edit.form.field.floatNr"></label>
+               translate="pages.testNumber.view.edit.form.field.floatNr"></label>
 		<div class="col-sm-10">
             <div class="input-group input-group">
 	      				<span class="input-group-addon">nr</span>
@@ -34,7 +34,7 @@
 
 	<div class="form-group">
 		<label class="col-sm-2 control-label" for="floatNrScale"
-               translate="pages.TestNumber.edit.form.field.floatNrScale"></label>
+               translate="pages.testNumber.view.edit.form.field.floatNrScale"></label>
 		<div class="col-sm-10">
             <div class="input-group input-group">
 	      				<span class="input-group-addon">nr</span>
@@ -47,7 +47,7 @@
 
 	<div class="form-group">
 		<label class="col-sm-2 control-label" for="integerNr"
-               translate="pages.TestNumber.edit.form.field.integerNr"></label>
+               translate="pages.testNumber.view.edit.form.field.integerNr"></label>
 		<div class="col-sm-10">
             <div class="input-group input-group">
 	      				<span class="input-group-addon">nr</span>
@@ -60,7 +60,7 @@
 
 	<div class="form-group">
 		<label class="col-sm-2 control-label" for="integerNrInList"
-               translate="pages.TestNumber.edit.form.field.integerNrInList"></label>
+               translate="pages.testNumber.view.edit.form.field.integerNrInList"></label>
 		<div class="col-sm-10">
             
 	<select id="integerNrInList" name="integerNrInList"
@@ -76,7 +76,7 @@
 
 	<div class="form-group">
 		<label class="col-sm-2 control-label" for="integerNrMax"
-               translate="pages.TestNumber.edit.form.field.integerNrMax"></label>
+               translate="pages.testNumber.view.edit.form.field.integerNrMax"></label>
 		<div class="col-sm-10">
             <div class="input-group input-group">
 	      				<span class="input-group-addon">nr</span>
@@ -89,7 +89,7 @@
 
 	<div class="form-group">
 		<label class="col-sm-2 control-label" for="integerNrMin"
-               translate="pages.TestNumber.edit.form.field.integerNrMin"></label>
+               translate="pages.testNumber.view.edit.form.field.integerNrMin"></label>
 		<div class="col-sm-10">
             <div class="input-group input-group">
 	      				<span class="input-group-addon">nr</span>
@@ -102,7 +102,7 @@
 
 	<div class="form-group">
 		<label class="col-sm-2 control-label" for="integerNrNotEqual"
-               translate="pages.TestNumber.edit.form.field.integerNrNotEqual"></label>
+               translate="pages.testNumber.view.edit.form.field.integerNrNotEqual"></label>
 		<div class="col-sm-10">
             <div class="input-group input-group">
 	      				<span class="input-group-addon">nr</span>
@@ -115,7 +115,7 @@
 
 	<div class="form-group">
 		<label class="col-sm-2 control-label" for="integerNrRange"
-               translate="pages.TestNumber.edit.form.field.integerNrRange"></label>
+               translate="pages.testNumber.view.edit.form.field.integerNrRange"></label>
 		<div class="col-sm-10">
             <div class="input-group input-group">
 	      				<span class="input-group-addon">nr</span>
@@ -128,7 +128,7 @@
 
 	<div class="form-group">
 		<label class="col-sm-2 control-label" for="integerNrUnique"
-               translate="pages.TestNumber.edit.form.field.integerNrUnique"></label>
+               translate="pages.testNumber.view.edit.form.field.integerNrUnique"></label>
 		<div class="col-sm-10">
             <div class="input-group input-group">
 	      				<span class="input-group-addon">nr</span>
@@ -141,7 +141,7 @@
 
 	<div class="form-group">
 		<label class="col-sm-2 control-label" for="longNr"
-               translate="pages.TestNumber.edit.form.field.longNr"></label>
+               translate="pages.testNumber.view.edit.form.field.longNr"></label>
 		<div class="col-sm-10">
             <div class="input-group input-group">
 	      				<span class="input-group-addon">nr</span>
@@ -159,9 +159,9 @@
                     class="btn btn-success"
                     type='submit'
                     ng-disabled="testNumberForm.$invalid"
-                    translate="pages.TestNumber.edit.form.submit"
+                    translate="pages.testNumber.view.edit.form.submit"
                     mx-show-loading ng-click="submit(testNumberForm)"></button>
-                <a class="btn btn-default" ng-click="back()" translate="pages.TestNumber.edit.form.cancel" mx-show-loading></a>
+                <a class="btn btn-default" ng-click="back()" translate="pages.testNumber.view.edit.form.cancel" mx-show-loading></a>
             </div>
             <div class="clearfix"/>
         </div>

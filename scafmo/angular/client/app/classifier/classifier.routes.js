@@ -5,25 +5,44 @@ angular.module('angularDemoApp')
 $stateProvider
 		.state('app.classifier', {
 		    url: '/classifier',
-		    template: '<div ui-view class="fade-in-up"></div>'
+			abstract: true,
+		    template: '<div ui-view="page" class="fade-in-up"></div>'
 		})
 		.state('app.classifier.list', {
 			url: '/list?search',//TODO: search so that search is not an object in url
-			templateUrl: 'app/classifier/classifier.list.html',
-			controller: 'ClassifierListController'
+			views: {
+				"page@app.classifier": {
+					templateUrl: 'app/classifier/classifier.list.html',
+					controller: 'ClassifierListController'
+				}
+			}
 		}).state('app.classifier.create',{
 			url: '/create',
-			templateUrl: 'app/classifier/classifier.form.html',
-			controller: 'ClassifierEditController',
+			ncyBreadcrumb: {
+				parent: 'app.classifier.list'
+			},
+			views: {
+				"page@app.classifier": {
+					templateUrl: 'app/classifier/classifier.form.html',
+					controller: 'ClassifierEditController'
+				}
+			},
 			resolve:{
 				classifierData: function($stateParams, ClassifierService) {
 					return new ClassifierService();
 				}
 			}
-		}).state('app.classifier.edit',{
-			url: '/edit/:id',
-			templateUrl: 'app/classifier/classifier.form.html',
-			controller: 'ClassifierEditController',
+		}).state('app.classifier.view',{
+			url: '/view/:id',
+			ncyBreadcrumb: {
+				parent: 'app.classifier.list'
+			},
+			views: {
+				"page@app.classifier": {
+					templateUrl: 'app/classifier/classifier.view.html',
+					controller: 'ClassifierViewController'
+				}
+			},
 			resolve:{
 				classifierData: function($stateParams, ClassifierService){
 					return ClassifierService.get({id:$stateParams.id}).$promise.then(
@@ -33,15 +52,19 @@ $stateProvider
 					);
 				}
 			}
-		}).state('app.classifier.view',{
-			url: '/view/:id',
-			templateUrl: 'app/classifier/classifier.view.html',
-			controller: 'ClassifierViewController',
-				resolve:{
+		}).state('app.classifier.view.edit',{
+			url: '/edit',
+			views: {
+				"page@app.classifier": {
+					templateUrl: 'app/classifier/classifier.form.html',
+					controller: 'ClassifierEditController',
+				}
+			},
+			resolve:{
 				classifierData: function($stateParams, ClassifierService){
 					return ClassifierService.get({id:$stateParams.id}).$promise.then(
 						function( response ){
-							return response;
+								return response;
 						}
 					);
 				}

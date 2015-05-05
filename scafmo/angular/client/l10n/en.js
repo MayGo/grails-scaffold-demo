@@ -63,7 +63,7 @@
 		}
 	},
 	
-		"Tag":{
+		"tag":{
 			"name":"Tag",
 			"list":{
 				"title": "Tag List",	
@@ -95,11 +95,13 @@
 				}
 			},
 			"view":{
-				"title": "Tag View",	
-				"new": " New Tag",
-				"edit": " Edit",
-				"delete": " Delete",
-				"back": " Back",
+				"title": "Tag View",
+				"buttons":{
+					"new": " New Tag",
+						"edit": " Edit",
+						"delete": " Delete",
+						"back": " Back"
+				},
 				"lists": "{{isval}} in {{inval}}",
 				"selecttab": "Click on tab to show table",
 				"field":{
@@ -107,22 +109,23 @@
 							"name":"Name",						
 							"tasks":"Tasks",						
 				    "id": "Id"
-				}
-			},
-			"edit":{
-				"title": "Edit Tag",	
-				"form":{
-					"title":"Tag Form",	
-					"submit":"Submit",
-					"cancel":"Cancel",
-					"field":{
+				},
+				"edit":{
+					"title": "Edit Tag",
+						"form":{
+						"title":"Tag Form",
+							"submit":"Submit",
+							"cancel":"Cancel",
+							"field":{
 						
-				   		"name":"Name",					    
-				   		"tasks":"Tasks",					    
-					    "id": "Id"
+									"name":"Name",								
+									"tasks":"Tasks",								
+							"id": "Id"
+						}
 					}
 				}
 			},
+
 			"messages":{
 				"delete": "Deleted Tag",
 				"update": "Updated Tag",
@@ -133,7 +136,7 @@
 			}
 		},
 	
-		"Task":{
+		"task":{
 			"name":"Task",
 			"list":{
 				"title": "Task List",	
@@ -175,11 +178,13 @@
 				}
 			},
 			"view":{
-				"title": "Task View",	
-				"new": " New Task",
-				"edit": " Edit",
-				"delete": " Delete",
-				"back": " Back",
+				"title": "Task View",
+				"buttons":{
+					"new": " New Task",
+						"edit": " Edit",
+						"delete": " Delete",
+						"back": " Back"
+				},
 				"lists": "{{isval}} in {{inval}}",
 				"selecttab": "Click on tab to show table",
 				"field":{
@@ -192,27 +197,28 @@
 							"tags":"Tags",						
 							"timeSpent":"Time Spent",						
 				    "id": "Id"
-				}
-			},
-			"edit":{
-				"title": "Edit Task",	
-				"form":{
-					"title":"Task Form",	
-					"submit":"Submit",
-					"cancel":"Cancel",
-					"field":{
+				},
+				"edit":{
+					"title": "Edit Task",
+						"form":{
+						"title":"Task Form",
+							"submit":"Submit",
+							"cancel":"Cancel",
+							"field":{
 						
-				   		"dateCreated":"Date Created",					    
-				   		"deadline":"Deadline",					    
-				   		"details":"Details",					    
-				   		"status":"Status",					    
-				   		"summary":"Summary",					    
-				   		"tags":"Tags",					    
-				   		"timeSpent":"Time Spent",					    
-					    "id": "Id"
+									"dateCreated":"Date Created",								
+									"deadline":"Deadline",								
+									"details":"Details",								
+									"status":"Status",								
+									"summary":"Summary",								
+									"tags":"Tags",								
+									"timeSpent":"Time Spent",								
+							"id": "Id"
+						}
 					}
 				}
 			},
+
 			"messages":{
 				"delete": "Deleted Task",
 				"update": "Updated Task",
@@ -223,7 +229,7 @@
 			}
 		},
 	
-		"Owner":{
+		"owner":{
 			"name":"Owner",
 			"list":{
 				"title": "Owner List",	
@@ -263,11 +269,13 @@
 				}
 			},
 			"view":{
-				"title": "Owner View",	
-				"new": " New Owner",
-				"edit": " Edit",
-				"delete": " Delete",
-				"back": " Back",
+				"title": "Owner View",
+				"buttons":{
+					"new": " New Owner",
+						"edit": " Edit",
+						"delete": " Delete",
+						"back": " Back"
+				},
 				"lists": "{{isval}} in {{inval}}",
 				"selecttab": "Click on tab to show table",
 				"field":{
@@ -279,26 +287,27 @@
 							"pets":"Pets",						
 							"telephone":"Telephone",						
 				    "id": "Id"
-				}
-			},
-			"edit":{
-				"title": "Edit Owner",	
-				"form":{
-					"title":"Owner Form",	
-					"submit":"Submit",
-					"cancel":"Cancel",
-					"field":{
+				},
+				"edit":{
+					"title": "Edit Owner",
+						"form":{
+						"title":"Owner Form",
+							"submit":"Submit",
+							"cancel":"Cancel",
+							"field":{
 						
-				   		"address":"Address",					    
-				   		"city":"City",					    
-				   		"firstName":"First Name",					    
-				   		"lastName":"Last Name",					    
-				   		"pets":"Pets",					    
-				   		"telephone":"Telephone",					    
-					    "id": "Id"
+									"address":"Address",								
+									"city":"City",								
+									"firstName":"First Name",								
+									"lastName":"Last Name",								
+									"pets":"Pets",								
+									"telephone":"Telephone",								
+							"id": "Id"
+						}
 					}
 				}
 			},
+
 			"messages":{
 				"delete": "Deleted Owner",
 				"update": "Updated Owner",
@@ -309,7 +318,7 @@
 			}
 		},
 	
-		"Person":{
+		"person":{
 			"name":"Person",
 			"list":{
 				"title": "Person List",	
@@ -341,11 +350,13 @@
 				}
 			},
 			"view":{
-				"title": "Person View",	
-				"new": " New Person",
-				"edit": " Edit",
-				"delete": " Delete",
-				"back": " Back",
+				"title": "Person View",
+				"buttons":{
+					"new": " New Person",
+						"edit": " Edit",
+						"delete": " Delete",
+						"back": " Back"
+				},
 				"lists": "{{isval}} in {{inval}}",
 				"selecttab": "Click on tab to show table",
 				"field":{
@@ -353,22 +364,23 @@
 							"firstName":"First Name",						
 							"lastName":"Last Name",						
 				    "id": "Id"
-				}
-			},
-			"edit":{
-				"title": "Edit Person",	
-				"form":{
-					"title":"Person Form",	
-					"submit":"Submit",
-					"cancel":"Cancel",
-					"field":{
+				},
+				"edit":{
+					"title": "Edit Person",
+						"form":{
+						"title":"Person Form",
+							"submit":"Submit",
+							"cancel":"Cancel",
+							"field":{
 						
-				   		"firstName":"First Name",					    
-				   		"lastName":"Last Name",					    
-					    "id": "Id"
+									"firstName":"First Name",								
+									"lastName":"Last Name",								
+							"id": "Id"
+						}
 					}
 				}
 			},
+
 			"messages":{
 				"delete": "Deleted Person",
 				"update": "Updated Person",
@@ -379,7 +391,7 @@
 			}
 		},
 	
-		"Pet":{
+		"pet":{
 			"name":"Pet",
 			"list":{
 				"title": "Pet List",	
@@ -417,11 +429,13 @@
 				}
 			},
 			"view":{
-				"title": "Pet View",	
-				"new": " New Pet",
-				"edit": " Edit",
-				"delete": " Delete",
-				"back": " Back",
+				"title": "Pet View",
+				"buttons":{
+					"new": " New Pet",
+						"edit": " Edit",
+						"delete": " Delete",
+						"back": " Back"
+				},
 				"lists": "{{isval}} in {{inval}}",
 				"selecttab": "Click on tab to show table",
 				"field":{
@@ -432,25 +446,26 @@
 							"type":"Type",						
 							"visits":"Visits",						
 				    "id": "Id"
-				}
-			},
-			"edit":{
-				"title": "Edit Pet",	
-				"form":{
-					"title":"Pet Form",	
-					"submit":"Submit",
-					"cancel":"Cancel",
-					"field":{
+				},
+				"edit":{
+					"title": "Edit Pet",
+						"form":{
+						"title":"Pet Form",
+							"submit":"Submit",
+							"cancel":"Cancel",
+							"field":{
 						
-				   		"birthDate":"Birth Date",					    
-				   		"name":"Name",					    
-				   		"owner":"Owner",					    
-				   		"type":"Type",					    
-				   		"visits":"Visits",					    
-					    "id": "Id"
+									"birthDate":"Birth Date",								
+									"name":"Name",								
+									"owner":"Owner",								
+									"type":"Type",								
+									"visits":"Visits",								
+							"id": "Id"
+						}
 					}
 				}
 			},
+
 			"messages":{
 				"delete": "Deleted Pet",
 				"update": "Updated Pet",
@@ -461,7 +476,7 @@
 			}
 		},
 	
-		"PetType":{
+		"petType":{
 			"name":"Pet Type",
 			"list":{
 				"title": "Pet Type List",	
@@ -491,32 +506,35 @@
 				}
 			},
 			"view":{
-				"title": "Pet Type View",	
-				"new": " New Pet Type",
-				"edit": " Edit",
-				"delete": " Delete",
-				"back": " Back",
+				"title": "Pet Type View",
+				"buttons":{
+					"new": " New Pet Type",
+						"edit": " Edit",
+						"delete": " Delete",
+						"back": " Back"
+				},
 				"lists": "{{isval}} in {{inval}}",
 				"selecttab": "Click on tab to show table",
 				"field":{
 					
 							"name":"Name",						
 				    "id": "Id"
-				}
-			},
-			"edit":{
-				"title": "Edit Pet Type",	
-				"form":{
-					"title":"Pet Type Form",	
-					"submit":"Submit",
-					"cancel":"Cancel",
-					"field":{
+				},
+				"edit":{
+					"title": "Edit Pet Type",
+						"form":{
+						"title":"Pet Type Form",
+							"submit":"Submit",
+							"cancel":"Cancel",
+							"field":{
 						
-				   		"name":"Name",					    
-					    "id": "Id"
+									"name":"Name",								
+							"id": "Id"
+						}
 					}
 				}
 			},
+
 			"messages":{
 				"delete": "Deleted Pet Type",
 				"update": "Updated Pet Type",
@@ -527,7 +545,7 @@
 			}
 		},
 	
-		"Speciality":{
+		"speciality":{
 			"name":"Speciality",
 			"list":{
 				"title": "Speciality List",	
@@ -557,32 +575,35 @@
 				}
 			},
 			"view":{
-				"title": "Speciality View",	
-				"new": " New Speciality",
-				"edit": " Edit",
-				"delete": " Delete",
-				"back": " Back",
+				"title": "Speciality View",
+				"buttons":{
+					"new": " New Speciality",
+						"edit": " Edit",
+						"delete": " Delete",
+						"back": " Back"
+				},
 				"lists": "{{isval}} in {{inval}}",
 				"selecttab": "Click on tab to show table",
 				"field":{
 					
 							"name":"Name",						
 				    "id": "Id"
-				}
-			},
-			"edit":{
-				"title": "Edit Speciality",	
-				"form":{
-					"title":"Speciality Form",	
-					"submit":"Submit",
-					"cancel":"Cancel",
-					"field":{
+				},
+				"edit":{
+					"title": "Edit Speciality",
+						"form":{
+						"title":"Speciality Form",
+							"submit":"Submit",
+							"cancel":"Cancel",
+							"field":{
 						
-				   		"name":"Name",					    
-					    "id": "Id"
+									"name":"Name",								
+							"id": "Id"
+						}
 					}
 				}
 			},
+
 			"messages":{
 				"delete": "Deleted Speciality",
 				"update": "Updated Speciality",
@@ -593,7 +614,7 @@
 			}
 		},
 	
-		"Vet":{
+		"vet":{
 			"name":"Vet",
 			"list":{
 				"title": "Vet List",	
@@ -627,11 +648,13 @@
 				}
 			},
 			"view":{
-				"title": "Vet View",	
-				"new": " New Vet",
-				"edit": " Edit",
-				"delete": " Delete",
-				"back": " Back",
+				"title": "Vet View",
+				"buttons":{
+					"new": " New Vet",
+						"edit": " Edit",
+						"delete": " Delete",
+						"back": " Back"
+				},
 				"lists": "{{isval}} in {{inval}}",
 				"selecttab": "Click on tab to show table",
 				"field":{
@@ -640,23 +663,24 @@
 							"lastName":"Last Name",						
 							"specialities":"Specialities",						
 				    "id": "Id"
-				}
-			},
-			"edit":{
-				"title": "Edit Vet",	
-				"form":{
-					"title":"Vet Form",	
-					"submit":"Submit",
-					"cancel":"Cancel",
-					"field":{
+				},
+				"edit":{
+					"title": "Edit Vet",
+						"form":{
+						"title":"Vet Form",
+							"submit":"Submit",
+							"cancel":"Cancel",
+							"field":{
 						
-				   		"firstName":"First Name",					    
-				   		"lastName":"Last Name",					    
-				   		"specialities":"Specialities",					    
-					    "id": "Id"
+									"firstName":"First Name",								
+									"lastName":"Last Name",								
+									"specialities":"Specialities",								
+							"id": "Id"
+						}
 					}
 				}
 			},
+
 			"messages":{
 				"delete": "Deleted Vet",
 				"update": "Updated Vet",
@@ -667,7 +691,7 @@
 			}
 		},
 	
-		"Visit":{
+		"visit":{
 			"name":"Visit",
 			"list":{
 				"title": "Visit List",	
@@ -701,11 +725,13 @@
 				}
 			},
 			"view":{
-				"title": "Visit View",	
-				"new": " New Visit",
-				"edit": " Edit",
-				"delete": " Delete",
-				"back": " Back",
+				"title": "Visit View",
+				"buttons":{
+					"new": " New Visit",
+						"edit": " Edit",
+						"delete": " Delete",
+						"back": " Back"
+				},
 				"lists": "{{isval}} in {{inval}}",
 				"selecttab": "Click on tab to show table",
 				"field":{
@@ -714,23 +740,24 @@
 							"description":"Description",						
 							"pet":"Pet",						
 				    "id": "Id"
-				}
-			},
-			"edit":{
-				"title": "Edit Visit",	
-				"form":{
-					"title":"Visit Form",	
-					"submit":"Submit",
-					"cancel":"Cancel",
-					"field":{
+				},
+				"edit":{
+					"title": "Edit Visit",
+						"form":{
+						"title":"Visit Form",
+							"submit":"Submit",
+							"cancel":"Cancel",
+							"field":{
 						
-				   		"date":"Date",					    
-				   		"description":"Description",					    
-				   		"pet":"Pet",					    
-					    "id": "Id"
+									"date":"Date",								
+									"description":"Description",								
+									"pet":"Pet",								
+							"id": "Id"
+						}
 					}
 				}
 			},
+
 			"messages":{
 				"delete": "Deleted Visit",
 				"update": "Updated Visit",
@@ -741,7 +768,7 @@
 			}
 		},
 	
-		"DivisionCollection":{
+		"divisionCollection":{
 			"name":"Division Collection",
 			"list":{
 				"title": "Division Collection List",	
@@ -775,11 +802,13 @@
 				}
 			},
 			"view":{
-				"title": "Division Collection View",	
-				"new": " New Division Collection",
-				"edit": " Edit",
-				"delete": " Delete",
-				"back": " Back",
+				"title": "Division Collection View",
+				"buttons":{
+					"new": " New Division Collection",
+						"edit": " Edit",
+						"delete": " Delete",
+						"back": " Back"
+				},
 				"lists": "{{isval}} in {{inval}}",
 				"selecttab": "Click on tab to show table",
 				"field":{
@@ -788,23 +817,24 @@
 							"name":"Name",						
 							"persons":"Persons",						
 				    "id": "Id"
-				}
-			},
-			"edit":{
-				"title": "Edit Division Collection",	
-				"form":{
-					"title":"Division Collection Form",	
-					"submit":"Submit",
-					"cancel":"Cancel",
-					"field":{
+				},
+				"edit":{
+					"title": "Edit Division Collection",
+						"form":{
+						"title":"Division Collection Form",
+							"submit":"Submit",
+							"cancel":"Cancel",
+							"field":{
 						
-				   		"headDivision":"Head Division",					    
-				   		"name":"Name",					    
-				   		"persons":"Persons",					    
-					    "id": "Id"
+									"headDivision":"Head Division",								
+									"name":"Name",								
+									"persons":"Persons",								
+							"id": "Id"
+						}
 					}
 				}
 			},
+
 			"messages":{
 				"delete": "Deleted Division Collection",
 				"update": "Updated Division Collection",
@@ -815,7 +845,7 @@
 			}
 		},
 	
-		"DivisionCollectionless":{
+		"divisionCollectionless":{
 			"name":"Division Collectionless",
 			"list":{
 				"title": "Division Collectionless List",	
@@ -847,11 +877,13 @@
 				}
 			},
 			"view":{
-				"title": "Division Collectionless View",	
-				"new": " New Division Collectionless",
-				"edit": " Edit",
-				"delete": " Delete",
-				"back": " Back",
+				"title": "Division Collectionless View",
+				"buttons":{
+					"new": " New Division Collectionless",
+						"edit": " Edit",
+						"delete": " Delete",
+						"back": " Back"
+				},
 				"lists": "{{isval}} in {{inval}}",
 				"selecttab": "Click on tab to show table",
 				"field":{
@@ -859,22 +891,23 @@
 							"headDivision":"Head Division",						
 							"name":"Name",						
 				    "id": "Id"
-				}
-			},
-			"edit":{
-				"title": "Edit Division Collectionless",	
-				"form":{
-					"title":"Division Collectionless Form",	
-					"submit":"Submit",
-					"cancel":"Cancel",
-					"field":{
+				},
+				"edit":{
+					"title": "Edit Division Collectionless",
+						"form":{
+						"title":"Division Collectionless Form",
+							"submit":"Submit",
+							"cancel":"Cancel",
+							"field":{
 						
-				   		"headDivision":"Head Division",					    
-				   		"name":"Name",					    
-					    "id": "Id"
+									"headDivision":"Head Division",								
+									"name":"Name",								
+							"id": "Id"
+						}
 					}
 				}
 			},
+
 			"messages":{
 				"delete": "Deleted Division Collectionless",
 				"update": "Updated Division Collectionless",
@@ -885,7 +918,7 @@
 			}
 		},
 	
-		"PersonCollection":{
+		"personCollection":{
 			"name":"Person Collection",
 			"list":{
 				"title": "Person Collection List",	
@@ -919,11 +952,13 @@
 				}
 			},
 			"view":{
-				"title": "Person Collection View",	
-				"new": " New Person Collection",
-				"edit": " Edit",
-				"delete": " Delete",
-				"back": " Back",
+				"title": "Person Collection View",
+				"buttons":{
+					"new": " New Person Collection",
+						"edit": " Edit",
+						"delete": " Delete",
+						"back": " Back"
+				},
 				"lists": "{{isval}} in {{inval}}",
 				"selecttab": "Click on tab to show table",
 				"field":{
@@ -932,23 +967,24 @@
 							"division":"Division",						
 							"name":"Name",						
 				    "id": "Id"
-				}
-			},
-			"edit":{
-				"title": "Edit Person Collection",	
-				"form":{
-					"title":"Person Collection Form",	
-					"submit":"Submit",
-					"cancel":"Cancel",
-					"field":{
+				},
+				"edit":{
+					"title": "Edit Person Collection",
+						"form":{
+						"title":"Person Collection Form",
+							"submit":"Submit",
+							"cancel":"Cancel",
+							"field":{
 						
-				   		"age":"Age",					    
-				   		"division":"Division",					    
-				   		"name":"Name",					    
-					    "id": "Id"
+									"age":"Age",								
+									"division":"Division",								
+									"name":"Name",								
+							"id": "Id"
+						}
 					}
 				}
 			},
+
 			"messages":{
 				"delete": "Deleted Person Collection",
 				"update": "Updated Person Collection",
@@ -959,7 +995,7 @@
 			}
 		},
 	
-		"PersonCollectionless":{
+		"personCollectionless":{
 			"name":"Person Collectionless",
 			"list":{
 				"title": "Person Collectionless List",	
@@ -993,11 +1029,13 @@
 				}
 			},
 			"view":{
-				"title": "Person Collectionless View",	
-				"new": " New Person Collectionless",
-				"edit": " Edit",
-				"delete": " Delete",
-				"back": " Back",
+				"title": "Person Collectionless View",
+				"buttons":{
+					"new": " New Person Collectionless",
+						"edit": " Edit",
+						"delete": " Delete",
+						"back": " Back"
+				},
 				"lists": "{{isval}} in {{inval}}",
 				"selecttab": "Click on tab to show table",
 				"field":{
@@ -1006,23 +1044,24 @@
 							"division":"Division",						
 							"name":"Name",						
 				    "id": "Id"
-				}
-			},
-			"edit":{
-				"title": "Edit Person Collectionless",	
-				"form":{
-					"title":"Person Collectionless Form",	
-					"submit":"Submit",
-					"cancel":"Cancel",
-					"field":{
+				},
+				"edit":{
+					"title": "Edit Person Collectionless",
+						"form":{
+						"title":"Person Collectionless Form",
+							"submit":"Submit",
+							"cancel":"Cancel",
+							"field":{
 						
-				   		"age":"Age",					    
-				   		"division":"Division",					    
-				   		"name":"Name",					    
-					    "id": "Id"
+									"age":"Age",								
+									"division":"Division",								
+									"name":"Name",								
+							"id": "Id"
+						}
 					}
 				}
 			},
+
 			"messages":{
 				"delete": "Deleted Person Collectionless",
 				"update": "Updated Person Collectionless",
@@ -1033,7 +1072,7 @@
 			}
 		},
 	
-		"TestNumber":{
+		"testNumber":{
 			"name":"Test Number",
 			"list":{
 				"title": "Test Number List",	
@@ -1083,11 +1122,13 @@
 				}
 			},
 			"view":{
-				"title": "Test Number View",	
-				"new": " New Test Number",
-				"edit": " Edit",
-				"delete": " Delete",
-				"back": " Back",
+				"title": "Test Number View",
+				"buttons":{
+					"new": " New Test Number",
+						"edit": " Edit",
+						"delete": " Delete",
+						"back": " Back"
+				},
 				"lists": "{{isval}} in {{inval}}",
 				"selecttab": "Click on tab to show table",
 				"field":{
@@ -1104,31 +1145,32 @@
 							"integerNrUnique":"Integer Nr Unique",						
 							"longNr":"Long Nr",						
 				    "id": "Id"
-				}
-			},
-			"edit":{
-				"title": "Edit Test Number",	
-				"form":{
-					"title":"Test Number Form",	
-					"submit":"Submit",
-					"cancel":"Cancel",
-					"field":{
+				},
+				"edit":{
+					"title": "Edit Test Number",
+						"form":{
+						"title":"Test Number Form",
+							"submit":"Submit",
+							"cancel":"Cancel",
+							"field":{
 						
-				   		"doubleNr":"Double Nr",					    
-				   		"floatNr":"Float Nr",					    
-				   		"floatNrScale":"Float Nr Scale",					    
-				   		"integerNr":"Integer Nr",					    
-				   		"integerNrInList":"Integer Nr In List",					    
-				   		"integerNrMax":"Integer Nr Max",					    
-				   		"integerNrMin":"Integer Nr Min",					    
-				   		"integerNrNotEqual":"Integer Nr Not Equal",					    
-				   		"integerNrRange":"Integer Nr Range",					    
-				   		"integerNrUnique":"Integer Nr Unique",					    
-				   		"longNr":"Long Nr",					    
-					    "id": "Id"
+									"doubleNr":"Double Nr",								
+									"floatNr":"Float Nr",								
+									"floatNrScale":"Float Nr Scale",								
+									"integerNr":"Integer Nr",								
+									"integerNrInList":"Integer Nr In List",								
+									"integerNrMax":"Integer Nr Max",								
+									"integerNrMin":"Integer Nr Min",								
+									"integerNrNotEqual":"Integer Nr Not Equal",								
+									"integerNrRange":"Integer Nr Range",								
+									"integerNrUnique":"Integer Nr Unique",								
+									"longNr":"Long Nr",								
+							"id": "Id"
+						}
 					}
 				}
 			},
+
 			"messages":{
 				"delete": "Deleted Test Number",
 				"update": "Updated Test Number",
@@ -1139,7 +1181,7 @@
 			}
 		},
 	
-		"TestOther":{
+		"testOther":{
 			"name":"Test Other",
 			"list":{
 				"title": "Test Other List",	
@@ -1175,11 +1217,13 @@
 				}
 			},
 			"view":{
-				"title": "Test Other View",	
-				"new": " New Test Other",
-				"edit": " Edit",
-				"delete": " Delete",
-				"back": " Back",
+				"title": "Test Other View",
+				"buttons":{
+					"new": " New Test Other",
+						"edit": " Edit",
+						"delete": " Delete",
+						"back": " Back"
+				},
 				"lists": "{{isval}} in {{inval}}",
 				"selecttab": "Click on tab to show table",
 				"field":{
@@ -1189,24 +1233,25 @@
 							"testEnum":"Test Enum",						
 							"testStringType":"Test String Type",						
 				    "id": "Id"
-				}
-			},
-			"edit":{
-				"title": "Edit Test Other",	
-				"form":{
-					"title":"Test Other Form",	
-					"submit":"Submit",
-					"cancel":"Cancel",
-					"field":{
+				},
+				"edit":{
+					"title": "Edit Test Other",
+						"form":{
+						"title":"Test Other Form",
+							"submit":"Submit",
+							"cancel":"Cancel",
+							"field":{
 						
-				   		"booleanNullable":"Boolean Nullable",					    
-				   		"testDate":"Test Date",					    
-				   		"testEnum":"Test Enum",					    
-				   		"testStringType":"Test String Type",					    
-					    "id": "Id"
+									"booleanNullable":"Boolean Nullable",								
+									"testDate":"Test Date",								
+									"testEnum":"Test Enum",								
+									"testStringType":"Test String Type",								
+							"id": "Id"
+						}
 					}
 				}
 			},
+
 			"messages":{
 				"delete": "Deleted Test Other",
 				"update": "Updated Test Other",
@@ -1217,7 +1262,7 @@
 			}
 		},
 	
-		"TestString":{
+		"testString":{
 			"name":"Test String",
 			"list":{
 				"title": "Test String List",	
@@ -1267,11 +1312,13 @@
 				}
 			},
 			"view":{
-				"title": "Test String View",	
-				"new": " New Test String",
-				"edit": " Edit",
-				"delete": " Delete",
-				"back": " Back",
+				"title": "Test String View",
+				"buttons":{
+					"new": " New Test String",
+						"edit": " Edit",
+						"delete": " Delete",
+						"back": " Back"
+				},
 				"lists": "{{isval}} in {{inval}}",
 				"selecttab": "Click on tab to show table",
 				"field":{
@@ -1288,31 +1335,32 @@
 							"uniqueStr":"Unique Str",						
 							"urlStr":"Url Str",						
 				    "id": "Id"
-				}
-			},
-			"edit":{
-				"title": "Edit Test String",	
-				"form":{
-					"title":"Test String Form",	
-					"submit":"Submit",
-					"cancel":"Cancel",
-					"field":{
+				},
+				"edit":{
+					"title": "Edit Test String",
+						"form":{
+						"title":"Test String Form",
+							"submit":"Submit",
+							"cancel":"Cancel",
+							"field":{
 						
-				   		"blankStr":"Blank Str",					    
-				   		"creditCardStr":"Credit Card Str",					    
-				   		"emailStr":"Email Str",					    
-				   		"inListStr":"In List Str",					    
-				   		"matchesStr":"Matches Str",					    
-				   		"maxSizeStr":"Max Size Str",					    
-				   		"minSizeStr":"Min Size Str",					    
-				   		"notEqualStr":"Not Equal Str",					    
-				   		"sizeStr":"Size Str",					    
-				   		"uniqueStr":"Unique Str",					    
-				   		"urlStr":"Url Str",					    
-					    "id": "Id"
+									"blankStr":"Blank Str",								
+									"creditCardStr":"Credit Card Str",								
+									"emailStr":"Email Str",								
+									"inListStr":"In List Str",								
+									"matchesStr":"Matches Str",								
+									"maxSizeStr":"Max Size Str",								
+									"minSizeStr":"Min Size Str",								
+									"notEqualStr":"Not Equal Str",								
+									"sizeStr":"Size Str",								
+									"uniqueStr":"Unique Str",								
+									"urlStr":"Url Str",								
+							"id": "Id"
+						}
 					}
 				}
 			},
+
 			"messages":{
 				"delete": "Deleted Test String",
 				"update": "Updated Test String",
@@ -1323,7 +1371,7 @@
 			}
 		},
 	
-		"Role":{
+		"role":{
 			"name":"Role",
 			"list":{
 				"title": "Role List",	
@@ -1353,32 +1401,35 @@
 				}
 			},
 			"view":{
-				"title": "Role View",	
-				"new": " New Role",
-				"edit": " Edit",
-				"delete": " Delete",
-				"back": " Back",
+				"title": "Role View",
+				"buttons":{
+					"new": " New Role",
+						"edit": " Edit",
+						"delete": " Delete",
+						"back": " Back"
+				},
 				"lists": "{{isval}} in {{inval}}",
 				"selecttab": "Click on tab to show table",
 				"field":{
 					
 							"authority":"Authority",						
 				    "id": "Id"
-				}
-			},
-			"edit":{
-				"title": "Edit Role",	
-				"form":{
-					"title":"Role Form",	
-					"submit":"Submit",
-					"cancel":"Cancel",
-					"field":{
+				},
+				"edit":{
+					"title": "Edit Role",
+						"form":{
+						"title":"Role Form",
+							"submit":"Submit",
+							"cancel":"Cancel",
+							"field":{
 						
-				   		"authority":"Authority",					    
-					    "id": "Id"
+									"authority":"Authority",								
+							"id": "Id"
+						}
 					}
 				}
 			},
+
 			"messages":{
 				"delete": "Deleted Role",
 				"update": "Updated Role",
@@ -1389,7 +1440,7 @@
 			}
 		},
 	
-		"User":{
+		"user":{
 			"name":"User",
 			"list":{
 				"title": "User List",	
@@ -1427,11 +1478,13 @@
 				}
 			},
 			"view":{
-				"title": "User View",	
-				"new": " New User",
-				"edit": " Edit",
-				"delete": " Delete",
-				"back": " Back",
+				"title": "User View",
+				"buttons":{
+					"new": " New User",
+						"edit": " Edit",
+						"delete": " Delete",
+						"back": " Back"
+				},
 				"lists": "{{isval}} in {{inval}}",
 				"selecttab": "Click on tab to show table",
 				"field":{
@@ -1442,25 +1495,26 @@
 							"passwordExpired":"Password Expired",						
 							"username":"Username",						
 				    "id": "Id"
-				}
-			},
-			"edit":{
-				"title": "Edit User",	
-				"form":{
-					"title":"User Form",	
-					"submit":"Submit",
-					"cancel":"Cancel",
-					"field":{
+				},
+				"edit":{
+					"title": "Edit User",
+						"form":{
+						"title":"User Form",
+							"submit":"Submit",
+							"cancel":"Cancel",
+							"field":{
 						
-				   		"accountExpired":"Account Expired",					    
-				   		"accountLocked":"Account Locked",					    
-				   		"enabled":"Enabled",					    
-				   		"passwordExpired":"Password Expired",					    
-				   		"username":"Username",					    
-					    "id": "Id"
+									"accountExpired":"Account Expired",								
+									"accountLocked":"Account Locked",								
+									"enabled":"Enabled",								
+									"passwordExpired":"Password Expired",								
+									"username":"Username",								
+							"id": "Id"
+						}
 					}
 				}
 			},
+
 			"messages":{
 				"delete": "Deleted User",
 				"update": "Updated User",
@@ -1471,7 +1525,7 @@
 			}
 		},
 	
-		"UserRole":{
+		"userRole":{
 			"name":"User Role",
 			"list":{
 				"title": "User Role List",	
@@ -1503,11 +1557,13 @@
 				}
 			},
 			"view":{
-				"title": "User Role View",	
-				"new": " New User Role",
-				"edit": " Edit",
-				"delete": " Delete",
-				"back": " Back",
+				"title": "User Role View",
+				"buttons":{
+					"new": " New User Role",
+						"edit": " Edit",
+						"delete": " Delete",
+						"back": " Back"
+				},
 				"lists": "{{isval}} in {{inval}}",
 				"selecttab": "Click on tab to show table",
 				"field":{
@@ -1515,22 +1571,23 @@
 							"role":"Role",						
 							"user":"User",						
 				    "id": "Id"
-				}
-			},
-			"edit":{
-				"title": "Edit User Role",	
-				"form":{
-					"title":"User Role Form",	
-					"submit":"Submit",
-					"cancel":"Cancel",
-					"field":{
+				},
+				"edit":{
+					"title": "Edit User Role",
+						"form":{
+						"title":"User Role Form",
+							"submit":"Submit",
+							"cancel":"Cancel",
+							"field":{
 						
-				   		"role":"Role",					    
-				   		"user":"User",					    
-					    "id": "Id"
+									"role":"Role",								
+									"user":"User",								
+							"id": "Id"
+						}
 					}
 				}
 			},
+
 			"messages":{
 				"delete": "Deleted User Role",
 				"update": "Updated User Role",
@@ -1541,7 +1598,7 @@
 			}
 		},
 	
-		"Classifier":{
+		"classifier":{
 			"name":"Classifier",
 			"list":{
 				"title": "Classifier List",	
@@ -1577,11 +1634,13 @@
 				}
 			},
 			"view":{
-				"title": "Classifier View",	
-				"new": " New Classifier",
-				"edit": " Edit",
-				"delete": " Delete",
-				"back": " Back",
+				"title": "Classifier View",
+				"buttons":{
+					"new": " New Classifier",
+						"edit": " Edit",
+						"delete": " Delete",
+						"back": " Back"
+				},
 				"lists": "{{isval}} in {{inval}}",
 				"selecttab": "Click on tab to show table",
 				"field":{
@@ -1591,24 +1650,25 @@
 							"description":"Description",						
 							"propertyname":"Propertyname",						
 				    "id": "Id"
-				}
-			},
-			"edit":{
-				"title": "Edit Classifier",	
-				"form":{
-					"title":"Classifier Form",	
-					"submit":"Submit",
-					"cancel":"Cancel",
-					"field":{
+				},
+				"edit":{
+					"title": "Edit Classifier",
+						"form":{
+						"title":"Classifier Form",
+							"submit":"Submit",
+							"cancel":"Cancel",
+							"field":{
 						
-				   		"classname":"Classname",					    
-				   		"constant":"Constant",					    
-				   		"description":"Description",					    
-				   		"propertyname":"Propertyname",					    
-					    "id": "Id"
+									"classname":"Classname",								
+									"constant":"Constant",								
+									"description":"Description",								
+									"propertyname":"Propertyname",								
+							"id": "Id"
+						}
 					}
 				}
 			},
+
 			"messages":{
 				"delete": "Deleted Classifier",
 				"update": "Updated Classifier",
@@ -1627,45 +1687,45 @@
 	},
 	"domain":{
 	
-		"Tag":"Tag",
+		"tag":"Tag",
 	
-		"Task":"Task",
+		"task":"Task",
 	
-		"Owner":"Owner",
+		"owner":"Owner",
 	
-		"Person":"Person",
+		"person":"Person",
 	
-		"Pet":"Pet",
+		"pet":"Pet",
 	
-		"PetType":"Pet Type",
+		"petType":"Pet Type",
 	
-		"Speciality":"Speciality",
+		"speciality":"Speciality",
 	
-		"Vet":"Vet",
+		"vet":"Vet",
 	
-		"Visit":"Visit",
+		"visit":"Visit",
 	
-		"DivisionCollection":"Division Collection",
+		"divisionCollection":"Division Collection",
 	
-		"DivisionCollectionless":"Division Collectionless",
+		"divisionCollectionless":"Division Collectionless",
 	
-		"PersonCollection":"Person Collection",
+		"personCollection":"Person Collection",
 	
-		"PersonCollectionless":"Person Collectionless",
+		"personCollectionless":"Person Collectionless",
 	
-		"TestNumber":"Test Number",
+		"testNumber":"Test Number",
 	
-		"TestOther":"Test Other",
+		"testOther":"Test Other",
 	
-		"TestString":"Test String",
+		"testString":"Test String",
 	
-		"Role":"Role",
+		"role":"Role",
 	
-		"User":"User",
+		"user":"User",
 	
-		"UserRole":"User Role",
+		"userRole":"User Role",
 	
-		"Classifier":"Classifier"
+		"classifier":"Classifier"
 	
 	},
 	"package":{

@@ -5,25 +5,44 @@ angular.module('angularDemoApp')
 $stateProvider
 		.state('app.userRole', {
 		    url: '/userRole',
-		    template: '<div ui-view class="fade-in-up"></div>'
+			abstract: true,
+		    template: '<div ui-view="page" class="fade-in-up"></div>'
 		})
 		.state('app.userRole.list', {
 			url: '/list?search',//TODO: search so that search is not an object in url
-			templateUrl: 'app/userRole/userRole.list.html',
-			controller: 'UserRoleListController'
+			views: {
+				"page@app.userRole": {
+					templateUrl: 'app/userRole/userRole.list.html',
+					controller: 'UserRoleListController'
+				}
+			}
 		}).state('app.userRole.create',{
 			url: '/create',
-			templateUrl: 'app/userRole/userRole.form.html',
-			controller: 'UserRoleEditController',
+			ncyBreadcrumb: {
+				parent: 'app.userRole.list'
+			},
+			views: {
+				"page@app.userRole": {
+					templateUrl: 'app/userRole/userRole.form.html',
+					controller: 'UserRoleEditController'
+				}
+			},
 			resolve:{
 				userRoleData: function($stateParams, UserRoleService) {
 					return new UserRoleService();
 				}
 			}
-		}).state('app.userRole.edit',{
-			url: '/edit/:id',
-			templateUrl: 'app/userRole/userRole.form.html',
-			controller: 'UserRoleEditController',
+		}).state('app.userRole.view',{
+			url: '/view/:id',
+			ncyBreadcrumb: {
+				parent: 'app.userRole.list'
+			},
+			views: {
+				"page@app.userRole": {
+					templateUrl: 'app/userRole/userRole.view.html',
+					controller: 'UserRoleViewController'
+				}
+			},
 			resolve:{
 				userRoleData: function($stateParams, UserRoleService){
 					return UserRoleService.get({id:$stateParams.id}).$promise.then(
@@ -33,15 +52,19 @@ $stateProvider
 					);
 				}
 			}
-		}).state('app.userRole.view',{
-			url: '/view/:id',
-			templateUrl: 'app/userRole/userRole.view.html',
-			controller: 'UserRoleViewController',
-				resolve:{
+		}).state('app.userRole.view.edit',{
+			url: '/edit',
+			views: {
+				"page@app.userRole": {
+					templateUrl: 'app/userRole/userRole.form.html',
+					controller: 'UserRoleEditController',
+				}
+			},
+			resolve:{
 				userRoleData: function($stateParams, UserRoleService){
 					return UserRoleService.get({id:$stateParams.id}).$promise.then(
 						function( response ){
-							return response;
+								return response;
 						}
 					);
 				}
@@ -78,7 +101,7 @@ $stateProvider
 
 		}
 
-	}).state('app.userRole.edit.roleSearchModal',{
+	}).state('app.userRole.view.edit.roleSearchModal',{
 		templateUrl: 'app/role/role.list.html',
 		controller: 'RoleListController'
 	})
@@ -112,7 +135,7 @@ $stateProvider
 
 		}
 
-	}).state('app.userRole.edit.userSearchModal',{
+	}).state('app.userRole.view.edit.userSearchModal',{
 		templateUrl: 'app/user/user.list.html',
 		controller: 'UserListController'
 	})

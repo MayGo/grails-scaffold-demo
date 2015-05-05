@@ -1,14 +1,14 @@
 
 
 <div id="pet_form"
-     ng-init="pageTitle = (isEditForm)?'pages.Pet.edit.title':'pages.Pet.create.title'" data-ng-include=" 'shared/blocks/page_heading.html' "></div>
+     ng-init="pageTitle = (isEditForm)?'pages.pet.view.edit.title':'pages.pet.create.title'" data-ng-include=" 'shared/blocks/page_heading.html' "></div>
 <div class="content-body">
     <form name="petForm" class="form-validation form-horizontal" novalidate>
         <input name="version" type="hidden" ng-model="pet.version" />
 
 	<div class="form-group">
 		<label class="col-sm-2 control-label" for="birthDate"
-               translate="pages.Pet.edit.form.field.birthDate"></label>
+               translate="pages.pet.view.edit.form.field.birthDate"></label>
 		<div class="col-sm-10">
             
      <div class="input-group input-group">
@@ -31,7 +31,7 @@
 
 	<div class="form-group">
 		<label class="col-sm-2 control-label" for="name"
-               translate="pages.Pet.edit.form.field.name"></label>
+               translate="pages.pet.view.edit.form.field.name"></label>
 		<div class="col-sm-10">
             <div class="input-group input-group">
                     <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
@@ -47,7 +47,7 @@
 
 	<div class="form-group">
 		<label class="col-sm-2 control-label" for="visits"
-               translate="pages.Pet.edit.form.field.visits"></label>
+               translate="pages.pet.view.edit.form.field.visits"></label>
 		<div class="col-sm-10">
             <!--OneToMany-->
           <tags-input
@@ -63,7 +63,7 @@
 
 	<div class="form-group">
 		<label class="col-sm-2 control-label" for="type"
-               translate="pages.Pet.edit.form.field.type"></label>
+               translate="pages.pet.view.edit.form.field.type"></label>
 		<div class="col-sm-10">
             <!--ManyToOne-->
      <div class="input-group input-group">
@@ -77,7 +77,7 @@
           typeahead-input-formatter="autocompleteService.petTypeFormatLabel($model, ['id','name'])"
        required />
          <span class="input-group-btn" item-selector update-model="pet.type"
-               ui-link="app.pet.edit.petTypeSearchModal" >
+               ui-link="app.pet.view.edit.petTypeSearchModal" >
          </span>
      </div> 
      <script type="text/ng-template" id="typeAutocompleteTemplate.html"><a><span bind-html-unsafe="match.model.id | typeaheadHighlight:query"></span> <span bind-html-unsafe="match.model.name | typeaheadHighlight:query"></span> </a></script>
@@ -88,7 +88,7 @@
 
 	<div class="form-group">
 		<label class="col-sm-2 control-label" for="owner"
-               translate="pages.Pet.edit.form.field.owner"></label>
+               translate="pages.pet.view.edit.form.field.owner"></label>
 		<div class="col-sm-10">
             <!--ManyToOne-->
      <div class="input-group input-group">
@@ -102,7 +102,7 @@
           typeahead-input-formatter="autocompleteService.ownerFormatLabel($model, ['id','telephone','lastName','firstName'])"
        required />
          <span class="input-group-btn" item-selector update-model="pet.owner"
-               ui-link="app.pet.edit.ownerSearchModal" >
+               ui-link="app.pet.view.edit.ownerSearchModal" >
          </span>
      </div> 
      <script type="text/ng-template" id="ownerAutocompleteTemplate.html"><a><span bind-html-unsafe="match.model.id | typeaheadHighlight:query"></span> <span bind-html-unsafe="match.model.telephone | typeaheadHighlight:query"></span> <span bind-html-unsafe="match.model.lastName | typeaheadHighlight:query"></span> <span bind-html-unsafe="match.model.firstName | typeaheadHighlight:query"></span> </a></script>
@@ -118,9 +118,9 @@
                     class="btn btn-success"
                     type='submit'
                     ng-disabled="petForm.$invalid"
-                    translate="pages.Pet.edit.form.submit"
+                    translate="pages.pet.view.edit.form.submit"
                     mx-show-loading ng-click="submit(petForm)"></button>
-                <a class="btn btn-default" ng-click="back()" translate="pages.Pet.edit.form.cancel" mx-show-loading></a>
+                <a class="btn btn-default" ng-click="back()" translate="pages.pet.view.edit.form.cancel" mx-show-loading></a>
             </div>
             <div class="clearfix"/>
         </div>

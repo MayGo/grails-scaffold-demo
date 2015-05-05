@@ -1,11 +1,7 @@
 package scafmo.constr
 
-
-import grails.util.GrailsNameUtils
 import grails.validation.Validateable
 import groovy.transform.ToString
-
-import scafmo.constr.TestString
 import scafmo.constr.TestOther.TestEnum
 
 @Validateable
@@ -16,7 +12,7 @@ class TestOtherSearchCommand {
 	String searchString
 	Boolean booleanNullable
 	Date testDate
-	TestEnum testEnum
+	scafmo.constr.TestOther$TestEnum testEnum
 	Long testStringType
 	List<Long> testStringTypes
 

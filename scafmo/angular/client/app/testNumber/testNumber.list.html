@@ -1,11 +1,11 @@
 
-<div id="testNumber_list" ng-init="pageTitle = 'pages.TestNumber.list.title'"
+<div id="testNumber_list" ng-init="pageTitle = 'pages.testNumber.list.title'"
      data-ng-include=" 'shared/blocks/page_heading.html' "></div>
 <div class="content-body">
-<div class="list-search"  st-table="rowCollection" st-pipe="callServer" >
+<div class="list-search">
 <accordion close-others="false">
-    <accordion-group  heading="{{::'pages.TestNumber.list.table.search' | translate}}"  is-open="isSearchOpen">
-         <form name="testNumberForm" class="form-validation form-horizontal" novalidate>
+    <accordion-group  heading="{{::'pages.testNumber.list.table.search' | translate}}"  is-open="isSearchOpen">
+         <form name="testNumberForm" novalidate>
         <div class="row form-inline">
             
                   <div class="col-lg-2 form-group"><div class="input-group input-group-sm">
@@ -13,9 +13,8 @@
                         <input 
                         	name="doubleNr"
                         	ng-model="search.doubleNr"
-                        	st-search="'doubleNr'"
-                        	class="form-control" 
-                        	placeholder="{{::'pages.TestNumber.list.search.placeholder.doubleNr' | translate}}"
+                        	class="form-control"
+                        	placeholder="{{::'pages.testNumber.list.search.placeholder.doubleNr' | translate}}"
                         	  type="number"  ></div> </div>
             
                   <div class="col-lg-2 form-group"><div class="input-group input-group-sm">
@@ -23,9 +22,8 @@
                         <input 
                         	name="floatNr"
                         	ng-model="search.floatNr"
-                        	st-search="'floatNr'"
-                        	class="form-control" 
-                        	placeholder="{{::'pages.TestNumber.list.search.placeholder.floatNr' | translate}}"
+                        	class="form-control"
+                        	placeholder="{{::'pages.testNumber.list.search.placeholder.floatNr' | translate}}"
                         	  type="number"  ></div> </div>
             
                   <div class="col-lg-2 form-group"><div class="input-group input-group-sm">
@@ -33,9 +31,8 @@
                         <input 
                         	name="floatNrScale"
                         	ng-model="search.floatNrScale"
-                        	st-search="'floatNrScale'"
-                        	class="form-control" 
-                        	placeholder="{{::'pages.TestNumber.list.search.placeholder.floatNrScale' | translate}}"
+                        	class="form-control"
+                        	placeholder="{{::'pages.testNumber.list.search.placeholder.floatNrScale' | translate}}"
                         	  type="number"  ></div> </div>
             
                   <div class="col-lg-2 form-group"><div class="input-group input-group-sm">
@@ -43,9 +40,8 @@
                         <input 
                         	name="integerNr"
                         	ng-model="search.integerNr"
-                        	st-search="'integerNr'"
-                        	class="form-control" 
-                        	placeholder="{{::'pages.TestNumber.list.search.placeholder.integerNr' | translate}}"
+                        	class="form-control"
+                        	placeholder="{{::'pages.testNumber.list.search.placeholder.integerNr' | translate}}"
                         	  type="number"  ></div> </div>
             
                   <div class="col-lg-2 form-group"><div class="input-group input-group-sm">
@@ -53,9 +49,8 @@
                         <input 
                         	name="integerNrInList"
                         	ng-model="search.integerNrInList"
-                        	st-search="'integerNrInList'"
-                        	class="form-control" 
-                        	placeholder="{{::'pages.TestNumber.list.search.placeholder.integerNrInList' | translate}}"
+                        	class="form-control"
+                        	placeholder="{{::'pages.testNumber.list.search.placeholder.integerNrInList' | translate}}"
                         	  type="number"  ></div> </div>
             
                   <div class="col-lg-2 form-group"><div class="input-group input-group-sm">
@@ -63,9 +58,8 @@
                         <input 
                         	name="integerNrMax"
                         	ng-model="search.integerNrMax"
-                        	st-search="'integerNrMax'"
-                        	class="form-control" 
-                        	placeholder="{{::'pages.TestNumber.list.search.placeholder.integerNrMax' | translate}}"
+                        	class="form-control"
+                        	placeholder="{{::'pages.testNumber.list.search.placeholder.integerNrMax' | translate}}"
                         	  type="number"  max="3"  ></div> </div>
             
                   <div class="col-lg-2 form-group"><div class="input-group input-group-sm">
@@ -73,9 +67,8 @@
                         <input 
                         	name="integerNrMin"
                         	ng-model="search.integerNrMin"
-                        	st-search="'integerNrMin'"
-                        	class="form-control" 
-                        	placeholder="{{::'pages.TestNumber.list.search.placeholder.integerNrMin' | translate}}"
+                        	class="form-control"
+                        	placeholder="{{::'pages.testNumber.list.search.placeholder.integerNrMin' | translate}}"
                         	  type="number"  min="2"  ></div> </div>
             
                   <div class="col-lg-2 form-group"><div class="input-group input-group-sm">
@@ -83,9 +76,8 @@
                         <input 
                         	name="integerNrNotEqual"
                         	ng-model="search.integerNrNotEqual"
-                        	st-search="'integerNrNotEqual'"
-                        	class="form-control" 
-                        	placeholder="{{::'pages.TestNumber.list.search.placeholder.integerNrNotEqual' | translate}}"
+                        	class="form-control"
+                        	placeholder="{{::'pages.testNumber.list.search.placeholder.integerNrNotEqual' | translate}}"
                         	  type="number"  ></div> </div>
             
                   <div class="col-lg-2 form-group"><div class="input-group input-group-sm">
@@ -93,9 +85,8 @@
                         <input 
                         	name="integerNrRange"
                         	ng-model="search.integerNrRange"
-                        	st-search="'integerNrRange'"
-                        	class="form-control" 
-                        	placeholder="{{::'pages.TestNumber.list.search.placeholder.integerNrRange' | translate}}"
+                        	class="form-control"
+                        	placeholder="{{::'pages.testNumber.list.search.placeholder.integerNrRange' | translate}}"
                         	  type="range"  min="18"  max="65"  ><span class="input-group-addon">{{integerNrRange}}</span></div> </div>
             
                   <div class="col-lg-2 form-group"><div class="input-group input-group-sm">
@@ -103,9 +94,8 @@
                         <input 
                         	name="integerNrUnique"
                         	ng-model="search.integerNrUnique"
-                        	st-search="'integerNrUnique'"
-                        	class="form-control" 
-                        	placeholder="{{::'pages.TestNumber.list.search.placeholder.integerNrUnique' | translate}}"
+                        	class="form-control"
+                        	placeholder="{{::'pages.testNumber.list.search.placeholder.integerNrUnique' | translate}}"
                         	  type="number"  ></div> </div>
             
                   <div class="col-lg-2 form-group"><div class="input-group input-group-sm">
@@ -113,9 +103,8 @@
                         <input 
                         	name="longNr"
                         	ng-model="search.longNr"
-                        	st-search="'longNr'"
-                        	class="form-control" 
-                        	placeholder="{{::'pages.TestNumber.list.search.placeholder.longNr' | translate}}"
+                        	class="form-control"
+                        	placeholder="{{::'pages.testNumber.list.search.placeholder.longNr' | translate}}"
                         	  type="number"  ></div> </div>
             
         </div>
@@ -125,38 +114,20 @@
         </accordion>
         <div class="box-tools pull-right" ng-if="!isModal">
             <a class="btn btn-default btn-xs" ui-sref="app.testNumber.create">
-                <i class="fa fa-plus" translate="pages.TestNumber.list.new" mx-show-loading></i>
+                <i class="fa fa-plus" translate="pages.testNumber.list.new" mx-show-loading></i>
             </a>
         </div>
 
         <div class="clearfix"></div>
         <div class="list-search-table">
-	      <table class="table table-responsive">
-	      	<thead>
-	      		<tr>
-                    <th></th>
-	      			<th width='20' st-sort="id" translate="pages.TestNumber.list.table.header.id"></th>	      		
-			   		<th st-sort="doubleNr" translate="pages.TestNumber.list.table.header.doubleNr" ></th>				 
-			   		<th st-sort="floatNr" translate="pages.TestNumber.list.table.header.floatNr" ></th>				 
-			   		<th st-sort="floatNrScale" translate="pages.TestNumber.list.table.header.floatNrScale" ></th>				 
-			   		<th st-sort="integerNr" translate="pages.TestNumber.list.table.header.integerNr" ></th>				 
-			   		<th st-sort="integerNrInList" translate="pages.TestNumber.list.table.header.integerNrInList" ></th>				 
-			   		<th st-sort="integerNrMax" translate="pages.TestNumber.list.table.header.integerNrMax" ></th>				 
-			   		<th st-sort="integerNrMin" translate="pages.TestNumber.list.table.header.integerNrMin" ></th>				 
-			   		<th st-sort="integerNrNotEqual" translate="pages.TestNumber.list.table.header.integerNrNotEqual" ></th>				 
-			   		<th st-sort="integerNrRange" translate="pages.TestNumber.list.table.header.integerNrRange" ></th>				 
-			   		<th st-sort="integerNrUnique" translate="pages.TestNumber.list.table.header.integerNrUnique" ></th>				 
-			   		<th st-sort="longNr" translate="pages.TestNumber.list.table.header.longNr" ></th>				 
-
-				</tr>
-	      	</thead>
-	      	<tbody ng-hide="isLoading">
-				<tr ng-repeat="testNumber in rowCollection">
+	      <table class="table table-responsive" ng-table="tableParams" show-filter="true" >
+	      	<tbody ng-hide="tableParams.settings().$loading">
+				<tr ng-repeat="testNumber in $data">
                     <td class="text-left" >
                         <a class="btn btn-default btn-xs" ui-sref="app.testNumber.view({id:testNumber.id})" ng-if="!isModal">
                             <i class="fa fa-eye"></i>
                         </a>
-                        <a class="btn btn-default btn-xs" ui-sref="app.testNumber.edit({id:testNumber.id})" ng-if="!isModal">
+                        <a class="btn btn-default btn-xs" ui-sref="app.testNumber.view.edit({id:testNumber.id})" ng-if="!isModal">
                             <i class="fa fa-edit"></i>
                         </a>
                         <a class="btn btn-danger btn-xs" ng-click="deleteTestNumber(testNumber)" mx-show-loading ng-if="!isModal">
@@ -166,33 +137,49 @@
                             <i class="fa fa-plus"></i>
                         </a>
                     </td>
-					 <td>{{::testNumber.id}}</td>					
-			   		<td>{{::testNumber.doubleNr}}</td>				 	
-			   		<td>{{::testNumber.floatNr}}</td>				 	
-			   		<td>{{::testNumber.floatNrScale}}</td>				 	
-			   		<td>{{::testNumber.integerNr}}</td>				 	
-			   		<td>{{::testNumber.integerNrInList}}</td>				 	
-			   		<td>{{::testNumber.integerNrMax}}</td>				 	
-			   		<td>{{::testNumber.integerNrMin}}</td>				 	
-			   		<td>{{::testNumber.integerNrNotEqual}}</td>				 	
-			   		<td>{{::testNumber.integerNrRange}}</td>				 	
-			   		<td>{{::testNumber.integerNrUnique}}</td>				 	
-			   		<td>{{::testNumber.longNr}}</td>				 	
+
+                    <td data-title="'pages.testNumber.list.table.header.id' | translate" sortable="'id'">{{::testNumber.id}}</td>					
+			   		
+        <td data-title="'pages.testNumber.list.table.header.doubleNr' | translate" sortable="'doubleNr'">
+{{::testNumber.doubleNr}}</td>				 	
+			   		
+        <td data-title="'pages.testNumber.list.table.header.floatNr' | translate" sortable="'floatNr'">
+{{::testNumber.floatNr}}</td>				 	
+			   		
+        <td data-title="'pages.testNumber.list.table.header.floatNrScale' | translate" sortable="'floatNrScale'">
+{{::testNumber.floatNrScale}}</td>				 	
+			   		
+        <td data-title="'pages.testNumber.list.table.header.integerNr' | translate" sortable="'integerNr'">
+{{::testNumber.integerNr}}</td>				 	
+			   		
+        <td data-title="'pages.testNumber.list.table.header.integerNrInList' | translate" sortable="'integerNrInList'">
+{{::testNumber.integerNrInList}}</td>				 	
+			   		
+        <td data-title="'pages.testNumber.list.table.header.integerNrMax' | translate" sortable="'integerNrMax'">
+{{::testNumber.integerNrMax}}</td>				 	
+			   		
+        <td data-title="'pages.testNumber.list.table.header.integerNrMin' | translate" sortable="'integerNrMin'">
+{{::testNumber.integerNrMin}}</td>				 	
+			   		
+        <td data-title="'pages.testNumber.list.table.header.integerNrNotEqual' | translate" sortable="'integerNrNotEqual'">
+{{::testNumber.integerNrNotEqual}}</td>				 	
+			   		
+        <td data-title="'pages.testNumber.list.table.header.integerNrRange' | translate" sortable="'integerNrRange'">
+{{::testNumber.integerNrRange}}</td>				 	
+			   		
+        <td data-title="'pages.testNumber.list.table.header.integerNrUnique' | translate" sortable="'integerNrUnique'">
+{{::testNumber.integerNrUnique}}</td>				 	
+			   		
+        <td data-title="'pages.testNumber.list.table.header.longNr' | translate" sortable="'longNr'">
+{{::testNumber.longNr}}</td>				 	
 
 				</tr>
 			</tbody>
-              <tbody ng-show="isLoading">
+              <tbody ng-show="tableParams.settings().$loading">
                   <tr>
                       <td class="text-center" translate="messages.loading"></td>
                   </tr>
               </tbody>
-			<tfoot ng-hide="isLoading">
-	          <tr>
-	            <td colspan="10" class="text-center" >
-	              <div st-pagination="" st-items-by-page="stTable.itemsByPage" st-displayed-pages="15" ></div>
-	            </td>
-	          </tr>
-	        </tfoot>
 	      </table>
         </div>
     </div>

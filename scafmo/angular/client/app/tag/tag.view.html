@@ -1,13 +1,13 @@
 
 
-<div id="tag_view" ng-init="pageTitle = 'pages.Tag.view.title'"
+<div id="tag_view" ng-init="pageTitle = 'pages.tag.view.title'"
      ng-include=" 'shared/blocks/page_heading.html' "></div>
 <div class="content-body">
     <div class="form-horizontal">
 
         <div class="form-group">
             <label class="col-sm-2 control-label"
-                   translate="pages.Tag.view.field.name"></label>
+                   translate="pages.tag.view.field.name"></label>
             <div class="col-sm-10 form-control-static"
                  ng-bind="tag.name"></div>
         </div>
@@ -15,7 +15,7 @@
     
 <!--ManyToMany-->
     <div class="form-group">
-        <label class="col-sm-2 control-label" translate="pages.Tag.view.field.tasks"></label>
+        <label class="col-sm-2 control-label" translate="pages.tag.view.field.tasks"></label>
         <div class="col-sm-10 form-control-static">
             <div ng-repeat="item in tag.tasks">
 <span ng-bind="item.id"></span> <span ng-bind="item.timeSpent"></span> <span ng-bind="item.summary"></span> <span ng-bind="item.status"></span> </div></div></div>
@@ -28,16 +28,16 @@
 
         <div class="form-action pull-right">
             <a id="editBtn" class="btn btn-default"
-               ui-sref="app.tag.edit({id:tag.id})">
-                <i class="fa fa-edit" translate="pages.Tag.view.edit"></i>
+               ui-sref="app.tag.view.edit({id:tag.id})">
+                <i class="fa fa-edit" translate="pages.tag.view.buttons.edit"></i>
             </a>
             <a id="deleteBtn" class="btn btn-danger"
                ng-click="deleteTag(tag)" mx-show-loading>
-                <i class="fa fa-trash-o" translate="pages.Tag.view.delete"></i>
+                <i class="fa fa-trash-o" translate="pages.tag.view.buttons.delete"></i>
             </a>
 
             <a id="backBtn" class="btn btn-default" ng-click="back()">
-                <i class="fa fa-chevron-left" translate="pages.Tag.view.back"></i>
+                <i class="fa fa-chevron-left" translate="pages.tag.view.buttons.back"></i>
             </a>
         </div>
         <div class="clearfix"/>

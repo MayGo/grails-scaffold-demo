@@ -26,7 +26,7 @@ angular.module('angularDemoApp')
 
 	    	if($scope.isEditForm){
 	    		UserRoleService.update($scope.userRole, function(response) {	
-	    			$translate('pages.UserRole.messages.update').then(function (msg) {
+	    			$translate('pages.userRole.messages.update').then(function (msg) {
 				    	inform.add(msg, {'type': 'success'});
 					});
 	            	deferred.resolve(response);
@@ -34,7 +34,7 @@ angular.module('angularDemoApp')
 	    	}else{
     			UserRoleService.save($scope.userRole,function(response) {
 					
-    				$translate('pages.UserRole.messages.create').then(function (msg) {
+    				$translate('pages.userRole.messages.create').then(function (msg) {
 				    	inform.add(msg, {'type': 'success'});
 					});
 					$state.go('^.view', { id: response.id }, {location: 'replace'});

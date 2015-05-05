@@ -1,14 +1,14 @@
 
 
 <div id="owner_form"
-     ng-init="pageTitle = (isEditForm)?'pages.Owner.edit.title':'pages.Owner.create.title'" data-ng-include=" 'shared/blocks/page_heading.html' "></div>
+     ng-init="pageTitle = (isEditForm)?'pages.owner.view.edit.title':'pages.owner.create.title'" data-ng-include=" 'shared/blocks/page_heading.html' "></div>
 <div class="content-body">
     <form name="ownerForm" class="form-validation form-horizontal" novalidate>
         <input name="version" type="hidden" ng-model="owner.version" />
 
 	<div class="form-group">
 		<label class="col-sm-2 control-label" for="address"
-               translate="pages.Owner.edit.form.field.address"></label>
+               translate="pages.owner.view.edit.form.field.address"></label>
 		<div class="col-sm-10">
             <div class="input-group input-group">
                     <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
@@ -24,7 +24,7 @@
 
 	<div class="form-group">
 		<label class="col-sm-2 control-label" for="city"
-               translate="pages.Owner.edit.form.field.city"></label>
+               translate="pages.owner.view.edit.form.field.city"></label>
 		<div class="col-sm-10">
             <div class="input-group input-group">
                     <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
@@ -40,7 +40,7 @@
 
 	<div class="form-group">
 		<label class="col-sm-2 control-label" for="firstName"
-               translate="pages.Owner.edit.form.field.firstName"></label>
+               translate="pages.owner.view.edit.form.field.firstName"></label>
 		<div class="col-sm-10">
             <div class="input-group input-group">
                     <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
@@ -56,7 +56,7 @@
 
 	<div class="form-group">
 		<label class="col-sm-2 control-label" for="lastName"
-               translate="pages.Owner.edit.form.field.lastName"></label>
+               translate="pages.owner.view.edit.form.field.lastName"></label>
 		<div class="col-sm-10">
             <div class="input-group input-group">
                     <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
@@ -72,7 +72,7 @@
 
 	<div class="form-group">
 		<label class="col-sm-2 control-label" for="telephone"
-               translate="pages.Owner.edit.form.field.telephone"></label>
+               translate="pages.owner.view.edit.form.field.telephone"></label>
 		<div class="col-sm-10">
             <div class="input-group input-group">
                     <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
@@ -88,7 +88,7 @@
 
 	<div class="form-group">
 		<label class="col-sm-2 control-label" for="pets"
-               translate="pages.Owner.edit.form.field.pets"></label>
+               translate="pages.owner.view.edit.form.field.pets"></label>
 		<div class="col-sm-10">
             <!--OneToMany-->
           <tags-input
@@ -109,9 +109,9 @@
                     class="btn btn-success"
                     type='submit'
                     ng-disabled="ownerForm.$invalid"
-                    translate="pages.Owner.edit.form.submit"
+                    translate="pages.owner.view.edit.form.submit"
                     mx-show-loading ng-click="submit(ownerForm)"></button>
-                <a class="btn btn-default" ng-click="back()" translate="pages.Owner.edit.form.cancel" mx-show-loading></a>
+                <a class="btn btn-default" ng-click="back()" translate="pages.owner.view.edit.form.cancel" mx-show-loading></a>
             </div>
             <div class="clearfix"/>
         </div>

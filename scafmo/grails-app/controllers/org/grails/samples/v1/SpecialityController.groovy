@@ -41,9 +41,8 @@ class SpecialityController {
 		params.max = Math.min(params.int('max') ?: 10, 100)
 
 		if (cmd.hasErrors()) {
-			throw new ValidationException("Search does not validate.", cmd.errors)
+			throw new ValidationException('Search does not validate.', cmd.errors)
 		}
-
 
 		def result = specialitySearchService.search(cmd, params)
 

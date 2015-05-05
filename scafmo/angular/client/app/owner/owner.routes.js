@@ -5,25 +5,44 @@ angular.module('angularDemoApp')
 $stateProvider
 		.state('app.owner', {
 		    url: '/owner',
-		    template: '<div ui-view class="fade-in-up"></div>'
+			abstract: true,
+		    template: '<div ui-view="page" class="fade-in-up"></div>'
 		})
 		.state('app.owner.list', {
 			url: '/list?search',//TODO: search so that search is not an object in url
-			templateUrl: 'app/owner/owner.list.html',
-			controller: 'OwnerListController'
+			views: {
+				"page@app.owner": {
+					templateUrl: 'app/owner/owner.list.html',
+					controller: 'OwnerListController'
+				}
+			}
 		}).state('app.owner.create',{
 			url: '/create',
-			templateUrl: 'app/owner/owner.form.html',
-			controller: 'OwnerEditController',
+			ncyBreadcrumb: {
+				parent: 'app.owner.list'
+			},
+			views: {
+				"page@app.owner": {
+					templateUrl: 'app/owner/owner.form.html',
+					controller: 'OwnerEditController'
+				}
+			},
 			resolve:{
 				ownerData: function($stateParams, OwnerService) {
 					return new OwnerService();
 				}
 			}
-		}).state('app.owner.edit',{
-			url: '/edit/:id',
-			templateUrl: 'app/owner/owner.form.html',
-			controller: 'OwnerEditController',
+		}).state('app.owner.view',{
+			url: '/view/:id',
+			ncyBreadcrumb: {
+				parent: 'app.owner.list'
+			},
+			views: {
+				"page@app.owner": {
+					templateUrl: 'app/owner/owner.view.html',
+					controller: 'OwnerViewController'
+				}
+			},
 			resolve:{
 				ownerData: function($stateParams, OwnerService){
 					return OwnerService.get({id:$stateParams.id}).$promise.then(
@@ -33,15 +52,19 @@ $stateProvider
 					);
 				}
 			}
-		}).state('app.owner.view',{
-			url: '/view/:id',
-			templateUrl: 'app/owner/owner.view.html',
-			controller: 'OwnerViewController',
-				resolve:{
+		}).state('app.owner.view.edit',{
+			url: '/edit',
+			views: {
+				"page@app.owner": {
+					templateUrl: 'app/owner/owner.form.html',
+					controller: 'OwnerEditController',
+				}
+			},
+			resolve:{
 				ownerData: function($stateParams, OwnerService){
 					return OwnerService.get({id:$stateParams.id}).$promise.then(
 						function( response ){
-							return response;
+								return response;
 						}
 					);
 				}
@@ -52,11 +75,18 @@ $stateProvider
 
 		.state('app.owner.view.pet',{
 			url: '/pet/:relationName',
+			ncyBreadcrumb: {
+				skip: true
+			},
 			data:{
 				isTab:true
 			},
-			templateUrl: 'app/pet/pet.list.html',
-			controller: 'PetListController'
+			views: {
+				"tabs": {
+					templateUrl: 'app/pet/pet.list.html',
+					controller: 'PetListController'
+				}
+			}
 		})
 	
 ;

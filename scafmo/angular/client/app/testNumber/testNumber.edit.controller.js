@@ -26,7 +26,7 @@ angular.module('angularDemoApp')
 
 	    	if($scope.isEditForm){
 	    		TestNumberService.update($scope.testNumber, function(response) {	
-	    			$translate('pages.TestNumber.messages.update').then(function (msg) {
+	    			$translate('pages.testNumber.messages.update').then(function (msg) {
 				    	inform.add(msg, {'type': 'success'});
 					});
 	            	deferred.resolve(response);
@@ -34,7 +34,7 @@ angular.module('angularDemoApp')
 	    	}else{
     			TestNumberService.save($scope.testNumber,function(response) {
 					
-    				$translate('pages.TestNumber.messages.create').then(function (msg) {
+    				$translate('pages.testNumber.messages.create').then(function (msg) {
 				    	inform.add(msg, {'type': 'success'});
 					});
 					$state.go('^.view', { id: response.id }, {location: 'replace'});

@@ -26,7 +26,7 @@ angular.module('angularDemoApp')
 
 	    	if($scope.isEditForm){
 	    		TaskService.update($scope.task, function(response) {	
-	    			$translate('pages.Task.messages.update').then(function (msg) {
+	    			$translate('pages.task.messages.update').then(function (msg) {
 				    	inform.add(msg, {'type': 'success'});
 					});
 	            	deferred.resolve(response);
@@ -34,7 +34,7 @@ angular.module('angularDemoApp')
 	    	}else{
     			TaskService.save($scope.task,function(response) {
 					
-    				$translate('pages.Task.messages.create').then(function (msg) {
+    				$translate('pages.task.messages.create').then(function (msg) {
 				    	inform.add(msg, {'type': 'success'});
 					});
 					$state.go('^.view', { id: response.id }, {location: 'replace'});

@@ -5,25 +5,44 @@ angular.module('angularDemoApp')
 $stateProvider
 		.state('app.testOther', {
 		    url: '/testOther',
-		    template: '<div ui-view class="fade-in-up"></div>'
+			abstract: true,
+		    template: '<div ui-view="page" class="fade-in-up"></div>'
 		})
 		.state('app.testOther.list', {
 			url: '/list?search',//TODO: search so that search is not an object in url
-			templateUrl: 'app/testOther/testOther.list.html',
-			controller: 'TestOtherListController'
+			views: {
+				"page@app.testOther": {
+					templateUrl: 'app/testOther/testOther.list.html',
+					controller: 'TestOtherListController'
+				}
+			}
 		}).state('app.testOther.create',{
 			url: '/create',
-			templateUrl: 'app/testOther/testOther.form.html',
-			controller: 'TestOtherEditController',
+			ncyBreadcrumb: {
+				parent: 'app.testOther.list'
+			},
+			views: {
+				"page@app.testOther": {
+					templateUrl: 'app/testOther/testOther.form.html',
+					controller: 'TestOtherEditController'
+				}
+			},
 			resolve:{
 				testOtherData: function($stateParams, TestOtherService) {
 					return new TestOtherService();
 				}
 			}
-		}).state('app.testOther.edit',{
-			url: '/edit/:id',
-			templateUrl: 'app/testOther/testOther.form.html',
-			controller: 'TestOtherEditController',
+		}).state('app.testOther.view',{
+			url: '/view/:id',
+			ncyBreadcrumb: {
+				parent: 'app.testOther.list'
+			},
+			views: {
+				"page@app.testOther": {
+					templateUrl: 'app/testOther/testOther.view.html',
+					controller: 'TestOtherViewController'
+				}
+			},
 			resolve:{
 				testOtherData: function($stateParams, TestOtherService){
 					return TestOtherService.get({id:$stateParams.id}).$promise.then(
@@ -33,15 +52,19 @@ $stateProvider
 					);
 				}
 			}
-		}).state('app.testOther.view',{
-			url: '/view/:id',
-			templateUrl: 'app/testOther/testOther.view.html',
-			controller: 'TestOtherViewController',
-				resolve:{
+		}).state('app.testOther.view.edit',{
+			url: '/edit',
+			views: {
+				"page@app.testOther": {
+					templateUrl: 'app/testOther/testOther.form.html',
+					controller: 'TestOtherEditController',
+				}
+			},
+			resolve:{
 				testOtherData: function($stateParams, TestOtherService){
 					return TestOtherService.get({id:$stateParams.id}).$promise.then(
 						function( response ){
-							return response;
+								return response;
 						}
 					);
 				}
@@ -78,7 +101,7 @@ $stateProvider
 
 		}
 
-	}).state('app.testOther.edit.testStringSearchModal',{
+	}).state('app.testOther.view.edit.testStringSearchModal',{
 		templateUrl: 'app/testString/testString.list.html',
 		controller: 'TestStringListController'
 	})

@@ -1,11 +1,7 @@
 package org.grails.samples
 
-
-import grails.util.GrailsNameUtils
 import grails.validation.Validateable
 import groovy.transform.ToString
-
-import org.grails.samples.Speciality
 
 @Validateable
 @ToString

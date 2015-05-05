@@ -26,7 +26,7 @@ angular.module('angularDemoApp')
 
 	    	if($scope.isEditForm){
 	    		PersonCollectionlessService.update($scope.personCollectionless, function(response) {	
-	    			$translate('pages.PersonCollectionless.messages.update').then(function (msg) {
+	    			$translate('pages.personCollectionless.messages.update').then(function (msg) {
 				    	inform.add(msg, {'type': 'success'});
 					});
 	            	deferred.resolve(response);
@@ -34,7 +34,7 @@ angular.module('angularDemoApp')
 	    	}else{
     			PersonCollectionlessService.save($scope.personCollectionless,function(response) {
 					
-    				$translate('pages.PersonCollectionless.messages.create').then(function (msg) {
+    				$translate('pages.personCollectionless.messages.create').then(function (msg) {
 				    	inform.add(msg, {'type': 'success'});
 					});
 					$state.go('^.view', { id: response.id }, {location: 'replace'});

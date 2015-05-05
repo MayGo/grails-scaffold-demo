@@ -1,33 +1,33 @@
 
 
-<div id="user_view" ng-init="pageTitle = 'pages.User.view.title'"
+<div id="user_view" ng-init="pageTitle = 'pages.user.view.title'"
      ng-include=" 'shared/blocks/page_heading.html' "></div>
 <div class="content-body">
     <div class="form-horizontal">
 
         <div class="form-group">
-            <label class="col-sm-2 control-label" translate="pages.User.view.field.accountExpired"></label>
+            <label class="col-sm-2 control-label" translate="pages.user.view.field.accountExpired"></label>
             <div class="col-sm-10 form-control-static" ng-bind="user.accountExpired"></div>
         </div>
         <div class="line line-dashed b-b line-lg pull-in"></div>
     
 
         <div class="form-group">
-            <label class="col-sm-2 control-label" translate="pages.User.view.field.accountLocked"></label>
+            <label class="col-sm-2 control-label" translate="pages.user.view.field.accountLocked"></label>
             <div class="col-sm-10 form-control-static" ng-bind="user.accountLocked"></div>
         </div>
         <div class="line line-dashed b-b line-lg pull-in"></div>
     
 
         <div class="form-group">
-            <label class="col-sm-2 control-label" translate="pages.User.view.field.enabled"></label>
+            <label class="col-sm-2 control-label" translate="pages.user.view.field.enabled"></label>
             <div class="col-sm-10 form-control-static" ng-bind="user.enabled"></div>
         </div>
         <div class="line line-dashed b-b line-lg pull-in"></div>
     
 
         <div class="form-group">
-            <label class="col-sm-2 control-label" translate="pages.User.view.field.passwordExpired"></label>
+            <label class="col-sm-2 control-label" translate="pages.user.view.field.passwordExpired"></label>
             <div class="col-sm-10 form-control-static" ng-bind="user.passwordExpired"></div>
         </div>
         <div class="line line-dashed b-b line-lg pull-in"></div>
@@ -35,7 +35,7 @@
 
         <div class="form-group">
             <label class="col-sm-2 control-label"
-                   translate="pages.User.view.field.username"></label>
+                   translate="pages.user.view.field.username"></label>
             <div class="col-sm-10 form-control-static"
                  ng-bind="user.username"></div>
         </div>
@@ -48,16 +48,16 @@
 
         <div class="form-action pull-right">
             <a id="editBtn" class="btn btn-default"
-               ui-sref="app.user.edit({id:user.id})">
-                <i class="fa fa-edit" translate="pages.User.view.edit"></i>
+               ui-sref="app.user.view.edit({id:user.id})">
+                <i class="fa fa-edit" translate="pages.user.view.buttons.edit"></i>
             </a>
             <a id="deleteBtn" class="btn btn-danger"
                ng-click="deleteUser(user)" mx-show-loading>
-                <i class="fa fa-trash-o" translate="pages.User.view.delete"></i>
+                <i class="fa fa-trash-o" translate="pages.user.view.buttons.delete"></i>
             </a>
 
             <a id="backBtn" class="btn btn-default" ng-click="back()">
-                <i class="fa fa-chevron-left" translate="pages.User.view.back"></i>
+                <i class="fa fa-chevron-left" translate="pages.user.view.buttons.back"></i>
             </a>
         </div>
         <div class="clearfix"/>
@@ -72,14 +72,15 @@
         <tab ui-sref="app.user.view.userRole({relationName:'users'})"
              ui-sref-active="active">
             <tab-heading
-                   translate="pages.UserRole.view.lists"
-                   translate-value-isval="{{::'pages.UserRole.view.field.user' | translate }}"
-                   translate-value-inval="{{::'pages.UserRole.name' | translate }}">
+                   translate="pages.userRole.view.lists"
+                   translate-value-isval="{{::'pages.userRole.view.field.user' | translate }}"
+                   translate-value-inval="{{::'pages.userRole.name' | translate }}">
             </tab-heading>
         </tab>
 
     </tabset>
-    <div ui-view ><div class="content-body">{{::'pages.User.view.selecttab' | translate}}</div></div>
+
+    <div ui-view="tabs" ><div class="content-body">{{::'pages.user.view.selecttab' | translate}}</div></div>
 </div>
     
 

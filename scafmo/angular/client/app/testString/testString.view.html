@@ -1,13 +1,13 @@
 
 
-<div id="testString_view" ng-init="pageTitle = 'pages.TestString.view.title'"
+<div id="testString_view" ng-init="pageTitle = 'pages.testString.view.title'"
      ng-include=" 'shared/blocks/page_heading.html' "></div>
 <div class="content-body">
     <div class="form-horizontal">
 
         <div class="form-group">
             <label class="col-sm-2 control-label"
-                   translate="pages.TestString.view.field.blankStr"></label>
+                   translate="pages.testString.view.field.blankStr"></label>
             <div class="col-sm-10 form-control-static"
                  ng-bind="testString.blankStr"></div>
         </div>
@@ -16,7 +16,7 @@
 
         <div class="form-group">
             <label class="col-sm-2 control-label"
-                   translate="pages.TestString.view.field.creditCardStr"></label>
+                   translate="pages.testString.view.field.creditCardStr"></label>
             <div class="col-sm-10 form-control-static"
                  ng-bind="testString.creditCardStr"></div>
         </div>
@@ -25,7 +25,7 @@
 
         <div class="form-group">
             <label class="col-sm-2 control-label"
-                   translate="pages.TestString.view.field.emailStr"></label>
+                   translate="pages.testString.view.field.emailStr"></label>
             <div class="col-sm-10 form-control-static"
                  ng-bind="testString.emailStr"></div>
         </div>
@@ -34,7 +34,7 @@
 
         <div class="form-group">
             <label class="col-sm-2 control-label"
-                   translate="pages.TestString.view.field.inListStr"></label>
+                   translate="pages.testString.view.field.inListStr"></label>
             <div class="col-sm-10 form-control-static"
                  ng-bind="testString.inListStr"></div>
         </div>
@@ -43,7 +43,7 @@
 
         <div class="form-group">
             <label class="col-sm-2 control-label"
-                   translate="pages.TestString.view.field.matchesStr"></label>
+                   translate="pages.testString.view.field.matchesStr"></label>
             <div class="col-sm-10 form-control-static"
                  ng-bind="testString.matchesStr"></div>
         </div>
@@ -52,7 +52,7 @@
 
         <div class="form-group">
             <label class="col-sm-2 control-label"
-                   translate="pages.TestString.view.field.maxSizeStr"></label>
+                   translate="pages.testString.view.field.maxSizeStr"></label>
             <div class="col-sm-10 form-control-static"
                  ng-bind="testString.maxSizeStr"></div>
         </div>
@@ -61,7 +61,7 @@
 
         <div class="form-group">
             <label class="col-sm-2 control-label"
-                   translate="pages.TestString.view.field.minSizeStr"></label>
+                   translate="pages.testString.view.field.minSizeStr"></label>
             <div class="col-sm-10 form-control-static"
                  ng-bind="testString.minSizeStr"></div>
         </div>
@@ -70,7 +70,7 @@
 
         <div class="form-group">
             <label class="col-sm-2 control-label"
-                   translate="pages.TestString.view.field.notEqualStr"></label>
+                   translate="pages.testString.view.field.notEqualStr"></label>
             <div class="col-sm-10 form-control-static"
                  ng-bind="testString.notEqualStr"></div>
         </div>
@@ -79,7 +79,7 @@
 
         <div class="form-group">
             <label class="col-sm-2 control-label"
-                   translate="pages.TestString.view.field.sizeStr"></label>
+                   translate="pages.testString.view.field.sizeStr"></label>
             <div class="col-sm-10 form-control-static"
                  ng-bind="testString.sizeStr"></div>
         </div>
@@ -88,7 +88,7 @@
 
         <div class="form-group">
             <label class="col-sm-2 control-label"
-                   translate="pages.TestString.view.field.uniqueStr"></label>
+                   translate="pages.testString.view.field.uniqueStr"></label>
             <div class="col-sm-10 form-control-static"
                  ng-bind="testString.uniqueStr"></div>
         </div>
@@ -97,7 +97,7 @@
 
         <div class="form-group">
             <label class="col-sm-2 control-label"
-                   translate="pages.TestString.view.field.urlStr"></label>
+                   translate="pages.testString.view.field.urlStr"></label>
             <div class="col-sm-10 form-control-static"
                  ng-bind="testString.urlStr"></div>
         </div>
@@ -110,16 +110,16 @@
 
         <div class="form-action pull-right">
             <a id="editBtn" class="btn btn-default"
-               ui-sref="app.testString.edit({id:testString.id})">
-                <i class="fa fa-edit" translate="pages.TestString.view.edit"></i>
+               ui-sref="app.testString.view.edit({id:testString.id})">
+                <i class="fa fa-edit" translate="pages.testString.view.buttons.edit"></i>
             </a>
             <a id="deleteBtn" class="btn btn-danger"
                ng-click="deleteTestString(testString)" mx-show-loading>
-                <i class="fa fa-trash-o" translate="pages.TestString.view.delete"></i>
+                <i class="fa fa-trash-o" translate="pages.testString.view.buttons.delete"></i>
             </a>
 
             <a id="backBtn" class="btn btn-default" ng-click="back()">
-                <i class="fa fa-chevron-left" translate="pages.TestString.view.back"></i>
+                <i class="fa fa-chevron-left" translate="pages.testString.view.buttons.back"></i>
             </a>
         </div>
         <div class="clearfix"/>
@@ -134,14 +134,15 @@
         <tab ui-sref="app.testString.view.testOther({relationName:'testStringTypes'})"
              ui-sref-active="active">
             <tab-heading
-                   translate="pages.TestOther.view.lists"
-                   translate-value-isval="{{::'pages.TestOther.view.field.testStringType' | translate }}"
-                   translate-value-inval="{{::'pages.TestOther.name' | translate }}">
+                   translate="pages.testOther.view.lists"
+                   translate-value-isval="{{::'pages.testOther.view.field.testStringType' | translate }}"
+                   translate-value-inval="{{::'pages.testOther.name' | translate }}">
             </tab-heading>
         </tab>
 
     </tabset>
-    <div ui-view ><div class="content-body">{{::'pages.TestString.view.selecttab' | translate}}</div></div>
+
+    <div ui-view="tabs" ><div class="content-body">{{::'pages.testString.view.selecttab' | translate}}</div></div>
 </div>
     
 

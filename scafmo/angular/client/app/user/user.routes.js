@@ -5,25 +5,44 @@ angular.module('angularDemoApp')
 $stateProvider
 		.state('app.user', {
 		    url: '/user',
-		    template: '<div ui-view class="fade-in-up"></div>'
+			abstract: true,
+		    template: '<div ui-view="page" class="fade-in-up"></div>'
 		})
 		.state('app.user.list', {
 			url: '/list?search',//TODO: search so that search is not an object in url
-			templateUrl: 'app/user/user.list.html',
-			controller: 'UserListController'
+			views: {
+				"page@app.user": {
+					templateUrl: 'app/user/user.list.html',
+					controller: 'UserListController'
+				}
+			}
 		}).state('app.user.create',{
 			url: '/create',
-			templateUrl: 'app/user/user.form.html',
-			controller: 'UserEditController',
+			ncyBreadcrumb: {
+				parent: 'app.user.list'
+			},
+			views: {
+				"page@app.user": {
+					templateUrl: 'app/user/user.form.html',
+					controller: 'UserEditController'
+				}
+			},
 			resolve:{
 				userData: function($stateParams, UserService) {
 					return new UserService();
 				}
 			}
-		}).state('app.user.edit',{
-			url: '/edit/:id',
-			templateUrl: 'app/user/user.form.html',
-			controller: 'UserEditController',
+		}).state('app.user.view',{
+			url: '/view/:id',
+			ncyBreadcrumb: {
+				parent: 'app.user.list'
+			},
+			views: {
+				"page@app.user": {
+					templateUrl: 'app/user/user.view.html',
+					controller: 'UserViewController'
+				}
+			},
 			resolve:{
 				userData: function($stateParams, UserService){
 					return UserService.get({id:$stateParams.id}).$promise.then(
@@ -33,15 +52,19 @@ $stateProvider
 					);
 				}
 			}
-		}).state('app.user.view',{
-			url: '/view/:id',
-			templateUrl: 'app/user/user.view.html',
-			controller: 'UserViewController',
-				resolve:{
+		}).state('app.user.view.edit',{
+			url: '/edit',
+			views: {
+				"page@app.user": {
+					templateUrl: 'app/user/user.form.html',
+					controller: 'UserEditController',
+				}
+			},
+			resolve:{
 				userData: function($stateParams, UserService){
 					return UserService.get({id:$stateParams.id}).$promise.then(
 						function( response ){
-							return response;
+								return response;
 						}
 					);
 				}
@@ -52,11 +75,18 @@ $stateProvider
 
 		.state('app.user.view.userRole',{
 			url: '/userRole/:relationName',
+			ncyBreadcrumb: {
+				skip: true
+			},
 			data:{
 				isTab:true
 			},
-			templateUrl: 'app/userRole/userRole.list.html',
-			controller: 'UserRoleListController'
+			views: {
+				"tabs": {
+					templateUrl: 'app/userRole/userRole.list.html',
+					controller: 'UserRoleListController'
+				}
+			}
 		})
 	
 ;

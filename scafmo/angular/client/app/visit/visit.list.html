@@ -1,11 +1,11 @@
 
-<div id="visit_list" ng-init="pageTitle = 'pages.Visit.list.title'"
+<div id="visit_list" ng-init="pageTitle = 'pages.visit.list.title'"
      data-ng-include=" 'shared/blocks/page_heading.html' "></div>
 <div class="content-body">
-<div class="list-search"  st-table="rowCollection" st-pipe="callServer" >
+<div class="list-search">
 <accordion close-others="false">
-    <accordion-group  heading="{{::'pages.Visit.list.table.search' | translate}}"  is-open="isSearchOpen">
-         <form name="visitForm" class="form-validation form-horizontal" novalidate>
+    <accordion-group  heading="{{::'pages.visit.list.table.search' | translate}}"  is-open="isSearchOpen">
+         <form name="visitForm" novalidate>
         <div class="row form-inline">
             
                   <div class="col-lg-2 form-group">
@@ -16,7 +16,7 @@
         custom-st-search="date"
      	type="text" 
      	class="form-control" 
-     	placeholder="{{::'pages.Visit.list.search.placeholder.date' | translate}}"
+     	placeholder="{{::'pages.visit.list.search.placeholder.date' | translate}}"
         datepicker-popup
         is-open="visit._dateOpen"
         ng-click="visit._dateOpen = true"
@@ -33,17 +33,16 @@
                     <input 
                     	name="description"
                    		ng-model="search.description"
-                   		st-search="'description'"
-                   		class="form-control" 
+                   		class="form-control"
                    		type="text" 
-                   		placeholder="{{::'pages.Visit.list.search.placeholder.description' | translate}}"  ></div> </div>
+                   		placeholder="{{::'pages.visit.list.search.placeholder.description' | translate}}"  ></div> </div>
             
                   <div class="col-lg-2 form-group"><!--ManyToOne-->
      <div class="input-group input-group-sm" style="width:100%">
      	<tags-input
             ng-model="search.pets"
             custom-st-search="pets"
-            placeholder="{{::'pages.Visit.list.search.placeholder.pet' | translate}}">
+            placeholder="{{::'pages.visit.list.search.placeholder.pet' | translate}}">
               <auto-complete
                       source="autocompleteService.petQuery($query, ['id','name','birthDate'], true)" ></auto-complete>
             </tags-input></div></div>
@@ -55,30 +54,20 @@
         </accordion>
         <div class="box-tools pull-right" ng-if="!isModal">
             <a class="btn btn-default btn-xs" ui-sref="app.visit.create">
-                <i class="fa fa-plus" translate="pages.Visit.list.new" mx-show-loading></i>
+                <i class="fa fa-plus" translate="pages.visit.list.new" mx-show-loading></i>
             </a>
         </div>
 
         <div class="clearfix"></div>
         <div class="list-search-table">
-	      <table class="table table-responsive">
-	      	<thead>
-	      		<tr>
-                    <th></th>
-	      			<th width='20' st-sort="id" translate="pages.Visit.list.table.header.id"></th>	      		
-			   		<th st-sort="date" translate="pages.Visit.list.table.header.date" ></th>				 
-			   		<th st-sort="description" translate="pages.Visit.list.table.header.description" ></th>				 
-			   		<th st-sort="pet" translate="pages.Visit.list.table.header.pet" ></th>				 
-
-				</tr>
-	      	</thead>
-	      	<tbody ng-hide="isLoading">
-				<tr ng-repeat="visit in rowCollection">
+	      <table class="table table-responsive" ng-table="tableParams" show-filter="true" >
+	      	<tbody ng-hide="tableParams.settings().$loading">
+				<tr ng-repeat="visit in $data">
                     <td class="text-left" >
                         <a class="btn btn-default btn-xs" ui-sref="app.visit.view({id:visit.id})" ng-if="!isModal">
                             <i class="fa fa-eye"></i>
                         </a>
-                        <a class="btn btn-default btn-xs" ui-sref="app.visit.edit({id:visit.id})" ng-if="!isModal">
+                        <a class="btn btn-default btn-xs" ui-sref="app.visit.view.edit({id:visit.id})" ng-if="!isModal">
                             <i class="fa fa-edit"></i>
                         </a>
                         <a class="btn btn-danger btn-xs" ng-click="deleteVisit(visit)" mx-show-loading ng-if="!isModal">
@@ -88,25 +77,25 @@
                             <i class="fa fa-plus"></i>
                         </a>
                     </td>
-					 <td>{{::visit.id}}</td>					
-			   		<td>{{visit.date | date:'yyyy-MM-dd HH:mm'}}</td>				 	
-			   		<td>{{::visit.description}}</td>				 	
-			   		<td>{{::visit.pet.id}} {{::visit.pet.name}} {{::visit.pet.birthDate}} </td>				 	
+
+                    <td data-title="'pages.visit.list.table.header.id' | translate" sortable="'id'">{{::visit.id}}</td>					
+			   		
+        <td data-title="'pages.visit.list.table.header.date' | translate" sortable="'date'">
+{{::visit.date | date:'yyyy-MM-dd HH:mm'}}</td>				 	
+			   		
+        <td data-title="'pages.visit.list.table.header.description' | translate" sortable="'description'">
+{{::visit.description}}</td>				 	
+			   		
+        <td data-title="'pages.visit.list.table.header.pet' | translate" sortable="'pet'">
+{{::visit.pet.id}} {{::visit.pet.name}} {{::visit.pet.birthDate}} </td>				 	
 
 				</tr>
 			</tbody>
-              <tbody ng-show="isLoading">
+              <tbody ng-show="tableParams.settings().$loading">
                   <tr>
                       <td class="text-center" translate="messages.loading"></td>
                   </tr>
               </tbody>
-			<tfoot ng-hide="isLoading">
-	          <tr>
-	            <td colspan="10" class="text-center" >
-	              <div st-pagination="" st-items-by-page="stTable.itemsByPage" st-displayed-pages="15" ></div>
-	            </td>
-	          </tr>
-	        </tfoot>
 	      </table>
         </div>
     </div>

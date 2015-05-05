@@ -1,17 +1,17 @@
 
-<div id="user_list" ng-init="pageTitle = 'pages.User.list.title'"
+<div id="user_list" ng-init="pageTitle = 'pages.user.list.title'"
      data-ng-include=" 'shared/blocks/page_heading.html' "></div>
 <div class="content-body">
-<div class="list-search"  st-table="rowCollection" st-pipe="callServer" >
+<div class="list-search">
 <accordion close-others="false">
-    <accordion-group  heading="{{::'pages.User.list.table.search' | translate}}"  is-open="isSearchOpen">
-         <form name="userForm" class="form-validation form-horizontal" novalidate>
+    <accordion-group  heading="{{::'pages.user.list.table.search' | translate}}"  is-open="isSearchOpen">
+         <form name="userForm" novalidate>
         <div class="row form-inline">
             
                   <div class="col-lg-2 form-group">
     <div class="form-group">
 	  <label for="accountExpired" class="control-label">
-          {{::'pages.User.list.search.placeholder.accountExpired' | translate}}</label>
+          {{::'pages.user.list.search.placeholder.accountExpired' | translate}}</label>
 	  <div class="input-group input-group-sm">
 		<ng-toggle 
 			tri-toggle 
@@ -28,7 +28,7 @@
                   <div class="col-lg-2 form-group">
     <div class="form-group">
 	  <label for="accountLocked" class="control-label">
-          {{::'pages.User.list.search.placeholder.accountLocked' | translate}}</label>
+          {{::'pages.user.list.search.placeholder.accountLocked' | translate}}</label>
 	  <div class="input-group input-group-sm">
 		<ng-toggle 
 			tri-toggle 
@@ -45,7 +45,7 @@
                   <div class="col-lg-2 form-group">
     <div class="form-group">
 	  <label for="enabled" class="control-label">
-          {{::'pages.User.list.search.placeholder.enabled' | translate}}</label>
+          {{::'pages.user.list.search.placeholder.enabled' | translate}}</label>
 	  <div class="input-group input-group-sm">
 		<ng-toggle 
 			tri-toggle 
@@ -62,7 +62,7 @@
                   <div class="col-lg-2 form-group">
     <div class="form-group">
 	  <label for="passwordExpired" class="control-label">
-          {{::'pages.User.list.search.placeholder.passwordExpired' | translate}}</label>
+          {{::'pages.user.list.search.placeholder.passwordExpired' | translate}}</label>
 	  <div class="input-group input-group-sm">
 		<ng-toggle 
 			tri-toggle 
@@ -81,10 +81,9 @@
                     <input 
                     	name="username"
                    		ng-model="search.username"
-                   		st-search="'username'"
-                   		class="form-control" 
+                   		class="form-control"
                    		type="text" 
-                   		placeholder="{{::'pages.User.list.search.placeholder.username' | translate}}"  ></div> </div>
+                   		placeholder="{{::'pages.user.list.search.placeholder.username' | translate}}"  ></div> </div>
             
         </div>
     
@@ -93,32 +92,20 @@
         </accordion>
         <div class="box-tools pull-right" ng-if="!isModal">
             <a class="btn btn-default btn-xs" ui-sref="app.user.create">
-                <i class="fa fa-plus" translate="pages.User.list.new" mx-show-loading></i>
+                <i class="fa fa-plus" translate="pages.user.list.new" mx-show-loading></i>
             </a>
         </div>
 
         <div class="clearfix"></div>
         <div class="list-search-table">
-	      <table class="table table-responsive">
-	      	<thead>
-	      		<tr>
-                    <th></th>
-	      			<th width='20' st-sort="id" translate="pages.User.list.table.header.id"></th>	      		
-			   		<th st-sort="accountExpired" translate="pages.User.list.table.header.accountExpired" ></th>				 
-			   		<th st-sort="accountLocked" translate="pages.User.list.table.header.accountLocked" ></th>				 
-			   		<th st-sort="enabled" translate="pages.User.list.table.header.enabled" ></th>				 
-			   		<th st-sort="passwordExpired" translate="pages.User.list.table.header.passwordExpired" ></th>				 
-			   		<th st-sort="username" translate="pages.User.list.table.header.username" ></th>				 
-
-				</tr>
-	      	</thead>
-	      	<tbody ng-hide="isLoading">
-				<tr ng-repeat="user in rowCollection">
+	      <table class="table table-responsive" ng-table="tableParams" show-filter="true" >
+	      	<tbody ng-hide="tableParams.settings().$loading">
+				<tr ng-repeat="user in $data">
                     <td class="text-left" >
                         <a class="btn btn-default btn-xs" ui-sref="app.user.view({id:user.id})" ng-if="!isModal">
                             <i class="fa fa-eye"></i>
                         </a>
-                        <a class="btn btn-default btn-xs" ui-sref="app.user.edit({id:user.id})" ng-if="!isModal">
+                        <a class="btn btn-default btn-xs" ui-sref="app.user.view.edit({id:user.id})" ng-if="!isModal">
                             <i class="fa fa-edit"></i>
                         </a>
                         <a class="btn btn-danger btn-xs" ng-click="deleteUser(user)" mx-show-loading ng-if="!isModal">
@@ -128,27 +115,31 @@
                             <i class="fa fa-plus"></i>
                         </a>
                     </td>
-					 <td>{{::user.id}}</td>					
-			   		<td>{{::user.accountExpired}}</td>				 	
-			   		<td>{{::user.accountLocked}}</td>				 	
-			   		<td>{{::user.enabled}}</td>				 	
-			   		<td>{{::user.passwordExpired}}</td>				 	
-			   		<td>{{::user.username}}</td>				 	
+
+                    <td data-title="'pages.user.list.table.header.id' | translate" sortable="'id'">{{::user.id}}</td>					
+			   		
+        <td data-title="'pages.user.list.table.header.accountExpired' | translate" sortable="'accountExpired'">
+{{::user.accountExpired}}</td>				 	
+			   		
+        <td data-title="'pages.user.list.table.header.accountLocked' | translate" sortable="'accountLocked'">
+{{::user.accountLocked}}</td>				 	
+			   		
+        <td data-title="'pages.user.list.table.header.enabled' | translate" sortable="'enabled'">
+{{::user.enabled}}</td>				 	
+			   		
+        <td data-title="'pages.user.list.table.header.passwordExpired' | translate" sortable="'passwordExpired'">
+{{::user.passwordExpired}}</td>				 	
+			   		
+        <td data-title="'pages.user.list.table.header.username' | translate" sortable="'username'">
+{{::user.username}}</td>				 	
 
 				</tr>
 			</tbody>
-              <tbody ng-show="isLoading">
+              <tbody ng-show="tableParams.settings().$loading">
                   <tr>
                       <td class="text-center" translate="messages.loading"></td>
                   </tr>
               </tbody>
-			<tfoot ng-hide="isLoading">
-	          <tr>
-	            <td colspan="10" class="text-center" >
-	              <div st-pagination="" st-items-by-page="stTable.itemsByPage" st-displayed-pages="15" ></div>
-	            </td>
-	          </tr>
-	        </tfoot>
 	      </table>
         </div>
     </div>

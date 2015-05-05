@@ -1,11 +1,7 @@
 package org.example.pomodoro
 
-
-import grails.util.GrailsNameUtils
 import grails.validation.Validateable
 import groovy.transform.ToString
-
-import org.example.pomodoro.Task
 
 @Validateable
 @ToString

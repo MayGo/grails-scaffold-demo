@@ -14,7 +14,7 @@ angular.module('angularDemoApp')
 		service.deleteInstance = function(instance) {
 			return instance.$delete(
 				function(instance) {
-					$translate('pages.Person.messages.delete').then(function (msg) {
+					$translate('pages.person.messages.delete').then(function (msg) {
 						inform.add(msg, {'type': 'warning'});
 					});
 

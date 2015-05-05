@@ -1,14 +1,14 @@
 
 
 <div id="personCollectionless_form"
-     ng-init="pageTitle = (isEditForm)?'pages.PersonCollectionless.edit.title':'pages.PersonCollectionless.create.title'" data-ng-include=" 'shared/blocks/page_heading.html' "></div>
+     ng-init="pageTitle = (isEditForm)?'pages.personCollectionless.view.edit.title':'pages.personCollectionless.create.title'" data-ng-include=" 'shared/blocks/page_heading.html' "></div>
 <div class="content-body">
     <form name="personCollectionlessForm" class="form-validation form-horizontal" novalidate>
         <input name="version" type="hidden" ng-model="personCollectionless.version" />
 
 	<div class="form-group">
 		<label class="col-sm-2 control-label" for="age"
-               translate="pages.PersonCollectionless.edit.form.field.age"></label>
+               translate="pages.personCollectionless.view.edit.form.field.age"></label>
 		<div class="col-sm-10">
             <div class="input-group input-group">
 	      				<span class="input-group-addon">nr</span>
@@ -21,7 +21,7 @@
 
 	<div class="form-group">
 		<label class="col-sm-2 control-label" for="name"
-               translate="pages.PersonCollectionless.edit.form.field.name"></label>
+               translate="pages.personCollectionless.view.edit.form.field.name"></label>
 		<div class="col-sm-10">
             <div class="input-group input-group">
                     <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
@@ -37,7 +37,7 @@
 
 	<div class="form-group">
 		<label class="col-sm-2 control-label" for="division"
-               translate="pages.PersonCollectionless.edit.form.field.division"></label>
+               translate="pages.personCollectionless.view.edit.form.field.division"></label>
 		<div class="col-sm-10">
             <!--ManyToOne-->
      <div class="input-group input-group">
@@ -51,7 +51,7 @@
           typeahead-input-formatter="autocompleteService.divisionCollectionlessFormatLabel($model, ['id','name'])"
        />
          <span class="input-group-btn" item-selector update-model="personCollectionless.division"
-               ui-link="app.personCollectionless.edit.divisionCollectionlessSearchModal" >
+               ui-link="app.personCollectionless.view.edit.divisionCollectionlessSearchModal" >
          </span>
      </div> 
      <script type="text/ng-template" id="divisionAutocompleteTemplate.html"><a><span bind-html-unsafe="match.model.id | typeaheadHighlight:query"></span> <span bind-html-unsafe="match.model.name | typeaheadHighlight:query"></span> </a></script>
@@ -67,9 +67,9 @@
                     class="btn btn-success"
                     type='submit'
                     ng-disabled="personCollectionlessForm.$invalid"
-                    translate="pages.PersonCollectionless.edit.form.submit"
+                    translate="pages.personCollectionless.view.edit.form.submit"
                     mx-show-loading ng-click="submit(personCollectionlessForm)"></button>
-                <a class="btn btn-default" ng-click="back()" translate="pages.PersonCollectionless.edit.form.cancel" mx-show-loading></a>
+                <a class="btn btn-default" ng-click="back()" translate="pages.personCollectionless.view.edit.form.cancel" mx-show-loading></a>
             </div>
             <div class="clearfix"/>
         </div>

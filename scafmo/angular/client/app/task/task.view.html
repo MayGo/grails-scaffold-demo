@@ -1,13 +1,13 @@
 
 
-<div id="task_view" ng-init="pageTitle = 'pages.Task.view.title'"
+<div id="task_view" ng-init="pageTitle = 'pages.task.view.title'"
      ng-include=" 'shared/blocks/page_heading.html' "></div>
 <div class="content-body">
     <div class="form-horizontal">
 
     <div class="form-group">
         <label class="col-sm-2 control-label"
-               translate="pages.Task.view.field.dateCreated"></label>
+               translate="pages.task.view.field.dateCreated"></label>
         <div class="col-sm-10 form-control-static"
              ng-bind="task.dateCreated | date:'yyyy-MM-dd HH:mm'"></div>
     </div>
@@ -16,7 +16,7 @@
 
     <div class="form-group">
         <label class="col-sm-2 control-label"
-               translate="pages.Task.view.field.deadline"></label>
+               translate="pages.task.view.field.deadline"></label>
         <div class="col-sm-10 form-control-static"
              ng-bind="task.deadline | date:'yyyy-MM-dd HH:mm'"></div>
     </div>
@@ -25,7 +25,7 @@
 
         <div class="form-group">
             <label class="col-sm-2 control-label"
-                   translate="pages.Task.view.field.details"></label>
+                   translate="pages.task.view.field.details"></label>
             <div class="col-sm-10 form-control-static"
                  ng-bind="task.details"></div>
         </div>
@@ -34,7 +34,7 @@
 
         <div class="form-group">
             <label class="col-sm-2 control-label"
-                   translate="pages.Task.view.field.status"></label>
+                   translate="pages.task.view.field.status"></label>
             <div class="col-sm-10 form-control-static"
                  ng-bind="task.status"></div>
         </div>
@@ -43,7 +43,7 @@
 
         <div class="form-group">
             <label class="col-sm-2 control-label"
-                   translate="pages.Task.view.field.summary"></label>
+                   translate="pages.task.view.field.summary"></label>
             <div class="col-sm-10 form-control-static"
                  ng-bind="task.summary"></div>
         </div>
@@ -52,7 +52,7 @@
 
         <div class="form-group">
             <label class="col-sm-2 control-label"
-                   translate="pages.Task.view.field.timeSpent"></label>
+                   translate="pages.task.view.field.timeSpent"></label>
             <div class="col-sm-10 form-control-static"
                  ng-bind="task.timeSpent"></div>
         </div>
@@ -71,16 +71,16 @@
 
         <div class="form-action pull-right">
             <a id="editBtn" class="btn btn-default"
-               ui-sref="app.task.edit({id:task.id})">
-                <i class="fa fa-edit" translate="pages.Task.view.edit"></i>
+               ui-sref="app.task.view.edit({id:task.id})">
+                <i class="fa fa-edit" translate="pages.task.view.buttons.edit"></i>
             </a>
             <a id="deleteBtn" class="btn btn-danger"
                ng-click="deleteTask(task)" mx-show-loading>
-                <i class="fa fa-trash-o" translate="pages.Task.view.delete"></i>
+                <i class="fa fa-trash-o" translate="pages.task.view.buttons.delete"></i>
             </a>
 
             <a id="backBtn" class="btn btn-default" ng-click="back()">
-                <i class="fa fa-chevron-left" translate="pages.Task.view.back"></i>
+                <i class="fa fa-chevron-left" translate="pages.task.view.buttons.back"></i>
             </a>
         </div>
         <div class="clearfix"/>

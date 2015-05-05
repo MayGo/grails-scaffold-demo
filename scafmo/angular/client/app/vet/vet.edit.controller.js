@@ -26,7 +26,7 @@ angular.module('angularDemoApp')
 
 	    	if($scope.isEditForm){
 	    		VetService.update($scope.vet, function(response) {	
-	    			$translate('pages.Vet.messages.update').then(function (msg) {
+	    			$translate('pages.vet.messages.update').then(function (msg) {
 				    	inform.add(msg, {'type': 'success'});
 					});
 	            	deferred.resolve(response);
@@ -34,7 +34,7 @@ angular.module('angularDemoApp')
 	    	}else{
     			VetService.save($scope.vet,function(response) {
 					
-    				$translate('pages.Vet.messages.create').then(function (msg) {
+    				$translate('pages.vet.messages.create').then(function (msg) {
 				    	inform.add(msg, {'type': 'success'});
 					});
 					$state.go('^.view', { id: response.id }, {location: 'replace'});

@@ -1,17 +1,17 @@
 
-<div id="testOther_list" ng-init="pageTitle = 'pages.TestOther.list.title'"
+<div id="testOther_list" ng-init="pageTitle = 'pages.testOther.list.title'"
      data-ng-include=" 'shared/blocks/page_heading.html' "></div>
 <div class="content-body">
-<div class="list-search"  st-table="rowCollection" st-pipe="callServer" >
+<div class="list-search">
 <accordion close-others="false">
-    <accordion-group  heading="{{::'pages.TestOther.list.table.search' | translate}}"  is-open="isSearchOpen">
-         <form name="testOtherForm" class="form-validation form-horizontal" novalidate>
+    <accordion-group  heading="{{::'pages.testOther.list.table.search' | translate}}"  is-open="isSearchOpen">
+         <form name="testOtherForm" novalidate>
         <div class="row form-inline">
             
                   <div class="col-lg-2 form-group">
     <div class="form-group">
 	  <label for="booleanNullable" class="control-label">
-          {{::'pages.TestOther.list.search.placeholder.booleanNullable' | translate}}</label>
+          {{::'pages.testOther.list.search.placeholder.booleanNullable' | translate}}</label>
 	  <div class="input-group input-group-sm">
 		<ng-toggle 
 			tri-toggle 
@@ -33,7 +33,7 @@
         custom-st-search="testDate"
      	type="text" 
      	class="form-control" 
-     	placeholder="{{::'pages.TestOther.list.search.placeholder.testDate' | translate}}"
+     	placeholder="{{::'pages.testOther.list.search.placeholder.testDate' | translate}}"
         datepicker-popup
         is-open="testOther._testDateOpen"
         ng-click="testOther._testDateOpen = true"
@@ -51,10 +51,9 @@
           <input 
           	name="testEnum"
           	ng-model="search.testEnum"
-          	st-search="'testEnum'"
-          	type="text" 
+          	type="text"
           	class="form-control" 
-            placeholder="{{::'pages.TestOther.list.search.placeholder.testEnum' | translate}}"
+            placeholder="{{::'pages.testOther.list.search.placeholder.testEnum' | translate}}"
             typeahead="b for b in autocompleteService.testOtherTestEnumList | filter:$viewValue" ></div> 
            </div>
             
@@ -63,7 +62,7 @@
      	<tags-input
             ng-model="search.testStringTypes"
             custom-st-search="testStringTypes"
-            placeholder="{{::'pages.TestOther.list.search.placeholder.testStringType' | translate}}">
+            placeholder="{{::'pages.testOther.list.search.placeholder.testStringType' | translate}}">
               <auto-complete
                       source="autocompleteService.testStringQuery($query, ['id','urlStr','uniqueStr','sizeStr'], true)" ></auto-complete>
             </tags-input></div></div>
@@ -75,31 +74,20 @@
         </accordion>
         <div class="box-tools pull-right" ng-if="!isModal">
             <a class="btn btn-default btn-xs" ui-sref="app.testOther.create">
-                <i class="fa fa-plus" translate="pages.TestOther.list.new" mx-show-loading></i>
+                <i class="fa fa-plus" translate="pages.testOther.list.new" mx-show-loading></i>
             </a>
         </div>
 
         <div class="clearfix"></div>
         <div class="list-search-table">
-	      <table class="table table-responsive">
-	      	<thead>
-	      		<tr>
-                    <th></th>
-	      			<th width='20' st-sort="id" translate="pages.TestOther.list.table.header.id"></th>	      		
-			   		<th st-sort="booleanNullable" translate="pages.TestOther.list.table.header.booleanNullable" ></th>				 
-			   		<th st-sort="testDate" translate="pages.TestOther.list.table.header.testDate" ></th>				 
-			   		<th st-sort="testEnum" translate="pages.TestOther.list.table.header.testEnum" ></th>				 
-			   		<th st-sort="testStringType" translate="pages.TestOther.list.table.header.testStringType" ></th>				 
-
-				</tr>
-	      	</thead>
-	      	<tbody ng-hide="isLoading">
-				<tr ng-repeat="testOther in rowCollection">
+	      <table class="table table-responsive" ng-table="tableParams" show-filter="true" >
+	      	<tbody ng-hide="tableParams.settings().$loading">
+				<tr ng-repeat="testOther in $data">
                     <td class="text-left" >
                         <a class="btn btn-default btn-xs" ui-sref="app.testOther.view({id:testOther.id})" ng-if="!isModal">
                             <i class="fa fa-eye"></i>
                         </a>
-                        <a class="btn btn-default btn-xs" ui-sref="app.testOther.edit({id:testOther.id})" ng-if="!isModal">
+                        <a class="btn btn-default btn-xs" ui-sref="app.testOther.view.edit({id:testOther.id})" ng-if="!isModal">
                             <i class="fa fa-edit"></i>
                         </a>
                         <a class="btn btn-danger btn-xs" ng-click="deleteTestOther(testOther)" mx-show-loading ng-if="!isModal">
@@ -109,26 +97,28 @@
                             <i class="fa fa-plus"></i>
                         </a>
                     </td>
-					 <td>{{::testOther.id}}</td>					
-			   		<td>{{::testOther.booleanNullable}}</td>				 	
-			   		<td>{{testOther.testDate | date:'yyyy-MM-dd HH:mm'}}</td>				 	
-			   		<td>{{::testOther.testEnum}}</td>				 	
-			   		<td>{{::testOther.testStringType.id}} {{::testOther.testStringType.urlStr}} {{::testOther.testStringType.uniqueStr}} {{::testOther.testStringType.sizeStr}} </td>				 	
+
+                    <td data-title="'pages.testOther.list.table.header.id' | translate" sortable="'id'">{{::testOther.id}}</td>					
+			   		
+        <td data-title="'pages.testOther.list.table.header.booleanNullable' | translate" sortable="'booleanNullable'">
+{{::testOther.booleanNullable}}</td>				 	
+			   		
+        <td data-title="'pages.testOther.list.table.header.testDate' | translate" sortable="'testDate'">
+{{::testOther.testDate | date:'yyyy-MM-dd HH:mm'}}</td>				 	
+			   		
+        <td data-title="'pages.testOther.list.table.header.testEnum' | translate" sortable="'testEnum'">
+{{::testOther.testEnum}}</td>				 	
+			   		
+        <td data-title="'pages.testOther.list.table.header.testStringType' | translate" sortable="'testStringType'">
+{{::testOther.testStringType.id}} {{::testOther.testStringType.urlStr}} {{::testOther.testStringType.uniqueStr}} {{::testOther.testStringType.sizeStr}} </td>				 	
 
 				</tr>
 			</tbody>
-              <tbody ng-show="isLoading">
+              <tbody ng-show="tableParams.settings().$loading">
                   <tr>
                       <td class="text-center" translate="messages.loading"></td>
                   </tr>
               </tbody>
-			<tfoot ng-hide="isLoading">
-	          <tr>
-	            <td colspan="10" class="text-center" >
-	              <div st-pagination="" st-items-by-page="stTable.itemsByPage" st-displayed-pages="15" ></div>
-	            </td>
-	          </tr>
-	        </tfoot>
 	      </table>
         </div>
     </div>

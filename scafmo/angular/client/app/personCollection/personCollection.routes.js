@@ -5,25 +5,44 @@ angular.module('angularDemoApp')
 $stateProvider
 		.state('app.personCollection', {
 		    url: '/personCollection',
-		    template: '<div ui-view class="fade-in-up"></div>'
+			abstract: true,
+		    template: '<div ui-view="page" class="fade-in-up"></div>'
 		})
 		.state('app.personCollection.list', {
 			url: '/list?search',//TODO: search so that search is not an object in url
-			templateUrl: 'app/personCollection/personCollection.list.html',
-			controller: 'PersonCollectionListController'
+			views: {
+				"page@app.personCollection": {
+					templateUrl: 'app/personCollection/personCollection.list.html',
+					controller: 'PersonCollectionListController'
+				}
+			}
 		}).state('app.personCollection.create',{
 			url: '/create',
-			templateUrl: 'app/personCollection/personCollection.form.html',
-			controller: 'PersonCollectionEditController',
+			ncyBreadcrumb: {
+				parent: 'app.personCollection.list'
+			},
+			views: {
+				"page@app.personCollection": {
+					templateUrl: 'app/personCollection/personCollection.form.html',
+					controller: 'PersonCollectionEditController'
+				}
+			},
 			resolve:{
 				personCollectionData: function($stateParams, PersonCollectionService) {
 					return new PersonCollectionService();
 				}
 			}
-		}).state('app.personCollection.edit',{
-			url: '/edit/:id',
-			templateUrl: 'app/personCollection/personCollection.form.html',
-			controller: 'PersonCollectionEditController',
+		}).state('app.personCollection.view',{
+			url: '/view/:id',
+			ncyBreadcrumb: {
+				parent: 'app.personCollection.list'
+			},
+			views: {
+				"page@app.personCollection": {
+					templateUrl: 'app/personCollection/personCollection.view.html',
+					controller: 'PersonCollectionViewController'
+				}
+			},
 			resolve:{
 				personCollectionData: function($stateParams, PersonCollectionService){
 					return PersonCollectionService.get({id:$stateParams.id}).$promise.then(
@@ -33,15 +52,19 @@ $stateProvider
 					);
 				}
 			}
-		}).state('app.personCollection.view',{
-			url: '/view/:id',
-			templateUrl: 'app/personCollection/personCollection.view.html',
-			controller: 'PersonCollectionViewController',
-				resolve:{
+		}).state('app.personCollection.view.edit',{
+			url: '/edit',
+			views: {
+				"page@app.personCollection": {
+					templateUrl: 'app/personCollection/personCollection.form.html',
+					controller: 'PersonCollectionEditController',
+				}
+			},
+			resolve:{
 				personCollectionData: function($stateParams, PersonCollectionService){
 					return PersonCollectionService.get({id:$stateParams.id}).$promise.then(
 						function( response ){
-							return response;
+								return response;
 						}
 					);
 				}
@@ -78,7 +101,7 @@ $stateProvider
 
 		}
 
-	}).state('app.personCollection.edit.divisionCollectionSearchModal',{
+	}).state('app.personCollection.view.edit.divisionCollectionSearchModal',{
 		templateUrl: 'app/divisionCollection/divisionCollection.list.html',
 		controller: 'DivisionCollectionListController'
 	})

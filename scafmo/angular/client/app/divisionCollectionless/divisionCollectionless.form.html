@@ -1,14 +1,14 @@
 
 
 <div id="divisionCollectionless_form"
-     ng-init="pageTitle = (isEditForm)?'pages.DivisionCollectionless.edit.title':'pages.DivisionCollectionless.create.title'" data-ng-include=" 'shared/blocks/page_heading.html' "></div>
+     ng-init="pageTitle = (isEditForm)?'pages.divisionCollectionless.view.edit.title':'pages.divisionCollectionless.create.title'" data-ng-include=" 'shared/blocks/page_heading.html' "></div>
 <div class="content-body">
     <form name="divisionCollectionlessForm" class="form-validation form-horizontal" novalidate>
         <input name="version" type="hidden" ng-model="divisionCollectionless.version" />
 
 	<div class="form-group">
 		<label class="col-sm-2 control-label" for="name"
-               translate="pages.DivisionCollectionless.edit.form.field.name"></label>
+               translate="pages.divisionCollectionless.view.edit.form.field.name"></label>
 		<div class="col-sm-10">
             <div class="input-group input-group">
                     <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
@@ -24,7 +24,7 @@
 
 	<div class="form-group">
 		<label class="col-sm-2 control-label" for="headDivision"
-               translate="pages.DivisionCollectionless.edit.form.field.headDivision"></label>
+               translate="pages.divisionCollectionless.view.edit.form.field.headDivision"></label>
 		<div class="col-sm-10">
             <!--ManyToOne-->
      <div class="input-group input-group">
@@ -38,7 +38,7 @@
           typeahead-input-formatter="autocompleteService.divisionCollectionlessFormatLabel($model, ['id','name'])"
        />
          <span class="input-group-btn" item-selector update-model="divisionCollectionless.headDivision"
-               ui-link="app.divisionCollectionless.edit.divisionCollectionlessSearchModal" >
+               ui-link="app.divisionCollectionless.view.edit.divisionCollectionlessSearchModal" >
          </span>
      </div> 
      <script type="text/ng-template" id="headDivisionAutocompleteTemplate.html"><a><span bind-html-unsafe="match.model.id | typeaheadHighlight:query"></span> <span bind-html-unsafe="match.model.name | typeaheadHighlight:query"></span> </a></script>
@@ -54,9 +54,9 @@
                     class="btn btn-success"
                     type='submit'
                     ng-disabled="divisionCollectionlessForm.$invalid"
-                    translate="pages.DivisionCollectionless.edit.form.submit"
+                    translate="pages.divisionCollectionless.view.edit.form.submit"
                     mx-show-loading ng-click="submit(divisionCollectionlessForm)"></button>
-                <a class="btn btn-default" ng-click="back()" translate="pages.DivisionCollectionless.edit.form.cancel" mx-show-loading></a>
+                <a class="btn btn-default" ng-click="back()" translate="pages.divisionCollectionless.view.edit.form.cancel" mx-show-loading></a>
             </div>
             <div class="clearfix"/>
         </div>

@@ -1,13 +1,13 @@
 
 
-<div id="pet_view" ng-init="pageTitle = 'pages.Pet.view.title'"
+<div id="pet_view" ng-init="pageTitle = 'pages.pet.view.title'"
      ng-include=" 'shared/blocks/page_heading.html' "></div>
 <div class="content-body">
     <div class="form-horizontal">
 
     <div class="form-group">
         <label class="col-sm-2 control-label"
-               translate="pages.Pet.view.field.birthDate"></label>
+               translate="pages.pet.view.field.birthDate"></label>
         <div class="col-sm-10 form-control-static"
              ng-bind="pet.birthDate | date:'yyyy-MM-dd HH:mm'"></div>
     </div>
@@ -16,7 +16,7 @@
 
         <div class="form-group">
             <label class="col-sm-2 control-label"
-                   translate="pages.Pet.view.field.name"></label>
+                   translate="pages.pet.view.field.name"></label>
             <div class="col-sm-10 form-control-static"
                  ng-bind="pet.name"></div>
         </div>
@@ -24,7 +24,7 @@
     
 <!--OneToMany-->
         <div class="form-group">
-            <label class="col-sm-2 control-label" translate="pages.Pet.view.field.visits"></label>
+            <label class="col-sm-2 control-label" translate="pages.pet.view.field.visits"></label>
             <div class="col-sm-10 form-control-static"
                ng-bind="pet.visits"></div>
 
@@ -33,7 +33,7 @@
     
 <!--ManyToOne-->
         <div class="form-group">
-            <label class="col-sm-2 control-label" translate="pages.Pet.view.field.type"></label>
+            <label class="col-sm-2 control-label" translate="pages.pet.view.field.type"></label>
             <a ui-sref="app.pet.view.petTypeModal({modalId:pet.type.id})" >
             <div class="col-sm-10 form-control-static">
             <span ng-bind="pet.type.id"></span> <span ng-bind="pet.type.name"></span> </div></a></div>
@@ -41,7 +41,7 @@
     
 <!--ManyToOne-->
         <div class="form-group">
-            <label class="col-sm-2 control-label" translate="pages.Pet.view.field.owner"></label>
+            <label class="col-sm-2 control-label" translate="pages.pet.view.field.owner"></label>
             <a ui-sref="app.pet.view.ownerModal({modalId:pet.owner.id})" >
             <div class="col-sm-10 form-control-static">
             <span ng-bind="pet.owner.id"></span> <span ng-bind="pet.owner.telephone"></span> <span ng-bind="pet.owner.lastName"></span> <span ng-bind="pet.owner.firstName"></span> </div></a></div>
@@ -54,16 +54,16 @@
 
         <div class="form-action pull-right">
             <a id="editBtn" class="btn btn-default"
-               ui-sref="app.pet.edit({id:pet.id})">
-                <i class="fa fa-edit" translate="pages.Pet.view.edit"></i>
+               ui-sref="app.pet.view.edit({id:pet.id})">
+                <i class="fa fa-edit" translate="pages.pet.view.buttons.edit"></i>
             </a>
             <a id="deleteBtn" class="btn btn-danger"
                ng-click="deletePet(pet)" mx-show-loading>
-                <i class="fa fa-trash-o" translate="pages.Pet.view.delete"></i>
+                <i class="fa fa-trash-o" translate="pages.pet.view.buttons.delete"></i>
             </a>
 
             <a id="backBtn" class="btn btn-default" ng-click="back()">
-                <i class="fa fa-chevron-left" translate="pages.Pet.view.back"></i>
+                <i class="fa fa-chevron-left" translate="pages.pet.view.buttons.back"></i>
             </a>
         </div>
         <div class="clearfix"/>
@@ -78,14 +78,15 @@
         <tab ui-sref="app.pet.view.visit({relationName:'pets'})"
              ui-sref-active="active">
             <tab-heading
-                   translate="pages.Visit.view.lists"
-                   translate-value-isval="{{::'pages.Visit.view.field.pet' | translate }}"
-                   translate-value-inval="{{::'pages.Visit.name' | translate }}">
+                   translate="pages.visit.view.lists"
+                   translate-value-isval="{{::'pages.visit.view.field.pet' | translate }}"
+                   translate-value-inval="{{::'pages.visit.name' | translate }}">
             </tab-heading>
         </tab>
 
     </tabset>
-    <div ui-view ><div class="content-body">{{::'pages.Pet.view.selecttab' | translate}}</div></div>
+
+    <div ui-view="tabs" ><div class="content-body">{{::'pages.pet.view.selecttab' | translate}}</div></div>
 </div>
     
 

@@ -1,14 +1,15 @@
 package scafmo.collection
 
 import grails.compiler.GrailsCompileStatic
+import org.codehaus.groovy.grails.web.binding.GrailsWebDataBinder
 import org.grails.databinding.SimpleMapDataBindingSource
 import grails.transaction.Transactional
 import defpackage.exceptions.ResourceNotFound
 
-//@GrailsCompileStatic
+@GrailsCompileStatic
 @Transactional
 class PersonCollectionModifyService {
-	def grailsWebDataBinder
+	GrailsWebDataBinder grailsWebDataBinder
 
 	PersonCollection createPersonCollection(Map data) {
 		PersonCollection personCollection = PersonCollection.newInstance()
@@ -16,13 +17,15 @@ class PersonCollectionModifyService {
 	}
 
 	PersonCollection updatePersonCollection(Map data) {
-		if (!data.id || data.id < 0) {
+		Long objId = (Long)data.id
+		if (!objId || objId < 0) {
 			throw new IllegalArgumentException('no.valid.id')
 		}
-		PersonCollection personCollection = PersonCollection.where { id == data.id }.find()
+
+		PersonCollection personCollection = PersonCollection.where { id == objId }.find()
 
 		if (!personCollection) {
-			throw new ResourceNotFound("No PersonCollection found with Id :[${data.id}]")
+			throw new ResourceNotFound("No PersonCollection found with Id :[$objId]")
 		}
 
 		return createOrUpdate(personCollection, data)

@@ -16,21 +16,21 @@ class PersonCollectionlessSearchServiceSpec extends Specification {
 	void 'Quering PersonCollectionless without id is not possible'() {
 
 		when:
-			service.queryForPersonCollectionless(null)
+			service.queryForRead(null)
 		then:
 			thrown(IllegalArgumentException)
 	}
 
 	void 'Quering PersonCollectionless with illegal id is not possible'() {
 		when:
-			service.queryForPersonCollectionless(ILLEGAL_ID)
+			service.queryForRead(ILLEGAL_ID)
 		then:
 			thrown(IllegalArgumentException)
 	}
 
 	void 'Quering PersonCollectionless with fictional id is not possible'() {
 		when:
-			service.queryForPersonCollectionless(FICTIONAL_ID)
+			service.queryForRead(FICTIONAL_ID)
 		then:
 			thrown(ResourceNotFound)
 	}
@@ -40,12 +40,14 @@ class PersonCollectionlessSearchServiceSpec extends Specification {
 		setup:
 			Long personCollectionlessId = createValidPersonCollectionless().id
 		when:
-			PersonCollectionless personCollectionless = service.queryForPersonCollectionless(personCollectionlessId)
+			PersonCollectionless personCollectionless = service.queryForRead(personCollectionlessId)
 		then:
 			personCollectionless != null
 			personCollectionless.id == 1
 	}
 
+	// TODO: Refactor and cleanup code so Codenarc check passes
+	@SuppressWarnings(['MethodSize'])
 	Map validData() {
 
 		Map data = [

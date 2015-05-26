@@ -97,9 +97,9 @@
         </div>
 
         <div class="clearfix"></div>
-        <div class="list-search-table">
+        <div class="list-search-table" loading-container="tableParams.settings().$loading">
 	      <table class="table table-responsive" ng-table="tableParams" show-filter="true" >
-	      	<tbody ng-hide="tableParams.settings().$loading">
+	      	<tbody>
 				<tr ng-repeat="user in $data">
                     <td class="text-left" >
                         <a class="btn btn-default btn-xs" ui-sref="app.user.view({id:user.id})" ng-if="!isModal">
@@ -135,11 +135,6 @@
 
 				</tr>
 			</tbody>
-              <tbody ng-show="tableParams.settings().$loading">
-                  <tr>
-                      <td class="text-center" translate="messages.loading"></td>
-                  </tr>
-              </tbody>
 	      </table>
         </div>
     </div>

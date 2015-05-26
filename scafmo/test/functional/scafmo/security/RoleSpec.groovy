@@ -201,7 +201,7 @@ class RoleSpec extends Specification implements RestQueries, AuthQueries, TestUt
 
 	void 'Test querying in Role list by dummy searchString.'() {
 		when: 'Get role list by searchString'
-			response = queryListWithUrlVariables('searchString={searchString}', [searchString: "999999999999999"])
+			response = queryListWithMap([searchString: "999999999999999"])
 
 		then: 'Should be with size 0'
 			response.json.size() == 0
@@ -210,38 +210,38 @@ class RoleSpec extends Specification implements RestQueries, AuthQueries, TestUt
 
 	void 'Test querying in Role list by real searchString.'() {
 		when: 'Get role list by searchString'
-			response = queryListWithUrlVariables('order=desc&sort=id&searchString={searchString}',
-					[searchString: "ROLE_303"])
+			response = queryListWithMap(
+					[order: 'desc', sort: 'id', searchString: "ROLE_303"])
 
 		then: 'Should at least last inserted item'
-			response.json[0].id == domainId
 			response.json.size() > 0
+			response.json[0].id == domainId
 			response.status == HttpStatus.OK.value()
 	}
 
 	void 'Test filtering in Role list by id.'() {
 		when: 'Get role list filtered by id'
 
-			response = queryListWithUrlVariables('filter={filter}', [filter:"{id:${domainId}}"])
+			response = queryListWithMap([id: domainId])
 
 		then: 'Should contains one item, just inserted item.'
-			response.json[0].id == domainId
 			response.json.size() == 1
+			response.json[0].id == domainId
 			response.status == HttpStatus.OK.value()
 	}
 
-	@Unroll("Role list search with props '#jsonVal' returns '#respSize' items")
+	@Unroll("Role list search with props '#filter' returns '#respSize' items")
 	void 'Filtering in Role list by all properties.'() {
 		given:
-			response = queryListWithUrlVariables('filter={filter}', [filter:"${jsonVal}"])
+			response = queryListWithMap(filter)
 			
 
 		expect:
 			response.json.size() == respSize
 		where:
-			jsonVal 	        || respSize
-			'{}'                || 10
-			'{"authority":"ROLE_303"}' || 1 
+			filter 	        || respSize
+			[:]                || 10
+			[authority:'ROLE_303'] || 1 
 
 	}
 

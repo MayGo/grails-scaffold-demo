@@ -3,25 +3,40 @@ package scafmo.constr
 import grails.compiler.GrailsCompileStatic
 import grails.gorm.PagedResultList
 import grails.transaction.Transactional
+import groovy.transform.TypeCheckingMode
 import org.grails.datastore.mapping.query.api.BuildableCriteria
 import defpackage.exceptions.ResourceNotFound
 
-//@GrailsCompileStatic
+@GrailsCompileStatic
 @Transactional(readOnly = true)
 class TestOtherSearchService {
 
-	TestOther queryForTestOther(Long testOtherId) {
+	TestOther queryForRead(Long testOtherId) {
+		return queryFor(testOtherId, true)
+	}
+
+	TestOther queryForWrite(Long testOtherId) {
+		return queryFor(testOtherId, false)
+	}
+
+	private TestOther queryFor(Long testOtherId, boolean doReadOnly = true) {
 		if (!testOtherId || testOtherId < 0) {
 			throw new IllegalArgumentException('no.valid.id')
 		}
-		TestOther testOther = TestOther.where { id == testOtherId }.find()
+		TestOther testOther
+		if (doReadOnly) {
+			testOther = TestOther.read(testOtherId)
+		} else {
+			testOther = TestOther.get(testOtherId)
+		}
+
 		if (!testOther) {
 			throw new ResourceNotFound("No TestOther found with Id :[$testOtherId]")
 		}
 		return testOther
 	}
 
-	PagedResultList search(TestOtherSearchCommand cmd, Map pagingParams) {
+	PagedResultList search(TestOtherSearchCommand cmd, Map pagingParams, boolean doReadOnly = true) {
 
 		BuildableCriteria criteriaBuilder = (BuildableCriteria) TestOther.createCriteria()
 		PagedResultList results = (PagedResultList) criteriaBuilder.list(
@@ -31,15 +46,18 @@ class TestOtherSearchService {
 				sort: pagingParams.sort
 		) {
 			searchCriteria criteriaBuilder, cmd
+			readOnly(doReadOnly)
 		}
+
 		return results
 	}
 
+	// TODO: Refactor and cleanup code so Codenarc check passes dynamic pgJsonHasFieldValue
+	@SuppressWarnings(['AbcMetric', 'CyclomaticComplexity', 'MethodSize'])
+	@GrailsCompileStatic(TypeCheckingMode.SKIP) // We want to use dynamically added criterias, eg: pgJsonHasFieldValue
 	private void searchCriteria(BuildableCriteria builder, TestOtherSearchCommand cmd) {
 		String searchString = cmd.searchString
-
 		builder.with {
-			//readOnly true
 			if (cmd.id) {
 				eq('id', cmd.id)
 			}

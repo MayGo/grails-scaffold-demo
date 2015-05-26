@@ -201,7 +201,7 @@ class PetTypeSpec extends Specification implements RestQueries, AuthQueries, Tes
 
 	void 'Test querying in PetType list by dummy searchString.'() {
 		when: 'Get petType list by searchString'
-			response = queryListWithUrlVariables('searchString={searchString}', [searchString: "999999999999999"])
+			response = queryListWithMap([searchString: "999999999999999"])
 
 		then: 'Should be with size 0'
 			response.json.size() == 0
@@ -210,38 +210,38 @@ class PetTypeSpec extends Specification implements RestQueries, AuthQueries, Tes
 
 	void 'Test querying in PetType list by real searchString.'() {
 		when: 'Get petType list by searchString'
-			response = queryListWithUrlVariables('order=desc&sort=id&searchString={searchString}',
-					[searchString: "Type 456"])
+			response = queryListWithMap(
+					[order: 'desc', sort: 'id', searchString: "Type 456"])
 
 		then: 'Should at least last inserted item'
-			response.json[0].id == domainId
 			response.json.size() > 0
+			response.json[0].id == domainId
 			response.status == HttpStatus.OK.value()
 	}
 
 	void 'Test filtering in PetType list by id.'() {
 		when: 'Get petType list filtered by id'
 
-			response = queryListWithUrlVariables('filter={filter}', [filter:"{id:${domainId}}"])
+			response = queryListWithMap([id: domainId])
 
 		then: 'Should contains one item, just inserted item.'
-			response.json[0].id == domainId
 			response.json.size() == 1
+			response.json[0].id == domainId
 			response.status == HttpStatus.OK.value()
 	}
 
-	@Unroll("PetType list search with props '#jsonVal' returns '#respSize' items")
+	@Unroll("PetType list search with props '#filter' returns '#respSize' items")
 	void 'Filtering in PetType list by all properties.'() {
 		given:
-			response = queryListWithUrlVariables('filter={filter}', [filter:"${jsonVal}"])
+			response = queryListWithMap(filter)
 			
 
 		expect:
 			response.json.size() == respSize
 		where:
-			jsonVal 	        || respSize
-			'{}'                || 10
-//Can't predict 'size'			'{"name":"Type 456"}' || 1 
+			filter 	        || respSize
+			[:]                || 10
+//Can't predict 'size'			[name:'Type 456'] || 1 
 
 	}
 

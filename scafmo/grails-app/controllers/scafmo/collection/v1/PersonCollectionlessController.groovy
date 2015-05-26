@@ -61,7 +61,7 @@ class PersonCollectionlessController {
 		)
 	])
 	def show() {
-		respond personCollectionlessSearchService.queryForPersonCollectionless(params.long('id')),
+		respond personCollectionlessSearchService.queryForRead(params.long('id')),
 				[includes: includes, excludes: excludes]
 	}
 
@@ -88,7 +88,7 @@ class PersonCollectionlessController {
 		)
 	])
 	def edit() {
-		respond personCollectionlessSearchService.queryForPersonCollectionless(params.long('id')),
+		respond personCollectionlessSearchService.queryForRead(params.long('id')),
 				[includes: includes, excludes: excludes]
 	}
 

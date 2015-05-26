@@ -228,7 +228,7 @@ class TestOtherSpec extends Specification implements RestQueries, AuthQueries, T
 
 	void 'Test querying in TestOther list by dummy searchString.'() {
 		when: 'Get testOther list by searchString'
-			response = queryListWithUrlVariables('searchString={searchString}', [searchString: "999999999999999"])
+			response = queryListWithMap([searchString: "999999999999999"])
 
 		then: 'Should be with size 0'
 			response.json.size() == 0
@@ -237,42 +237,42 @@ class TestOtherSpec extends Specification implements RestQueries, AuthQueries, T
 
 	void 'Test querying in TestOther list by real searchString.'() {
 		when: 'Get testOther list by searchString'
-			response = queryListWithUrlVariables('order=desc&sort=id&searchString={searchString}',
-					[searchString: "TEST_1"])
+			response = queryListWithMap(
+					[order: 'desc', sort: 'id', searchString: "TEST_1"])
 
 		then: 'Should at least last inserted item'
-			response.json[0].id == domainId
 			response.json.size() > 0
+			response.json[0].id == domainId
 			response.status == HttpStatus.OK.value()
 	}
 
 	void 'Test filtering in TestOther list by id.'() {
 		when: 'Get testOther list filtered by id'
 
-			response = queryListWithUrlVariables('filter={filter}', [filter:"{id:${domainId}}"])
+			response = queryListWithMap([id: domainId])
 
 		then: 'Should contains one item, just inserted item.'
-			response.json[0].id == domainId
 			response.json.size() == 1
+			response.json[0].id == domainId
 			response.status == HttpStatus.OK.value()
 	}
 
-	@Unroll("TestOther list search with props '#jsonVal' returns '#respSize' items")
+	@Unroll("TestOther list search with props '#filter' returns '#respSize' items")
 	void 'Filtering in TestOther list by all properties.'() {
 		given:
-			response = queryListWithUrlVariables('filter={filter}', [filter:"${jsonVal}"])
+			response = queryListWithMap(filter)
 			
 
 		expect:
 			response.json.size() == respSize
 		where:
-			jsonVal 	        || respSize
-			'{}'                || 10
-			'{"booleanNullable":false}' || 10 
-			'{"testDate":"' + getTodayForInput() + '"}' || 10 
-			'{"testEnum":"TEST_1"}' || 10 
-			'{"testStringType":1}' || 2 
-			'{"testStringTypes":[1]}' || 2 
+			filter 	        || respSize
+			[:]                || 10
+			[booleanNullable:false] || 10 
+			[testDate:'' + getTodayForInput() + ''] || 10 
+			[testEnum:'TEST_1'] || 10 
+			[testStringType:1] || 3 
+			[testStringTypes:1] || 3 
 
 	}
 

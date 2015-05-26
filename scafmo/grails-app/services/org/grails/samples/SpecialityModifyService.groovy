@@ -1,14 +1,15 @@
 package org.grails.samples
 
 import grails.compiler.GrailsCompileStatic
+import org.codehaus.groovy.grails.web.binding.GrailsWebDataBinder
 import org.grails.databinding.SimpleMapDataBindingSource
 import grails.transaction.Transactional
 import defpackage.exceptions.ResourceNotFound
 
-//@GrailsCompileStatic
+@GrailsCompileStatic
 @Transactional
 class SpecialityModifyService {
-	def grailsWebDataBinder
+	GrailsWebDataBinder grailsWebDataBinder
 
 	Speciality createSpeciality(Map data) {
 		Speciality speciality = Speciality.newInstance()
@@ -16,13 +17,15 @@ class SpecialityModifyService {
 	}
 
 	Speciality updateSpeciality(Map data) {
-		if (!data.id || data.id < 0) {
+		Long objId = (Long)data.id
+		if (!objId || objId < 0) {
 			throw new IllegalArgumentException('no.valid.id')
 		}
-		Speciality speciality = Speciality.where { id == data.id }.find()
+
+		Speciality speciality = Speciality.where { id == objId }.find()
 
 		if (!speciality) {
-			throw new ResourceNotFound("No Speciality found with Id :[${data.id}]")
+			throw new ResourceNotFound("No Speciality found with Id :[$objId]")
 		}
 
 		return createOrUpdate(speciality, data)

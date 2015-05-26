@@ -61,7 +61,7 @@ class TaskController {
 		)
 	])
 	def show() {
-		respond taskSearchService.queryForTask(params.long('id')),
+		respond taskSearchService.queryForRead(params.long('id')),
 				[includes: includes, excludes: excludes]
 	}
 
@@ -88,7 +88,7 @@ class TaskController {
 		)
 	])
 	def edit() {
-		respond taskSearchService.queryForTask(params.long('id')),
+		respond taskSearchService.queryForRead(params.long('id')),
 				[includes: includes, excludes: excludes]
 	}
 

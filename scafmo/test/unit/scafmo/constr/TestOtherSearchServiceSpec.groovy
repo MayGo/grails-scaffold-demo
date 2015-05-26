@@ -16,21 +16,21 @@ class TestOtherSearchServiceSpec extends Specification {
 	void 'Quering TestOther without id is not possible'() {
 
 		when:
-			service.queryForTestOther(null)
+			service.queryForRead(null)
 		then:
 			thrown(IllegalArgumentException)
 	}
 
 	void 'Quering TestOther with illegal id is not possible'() {
 		when:
-			service.queryForTestOther(ILLEGAL_ID)
+			service.queryForRead(ILLEGAL_ID)
 		then:
 			thrown(IllegalArgumentException)
 	}
 
 	void 'Quering TestOther with fictional id is not possible'() {
 		when:
-			service.queryForTestOther(FICTIONAL_ID)
+			service.queryForRead(FICTIONAL_ID)
 		then:
 			thrown(ResourceNotFound)
 	}
@@ -40,18 +40,19 @@ class TestOtherSearchServiceSpec extends Specification {
 		setup:
 			Long testOtherId = createValidTestOther().id
 		when:
-			TestOther testOther = service.queryForTestOther(testOtherId)
+			TestOther testOther = service.queryForRead(testOtherId)
 		then:
 			testOther != null
 			testOther.id == 1
 	}
 
+	// TODO: Refactor and cleanup code so Codenarc check passes
+	@SuppressWarnings(['MethodSize'])
 	Map validData() {
 
 		Map data = [
   'id':  null,
   'version':  null,
-  'booleanNullable':  false,
   'testDate':  new Date().clearTime(),
   'testEnum':  'TEST_1'
 ]

@@ -16,21 +16,21 @@ class PersonSearchServiceSpec extends Specification {
 	void 'Quering Person without id is not possible'() {
 
 		when:
-			service.queryForPerson(null)
+			service.queryForRead(null)
 		then:
 			thrown(IllegalArgumentException)
 	}
 
 	void 'Quering Person with illegal id is not possible'() {
 		when:
-			service.queryForPerson(ILLEGAL_ID)
+			service.queryForRead(ILLEGAL_ID)
 		then:
 			thrown(IllegalArgumentException)
 	}
 
 	void 'Quering Person with fictional id is not possible'() {
 		when:
-			service.queryForPerson(FICTIONAL_ID)
+			service.queryForRead(FICTIONAL_ID)
 		then:
 			thrown(ResourceNotFound)
 	}
@@ -40,12 +40,14 @@ class PersonSearchServiceSpec extends Specification {
 		setup:
 			Long personId = createValidPerson().id
 		when:
-			Person person = service.queryForPerson(personId)
+			Person person = service.queryForRead(personId)
 		then:
 			person != null
 			person.id == 1
 	}
 
+	// TODO: Refactor and cleanup code so Codenarc check passes
+	@SuppressWarnings(['MethodSize'])
 	Map validData() {
 
 		Map data = [

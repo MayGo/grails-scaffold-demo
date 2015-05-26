@@ -61,7 +61,7 @@ class SpecialityController {
 		)
 	])
 	def show() {
-		respond specialitySearchService.queryForSpeciality(params.long('id')),
+		respond specialitySearchService.queryForRead(params.long('id')),
 				[includes: includes, excludes: excludes]
 	}
 
@@ -88,7 +88,7 @@ class SpecialityController {
 		)
 	])
 	def edit() {
-		respond specialitySearchService.queryForSpeciality(params.long('id')),
+		respond specialitySearchService.queryForRead(params.long('id')),
 				[includes: includes, excludes: excludes]
 	}
 

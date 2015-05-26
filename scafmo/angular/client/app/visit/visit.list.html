@@ -13,13 +13,12 @@
      <input 
      	name="date"
      	ng-model="search.date"
-        custom-st-search="date"
      	type="text" 
      	class="form-control" 
      	placeholder="{{::'pages.visit.list.search.placeholder.date' | translate}}"
-        datepicker-popup
-        is-open="visit._dateOpen"
-        ng-click="visit._dateOpen = true"
+        bs-datepicker
+        data-model-date-format="yyyy-MM-dd'T'HH:mm:ssZ"
+        data-date-type='string'
       
       />
      <span class="input-group-addon">
@@ -59,9 +58,9 @@
         </div>
 
         <div class="clearfix"></div>
-        <div class="list-search-table">
+        <div class="list-search-table" loading-container="tableParams.settings().$loading">
 	      <table class="table table-responsive" ng-table="tableParams" show-filter="true" >
-	      	<tbody ng-hide="tableParams.settings().$loading">
+	      	<tbody>
 				<tr ng-repeat="visit in $data">
                     <td class="text-left" >
                         <a class="btn btn-default btn-xs" ui-sref="app.visit.view({id:visit.id})" ng-if="!isModal">
@@ -91,11 +90,6 @@
 
 				</tr>
 			</tbody>
-              <tbody ng-show="tableParams.settings().$loading">
-                  <tr>
-                      <td class="text-center" translate="messages.loading"></td>
-                  </tr>
-              </tbody>
 	      </table>
         </div>
     </div>

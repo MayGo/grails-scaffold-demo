@@ -6,6 +6,7 @@ import spock.lang.Specification
 import defpackage.ConstraintHelper
 
 @TestFor(DivisionCollectionless)
+@SuppressWarnings(['DuplicateNumberLiteral'])
 class DivisionCollectionlessConstraintsSpec extends Specification {
 
 	def setup() {

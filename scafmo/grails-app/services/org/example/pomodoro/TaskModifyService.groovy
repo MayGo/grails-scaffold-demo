@@ -1,14 +1,15 @@
 package org.example.pomodoro
 
 import grails.compiler.GrailsCompileStatic
+import org.codehaus.groovy.grails.web.binding.GrailsWebDataBinder
 import org.grails.databinding.SimpleMapDataBindingSource
 import grails.transaction.Transactional
 import defpackage.exceptions.ResourceNotFound
 
-//@GrailsCompileStatic
+@GrailsCompileStatic
 @Transactional
 class TaskModifyService {
-	def grailsWebDataBinder
+	GrailsWebDataBinder grailsWebDataBinder
 
 	Task createTask(Map data) {
 		Task task = Task.newInstance()
@@ -16,13 +17,15 @@ class TaskModifyService {
 	}
 
 	Task updateTask(Map data) {
-		if (!data.id || data.id < 0) {
+		Long objId = (Long)data.id
+		if (!objId || objId < 0) {
 			throw new IllegalArgumentException('no.valid.id')
 		}
-		Task task = Task.where { id == data.id }.find()
+
+		Task task = Task.where { id == objId }.find()
 
 		if (!task) {
-			throw new ResourceNotFound("No Task found with Id :[${data.id}]")
+			throw new ResourceNotFound("No Task found with Id :[$objId]")
 		}
 
 		return createOrUpdate(task, data)

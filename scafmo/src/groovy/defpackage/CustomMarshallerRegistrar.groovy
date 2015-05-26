@@ -26,6 +26,8 @@ import scafmo.security.User
 import scafmo.security.UserRole
 import test.Classifier
 
+// TODO: Refactor and cleanup code so Codenarc check passes
+@SuppressWarnings(['AbcMetric', 'CyclomaticComplexity', 'MethodSize', 'NestedForLoop', 'DuplicateListLiteral'])
 class CustomMarshallerRegistrar {
 
 	static Map domainPropertiesCache = [:]
@@ -77,7 +79,7 @@ class CustomMarshallerRegistrar {
 		}
 		for (String key in getDomainProperties(domain.class)) {
 			def value = domain[key]
-			if (excludes.containsKey(key) && !excludes[key]) {
+			if (excludes.containsKey(key) && !excludes[key] || !value) {
 				continue
 			}
 			if (excludes.containsKey(key) && excludes[key] && value) {
@@ -95,12 +97,10 @@ class CustomMarshallerRegistrar {
 				} else {
 					res[key] = filter(value, excludes[key])
 				}
-			} else if (value != null && value != '') {
-				if (value.class?.isEnum()) {
+			} else if (value.class?.isEnum()) {
 					res[key] = value.name()
-				} else {
-					res[key] = value
-				}
+			} else {
+				res[key] = value
 			}
 		}
 		return res
@@ -112,124 +112,125 @@ class CustomMarshallerRegistrar {
 		def customDateMarshaller = new DateMarshaller(FastDateFormat.getInstance("yyyy-MM-dd'T'HH:mm:ssZ",
 				TimeZone.default, Locale.default))
 		JSON.registerObjectMarshaller(customDateMarshaller)
+		JSON.with {
 
-		JSON.registerObjectMarshaller Tag, priority, { Tag instance, JSON json ->
-			Class cl = instance.getClass()
-			List defaultExcludes = [
+			registerObjectMarshaller(Tag, priority) { Tag instance, JSON json ->
+				Class cl = instance.getClass()
+				List defaultExcludes = [
 'tasks']
-			Map excludes = createMap(defaultExcludes + json.getExcludes(cl) - json.getIncludes(cl))
-			return filter(instance, excludes)
-		}
-		JSON.registerObjectMarshaller Task, priority, { Task instance, JSON json ->
-			Class cl = instance.getClass()
-			List defaultExcludes = [
+				Map excludes = createMap(defaultExcludes + json.getExcludes(cl) - json.getIncludes(cl))
+				return filter(instance, excludes)
+			}
+			registerObjectMarshaller(Task, priority) { Task instance, JSON json ->
+				Class cl = instance.getClass()
+				List defaultExcludes = [
 'tags']
-			Map excludes = createMap(defaultExcludes + json.getExcludes(cl) - json.getIncludes(cl))
-			return filter(instance, excludes)
-		}
-		JSON.registerObjectMarshaller Owner, priority, { Owner instance, JSON json ->
-			Class cl = instance.getClass()
-			List defaultExcludes = [
+				Map excludes = createMap(defaultExcludes + json.getExcludes(cl) - json.getIncludes(cl))
+				return filter(instance, excludes)
+			}
+			registerObjectMarshaller(Owner, priority) { Owner instance, JSON json ->
+				Class cl = instance.getClass()
+				List defaultExcludes = [
 'pets']
-			Map excludes = createMap(defaultExcludes + json.getExcludes(cl) - json.getIncludes(cl))
-			return filter(instance, excludes)
-		}
-		JSON.registerObjectMarshaller Person, priority, { Person instance, JSON json ->
-			Class cl = instance.getClass()
-			List defaultExcludes = []
-			Map excludes = createMap(defaultExcludes + json.getExcludes(cl) - json.getIncludes(cl))
-			return filter(instance, excludes)
-		}
-		JSON.registerObjectMarshaller Pet, priority, { Pet instance, JSON json ->
-			Class cl = instance.getClass()
-			List defaultExcludes = [
+				Map excludes = createMap(defaultExcludes + json.getExcludes(cl) - json.getIncludes(cl))
+				return filter(instance, excludes)
+			}
+			registerObjectMarshaller(Person, priority) { Person instance, JSON json ->
+				Class cl = instance.getClass()
+				List defaultExcludes = []
+				Map excludes = createMap(defaultExcludes + json.getExcludes(cl) - json.getIncludes(cl))
+				return filter(instance, excludes)
+			}
+			registerObjectMarshaller(Pet, priority) { Pet instance, JSON json ->
+				Class cl = instance.getClass()
+				List defaultExcludes = [
 'ownerId',
 'owner.address',
 'owner.city',
 'owner.pets',
 'typeId',
 'visits']
-			Map excludes = createMap(defaultExcludes + json.getExcludes(cl) - json.getIncludes(cl))
-			return filter(instance, excludes)
-		}
-		JSON.registerObjectMarshaller PetType, priority, { PetType instance, JSON json ->
-			Class cl = instance.getClass()
-			List defaultExcludes = []
-			Map excludes = createMap(defaultExcludes + json.getExcludes(cl) - json.getIncludes(cl))
-			return filter(instance, excludes)
-		}
-		JSON.registerObjectMarshaller Speciality, priority, { Speciality instance, JSON json ->
-			Class cl = instance.getClass()
-			List defaultExcludes = []
-			Map excludes = createMap(defaultExcludes + json.getExcludes(cl) - json.getIncludes(cl))
-			return filter(instance, excludes)
-		}
-		JSON.registerObjectMarshaller Vet, priority, { Vet instance, JSON json ->
-			Class cl = instance.getClass()
-			List defaultExcludes = []
-			Map excludes = createMap(defaultExcludes + json.getExcludes(cl) - json.getIncludes(cl))
-			return filter(instance, excludes)
-		}
-		JSON.registerObjectMarshaller Visit, priority, { Visit instance, JSON json ->
-			Class cl = instance.getClass()
-			List defaultExcludes = [
+				Map excludes = createMap(defaultExcludes + json.getExcludes(cl) - json.getIncludes(cl))
+				return filter(instance, excludes)
+			}
+			registerObjectMarshaller(PetType, priority) { PetType instance, JSON json ->
+				Class cl = instance.getClass()
+				List defaultExcludes = []
+				Map excludes = createMap(defaultExcludes + json.getExcludes(cl) - json.getIncludes(cl))
+				return filter(instance, excludes)
+			}
+			registerObjectMarshaller(Speciality, priority) { Speciality instance, JSON json ->
+				Class cl = instance.getClass()
+				List defaultExcludes = []
+				Map excludes = createMap(defaultExcludes + json.getExcludes(cl) - json.getIncludes(cl))
+				return filter(instance, excludes)
+			}
+			registerObjectMarshaller(Vet, priority) { Vet instance, JSON json ->
+				Class cl = instance.getClass()
+				List defaultExcludes = []
+				Map excludes = createMap(defaultExcludes + json.getExcludes(cl) - json.getIncludes(cl))
+				return filter(instance, excludes)
+			}
+			registerObjectMarshaller(Visit, priority) { Visit instance, JSON json ->
+				Class cl = instance.getClass()
+				List defaultExcludes = [
 'petId',
 'pet.owner',
 'pet.ownerId',
 'pet.type',
 'pet.typeId',
 'pet.visits']
-			Map excludes = createMap(defaultExcludes + json.getExcludes(cl) - json.getIncludes(cl))
-			return filter(instance, excludes)
-		}
-		JSON.registerObjectMarshaller DivisionCollection, priority, { DivisionCollection instance, JSON json ->
-			Class cl = instance.getClass()
-			List defaultExcludes = [
+				Map excludes = createMap(defaultExcludes + json.getExcludes(cl) - json.getIncludes(cl))
+				return filter(instance, excludes)
+			}
+			registerObjectMarshaller(DivisionCollection, priority) { DivisionCollection instance, JSON json ->
+				Class cl = instance.getClass()
+				List defaultExcludes = [
 'headDivisionId',
 'headDivision.headDivision',
 'headDivision.headDivisionId',
 'headDivision.persons',
 'persons']
-			Map excludes = createMap(defaultExcludes + json.getExcludes(cl) - json.getIncludes(cl))
-			return filter(instance, excludes)
-		}
-		JSON.registerObjectMarshaller DivisionCollectionless, priority, { DivisionCollectionless instance, JSON json ->
-			Class cl = instance.getClass()
-			List defaultExcludes = [
+				Map excludes = createMap(defaultExcludes + json.getExcludes(cl) - json.getIncludes(cl))
+				return filter(instance, excludes)
+			}
+			registerObjectMarshaller(DivisionCollectionless, priority) { DivisionCollectionless instance, JSON json ->
+				Class cl = instance.getClass()
+				List defaultExcludes = [
 'headDivisionId',
 'headDivision.headDivision',
 'headDivision.headDivisionId']
-			Map excludes = createMap(defaultExcludes + json.getExcludes(cl) - json.getIncludes(cl))
-			return filter(instance, excludes)
-		}
-		JSON.registerObjectMarshaller PersonCollection, priority, { PersonCollection instance, JSON json ->
-			Class cl = instance.getClass()
-			List defaultExcludes = [
+				Map excludes = createMap(defaultExcludes + json.getExcludes(cl) - json.getIncludes(cl))
+				return filter(instance, excludes)
+			}
+			registerObjectMarshaller(PersonCollection, priority) { PersonCollection instance, JSON json ->
+				Class cl = instance.getClass()
+				List defaultExcludes = [
 'divisionId',
 'division.headDivision',
 'division.headDivisionId',
 'division.persons']
-			Map excludes = createMap(defaultExcludes + json.getExcludes(cl) - json.getIncludes(cl))
-			return filter(instance, excludes)
-		}
-		JSON.registerObjectMarshaller PersonCollectionless, priority, { PersonCollectionless instance, JSON json ->
-			Class cl = instance.getClass()
-			List defaultExcludes = [
+				Map excludes = createMap(defaultExcludes + json.getExcludes(cl) - json.getIncludes(cl))
+				return filter(instance, excludes)
+			}
+			registerObjectMarshaller(PersonCollectionless, priority) { PersonCollectionless instance, JSON json ->
+				Class cl = instance.getClass()
+				List defaultExcludes = [
 'divisionId',
 'division.headDivision',
 'division.headDivisionId']
-			Map excludes = createMap(defaultExcludes + json.getExcludes(cl) - json.getIncludes(cl))
-			return filter(instance, excludes)
-		}
-		JSON.registerObjectMarshaller TestNumber, priority, { TestNumber instance, JSON json ->
-			Class cl = instance.getClass()
-			List defaultExcludes = []
-			Map excludes = createMap(defaultExcludes + json.getExcludes(cl) - json.getIncludes(cl))
-			return filter(instance, excludes)
-		}
-		JSON.registerObjectMarshaller TestOther, priority, { TestOther instance, JSON json ->
-			Class cl = instance.getClass()
-			List defaultExcludes = [
+				Map excludes = createMap(defaultExcludes + json.getExcludes(cl) - json.getIncludes(cl))
+				return filter(instance, excludes)
+			}
+			registerObjectMarshaller(TestNumber, priority) { TestNumber instance, JSON json ->
+				Class cl = instance.getClass()
+				List defaultExcludes = []
+				Map excludes = createMap(defaultExcludes + json.getExcludes(cl) - json.getIncludes(cl))
+				return filter(instance, excludes)
+			}
+			registerObjectMarshaller(TestOther, priority) { TestOther instance, JSON json ->
+				Class cl = instance.getClass()
+				List defaultExcludes = [
 'testStringTypeId',
 'testStringType.blankStr',
 'testStringType.creditCardStr',
@@ -239,42 +240,43 @@ class CustomMarshallerRegistrar {
 'testStringType.maxSizeStr',
 'testStringType.minSizeStr',
 'testStringType.notEqualStr']
-			Map excludes = createMap(defaultExcludes + json.getExcludes(cl) - json.getIncludes(cl))
-			return filter(instance, excludes)
-		}
-		JSON.registerObjectMarshaller TestString, priority, { TestString instance, JSON json ->
-			Class cl = instance.getClass()
-			List defaultExcludes = []
-			Map excludes = createMap(defaultExcludes + json.getExcludes(cl) - json.getIncludes(cl))
-			return filter(instance, excludes)
-		}
-		JSON.registerObjectMarshaller Role, priority, { Role instance, JSON json ->
-			Class cl = instance.getClass()
-			List defaultExcludes = []
-			Map excludes = createMap(defaultExcludes + json.getExcludes(cl) - json.getIncludes(cl))
-			return filter(instance, excludes)
-		}
-		JSON.registerObjectMarshaller User, priority, { User instance, JSON json ->
-			Class cl = instance.getClass()
-			List defaultExcludes = []
-			Map excludes = createMap(defaultExcludes + json.getExcludes(cl) - json.getIncludes(cl))
-			return filter(instance, excludes)
-		}
-		JSON.registerObjectMarshaller UserRole, priority, { UserRole instance, JSON json ->
-			Class cl = instance.getClass()
-			List defaultExcludes = [
+				Map excludes = createMap(defaultExcludes + json.getExcludes(cl) - json.getIncludes(cl))
+				return filter(instance, excludes)
+			}
+			registerObjectMarshaller(TestString, priority) { TestString instance, JSON json ->
+				Class cl = instance.getClass()
+				List defaultExcludes = []
+				Map excludes = createMap(defaultExcludes + json.getExcludes(cl) - json.getIncludes(cl))
+				return filter(instance, excludes)
+			}
+			registerObjectMarshaller(Role, priority) { Role instance, JSON json ->
+				Class cl = instance.getClass()
+				List defaultExcludes = []
+				Map excludes = createMap(defaultExcludes + json.getExcludes(cl) - json.getIncludes(cl))
+				return filter(instance, excludes)
+			}
+			registerObjectMarshaller(User, priority) { User instance, JSON json ->
+				Class cl = instance.getClass()
+				List defaultExcludes = []
+				Map excludes = createMap(defaultExcludes + json.getExcludes(cl) - json.getIncludes(cl))
+				return filter(instance, excludes)
+			}
+			registerObjectMarshaller(UserRole, priority) { UserRole instance, JSON json ->
+				Class cl = instance.getClass()
+				List defaultExcludes = [
 'roleId',
 'userId',
 'user.accountExpired',
 'user.accountLocked']
-			Map excludes = createMap(defaultExcludes + json.getExcludes(cl) - json.getIncludes(cl))
-			return filter(instance, excludes)
-		}
-		JSON.registerObjectMarshaller Classifier, priority, { Classifier instance, JSON json ->
-			Class cl = instance.getClass()
-			List defaultExcludes = []
-			Map excludes = createMap(defaultExcludes + json.getExcludes(cl) - json.getIncludes(cl))
-			return filter(instance, excludes)
+				Map excludes = createMap(defaultExcludes + json.getExcludes(cl) - json.getIncludes(cl))
+				return filter(instance, excludes)
+			}
+			registerObjectMarshaller(Classifier, priority) { Classifier instance, JSON json ->
+				Class cl = instance.getClass()
+				List defaultExcludes = []
+				Map excludes = createMap(defaultExcludes + json.getExcludes(cl) - json.getIncludes(cl))
+				return filter(instance, excludes)
+			}
 		}
     }
 }

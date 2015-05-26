@@ -61,7 +61,7 @@ class DivisionCollectionController {
 		)
 	])
 	def show() {
-		respond divisionCollectionSearchService.queryForDivisionCollection(params.long('id')),
+		respond divisionCollectionSearchService.queryForRead(params.long('id')),
 				[includes: includes, excludes: excludes]
 	}
 
@@ -88,7 +88,7 @@ class DivisionCollectionController {
 		)
 	])
 	def edit() {
-		respond divisionCollectionSearchService.queryForDivisionCollection(params.long('id')),
+		respond divisionCollectionSearchService.queryForRead(params.long('id')),
 				[includes: includes, excludes: excludes]
 	}
 

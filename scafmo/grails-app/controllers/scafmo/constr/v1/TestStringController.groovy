@@ -61,7 +61,7 @@ class TestStringController {
 		)
 	])
 	def show() {
-		respond testStringSearchService.queryForTestString(params.long('id')),
+		respond testStringSearchService.queryForRead(params.long('id')),
 				[includes: includes, excludes: excludes]
 	}
 
@@ -88,7 +88,7 @@ class TestStringController {
 		)
 	])
 	def edit() {
-		respond testStringSearchService.queryForTestString(params.long('id')),
+		respond testStringSearchService.queryForRead(params.long('id')),
 				[includes: includes, excludes: excludes]
 	}
 

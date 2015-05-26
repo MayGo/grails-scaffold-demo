@@ -1,14 +1,15 @@
 package org.grails.samples
 
 import grails.compiler.GrailsCompileStatic
+import org.codehaus.groovy.grails.web.binding.GrailsWebDataBinder
 import org.grails.databinding.SimpleMapDataBindingSource
 import grails.transaction.Transactional
 import defpackage.exceptions.ResourceNotFound
 
-//@GrailsCompileStatic
+@GrailsCompileStatic
 @Transactional
 class PersonModifyService {
-	def grailsWebDataBinder
+	GrailsWebDataBinder grailsWebDataBinder
 
 	Person createPerson(Map data) {
 		Person person = Person.newInstance()
@@ -16,13 +17,15 @@ class PersonModifyService {
 	}
 
 	Person updatePerson(Map data) {
-		if (!data.id || data.id < 0) {
+		Long objId = (Long)data.id
+		if (!objId || objId < 0) {
 			throw new IllegalArgumentException('no.valid.id')
 		}
-		Person person = Person.where { id == data.id }.find()
+
+		Person person = Person.where { id == objId }.find()
 
 		if (!person) {
-			throw new ResourceNotFound("No Person found with Id :[${data.id}]")
+			throw new ResourceNotFound("No Person found with Id :[$objId]")
 		}
 
 		return createOrUpdate(person, data)

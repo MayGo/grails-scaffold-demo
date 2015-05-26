@@ -61,7 +61,7 @@ class UserController {
 		)
 	])
 	def show() {
-		respond userSearchService.queryForUser(params.long('id')),
+		respond userSearchService.queryForRead(params.long('id')),
 				[includes: includes, excludes: excludes]
 	}
 
@@ -88,7 +88,7 @@ class UserController {
 		)
 	])
 	def edit() {
-		respond userSearchService.queryForUser(params.long('id')),
+		respond userSearchService.queryForRead(params.long('id')),
 				[includes: includes, excludes: excludes]
 	}
 

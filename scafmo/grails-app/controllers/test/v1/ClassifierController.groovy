@@ -61,7 +61,7 @@ class ClassifierController {
 		)
 	])
 	def show() {
-		respond classifierSearchService.queryForClassifier(params.long('id')),
+		respond classifierSearchService.queryForRead(params.long('id')),
 				[includes: includes, excludes: excludes]
 	}
 
@@ -88,7 +88,7 @@ class ClassifierController {
 		)
 	])
 	def edit() {
-		respond classifierSearchService.queryForClassifier(params.long('id')),
+		respond classifierSearchService.queryForRead(params.long('id')),
 				[includes: includes, excludes: excludes]
 	}
 

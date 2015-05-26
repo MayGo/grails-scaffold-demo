@@ -291,7 +291,7 @@ class TestNumberSpec extends Specification implements RestQueries, AuthQueries, 
 
 	void 'Test querying in TestNumber list by dummy searchString.'() {
 		when: 'Get testNumber list by searchString'
-			response = queryListWithUrlVariables('searchString={searchString}', [searchString: "999999999999999"])
+			response = queryListWithMap([searchString: "999999999999999"])
 
 		then: 'Should be with size 0'
 			response.json.size() == 0
@@ -300,48 +300,48 @@ class TestNumberSpec extends Specification implements RestQueries, AuthQueries, 
 
 	void 'Test querying in TestNumber list by real searchString.'() {
 		when: 'Get testNumber list by searchString'
-			response = queryListWithUrlVariables('order=desc&sort=id&searchString={searchString}',
-					[searchString: "4"])
+			response = queryListWithMap(
+					[order: 'desc', sort: 'id', searchString: "4"])
 
 		then: 'Should at least last inserted item'
-			response.json[0].id == domainId
 			response.json.size() > 0
+			response.json[0].id == domainId
 			response.status == HttpStatus.OK.value()
 	}
 
 	void 'Test filtering in TestNumber list by id.'() {
 		when: 'Get testNumber list filtered by id'
 
-			response = queryListWithUrlVariables('filter={filter}', [filter:"{id:${domainId}}"])
+			response = queryListWithMap([id: domainId])
 
 		then: 'Should contains one item, just inserted item.'
-			response.json[0].id == domainId
 			response.json.size() == 1
+			response.json[0].id == domainId
 			response.status == HttpStatus.OK.value()
 	}
 
-	@Unroll("TestNumber list search with props '#jsonVal' returns '#respSize' items")
+	@Unroll("TestNumber list search with props '#filter' returns '#respSize' items")
 	void 'Filtering in TestNumber list by all properties.'() {
 		given:
-			response = queryListWithUrlVariables('filter={filter}', [filter:"${jsonVal}"])
+			response = queryListWithMap(filter)
 			
 
 		expect:
 			response.json.size() == respSize
 		where:
-			jsonVal 	        || respSize
-			'{}'                || 10
-			'{"doubleNr":123.123}' || 10 
-			'{"floatNr":123.123}' || 10 
-			'{"floatNrScale":2.34}' || 10 
-			'{"integerNr":305}' || 1 
-			'{"integerNrInList":3}' || 10 
-			'{"integerNrMax":2}' || 10 
-			'{"integerNrMin":3}' || 10 
-			'{"integerNrNotEqual":2}' || 10 
-			'{"integerNrRange":19}' || 10 
-			'{"integerNrUnique":306}' || 1 
-			'{"longNr":4}' || 10 
+			filter 	        || respSize
+			[:]                || 10
+			[doubleNr:123.123] || 10 
+			[floatNr:123.123] || 10 
+			[floatNrScale:2.34] || 10 
+			[integerNr:305] || 1 
+			[integerNrInList:3] || 10 
+			[integerNrMax:2] || 10 
+			[integerNrMin:3] || 10 
+			[integerNrNotEqual:2] || 10 
+			[integerNrRange:19] || 10 
+			[integerNrUnique:306] || 1 
+			[longNr:4] || 10 
 
 	}
 

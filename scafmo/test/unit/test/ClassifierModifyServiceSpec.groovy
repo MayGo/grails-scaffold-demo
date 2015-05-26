@@ -9,6 +9,7 @@ import grails.validation.ValidationException
 
 @TestFor(ClassifierModifyService)
 @Mock(Classifier)
+@SuppressWarnings(['DuplicateNumberLiteral'])
 class ClassifierModifyServiceSpec extends Specification {
 
 	static final long ILLEGAL_ID = -1L
@@ -142,6 +143,8 @@ class ClassifierModifyServiceSpec extends Specification {
  'propertyname': null]
 	}
 
+	// TODO: Refactor and cleanup code so Codenarc check passes
+	@SuppressWarnings(['MethodSize'])
 	Map validData() {
 
 		Map data = [

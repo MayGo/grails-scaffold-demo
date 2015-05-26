@@ -3,25 +3,40 @@ package org.example.pomodoro
 import grails.compiler.GrailsCompileStatic
 import grails.gorm.PagedResultList
 import grails.transaction.Transactional
+import groovy.transform.TypeCheckingMode
 import org.grails.datastore.mapping.query.api.BuildableCriteria
 import defpackage.exceptions.ResourceNotFound
 
-//@GrailsCompileStatic
+@GrailsCompileStatic
 @Transactional(readOnly = true)
 class TaskSearchService {
 
-	Task queryForTask(Long taskId) {
+	Task queryForRead(Long taskId) {
+		return queryFor(taskId, true)
+	}
+
+	Task queryForWrite(Long taskId) {
+		return queryFor(taskId, false)
+	}
+
+	private Task queryFor(Long taskId, boolean doReadOnly = true) {
 		if (!taskId || taskId < 0) {
 			throw new IllegalArgumentException('no.valid.id')
 		}
-		Task task = Task.where { id == taskId }.find()
+		Task task
+		if (doReadOnly) {
+			task = Task.read(taskId)
+		} else {
+			task = Task.get(taskId)
+		}
+
 		if (!task) {
 			throw new ResourceNotFound("No Task found with Id :[$taskId]")
 		}
 		return task
 	}
 
-	PagedResultList search(TaskSearchCommand cmd, Map pagingParams) {
+	PagedResultList search(TaskSearchCommand cmd, Map pagingParams, boolean doReadOnly = true) {
 
 		BuildableCriteria criteriaBuilder = (BuildableCriteria) Task.createCriteria()
 		PagedResultList results = (PagedResultList) criteriaBuilder.list(
@@ -31,15 +46,18 @@ class TaskSearchService {
 				sort: pagingParams.sort
 		) {
 			searchCriteria criteriaBuilder, cmd
+			readOnly(doReadOnly)
 		}
+
 		return results
 	}
 
+	// TODO: Refactor and cleanup code so Codenarc check passes dynamic pgJsonHasFieldValue
+	@SuppressWarnings(['AbcMetric', 'CyclomaticComplexity', 'MethodSize'])
+	@GrailsCompileStatic(TypeCheckingMode.SKIP) // We want to use dynamically added criterias, eg: pgJsonHasFieldValue
 	private void searchCriteria(BuildableCriteria builder, TaskSearchCommand cmd) {
 		String searchString = cmd.searchString
-
 		builder.with {
-			//readOnly true
 			if (cmd.id) {
 				eq('id', cmd.id)
 			}
@@ -66,11 +84,11 @@ class TaskSearchService {
 				Date d = cmd.deadline
 				between('deadline', d, d + 1)
 			}
-			if (cmd.details){
+			if (cmd.details) {
 				ilike('details', cmd.details + '%')
 			}
 //inList - status
-			if (cmd.summary){
+			if (cmd.summary) {
 				ilike('summary', cmd.summary + '%')
 			}
 			if (cmd.timeSpent != null) {

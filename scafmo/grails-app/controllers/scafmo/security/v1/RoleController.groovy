@@ -61,7 +61,7 @@ class RoleController {
 		)
 	])
 	def show() {
-		respond roleSearchService.queryForRole(params.long('id')),
+		respond roleSearchService.queryForRead(params.long('id')),
 				[includes: includes, excludes: excludes]
 	}
 
@@ -88,7 +88,7 @@ class RoleController {
 		)
 	])
 	def edit() {
-		respond roleSearchService.queryForRole(params.long('id')),
+		respond roleSearchService.queryForRead(params.long('id')),
 				[includes: includes, excludes: excludes]
 	}
 

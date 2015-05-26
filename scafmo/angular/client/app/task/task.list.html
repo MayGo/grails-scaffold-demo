@@ -13,13 +13,12 @@
      <input 
      	name="dateCreated"
      	ng-model="search.dateCreated"
-        custom-st-search="dateCreated"
      	type="text" 
      	class="form-control" 
      	placeholder="{{::'pages.task.list.search.placeholder.dateCreated' | translate}}"
-        datepicker-popup
-        is-open="task._dateCreatedOpen"
-        ng-click="task._dateCreatedOpen = true"
+        bs-datepicker
+        data-model-date-format="yyyy-MM-dd'T'HH:mm:ssZ"
+        data-date-type='string'
       
       />
      <span class="input-group-addon">
@@ -33,13 +32,12 @@
      <input 
      	name="deadline"
      	ng-model="search.deadline"
-        custom-st-search="deadline"
      	type="text" 
      	class="form-control" 
      	placeholder="{{::'pages.task.list.search.placeholder.deadline' | translate}}"
-        datepicker-popup
-        is-open="task._deadlineOpen"
-        ng-click="task._deadlineOpen = true"
+        bs-datepicker
+        data-model-date-format="yyyy-MM-dd'T'HH:mm:ssZ"
+        data-date-type='string'
       
       />
      <span class="input-group-addon">
@@ -96,9 +94,9 @@
         </div>
 
         <div class="clearfix"></div>
-        <div class="list-search-table">
+        <div class="list-search-table" loading-container="tableParams.settings().$loading">
 	      <table class="table table-responsive" ng-table="tableParams" show-filter="true" >
-	      	<tbody ng-hide="tableParams.settings().$loading">
+	      	<tbody>
 				<tr ng-repeat="task in $data">
                     <td class="text-left" >
                         <a class="btn btn-default btn-xs" ui-sref="app.task.view({id:task.id})" ng-if="!isModal">
@@ -137,11 +135,6 @@
 
 				</tr>
 			</tbody>
-              <tbody ng-show="tableParams.settings().$loading">
-                  <tr>
-                      <td class="text-center" translate="messages.loading"></td>
-                  </tr>
-              </tbody>
 	      </table>
         </div>
     </div>

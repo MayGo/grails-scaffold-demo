@@ -9,6 +9,7 @@ import grails.validation.ValidationException
 
 @TestFor(PetModifyService)
 @Mock(Pet)
+@SuppressWarnings(['DuplicateNumberLiteral'])
 class PetModifyServiceSpec extends Specification {
 
 	static final long ILLEGAL_ID = -1L
@@ -142,6 +143,8 @@ class PetModifyServiceSpec extends Specification {
  'owner': null]
 	}
 
+	// TODO: Refactor and cleanup code so Codenarc check passes
+	@SuppressWarnings(['MethodSize'])
 	Map validData() {
 
 		Map data = [
@@ -151,11 +154,15 @@ class PetModifyServiceSpec extends Specification {
   'name':  'Pet 302',
   'owner':  [
     'id':  752,
-    'version':  0
+    'version':  0,
+    'firstName':  'firstName',
+    'lastName':  'lastName',
+    'telephone':  '555455'
   ],
   'type':  [
     'id':  null,
-    'version':  null
+    'version':  null,
+    'name':  'Type 452'
   ]
 ]
 		return data

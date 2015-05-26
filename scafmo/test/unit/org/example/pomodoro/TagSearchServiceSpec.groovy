@@ -16,21 +16,21 @@ class TagSearchServiceSpec extends Specification {
 	void 'Quering Tag without id is not possible'() {
 
 		when:
-			service.queryForTag(null)
+			service.queryForRead(null)
 		then:
 			thrown(IllegalArgumentException)
 	}
 
 	void 'Quering Tag with illegal id is not possible'() {
 		when:
-			service.queryForTag(ILLEGAL_ID)
+			service.queryForRead(ILLEGAL_ID)
 		then:
 			thrown(IllegalArgumentException)
 	}
 
 	void 'Quering Tag with fictional id is not possible'() {
 		when:
-			service.queryForTag(FICTIONAL_ID)
+			service.queryForRead(FICTIONAL_ID)
 		then:
 			thrown(ResourceNotFound)
 	}
@@ -40,12 +40,14 @@ class TagSearchServiceSpec extends Specification {
 		setup:
 			Long tagId = createValidTag().id
 		when:
-			Tag tag = service.queryForTag(tagId)
+			Tag tag = service.queryForRead(tagId)
 		then:
 			tag != null
 			tag.id == 1
 	}
 
+	// TODO: Refactor and cleanup code so Codenarc check passes
+	@SuppressWarnings(['MethodSize'])
 	Map validData() {
 
 		Map data = [

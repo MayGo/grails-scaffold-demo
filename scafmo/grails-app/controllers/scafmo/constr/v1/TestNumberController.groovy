@@ -61,7 +61,7 @@ class TestNumberController {
 		)
 	])
 	def show() {
-		respond testNumberSearchService.queryForTestNumber(params.long('id')),
+		respond testNumberSearchService.queryForRead(params.long('id')),
 				[includes: includes, excludes: excludes]
 	}
 
@@ -88,7 +88,7 @@ class TestNumberController {
 		)
 	])
 	def edit() {
-		respond testNumberSearchService.queryForTestNumber(params.long('id')),
+		respond testNumberSearchService.queryForRead(params.long('id')),
 				[includes: includes, excludes: excludes]
 	}
 

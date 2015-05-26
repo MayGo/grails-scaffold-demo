@@ -16,21 +16,21 @@ class TestStringSearchServiceSpec extends Specification {
 	void 'Quering TestString without id is not possible'() {
 
 		when:
-			service.queryForTestString(null)
+			service.queryForRead(null)
 		then:
 			thrown(IllegalArgumentException)
 	}
 
 	void 'Quering TestString with illegal id is not possible'() {
 		when:
-			service.queryForTestString(ILLEGAL_ID)
+			service.queryForRead(ILLEGAL_ID)
 		then:
 			thrown(IllegalArgumentException)
 	}
 
 	void 'Quering TestString with fictional id is not possible'() {
 		when:
-			service.queryForTestString(FICTIONAL_ID)
+			service.queryForRead(FICTIONAL_ID)
 		then:
 			thrown(ResourceNotFound)
 	}
@@ -40,12 +40,14 @@ class TestStringSearchServiceSpec extends Specification {
 		setup:
 			Long testStringId = createValidTestString().id
 		when:
-			TestString testString = service.queryForTestString(testStringId)
+			TestString testString = service.queryForRead(testStringId)
 		then:
 			testString != null
 			testString.id == 1
 	}
 
+	// TODO: Refactor and cleanup code so Codenarc check passes
+	@SuppressWarnings(['MethodSize'])
 	Map validData() {
 
 		Map data = [

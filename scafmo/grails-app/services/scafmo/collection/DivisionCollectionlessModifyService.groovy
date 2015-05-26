@@ -1,14 +1,15 @@
 package scafmo.collection
 
 import grails.compiler.GrailsCompileStatic
+import org.codehaus.groovy.grails.web.binding.GrailsWebDataBinder
 import org.grails.databinding.SimpleMapDataBindingSource
 import grails.transaction.Transactional
 import defpackage.exceptions.ResourceNotFound
 
-//@GrailsCompileStatic
+@GrailsCompileStatic
 @Transactional
 class DivisionCollectionlessModifyService {
-	def grailsWebDataBinder
+	GrailsWebDataBinder grailsWebDataBinder
 
 	DivisionCollectionless createDivisionCollectionless(Map data) {
 		DivisionCollectionless divisionCollectionless = DivisionCollectionless.newInstance()
@@ -16,13 +17,15 @@ class DivisionCollectionlessModifyService {
 	}
 
 	DivisionCollectionless updateDivisionCollectionless(Map data) {
-		if (!data.id || data.id < 0) {
+		Long objId = (Long)data.id
+		if (!objId || objId < 0) {
 			throw new IllegalArgumentException('no.valid.id')
 		}
-		DivisionCollectionless divisionCollectionless = DivisionCollectionless.where { id == data.id }.find()
+
+		DivisionCollectionless divisionCollectionless = DivisionCollectionless.where { id == objId }.find()
 
 		if (!divisionCollectionless) {
-			throw new ResourceNotFound("No DivisionCollectionless found with Id :[${data.id}]")
+			throw new ResourceNotFound("No DivisionCollectionless found with Id :[$objId]")
 		}
 
 		return createOrUpdate(divisionCollectionless, data)

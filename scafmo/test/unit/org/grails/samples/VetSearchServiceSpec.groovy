@@ -16,21 +16,21 @@ class VetSearchServiceSpec extends Specification {
 	void 'Quering Vet without id is not possible'() {
 
 		when:
-			service.queryForVet(null)
+			service.queryForRead(null)
 		then:
 			thrown(IllegalArgumentException)
 	}
 
 	void 'Quering Vet with illegal id is not possible'() {
 		when:
-			service.queryForVet(ILLEGAL_ID)
+			service.queryForRead(ILLEGAL_ID)
 		then:
 			thrown(IllegalArgumentException)
 	}
 
 	void 'Quering Vet with fictional id is not possible'() {
 		when:
-			service.queryForVet(FICTIONAL_ID)
+			service.queryForRead(FICTIONAL_ID)
 		then:
 			thrown(ResourceNotFound)
 	}
@@ -40,12 +40,14 @@ class VetSearchServiceSpec extends Specification {
 		setup:
 			Long vetId = createValidVet().id
 		when:
-			Vet vet = service.queryForVet(vetId)
+			Vet vet = service.queryForRead(vetId)
 		then:
 			vet != null
 			vet.id == 1
 	}
 
+	// TODO: Refactor and cleanup code so Codenarc check passes
+	@SuppressWarnings(['MethodSize'])
 	Map validData() {
 
 		Map data = [

@@ -228,7 +228,7 @@ class ClassifierSpec extends Specification implements RestQueries, AuthQueries, 
 
 	void 'Test querying in Classifier list by dummy searchString.'() {
 		when: 'Get classifier list by searchString'
-			response = queryListWithUrlVariables('searchString={searchString}', [searchString: "999999999999999"])
+			response = queryListWithMap([searchString: "999999999999999"])
 
 		then: 'Should be with size 0'
 			response.json.size() == 0
@@ -237,41 +237,41 @@ class ClassifierSpec extends Specification implements RestQueries, AuthQueries, 
 
 	void 'Test querying in Classifier list by real searchString.'() {
 		when: 'Get classifier list by searchString'
-			response = queryListWithUrlVariables('order=desc&sort=id&searchString={searchString}',
-					[searchString: "propertyname"])
+			response = queryListWithMap(
+					[order: 'desc', sort: 'id', searchString: "propertyname"])
 
 		then: 'Should at least last inserted item'
-			response.json[0].id == domainId
 			response.json.size() > 0
+			response.json[0].id == domainId
 			response.status == HttpStatus.OK.value()
 	}
 
 	void 'Test filtering in Classifier list by id.'() {
 		when: 'Get classifier list filtered by id'
 
-			response = queryListWithUrlVariables('filter={filter}', [filter:"{id:${domainId}}"])
+			response = queryListWithMap([id: domainId])
 
 		then: 'Should contains one item, just inserted item.'
-			response.json[0].id == domainId
 			response.json.size() == 1
+			response.json[0].id == domainId
 			response.status == HttpStatus.OK.value()
 	}
 
-	@Unroll("Classifier list search with props '#jsonVal' returns '#respSize' items")
+	@Unroll("Classifier list search with props '#filter' returns '#respSize' items")
 	void 'Filtering in Classifier list by all properties.'() {
 		given:
-			response = queryListWithUrlVariables('filter={filter}', [filter:"${jsonVal}"])
+			response = queryListWithMap(filter)
 			
 
 		expect:
 			response.json.size() == respSize
 		where:
-			jsonVal 	        || respSize
-			'{}'                || 10
-			'{"classname":"classname"}' || 10 
-			'{"constant":"constant"}' || 10 
-			'{"description":"description"}' || 10 
-			'{"propertyname":"propertyname"}' || 10 
+			filter 	        || respSize
+			[:]                || 10
+			[classname:'classname'] || 10 
+			[constant:'constant'] || 10 
+			[description:'description'] || 10 
+			[propertyname:'propertyname'] || 10 
 
 	}
 

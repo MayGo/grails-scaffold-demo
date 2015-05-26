@@ -61,7 +61,7 @@ class TestOtherController {
 		)
 	])
 	def show() {
-		respond testOtherSearchService.queryForTestOther(params.long('id')),
+		respond testOtherSearchService.queryForRead(params.long('id')),
 				[includes: includes, excludes: excludes]
 	}
 
@@ -88,7 +88,7 @@ class TestOtherController {
 		)
 	])
 	def edit() {
-		respond testOtherSearchService.queryForTestOther(params.long('id')),
+		respond testOtherSearchService.queryForRead(params.long('id')),
 				[includes: includes, excludes: excludes]
 	}
 

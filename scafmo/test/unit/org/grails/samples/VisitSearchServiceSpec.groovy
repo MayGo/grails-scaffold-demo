@@ -16,21 +16,21 @@ class VisitSearchServiceSpec extends Specification {
 	void 'Quering Visit without id is not possible'() {
 
 		when:
-			service.queryForVisit(null)
+			service.queryForRead(null)
 		then:
 			thrown(IllegalArgumentException)
 	}
 
 	void 'Quering Visit with illegal id is not possible'() {
 		when:
-			service.queryForVisit(ILLEGAL_ID)
+			service.queryForRead(ILLEGAL_ID)
 		then:
 			thrown(IllegalArgumentException)
 	}
 
 	void 'Quering Visit with fictional id is not possible'() {
 		when:
-			service.queryForVisit(FICTIONAL_ID)
+			service.queryForRead(FICTIONAL_ID)
 		then:
 			thrown(ResourceNotFound)
 	}
@@ -40,12 +40,14 @@ class VisitSearchServiceSpec extends Specification {
 		setup:
 			Long visitId = createValidVisit().id
 		when:
-			Visit visit = service.queryForVisit(visitId)
+			Visit visit = service.queryForRead(visitId)
 		then:
 			visit != null
 			visit.id == 1
 	}
 
+	// TODO: Refactor and cleanup code so Codenarc check passes
+	@SuppressWarnings(['MethodSize'])
 	Map validData() {
 
 		Map data = [
@@ -55,7 +57,9 @@ class VisitSearchServiceSpec extends Specification {
   'description':  'description',
   'pet':  [
     'id':  302,
-    'version':  0
+    'version':  0,
+    'birthDate':  new Date().clearTime(),
+    'name':  'Pet 305'
   ]
 ]
 		return data

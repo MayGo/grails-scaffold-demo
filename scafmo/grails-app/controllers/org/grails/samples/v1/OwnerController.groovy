@@ -61,7 +61,7 @@ class OwnerController {
 		)
 	])
 	def show() {
-		respond ownerSearchService.queryForOwner(params.long('id')),
+		respond ownerSearchService.queryForRead(params.long('id')),
 				[includes: includes, excludes: excludes]
 	}
 
@@ -88,7 +88,7 @@ class OwnerController {
 		)
 	])
 	def edit() {
-		respond ownerSearchService.queryForOwner(params.long('id')),
+		respond ownerSearchService.queryForRead(params.long('id')),
 				[includes: includes, excludes: excludes]
 	}
 

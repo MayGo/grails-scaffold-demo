@@ -6,6 +6,7 @@ import spock.lang.Specification
 import defpackage.ConstraintHelper
 
 @TestFor(Speciality)
+@SuppressWarnings(['DuplicateNumberLiteral'])
 class SpecialityConstraintsSpec extends Specification {
 
 	def setup() {

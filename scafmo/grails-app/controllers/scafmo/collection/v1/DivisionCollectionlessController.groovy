@@ -61,7 +61,7 @@ class DivisionCollectionlessController {
 		)
 	])
 	def show() {
-		respond divisionCollectionlessSearchService.queryForDivisionCollectionless(params.long('id')),
+		respond divisionCollectionlessSearchService.queryForRead(params.long('id')),
 				[includes: includes, excludes: excludes]
 	}
 
@@ -88,7 +88,7 @@ class DivisionCollectionlessController {
 		)
 	])
 	def edit() {
-		respond divisionCollectionlessSearchService.queryForDivisionCollectionless(params.long('id')),
+		respond divisionCollectionlessSearchService.queryForRead(params.long('id')),
 				[includes: includes, excludes: excludes]
 	}
 

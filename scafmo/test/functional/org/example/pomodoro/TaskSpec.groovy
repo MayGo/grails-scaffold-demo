@@ -246,7 +246,7 @@ class TaskSpec extends Specification implements RestQueries, AuthQueries, TestUt
 
 	void 'Test querying in Task list by dummy searchString.'() {
 		when: 'Get task list by searchString'
-			response = queryListWithUrlVariables('searchString={searchString}', [searchString: "999999999999999"])
+			response = queryListWithMap([searchString: "999999999999999"])
 
 		then: 'Should be with size 0'
 			response.json.size() == 0
@@ -255,43 +255,43 @@ class TaskSpec extends Specification implements RestQueries, AuthQueries, TestUt
 
 	void 'Test querying in Task list by real searchString.'() {
 		when: 'Get task list by searchString'
-			response = queryListWithUrlVariables('order=desc&sort=id&searchString={searchString}',
-					[searchString: "0"])
+			response = queryListWithMap(
+					[order: 'desc', sort: 'id', searchString: "0"])
 
 		then: 'Should at least last inserted item'
-			response.json[0].id == domainId
 			response.json.size() > 0
+			response.json[0].id == domainId
 			response.status == HttpStatus.OK.value()
 	}
 
 	void 'Test filtering in Task list by id.'() {
 		when: 'Get task list filtered by id'
 
-			response = queryListWithUrlVariables('filter={filter}', [filter:"{id:${domainId}}"])
+			response = queryListWithMap([id: domainId])
 
 		then: 'Should contains one item, just inserted item.'
-			response.json[0].id == domainId
 			response.json.size() == 1
+			response.json[0].id == domainId
 			response.status == HttpStatus.OK.value()
 	}
 
-	@Unroll("Task list search with props '#jsonVal' returns '#respSize' items")
+	@Unroll("Task list search with props '#filter' returns '#respSize' items")
 	void 'Filtering in Task list by all properties.'() {
 		given:
-			response = queryListWithUrlVariables('filter={filter}', [filter:"${jsonVal}"])
+			response = queryListWithMap(filter)
 			
 
 		expect:
 			response.json.size() == respSize
 		where:
-			jsonVal 	        || respSize
-			'{}'                || 10
-			'{"dateCreated":"' + getTodayForInput() + '"}' || 10 
-			'{"deadline":"' + getTodayForInput() + '"}' || 10 
-			'{"details":"details"}' || 10 
-			'{"status":"Open"}' || 10 
-//Can't predict 'size'			'{"summary":"Work Summary 153"}' || 1 
-			'{"timeSpent":0}' || 10 
+			filter 	        || respSize
+			[:]                || 10
+			[dateCreated:'' + getTodayForInput() + ''] || 10 
+			[deadline:'' + getTodayForInput() + ''] || 10 
+			[details:'details'] || 10 
+			[status:'Open'] || 10 
+//Can't predict 'size'			[summary:'Work Summary 153'] || 1 
+			[timeSpent:0] || 10 
 
 	}
 

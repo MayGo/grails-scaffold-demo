@@ -1,14 +1,15 @@
 package test
 
 import grails.compiler.GrailsCompileStatic
+import org.codehaus.groovy.grails.web.binding.GrailsWebDataBinder
 import org.grails.databinding.SimpleMapDataBindingSource
 import grails.transaction.Transactional
 import defpackage.exceptions.ResourceNotFound
 
-//@GrailsCompileStatic
+@GrailsCompileStatic
 @Transactional
 class ClassifierModifyService {
-	def grailsWebDataBinder
+	GrailsWebDataBinder grailsWebDataBinder
 
 	Classifier createClassifier(Map data) {
 		Classifier classifier = Classifier.newInstance()
@@ -16,13 +17,15 @@ class ClassifierModifyService {
 	}
 
 	Classifier updateClassifier(Map data) {
-		if (!data.id || data.id < 0) {
+		Long objId = (Long)data.id
+		if (!objId || objId < 0) {
 			throw new IllegalArgumentException('no.valid.id')
 		}
-		Classifier classifier = Classifier.where { id == data.id }.find()
+
+		Classifier classifier = Classifier.where { id == objId }.find()
 
 		if (!classifier) {
-			throw new ResourceNotFound("No Classifier found with Id :[${data.id}]")
+			throw new ResourceNotFound("No Classifier found with Id :[$objId]")
 		}
 
 		return createOrUpdate(classifier, data)

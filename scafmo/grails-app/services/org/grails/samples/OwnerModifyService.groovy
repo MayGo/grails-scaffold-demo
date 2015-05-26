@@ -1,14 +1,15 @@
 package org.grails.samples
 
 import grails.compiler.GrailsCompileStatic
+import org.codehaus.groovy.grails.web.binding.GrailsWebDataBinder
 import org.grails.databinding.SimpleMapDataBindingSource
 import grails.transaction.Transactional
 import defpackage.exceptions.ResourceNotFound
 
-//@GrailsCompileStatic
+@GrailsCompileStatic
 @Transactional
 class OwnerModifyService {
-	def grailsWebDataBinder
+	GrailsWebDataBinder grailsWebDataBinder
 
 	Owner createOwner(Map data) {
 		Owner owner = Owner.newInstance()
@@ -16,13 +17,15 @@ class OwnerModifyService {
 	}
 
 	Owner updateOwner(Map data) {
-		if (!data.id || data.id < 0) {
+		Long objId = (Long)data.id
+		if (!objId || objId < 0) {
 			throw new IllegalArgumentException('no.valid.id')
 		}
-		Owner owner = Owner.where { id == data.id }.find()
+
+		Owner owner = Owner.where { id == objId }.find()
 
 		if (!owner) {
-			throw new ResourceNotFound("No Owner found with Id :[${data.id}]")
+			throw new ResourceNotFound("No Owner found with Id :[$objId]")
 		}
 
 		return createOrUpdate(owner, data)

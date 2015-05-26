@@ -3,25 +3,40 @@ package scafmo.collection
 import grails.compiler.GrailsCompileStatic
 import grails.gorm.PagedResultList
 import grails.transaction.Transactional
+import groovy.transform.TypeCheckingMode
 import org.grails.datastore.mapping.query.api.BuildableCriteria
 import defpackage.exceptions.ResourceNotFound
 
-//@GrailsCompileStatic
+@GrailsCompileStatic
 @Transactional(readOnly = true)
 class PersonCollectionSearchService {
 
-	PersonCollection queryForPersonCollection(Long personCollectionId) {
+	PersonCollection queryForRead(Long personCollectionId) {
+		return queryFor(personCollectionId, true)
+	}
+
+	PersonCollection queryForWrite(Long personCollectionId) {
+		return queryFor(personCollectionId, false)
+	}
+
+	private PersonCollection queryFor(Long personCollectionId, boolean doReadOnly = true) {
 		if (!personCollectionId || personCollectionId < 0) {
 			throw new IllegalArgumentException('no.valid.id')
 		}
-		PersonCollection personCollection = PersonCollection.where { id == personCollectionId }.find()
+		PersonCollection personCollection
+		if (doReadOnly) {
+			personCollection = PersonCollection.read(personCollectionId)
+		} else {
+			personCollection = PersonCollection.get(personCollectionId)
+		}
+
 		if (!personCollection) {
 			throw new ResourceNotFound("No PersonCollection found with Id :[$personCollectionId]")
 		}
 		return personCollection
 	}
 
-	PagedResultList search(PersonCollectionSearchCommand cmd, Map pagingParams) {
+	PagedResultList search(PersonCollectionSearchCommand cmd, Map pagingParams, boolean doReadOnly = true) {
 
 		BuildableCriteria criteriaBuilder = (BuildableCriteria) PersonCollection.createCriteria()
 		PagedResultList results = (PagedResultList) criteriaBuilder.list(
@@ -31,15 +46,18 @@ class PersonCollectionSearchService {
 				sort: pagingParams.sort
 		) {
 			searchCriteria criteriaBuilder, cmd
+			readOnly(doReadOnly)
 		}
+
 		return results
 	}
 
+	// TODO: Refactor and cleanup code so Codenarc check passes dynamic pgJsonHasFieldValue
+	@SuppressWarnings(['AbcMetric', 'CyclomaticComplexity', 'MethodSize'])
+	@GrailsCompileStatic(TypeCheckingMode.SKIP) // We want to use dynamically added criterias, eg: pgJsonHasFieldValue
 	private void searchCriteria(BuildableCriteria builder, PersonCollectionSearchCommand cmd) {
 		String searchString = cmd.searchString
-
 		builder.with {
-			//readOnly true
 			if (cmd.id) {
 				eq('id', cmd.id)
 			}
@@ -60,7 +78,7 @@ class PersonCollectionSearchService {
 			if (cmd.age != null) {
 				eq('age', cmd.age)
 			}
-			if (cmd.name){
+			if (cmd.name) {
 				ilike('name', cmd.name + '%')
 			}
 			if (cmd.divisions) {

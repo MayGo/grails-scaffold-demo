@@ -61,7 +61,7 @@ class PersonCollectionController {
 		)
 	])
 	def show() {
-		respond personCollectionSearchService.queryForPersonCollection(params.long('id')),
+		respond personCollectionSearchService.queryForRead(params.long('id')),
 				[includes: includes, excludes: excludes]
 	}
 
@@ -88,7 +88,7 @@ class PersonCollectionController {
 		)
 	])
 	def edit() {
-		respond personCollectionSearchService.queryForPersonCollection(params.long('id')),
+		respond personCollectionSearchService.queryForRead(params.long('id')),
 				[includes: includes, excludes: excludes]
 	}
 

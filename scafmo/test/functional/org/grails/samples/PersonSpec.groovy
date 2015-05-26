@@ -210,7 +210,7 @@ class PersonSpec extends Specification implements RestQueries, AuthQueries, Test
 
 	void 'Test querying in Person list by dummy searchString.'() {
 		when: 'Get person list by searchString'
-			response = queryListWithUrlVariables('searchString={searchString}', [searchString: "999999999999999"])
+			response = queryListWithMap([searchString: "999999999999999"])
 
 		then: 'Should be with size 0'
 			response.json.size() == 0
@@ -219,39 +219,39 @@ class PersonSpec extends Specification implements RestQueries, AuthQueries, Test
 
 	void 'Test querying in Person list by real searchString.'() {
 		when: 'Get person list by searchString'
-			response = queryListWithUrlVariables('order=desc&sort=id&searchString={searchString}',
-					[searchString: "lastName"])
+			response = queryListWithMap(
+					[order: 'desc', sort: 'id', searchString: "lastName"])
 
 		then: 'Should at least last inserted item'
-			response.json[0].id == domainId
 			response.json.size() > 0
+			response.json[0].id == domainId
 			response.status == HttpStatus.OK.value()
 	}
 
 	void 'Test filtering in Person list by id.'() {
 		when: 'Get person list filtered by id'
 
-			response = queryListWithUrlVariables('filter={filter}', [filter:"{id:${domainId}}"])
+			response = queryListWithMap([id: domainId])
 
 		then: 'Should contains one item, just inserted item.'
-			response.json[0].id == domainId
 			response.json.size() == 1
+			response.json[0].id == domainId
 			response.status == HttpStatus.OK.value()
 	}
 
-	@Unroll("Person list search with props '#jsonVal' returns '#respSize' items")
+	@Unroll("Person list search with props '#filter' returns '#respSize' items")
 	void 'Filtering in Person list by all properties.'() {
 		given:
-			response = queryListWithUrlVariables('filter={filter}', [filter:"${jsonVal}"])
+			response = queryListWithMap(filter)
 			
 
 		expect:
 			response.json.size() == respSize
 		where:
-			jsonVal 	        || respSize
-			'{}'                || 10
-			'{"firstName":"firstName"}' || 10 
-			'{"lastName":"lastName"}' || 10 
+			filter 	        || respSize
+			[:]                || 10
+			[firstName:'firstName'] || 10 
+			[lastName:'lastName'] || 10 
 
 	}
 

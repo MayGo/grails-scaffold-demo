@@ -16,21 +16,21 @@ class ClassifierSearchServiceSpec extends Specification {
 	void 'Quering Classifier without id is not possible'() {
 
 		when:
-			service.queryForClassifier(null)
+			service.queryForRead(null)
 		then:
 			thrown(IllegalArgumentException)
 	}
 
 	void 'Quering Classifier with illegal id is not possible'() {
 		when:
-			service.queryForClassifier(ILLEGAL_ID)
+			service.queryForRead(ILLEGAL_ID)
 		then:
 			thrown(IllegalArgumentException)
 	}
 
 	void 'Quering Classifier with fictional id is not possible'() {
 		when:
-			service.queryForClassifier(FICTIONAL_ID)
+			service.queryForRead(FICTIONAL_ID)
 		then:
 			thrown(ResourceNotFound)
 	}
@@ -40,12 +40,14 @@ class ClassifierSearchServiceSpec extends Specification {
 		setup:
 			Long classifierId = createValidClassifier().id
 		when:
-			Classifier classifier = service.queryForClassifier(classifierId)
+			Classifier classifier = service.queryForRead(classifierId)
 		then:
 			classifier != null
 			classifier.id == 1
 	}
 
+	// TODO: Refactor and cleanup code so Codenarc check passes
+	@SuppressWarnings(['MethodSize'])
 	Map validData() {
 
 		Map data = [

@@ -237,7 +237,7 @@ class UserSpec extends Specification implements RestQueries, AuthQueries, TestUt
 
 	void 'Test querying in User list by dummy searchString.'() {
 		when: 'Get user list by searchString'
-			response = queryListWithUrlVariables('searchString={searchString}', [searchString: "999999999999999"])
+			response = queryListWithMap([searchString: "999999999999999"])
 
 		then: 'Should be with size 0'
 			response.json.size() == 0
@@ -246,42 +246,42 @@ class UserSpec extends Specification implements RestQueries, AuthQueries, TestUt
 
 	void 'Test querying in User list by real searchString.'() {
 		when: 'Get user list by searchString'
-			response = queryListWithUrlVariables('order=desc&sort=id&searchString={searchString}',
-					[searchString: "John Doe 303"])
+			response = queryListWithMap(
+					[order: 'desc', sort: 'id', searchString: "John Doe 303"])
 
 		then: 'Should at least last inserted item'
-			response.json[0].id == domainId
 			response.json.size() > 0
+			response.json[0].id == domainId
 			response.status == HttpStatus.OK.value()
 	}
 
 	void 'Test filtering in User list by id.'() {
 		when: 'Get user list filtered by id'
 
-			response = queryListWithUrlVariables('filter={filter}', [filter:"{id:${domainId}}"])
+			response = queryListWithMap([id: domainId])
 
 		then: 'Should contains one item, just inserted item.'
-			response.json[0].id == domainId
 			response.json.size() == 1
+			response.json[0].id == domainId
 			response.status == HttpStatus.OK.value()
 	}
 
-	@Unroll("User list search with props '#jsonVal' returns '#respSize' items")
+	@Unroll("User list search with props '#filter' returns '#respSize' items")
 	void 'Filtering in User list by all properties.'() {
 		given:
-			response = queryListWithUrlVariables('filter={filter}', [filter:"${jsonVal}"])
+			response = queryListWithMap(filter)
 			
 
 		expect:
 			response.json.size() == respSize
 		where:
-			jsonVal 	        || respSize
-			'{}'                || 10
-			'{"accountExpired":false}' || 10 
-			'{"accountLocked":false}' || 10 
-			'{"enabled":true}' || 10 
-			'{"passwordExpired":false}' || 10 
-//Can't predict 'size'			'{"username":"John Doe 303"}' || 1 
+			filter 	        || respSize
+			[:]                || 10
+			[accountExpired:false] || 10 
+			[accountLocked:false] || 10 
+			[enabled:true] || 10 
+			[passwordExpired:false] || 10 
+//Can't predict 'size'			[username:'John Doe 303'] || 1 
 
 	}
 

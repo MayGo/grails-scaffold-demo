@@ -1,14 +1,15 @@
 package scafmo.constr
 
 import grails.compiler.GrailsCompileStatic
+import org.codehaus.groovy.grails.web.binding.GrailsWebDataBinder
 import org.grails.databinding.SimpleMapDataBindingSource
 import grails.transaction.Transactional
 import defpackage.exceptions.ResourceNotFound
 
-//@GrailsCompileStatic
+@GrailsCompileStatic
 @Transactional
 class TestNumberModifyService {
-	def grailsWebDataBinder
+	GrailsWebDataBinder grailsWebDataBinder
 
 	TestNumber createTestNumber(Map data) {
 		TestNumber testNumber = TestNumber.newInstance()
@@ -16,13 +17,15 @@ class TestNumberModifyService {
 	}
 
 	TestNumber updateTestNumber(Map data) {
-		if (!data.id || data.id < 0) {
+		Long objId = (Long)data.id
+		if (!objId || objId < 0) {
 			throw new IllegalArgumentException('no.valid.id')
 		}
-		TestNumber testNumber = TestNumber.where { id == data.id }.find()
+
+		TestNumber testNumber = TestNumber.where { id == objId }.find()
 
 		if (!testNumber) {
-			throw new ResourceNotFound("No TestNumber found with Id :[${data.id}]")
+			throw new ResourceNotFound("No TestNumber found with Id :[$objId]")
 		}
 
 		return createOrUpdate(testNumber, data)

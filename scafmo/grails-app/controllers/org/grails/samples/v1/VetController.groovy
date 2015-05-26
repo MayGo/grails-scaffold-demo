@@ -61,7 +61,7 @@ class VetController {
 		)
 	])
 	def show() {
-		respond vetSearchService.queryForVet(params.long('id')),
+		respond vetSearchService.queryForRead(params.long('id')),
 				[includes: includes, excludes: excludes]
 	}
 
@@ -88,7 +88,7 @@ class VetController {
 		)
 	])
 	def edit() {
-		respond vetSearchService.queryForVet(params.long('id')),
+		respond vetSearchService.queryForRead(params.long('id')),
 				[includes: includes, excludes: excludes]
 	}
 

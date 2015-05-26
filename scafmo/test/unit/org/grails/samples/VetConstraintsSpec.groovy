@@ -6,6 +6,7 @@ import spock.lang.Specification
 import defpackage.ConstraintHelper
 
 @TestFor(Vet)
+@SuppressWarnings(['DuplicateNumberLiteral'])
 class VetConstraintsSpec extends Specification {
 
 	def setup() {

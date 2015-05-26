@@ -9,6 +9,7 @@ import grails.validation.ValidationException
 
 @TestFor(TestNumberModifyService)
 @Mock(TestNumber)
+@SuppressWarnings(['DuplicateNumberLiteral'])
 class TestNumberModifyServiceSpec extends Specification {
 
 	static final long ILLEGAL_ID = -1L
@@ -139,6 +140,8 @@ class TestNumberModifyServiceSpec extends Specification {
 		return ['foo': 'Sadisfy empty data exception']
 	}
 
+	// TODO: Refactor and cleanup code so Codenarc check passes
+	@SuppressWarnings(['MethodSize'])
 	Map validData() {
 
 		Map data = [

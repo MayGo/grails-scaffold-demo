@@ -16,21 +16,21 @@ class DivisionCollectionlessSearchServiceSpec extends Specification {
 	void 'Quering DivisionCollectionless without id is not possible'() {
 
 		when:
-			service.queryForDivisionCollectionless(null)
+			service.queryForRead(null)
 		then:
 			thrown(IllegalArgumentException)
 	}
 
 	void 'Quering DivisionCollectionless with illegal id is not possible'() {
 		when:
-			service.queryForDivisionCollectionless(ILLEGAL_ID)
+			service.queryForRead(ILLEGAL_ID)
 		then:
 			thrown(IllegalArgumentException)
 	}
 
 	void 'Quering DivisionCollectionless with fictional id is not possible'() {
 		when:
-			service.queryForDivisionCollectionless(FICTIONAL_ID)
+			service.queryForRead(FICTIONAL_ID)
 		then:
 			thrown(ResourceNotFound)
 	}
@@ -40,12 +40,14 @@ class DivisionCollectionlessSearchServiceSpec extends Specification {
 		setup:
 			Long divisionCollectionlessId = createValidDivisionCollectionless().id
 		when:
-			DivisionCollectionless divisionCollectionless = service.queryForDivisionCollectionless(divisionCollectionlessId)
+			DivisionCollectionless divisionCollectionless = service.queryForRead(divisionCollectionlessId)
 		then:
 			divisionCollectionless != null
 			divisionCollectionless.id == 1
 	}
 
+	// TODO: Refactor and cleanup code so Codenarc check passes
+	@SuppressWarnings(['MethodSize'])
 	Map validData() {
 
 		Map data = [

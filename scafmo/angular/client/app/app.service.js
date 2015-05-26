@@ -55,6 +55,7 @@ angular.module('angularDemoApp')
 			});
 		};
 		stringify(model);
+		//console.log(str)
 		return str;
 	};
 

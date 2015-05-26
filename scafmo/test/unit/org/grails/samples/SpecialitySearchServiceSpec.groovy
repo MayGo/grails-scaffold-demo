@@ -16,21 +16,21 @@ class SpecialitySearchServiceSpec extends Specification {
 	void 'Quering Speciality without id is not possible'() {
 
 		when:
-			service.queryForSpeciality(null)
+			service.queryForRead(null)
 		then:
 			thrown(IllegalArgumentException)
 	}
 
 	void 'Quering Speciality with illegal id is not possible'() {
 		when:
-			service.queryForSpeciality(ILLEGAL_ID)
+			service.queryForRead(ILLEGAL_ID)
 		then:
 			thrown(IllegalArgumentException)
 	}
 
 	void 'Quering Speciality with fictional id is not possible'() {
 		when:
-			service.queryForSpeciality(FICTIONAL_ID)
+			service.queryForRead(FICTIONAL_ID)
 		then:
 			thrown(ResourceNotFound)
 	}
@@ -40,12 +40,14 @@ class SpecialitySearchServiceSpec extends Specification {
 		setup:
 			Long specialityId = createValidSpeciality().id
 		when:
-			Speciality speciality = service.queryForSpeciality(specialityId)
+			Speciality speciality = service.queryForRead(specialityId)
 		then:
 			speciality != null
 			speciality.id == 1
 	}
 
+	// TODO: Refactor and cleanup code so Codenarc check passes
+	@SuppressWarnings(['MethodSize'])
 	Map validData() {
 
 		Map data = [

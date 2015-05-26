@@ -16,21 +16,21 @@ class TaskSearchServiceSpec extends Specification {
 	void 'Quering Task without id is not possible'() {
 
 		when:
-			service.queryForTask(null)
+			service.queryForRead(null)
 		then:
 			thrown(IllegalArgumentException)
 	}
 
 	void 'Quering Task with illegal id is not possible'() {
 		when:
-			service.queryForTask(ILLEGAL_ID)
+			service.queryForRead(ILLEGAL_ID)
 		then:
 			thrown(IllegalArgumentException)
 	}
 
 	void 'Quering Task with fictional id is not possible'() {
 		when:
-			service.queryForTask(FICTIONAL_ID)
+			service.queryForRead(FICTIONAL_ID)
 		then:
 			thrown(ResourceNotFound)
 	}
@@ -40,12 +40,14 @@ class TaskSearchServiceSpec extends Specification {
 		setup:
 			Long taskId = createValidTask().id
 		when:
-			Task task = service.queryForTask(taskId)
+			Task task = service.queryForRead(taskId)
 		then:
 			task != null
 			task.id == 1
 	}
 
+	// TODO: Refactor and cleanup code so Codenarc check passes
+	@SuppressWarnings(['MethodSize'])
 	Map validData() {
 
 		Map data = [
@@ -55,8 +57,7 @@ class TaskSearchServiceSpec extends Specification {
   'deadline':  new Date().clearTime(),
   'details':  'details',
   'status':  'Open',
-  'summary':  'Work Summary 152',
-  'timeSpent':  0
+  'summary':  'Work Summary 152'
 ]
 		return data
 	}

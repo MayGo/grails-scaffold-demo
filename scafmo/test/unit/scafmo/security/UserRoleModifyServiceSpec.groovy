@@ -10,6 +10,7 @@ import grails.validation.ValidationException
 
 @TestFor(UserRoleModifyService)
 @Mock(UserRole)
+@SuppressWarnings(['DuplicateNumberLiteral'])
 class UserRoleModifyServiceSpec extends Specification {
 
 	static final long ILLEGAL_ID = -1L
@@ -141,6 +142,8 @@ class UserRoleModifyServiceSpec extends Specification {
  'user': null]
 	}
 
+	// TODO: Refactor and cleanup code so Codenarc check passes
+	@SuppressWarnings(['MethodSize'])
 	Map validData() {
 
 		Map data = [
@@ -148,11 +151,14 @@ class UserRoleModifyServiceSpec extends Specification {
   'version':  null,
   'role':  [
     'id':  null,
-    'version':  null
+    'version':  null,
+    'authority':  'ROLE_304'
   ],
   'user':  [
     'id':  null,
-    'version':  null
+    'version':  null,
+    'enabled':  true,
+    'username':  'John Doe 304'
   ]
 ]
 		return data

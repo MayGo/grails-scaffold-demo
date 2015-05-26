@@ -1,14 +1,15 @@
 package org.grails.samples
 
 import grails.compiler.GrailsCompileStatic
+import org.codehaus.groovy.grails.web.binding.GrailsWebDataBinder
 import org.grails.databinding.SimpleMapDataBindingSource
 import grails.transaction.Transactional
 import defpackage.exceptions.ResourceNotFound
 
-//@GrailsCompileStatic
+@GrailsCompileStatic
 @Transactional
 class VetModifyService {
-	def grailsWebDataBinder
+	GrailsWebDataBinder grailsWebDataBinder
 
 	Vet createVet(Map data) {
 		Vet vet = Vet.newInstance()
@@ -16,13 +17,15 @@ class VetModifyService {
 	}
 
 	Vet updateVet(Map data) {
-		if (!data.id || data.id < 0) {
+		Long objId = (Long)data.id
+		if (!objId || objId < 0) {
 			throw new IllegalArgumentException('no.valid.id')
 		}
-		Vet vet = Vet.where { id == data.id }.find()
+
+		Vet vet = Vet.where { id == objId }.find()
 
 		if (!vet) {
-			throw new ResourceNotFound("No Vet found with Id :[${data.id}]")
+			throw new ResourceNotFound("No Vet found with Id :[$objId]")
 		}
 
 		return createOrUpdate(vet, data)

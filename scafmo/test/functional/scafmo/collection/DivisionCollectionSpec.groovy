@@ -210,7 +210,7 @@ class DivisionCollectionSpec extends Specification implements RestQueries, AuthQ
 
 	void 'Test querying in DivisionCollection list by dummy searchString.'() {
 		when: 'Get divisionCollection list by searchString'
-			response = queryListWithUrlVariables('searchString={searchString}', [searchString: "999999999999999"])
+			response = queryListWithMap([searchString: "999999999999999"])
 
 		then: 'Should be with size 0'
 			response.json.size() == 0
@@ -219,40 +219,40 @@ class DivisionCollectionSpec extends Specification implements RestQueries, AuthQ
 
 	void 'Test querying in DivisionCollection list by real searchString.'() {
 		when: 'Get divisionCollection list by searchString'
-			response = queryListWithUrlVariables('order=desc&sort=id&searchString={searchString}',
-					[searchString: "Division153"])
+			response = queryListWithMap(
+					[order: 'desc', sort: 'id', searchString: "Division153"])
 
 		then: 'Should at least last inserted item'
-			response.json[0].id == domainId
 			response.json.size() > 0
+			response.json[0].id == domainId
 			response.status == HttpStatus.OK.value()
 	}
 
 	void 'Test filtering in DivisionCollection list by id.'() {
 		when: 'Get divisionCollection list filtered by id'
 
-			response = queryListWithUrlVariables('filter={filter}', [filter:"{id:${domainId}}"])
+			response = queryListWithMap([id: domainId])
 
 		then: 'Should contains one item, just inserted item.'
-			response.json[0].id == domainId
 			response.json.size() == 1
+			response.json[0].id == domainId
 			response.status == HttpStatus.OK.value()
 	}
 
-	@Unroll("DivisionCollection list search with props '#jsonVal' returns '#respSize' items")
+	@Unroll("DivisionCollection list search with props '#filter' returns '#respSize' items")
 	void 'Filtering in DivisionCollection list by all properties.'() {
 		given:
-			response = queryListWithUrlVariables('filter={filter}', [filter:"${jsonVal}"])
+			response = queryListWithMap(filter)
 			
 
 		expect:
 			response.json.size() == respSize
 		where:
-			jsonVal 	        || respSize
-			'{}'                || 10
-			'{"name":"Division153"}' || 1 
-			'{"headDivision":1}' || 2 
-			'{"headDivisions":[1]}' || 2 
+			filter 	        || respSize
+			[:]                || 10
+			[name:'Division153'] || 1 
+			[headDivision:1] || 3 
+			[headDivisions:1] || 3 
 
 	}
 

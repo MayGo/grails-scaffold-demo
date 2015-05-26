@@ -16,21 +16,21 @@ class RoleSearchServiceSpec extends Specification {
 	void 'Quering Role without id is not possible'() {
 
 		when:
-			service.queryForRole(null)
+			service.queryForRead(null)
 		then:
 			thrown(IllegalArgumentException)
 	}
 
 	void 'Quering Role with illegal id is not possible'() {
 		when:
-			service.queryForRole(ILLEGAL_ID)
+			service.queryForRead(ILLEGAL_ID)
 		then:
 			thrown(IllegalArgumentException)
 	}
 
 	void 'Quering Role with fictional id is not possible'() {
 		when:
-			service.queryForRole(FICTIONAL_ID)
+			service.queryForRead(FICTIONAL_ID)
 		then:
 			thrown(ResourceNotFound)
 	}
@@ -40,12 +40,14 @@ class RoleSearchServiceSpec extends Specification {
 		setup:
 			Long roleId = createValidRole().id
 		when:
-			Role role = service.queryForRole(roleId)
+			Role role = service.queryForRead(roleId)
 		then:
 			role != null
 			role.id == 1
 	}
 
+	// TODO: Refactor and cleanup code so Codenarc check passes
+	@SuppressWarnings(['MethodSize'])
 	Map validData() {
 
 		Map data = [

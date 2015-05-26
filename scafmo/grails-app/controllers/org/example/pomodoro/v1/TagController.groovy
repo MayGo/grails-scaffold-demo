@@ -61,7 +61,7 @@ class TagController {
 		)
 	])
 	def show() {
-		respond tagSearchService.queryForTag(params.long('id')),
+		respond tagSearchService.queryForRead(params.long('id')),
 				[includes: includes, excludes: excludes]
 	}
 
@@ -88,7 +88,7 @@ class TagController {
 		)
 	])
 	def edit() {
-		respond tagSearchService.queryForTag(params.long('id')),
+		respond tagSearchService.queryForRead(params.long('id')),
 				[includes: includes, excludes: excludes]
 	}
 

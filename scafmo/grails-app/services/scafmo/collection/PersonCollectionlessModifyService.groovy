@@ -1,14 +1,15 @@
 package scafmo.collection
 
 import grails.compiler.GrailsCompileStatic
+import org.codehaus.groovy.grails.web.binding.GrailsWebDataBinder
 import org.grails.databinding.SimpleMapDataBindingSource
 import grails.transaction.Transactional
 import defpackage.exceptions.ResourceNotFound
 
-//@GrailsCompileStatic
+@GrailsCompileStatic
 @Transactional
 class PersonCollectionlessModifyService {
-	def grailsWebDataBinder
+	GrailsWebDataBinder grailsWebDataBinder
 
 	PersonCollectionless createPersonCollectionless(Map data) {
 		PersonCollectionless personCollectionless = PersonCollectionless.newInstance()
@@ -16,13 +17,15 @@ class PersonCollectionlessModifyService {
 	}
 
 	PersonCollectionless updatePersonCollectionless(Map data) {
-		if (!data.id || data.id < 0) {
+		Long objId = (Long)data.id
+		if (!objId || objId < 0) {
 			throw new IllegalArgumentException('no.valid.id')
 		}
-		PersonCollectionless personCollectionless = PersonCollectionless.where { id == data.id }.find()
+
+		PersonCollectionless personCollectionless = PersonCollectionless.where { id == objId }.find()
 
 		if (!personCollectionless) {
-			throw new ResourceNotFound("No PersonCollectionless found with Id :[${data.id}]")
+			throw new ResourceNotFound("No PersonCollectionless found with Id :[$objId]")
 		}
 
 		return createOrUpdate(personCollectionless, data)

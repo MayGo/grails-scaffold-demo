@@ -16,21 +16,21 @@ class OwnerSearchServiceSpec extends Specification {
 	void 'Quering Owner without id is not possible'() {
 
 		when:
-			service.queryForOwner(null)
+			service.queryForRead(null)
 		then:
 			thrown(IllegalArgumentException)
 	}
 
 	void 'Quering Owner with illegal id is not possible'() {
 		when:
-			service.queryForOwner(ILLEGAL_ID)
+			service.queryForRead(ILLEGAL_ID)
 		then:
 			thrown(IllegalArgumentException)
 	}
 
 	void 'Quering Owner with fictional id is not possible'() {
 		when:
-			service.queryForOwner(FICTIONAL_ID)
+			service.queryForRead(FICTIONAL_ID)
 		then:
 			thrown(ResourceNotFound)
 	}
@@ -40,12 +40,14 @@ class OwnerSearchServiceSpec extends Specification {
 		setup:
 			Long ownerId = createValidOwner().id
 		when:
-			Owner owner = service.queryForOwner(ownerId)
+			Owner owner = service.queryForRead(ownerId)
 		then:
 			owner != null
 			owner.id == 1
 	}
 
+	// TODO: Refactor and cleanup code so Codenarc check passes
+	@SuppressWarnings(['MethodSize'])
 	Map validData() {
 
 		Map data = [

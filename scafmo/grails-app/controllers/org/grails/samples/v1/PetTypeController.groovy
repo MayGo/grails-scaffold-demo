@@ -61,7 +61,7 @@ class PetTypeController {
 		)
 	])
 	def show() {
-		respond petTypeSearchService.queryForPetType(params.long('id')),
+		respond petTypeSearchService.queryForRead(params.long('id')),
 				[includes: includes, excludes: excludes]
 	}
 
@@ -88,7 +88,7 @@ class PetTypeController {
 		)
 	])
 	def edit() {
-		respond petTypeSearchService.queryForPetType(params.long('id')),
+		respond petTypeSearchService.queryForRead(params.long('id')),
 				[includes: includes, excludes: excludes]
 	}
 

@@ -1,14 +1,15 @@
 package scafmo.security
 
 import grails.compiler.GrailsCompileStatic
+import org.codehaus.groovy.grails.web.binding.GrailsWebDataBinder
 import org.grails.databinding.SimpleMapDataBindingSource
 import grails.transaction.Transactional
 import defpackage.exceptions.ResourceNotFound
 
-//@GrailsCompileStatic
+@GrailsCompileStatic
 @Transactional
 class UserRoleModifyService {
-	def grailsWebDataBinder
+	GrailsWebDataBinder grailsWebDataBinder
 
 	UserRole createUserRole(Map data) {
 		UserRole userRole = UserRole.newInstance()
@@ -16,13 +17,15 @@ class UserRoleModifyService {
 	}
 
 	UserRole updateUserRole(Map data) {
-		if (!data.id || data.id < 0) {
+		Long objId = (Long)data.id
+		if (!objId || objId < 0) {
 			throw new IllegalArgumentException('no.valid.id')
 		}
-		UserRole userRole = UserRole.where { id == data.id }.find()
+
+		UserRole userRole = UserRole.where { id == objId }.find()
 
 		if (!userRole) {
-			throw new ResourceNotFound("No UserRole found with Id :[${data.id}]")
+			throw new ResourceNotFound("No UserRole found with Id :[$objId]")
 		}
 
 		return createOrUpdate(userRole, data)

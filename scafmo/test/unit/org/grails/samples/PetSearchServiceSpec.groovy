@@ -16,21 +16,21 @@ class PetSearchServiceSpec extends Specification {
 	void 'Quering Pet without id is not possible'() {
 
 		when:
-			service.queryForPet(null)
+			service.queryForRead(null)
 		then:
 			thrown(IllegalArgumentException)
 	}
 
 	void 'Quering Pet with illegal id is not possible'() {
 		when:
-			service.queryForPet(ILLEGAL_ID)
+			service.queryForRead(ILLEGAL_ID)
 		then:
 			thrown(IllegalArgumentException)
 	}
 
 	void 'Quering Pet with fictional id is not possible'() {
 		when:
-			service.queryForPet(FICTIONAL_ID)
+			service.queryForRead(FICTIONAL_ID)
 		then:
 			thrown(ResourceNotFound)
 	}
@@ -40,12 +40,14 @@ class PetSearchServiceSpec extends Specification {
 		setup:
 			Long petId = createValidPet().id
 		when:
-			Pet pet = service.queryForPet(petId)
+			Pet pet = service.queryForRead(petId)
 		then:
 			pet != null
 			pet.id == 1
 	}
 
+	// TODO: Refactor and cleanup code so Codenarc check passes
+	@SuppressWarnings(['MethodSize'])
 	Map validData() {
 
 		Map data = [
@@ -55,11 +57,15 @@ class PetSearchServiceSpec extends Specification {
   'name':  'Pet 302',
   'owner':  [
     'id':  752,
-    'version':  0
+    'version':  0,
+    'firstName':  'firstName',
+    'lastName':  'lastName',
+    'telephone':  '555455'
   ],
   'type':  [
     'id':  null,
-    'version':  null
+    'version':  null,
+    'name':  'Type 452'
   ]
 ]
 		return data

@@ -1,14 +1,15 @@
 package org.grails.samples
 
 import grails.compiler.GrailsCompileStatic
+import org.codehaus.groovy.grails.web.binding.GrailsWebDataBinder
 import org.grails.databinding.SimpleMapDataBindingSource
 import grails.transaction.Transactional
 import defpackage.exceptions.ResourceNotFound
 
-//@GrailsCompileStatic
+@GrailsCompileStatic
 @Transactional
 class VisitModifyService {
-	def grailsWebDataBinder
+	GrailsWebDataBinder grailsWebDataBinder
 
 	Visit createVisit(Map data) {
 		Visit visit = Visit.newInstance()
@@ -16,13 +17,15 @@ class VisitModifyService {
 	}
 
 	Visit updateVisit(Map data) {
-		if (!data.id || data.id < 0) {
+		Long objId = (Long)data.id
+		if (!objId || objId < 0) {
 			throw new IllegalArgumentException('no.valid.id')
 		}
-		Visit visit = Visit.where { id == data.id }.find()
+
+		Visit visit = Visit.where { id == objId }.find()
 
 		if (!visit) {
-			throw new ResourceNotFound("No Visit found with Id :[${data.id}]")
+			throw new ResourceNotFound("No Visit found with Id :[$objId]")
 		}
 
 		return createOrUpdate(visit, data)

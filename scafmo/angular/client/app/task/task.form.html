@@ -14,9 +14,7 @@
      <div class="input-group input-group">
      <input id="dateCreated" name="dateCreated" type="text" class="form-control"
             ng-model="task.dateCreated"
-	     datepicker-popup
-	     is-open="task._dateCreatedOpen"
-	     ng-click="task._dateCreatedOpen = true"
+            bs-datepicker
        required
       />
      <span class="input-group-addon">
@@ -37,9 +35,7 @@
      <div class="input-group input-group">
      <input id="deadline" name="deadline" type="text" class="form-control"
             ng-model="task.deadline"
-	     datepicker-popup
-	     is-open="task._deadlineOpen"
-	     ng-click="task._deadlineOpen = true"
+            bs-datepicker
       
       />
      <span class="input-group-addon">
@@ -128,7 +124,6 @@
 	</div>
 	<div class="line line-dashed b-b line-lg pull-in"></div>
 	
-
 
         <div class="form-group">
             <div class="form-action pull-right">

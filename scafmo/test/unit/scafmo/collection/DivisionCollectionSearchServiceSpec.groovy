@@ -16,21 +16,21 @@ class DivisionCollectionSearchServiceSpec extends Specification {
 	void 'Quering DivisionCollection without id is not possible'() {
 
 		when:
-			service.queryForDivisionCollection(null)
+			service.queryForRead(null)
 		then:
 			thrown(IllegalArgumentException)
 	}
 
 	void 'Quering DivisionCollection with illegal id is not possible'() {
 		when:
-			service.queryForDivisionCollection(ILLEGAL_ID)
+			service.queryForRead(ILLEGAL_ID)
 		then:
 			thrown(IllegalArgumentException)
 	}
 
 	void 'Quering DivisionCollection with fictional id is not possible'() {
 		when:
-			service.queryForDivisionCollection(FICTIONAL_ID)
+			service.queryForRead(FICTIONAL_ID)
 		then:
 			thrown(ResourceNotFound)
 	}
@@ -40,12 +40,14 @@ class DivisionCollectionSearchServiceSpec extends Specification {
 		setup:
 			Long divisionCollectionId = createValidDivisionCollection().id
 		when:
-			DivisionCollection divisionCollection = service.queryForDivisionCollection(divisionCollectionId)
+			DivisionCollection divisionCollection = service.queryForRead(divisionCollectionId)
 		then:
 			divisionCollection != null
 			divisionCollection.id == 1
 	}
 
+	// TODO: Refactor and cleanup code so Codenarc check passes
+	@SuppressWarnings(['MethodSize'])
 	Map validData() {
 
 		Map data = [

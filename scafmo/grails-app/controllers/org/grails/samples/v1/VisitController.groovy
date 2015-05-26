@@ -61,7 +61,7 @@ class VisitController {
 		)
 	])
 	def show() {
-		respond visitSearchService.queryForVisit(params.long('id')),
+		respond visitSearchService.queryForRead(params.long('id')),
 				[includes: includes, excludes: excludes]
 	}
 
@@ -88,7 +88,7 @@ class VisitController {
 		)
 	])
 	def edit() {
-		respond visitSearchService.queryForVisit(params.long('id')),
+		respond visitSearchService.queryForRead(params.long('id')),
 				[includes: includes, excludes: excludes]
 	}
 

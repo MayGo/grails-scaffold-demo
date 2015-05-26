@@ -1,6 +1,6 @@
 ﻿cd c:/_SOURCES/grails-scaffold-demo/
 
-gvm use grails 2.4.3
+gvm use grails 2.5.0
 [Environment]::SetEnvironmentVariable("JAVA_HOME","C:\Program Files\Java\jdk1.8.0_11", "Process")
 Remove-Item -Path scafmo -Force -Recurse
 grails create-app scafmo

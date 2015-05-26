@@ -151,14 +151,11 @@ class UserRoleModifyServiceSpec extends Specification {
   'version':  null,
   'role':  [
     'id':  null,
-    'version':  null,
-    'authority':  'ROLE_304'
+    'version':  null
   ],
   'user':  [
     'id':  null,
-    'version':  null,
-    'enabled':  true,
-    'username':  'John Doe 304'
+    'version':  null
   ]
 ]
 		return data

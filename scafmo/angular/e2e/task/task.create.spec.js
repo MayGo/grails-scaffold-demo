@@ -36,8 +36,8 @@ describe('task create page', function() {
 	it('after filling all the fields, should submit and change route to view', function() {
 		expect(page.submitButton.isEnabled()).toBe(false);
 		//Fill the form
-		page.dateCreatedEl.sendKeys('26.05.2015');
-		page.deadlineEl.sendKeys('26.05.2015');
+		page.dateCreatedEl.sendKeys('28.05.2015');
+		page.deadlineEl.sendKeys('28.05.2015');
 		page.detailsEl.sendKeys('details');
 		page.statusEl.sendKeys('Open');
 		page.summaryEl.sendKeys('Work Summary 152');

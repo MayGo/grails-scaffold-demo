@@ -1,10 +1,22 @@
 language: groovy
-script: rm -rf ./scafmo
-  && ./grailsw create-app scafmo
-  && cp -r ./test-assets/scafmo/* ./scafmo
-  && cd scafmo
-  && ./grailsw compile
-  && ./grailsw scaffold
-  && \cp ../test-assets/scafmo/grails-app/conf/TestDataConfig.groovy ./grails-app/conf/TestDataConfig.groovy
-  && ./grailsw scaffold
-  && ./grailsw test-app
+ 
+jdk:
+- oraclejdk8
+ 
+env:
+  - GRAILS_VERSION=2.5.0
+ 
+before_install:
+- rm -rf ~/.gvm
+- curl -s get.gvmtool.net > ~/install_gvm.sh
+- chmod 775 ~/install_gvm.sh
+- ~/install_gvm.sh
+- echo "gvm_auto_answer=true" > ~/.gvm/etc/config
+- source ~/.gvm/bin/gvm-init.sh
+- gvm install grails $GRAILS_VERSION || true
+ 
+branches:
+  only:
+    - master
+ 
+script: grails clean && grails upgrade --non-interactive && grails test-app --non-interactive --stacktrace

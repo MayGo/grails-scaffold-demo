@@ -1,10 +1,10 @@
 language: groovy
 script: rm -rf ./scafmo
-	&& ./grailsw create-app scafmo
-	&& cp -r ./test-assets/scafmo/* ./scafmo
-	&& cd scafmo
-	&& ./grailsw compile
-	&& ./grailsw scaffold
-	&& \cp ../test-assets/scafmo/grails-app/conf/TestDataConfig.groovy ./grails-app/conf/TestDataConfig.groovy
-	&& ./grailsw scaffold
-	&& ./grailsw test-app
+  && ./grailsw create-app scafmo
+  && cp -r ./test-assets/scafmo/* ./scafmo
+  && cd scafmo
+  && ./grailsw compile
+  && ./grailsw scaffold
+  && \cp ../test-assets/scafmo/grails-app/conf/TestDataConfig.groovy ./grails-app/conf/TestDataConfig.groovy
+  && ./grailsw scaffold
+  && ./grailsw test-app

@@ -18,6 +18,7 @@ var EditPage = function() {
 		this.minSizeStrEl = element(by.model('testString.minSizeStr'));
 		this.notEqualStrEl = element(by.model('testString.notEqualStr'));
 		this.sizeStrEl = element(by.model('testString.sizeStr'));
+		this.textareaStrEl = element(by.model('testString.textareaStr'));
 		this.uniqueStrEl = element(by.model('testString.uniqueStr'));
 		this.urlStrEl = element(by.model('testString.urlStr'));
 

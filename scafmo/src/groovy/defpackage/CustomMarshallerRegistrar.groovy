@@ -21,6 +21,8 @@ import scafmo.collection.PersonCollectionless
 import scafmo.constr.TestNumber
 import scafmo.constr.TestOther
 import scafmo.constr.TestString
+import scafmo.embedded.Embed
+import scafmo.embedded.Embeddable
 import scafmo.security.Role
 import scafmo.security.User
 import scafmo.security.UserRole
@@ -239,11 +241,24 @@ class CustomMarshallerRegistrar {
 'testStringType.matchesStr',
 'testStringType.maxSizeStr',
 'testStringType.minSizeStr',
-'testStringType.notEqualStr']
+'testStringType.notEqualStr',
+'testStringType.textareaStr']
 				Map excludes = createMap(defaultExcludes + json.getExcludes(cl) - json.getIncludes(cl))
 				return filter(instance, excludes)
 			}
 			registerObjectMarshaller(TestString, priority) { TestString instance, JSON json ->
+				Class cl = instance.getClass()
+				List defaultExcludes = []
+				Map excludes = createMap(defaultExcludes + json.getExcludes(cl) - json.getIncludes(cl))
+				return filter(instance, excludes)
+			}
+			registerObjectMarshaller(Embed, priority) { Embed instance, JSON json ->
+				Class cl = instance.getClass()
+				List defaultExcludes = []
+				Map excludes = createMap(defaultExcludes + json.getExcludes(cl) - json.getIncludes(cl))
+				return filter(instance, excludes)
+			}
+			registerObjectMarshaller(Embeddable, priority) { Embeddable instance, JSON json ->
 				Class cl = instance.getClass()
 				List defaultExcludes = []
 				Map excludes = createMap(defaultExcludes + json.getExcludes(cl) - json.getIncludes(cl))

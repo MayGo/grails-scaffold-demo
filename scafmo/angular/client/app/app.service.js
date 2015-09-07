@@ -1,4 +1,7 @@
 'use strict';
+/**
+ * Generated autocomplete services to quickly demo autocomplete functionality
+ */
 angular.module('angularDemoApp')
   .factory('AutocompleteService', function($resource, appConfig){
   	var toLabel = function(model, labelProperties){
@@ -18,16 +21,18 @@ angular.module('angularDemoApp')
   		var obj = {id:item.id};
   		if(tagsOutput){
   			obj.name = _.map(labelProperties, function(label) { return item[label];  }).join(', ');
-		}else{
-			angular.forEach(labelProperties, function(label) {
-			  obj[label] = item[label];
-			}, item);
-		}
-        return obj;
-  	};
+	    }else if(labelProperties){
+		    angular.forEach(labelProperties, function(label) {
+			    obj[label] = item[label];
+		    }, item);
+	    }else{
+		    obj.name = autocompleteObjToString(item);
+	    }
+	    return obj;
+    };
   	
   	var resourceQuery = function(val, urlPart, labelProperties, excludes, tagsOutput){
-  		var param = {limit: 15};
+  		var param = {max: 15};
 		param.searchString = val;
 		param.excludes = excludes;
 		var resource = $resource(appConfig.restUrl + '/' + urlPart);
@@ -55,7 +60,6 @@ angular.module('angularDemoApp')
 			});
 		};
 		stringify(model);
-		//console.log(str)
 		return str;
 	};
 
@@ -65,6 +69,41 @@ angular.module('angularDemoApp')
 				model.name = toLabel(model, labelProperties);
 			});
 			return model;
+		},
+	
+		testStringSimpleQuery : function(val, tagsOutput){
+			var urlVar = 'testStringUrl';
+			var url = appConfig[urlVar];
+			if(url === undefined){
+				console.error('Define ' + urlVar + ' in config.json.');
+				url = 'http://localhost:8080/' + urlVar; // for karma tests
+			}
+			var param = {max: 15};
+			param.searchString = val;
+			var resource = $resource(url);
+			return resource.query(param).$promise.then(
+				function( response ){
+					return response.map(function(item){
+						var obj = item;
+						if(tagsOutput){
+							obj = {id: item.id, name: autocompleteObjToString(item)};
+						}else{
+							item.label = autocompleteObjToString(item);
+						}
+						// postgres json can only save objects at the moment
+						return obj;
+					});
+				}
+			);
+		},
+		testStringSimpleFormatLabel : function(model) {
+			if(model === undefined){
+				return '';
+			}
+			if(model.item !== undefined && model.item.label !== undefined){
+				return model.item.label;
+			}
+			return autocompleteObjToString(model);
 		},
 	
 
@@ -178,6 +217,20 @@ angular.module('angularDemoApp')
   			return resourceQuery(val, 'teststrings/v1', labelProperties, '', tagsOutput);
 	    },
 	    testStringFormatLabel : function(model, labelProperties) {
+		    return toLabel(model, labelProperties);
+		},
+    
+  		embedQuery : function(val, labelProperties, tagsOutput){
+  			return resourceQuery(val, 'embeds/v1', labelProperties, 'myEmbeddedField', tagsOutput);
+	    },
+	    embedFormatLabel : function(model, labelProperties) {
+		    return toLabel(model, labelProperties);
+		},
+    
+  		embeddableQuery : function(val, labelProperties, tagsOutput){
+  			return resourceQuery(val, 'embeddables/v1', labelProperties, '', tagsOutput);
+	    },
+	    embeddableFormatLabel : function(model, labelProperties) {
 		    return toLabel(model, labelProperties);
 		},
     

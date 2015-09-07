@@ -1,0 +1,187 @@
+
+
+<div id="embed_form"
+     ng-init="pageTitle = (isEditForm)?'pages.embed.view.edit.title':'pages.embed.create.title'" data-ng-include=" 'shared/blocks/page_heading.html' "></div>
+
+<md-content layout-padding layout="column">
+    <form name="embedForm" novalidate>
+        <input name="version" type="hidden" ng-model="embed.version" />
+
+    <div class="input-container" layout layout-sm="column">
+		<label for="acCustomMap"
+               translate="pages.embed.view.edit.form.field.acCustomMap" flex="20"/>
+        <md-input-container md-no-float="true" flex="30" layout="row">
+            <!--Autocomplete-->
+        <md-autocomplete
+                input-name="acCustomMap"
+                md-cache="false"
+                md-selected-item="embed.acCustomMap"
+                md-search-text="searchText_acCustomMap"
+                md-items="item in autocompleteService.testStringSimpleQuery(searchText_acCustomMap)"
+                md-item-text="item.name || item.label || item.id"
+                md-min-length="0"
+    
+        >
+            <md-item-template>
+                <span md-highlight-text="searchText_acCustomMap" md-highlight-flags="^i">{{item.name || item.label || item.id}}</span>
+            </md-item-template>
+        </md-autocomplete>
+    
+        </md-input-container>
+	</div>
+	
+
+    <div class="input-container" layout layout-sm="column">
+		<label for="acMap"
+               translate="pages.embed.view.edit.form.field.acMap" flex="20"/>
+        <md-input-container md-no-float="true" flex="30" layout="row">
+            <!--Autocomplete-->
+        <md-autocomplete
+                input-name="acMap"
+                md-cache="false"
+                md-selected-item="embed.acMap"
+                md-search-text="searchText_acMap"
+                md-items="item in autocompleteService.testStringSimpleQuery(searchText_acMap)"
+                md-item-text="item.name || item.label || item.id"
+                md-min-length="0"
+    
+        >
+            <md-item-template>
+                <span md-highlight-text="searchText_acMap" md-highlight-flags="^i">{{item.name || item.label || item.id}}</span>
+            </md-item-template>
+        </md-autocomplete>
+    
+        </md-input-container>
+	</div>
+	
+
+    <div class="input-container" layout layout-sm="column">
+		<label for="acStr"
+               translate="pages.embed.view.edit.form.field.acStr" flex="20"/>
+        <md-input-container md-no-float="true" flex="30" layout="row">
+            <!--Autocomplete-->
+        <md-autocomplete
+                input-name="acStr"
+                md-cache="false"
+                md-selected-item="embed.acStr"
+                md-search-text="searchText_acStr"
+                md-items="item in autocompleteService.testStringSimpleQuery(searchText_acStr)"
+                md-item-text="item.name || item.label || item.id"
+                md-min-length="0"
+    
+        >
+            <md-item-template>
+                <span md-highlight-text="searchText_acStr" md-highlight-flags="^i">{{item.name || item.label || item.id}}</span>
+            </md-item-template>
+        </md-autocomplete>
+    
+        </md-input-container>
+	</div>
+	
+
+    <div class="input-container" layout layout-sm="column">
+		<label for="muFileLocation"
+               translate="pages.embed.view.edit.form.field.muFileLocation" flex="20"/>
+        <md-input-container md-no-float="true" flex="30" layout="row">
+            <div class="input-group input-group">
+    <div
+         name="muFileLocation"
+         uploader-widget
+         uploaded-items-to-model="embed.muFileLocation" upload-only-one="false"
+            ></div>
+</div>
+        </md-input-container>
+	</div>
+	
+
+    <div class="input-container" layout layout-sm="column">
+		<label for="myFile"
+               translate="pages.embed.view.edit.form.field.myFile" flex="20"/>
+        <md-input-container md-no-float="true" flex="30" layout="row">
+            <div class="input-group input-group">
+    <div
+         name="myFile"
+         uploader-widget
+         bytes-model="embed.myFile"
+         ></div>
+    </div>
+        </md-input-container>
+	</div>
+	
+
+        <accordion close-others="false" id="myEmbeddedFieldAccordion">
+            <accordion-group
+                    heading="{{::'pages.embed.view.edit.form.field.myEmbeddedField.title' | translate}}"
+                    is-open="isSearchOpen">
+                <div class="row">
+                    
+    <div class="input-container" layout layout-sm="column">
+		<label for="myEmbeddedField.jsonMap"
+               translate="pages.embed.view.edit.form.field.myEmbeddedField.jsonMap" flex="20"/>
+        <md-input-container md-no-float="true" flex="30" layout="row">
+            
+        <div class="jsonView">
+            <json child="embed.myEmbeddedField.jsonMap" default-collapsed="false" type="object"></json>
+        </div> 
+        </md-input-container>
+	</div>
+	
+
+    <div class="input-container" layout layout-sm="column">
+		<label for="myEmbeddedField"
+               translate="pages.embed.view.edit.form.field.myEmbeddedField.myAc" flex="20"/>
+        <md-input-container md-no-float="true" flex="30" layout="row">
+            <!--Autocomplete-->
+        <md-autocomplete
+                input-name="myEmbeddedField"
+                md-cache="false"
+                md-selected-item="embed.myEmbeddedField.myAc"
+                md-search-text="searchText_myEmbeddedField_myAc"
+                md-items="item in autocompleteService.testStringSimpleQuery(searchText_myEmbeddedField_myAc)"
+                md-item-text="item.name || item.label || item.id"
+                md-min-length="0"
+    
+        >
+            <md-item-template>
+                <span md-highlight-text="searchText_myEmbeddedField_myAc" md-highlight-flags="^i">{{item.name || item.label || item.id}}</span>
+            </md-item-template>
+        </md-autocomplete>
+    
+        </md-input-container>
+	</div>
+	
+
+    <div class="input-container" layout layout-sm="column">
+		<label for="myEmbeddedField.str"
+               translate="pages.embed.view.edit.form.field.myEmbeddedField.str" flex="20"/>
+        <md-input-container md-no-float="true" flex="30" layout="row">
+            
+                    <input name="myEmbeddedField.str"
+                           aria-label="myEmbeddedField.str"
+                           type="text"
+                           ng-model="embed.myEmbeddedField.str"
+                 /> 
+        </md-input-container>
+	</div>
+	
+
+                </div>
+            </accordion-group>
+        </accordion>
+
+
+        <section layout="row" layout-sm="column" layout-align="bottom left">
+            <md-button
+                id="embedSubmitBtn"
+                class="md-raised md-primary"
+                ng-disabled="embedForm.$invalid"
+                ng-click="submit(embedForm)"
+                translate="button.submit"
+                aria-label="save"
+            ></md-button>
+
+
+            <md-button class="md-flat" ng-click="back()" translate="button.back" aria-label="back"></md-button>
+        </section>
+    </form>
+</md-content>

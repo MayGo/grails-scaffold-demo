@@ -2,37 +2,38 @@
 
 <div id="role_form"
      ng-init="pageTitle = (isEditForm)?'pages.role.view.edit.title':'pages.role.create.title'" data-ng-include=" 'shared/blocks/page_heading.html' "></div>
-<div class="content-body">
-    <form name="roleForm" class="form-validation form-horizontal" novalidate>
+
+<md-content layout-padding layout="column">
+    <form name="roleForm" novalidate>
         <input name="version" type="hidden" ng-model="role.version" />
 
-	<div class="form-group">
-		<label class="col-sm-2 control-label" for="authority"
-               translate="pages.role.view.edit.form.field.authority"></label>
-		<div class="col-sm-10">
-            <div class="input-group input-group">
-                    <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
-                    
-                    <input id="authority" name="authority" class="form-control"
+    <div class="input-container" layout layout-sm="column">
+		<label for="authority"
+               translate="pages.role.view.edit.form.field.authority" flex="20"/>
+        <md-input-container md-no-float="true" flex="30" layout="row">
+            
+                    <input name="authority"
+                           aria-label="authority"
                            type="text"
                            ng-model="role.authority"
-                 required /></div> 
-        </div>
+                 required /> 
+        </md-input-container>
 	</div>
-	<div class="line line-dashed b-b line-lg pull-in"></div>
 	
 
-        <div class="form-group">
-            <div class="form-action pull-right">
-                <button id="roleSubmitBtn"
-                    class="btn btn-success"
-                    type='submit'
-                    ng-disabled="roleForm.$invalid"
-                    translate="pages.role.view.edit.form.submit"
-                    mx-show-loading ng-click="submit(roleForm)"></button>
-                <a class="btn btn-default" ng-click="back()" translate="pages.role.view.edit.form.cancel" mx-show-loading></a>
-            </div>
-            <div class="clearfix"/>
-        </div>
+
+        <section layout="row" layout-sm="column" layout-align="bottom left">
+            <md-button
+                id="roleSubmitBtn"
+                class="md-raised md-primary"
+                ng-disabled="roleForm.$invalid"
+                ng-click="submit(roleForm)"
+                translate="button.submit"
+                aria-label="save"
+            ></md-button>
+
+
+            <md-button class="md-flat" ng-click="back()" translate="button.back" aria-label="back"></md-button>
+        </section>
     </form>
-</div>
+</md-content>

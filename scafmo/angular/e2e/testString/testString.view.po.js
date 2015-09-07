@@ -19,6 +19,7 @@ var ViewPage = function() {
   this.minSizeStrEl = element(by.binding('testString.minSizeStr'));  
   this.notEqualStrEl = element(by.binding('testString.notEqualStr'));  
   this.sizeStrEl = element(by.binding('testString.sizeStr'));  
+  this.textareaStrEl = element(by.binding('testString.textareaStr'));  
   this.uniqueStrEl = element(by.binding('testString.uniqueStr'));  
   this.urlStrEl = element(by.binding('testString.urlStr'));  
 };

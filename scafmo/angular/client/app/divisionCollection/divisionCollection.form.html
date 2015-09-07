@@ -2,78 +2,91 @@
 
 <div id="divisionCollection_form"
      ng-init="pageTitle = (isEditForm)?'pages.divisionCollection.view.edit.title':'pages.divisionCollection.create.title'" data-ng-include=" 'shared/blocks/page_heading.html' "></div>
-<div class="content-body">
-    <form name="divisionCollectionForm" class="form-validation form-horizontal" novalidate>
+
+<md-content layout-padding layout="column">
+    <form name="divisionCollectionForm" novalidate>
         <input name="version" type="hidden" ng-model="divisionCollection.version" />
 
-	<div class="form-group">
-		<label class="col-sm-2 control-label" for="name"
-               translate="pages.divisionCollection.view.edit.form.field.name"></label>
-		<div class="col-sm-10">
-            <div class="input-group input-group">
-                    <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
-                    
-                    <input id="name" name="name" class="form-control"
+    <div class="input-container" layout layout-sm="column">
+		<label for="name"
+               translate="pages.divisionCollection.view.edit.form.field.name" flex="20"/>
+        <md-input-container md-no-float="true" flex="30" layout="row">
+            
+                    <input name="name"
+                           aria-label="name"
                            type="text"
                            ng-model="divisionCollection.name"
-                 required /></div> 
-        </div>
+                 required /> 
+        </md-input-container>
 	</div>
-	<div class="line line-dashed b-b line-lg pull-in"></div>
 	
 
-	<div class="form-group">
-		<label class="col-sm-2 control-label" for="persons"
-               translate="pages.divisionCollection.view.edit.form.field.persons"></label>
-		<div class="col-sm-10">
+    <div class="input-container" layout layout-sm="column">
+		<label for="persons"
+               translate="pages.divisionCollection.view.edit.form.field.persons" flex="20"/>
+        <md-input-container md-no-float="true" flex="30" layout="row">
             <!--OneToMany-->
-          <tags-input
-                  name="persons"
-                  id="persons"
-                  ng-model="divisionCollection.persons">
-              <auto-complete source="autocompleteService.personCollectionQuery($query, ['id','name','age'], true)" ></auto-complete>
-             </tags-input>
-        </div>
+            <md-chips
+                    ng-model="divisionCollection.persons"
+                    readonly="false"
+                    md-autocomplete-snap
+                    md-require-match
+    ><md-autocomplete
+                    md-selected-item="selectedItem_persons"
+                    md-search-text="searchText_persons"
+                    md-items="item in autocompleteService.personCollectionQuery(searchText_persons, ['id','name','age'], true)"
+                    md-item-text="item.name">
+                <span md-highlight-text="searchText_persons">{{item.name}}</span>
+            </md-autocomplete>
+            <md-chip-template>
+                <span>{{$chip.name}}</span>
+            </md-chip-template>
+    </md-chips>
+        </md-input-container>
 	</div>
-	<div class="line line-dashed b-b line-lg pull-in"></div>
 	
 
-	<div class="form-group">
-		<label class="col-sm-2 control-label" for="headDivision"
-               translate="pages.divisionCollection.view.edit.form.field.headDivision"></label>
-		<div class="col-sm-10">
-            <!--ManyToOne-->
-     <div class="input-group input-group">
-          <span class="input-group-addon"><i class="glyphicon glyphicon-flash"></i></span>  
-          <input id="headDivision" name="headDivision" type="text" class="form-control"
-          ng-model="divisionCollection.headDivision"
-          typeahead-template-url="headDivisionAutocompleteTemplate.html"
-          typeahead-editable="false" 
-          typeahead="b for b in autocompleteService.divisionCollectionQuery($viewValue, ['id','name'])" 
-         
-          typeahead-input-formatter="autocompleteService.divisionCollectionFormatLabel($model, ['id','name'])"
-       />
-         <span class="input-group-btn" item-selector update-model="divisionCollection.headDivision"
-               ui-link="app.divisionCollection.view.edit.divisionCollectionSearchModal" >
-         </span>
-     </div> 
-     <script type="text/ng-template" id="headDivisionAutocompleteTemplate.html"><a><span bind-html-unsafe="match.model.id | typeaheadHighlight:query"></span> <span bind-html-unsafe="match.model.name | typeaheadHighlight:query"></span> </a></script>
-        </div>
+    <div class="input-container" layout layout-sm="column">
+		<label for="headDivision"
+               translate="pages.divisionCollection.view.edit.form.field.headDivision" flex="20"/>
+        <md-input-container md-no-float="true" flex="30" layout="row">
+            <!-- ManyToOne-->
+        <md-autocomplete
+                input-name="headDivision"
+                md-cache="false"
+                md-selected-item="divisionCollection.headDivision"
+                md-search-text="searchText_headDivision"
+                md-items="item in autocompleteService.divisionCollectionQuery(searchText_headDivision)"
+                md-item-text="item.name || item.label || item.id"
+                md-min-length="0"
+    
+        >
+            <md-item-template>
+                <span md-highlight-text="searchText_headDivision" md-highlight-flags="^i">{{item.name || item.label || item.id}}</span>
+            </md-item-template>
+        </md-autocomplete>
+    
+         <item-selector update-model="divisionCollection.headDivision"
+               item-link="app.divisionCollection.view.edit.divisionCollectionSearchModal" >
+         </item-selector>
+     
+        </md-input-container>
 	</div>
-	<div class="line line-dashed b-b line-lg pull-in"></div>
 	
 
-        <div class="form-group">
-            <div class="form-action pull-right">
-                <button id="divisionCollectionSubmitBtn"
-                    class="btn btn-success"
-                    type='submit'
-                    ng-disabled="divisionCollectionForm.$invalid"
-                    translate="pages.divisionCollection.view.edit.form.submit"
-                    mx-show-loading ng-click="submit(divisionCollectionForm)"></button>
-                <a class="btn btn-default" ng-click="back()" translate="pages.divisionCollection.view.edit.form.cancel" mx-show-loading></a>
-            </div>
-            <div class="clearfix"/>
-        </div>
+
+        <section layout="row" layout-sm="column" layout-align="bottom left">
+            <md-button
+                id="divisionCollectionSubmitBtn"
+                class="md-raised md-primary"
+                ng-disabled="divisionCollectionForm.$invalid"
+                ng-click="submit(divisionCollectionForm)"
+                translate="button.submit"
+                aria-label="save"
+            ></md-button>
+
+
+            <md-button class="md-flat" ng-click="back()" translate="button.back" aria-label="back"></md-button>
+        </section>
     </form>
-</div>
+</md-content>

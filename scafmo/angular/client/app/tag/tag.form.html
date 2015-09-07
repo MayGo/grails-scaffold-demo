@@ -2,52 +2,63 @@
 
 <div id="tag_form"
      ng-init="pageTitle = (isEditForm)?'pages.tag.view.edit.title':'pages.tag.create.title'" data-ng-include=" 'shared/blocks/page_heading.html' "></div>
-<div class="content-body">
-    <form name="tagForm" class="form-validation form-horizontal" novalidate>
+
+<md-content layout-padding layout="column">
+    <form name="tagForm" novalidate>
         <input name="version" type="hidden" ng-model="tag.version" />
 
-	<div class="form-group">
-		<label class="col-sm-2 control-label" for="name"
-               translate="pages.tag.view.edit.form.field.name"></label>
-		<div class="col-sm-10">
-            <div class="input-group input-group">
-                    <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
-                    
-                    <input id="name" name="name" class="form-control"
+    <div class="input-container" layout layout-sm="column">
+		<label for="name"
+               translate="pages.tag.view.edit.form.field.name" flex="20"/>
+        <md-input-container md-no-float="true" flex="30" layout="row">
+            
+                    <input name="name"
+                           aria-label="name"
                            type="text"
                            ng-model="tag.name"
-                 required /></div> 
-        </div>
+                 required /> 
+        </md-input-container>
 	</div>
-	<div class="line line-dashed b-b line-lg pull-in"></div>
 	
 
-	<div class="form-group">
-		<label class="col-sm-2 control-label" for="tasks"
-               translate="pages.tag.view.edit.form.field.tasks"></label>
-		<div class="col-sm-10">
+    <div class="input-container" layout layout-sm="column">
+		<label for="tasks"
+               translate="pages.tag.view.edit.form.field.tasks" flex="20"/>
+        <md-input-container md-no-float="true" flex="30" layout="row">
             <!--ManyToMany-->
-          <tags-input  name="tasks"
-                       id="tasks"
-                        ng-model="tag.tasks">
-              <auto-complete source="autocompleteService.taskQuery($query, ['id','timeSpent','summary','status'], true)" ></auto-complete>
-             </tags-input>
-        </div>
+            <md-chips
+                    ng-model="tag.tasks"
+                    readonly="false"
+                    md-autocomplete-snap
+                    md-require-match
+    ><md-autocomplete
+                    md-selected-item="selectedItem_tasks"
+                    md-search-text="searchText_tasks"
+                    md-items="item in autocompleteService.taskQuery(searchText_tasks, ['id','timeSpent','summary','status'], true)"
+                    md-item-text="item.name">
+                <span md-highlight-text="searchText_tasks">{{item.name}}</span>
+            </md-autocomplete>
+            <md-chip-template>
+                <span>{{$chip.name}}</span>
+            </md-chip-template>
+    </md-chips>
+        </md-input-container>
 	</div>
-	<div class="line line-dashed b-b line-lg pull-in"></div>
 	
 
-        <div class="form-group">
-            <div class="form-action pull-right">
-                <button id="tagSubmitBtn"
-                    class="btn btn-success"
-                    type='submit'
-                    ng-disabled="tagForm.$invalid"
-                    translate="pages.tag.view.edit.form.submit"
-                    mx-show-loading ng-click="submit(tagForm)"></button>
-                <a class="btn btn-default" ng-click="back()" translate="pages.tag.view.edit.form.cancel" mx-show-loading></a>
-            </div>
-            <div class="clearfix"/>
-        </div>
+
+        <section layout="row" layout-sm="column" layout-align="bottom left">
+            <md-button
+                id="tagSubmitBtn"
+                class="md-raised md-primary"
+                ng-disabled="tagForm.$invalid"
+                ng-click="submit(tagForm)"
+                translate="button.submit"
+                aria-label="save"
+            ></md-button>
+
+
+            <md-button class="md-flat" ng-click="back()" translate="button.back" aria-label="back"></md-button>
+        </section>
     </form>
-</div>
+</md-content>

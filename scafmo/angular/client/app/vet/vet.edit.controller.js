@@ -51,6 +51,8 @@ angular.module('angularDemoApp')
 		$scope.vet.specialities = $scope.vet.specialities.map(function(item){
 			return {id:item.id, name:item.id+ ', ' +item.name};
 		});
+	}else{
+		$scope.vet.specialities = [];
 	}
 		   
 	});

@@ -2,6 +2,10 @@ class UrlMappings {
 
 	static mappings = {
 
+		'/embeds/v1'(resources: 'Embed', namespace: 'v1')
+		'/embeddables/v1'(resources: 'Embeddable', namespace: 'v1')
+
+
 		'/tags/v1'(resources: 'Tag', namespace: 'v1')
 		'/tasks/v1'(resources: 'Task', namespace: 'v1')
 		'/owners/v1'(resources: 'Owner', namespace: 'v1')

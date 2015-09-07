@@ -55,6 +55,8 @@ angular.module('angularDemoApp')
 		$scope.task.tags = $scope.task.tags.map(function(item){
 			return {id:item.id, name:item.id+ ', ' +item.name};
 		});
+	}else{
+		$scope.task.tags = [];
 	}
 		   
 	});

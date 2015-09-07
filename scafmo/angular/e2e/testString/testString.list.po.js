@@ -19,6 +19,7 @@ var EditPage = function() {
   this.minSizeStrEl = element(by.model('search.minSizeStr'));  
   this.notEqualStrEl = element(by.model('search.notEqualStr'));  
   this.sizeStrEl = element(by.model('search.sizeStr'));  
+  this.textareaStrEl = element(by.model('search.textareaStr'));  
   this.uniqueStrEl = element(by.model('search.uniqueStr'));  
   this.urlStrEl = element(by.model('search.urlStr'));  
 };

@@ -1,129 +1,103 @@
 
 
+
 <div id="testString_view" ng-init="pageTitle = 'pages.testString.view.title'"
      ng-include=" 'shared/blocks/page_heading.html' "></div>
 <div class="content-body">
-    <div class="form-horizontal">
+    <md-content layout-padding layout="column">
 
-        <div class="form-group">
-            <label class="col-sm-2 control-label"
-                   translate="pages.testString.view.field.blankStr"></label>
-            <div class="col-sm-10 form-control-static"
-                 ng-bind="testString.blankStr"></div>
-        </div>
-        <div class="line line-dashed b-b line-lg pull-in"></div>
+<div class="input-container" layout layout-sm="column">
+
+            <label translate="pages.testString.view.field.blankStr" flex="20"></label>
+            <div class="read-field" ng-bind="testString.blankStr" flex="30"></div>
     
+</div>
+<div class="input-container" layout layout-sm="column">
 
-        <div class="form-group">
-            <label class="col-sm-2 control-label"
-                   translate="pages.testString.view.field.creditCardStr"></label>
-            <div class="col-sm-10 form-control-static"
-                 ng-bind="testString.creditCardStr"></div>
-        </div>
-        <div class="line line-dashed b-b line-lg pull-in"></div>
+            <label translate="pages.testString.view.field.creditCardStr" flex="20"></label>
+            <div class="read-field" ng-bind="testString.creditCardStr" flex="30"></div>
     
+</div>
+<div class="input-container" layout layout-sm="column">
 
-        <div class="form-group">
-            <label class="col-sm-2 control-label"
-                   translate="pages.testString.view.field.emailStr"></label>
-            <div class="col-sm-10 form-control-static"
-                 ng-bind="testString.emailStr"></div>
-        </div>
-        <div class="line line-dashed b-b line-lg pull-in"></div>
+            <label translate="pages.testString.view.field.emailStr" flex="20"></label>
+            <div class="read-field" ng-bind="testString.emailStr" flex="30"></div>
     
+</div>
+<div class="input-container" layout layout-sm="column">
 
-        <div class="form-group">
-            <label class="col-sm-2 control-label"
-                   translate="pages.testString.view.field.inListStr"></label>
-            <div class="col-sm-10 form-control-static"
-                 ng-bind="testString.inListStr"></div>
-        </div>
-        <div class="line line-dashed b-b line-lg pull-in"></div>
+            <label translate="pages.testString.view.field.inListStr" flex="20"></label>
+            <div class="read-field" ng-bind="testString.inListStr" flex="30"></div>
     
+</div>
+<div class="input-container" layout layout-sm="column">
 
-        <div class="form-group">
-            <label class="col-sm-2 control-label"
-                   translate="pages.testString.view.field.matchesStr"></label>
-            <div class="col-sm-10 form-control-static"
-                 ng-bind="testString.matchesStr"></div>
-        </div>
-        <div class="line line-dashed b-b line-lg pull-in"></div>
+            <label translate="pages.testString.view.field.matchesStr" flex="20"></label>
+            <div class="read-field" ng-bind="testString.matchesStr" flex="30"></div>
     
+</div>
+<div class="input-container" layout layout-sm="column">
 
-        <div class="form-group">
-            <label class="col-sm-2 control-label"
-                   translate="pages.testString.view.field.maxSizeStr"></label>
-            <div class="col-sm-10 form-control-static"
-                 ng-bind="testString.maxSizeStr"></div>
-        </div>
-        <div class="line line-dashed b-b line-lg pull-in"></div>
+            <label translate="pages.testString.view.field.maxSizeStr" flex="20"></label>
+            <div class="read-field" ng-bind="testString.maxSizeStr" flex="30"></div>
     
+</div>
+<div class="input-container" layout layout-sm="column">
 
-        <div class="form-group">
-            <label class="col-sm-2 control-label"
-                   translate="pages.testString.view.field.minSizeStr"></label>
-            <div class="col-sm-10 form-control-static"
-                 ng-bind="testString.minSizeStr"></div>
-        </div>
-        <div class="line line-dashed b-b line-lg pull-in"></div>
+            <label translate="pages.testString.view.field.minSizeStr" flex="20"></label>
+            <div class="read-field" ng-bind="testString.minSizeStr" flex="30"></div>
     
+</div>
+<div class="input-container" layout layout-sm="column">
 
-        <div class="form-group">
-            <label class="col-sm-2 control-label"
-                   translate="pages.testString.view.field.notEqualStr"></label>
-            <div class="col-sm-10 form-control-static"
-                 ng-bind="testString.notEqualStr"></div>
-        </div>
-        <div class="line line-dashed b-b line-lg pull-in"></div>
+            <label translate="pages.testString.view.field.notEqualStr" flex="20"></label>
+            <div class="read-field" ng-bind="testString.notEqualStr" flex="30"></div>
     
+</div>
+<div class="input-container" layout layout-sm="column">
 
-        <div class="form-group">
-            <label class="col-sm-2 control-label"
-                   translate="pages.testString.view.field.sizeStr"></label>
-            <div class="col-sm-10 form-control-static"
-                 ng-bind="testString.sizeStr"></div>
-        </div>
-        <div class="line line-dashed b-b line-lg pull-in"></div>
+            <label translate="pages.testString.view.field.sizeStr" flex="20"></label>
+            <div class="read-field" ng-bind="testString.sizeStr" flex="30"></div>
     
+</div>
+<div class="input-container" layout layout-sm="column">
 
-        <div class="form-group">
-            <label class="col-sm-2 control-label"
-                   translate="pages.testString.view.field.uniqueStr"></label>
-            <div class="col-sm-10 form-control-static"
-                 ng-bind="testString.uniqueStr"></div>
-        </div>
-        <div class="line line-dashed b-b line-lg pull-in"></div>
+            <label translate="pages.testString.view.field.textareaStr" flex="20"></label>
+            <div class="read-field" ng-bind="testString.textareaStr" flex="30"></div>
     
+</div>
+<div class="input-container" layout layout-sm="column">
 
-        <div class="form-group">
-            <label class="col-sm-2 control-label"
-                   translate="pages.testString.view.field.urlStr"></label>
-            <div class="col-sm-10 form-control-static"
-                 ng-bind="testString.urlStr"></div>
-        </div>
-        <div class="line line-dashed b-b line-lg pull-in"></div>
+            <label translate="pages.testString.view.field.uniqueStr" flex="20"></label>
+            <div class="read-field" ng-bind="testString.uniqueStr" flex="30"></div>
     
+</div>
+<div class="input-container" layout layout-sm="column">
 
-    </div>
-    <div class="line line-dashed b-b line-lg pull-in"></div>
-    <div class="form-group" ng-if="!isModal">
+            <label translate="pages.testString.view.field.urlStr" flex="20"></label>
+            <div class="read-field" ng-bind="testString.urlStr" flex="30"></div>
+    
+</div>
 
-        <div class="form-action pull-right">
-            <a id="editBtn" class="btn btn-default"
-               ui-sref="app.testString.view.edit({id:testString.id})">
-                <i class="fa fa-edit" translate="pages.testString.view.buttons.edit"></i>
-            </a>
-            <a id="deleteBtn" class="btn btn-danger"
-               ng-click="deleteTestString(testString)" mx-show-loading>
-                <i class="fa fa-trash-o" translate="pages.testString.view.buttons.delete"></i>
-            </a>
 
-            <a id="backBtn" class="btn btn-default" ng-click="back()">
-                <i class="fa fa-chevron-left" translate="pages.testString.view.buttons.back"></i>
-            </a>
-        </div>
-        <div class="clearfix"/>
-    </div>
+    <section ng-if="!isModal" layout="row" layout-sm="column" layout-align="bottom left">
+        <md-button id="editBtn"
+                   class="md-raised md-primary"
+                   ui-sref="app.testString.view.edit({id:testString.id})"
+                   translate="button.edit"
+                   aria-label="edit"
+                ></md-button>
+        <md-button id="deleteBtn"
+                   class="md-raised md-warn"
+                   ng-click="deleteTestString(testString)"
+                   mx-show-loading
+                   translate="button.delete"
+                   aria-label="delete"
+                ></md-button>
+
+        <md-button class="md-flat" ng-click="back()" translate="button.back" aria-label="back"></md-button>
+    </section>
+    </md-content>
 </div>
 
 

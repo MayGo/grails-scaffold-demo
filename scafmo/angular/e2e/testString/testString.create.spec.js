@@ -35,6 +35,8 @@ describe('testString create page', function() {
 	
 		expect(page.sizeStrEl).not.toBeNull()
 	
+		expect(page.textareaStrEl).not.toBeNull()
+	
 		expect(page.uniqueStrEl).not.toBeNull()
 	
 		expect(page.urlStrEl).not.toBeNull()
@@ -53,6 +55,7 @@ describe('testString create page', function() {
 		page.minSizeStrEl.sendKeys('ABC');
 		page.notEqualStrEl.sendKeys('notEqualStr 758');
 		page.sizeStrEl.sendKeys('sizeStr');
+		page.textareaStrEl.sendKeys('textareaStr');
 		page.uniqueStrEl.sendKeys('U 759');
 		page.urlStrEl.sendKeys('http://www.test760.com');
 
@@ -75,6 +78,7 @@ describe('testString create page', function() {
 		expect(page.minSizeStrViewEl).toBeDefined()
 		expect(page.notEqualStrViewEl).toBeDefined()
 		expect(page.sizeStrViewEl).toBeDefined()
+		expect(page.textareaStrViewEl).toBeDefined()
 		expect(page.uniqueStrViewEl).toBeDefined()
 		expect(page.urlStrViewEl).toBeDefined()
 

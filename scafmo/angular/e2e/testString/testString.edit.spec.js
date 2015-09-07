@@ -23,6 +23,7 @@ describe('testString edit page', function() {
 		expect(page.minSizeStrEl).not.toBeNull()
 		expect(page.notEqualStrEl).not.toBeNull()
 		expect(page.sizeStrEl).not.toBeNull()
+		expect(page.textareaStrEl).not.toBeNull()
 		expect(page.uniqueStrEl).not.toBeNull()
 		expect(page.urlStrEl).not.toBeNull()
 

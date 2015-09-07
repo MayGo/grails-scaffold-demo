@@ -2,11 +2,12 @@
 
 angular.module('angularDemoApp')
 	.controller('DivisionCollectionListController', function ($scope, $rootScope,
-		$state, $q, DivisionCollectionService, $stateParams, $timeout, inform, ngTableParams, appConfig, $location) {
+		$state, $q, DivisionCollectionService, $stateParams, $timeout, inform, ngTableParams, appConfig, $location, $mdDialog) {
 
 		if($state.current.data){
 			$scope.isTab = $state.current.data.isTab;
 		}
+
 
 		$scope.deleteDivisionCollection = function(instance){
 			return DivisionCollectionService.deleteInstance(instance).then(function(instance){
@@ -17,6 +18,7 @@ angular.module('angularDemoApp')
 
 
 		$scope.search = {};
+    $scope.search.divisionCollection = [];
 
 		if($location.search().filter) {
 			angular.extend($scope.search,$location.search())
@@ -75,4 +77,17 @@ angular.module('angularDemoApp')
 		};
 
 		$scope.tableParams = new ngTableParams(parameters, settings);
+
+		/**
+		 * When list is opened as modal to select item to field with item-selector directive
+		 * @param item
+		 */
+		$scope.selectItemToField = function (item) {
+			console.log("Selected item:", item);
+			$mdDialog.hide(item);
+		};
+
+		$scope.closeItemToFieldSelector = function () {
+			$mdDialog.hide();
+		};
 });

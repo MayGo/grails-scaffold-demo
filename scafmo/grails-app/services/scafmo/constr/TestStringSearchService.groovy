@@ -98,6 +98,9 @@ class TestStringSearchService {
 			if (cmd.sizeStr) {
 				ilike('sizeStr', cmd.sizeStr + '%')
 			}
+			if (cmd.textareaStr) {
+				ilike('textareaStr', cmd.textareaStr + '%')
+			}
 			if (cmd.uniqueStr) {
 				ilike('uniqueStr', cmd.uniqueStr + '%')
 			}

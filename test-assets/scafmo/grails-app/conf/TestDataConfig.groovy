@@ -104,6 +104,22 @@ testDataConfig {
 			def i = 1
 			authority = {-> "ROLE_${i++}" }
 		}
+		'scafmo.embedded.Embed' {
+			def i = 1
+
+			acStr = {->"Blank ${i++}" }
+			acMap = {->["mykey": "myvalue"] }
+			acCustomMap = {->new types.CustomMap(["mykey": "myvalue"]) }
+			myFile = {->"test1".bytes }
+			muFileLocation = {->"myfile.txt" }
+
+		}
+		'scafmo.embedded.Embeddable' {
+			def i = 1
+
+			str = {->"Blank ${i++}" }
+			myAc = {->["mykey": "myvalue"] }
+		}
 		
 	}
 }

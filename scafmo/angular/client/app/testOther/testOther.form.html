@@ -2,101 +2,98 @@
 
 <div id="testOther_form"
      ng-init="pageTitle = (isEditForm)?'pages.testOther.view.edit.title':'pages.testOther.create.title'" data-ng-include=" 'shared/blocks/page_heading.html' "></div>
-<div class="content-body">
-    <form name="testOtherForm" class="form-validation form-horizontal" novalidate>
+
+<md-content layout-padding layout="column">
+    <form name="testOtherForm" novalidate>
         <input name="version" type="hidden" ng-model="testOther.version" />
 
-	<div class="form-group">
-		<label class="col-sm-2 control-label" for="booleanNullable"
-               translate="pages.testOther.view.edit.form.field.booleanNullable"></label>
-		<div class="col-sm-10">
+    <div class="input-container" layout layout-sm="column">
+		<label for="booleanNullable"
+               translate="pages.testOther.view.edit.form.field.booleanNullable" flex="20"/>
+        <md-input-container md-no-float="true" flex="30" layout="row">
             
-		<div class="input-group input-group">
-		  <ng-toggle tri-toggle 
-		  disabled="disabled"
-		  ng-true-val="true" 
-		  ng-false-val="false"
-          id="booleanNullable"
-          name="booleanNullable"
-		  ng-model="testOther.booleanNullable"></ng-toggle>
-		</div>
-        </div>
+<md-switch name="booleanNullable"
+           ng-model="testOther.booleanNullable"
+           aria-label="booleanNullable Switch">
+</md-switch>
+		
+        </md-input-container>
 	</div>
-	<div class="line line-dashed b-b line-lg pull-in"></div>
 	
 
-	<div class="form-group">
-		<label class="col-sm-2 control-label" for="testDate"
-               translate="pages.testOther.view.edit.form.field.testDate"></label>
-		<div class="col-sm-10">
+    <div class="input-container" layout layout-sm="column">
+		<label for="testDate"
+               translate="pages.testOther.view.edit.form.field.testDate" flex="20"/>
+        <md-input-container md-no-float="true" flex="30" layout="row">
             
-     <div class="input-group input-group">
-     <input id="testDate" name="testDate" type="text" class="form-control"
+     <input name="testDate"
+            aria-label="testDate"
+            type="text"
             ng-model="testOther.testDate"
             bs-datepicker
       
       />
-     <span class="input-group-addon">
-       <i class="glyphicon glyphicon-calendar"></i>
-     </span>
-     </div>
       
-        </div>
+        </md-input-container>
 	</div>
-	<div class="line line-dashed b-b line-lg pull-in"></div>
 	
 
-	<div class="form-group">
-		<label class="col-sm-2 control-label" for="testEnum"
-               translate="pages.testOther.view.edit.form.field.testEnum"></label>
-		<div class="col-sm-10">
+    <div class="input-container" layout layout-sm="column">
+		<label for="testEnum"
+               translate="pages.testOther.view.edit.form.field.testEnum" flex="20"/>
+        <md-input-container md-no-float="true" flex="30" layout="row">
             
-     <div class="input-group input-group">
-          <span class="input-group-addon">enum</span>   
-          <input id="testEnum" name="testEnum" type="text" class="form-control"
-                 ng-model="testOther.testEnum"
-                 typeahead="b for b in autocompleteService.testOtherTestEnumList  | filter:$viewValue"   /></div> 
-        </div>
+            <md-select
+                    aria-label="testEnum"
+                    ng-model="testOther.testEnum"
+    ><md-option ng-repeat="item in autocompleteService.testOtherTestEnumList" >{{item}}</md-option>
+            </md-select>
+ 
+        </md-input-container>
 	</div>
-	<div class="line line-dashed b-b line-lg pull-in"></div>
 	
 
-	<div class="form-group">
-		<label class="col-sm-2 control-label" for="testStringType"
-               translate="pages.testOther.view.edit.form.field.testStringType"></label>
-		<div class="col-sm-10">
-            <!--ManyToOne-->
-     <div class="input-group input-group">
-          <span class="input-group-addon"><i class="glyphicon glyphicon-flash"></i></span>  
-          <input id="testStringType" name="testStringType" type="text" class="form-control"
-          ng-model="testOther.testStringType"
-          typeahead-template-url="testStringTypeAutocompleteTemplate.html"
-          typeahead-editable="false" 
-          typeahead="b for b in autocompleteService.testStringQuery($viewValue, ['id','urlStr','uniqueStr','sizeStr'])" 
-         
-          typeahead-input-formatter="autocompleteService.testStringFormatLabel($model, ['id','urlStr','uniqueStr','sizeStr'])"
-       />
-         <span class="input-group-btn" item-selector update-model="testOther.testStringType"
-               ui-link="app.testOther.view.edit.testStringSearchModal" >
-         </span>
-     </div> 
-     <script type="text/ng-template" id="testStringTypeAutocompleteTemplate.html"><a><span bind-html-unsafe="match.model.id | typeaheadHighlight:query"></span> <span bind-html-unsafe="match.model.urlStr | typeaheadHighlight:query"></span> <span bind-html-unsafe="match.model.uniqueStr | typeaheadHighlight:query"></span> <span bind-html-unsafe="match.model.sizeStr | typeaheadHighlight:query"></span> </a></script>
-        </div>
+    <div class="input-container" layout layout-sm="column">
+		<label for="testStringType"
+               translate="pages.testOther.view.edit.form.field.testStringType" flex="20"/>
+        <md-input-container md-no-float="true" flex="30" layout="row">
+            <!-- ManyToOne-->
+        <md-autocomplete
+                input-name="testStringType"
+                md-cache="false"
+                md-selected-item="testOther.testStringType"
+                md-search-text="searchText_testStringType"
+                md-items="item in autocompleteService.testStringQuery(searchText_testStringType)"
+                md-item-text="item.name || item.label || item.id"
+                md-min-length="0"
+    
+        >
+            <md-item-template>
+                <span md-highlight-text="searchText_testStringType" md-highlight-flags="^i">{{item.name || item.label || item.id}}</span>
+            </md-item-template>
+        </md-autocomplete>
+    
+         <item-selector update-model="testOther.testStringType"
+               item-link="app.testOther.view.edit.testStringSearchModal" >
+         </item-selector>
+     
+        </md-input-container>
 	</div>
-	<div class="line line-dashed b-b line-lg pull-in"></div>
 	
 
-        <div class="form-group">
-            <div class="form-action pull-right">
-                <button id="testOtherSubmitBtn"
-                    class="btn btn-success"
-                    type='submit'
-                    ng-disabled="testOtherForm.$invalid"
-                    translate="pages.testOther.view.edit.form.submit"
-                    mx-show-loading ng-click="submit(testOtherForm)"></button>
-                <a class="btn btn-default" ng-click="back()" translate="pages.testOther.view.edit.form.cancel" mx-show-loading></a>
-            </div>
-            <div class="clearfix"/>
-        </div>
+
+        <section layout="row" layout-sm="column" layout-align="bottom left">
+            <md-button
+                id="testOtherSubmitBtn"
+                class="md-raised md-primary"
+                ng-disabled="testOtherForm.$invalid"
+                ng-click="submit(testOtherForm)"
+                translate="button.submit"
+                aria-label="save"
+            ></md-button>
+
+
+            <md-button class="md-flat" ng-click="back()" translate="button.back" aria-label="back"></md-button>
+        </section>
     </form>
-</div>
+</md-content>

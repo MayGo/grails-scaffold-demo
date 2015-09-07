@@ -2,75 +2,78 @@
 
 <div id="personCollectionless_form"
      ng-init="pageTitle = (isEditForm)?'pages.personCollectionless.view.edit.title':'pages.personCollectionless.create.title'" data-ng-include=" 'shared/blocks/page_heading.html' "></div>
-<div class="content-body">
-    <form name="personCollectionlessForm" class="form-validation form-horizontal" novalidate>
+
+<md-content layout-padding layout="column">
+    <form name="personCollectionlessForm" novalidate>
         <input name="version" type="hidden" ng-model="personCollectionless.version" />
 
-	<div class="form-group">
-		<label class="col-sm-2 control-label" for="age"
-               translate="pages.personCollectionless.view.edit.form.field.age"></label>
-		<div class="col-sm-10">
-            <div class="input-group input-group">
-	      				<span class="input-group-addon">nr</span>
-	      				<input id="age" name="age" class="form-control"
-                               ng-model="personCollectionless.age"  type="number"  required /></div> 
-        </div>
+    <div class="input-container" layout layout-sm="column">
+		<label for="age"
+               translate="pages.personCollectionless.view.edit.form.field.age" flex="20"/>
+        <md-input-container md-no-float="true" flex="30" layout="row">
+            <input
+                           name="age"
+                           aria-label="age"
+                           ng-model="personCollectionless.age"  type="number"  required />
+        </md-input-container>
 	</div>
-	<div class="line line-dashed b-b line-lg pull-in"></div>
 	
 
-	<div class="form-group">
-		<label class="col-sm-2 control-label" for="name"
-               translate="pages.personCollectionless.view.edit.form.field.name"></label>
-		<div class="col-sm-10">
-            <div class="input-group input-group">
-                    <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
-                    
-                    <input id="name" name="name" class="form-control"
+    <div class="input-container" layout layout-sm="column">
+		<label for="name"
+               translate="pages.personCollectionless.view.edit.form.field.name" flex="20"/>
+        <md-input-container md-no-float="true" flex="30" layout="row">
+            
+                    <input name="name"
+                           aria-label="name"
                            type="text"
                            ng-model="personCollectionless.name"
-                 required /></div> 
-        </div>
+                 required /> 
+        </md-input-container>
 	</div>
-	<div class="line line-dashed b-b line-lg pull-in"></div>
 	
 
-	<div class="form-group">
-		<label class="col-sm-2 control-label" for="division"
-               translate="pages.personCollectionless.view.edit.form.field.division"></label>
-		<div class="col-sm-10">
-            <!--ManyToOne-->
-     <div class="input-group input-group">
-          <span class="input-group-addon"><i class="glyphicon glyphicon-flash"></i></span>  
-          <input id="division" name="division" type="text" class="form-control"
-          ng-model="personCollectionless.division"
-          typeahead-template-url="divisionAutocompleteTemplate.html"
-          typeahead-editable="false" 
-          typeahead="b for b in autocompleteService.divisionCollectionlessQuery($viewValue, ['id','name'])" 
-         
-          typeahead-input-formatter="autocompleteService.divisionCollectionlessFormatLabel($model, ['id','name'])"
-       />
-         <span class="input-group-btn" item-selector update-model="personCollectionless.division"
-               ui-link="app.personCollectionless.view.edit.divisionCollectionlessSearchModal" >
-         </span>
-     </div> 
-     <script type="text/ng-template" id="divisionAutocompleteTemplate.html"><a><span bind-html-unsafe="match.model.id | typeaheadHighlight:query"></span> <span bind-html-unsafe="match.model.name | typeaheadHighlight:query"></span> </a></script>
-        </div>
+    <div class="input-container" layout layout-sm="column">
+		<label for="division"
+               translate="pages.personCollectionless.view.edit.form.field.division" flex="20"/>
+        <md-input-container md-no-float="true" flex="30" layout="row">
+            <!-- ManyToOne-->
+        <md-autocomplete
+                input-name="division"
+                md-cache="false"
+                md-selected-item="personCollectionless.division"
+                md-search-text="searchText_division"
+                md-items="item in autocompleteService.divisionCollectionlessQuery(searchText_division)"
+                md-item-text="item.name || item.label || item.id"
+                md-min-length="0"
+    
+        >
+            <md-item-template>
+                <span md-highlight-text="searchText_division" md-highlight-flags="^i">{{item.name || item.label || item.id}}</span>
+            </md-item-template>
+        </md-autocomplete>
+    
+         <item-selector update-model="personCollectionless.division"
+               item-link="app.personCollectionless.view.edit.divisionCollectionlessSearchModal" >
+         </item-selector>
+     
+        </md-input-container>
 	</div>
-	<div class="line line-dashed b-b line-lg pull-in"></div>
 	
 
-        <div class="form-group">
-            <div class="form-action pull-right">
-                <button id="personCollectionlessSubmitBtn"
-                    class="btn btn-success"
-                    type='submit'
-                    ng-disabled="personCollectionlessForm.$invalid"
-                    translate="pages.personCollectionless.view.edit.form.submit"
-                    mx-show-loading ng-click="submit(personCollectionlessForm)"></button>
-                <a class="btn btn-default" ng-click="back()" translate="pages.personCollectionless.view.edit.form.cancel" mx-show-loading></a>
-            </div>
-            <div class="clearfix"/>
-        </div>
+
+        <section layout="row" layout-sm="column" layout-align="bottom left">
+            <md-button
+                id="personCollectionlessSubmitBtn"
+                class="md-raised md-primary"
+                ng-disabled="personCollectionlessForm.$invalid"
+                ng-click="submit(personCollectionlessForm)"
+                translate="button.submit"
+                aria-label="save"
+            ></md-button>
+
+
+            <md-button class="md-flat" ng-click="back()" translate="button.back" aria-label="back"></md-button>
+        </section>
     </form>
-</div>
+</md-content>

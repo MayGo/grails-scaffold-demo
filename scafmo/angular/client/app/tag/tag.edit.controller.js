@@ -50,6 +50,8 @@ angular.module('angularDemoApp')
 		$scope.tag.tasks = $scope.tag.tasks.map(function(item){
 			return {id:item.id, name:item.id+ ', ' +item.timeSpent+ ', ' +item.summary+ ', ' +item.status};
 		});
+	}else{
+		$scope.tag.tasks = [];
 	}
 		   
 	});

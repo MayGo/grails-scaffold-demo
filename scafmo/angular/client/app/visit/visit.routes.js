@@ -102,7 +102,7 @@ $stateProvider
 		}
 
 	}).state('app.visit.view.edit.petSearchModal',{
-		templateUrl: 'app/pet/pet.list.html',
+		templateUrl: 'app/pet/pet.list.modal.html',
 		controller: 'PetListController'
 	})
 	

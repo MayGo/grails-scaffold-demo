@@ -1,129 +1,97 @@
 
 
+
 <div id="testNumber_view" ng-init="pageTitle = 'pages.testNumber.view.title'"
      ng-include=" 'shared/blocks/page_heading.html' "></div>
 <div class="content-body">
-    <div class="form-horizontal">
+    <md-content layout-padding layout="column">
 
-        <div class="form-group">
-            <label class="col-sm-2 control-label"
-                   translate="pages.testNumber.view.field.doubleNr"></label>
-            <div class="col-sm-10 form-control-static"
-                 ng-bind="testNumber.doubleNr"></div>
-        </div>
-        <div class="line line-dashed b-b line-lg pull-in"></div>
+<div class="input-container" layout layout-sm="column">
+
+            <label translate="pages.testNumber.view.field.doubleNr" flex="20"></label>
+            <div class="read-field" ng-bind="testNumber.doubleNr" flex="30"></div>
     
+</div>
+<div class="input-container" layout layout-sm="column">
 
-        <div class="form-group">
-            <label class="col-sm-2 control-label"
-                   translate="pages.testNumber.view.field.floatNr"></label>
-            <div class="col-sm-10 form-control-static"
-                 ng-bind="testNumber.floatNr"></div>
-        </div>
-        <div class="line line-dashed b-b line-lg pull-in"></div>
+            <label translate="pages.testNumber.view.field.floatNr" flex="20"></label>
+            <div class="read-field" ng-bind="testNumber.floatNr" flex="30"></div>
     
+</div>
+<div class="input-container" layout layout-sm="column">
 
-        <div class="form-group">
-            <label class="col-sm-2 control-label"
-                   translate="pages.testNumber.view.field.floatNrScale"></label>
-            <div class="col-sm-10 form-control-static"
-                 ng-bind="testNumber.floatNrScale"></div>
-        </div>
-        <div class="line line-dashed b-b line-lg pull-in"></div>
+            <label translate="pages.testNumber.view.field.floatNrScale" flex="20"></label>
+            <div class="read-field" ng-bind="testNumber.floatNrScale" flex="30"></div>
     
+</div>
+<div class="input-container" layout layout-sm="column">
 
-        <div class="form-group">
-            <label class="col-sm-2 control-label"
-                   translate="pages.testNumber.view.field.integerNr"></label>
-            <div class="col-sm-10 form-control-static"
-                 ng-bind="testNumber.integerNr"></div>
-        </div>
-        <div class="line line-dashed b-b line-lg pull-in"></div>
+            <label translate="pages.testNumber.view.field.integerNr" flex="20"></label>
+            <div class="read-field" ng-bind="testNumber.integerNr" flex="30"></div>
     
+</div>
+<div class="input-container" layout layout-sm="column">
 
-        <div class="form-group">
-            <label class="col-sm-2 control-label"
-                   translate="pages.testNumber.view.field.integerNrInList"></label>
-            <div class="col-sm-10 form-control-static"
-                 ng-bind="testNumber.integerNrInList"></div>
-        </div>
-        <div class="line line-dashed b-b line-lg pull-in"></div>
+            <label translate="pages.testNumber.view.field.integerNrInList" flex="20"></label>
+            <div class="read-field" ng-bind="testNumber.integerNrInList" flex="30"></div>
     
+</div>
+<div class="input-container" layout layout-sm="column">
 
-        <div class="form-group">
-            <label class="col-sm-2 control-label"
-                   translate="pages.testNumber.view.field.integerNrMax"></label>
-            <div class="col-sm-10 form-control-static"
-                 ng-bind="testNumber.integerNrMax"></div>
-        </div>
-        <div class="line line-dashed b-b line-lg pull-in"></div>
+            <label translate="pages.testNumber.view.field.integerNrMax" flex="20"></label>
+            <div class="read-field" ng-bind="testNumber.integerNrMax" flex="30"></div>
     
+</div>
+<div class="input-container" layout layout-sm="column">
 
-        <div class="form-group">
-            <label class="col-sm-2 control-label"
-                   translate="pages.testNumber.view.field.integerNrMin"></label>
-            <div class="col-sm-10 form-control-static"
-                 ng-bind="testNumber.integerNrMin"></div>
-        </div>
-        <div class="line line-dashed b-b line-lg pull-in"></div>
+            <label translate="pages.testNumber.view.field.integerNrMin" flex="20"></label>
+            <div class="read-field" ng-bind="testNumber.integerNrMin" flex="30"></div>
     
+</div>
+<div class="input-container" layout layout-sm="column">
 
-        <div class="form-group">
-            <label class="col-sm-2 control-label"
-                   translate="pages.testNumber.view.field.integerNrNotEqual"></label>
-            <div class="col-sm-10 form-control-static"
-                 ng-bind="testNumber.integerNrNotEqual"></div>
-        </div>
-        <div class="line line-dashed b-b line-lg pull-in"></div>
+            <label translate="pages.testNumber.view.field.integerNrNotEqual" flex="20"></label>
+            <div class="read-field" ng-bind="testNumber.integerNrNotEqual" flex="30"></div>
     
+</div>
+<div class="input-container" layout layout-sm="column">
 
-        <div class="form-group">
-            <label class="col-sm-2 control-label"
-                   translate="pages.testNumber.view.field.integerNrRange"></label>
-            <div class="col-sm-10 form-control-static"
-                 ng-bind="testNumber.integerNrRange"></div>
-        </div>
-        <div class="line line-dashed b-b line-lg pull-in"></div>
+            <label translate="pages.testNumber.view.field.integerNrRange" flex="20"></label>
+            <div class="read-field" ng-bind="testNumber.integerNrRange" flex="30"></div>
     
+</div>
+<div class="input-container" layout layout-sm="column">
 
-        <div class="form-group">
-            <label class="col-sm-2 control-label"
-                   translate="pages.testNumber.view.field.integerNrUnique"></label>
-            <div class="col-sm-10 form-control-static"
-                 ng-bind="testNumber.integerNrUnique"></div>
-        </div>
-        <div class="line line-dashed b-b line-lg pull-in"></div>
+            <label translate="pages.testNumber.view.field.integerNrUnique" flex="20"></label>
+            <div class="read-field" ng-bind="testNumber.integerNrUnique" flex="30"></div>
     
+</div>
+<div class="input-container" layout layout-sm="column">
 
-        <div class="form-group">
-            <label class="col-sm-2 control-label"
-                   translate="pages.testNumber.view.field.longNr"></label>
-            <div class="col-sm-10 form-control-static"
-                 ng-bind="testNumber.longNr"></div>
-        </div>
-        <div class="line line-dashed b-b line-lg pull-in"></div>
+            <label translate="pages.testNumber.view.field.longNr" flex="20"></label>
+            <div class="read-field" ng-bind="testNumber.longNr" flex="30"></div>
     
+</div>
 
-    </div>
-    <div class="line line-dashed b-b line-lg pull-in"></div>
-    <div class="form-group" ng-if="!isModal">
 
-        <div class="form-action pull-right">
-            <a id="editBtn" class="btn btn-default"
-               ui-sref="app.testNumber.view.edit({id:testNumber.id})">
-                <i class="fa fa-edit" translate="pages.testNumber.view.buttons.edit"></i>
-            </a>
-            <a id="deleteBtn" class="btn btn-danger"
-               ng-click="deleteTestNumber(testNumber)" mx-show-loading>
-                <i class="fa fa-trash-o" translate="pages.testNumber.view.buttons.delete"></i>
-            </a>
+    <section ng-if="!isModal" layout="row" layout-sm="column" layout-align="bottom left">
+        <md-button id="editBtn"
+                   class="md-raised md-primary"
+                   ui-sref="app.testNumber.view.edit({id:testNumber.id})"
+                   translate="button.edit"
+                   aria-label="edit"
+                ></md-button>
+        <md-button id="deleteBtn"
+                   class="md-raised md-warn"
+                   ng-click="deleteTestNumber(testNumber)"
+                   mx-show-loading
+                   translate="button.delete"
+                   aria-label="delete"
+                ></md-button>
 
-            <a id="backBtn" class="btn btn-default" ng-click="back()">
-                <i class="fa fa-chevron-left" translate="pages.testNumber.view.buttons.back"></i>
-            </a>
-        </div>
-        <div class="clearfix"/>
-    </div>
+        <md-button class="md-flat" ng-click="back()" translate="button.back" aria-label="back"></md-button>
+    </section>
+    </md-content>
 </div>
 
 

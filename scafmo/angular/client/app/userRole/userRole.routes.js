@@ -102,7 +102,7 @@ $stateProvider
 		}
 
 	}).state('app.userRole.view.edit.roleSearchModal',{
-		templateUrl: 'app/role/role.list.html',
+		templateUrl: 'app/role/role.list.modal.html',
 		controller: 'RoleListController'
 	})
 	
@@ -136,7 +136,7 @@ $stateProvider
 		}
 
 	}).state('app.userRole.view.edit.userSearchModal',{
-		templateUrl: 'app/user/user.list.html',
+		templateUrl: 'app/user/user.list.modal.html',
 		controller: 'UserListController'
 	})
 	

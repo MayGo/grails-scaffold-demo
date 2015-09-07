@@ -102,7 +102,7 @@ $stateProvider
 		}
 
 	}).state('app.testOther.view.edit.testStringSearchModal',{
-		templateUrl: 'app/testString/testString.list.html',
+		templateUrl: 'app/testString/testString.list.modal.html',
 		controller: 'TestStringListController'
 	})
 	

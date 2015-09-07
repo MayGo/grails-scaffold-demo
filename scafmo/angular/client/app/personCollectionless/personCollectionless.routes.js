@@ -102,7 +102,7 @@ $stateProvider
 		}
 
 	}).state('app.personCollectionless.view.edit.divisionCollectionlessSearchModal',{
-		templateUrl: 'app/divisionCollectionless/divisionCollectionless.list.html',
+		templateUrl: 'app/divisionCollectionless/divisionCollectionless.list.modal.html',
 		controller: 'DivisionCollectionlessListController'
 	})
 	

@@ -13,6 +13,7 @@ class TestString {
 	String notEqualStr
 	String uniqueStr
 	String urlStr
+	String textareaStr
 	
 	
     static constraints = {
@@ -27,5 +28,6 @@ class TestString {
 		notEqualStr nullable:true, notEqual:"test" 
 		uniqueStr nullable:true, unique:true
 		urlStr nullable:true, url:true
+		textareaStr nullable:true, type:'text', size: 1..1000
     }
 }

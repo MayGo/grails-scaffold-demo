@@ -153,7 +153,9 @@ class VisitModifyServiceSpec extends Specification {
   'description':  'description',
   'pet':  [
     'id':  302,
-    'version':  0
+    'version':  0,
+    'birthDate':  new Date().clearTime(),
+    'name':  'Pet 305'
   ]
 ]
 		return data

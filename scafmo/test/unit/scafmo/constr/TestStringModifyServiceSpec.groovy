@@ -156,6 +156,7 @@ class TestStringModifyServiceSpec extends Specification {
   'minSizeStr':  'ABC',
   'notEqualStr':  'notEqualStr 758',
   'sizeStr':  'sizeStr',
+  'textareaStr':  'textareaStr',
   'uniqueStr':  'U 759',
   'urlStr':  'http://www.test760.com'
 ]

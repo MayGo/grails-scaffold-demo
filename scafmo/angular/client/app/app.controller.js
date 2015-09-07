@@ -1,82 +1,150 @@
 'use strict';
 
 angular.module('angularDemoApp')
-  .controller('AppController', function ($scope, $state, $translate, $localStorage, $window, Fullscreen, AutocompleteService, SessionService) {
-    var isSmartDevice = function ($window) {
-      // Adapted from http://www.detectmobilebrowsers.com
-      var ua = $window.navigator.userAgent || $window.navigator.vendor || $window.opera;
-      // Checks for iOs, Android, Blackberry, Opera Mini, and Windows mobile devices
-      return (/iPhone|iPod|iPad|Silk|Android|BlackBerry|Opera Mini|IEMobile/).test(ua);
-    };
+  .controller('AppController', function ($scope, $state, $translate, $localStorage, $window, Fullscreen, AutocompleteService, SessionService, MenuService, $mdSidenav, $timeout) {
 
-    $scope.username = SessionService.getCurrentUser().login;
-    $scope.autocompleteService = AutocompleteService;
+    $scope.menu = MenuService;
+    $scope.state = $state
+    $scope.path = path;
+    $scope.goHome = goHome;
+    $scope.openMenu = openMenu;
+    $scope.closeMenu = closeMenu;
+    $scope.isSectionSelected = isSectionSelected;
 
-    // add 'ie' classes to html
+    // Methods used by menuLink and menuToggle directives
+    this.isOpen = isOpen;
+    this.isSelected = isSelected;
+    this.toggleOpen = toggleOpen;
+    this.autoFocusContent = false;
+
+    var mainContentArea = document.querySelector("[role='main']");
+
+    // *********************
+    // Internal methods
+    // *********************
+
+    function closeMenu() {
+      $timeout(function() { $mdSidenav('left').close(); });
+    }
+
+    function openMenu() {
+      $timeout(function() { $mdSidenav('left').open(); });
+    }
+
+    function path() {
+      return $location.path();
+    }
+
+    function goHome($event) {
+      MenuService.selectPage(null, null);
+      $location.path( '/' );
+    }
+
+    function openPage() {
+      $scope.closeMenu();
+
+      if (self.autoFocusContent) {
+        focusMainContent();
+        self.autoFocusContent = false;
+      }
+    }
+
+    function focusMainContent($event) {
+      // prevent skip link from redirecting
+      if ($event) { $event.preventDefault(); }
+
+      $timeout(function(){
+        mainContentArea.focus();
+      },90);
+
+    }
+
+    function isSelected(page) {
+      return MenuService.isPageSelected(page);
+    }
+
+    function isSectionSelected(section) {
+      var selected = false;
+      var openedSection = MenuService.openedSection;
+      if(openedSection === section){
+        selected = true;
+      }
+      else if(section.children) {
+        section.children.forEach(function(childSection) {
+          if(childSection === openedSection){
+            selected = true;
+          }
+        });
+      }
+      return selected;
+    }
+
+    function isOpen(section) {
+      return MenuService.isSectionSelected(section);
+    }
+
+    function toggleOpen(section) {
+      MenuService.toggleSelectSection(section);
+    }
+
+    //grap
+
+
     var isIE = !!navigator.userAgent.match(/MSIE/i);
-    if (isIE) {
-      angular.element($window.document.body).addClass('ie');
-    }
-    if (isSmartDevice($window)) {
-      angular.element($window.document.body).addClass('smart');
-    }
+      isIE && angular.element($window.document.body).addClass('ie');
+      isSmartDevice( $window ) && angular.element($window.document.body).addClass('smart');
 
-    // config
-
-
-    $scope.app = {
-      version: '1.3.2',
-
-      // for chart colors
-      color: {
-        primary: '#7266ba',
-        info: '#23b7e5',
-        success: '#27c24c',
-        warning: '#fad733',
-        danger: '#f05050',
-        light: '#e8eff0',
-        dark: '#3a3f51',
-        black: '#1c2b36'
-      },
-      settings: {
-        themeID: 1,
-        navbarHeaderColor: 'bg-black',
-        navbarCollapseColor: 'bg-white-only',
-        asideColor: 'bg-black',
-        headerFixed: true,
-        asideFixed: false,
-        asideFolded: false,
-        asideDock: false,
-        container: false
+      // config
+      $scope.app = {
+        settings: {
+          themeID: 1,
+          navbarHeaderColor: 'bg-black',
+          navbarCollapseColor: 'bg-white-only',
+          asideColor: 'bg-black',
+          headerFixed: true,
+          asideFixed: true,
+          asideFolded: false,
+          asideDock: false,
+          container: false
+        }
       }
-    };
 
-    // save settings to local storage
-    if (angular.isDefined($localStorage.settings)) {
-      $scope.app.settings = $localStorage.settings;
-    } else {
-      $localStorage.settings = $scope.app.settings;
-    }
-    $scope.$watch('app.settings', function () {
-      if ($scope.app.settings.asideDock && $scope.app.settings.asideFixed) {
-        // aside dock and fixed must set the header fixed.
-        $scope.app.settings.headerFixed = true;
+      // save settings to local storage
+      if ( angular.isDefined($localStorage.settings) ) {
+        $scope.app.settings = $localStorage.settings;
+      } else {
+        $localStorage.settings = $scope.app.settings;
       }
-      // save to local storage
-      $localStorage.settings = $scope.app.settings;
-    }, true);
+      $scope.$watch('app.settings', function(){
+        if( $scope.app.settings.asideDock  &&  $scope.app.settings.asideFixed ){
+          // aside dock and fixed must set the header fixed.
+          $scope.app.settings.headerFixed = true;
+        }
+        // for box layout, add background image
+        $scope.app.settings.container ? angular.element('html').addClass('bg') : angular.element('html').removeClass('bg');
+        // save to local storage
+        $localStorage.settings = $scope.app.settings;
+      }, true);
 
-    // angular translate
-    $scope.lang = {isopen: false};
-    $scope.langs = {'en': 'English', 'de_DE': 'German', 'it_IT': 'Italian'};
-    $scope.selectLang = $scope.langs[$translate.proposedLanguage()] || 'English';
-    $scope.setLang = function (langKey) {
-      // set the current lang
-      $scope.selectLang = $scope.langs[langKey];
-      // You can change the language during runtime
-      $translate.use(langKey);
-      $scope.lang.isopen = !$scope.lang.isopen;
-    };
+      // angular translate
+      $scope.lang = { isopen: false };
+      $scope.langs = {en:'English', de_DE:'German', it_IT:'Italian'};
+      $scope.selectLang = $scope.langs[$translate.proposedLanguage()] || "English";
+      $scope.setLang = function(langKey, $event) {
+        // set the current lang
+        $scope.selectLang = $scope.langs[langKey];
+        // You can change the language during runtime
+        $translate.use(langKey);
+        $scope.lang.isopen = !$scope.lang.isopen;
+      };
+
+      function isSmartDevice( $window )
+      {
+          // Adapted from http://www.detectmobilebrowsers.com
+          var ua = $window['navigator']['userAgent'] || $window['navigator']['vendor'] || $window['opera'];
+          // Checks for iOs, Android, Blackberry, Opera Mini, and Windows mobile devices
+          return (/iPhone|iPod|iPad|Silk|Android|BlackBerry|Opera Mini|IEMobile/).test(ua);
+      }
 
 
     $scope.goFullscreen = function () {
@@ -101,5 +169,13 @@ angular.module('angularDemoApp')
       }
     };
 
+    $scope.username = SessionService.getCurrentUser().login;
+    $scope.autocompleteService = AutocompleteService;
+
+    $scope.openedSubmenuId = 0;
+    $scope.openSubmenu = function (submenuId) {
+      $scope.openedSubmenuId = submenuId;
+      this.$parent.isOpen0 = true;
+    }
 
   });

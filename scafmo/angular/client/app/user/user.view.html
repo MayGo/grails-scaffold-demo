@@ -1,67 +1,61 @@
 
 
+
 <div id="user_view" ng-init="pageTitle = 'pages.user.view.title'"
      ng-include=" 'shared/blocks/page_heading.html' "></div>
 <div class="content-body">
-    <div class="form-horizontal">
+    <md-content layout-padding layout="column">
 
-        <div class="form-group">
-            <label class="col-sm-2 control-label" translate="pages.user.view.field.accountExpired"></label>
-            <div class="col-sm-10 form-control-static" ng-bind="user.accountExpired"></div>
-        </div>
-        <div class="line line-dashed b-b line-lg pull-in"></div>
+<div class="input-container" layout layout-sm="column">
+
+            <label translate="pages.user.view.field.accountExpired" flex="20"></label>
+            <div class="read-field" ng-bind="user.accountExpired" flex="30"></div>
     
+</div>
+<div class="input-container" layout layout-sm="column">
 
-        <div class="form-group">
-            <label class="col-sm-2 control-label" translate="pages.user.view.field.accountLocked"></label>
-            <div class="col-sm-10 form-control-static" ng-bind="user.accountLocked"></div>
-        </div>
-        <div class="line line-dashed b-b line-lg pull-in"></div>
+            <label translate="pages.user.view.field.accountLocked" flex="20"></label>
+            <div class="read-field" ng-bind="user.accountLocked" flex="30"></div>
     
+</div>
+<div class="input-container" layout layout-sm="column">
 
-        <div class="form-group">
-            <label class="col-sm-2 control-label" translate="pages.user.view.field.enabled"></label>
-            <div class="col-sm-10 form-control-static" ng-bind="user.enabled"></div>
-        </div>
-        <div class="line line-dashed b-b line-lg pull-in"></div>
+            <label translate="pages.user.view.field.enabled" flex="20"></label>
+            <div class="read-field" ng-bind="user.enabled" flex="30"></div>
     
+</div>
+<div class="input-container" layout layout-sm="column">
 
-        <div class="form-group">
-            <label class="col-sm-2 control-label" translate="pages.user.view.field.passwordExpired"></label>
-            <div class="col-sm-10 form-control-static" ng-bind="user.passwordExpired"></div>
-        </div>
-        <div class="line line-dashed b-b line-lg pull-in"></div>
+            <label translate="pages.user.view.field.passwordExpired" flex="20"></label>
+            <div class="read-field" ng-bind="user.passwordExpired" flex="30"></div>
     
+</div>
+<div class="input-container" layout layout-sm="column">
 
-        <div class="form-group">
-            <label class="col-sm-2 control-label"
-                   translate="pages.user.view.field.username"></label>
-            <div class="col-sm-10 form-control-static"
-                 ng-bind="user.username"></div>
-        </div>
-        <div class="line line-dashed b-b line-lg pull-in"></div>
+            <label translate="pages.user.view.field.username" flex="20"></label>
+            <div class="read-field" ng-bind="user.username" flex="30"></div>
     
+</div>
 
-    </div>
-    <div class="line line-dashed b-b line-lg pull-in"></div>
-    <div class="form-group" ng-if="!isModal">
 
-        <div class="form-action pull-right">
-            <a id="editBtn" class="btn btn-default"
-               ui-sref="app.user.view.edit({id:user.id})">
-                <i class="fa fa-edit" translate="pages.user.view.buttons.edit"></i>
-            </a>
-            <a id="deleteBtn" class="btn btn-danger"
-               ng-click="deleteUser(user)" mx-show-loading>
-                <i class="fa fa-trash-o" translate="pages.user.view.buttons.delete"></i>
-            </a>
+    <section ng-if="!isModal" layout="row" layout-sm="column" layout-align="bottom left">
+        <md-button id="editBtn"
+                   class="md-raised md-primary"
+                   ui-sref="app.user.view.edit({id:user.id})"
+                   translate="button.edit"
+                   aria-label="edit"
+                ></md-button>
+        <md-button id="deleteBtn"
+                   class="md-raised md-warn"
+                   ng-click="deleteUser(user)"
+                   mx-show-loading
+                   translate="button.delete"
+                   aria-label="delete"
+                ></md-button>
 
-            <a id="backBtn" class="btn btn-default" ng-click="back()">
-                <i class="fa fa-chevron-left" translate="pages.user.view.buttons.back"></i>
-            </a>
-        </div>
-        <div class="clearfix"/>
-    </div>
+        <md-button class="md-flat" ng-click="back()" translate="button.back" aria-label="back"></md-button>
+    </section>
+    </md-content>
 </div>
 
 

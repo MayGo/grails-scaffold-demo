@@ -2,197 +2,194 @@
 
 <div id="testString_form"
      ng-init="pageTitle = (isEditForm)?'pages.testString.view.edit.title':'pages.testString.create.title'" data-ng-include=" 'shared/blocks/page_heading.html' "></div>
-<div class="content-body">
-    <form name="testStringForm" class="form-validation form-horizontal" novalidate>
+
+<md-content layout-padding layout="column">
+    <form name="testStringForm" novalidate>
         <input name="version" type="hidden" ng-model="testString.version" />
 
-	<div class="form-group">
-		<label class="col-sm-2 control-label" for="blankStr"
-               translate="pages.testString.view.edit.form.field.blankStr"></label>
-		<div class="col-sm-10">
-            <div class="input-group input-group">
-                    <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
-                    
-                    <input id="blankStr" name="blankStr" class="form-control"
+    <div class="input-container" layout layout-sm="column">
+		<label for="blankStr"
+               translate="pages.testString.view.edit.form.field.blankStr" flex="20"/>
+        <md-input-container md-no-float="true" flex="30" layout="row">
+            
+                    <input name="blankStr"
+                           aria-label="blankStr"
                            type="text"
                            ng-model="testString.blankStr"
-                 /></div> 
-        </div>
+                 /> 
+        </md-input-container>
 	</div>
-	<div class="line line-dashed b-b line-lg pull-in"></div>
 	
 
-	<div class="form-group">
-		<label class="col-sm-2 control-label" for="creditCardStr"
-               translate="pages.testString.view.edit.form.field.creditCardStr"></label>
-		<div class="col-sm-10">
-            <div class="input-group input-group">
-                    <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
-                    
-                    <input id="creditCardStr" name="creditCardStr" class="form-control"
+    <div class="input-container" layout layout-sm="column">
+		<label for="creditCardStr"
+               translate="pages.testString.view.edit.form.field.creditCardStr" flex="20"/>
+        <md-input-container md-no-float="true" flex="30" layout="row">
+            
+                    <input name="creditCardStr"
+                           aria-label="creditCardStr"
                            type="text"
                            ng-model="testString.creditCardStr"
-                 /></div> 
-        </div>
+                 /> 
+        </md-input-container>
 	</div>
-	<div class="line line-dashed b-b line-lg pull-in"></div>
 	
 
-	<div class="form-group">
-		<label class="col-sm-2 control-label" for="emailStr"
-               translate="pages.testString.view.edit.form.field.emailStr"></label>
-		<div class="col-sm-10">
-            <div class="input-group input-group">
-                    <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
-                    
-                    <input id="emailStr" name="emailStr" class="form-control"
+    <div class="input-container" layout layout-sm="column">
+		<label for="emailStr"
+               translate="pages.testString.view.edit.form.field.emailStr" flex="20"/>
+        <md-input-container md-no-float="true" flex="30" layout="row">
+            
+                    <input name="emailStr"
+                           aria-label="emailStr"
                            type="email"
                            ng-model="testString.emailStr"
-                 /></div> 
-        </div>
+                 /> 
+        </md-input-container>
 	</div>
-	<div class="line line-dashed b-b line-lg pull-in"></div>
 	
 
-	<div class="form-group">
-		<label class="col-sm-2 control-label" for="inListStr"
-               translate="pages.testString.view.edit.form.field.inListStr"></label>
-		<div class="col-sm-10">
+    <div class="input-container" layout layout-sm="column">
+		<label for="inListStr"
+               translate="pages.testString.view.edit.form.field.inListStr" flex="20"/>
+        <md-input-container md-no-float="true" flex="30" layout="row">
             
-	<select id="inListStr" name="inListStr"
-            ng-model="testString.inListStr"
-            ng-options="obj as obj for obj in ['test1', 'test2', 'test3']">
-      <option value=""></option>
-    </select>
+            <md-select
+                    aria-label="inListStr"
+                    ng-model="testString.inListStr"
+        ><md-option ng-repeat="item in ['test1', 'test2', 'test3']" >{{item}}</md-option>
+    </md-select>
 	
-        </div>
+        </md-input-container>
 	</div>
-	<div class="line line-dashed b-b line-lg pull-in"></div>
 	
 
-	<div class="form-group">
-		<label class="col-sm-2 control-label" for="matchesStr"
-               translate="pages.testString.view.edit.form.field.matchesStr"></label>
-		<div class="col-sm-10">
-            <div class="input-group input-group">
-                    <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
-                    
-                    <input id="matchesStr" name="matchesStr" class="form-control"
+    <div class="input-container" layout layout-sm="column">
+		<label for="matchesStr"
+               translate="pages.testString.view.edit.form.field.matchesStr" flex="20"/>
+        <md-input-container md-no-float="true" flex="30" layout="row">
+            
+                    <input name="matchesStr"
+                           aria-label="matchesStr"
                            type="text"
                            ng-model="testString.matchesStr"
-                 ng-pattern="/[a-zA-Z]+/"  /></div> 
-        </div>
+                 ng-pattern="/[a-zA-Z]+/"  /> 
+        </md-input-container>
 	</div>
-	<div class="line line-dashed b-b line-lg pull-in"></div>
 	
 
-	<div class="form-group">
-		<label class="col-sm-2 control-label" for="maxSizeStr"
-               translate="pages.testString.view.edit.form.field.maxSizeStr"></label>
-		<div class="col-sm-10">
-            <div class="input-group input-group">
-                    <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
-                    
-                    <input id="maxSizeStr" name="maxSizeStr" class="form-control"
+    <div class="input-container" layout layout-sm="column">
+		<label for="maxSizeStr"
+               translate="pages.testString.view.edit.form.field.maxSizeStr" flex="20"/>
+        <md-input-container md-no-float="true" flex="30" layout="row">
+            
+                    <input name="maxSizeStr"
+                           aria-label="maxSizeStr"
                            type="text"
                            ng-model="testString.maxSizeStr"
-                 ng-maxlength="5"  /></div> 
-        </div>
+                 md-maxlength="5"  /> 
+        </md-input-container>
 	</div>
-	<div class="line line-dashed b-b line-lg pull-in"></div>
 	
 
-	<div class="form-group">
-		<label class="col-sm-2 control-label" for="minSizeStr"
-               translate="pages.testString.view.edit.form.field.minSizeStr"></label>
-		<div class="col-sm-10">
-            <div class="input-group input-group">
-                    <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
-                    
-                    <input id="minSizeStr" name="minSizeStr" class="form-control"
+    <div class="input-container" layout layout-sm="column">
+		<label for="minSizeStr"
+               translate="pages.testString.view.edit.form.field.minSizeStr" flex="20"/>
+        <md-input-container md-no-float="true" flex="30" layout="row">
+            
+                    <input name="minSizeStr"
+                           aria-label="minSizeStr"
                            type="text"
                            ng-model="testString.minSizeStr"
-                 ng-minlength="2"  /></div> 
-        </div>
+                 md-minlength="2"  /> 
+        </md-input-container>
 	</div>
-	<div class="line line-dashed b-b line-lg pull-in"></div>
 	
 
-	<div class="form-group">
-		<label class="col-sm-2 control-label" for="notEqualStr"
-               translate="pages.testString.view.edit.form.field.notEqualStr"></label>
-		<div class="col-sm-10">
-            <div class="input-group input-group">
-                    <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
-                    
-                    <input id="notEqualStr" name="notEqualStr" class="form-control"
+    <div class="input-container" layout layout-sm="column">
+		<label for="notEqualStr"
+               translate="pages.testString.view.edit.form.field.notEqualStr" flex="20"/>
+        <md-input-container md-no-float="true" flex="30" layout="row">
+            
+                    <input name="notEqualStr"
+                           aria-label="notEqualStr"
                            type="text"
                            ng-model="testString.notEqualStr"
-                 /></div> 
-        </div>
+                 /> 
+        </md-input-container>
 	</div>
-	<div class="line line-dashed b-b line-lg pull-in"></div>
 	
 
-	<div class="form-group">
-		<label class="col-sm-2 control-label" for="sizeStr"
-               translate="pages.testString.view.edit.form.field.sizeStr"></label>
-		<div class="col-sm-10">
-            <div class="input-group input-group">
-                    <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
-                    
-                    <input id="sizeStr" name="sizeStr" class="form-control"
+    <div class="input-container" layout layout-sm="column">
+		<label for="sizeStr"
+               translate="pages.testString.view.edit.form.field.sizeStr" flex="20"/>
+        <md-input-container md-no-float="true" flex="30" layout="row">
+            
+                    <input name="sizeStr"
+                           aria-label="sizeStr"
                            type="text"
                            ng-model="testString.sizeStr"
-                 ng-minlength="1"  ng-maxlength="100"  /></div> 
-        </div>
+                 md-minlength="1"  md-maxlength="100"  /> 
+        </md-input-container>
 	</div>
-	<div class="line line-dashed b-b line-lg pull-in"></div>
 	
 
-	<div class="form-group">
-		<label class="col-sm-2 control-label" for="uniqueStr"
-               translate="pages.testString.view.edit.form.field.uniqueStr"></label>
-		<div class="col-sm-10">
-            <div class="input-group input-group">
-                    <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
-                    
-                    <input id="uniqueStr" name="uniqueStr" class="form-control"
+    <div class="input-container" layout layout-sm="column">
+		<label for="textareaStr"
+               translate="pages.testString.view.edit.form.field.textareaStr" flex="20"/>
+        <md-input-container md-no-float="true" flex="30" layout="row">
+            
+            <textarea rows="5"
+                      name="textareaStr"
+                      aria-label="textareaStr"
+                      type="text"
+                      ng-model="testString.textareaStr"
+                 md-minlength="1"  md-maxlength="1000"  > </textarea>
+        </md-input-container>
+	</div>
+	
+
+    <div class="input-container" layout layout-sm="column">
+		<label for="uniqueStr"
+               translate="pages.testString.view.edit.form.field.uniqueStr" flex="20"/>
+        <md-input-container md-no-float="true" flex="30" layout="row">
+            
+                    <input name="uniqueStr"
+                           aria-label="uniqueStr"
                            type="text"
                            ng-model="testString.uniqueStr"
-                 /></div> 
-        </div>
+                 /> 
+        </md-input-container>
 	</div>
-	<div class="line line-dashed b-b line-lg pull-in"></div>
 	
 
-	<div class="form-group">
-		<label class="col-sm-2 control-label" for="urlStr"
-               translate="pages.testString.view.edit.form.field.urlStr"></label>
-		<div class="col-sm-10">
-            <div class="input-group input-group">
-                    <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
-                    
-                    <input id="urlStr" name="urlStr" class="form-control"
+    <div class="input-container" layout layout-sm="column">
+		<label for="urlStr"
+               translate="pages.testString.view.edit.form.field.urlStr" flex="20"/>
+        <md-input-container md-no-float="true" flex="30" layout="row">
+            
+                    <input name="urlStr"
+                           aria-label="urlStr"
                            type="text"
                            ng-model="testString.urlStr"
-                 /></div> 
-        </div>
+                 /> 
+        </md-input-container>
 	</div>
-	<div class="line line-dashed b-b line-lg pull-in"></div>
 	
 
-        <div class="form-group">
-            <div class="form-action pull-right">
-                <button id="testStringSubmitBtn"
-                    class="btn btn-success"
-                    type='submit'
-                    ng-disabled="testStringForm.$invalid"
-                    translate="pages.testString.view.edit.form.submit"
-                    mx-show-loading ng-click="submit(testStringForm)"></button>
-                <a class="btn btn-default" ng-click="back()" translate="pages.testString.view.edit.form.cancel" mx-show-loading></a>
-            </div>
-            <div class="clearfix"/>
-        </div>
+
+        <section layout="row" layout-sm="column" layout-align="bottom left">
+            <md-button
+                id="testStringSubmitBtn"
+                class="md-raised md-primary"
+                ng-disabled="testStringForm.$invalid"
+                ng-click="submit(testStringForm)"
+                translate="button.submit"
+                aria-label="save"
+            ></md-button>
+
+
+            <md-button class="md-flat" ng-click="back()" translate="button.back" aria-label="back"></md-button>
+        </section>
     </form>
-</div>
+</md-content>

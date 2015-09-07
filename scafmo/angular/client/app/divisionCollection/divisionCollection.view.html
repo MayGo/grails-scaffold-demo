@@ -1,56 +1,51 @@
 
 
+
 <div id="divisionCollection_view" ng-init="pageTitle = 'pages.divisionCollection.view.title'"
      ng-include=" 'shared/blocks/page_heading.html' "></div>
 <div class="content-body">
-    <div class="form-horizontal">
+    <md-content layout-padding layout="column">
 
-        <div class="form-group">
-            <label class="col-sm-2 control-label"
-                   translate="pages.divisionCollection.view.field.name"></label>
-            <div class="col-sm-10 form-control-static"
-                 ng-bind="divisionCollection.name"></div>
-        </div>
-        <div class="line line-dashed b-b line-lg pull-in"></div>
+<div class="input-container" layout layout-sm="column">
+
+            <label translate="pages.divisionCollection.view.field.name" flex="20"></label>
+            <div class="read-field" ng-bind="divisionCollection.name" flex="30"></div>
     
+</div>
+<div class="input-container" layout layout-sm="column">
 <!--OneToMany-->
-        <div class="form-group">
-            <label class="col-sm-2 control-label" translate="pages.divisionCollection.view.field.persons"></label>
-            <div class="col-sm-10 form-control-static"
-               ng-bind="divisionCollection.persons"></div>
-
-        </div>
-        <div class="line line-dashed b-b line-lg pull-in"></div>
+            <label translate="pages.divisionCollection.view.field.persons" flex="20"></label>
+            <div class="read-field" ng-bind="divisionCollection.persons" flex="30"></div>
     
+</div>
+<div class="input-container" layout layout-sm="column">
 <!--ManyToOne-->
-        <div class="form-group">
-            <label class="col-sm-2 control-label" translate="pages.divisionCollection.view.field.headDivision"></label>
-            <a ui-sref="app.divisionCollection.view.divisionCollectionModal({modalId:divisionCollection.headDivision.id})" >
-            <div class="col-sm-10 form-control-static">
-            <span ng-bind="divisionCollection.headDivision.id"></span> <span ng-bind="divisionCollection.headDivision.name"></span> </div></a></div>
-        <div class="line line-dashed b-b line-lg pull-in"></div>
-    
 
-    </div>
-    <div class="line line-dashed b-b line-lg pull-in"></div>
-    <div class="form-group" ng-if="!isModal">
+            <label translate="pages.divisionCollection.view.field.headDivision" flex="20"></label>
+            <div class="read-field">
+                <a  ui-sref="app.divisionCollection.view.divisionCollectionModal({modalId:divisionCollection.headDivision.id})" flex="30">
+                <span ng-bind="divisionCollection.headDivision.id"></span> <span ng-bind="divisionCollection.headDivision.name"></span> </a></div>
+</div>
 
-        <div class="form-action pull-right">
-            <a id="editBtn" class="btn btn-default"
-               ui-sref="app.divisionCollection.view.edit({id:divisionCollection.id})">
-                <i class="fa fa-edit" translate="pages.divisionCollection.view.buttons.edit"></i>
-            </a>
-            <a id="deleteBtn" class="btn btn-danger"
-               ng-click="deleteDivisionCollection(divisionCollection)" mx-show-loading>
-                <i class="fa fa-trash-o" translate="pages.divisionCollection.view.buttons.delete"></i>
-            </a>
 
-            <a id="backBtn" class="btn btn-default" ng-click="back()">
-                <i class="fa fa-chevron-left" translate="pages.divisionCollection.view.buttons.back"></i>
-            </a>
-        </div>
-        <div class="clearfix"/>
-    </div>
+    <section ng-if="!isModal" layout="row" layout-sm="column" layout-align="bottom left">
+        <md-button id="editBtn"
+                   class="md-raised md-primary"
+                   ui-sref="app.divisionCollection.view.edit({id:divisionCollection.id})"
+                   translate="button.edit"
+                   aria-label="edit"
+                ></md-button>
+        <md-button id="deleteBtn"
+                   class="md-raised md-warn"
+                   ng-click="deleteDivisionCollection(divisionCollection)"
+                   mx-show-loading
+                   translate="button.delete"
+                   aria-label="delete"
+                ></md-button>
+
+        <md-button class="md-flat" ng-click="back()" translate="button.back" aria-label="back"></md-button>
+    </section>
+    </md-content>
 </div>
 
 

@@ -2,113 +2,94 @@
 
 <div id="user_form"
      ng-init="pageTitle = (isEditForm)?'pages.user.view.edit.title':'pages.user.create.title'" data-ng-include=" 'shared/blocks/page_heading.html' "></div>
-<div class="content-body">
-    <form name="userForm" class="form-validation form-horizontal" novalidate>
+
+<md-content layout-padding layout="column">
+    <form name="userForm" novalidate>
         <input name="version" type="hidden" ng-model="user.version" />
 
-	<div class="form-group">
-		<label class="col-sm-2 control-label" for="accountExpired"
-               translate="pages.user.view.edit.form.field.accountExpired"></label>
-		<div class="col-sm-10">
+    <div class="input-container" layout layout-sm="column">
+		<label for="accountExpired"
+               translate="pages.user.view.edit.form.field.accountExpired" flex="20"/>
+        <md-input-container md-no-float="true" flex="30" layout="row">
             
-		<div class="input-group input-group">
-		  <ng-toggle  
-		  disabled="disabled"
-		  ng-true-val="true" 
-		  ng-false-val="false"
-          id="accountExpired"
-          name="accountExpired"
-		  ng-model="user.accountExpired"></ng-toggle>
-		</div>
-        </div>
+<md-switch name="accountExpired"
+           ng-model="user.accountExpired"
+           aria-label="accountExpired Switch">
+</md-switch>
+		
+        </md-input-container>
 	</div>
-	<div class="line line-dashed b-b line-lg pull-in"></div>
 	
 
-	<div class="form-group">
-		<label class="col-sm-2 control-label" for="accountLocked"
-               translate="pages.user.view.edit.form.field.accountLocked"></label>
-		<div class="col-sm-10">
+    <div class="input-container" layout layout-sm="column">
+		<label for="accountLocked"
+               translate="pages.user.view.edit.form.field.accountLocked" flex="20"/>
+        <md-input-container md-no-float="true" flex="30" layout="row">
             
-		<div class="input-group input-group">
-		  <ng-toggle  
-		  disabled="disabled"
-		  ng-true-val="true" 
-		  ng-false-val="false"
-          id="accountLocked"
-          name="accountLocked"
-		  ng-model="user.accountLocked"></ng-toggle>
-		</div>
-        </div>
+<md-switch name="accountLocked"
+           ng-model="user.accountLocked"
+           aria-label="accountLocked Switch">
+</md-switch>
+		
+        </md-input-container>
 	</div>
-	<div class="line line-dashed b-b line-lg pull-in"></div>
 	
 
-	<div class="form-group">
-		<label class="col-sm-2 control-label" for="enabled"
-               translate="pages.user.view.edit.form.field.enabled"></label>
-		<div class="col-sm-10">
+    <div class="input-container" layout layout-sm="column">
+		<label for="enabled"
+               translate="pages.user.view.edit.form.field.enabled" flex="20"/>
+        <md-input-container md-no-float="true" flex="30" layout="row">
             
-		<div class="input-group input-group">
-		  <ng-toggle  
-		  disabled="disabled"
-		  ng-true-val="true" 
-		  ng-false-val="false"
-          id="enabled"
-          name="enabled"
-		  ng-model="user.enabled"></ng-toggle>
-		</div>
-        </div>
+<md-switch name="enabled"
+           ng-model="user.enabled"
+           aria-label="enabled Switch">
+</md-switch>
+		
+        </md-input-container>
 	</div>
-	<div class="line line-dashed b-b line-lg pull-in"></div>
 	
 
-	<div class="form-group">
-		<label class="col-sm-2 control-label" for="passwordExpired"
-               translate="pages.user.view.edit.form.field.passwordExpired"></label>
-		<div class="col-sm-10">
+    <div class="input-container" layout layout-sm="column">
+		<label for="passwordExpired"
+               translate="pages.user.view.edit.form.field.passwordExpired" flex="20"/>
+        <md-input-container md-no-float="true" flex="30" layout="row">
             
-		<div class="input-group input-group">
-		  <ng-toggle  
-		  disabled="disabled"
-		  ng-true-val="true" 
-		  ng-false-val="false"
-          id="passwordExpired"
-          name="passwordExpired"
-		  ng-model="user.passwordExpired"></ng-toggle>
-		</div>
-        </div>
+<md-switch name="passwordExpired"
+           ng-model="user.passwordExpired"
+           aria-label="passwordExpired Switch">
+</md-switch>
+		
+        </md-input-container>
 	</div>
-	<div class="line line-dashed b-b line-lg pull-in"></div>
 	
 
-	<div class="form-group">
-		<label class="col-sm-2 control-label" for="username"
-               translate="pages.user.view.edit.form.field.username"></label>
-		<div class="col-sm-10">
-            <div class="input-group input-group">
-                    <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
-                    
-                    <input id="username" name="username" class="form-control"
+    <div class="input-container" layout layout-sm="column">
+		<label for="username"
+               translate="pages.user.view.edit.form.field.username" flex="20"/>
+        <md-input-container md-no-float="true" flex="30" layout="row">
+            
+                    <input name="username"
+                           aria-label="username"
                            type="text"
                            ng-model="user.username"
-                 required /></div> 
-        </div>
+                 required /> 
+        </md-input-container>
 	</div>
-	<div class="line line-dashed b-b line-lg pull-in"></div>
 	
 
-        <div class="form-group">
-            <div class="form-action pull-right">
-                <button id="userSubmitBtn"
-                    class="btn btn-success"
-                    type='submit'
-                    ng-disabled="userForm.$invalid"
-                    translate="pages.user.view.edit.form.submit"
-                    mx-show-loading ng-click="submit(userForm)"></button>
-                <a class="btn btn-default" ng-click="back()" translate="pages.user.view.edit.form.cancel" mx-show-loading></a>
-            </div>
-            <div class="clearfix"/>
-        </div>
+
+        <section layout="row" layout-sm="column" layout-align="bottom left">
+            <md-button
+                id="userSubmitBtn"
+                class="md-raised md-primary"
+                ng-disabled="userForm.$invalid"
+                ng-click="submit(userForm)"
+                translate="button.submit"
+                aria-label="save"
+            ></md-button>
+
+
+            <md-button class="md-flat" ng-click="back()" translate="button.back" aria-label="back"></md-button>
+        </section>
     </form>
-</div>
+</md-content>

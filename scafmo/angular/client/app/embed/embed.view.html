@@ -1,0 +1,105 @@
+
+
+
+<div id="embed_view" ng-init="pageTitle = 'pages.embed.view.title'"
+     ng-include=" 'shared/blocks/page_heading.html' "></div>
+<div class="content-body">
+    <md-content layout-padding layout="column">
+
+<div class="input-container" layout layout-sm="column">
+<!--Autocomplete-->
+
+        <label translate="pages.embed.view.field.acCustomMap" flex="20"></label>
+        <div class="read-field" ng-bind="embed.acCustomMap && autocompleteService.testStringSimpleFormatLabel(embed.acCustomMap)"
+             flex="30"
+                ></div>
+
+</div>
+<div class="input-container" layout layout-sm="column">
+<!--Autocomplete-->
+
+        <label translate="pages.embed.view.field.acMap" flex="20"></label>
+        <div class="read-field" ng-bind="embed.acMap && autocompleteService.testStringSimpleFormatLabel(embed.acMap)"
+             flex="30"
+                ></div>
+
+</div>
+<div class="input-container" layout layout-sm="column">
+<!--Autocomplete-->
+
+        <label translate="pages.embed.view.field.acStr" flex="20"></label>
+        <div class="read-field" ng-bind="embed.acStr && autocompleteService.testStringSimpleFormatLabel(embed.acStr)"
+             flex="30"
+                ></div>
+
+</div>
+<div class="input-container" layout layout-sm="column">
+
+            <label translate="pages.embed.view.field.muFileLocation" flex="20"></label>
+            <div class="read-field" ng-bind="embed.muFileLocation" flex="30"></div>
+    
+</div>
+<div class="input-container" layout layout-sm="column">
+
+            <label translate="pages.embed.view.field.myFile" flex="20"></label>
+            <div class="read-field" ng-model="embed.myFile" byte-downloader flex="30"></div>
+    
+</div>
+
+                <accordion close-others="false" id="myEmbeddedFieldAccordion">
+                    <accordion-group
+                            heading="{{::'pages.embed.view.field.myEmbeddedField.title' | translate}}"
+                            is-open="isSearchOpen">
+                        <div class="row">
+                            <div class="input-container" layout layout-sm="column"class="input-container" layout layout-sm="column">
+<!--Map-->
+
+        <label translate="pages.embed.view.field.myEmbeddedField.jsonMap" flex="20"></label>
+        <div class="read-field" class="jsonView jsonRead" flex="30">
+            <json child="embed.myEmbeddedField.jsonMap" default-collapsed="false" type="object"></json>
+        </div>
+    
+</div>
+<div class="input-container" layout layout-sm="column"class="input-container" layout layout-sm="column">
+<!--Autocomplete-->
+
+        <label translate="pages.embed.view.field.myEmbeddedField.myAc" flex="20"></label>
+        <div class="read-field" ng-bind="embed.myEmbeddedField.myAc && autocompleteService.testStringSimpleFormatLabel(embed.myEmbeddedField.myAc)"
+             flex="30"
+                ></div>
+
+</div>
+<div class="input-container" layout layout-sm="column"class="input-container" layout layout-sm="column">
+
+            <label translate="pages.embed.view.field.myEmbeddedField.str" flex="20"></label>
+            <div class="read-field" ng-bind="embed.myEmbeddedField.str" flex="30"></div>
+    
+</div>
+
+                        </div>
+                    </accordion-group>
+                </accordion>
+                    
+
+    <section ng-if="!isModal" layout="row" layout-sm="column" layout-align="bottom left">
+        <md-button id="editBtn"
+                   class="md-raised md-primary"
+                   ui-sref="app.embed.view.edit({id:embed.id})"
+                   translate="button.edit"
+                   aria-label="edit"
+                ></md-button>
+        <md-button id="deleteBtn"
+                   class="md-raised md-warn"
+                   ng-click="deleteEmbed(embed)"
+                   mx-show-loading
+                   translate="button.delete"
+                   aria-label="delete"
+                ></md-button>
+
+        <md-button class="md-flat" ng-click="back()" translate="button.back" aria-label="back"></md-button>
+    </section>
+    </md-content>
+</div>
+
+
+

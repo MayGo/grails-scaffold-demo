@@ -102,7 +102,7 @@ $stateProvider
 		}
 
 	}).state('app.divisionCollection.view.edit.divisionCollectionSearchModal',{
-		templateUrl: 'app/divisionCollection/divisionCollection.list.html',
+		templateUrl: 'app/divisionCollection/divisionCollection.list.modal.html',
 		controller: 'DivisionCollectionListController'
 	})
 	

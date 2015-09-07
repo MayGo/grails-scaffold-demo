@@ -1,0 +1,75 @@
+
+
+<div id="embeddable_form"
+     ng-init="pageTitle = (isEditForm)?'pages.embeddable.view.edit.title':'pages.embeddable.create.title'" data-ng-include=" 'shared/blocks/page_heading.html' "></div>
+
+<md-content layout-padding layout="column">
+    <form name="embeddableForm" novalidate>
+        <input name="version" type="hidden" ng-model="embeddable.version" />
+
+    <div class="input-container" layout layout-sm="column">
+		<label for="jsonMap"
+               translate="pages.embeddable.view.edit.form.field.jsonMap" flex="20"/>
+        <md-input-container md-no-float="true" flex="30" layout="row">
+            
+        <div class="jsonView">
+            <json child="embeddable.jsonMap" default-collapsed="false" type="object"></json>
+        </div> 
+        </md-input-container>
+	</div>
+	
+
+    <div class="input-container" layout layout-sm="column">
+		<label for="myAc"
+               translate="pages.embeddable.view.edit.form.field.myAc" flex="20"/>
+        <md-input-container md-no-float="true" flex="30" layout="row">
+            <!--Autocomplete-->
+        <md-autocomplete
+                input-name="myAc"
+                md-cache="false"
+                md-selected-item="embeddable.myAc"
+                md-search-text="searchText_myAc"
+                md-items="item in autocompleteService.testStringSimpleQuery(searchText_myAc)"
+                md-item-text="item.name || item.label || item.id"
+                md-min-length="0"
+    
+        >
+            <md-item-template>
+                <span md-highlight-text="searchText_myAc" md-highlight-flags="^i">{{item.name || item.label || item.id}}</span>
+            </md-item-template>
+        </md-autocomplete>
+    
+        </md-input-container>
+	</div>
+	
+
+    <div class="input-container" layout layout-sm="column">
+		<label for="str"
+               translate="pages.embeddable.view.edit.form.field.str" flex="20"/>
+        <md-input-container md-no-float="true" flex="30" layout="row">
+            
+                    <input name="str"
+                           aria-label="str"
+                           type="text"
+                           ng-model="embeddable.str"
+                 /> 
+        </md-input-container>
+	</div>
+	
+
+
+        <section layout="row" layout-sm="column" layout-align="bottom left">
+            <md-button
+                id="embeddableSubmitBtn"
+                class="md-raised md-primary"
+                ng-disabled="embeddableForm.$invalid"
+                ng-click="submit(embeddableForm)"
+                translate="button.submit"
+                aria-label="save"
+            ></md-button>
+
+
+            <md-button class="md-flat" ng-click="back()" translate="button.back" aria-label="back"></md-button>
+        </section>
+    </form>
+</md-content>

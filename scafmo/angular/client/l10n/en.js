@@ -3,6 +3,15 @@
 	"name":"Scafmo",
 	"title":"Scafmo"
 },
+"button": {
+	"submit": "Save",
+	"back": "Back",
+	"cancel": "Cancel",
+	"delete":"Delete",
+	"edit":"Edit",
+	"copy": "Copy",
+	"search":"Search"
+},
 "header" : {
   "navbar" : {
     "UPLOAD" : "Upload",
@@ -90,12 +99,8 @@
 			"list":{
 				"title": "Tag List",	
 				"new": " New Tag",
-				"edit": " Edit",
-				"view": " View",
-				"delete": " Delete",
 				"table":{
-					"title":"Tag Table",	
-					"search":"Search in Tag Table",
+					"title":"Tag Table",
 					"embeddedSearch":{
 					
 						"all":"All"
@@ -118,12 +123,6 @@
 			},
 			"view":{
 				"title": "Tag View",
-				"buttons":{
-					"new": " New Tag",
-						"edit": " Edit",
-						"delete": " Delete",
-						"back": " Back"
-				},
 				"lists": "{{isval}} in {{inval}}",
 				"selecttab": "Click on tab to show table",
 				"field":{
@@ -136,8 +135,6 @@
 					"title": "Edit Tag",
 						"form":{
 						"title":"Tag Form",
-							"submit":"Submit",
-							"cancel":"Cancel",
 							"field":{
 						
 									"name":"Name",								
@@ -163,12 +160,8 @@
 			"list":{
 				"title": "Task List",	
 				"new": " New Task",
-				"edit": " Edit",
-				"view": " View",
-				"delete": " Delete",
 				"table":{
-					"title":"Task Table",	
-					"search":"Search in Task Table",
+					"title":"Task Table",
 					"embeddedSearch":{
 					
 						"all":"All"
@@ -201,12 +194,6 @@
 			},
 			"view":{
 				"title": "Task View",
-				"buttons":{
-					"new": " New Task",
-						"edit": " Edit",
-						"delete": " Delete",
-						"back": " Back"
-				},
 				"lists": "{{isval}} in {{inval}}",
 				"selecttab": "Click on tab to show table",
 				"field":{
@@ -224,8 +211,6 @@
 					"title": "Edit Task",
 						"form":{
 						"title":"Task Form",
-							"submit":"Submit",
-							"cancel":"Cancel",
 							"field":{
 						
 									"dateCreated":"Date Created",								
@@ -256,12 +241,8 @@
 			"list":{
 				"title": "Owner List",	
 				"new": " New Owner",
-				"edit": " Edit",
-				"view": " View",
-				"delete": " Delete",
 				"table":{
-					"title":"Owner Table",	
-					"search":"Search in Owner Table",
+					"title":"Owner Table",
 					"embeddedSearch":{
 					
 						"all":"All"
@@ -292,12 +273,6 @@
 			},
 			"view":{
 				"title": "Owner View",
-				"buttons":{
-					"new": " New Owner",
-						"edit": " Edit",
-						"delete": " Delete",
-						"back": " Back"
-				},
 				"lists": "{{isval}} in {{inval}}",
 				"selecttab": "Click on tab to show table",
 				"field":{
@@ -314,8 +289,6 @@
 					"title": "Edit Owner",
 						"form":{
 						"title":"Owner Form",
-							"submit":"Submit",
-							"cancel":"Cancel",
 							"field":{
 						
 									"address":"Address",								
@@ -345,12 +318,8 @@
 			"list":{
 				"title": "Person List",	
 				"new": " New Person",
-				"edit": " Edit",
-				"view": " View",
-				"delete": " Delete",
 				"table":{
-					"title":"Person Table",	
-					"search":"Search in Person Table",
+					"title":"Person Table",
 					"embeddedSearch":{
 					
 						"all":"All"
@@ -373,12 +342,6 @@
 			},
 			"view":{
 				"title": "Person View",
-				"buttons":{
-					"new": " New Person",
-						"edit": " Edit",
-						"delete": " Delete",
-						"back": " Back"
-				},
 				"lists": "{{isval}} in {{inval}}",
 				"selecttab": "Click on tab to show table",
 				"field":{
@@ -391,8 +354,6 @@
 					"title": "Edit Person",
 						"form":{
 						"title":"Person Form",
-							"submit":"Submit",
-							"cancel":"Cancel",
 							"field":{
 						
 									"firstName":"First Name",								
@@ -418,12 +379,8 @@
 			"list":{
 				"title": "Pet List",	
 				"new": " New Pet",
-				"edit": " Edit",
-				"view": " View",
-				"delete": " Delete",
 				"table":{
-					"title":"Pet Table",	
-					"search":"Search in Pet Table",
+					"title":"Pet Table",
 					"embeddedSearch":{
 					
 						"all":"All"
@@ -452,12 +409,6 @@
 			},
 			"view":{
 				"title": "Pet View",
-				"buttons":{
-					"new": " New Pet",
-						"edit": " Edit",
-						"delete": " Delete",
-						"back": " Back"
-				},
 				"lists": "{{isval}} in {{inval}}",
 				"selecttab": "Click on tab to show table",
 				"field":{
@@ -473,8 +424,6 @@
 					"title": "Edit Pet",
 						"form":{
 						"title":"Pet Form",
-							"submit":"Submit",
-							"cancel":"Cancel",
 							"field":{
 						
 									"birthDate":"Birth Date",								
@@ -503,12 +452,8 @@
 			"list":{
 				"title": "Pet Type List",	
 				"new": " New Pet Type",
-				"edit": " Edit",
-				"view": " View",
-				"delete": " Delete",
 				"table":{
-					"title":"Pet Type Table",	
-					"search":"Search in Pet Type Table",
+					"title":"Pet Type Table",
 					"embeddedSearch":{
 					
 						"all":"All"
@@ -529,12 +474,6 @@
 			},
 			"view":{
 				"title": "Pet Type View",
-				"buttons":{
-					"new": " New Pet Type",
-						"edit": " Edit",
-						"delete": " Delete",
-						"back": " Back"
-				},
 				"lists": "{{isval}} in {{inval}}",
 				"selecttab": "Click on tab to show table",
 				"field":{
@@ -546,8 +485,6 @@
 					"title": "Edit Pet Type",
 						"form":{
 						"title":"Pet Type Form",
-							"submit":"Submit",
-							"cancel":"Cancel",
 							"field":{
 						
 									"name":"Name",								
@@ -572,12 +509,8 @@
 			"list":{
 				"title": "Speciality List",	
 				"new": " New Speciality",
-				"edit": " Edit",
-				"view": " View",
-				"delete": " Delete",
 				"table":{
-					"title":"Speciality Table",	
-					"search":"Search in Speciality Table",
+					"title":"Speciality Table",
 					"embeddedSearch":{
 					
 						"all":"All"
@@ -598,12 +531,6 @@
 			},
 			"view":{
 				"title": "Speciality View",
-				"buttons":{
-					"new": " New Speciality",
-						"edit": " Edit",
-						"delete": " Delete",
-						"back": " Back"
-				},
 				"lists": "{{isval}} in {{inval}}",
 				"selecttab": "Click on tab to show table",
 				"field":{
@@ -615,8 +542,6 @@
 					"title": "Edit Speciality",
 						"form":{
 						"title":"Speciality Form",
-							"submit":"Submit",
-							"cancel":"Cancel",
 							"field":{
 						
 									"name":"Name",								
@@ -641,12 +566,8 @@
 			"list":{
 				"title": "Vet List",	
 				"new": " New Vet",
-				"edit": " Edit",
-				"view": " View",
-				"delete": " Delete",
 				"table":{
-					"title":"Vet Table",	
-					"search":"Search in Vet Table",
+					"title":"Vet Table",
 					"embeddedSearch":{
 					
 						"all":"All"
@@ -671,12 +592,6 @@
 			},
 			"view":{
 				"title": "Vet View",
-				"buttons":{
-					"new": " New Vet",
-						"edit": " Edit",
-						"delete": " Delete",
-						"back": " Back"
-				},
 				"lists": "{{isval}} in {{inval}}",
 				"selecttab": "Click on tab to show table",
 				"field":{
@@ -690,8 +605,6 @@
 					"title": "Edit Vet",
 						"form":{
 						"title":"Vet Form",
-							"submit":"Submit",
-							"cancel":"Cancel",
 							"field":{
 						
 									"firstName":"First Name",								
@@ -718,12 +631,8 @@
 			"list":{
 				"title": "Visit List",	
 				"new": " New Visit",
-				"edit": " Edit",
-				"view": " View",
-				"delete": " Delete",
 				"table":{
-					"title":"Visit Table",	
-					"search":"Search in Visit Table",
+					"title":"Visit Table",
 					"embeddedSearch":{
 					
 						"all":"All"
@@ -748,12 +657,6 @@
 			},
 			"view":{
 				"title": "Visit View",
-				"buttons":{
-					"new": " New Visit",
-						"edit": " Edit",
-						"delete": " Delete",
-						"back": " Back"
-				},
 				"lists": "{{isval}} in {{inval}}",
 				"selecttab": "Click on tab to show table",
 				"field":{
@@ -767,8 +670,6 @@
 					"title": "Edit Visit",
 						"form":{
 						"title":"Visit Form",
-							"submit":"Submit",
-							"cancel":"Cancel",
 							"field":{
 						
 									"date":"Date",								
@@ -795,12 +696,8 @@
 			"list":{
 				"title": "Division Collection List",	
 				"new": " New Division Collection",
-				"edit": " Edit",
-				"view": " View",
-				"delete": " Delete",
 				"table":{
-					"title":"Division Collection Table",	
-					"search":"Search in Division Collection Table",
+					"title":"Division Collection Table",
 					"embeddedSearch":{
 					
 						"all":"All"
@@ -825,12 +722,6 @@
 			},
 			"view":{
 				"title": "Division Collection View",
-				"buttons":{
-					"new": " New Division Collection",
-						"edit": " Edit",
-						"delete": " Delete",
-						"back": " Back"
-				},
 				"lists": "{{isval}} in {{inval}}",
 				"selecttab": "Click on tab to show table",
 				"field":{
@@ -844,8 +735,6 @@
 					"title": "Edit Division Collection",
 						"form":{
 						"title":"Division Collection Form",
-							"submit":"Submit",
-							"cancel":"Cancel",
 							"field":{
 						
 									"headDivision":"Head Division",								
@@ -872,12 +761,8 @@
 			"list":{
 				"title": "Division Collectionless List",	
 				"new": " New Division Collectionless",
-				"edit": " Edit",
-				"view": " View",
-				"delete": " Delete",
 				"table":{
-					"title":"Division Collectionless Table",	
-					"search":"Search in Division Collectionless Table",
+					"title":"Division Collectionless Table",
 					"embeddedSearch":{
 					
 						"all":"All"
@@ -900,12 +785,6 @@
 			},
 			"view":{
 				"title": "Division Collectionless View",
-				"buttons":{
-					"new": " New Division Collectionless",
-						"edit": " Edit",
-						"delete": " Delete",
-						"back": " Back"
-				},
 				"lists": "{{isval}} in {{inval}}",
 				"selecttab": "Click on tab to show table",
 				"field":{
@@ -918,8 +797,6 @@
 					"title": "Edit Division Collectionless",
 						"form":{
 						"title":"Division Collectionless Form",
-							"submit":"Submit",
-							"cancel":"Cancel",
 							"field":{
 						
 									"headDivision":"Head Division",								
@@ -945,12 +822,8 @@
 			"list":{
 				"title": "Person Collection List",	
 				"new": " New Person Collection",
-				"edit": " Edit",
-				"view": " View",
-				"delete": " Delete",
 				"table":{
-					"title":"Person Collection Table",	
-					"search":"Search in Person Collection Table",
+					"title":"Person Collection Table",
 					"embeddedSearch":{
 					
 						"all":"All"
@@ -975,12 +848,6 @@
 			},
 			"view":{
 				"title": "Person Collection View",
-				"buttons":{
-					"new": " New Person Collection",
-						"edit": " Edit",
-						"delete": " Delete",
-						"back": " Back"
-				},
 				"lists": "{{isval}} in {{inval}}",
 				"selecttab": "Click on tab to show table",
 				"field":{
@@ -994,8 +861,6 @@
 					"title": "Edit Person Collection",
 						"form":{
 						"title":"Person Collection Form",
-							"submit":"Submit",
-							"cancel":"Cancel",
 							"field":{
 						
 									"age":"Age",								
@@ -1022,12 +887,8 @@
 			"list":{
 				"title": "Person Collectionless List",	
 				"new": " New Person Collectionless",
-				"edit": " Edit",
-				"view": " View",
-				"delete": " Delete",
 				"table":{
-					"title":"Person Collectionless Table",	
-					"search":"Search in Person Collectionless Table",
+					"title":"Person Collectionless Table",
 					"embeddedSearch":{
 					
 						"all":"All"
@@ -1052,12 +913,6 @@
 			},
 			"view":{
 				"title": "Person Collectionless View",
-				"buttons":{
-					"new": " New Person Collectionless",
-						"edit": " Edit",
-						"delete": " Delete",
-						"back": " Back"
-				},
 				"lists": "{{isval}} in {{inval}}",
 				"selecttab": "Click on tab to show table",
 				"field":{
@@ -1071,8 +926,6 @@
 					"title": "Edit Person Collectionless",
 						"form":{
 						"title":"Person Collectionless Form",
-							"submit":"Submit",
-							"cancel":"Cancel",
 							"field":{
 						
 									"age":"Age",								
@@ -1099,12 +952,8 @@
 			"list":{
 				"title": "Test Number List",	
 				"new": " New Test Number",
-				"edit": " Edit",
-				"view": " View",
-				"delete": " Delete",
 				"table":{
-					"title":"Test Number Table",	
-					"search":"Search in Test Number Table",
+					"title":"Test Number Table",
 					"embeddedSearch":{
 					
 						"all":"All"
@@ -1145,12 +994,6 @@
 			},
 			"view":{
 				"title": "Test Number View",
-				"buttons":{
-					"new": " New Test Number",
-						"edit": " Edit",
-						"delete": " Delete",
-						"back": " Back"
-				},
 				"lists": "{{isval}} in {{inval}}",
 				"selecttab": "Click on tab to show table",
 				"field":{
@@ -1172,8 +1015,6 @@
 					"title": "Edit Test Number",
 						"form":{
 						"title":"Test Number Form",
-							"submit":"Submit",
-							"cancel":"Cancel",
 							"field":{
 						
 									"doubleNr":"Double Nr",								
@@ -1208,12 +1049,8 @@
 			"list":{
 				"title": "Test Other List",	
 				"new": " New Test Other",
-				"edit": " Edit",
-				"view": " View",
-				"delete": " Delete",
 				"table":{
-					"title":"Test Other Table",	
-					"search":"Search in Test Other Table",
+					"title":"Test Other Table",
 					"embeddedSearch":{
 					
 						"all":"All"
@@ -1240,12 +1077,6 @@
 			},
 			"view":{
 				"title": "Test Other View",
-				"buttons":{
-					"new": " New Test Other",
-						"edit": " Edit",
-						"delete": " Delete",
-						"back": " Back"
-				},
 				"lists": "{{isval}} in {{inval}}",
 				"selecttab": "Click on tab to show table",
 				"field":{
@@ -1260,8 +1091,6 @@
 					"title": "Edit Test Other",
 						"form":{
 						"title":"Test Other Form",
-							"submit":"Submit",
-							"cancel":"Cancel",
 							"field":{
 						
 									"booleanNullable":"Boolean Nullable",								
@@ -1289,12 +1118,8 @@
 			"list":{
 				"title": "Test String List",	
 				"new": " New Test String",
-				"edit": " Edit",
-				"view": " View",
-				"delete": " Delete",
 				"table":{
-					"title":"Test String Table",	
-					"search":"Search in Test String Table",
+					"title":"Test String Table",
 					"embeddedSearch":{
 					
 						"all":"All"
@@ -1310,6 +1135,7 @@
 				   		"minSizeStr":"Min Size Str",					    
 				   		"notEqualStr":"Not Equal Str",					    
 				   		"sizeStr":"Size Str",					    
+				   		"textareaStr":"Textarea Str",					    
 				   		"uniqueStr":"Unique Str",					    
 				   		"urlStr":"Url Str",					    
 					    "id": "Id"
@@ -1327,6 +1153,7 @@
 								"minSizeStr":"Min Size Str",							
 								"notEqualStr":"Not Equal Str",							
 								"sizeStr":"Size Str",							
+								"textareaStr":"Textarea Str",							
 								"uniqueStr":"Unique Str",							
 								"urlStr":"Url Str",							
 					    "id": "Id"
@@ -1335,12 +1162,6 @@
 			},
 			"view":{
 				"title": "Test String View",
-				"buttons":{
-					"new": " New Test String",
-						"edit": " Edit",
-						"delete": " Delete",
-						"back": " Back"
-				},
 				"lists": "{{isval}} in {{inval}}",
 				"selecttab": "Click on tab to show table",
 				"field":{
@@ -1354,6 +1175,7 @@
 							"minSizeStr":"Min Size Str",						
 							"notEqualStr":"Not Equal Str",						
 							"sizeStr":"Size Str",						
+							"textareaStr":"Textarea Str",						
 							"uniqueStr":"Unique Str",						
 							"urlStr":"Url Str",						
 				    "id": "Id"
@@ -1362,8 +1184,6 @@
 					"title": "Edit Test String",
 						"form":{
 						"title":"Test String Form",
-							"submit":"Submit",
-							"cancel":"Cancel",
 							"field":{
 						
 									"blankStr":"Blank Str",								
@@ -1375,6 +1195,7 @@
 									"minSizeStr":"Min Size Str",								
 									"notEqualStr":"Not Equal Str",								
 									"sizeStr":"Size Str",								
+									"textareaStr":"Textarea Str",								
 									"uniqueStr":"Unique Str",								
 									"urlStr":"Url Str",								
 							"id": "Id"
@@ -1393,17 +1214,171 @@
 			}
 		},
 	
+		"embed":{
+			"name":"Embed",
+			"list":{
+				"title": "Embed List",	
+				"new": " New Embed",
+				"table":{
+					"title":"Embed Table",
+					"embeddedSearch":{
+					
+								"myEmbeddedField.title":"My Embedded Field",							
+						"all":"All"
+					},
+					"header":{
+						
+				   		"acCustomMap":"Ac Custom Map",					    
+				   		"acMap":"Ac Map",					    
+				   		"acStr":"Ac Str",					    
+				   		"muFileLocation":"Mu File Location",					    
+				   		"myEmbeddedField":"My Embedded Field",					    
+				   		"myFile":"My File",					    
+					    "id": "Id"
+					}
+				},
+				"search":{
+					"placeholder":{
+						
+								"acCustomMap":"Ac Custom Map",							
+								"acMap":"Ac Map",							
+								"acStr":"Ac Str",							
+								"muFileLocation":"Mu File Location",							
+								"myEmbeddedField.title":"My Embedded Field",							
+								"myEmbeddedField.id":"Id",								
+								"myEmbeddedField.jsonMap":"Json Map",								
+								"myEmbeddedField.myAc":"My Ac",								
+								"myEmbeddedField.str":"Str",								
+								"myEmbeddedField.version":"Version",								
+								"myFile":"My File",							
+					    "id": "Id"
+					}
+				}
+			},
+			"view":{
+				"title": "Embed View",
+				"lists": "{{isval}} in {{inval}}",
+				"selecttab": "Click on tab to show table",
+				"field":{
+					
+							"acCustomMap":"Ac Custom Map",						
+							"acMap":"Ac Map",						
+							"acStr":"Ac Str",						
+							"muFileLocation":"Mu File Location",						
+							"myEmbeddedField.title":"My Embedded Field",						
+							"myEmbeddedField.id":"Id",							
+							"myEmbeddedField.jsonMap":"Json Map",							
+							"myEmbeddedField.myAc":"My Ac",							
+							"myEmbeddedField.str":"Str",							
+							"myEmbeddedField.version":"Version",							
+							"myFile":"My File",						
+				    "id": "Id"
+				},
+				"edit":{
+					"title": "Edit Embed",
+						"form":{
+						"title":"Embed Form",
+							"field":{
+						
+									"acCustomMap":"Ac Custom Map",								
+									"acMap":"Ac Map",								
+									"acStr":"Ac Str",								
+									"muFileLocation":"Mu File Location",								
+									"myEmbeddedField.title":"My Embedded Field",								
+									"myEmbeddedField.id":"Id",									
+									"myEmbeddedField.jsonMap":"Json Map",									
+									"myEmbeddedField.myAc":"My Ac",									
+									"myEmbeddedField.str":"Str",									
+									"myEmbeddedField.version":"Version",									
+									"myFile":"My File",								
+							"id": "Id"
+						}
+					}
+				}
+			},
+
+			"messages":{
+				"delete": "Deleted Embed",
+				"update": "Updated Embed",
+				"create": "Created Embed"
+			},	
+			"create":{
+				"title": "Create Embed"
+			}
+		},
+	
+		"embeddable":{
+			"name":"Embeddable",
+			"list":{
+				"title": "Embeddable List",	
+				"new": " New Embeddable",
+				"table":{
+					"title":"Embeddable Table",
+					"embeddedSearch":{
+					
+						"all":"All"
+					},
+					"header":{
+						
+				   		"jsonMap":"Json Map",					    
+				   		"myAc":"My Ac",					    
+				   		"str":"Str",					    
+					    "id": "Id"
+					}
+				},
+				"search":{
+					"placeholder":{
+						
+								"jsonMap":"Json Map",							
+								"myAc":"My Ac",							
+								"str":"Str",							
+					    "id": "Id"
+					}
+				}
+			},
+			"view":{
+				"title": "Embeddable View",
+				"lists": "{{isval}} in {{inval}}",
+				"selecttab": "Click on tab to show table",
+				"field":{
+					
+							"jsonMap":"Json Map",						
+							"myAc":"My Ac",						
+							"str":"Str",						
+				    "id": "Id"
+				},
+				"edit":{
+					"title": "Edit Embeddable",
+						"form":{
+						"title":"Embeddable Form",
+							"field":{
+						
+									"jsonMap":"Json Map",								
+									"myAc":"My Ac",								
+									"str":"Str",								
+							"id": "Id"
+						}
+					}
+				}
+			},
+
+			"messages":{
+				"delete": "Deleted Embeddable",
+				"update": "Updated Embeddable",
+				"create": "Created Embeddable"
+			},	
+			"create":{
+				"title": "Create Embeddable"
+			}
+		},
+	
 		"role":{
 			"name":"Role",
 			"list":{
 				"title": "Role List",	
 				"new": " New Role",
-				"edit": " Edit",
-				"view": " View",
-				"delete": " Delete",
 				"table":{
-					"title":"Role Table",	
-					"search":"Search in Role Table",
+					"title":"Role Table",
 					"embeddedSearch":{
 					
 						"all":"All"
@@ -1424,12 +1399,6 @@
 			},
 			"view":{
 				"title": "Role View",
-				"buttons":{
-					"new": " New Role",
-						"edit": " Edit",
-						"delete": " Delete",
-						"back": " Back"
-				},
 				"lists": "{{isval}} in {{inval}}",
 				"selecttab": "Click on tab to show table",
 				"field":{
@@ -1441,8 +1410,6 @@
 					"title": "Edit Role",
 						"form":{
 						"title":"Role Form",
-							"submit":"Submit",
-							"cancel":"Cancel",
 							"field":{
 						
 									"authority":"Authority",								
@@ -1467,12 +1434,8 @@
 			"list":{
 				"title": "User List",	
 				"new": " New User",
-				"edit": " Edit",
-				"view": " View",
-				"delete": " Delete",
 				"table":{
-					"title":"User Table",	
-					"search":"Search in User Table",
+					"title":"User Table",
 					"embeddedSearch":{
 					
 						"all":"All"
@@ -1501,12 +1464,6 @@
 			},
 			"view":{
 				"title": "User View",
-				"buttons":{
-					"new": " New User",
-						"edit": " Edit",
-						"delete": " Delete",
-						"back": " Back"
-				},
 				"lists": "{{isval}} in {{inval}}",
 				"selecttab": "Click on tab to show table",
 				"field":{
@@ -1522,8 +1479,6 @@
 					"title": "Edit User",
 						"form":{
 						"title":"User Form",
-							"submit":"Submit",
-							"cancel":"Cancel",
 							"field":{
 						
 									"accountExpired":"Account Expired",								
@@ -1552,12 +1507,8 @@
 			"list":{
 				"title": "User Role List",	
 				"new": " New User Role",
-				"edit": " Edit",
-				"view": " View",
-				"delete": " Delete",
 				"table":{
-					"title":"User Role Table",	
-					"search":"Search in User Role Table",
+					"title":"User Role Table",
 					"embeddedSearch":{
 					
 						"all":"All"
@@ -1580,12 +1531,6 @@
 			},
 			"view":{
 				"title": "User Role View",
-				"buttons":{
-					"new": " New User Role",
-						"edit": " Edit",
-						"delete": " Delete",
-						"back": " Back"
-				},
 				"lists": "{{isval}} in {{inval}}",
 				"selecttab": "Click on tab to show table",
 				"field":{
@@ -1598,8 +1543,6 @@
 					"title": "Edit User Role",
 						"form":{
 						"title":"User Role Form",
-							"submit":"Submit",
-							"cancel":"Cancel",
 							"field":{
 						
 									"role":"Role",								
@@ -1625,12 +1568,8 @@
 			"list":{
 				"title": "Classifier List",	
 				"new": " New Classifier",
-				"edit": " Edit",
-				"view": " View",
-				"delete": " Delete",
 				"table":{
-					"title":"Classifier Table",	
-					"search":"Search in Classifier Table",
+					"title":"Classifier Table",
 					"embeddedSearch":{
 					
 						"all":"All"
@@ -1657,12 +1596,6 @@
 			},
 			"view":{
 				"title": "Classifier View",
-				"buttons":{
-					"new": " New Classifier",
-						"edit": " Edit",
-						"delete": " Delete",
-						"back": " Back"
-				},
 				"lists": "{{isval}} in {{inval}}",
 				"selecttab": "Click on tab to show table",
 				"field":{
@@ -1677,8 +1610,6 @@
 					"title": "Edit Classifier",
 						"form":{
 						"title":"Classifier Form",
-							"submit":"Submit",
-							"cancel":"Cancel",
 							"field":{
 						
 									"classname":"Classname",								
@@ -1741,6 +1672,10 @@
 	
 		"testString":"Test String",
 	
+		"embed":"Embed",
+	
+		"embeddable":"Embeddable",
+	
 		"role":"Role",
 	
 		"user":"User",
@@ -1759,6 +1694,8 @@
 		"collection":"Collection",
 	
 		"constr":"Constr",
+	
+		"embedded":"Embedded",
 	
 		"security":"Security",
 	

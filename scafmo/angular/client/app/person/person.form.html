@@ -2,53 +2,52 @@
 
 <div id="person_form"
      ng-init="pageTitle = (isEditForm)?'pages.person.view.edit.title':'pages.person.create.title'" data-ng-include=" 'shared/blocks/page_heading.html' "></div>
-<div class="content-body">
-    <form name="personForm" class="form-validation form-horizontal" novalidate>
+
+<md-content layout-padding layout="column">
+    <form name="personForm" novalidate>
         <input name="version" type="hidden" ng-model="person.version" />
 
-	<div class="form-group">
-		<label class="col-sm-2 control-label" for="firstName"
-               translate="pages.person.view.edit.form.field.firstName"></label>
-		<div class="col-sm-10">
-            <div class="input-group input-group">
-                    <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
-                    
-                    <input id="firstName" name="firstName" class="form-control"
+    <div class="input-container" layout layout-sm="column">
+		<label for="firstName"
+               translate="pages.person.view.edit.form.field.firstName" flex="20"/>
+        <md-input-container md-no-float="true" flex="30" layout="row">
+            
+                    <input name="firstName"
+                           aria-label="firstName"
                            type="text"
                            ng-model="person.firstName"
-                 required /></div> 
-        </div>
+                 required /> 
+        </md-input-container>
 	</div>
-	<div class="line line-dashed b-b line-lg pull-in"></div>
 	
 
-	<div class="form-group">
-		<label class="col-sm-2 control-label" for="lastName"
-               translate="pages.person.view.edit.form.field.lastName"></label>
-		<div class="col-sm-10">
-            <div class="input-group input-group">
-                    <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
-                    
-                    <input id="lastName" name="lastName" class="form-control"
+    <div class="input-container" layout layout-sm="column">
+		<label for="lastName"
+               translate="pages.person.view.edit.form.field.lastName" flex="20"/>
+        <md-input-container md-no-float="true" flex="30" layout="row">
+            
+                    <input name="lastName"
+                           aria-label="lastName"
                            type="text"
                            ng-model="person.lastName"
-                 required /></div> 
-        </div>
+                 required /> 
+        </md-input-container>
 	</div>
-	<div class="line line-dashed b-b line-lg pull-in"></div>
 	
 
-        <div class="form-group">
-            <div class="form-action pull-right">
-                <button id="personSubmitBtn"
-                    class="btn btn-success"
-                    type='submit'
-                    ng-disabled="personForm.$invalid"
-                    translate="pages.person.view.edit.form.submit"
-                    mx-show-loading ng-click="submit(personForm)"></button>
-                <a class="btn btn-default" ng-click="back()" translate="pages.person.view.edit.form.cancel" mx-show-loading></a>
-            </div>
-            <div class="clearfix"/>
-        </div>
+
+        <section layout="row" layout-sm="column" layout-align="bottom left">
+            <md-button
+                id="personSubmitBtn"
+                class="md-raised md-primary"
+                ng-disabled="personForm.$invalid"
+                ng-click="submit(personForm)"
+                translate="button.submit"
+                aria-label="save"
+            ></md-button>
+
+
+            <md-button class="md-flat" ng-click="back()" translate="button.back" aria-label="back"></md-button>
+        </section>
     </form>
-</div>
+</md-content>

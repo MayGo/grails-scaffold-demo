@@ -10,7 +10,7 @@ angular.module('angularDemoApp', [
 	'ui.router',
 	'ui.bootstrap',
 	'pascalprecht.translate',
-	'jcs-autoValidate',
+	//'jcs-autoValidate',
 	'angular-loading-bar',
 	'ngTable',
 	'ui.bootstrap.typeahead',
@@ -23,13 +23,13 @@ angular.module('angularDemoApp', [
 	'mgcrea.ngStrap.helpers.dateParser',
 	'mgcrea.ngStrap.tooltip',
 	'mgcrea.ngStrap.datepicker',
-	'mgcrea.ngStrap.typeahead',
-	'mgcrea.ngStrap.helpers.parseOptions',
 	'ngToggle',
 	'permission',
 	'JSONedit',
 	'ncy-angular-breadcrumb',
-	'angularFileUpload'
+	'angularFileUpload',
+	'ngAria',
+	'ngMaterial'
 ])
 	.constant('appConfig', (function() {
 
@@ -119,18 +119,15 @@ angular.module('angularDemoApp', [
 
 		// $locationProvider.html5Mode(true);
 	})
-	.config(function($datepickerProvider, $typeaheadProvider) {
+	.config(function($datepickerProvider) {
 		angular.extend($datepickerProvider.defaults, {
 			dateFormat: 'dd.MM.yyyy',
 			autoclose: 1,
 			container: 'body'
 		});
-
-		angular.extend($typeaheadProvider.defaults, {
-			minLength: 0,
-			limit: 10
-		});
 	})
+
+
 
 	.config(function($translateProvider){
 	    // Register a loader for the static files
@@ -144,6 +141,7 @@ angular.module('angularDemoApp', [
 	    $translateProvider.preferredLanguage('en');
 	    // Tell the module to store the language in the local storage
 	    $translateProvider.useLocalStorage();
+		$translateProvider.useSanitizeValueStrategy('sanitize');
 	})
 	.config(function(tagsInputConfigProvider) {
 		tagsInputConfigProvider.setDefaults('tagsInput', {
@@ -205,8 +203,8 @@ angular.module('angularDemoApp', [
 			increaseArea: '20%' // optional
 		}
 	})
-	.run(function($filter, validator) {
-		validator.setValidElementStyling(false);
+	.run(function($filter) {
+		//validator.setValidElementStyling(false);
 
 		//Set date to timestamp to ignore users locale
 		Date.prototype.toJSON = function() {
@@ -232,7 +230,9 @@ angular.module('angularDemoApp', [
 			$state.go('app.error', stateParams, {location: false});
 		});
 
-	}).run(function (Permission, SessionService) {
+
+	}).run(function (Permission, SessionService, $timeout) {
+
 		Permission
 			.defineRole('ROLE_USER', function () {
 				return SessionService.hasRole('ROLE_USER');

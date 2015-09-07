@@ -1,73 +1,65 @@
 
 
+
 <div id="pet_view" ng-init="pageTitle = 'pages.pet.view.title'"
      ng-include=" 'shared/blocks/page_heading.html' "></div>
 <div class="content-body">
-    <div class="form-horizontal">
+    <md-content layout-padding layout="column">
 
-    <div class="form-group">
-        <label class="col-sm-2 control-label"
-               translate="pages.pet.view.field.birthDate"></label>
-        <div class="col-sm-10 form-control-static"
-             ng-bind="pet.birthDate | date:'yyyy-MM-dd HH:mm'"></div>
-    </div>
-    <div class="line line-dashed b-b line-lg pull-in"></div>
-    
+<div class="input-container" layout layout-sm="column">
 
-        <div class="form-group">
-            <label class="col-sm-2 control-label"
-                   translate="pages.pet.view.field.name"></label>
-            <div class="col-sm-10 form-control-static"
-                 ng-bind="pet.name"></div>
-        </div>
-        <div class="line line-dashed b-b line-lg pull-in"></div>
+        <label translate="pages.pet.view.field.birthDate" flex="20"></label>
+        <div class="read-field" ng-bind="pet.birthDate | date:'yyyy-MM-dd HH:mm'" flex="30"></div>
     
+</div>
+<div class="input-container" layout layout-sm="column">
+
+            <label translate="pages.pet.view.field.name" flex="20"></label>
+            <div class="read-field" ng-bind="pet.name" flex="30"></div>
+    
+</div>
+<div class="input-container" layout layout-sm="column">
 <!--OneToMany-->
-        <div class="form-group">
-            <label class="col-sm-2 control-label" translate="pages.pet.view.field.visits"></label>
-            <div class="col-sm-10 form-control-static"
-               ng-bind="pet.visits"></div>
-
-        </div>
-        <div class="line line-dashed b-b line-lg pull-in"></div>
+            <label translate="pages.pet.view.field.visits" flex="20"></label>
+            <div class="read-field" ng-bind="pet.visits" flex="30"></div>
     
+</div>
+<div class="input-container" layout layout-sm="column">
 <!--ManyToOne-->
-        <div class="form-group">
-            <label class="col-sm-2 control-label" translate="pages.pet.view.field.type"></label>
-            <a ui-sref="app.pet.view.petTypeModal({modalId:pet.type.id})" >
-            <div class="col-sm-10 form-control-static">
-            <span ng-bind="pet.type.id"></span> <span ng-bind="pet.type.name"></span> </div></a></div>
-        <div class="line line-dashed b-b line-lg pull-in"></div>
-    
+
+            <label translate="pages.pet.view.field.type" flex="20"></label>
+            <div class="read-field">
+                <a  ui-sref="app.pet.view.petTypeModal({modalId:pet.type.id})" flex="30">
+                <span ng-bind="pet.type.id"></span> <span ng-bind="pet.type.name"></span> </a></div>
+</div>
+<div class="input-container" layout layout-sm="column">
 <!--ManyToOne-->
-        <div class="form-group">
-            <label class="col-sm-2 control-label" translate="pages.pet.view.field.owner"></label>
-            <a ui-sref="app.pet.view.ownerModal({modalId:pet.owner.id})" >
-            <div class="col-sm-10 form-control-static">
-            <span ng-bind="pet.owner.id"></span> <span ng-bind="pet.owner.telephone"></span> <span ng-bind="pet.owner.lastName"></span> <span ng-bind="pet.owner.firstName"></span> </div></a></div>
-        <div class="line line-dashed b-b line-lg pull-in"></div>
-    
 
-    </div>
-    <div class="line line-dashed b-b line-lg pull-in"></div>
-    <div class="form-group" ng-if="!isModal">
+            <label translate="pages.pet.view.field.owner" flex="20"></label>
+            <div class="read-field">
+                <a  ui-sref="app.pet.view.ownerModal({modalId:pet.owner.id})" flex="30">
+                <span ng-bind="pet.owner.id"></span> <span ng-bind="pet.owner.telephone"></span> <span ng-bind="pet.owner.lastName"></span> <span ng-bind="pet.owner.firstName"></span> </a></div>
+</div>
 
-        <div class="form-action pull-right">
-            <a id="editBtn" class="btn btn-default"
-               ui-sref="app.pet.view.edit({id:pet.id})">
-                <i class="fa fa-edit" translate="pages.pet.view.buttons.edit"></i>
-            </a>
-            <a id="deleteBtn" class="btn btn-danger"
-               ng-click="deletePet(pet)" mx-show-loading>
-                <i class="fa fa-trash-o" translate="pages.pet.view.buttons.delete"></i>
-            </a>
 
-            <a id="backBtn" class="btn btn-default" ng-click="back()">
-                <i class="fa fa-chevron-left" translate="pages.pet.view.buttons.back"></i>
-            </a>
-        </div>
-        <div class="clearfix"/>
-    </div>
+    <section ng-if="!isModal" layout="row" layout-sm="column" layout-align="bottom left">
+        <md-button id="editBtn"
+                   class="md-raised md-primary"
+                   ui-sref="app.pet.view.edit({id:pet.id})"
+                   translate="button.edit"
+                   aria-label="edit"
+                ></md-button>
+        <md-button id="deleteBtn"
+                   class="md-raised md-warn"
+                   ng-click="deletePet(pet)"
+                   mx-show-loading
+                   translate="button.delete"
+                   aria-label="delete"
+                ></md-button>
+
+        <md-button class="md-flat" ng-click="back()" translate="button.back" aria-label="back"></md-button>
+    </section>
+    </md-content>
 </div>
 
 

@@ -1,47 +1,44 @@
 
 
+
 <div id="tag_view" ng-init="pageTitle = 'pages.tag.view.title'"
      ng-include=" 'shared/blocks/page_heading.html' "></div>
 <div class="content-body">
-    <div class="form-horizontal">
+    <md-content layout-padding layout="column">
 
-        <div class="form-group">
-            <label class="col-sm-2 control-label"
-                   translate="pages.tag.view.field.name"></label>
-            <div class="col-sm-10 form-control-static"
-                 ng-bind="tag.name"></div>
-        </div>
-        <div class="line line-dashed b-b line-lg pull-in"></div>
+<div class="input-container" layout layout-sm="column">
+
+            <label translate="pages.tag.view.field.name" flex="20"></label>
+            <div class="read-field" ng-bind="tag.name" flex="30"></div>
     
+</div>
+<div class="input-container" layout layout-sm="column">
 <!--ManyToMany-->
-    <div class="form-group">
-        <label class="col-sm-2 control-label" translate="pages.tag.view.field.tasks"></label>
-        <div class="col-sm-10 form-control-static">
+        <label translate="pages.tag.view.field.tasks" flex="20"></label>
+        <div class="read-field" flex="30">
             <div ng-repeat="item in tag.tasks">
-<span ng-bind="item.id"></span> <span ng-bind="item.timeSpent"></span> <span ng-bind="item.summary"></span> <span ng-bind="item.status"></span> </div></div></div>
-    <div class="line line-dashed b-b line-lg pull-in"></div>
-    
+<span ng-bind="item.id"></span> <span ng-bind="item.timeSpent"></span> <span ng-bind="item.summary"></span> <span ng-bind="item.status"></span> </div></div>
+</div>
 
-    </div>
-    <div class="line line-dashed b-b line-lg pull-in"></div>
-    <div class="form-group" ng-if="!isModal">
 
-        <div class="form-action pull-right">
-            <a id="editBtn" class="btn btn-default"
-               ui-sref="app.tag.view.edit({id:tag.id})">
-                <i class="fa fa-edit" translate="pages.tag.view.buttons.edit"></i>
-            </a>
-            <a id="deleteBtn" class="btn btn-danger"
-               ng-click="deleteTag(tag)" mx-show-loading>
-                <i class="fa fa-trash-o" translate="pages.tag.view.buttons.delete"></i>
-            </a>
+    <section ng-if="!isModal" layout="row" layout-sm="column" layout-align="bottom left">
+        <md-button id="editBtn"
+                   class="md-raised md-primary"
+                   ui-sref="app.tag.view.edit({id:tag.id})"
+                   translate="button.edit"
+                   aria-label="edit"
+                ></md-button>
+        <md-button id="deleteBtn"
+                   class="md-raised md-warn"
+                   ng-click="deleteTag(tag)"
+                   mx-show-loading
+                   translate="button.delete"
+                   aria-label="delete"
+                ></md-button>
 
-            <a id="backBtn" class="btn btn-default" ng-click="back()">
-                <i class="fa fa-chevron-left" translate="pages.tag.view.buttons.back"></i>
-            </a>
-        </div>
-        <div class="clearfix"/>
-    </div>
+        <md-button class="md-flat" ng-click="back()" translate="button.back" aria-label="back"></md-button>
+    </section>
+    </md-content>
 </div>
 
 

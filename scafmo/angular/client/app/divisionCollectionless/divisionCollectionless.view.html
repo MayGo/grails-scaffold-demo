@@ -1,47 +1,45 @@
 
 
+
 <div id="divisionCollectionless_view" ng-init="pageTitle = 'pages.divisionCollectionless.view.title'"
      ng-include=" 'shared/blocks/page_heading.html' "></div>
 <div class="content-body">
-    <div class="form-horizontal">
+    <md-content layout-padding layout="column">
 
-        <div class="form-group">
-            <label class="col-sm-2 control-label"
-                   translate="pages.divisionCollectionless.view.field.name"></label>
-            <div class="col-sm-10 form-control-static"
-                 ng-bind="divisionCollectionless.name"></div>
-        </div>
-        <div class="line line-dashed b-b line-lg pull-in"></div>
+<div class="input-container" layout layout-sm="column">
+
+            <label translate="pages.divisionCollectionless.view.field.name" flex="20"></label>
+            <div class="read-field" ng-bind="divisionCollectionless.name" flex="30"></div>
     
+</div>
+<div class="input-container" layout layout-sm="column">
 <!--ManyToOne-->
-        <div class="form-group">
-            <label class="col-sm-2 control-label" translate="pages.divisionCollectionless.view.field.headDivision"></label>
-            <a ui-sref="app.divisionCollectionless.view.divisionCollectionlessModal({modalId:divisionCollectionless.headDivision.id})" >
-            <div class="col-sm-10 form-control-static">
-            <span ng-bind="divisionCollectionless.headDivision.id"></span> <span ng-bind="divisionCollectionless.headDivision.name"></span> </div></a></div>
-        <div class="line line-dashed b-b line-lg pull-in"></div>
-    
 
-    </div>
-    <div class="line line-dashed b-b line-lg pull-in"></div>
-    <div class="form-group" ng-if="!isModal">
+            <label translate="pages.divisionCollectionless.view.field.headDivision" flex="20"></label>
+            <div class="read-field">
+                <a  ui-sref="app.divisionCollectionless.view.divisionCollectionlessModal({modalId:divisionCollectionless.headDivision.id})" flex="30">
+                <span ng-bind="divisionCollectionless.headDivision.id"></span> <span ng-bind="divisionCollectionless.headDivision.name"></span> </a></div>
+</div>
 
-        <div class="form-action pull-right">
-            <a id="editBtn" class="btn btn-default"
-               ui-sref="app.divisionCollectionless.view.edit({id:divisionCollectionless.id})">
-                <i class="fa fa-edit" translate="pages.divisionCollectionless.view.buttons.edit"></i>
-            </a>
-            <a id="deleteBtn" class="btn btn-danger"
-               ng-click="deleteDivisionCollectionless(divisionCollectionless)" mx-show-loading>
-                <i class="fa fa-trash-o" translate="pages.divisionCollectionless.view.buttons.delete"></i>
-            </a>
 
-            <a id="backBtn" class="btn btn-default" ng-click="back()">
-                <i class="fa fa-chevron-left" translate="pages.divisionCollectionless.view.buttons.back"></i>
-            </a>
-        </div>
-        <div class="clearfix"/>
-    </div>
+    <section ng-if="!isModal" layout="row" layout-sm="column" layout-align="bottom left">
+        <md-button id="editBtn"
+                   class="md-raised md-primary"
+                   ui-sref="app.divisionCollectionless.view.edit({id:divisionCollectionless.id})"
+                   translate="button.edit"
+                   aria-label="edit"
+                ></md-button>
+        <md-button id="deleteBtn"
+                   class="md-raised md-warn"
+                   ng-click="deleteDivisionCollectionless(divisionCollectionless)"
+                   mx-show-loading
+                   translate="button.delete"
+                   aria-label="delete"
+                ></md-button>
+
+        <md-button class="md-flat" ng-click="back()" translate="button.back" aria-label="back"></md-button>
+    </section>
+    </md-content>
 </div>
 
 

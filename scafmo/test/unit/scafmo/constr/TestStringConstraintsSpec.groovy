@@ -42,6 +42,9 @@ class TestStringConstraintsSpec extends Specification {
 			'valid' | 'sizeStr' | ConstraintHelper.getLongString(1)
 			'valid' | 'sizeStr' | ConstraintHelper.getLongString(100)
 			'size' | 'sizeStr' | ConstraintHelper.getLongString(101)
+			'valid' | 'textareaStr' | ConstraintHelper.getLongString(1)
+			'valid' | 'textareaStr' | ConstraintHelper.getLongString(1000)
+			'size' | 'textareaStr' | ConstraintHelper.getLongString(1001)
 			'url' | 'urlStr' | ConstraintHelper.getUrl(false)
 
 	}

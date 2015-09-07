@@ -2,117 +2,119 @@
 
 <div id="owner_form"
      ng-init="pageTitle = (isEditForm)?'pages.owner.view.edit.title':'pages.owner.create.title'" data-ng-include=" 'shared/blocks/page_heading.html' "></div>
-<div class="content-body">
-    <form name="ownerForm" class="form-validation form-horizontal" novalidate>
+
+<md-content layout-padding layout="column">
+    <form name="ownerForm" novalidate>
         <input name="version" type="hidden" ng-model="owner.version" />
 
-	<div class="form-group">
-		<label class="col-sm-2 control-label" for="address"
-               translate="pages.owner.view.edit.form.field.address"></label>
-		<div class="col-sm-10">
-            <div class="input-group input-group">
-                    <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
-                    
-                    <input id="address" name="address" class="form-control"
+    <div class="input-container" layout layout-sm="column">
+		<label for="address"
+               translate="pages.owner.view.edit.form.field.address" flex="20"/>
+        <md-input-container md-no-float="true" flex="30" layout="row">
+            
+                    <input name="address"
+                           aria-label="address"
                            type="text"
                            ng-model="owner.address"
-                 required /></div> 
-        </div>
+                 required /> 
+        </md-input-container>
 	</div>
-	<div class="line line-dashed b-b line-lg pull-in"></div>
 	
 
-	<div class="form-group">
-		<label class="col-sm-2 control-label" for="city"
-               translate="pages.owner.view.edit.form.field.city"></label>
-		<div class="col-sm-10">
-            <div class="input-group input-group">
-                    <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
-                    
-                    <input id="city" name="city" class="form-control"
+    <div class="input-container" layout layout-sm="column">
+		<label for="city"
+               translate="pages.owner.view.edit.form.field.city" flex="20"/>
+        <md-input-container md-no-float="true" flex="30" layout="row">
+            
+                    <input name="city"
+                           aria-label="city"
                            type="text"
                            ng-model="owner.city"
-                 required /></div> 
-        </div>
+                 required /> 
+        </md-input-container>
 	</div>
-	<div class="line line-dashed b-b line-lg pull-in"></div>
 	
 
-	<div class="form-group">
-		<label class="col-sm-2 control-label" for="firstName"
-               translate="pages.owner.view.edit.form.field.firstName"></label>
-		<div class="col-sm-10">
-            <div class="input-group input-group">
-                    <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
-                    
-                    <input id="firstName" name="firstName" class="form-control"
+    <div class="input-container" layout layout-sm="column">
+		<label for="firstName"
+               translate="pages.owner.view.edit.form.field.firstName" flex="20"/>
+        <md-input-container md-no-float="true" flex="30" layout="row">
+            
+                    <input name="firstName"
+                           aria-label="firstName"
                            type="text"
                            ng-model="owner.firstName"
-                 required /></div> 
-        </div>
+                 required /> 
+        </md-input-container>
 	</div>
-	<div class="line line-dashed b-b line-lg pull-in"></div>
 	
 
-	<div class="form-group">
-		<label class="col-sm-2 control-label" for="lastName"
-               translate="pages.owner.view.edit.form.field.lastName"></label>
-		<div class="col-sm-10">
-            <div class="input-group input-group">
-                    <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
-                    
-                    <input id="lastName" name="lastName" class="form-control"
+    <div class="input-container" layout layout-sm="column">
+		<label for="lastName"
+               translate="pages.owner.view.edit.form.field.lastName" flex="20"/>
+        <md-input-container md-no-float="true" flex="30" layout="row">
+            
+                    <input name="lastName"
+                           aria-label="lastName"
                            type="text"
                            ng-model="owner.lastName"
-                 required /></div> 
-        </div>
+                 required /> 
+        </md-input-container>
 	</div>
-	<div class="line line-dashed b-b line-lg pull-in"></div>
 	
 
-	<div class="form-group">
-		<label class="col-sm-2 control-label" for="telephone"
-               translate="pages.owner.view.edit.form.field.telephone"></label>
-		<div class="col-sm-10">
-            <div class="input-group input-group">
-                    <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
-                    
-                    <input id="telephone" name="telephone" class="form-control"
+    <div class="input-container" layout layout-sm="column">
+		<label for="telephone"
+               translate="pages.owner.view.edit.form.field.telephone" flex="20"/>
+        <md-input-container md-no-float="true" flex="30" layout="row">
+            
+                    <input name="telephone"
+                           aria-label="telephone"
                            type="text"
                            ng-model="owner.telephone"
-                 ng-pattern="/\d+/"  required /></div> 
-        </div>
+                 ng-pattern="/\d+/"  required /> 
+        </md-input-container>
 	</div>
-	<div class="line line-dashed b-b line-lg pull-in"></div>
 	
 
-	<div class="form-group">
-		<label class="col-sm-2 control-label" for="pets"
-               translate="pages.owner.view.edit.form.field.pets"></label>
-		<div class="col-sm-10">
+    <div class="input-container" layout layout-sm="column">
+		<label for="pets"
+               translate="pages.owner.view.edit.form.field.pets" flex="20"/>
+        <md-input-container md-no-float="true" flex="30" layout="row">
             <!--OneToMany-->
-          <tags-input
-                  name="pets"
-                  id="pets"
-                  ng-model="owner.pets">
-              <auto-complete source="autocompleteService.petQuery($query, ['id','name','birthDate'], true)" ></auto-complete>
-             </tags-input>
-        </div>
+            <md-chips
+                    ng-model="owner.pets"
+                    readonly="false"
+                    md-autocomplete-snap
+                    md-require-match
+    ><md-autocomplete
+                    md-selected-item="selectedItem_pets"
+                    md-search-text="searchText_pets"
+                    md-items="item in autocompleteService.petQuery(searchText_pets, ['id','name','birthDate'], true)"
+                    md-item-text="item.name">
+                <span md-highlight-text="searchText_pets">{{item.name}}</span>
+            </md-autocomplete>
+            <md-chip-template>
+                <span>{{$chip.name}}</span>
+            </md-chip-template>
+    </md-chips>
+        </md-input-container>
 	</div>
-	<div class="line line-dashed b-b line-lg pull-in"></div>
 	
 
-        <div class="form-group">
-            <div class="form-action pull-right">
-                <button id="ownerSubmitBtn"
-                    class="btn btn-success"
-                    type='submit'
-                    ng-disabled="ownerForm.$invalid"
-                    translate="pages.owner.view.edit.form.submit"
-                    mx-show-loading ng-click="submit(ownerForm)"></button>
-                <a class="btn btn-default" ng-click="back()" translate="pages.owner.view.edit.form.cancel" mx-show-loading></a>
-            </div>
-            <div class="clearfix"/>
-        </div>
+
+        <section layout="row" layout-sm="column" layout-align="bottom left">
+            <md-button
+                id="ownerSubmitBtn"
+                class="md-raised md-primary"
+                ng-disabled="ownerForm.$invalid"
+                ng-click="submit(ownerForm)"
+                translate="button.submit"
+                aria-label="save"
+            ></md-button>
+
+
+            <md-button class="md-flat" ng-click="back()" translate="button.back" aria-label="back"></md-button>
+        </section>
     </form>
-</div>
+</md-content>

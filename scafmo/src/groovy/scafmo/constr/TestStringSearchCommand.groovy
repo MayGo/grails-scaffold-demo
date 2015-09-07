@@ -18,6 +18,7 @@ class TestStringSearchCommand {
 	String minSizeStr
 	String notEqualStr
 	String sizeStr
+	String textareaStr
 	String uniqueStr
 	String urlStr
 
@@ -33,6 +34,7 @@ class TestStringSearchCommand {
 		minSizeStr nullable: true
 		notEqualStr nullable: true
 		sizeStr nullable: true
+		textareaStr nullable: true
 		uniqueStr nullable: true
 		urlStr nullable: true
 

@@ -102,7 +102,7 @@ $stateProvider
 		}
 
 	}).state('app.pet.view.edit.petTypeSearchModal',{
-		templateUrl: 'app/petType/petType.list.html',
+		templateUrl: 'app/petType/petType.list.modal.html',
 		controller: 'PetTypeListController'
 	})
 	
@@ -136,7 +136,7 @@ $stateProvider
 		}
 
 	}).state('app.pet.view.edit.ownerSearchModal',{
-		templateUrl: 'app/owner/owner.list.html',
+		templateUrl: 'app/owner/owner.list.modal.html',
 		controller: 'OwnerListController'
 	})
 	

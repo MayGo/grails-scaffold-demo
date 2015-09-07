@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component
 @SuppressWarnings(['EmptyMethod', 'SpaceAfterOpeningBrace'])
 class ServicesLogging {
 
-	@Pointcut('bean(*Service) && execution(public * *.*(..))')
+	@Pointcut('bean(*Service) && execution(public * *..*(..))')
 	void publicServiceMethod() {}
 
 	@Pointcut('execution(public groovy.lang.MetaClass getMetaClass()) \

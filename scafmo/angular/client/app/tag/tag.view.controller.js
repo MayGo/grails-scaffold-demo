@@ -1,7 +1,8 @@
 'use strict';
 
 angular.module('angularDemoApp')
-    .controller('TagViewController', function ($scope, $state, $stateParams, $translate, inform, TagService, tagData) {
+    .controller('TagViewController', function ($scope, $state, $stateParams, $translate, inform,
+            TagService, tagData,$mdDialog) {
 	 	$scope.tag = tagData;
 
 		if($state.current.data){
@@ -16,5 +17,8 @@ angular.module('angularDemoApp')
 		};
 		$scope.go = function(route){
 			$state.go(route);
+		};
+		$scope.closeItemViewer = function () {
+			$mdDialog.hide();
 		};
 	});

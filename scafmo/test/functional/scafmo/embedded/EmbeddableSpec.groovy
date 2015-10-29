@@ -36,28 +36,18 @@ class EmbeddableSpec extends RestQueries implements TestUtils{
 	void 'Test creating another Embeddable instance.'() {//This is for creating some data to test list sorting
 		when: 'Create embeddable'
 			response = sendCreateWithData(){
-				myAc = [
-  'mykey':  'myvalue'
-]
-				str = 'Blank 2'
 			}
 			
 			otherDomainId = response.json.id
 			
 
 		then: 'Should create and return created values'
-//			response.json.myAc == [mykey:myvalue]
-			response.json.str == 'Blank 2'
 			response.status == HttpStatus.CREATED.value()
 	}
 
 	void 'Test creating Embeddable instance.'() {
 		when: 'Create embeddable'
 			response = sendCreateWithData(){
-				myAc = [
-  'mykey':  'myvalue'
-]
-				str = 'Blank 3'
 			}
 			
 			domainId = response.json.id
@@ -65,8 +55,6 @@ class EmbeddableSpec extends RestQueries implements TestUtils{
 
 		then: 'Should create and return created values'
 
-//			response.json.myAc == [mykey:myvalue]
-			response.json.str == 'Blank 3'
 			response.status == HttpStatus.CREATED.value()
 	}
 
@@ -79,8 +67,6 @@ class EmbeddableSpec extends RestQueries implements TestUtils{
 			response = readDomainItemWithParams(domainId.toString(), "")
 		then: 'Should return correct values'
 
-//			response.json.myAc == [mykey:myvalue]
-			response.json.str == 'Blank 3'
 			response.status == HttpStatus.OK.value()
 	}
 
@@ -118,15 +104,9 @@ class EmbeddableSpec extends RestQueries implements TestUtils{
 	void 'Test updating Embeddable instance.'() {
 		when: 'Update embeddable'
 			response = sendUpdateWithData(domainId.toString()){
-				myAc = [
-  'mykey':  'myvalue'
-]
-				str = 'Blank 4'
 
 			}
 		then: 'Should return updated values'
-//			response.json.myAc == [mykey:myvalue]
-			response.json.str == 'Blank 4'
 
 			response.status == HttpStatus.OK.value()
 	}
@@ -134,22 +114,14 @@ class EmbeddableSpec extends RestQueries implements TestUtils{
 	void 'Test updating unexisting Embeddable instance.'() {
 		when: 'Update unexisting embeddable'
 			response = sendUpdateWithData('9999999999'){
-					myAc = [
-  'mykey':  'myvalue'
-]
-				str = 'Blank 4'
-
+	
 			}
 		then: 'Should not find'
 			response.status == HttpStatus.NOT_FOUND.value()
 
 		when: 'Update unexisting embeddable id not a number'
 			response = sendUpdateWithData('nonexistent'){
-					myAc = [
-  'mykey':  'myvalue'
-]
-				str = 'Blank 4'
-
+	
 			}
 		then: 'Should not find'
 			response.status == HttpStatus.UNPROCESSABLE_ENTITY.value()
@@ -265,8 +237,6 @@ class EmbeddableSpec extends RestQueries implements TestUtils{
 		where:
 			filter 	        || respSize
 			[:]                || 10
-			[myAcs:'%7B"mykey":"myvalue"%7D'] || 10 
-//Can't predict 'size'			[str:'Blank 4'] || 1 
 
 	}
 

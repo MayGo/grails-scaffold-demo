@@ -1,29 +1,29 @@
 
 
 
-<div id="personCollectionless_view" ng-init="pageTitle = 'pages.personCollectionless.view.title'"
+<div ng-if="!isModal" id="personCollectionless_view" ng-init="pageTitle = 'pages.personCollectionless.view.title'"
      ng-include=" 'shared/blocks/page_heading.html' "></div>
-<div class="content-body">
-    <md-content layout-padding layout="column">
+
+<md-content layout="column">
 
 <div class="input-container" layout layout-sm="column">
 
-            <label translate="pages.personCollectionless.view.field.age" flex="20"></label>
-            <div class="read-field" ng-bind="personCollectionless.age" flex="30"></div>
+            <label translate="pages.personCollectionless.defaultFieldName.age" flex="30"></label>
+            <div class="read-field" ng-bind="personCollectionless.age" flex="70"></div>
     
 </div>
 <div class="input-container" layout layout-sm="column">
 
-            <label translate="pages.personCollectionless.view.field.name" flex="20"></label>
-            <div class="read-field" ng-bind="personCollectionless.name" flex="30"></div>
+            <label translate="pages.personCollectionless.defaultFieldName.name" flex="30"></label>
+            <div class="read-field" ng-bind="personCollectionless.name" flex="70"></div>
     
 </div>
 <div class="input-container" layout layout-sm="column">
 <!--ManyToOne-->
 
-            <label translate="pages.personCollectionless.view.field.division" flex="20"></label>
+            <label translate="pages.personCollectionless.defaultFieldName.division" flex="30"></label>
             <div class="read-field">
-                <a  ui-sref="app.personCollectionless.view.divisionCollectionlessModal({modalId:personCollectionless.division.id})" flex="30">
+                <a  ui-sref="app.personCollectionless.view.divisionCollectionlessModal({modalId:personCollectionless.division.id})" flex="70">
                 <span ng-bind="personCollectionless.division.id"></span> <span ng-bind="personCollectionless.division.name"></span> </a></div>
 </div>
 
@@ -45,8 +45,7 @@
 
         <md-button class="md-flat" ng-click="back()" translate="button.back" aria-label="back"></md-button>
     </section>
-    </md-content>
-</div>
+</md-content>
 
 
 

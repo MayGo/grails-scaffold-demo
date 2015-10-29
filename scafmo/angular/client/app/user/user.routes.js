@@ -11,7 +11,7 @@ $stateProvider
 		.state('app.user.list', {
 			url: '/list?search',//TODO: search so that search is not an object in url
 			views: {
-				"page@app.user": {
+				'page@app.user': {
 					templateUrl: 'app/user/user.list.html',
 					controller: 'UserListController'
 				}
@@ -22,7 +22,7 @@ $stateProvider
 				parent: 'app.user.list'
 			},
 			views: {
-				"page@app.user": {
+				'page@app.user': {
 					templateUrl: 'app/user/user.form.html',
 					controller: 'UserEditController'
 				}
@@ -38,7 +38,7 @@ $stateProvider
 				parent: 'app.user.list'
 			},
 			views: {
-				"page@app.user": {
+				'page@app.user': {
 					templateUrl: 'app/user/user.view.html',
 					controller: 'UserViewController'
 				}
@@ -55,7 +55,7 @@ $stateProvider
 		}).state('app.user.view.edit',{
 			url: '/edit',
 			views: {
-				"page@app.user": {
+				'page@app.user': {
 					templateUrl: 'app/user/user.form.html',
 					controller: 'UserEditController',
 				}
@@ -82,7 +82,7 @@ $stateProvider
 				isTab:true
 			},
 			views: {
-				"tabs": {
+				'tabs': {
 					templateUrl: 'app/userRole/userRole.list.html',
 					controller: 'UserRoleListController'
 				}

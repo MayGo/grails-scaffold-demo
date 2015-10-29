@@ -14,7 +14,8 @@ describe('embeddable edit page', function() {
 		browser.clearMockModules();
 	});
   it('should contain all fields.', function() {
-	  		expect(page.myAcEl).not.toBeNull()
+	  		expect(page.jsonMapEl).not.toBeNull()
+		expect(page.myAcEl).not.toBeNull()
 		expect(page.strEl).not.toBeNull()
 
   });

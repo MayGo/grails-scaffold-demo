@@ -1,7 +1,8 @@
 'use strict';
 
 angular.module('angularDemoApp')
-    .controller('TaskViewController', function ($scope, $state, $stateParams, $translate, inform, TaskService, taskData) {
+    .controller('TaskViewController', function ($scope, $state, $stateParams, $translate, inform,
+            TaskService, taskData,$mdDialog) {
 	 	$scope.task = taskData;
 
 		if($state.current.data){
@@ -16,5 +17,8 @@ angular.module('angularDemoApp')
 		};
 		$scope.go = function(route){
 			$state.go(route);
+		};
+		$scope.closeItemViewer = function () {
+			$mdDialog.hide();
 		};
 	});

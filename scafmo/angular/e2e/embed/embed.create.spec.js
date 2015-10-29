@@ -39,9 +39,8 @@ describe('embed create page', function() {
 		page.acStrEl.sendKeys('');//no val for acStr
 		page.muFileLocationEl.sendKeys('myfile.txt');
 		page.myFileEl.sendKeys('[116, 101, 115, 116, 49]');
-		page.myEmbeddedFieldAccordionEl.click()
-		page.myEmbeddedField_myAcEl.sendKeys('');//no val for myEmbeddedField_myAc
-		page.myEmbeddedField_strEl.sendKeys('Blank 5');
+		page.myEmbeddedFieldEmbeddedEl.click()
+// no data for myEmbeddedField
 
 		expect(page.submitButton.isEnabled()).toBe(true);
 		page.submitButton.click();
@@ -58,7 +57,8 @@ describe('embed create page', function() {
 		expect(page.acStrViewEl).toBeDefined()
 		expect(page.muFileLocationViewEl).toBeDefined()
 		expect(page.myFileViewEl).toBeDefined()
-		page.myEmbeddedFieldAccordionEl.click()
+		page.myEmbeddedFieldEmbeddedEl.click()
+		expect(page.myEmbeddedField_jsonMapViewEl).toBeDefined()
 		expect(page.myEmbeddedField_myAcViewEl).toBeDefined()
 		expect(page.myEmbeddedField_strViewEl).toBeDefined()
 

@@ -1,7 +1,8 @@
 'use strict';
 
 angular.module('angularDemoApp')
-    .controller('TestOtherViewController', function ($scope, $state, $stateParams, $translate, inform, TestOtherService, testOtherData) {
+    .controller('TestOtherViewController', function ($scope, $state, $stateParams, $translate, inform,
+            TestOtherService, testOtherData,$mdDialog) {
 	 	$scope.testOther = testOtherData;
 
 		if($state.current.data){
@@ -16,5 +17,8 @@ angular.module('angularDemoApp')
 		};
 		$scope.go = function(route){
 			$state.go(route);
+		};
+		$scope.closeItemViewer = function () {
+			$mdDialog.hide();
 		};
 	});

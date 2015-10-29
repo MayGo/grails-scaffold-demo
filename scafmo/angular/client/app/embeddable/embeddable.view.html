@@ -1,16 +1,16 @@
 
 
 
-<div id="embeddable_view" ng-init="pageTitle = 'pages.embeddable.view.title'"
+<div ng-if="!isModal" id="embeddable_view" ng-init="pageTitle = 'pages.embeddable.view.title'"
      ng-include=" 'shared/blocks/page_heading.html' "></div>
-<div class="content-body">
-    <md-content layout-padding layout="column">
+
+<md-content layout="column">
 
 <div class="input-container" layout layout-sm="column">
 <!--Map-->
 
-        <label translate="pages.embeddable.view.field.jsonMap" flex="20"></label>
-        <div class="read-field" class="jsonView jsonRead" flex="30">
+        <label translate="pages.embeddable.defaultFieldName.jsonMap" flex="30"></label>
+        <div class="read-field" class="jsonView jsonRead" flex="70">
             <json child="embeddable.jsonMap" default-collapsed="false" type="object"></json>
         </div>
     
@@ -18,16 +18,16 @@
 <div class="input-container" layout layout-sm="column">
 <!--Autocomplete-->
 
-        <label translate="pages.embeddable.view.field.myAc" flex="20"></label>
+        <label translate="pages.embeddable.defaultFieldName.myAc" flex="30"></label>
         <div class="read-field" ng-bind="embeddable.myAc && autocompleteService.testStringSimpleFormatLabel(embeddable.myAc)"
-             flex="30"
+             flex="70"
                 ></div>
 
 </div>
 <div class="input-container" layout layout-sm="column">
 
-            <label translate="pages.embeddable.view.field.str" flex="20"></label>
-            <div class="read-field" ng-bind="embeddable.str" flex="30"></div>
+            <label translate="pages.embeddable.defaultFieldName.str" flex="30"></label>
+            <div class="read-field" ng-bind="embeddable.str" flex="70"></div>
     
 </div>
 
@@ -49,26 +49,27 @@
 
         <md-button class="md-flat" ng-click="back()" translate="button.back" aria-label="back"></md-button>
     </section>
-    </md-content>
-</div>
+</md-content>
 
 
 <div ng-if="!isModal">
-    <tabset>
+    <md-content class="md-padding">
+        <md-tabs md-dynamic-height md-border-bottom>
 
+        <md-tab ui-sref="app.embeddable.view.embed({relationName:'myEmbeddedFields'})"
+             ui-sref-active="active" label="asdsd">
+            <md-tab-label>
+                <span translate="pages.embed.view.lists"
+                        translate-value-isval="{{::'pages.embed.defaultFieldName.myEmbeddedField' | translate }}"
+                        translate-value-inval="{{::'pages.embed.name' | translate }}"></span>
+            </md-tab-label>
+        </md-tab>
 
-        <tab ui-sref="app.embeddable.view.embed({relationName:'myEmbeddedFields'})"
-             ui-sref-active="active">
-            <tab-heading
-                   translate="pages.embed.view.lists"
-                   translate-value-isval="{{::'pages.embed.view.field.myEmbeddedField' | translate }}"
-                   translate-value-inval="{{::'pages.embed.name' | translate }}">
-            </tab-heading>
-        </tab>
+    </md-tabs>
 
-    </tabset>
-
-    <div ui-view="tabs" ><div class="content-body">{{::'pages.embeddable.view.selecttab' | translate}}</div></div>
+    <div ui-view="tabs" ><div class="content-body">{{::'tabs.selecttab' | translate}}</div></div>
+    </md-content>
 </div>
+
     
 

@@ -17,6 +17,8 @@ import scafmo.collection.PersonCollectionless
 import scafmo.constr.TestNumber
 import scafmo.constr.TestOther
 import scafmo.constr.TestString
+import scafmo.embedded.Embed
+import scafmo.embedded.Embeddable
 import scafmo.security.Role
 import scafmo.security.User
 import scafmo.security.UserRole
@@ -62,6 +64,8 @@ class TestDataGeneratorService {
 				TestNumber.build()
 				TestOther.build()
 				TestString.build()
+				Embed.build()
+				Embeddable.build()
 				Role.build()
 				User.build()
 				UserRole.build(role: Role.build(), user: User.build())

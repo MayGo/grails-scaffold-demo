@@ -80,7 +80,7 @@ grails.project.dependency.resolution = {
         //runtime ":database-migration:1.4.0"
 
 		//compile ':scaffold-angular:1.3.5'
-		compile ':scaffold-angular-smit:1.3.11'
+		compile ':scaffold-angular:1.3.14'
     }
 }
 

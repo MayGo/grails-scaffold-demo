@@ -1,7 +1,8 @@
 'use strict';
 
 angular.module('angularDemoApp')
-    .controller('PersonCollectionViewController', function ($scope, $state, $stateParams, $translate, inform, PersonCollectionService, personCollectionData) {
+    .controller('PersonCollectionViewController', function ($scope, $state, $stateParams, $translate, inform,
+            PersonCollectionService, personCollectionData,$mdDialog) {
 	 	$scope.personCollection = personCollectionData;
 
 		if($state.current.data){
@@ -16,5 +17,8 @@ angular.module('angularDemoApp')
 		};
 		$scope.go = function(route){
 			$state.go(route);
+		};
+		$scope.closeItemViewer = function () {
+			$mdDialog.hide();
 		};
 	});

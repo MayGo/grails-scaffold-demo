@@ -1,7 +1,8 @@
 'use strict';
 
 angular.module('angularDemoApp')
-    .controller('UserRoleViewController', function ($scope, $state, $stateParams, $translate, inform, UserRoleService, userRoleData) {
+    .controller('UserRoleViewController', function ($scope, $state, $stateParams, $translate, inform,
+            UserRoleService, userRoleData,$mdDialog) {
 	 	$scope.userRole = userRoleData;
 
 		if($state.current.data){
@@ -16,5 +17,8 @@ angular.module('angularDemoApp')
 		};
 		$scope.go = function(route){
 			$state.go(route);
+		};
+		$scope.closeItemViewer = function () {
+			$mdDialog.hide();
 		};
 	});

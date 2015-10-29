@@ -4,12 +4,18 @@
 <div>
 
 
-<md-content ng-init="isSearchOpen=true">
+<md-content>
     <md-toolbar class="md-gray" ng-click="isSearchOpen = !isSearchOpen">
         <div class="md-toolbar-tools">
-            <md-button class="md-raised" translate="button.search"></md-button>
+            <md-button class="md-raised">
+                <md-icon md-font-set="material-icons" class="md-primary">search</md-icon>
+                <span translate="button.search"></span>
+            </md-button>
             <span flex></span>
-            <md-button class="md-raised" ng-if="!isModal" ui-sref="app.testNumber.create" translate="pages.testNumber.list.new"></md-button>
+            <md-button class="md-raised" ng-if="!isModal" ui-sref="app.testNumber.create" ng-click="$event.stopPropagation();" >
+                <md-icon md-font-set="material-icons" class="md-primary">add_circle</md-icon>
+                <span translate="pages.testNumber.list.new"></span>
+            </md-button>
         </div>
     </md-toolbar>
     <md-content ng-if="isSearchOpen" layout-padding>
@@ -20,175 +26,165 @@
                      md-cols-sm="1" md-cols-md="4"
                      md-gutter="6px"
                    >
-            
-                  <md-grid-tile class="gray"
-                                  md-rowspan="2" md-colspan="3" md-colspan-sm="1">
-    <md-input-container flex>
-<label translate="pages.testNumber.list.search.placeholder.doubleNr"></label>
+            <md-grid-tile class="gray" md-rowspan="1" md-colspan="1" md-colspan-sm="1">
+                        <md-input-container flex>
+                    <label translate="pages.testNumber.defaultFieldName.doubleNr"></label>
                     <input
                         	name="doubleNr"
                         	aria-label="doubleNr"
                         	ng-model="search.doubleNr"
                         	  type="number"  /> </md-input-container></md-grid-tile>
-            
-                  <md-grid-tile class="gray"
-                                  md-rowspan="2" md-colspan="3" md-colspan-sm="1">
-    <md-input-container flex>
-<label translate="pages.testNumber.list.search.placeholder.floatNr"></label>
+<md-grid-tile class="gray" md-rowspan="1" md-colspan="1" md-colspan-sm="1">
+                        <md-input-container flex>
+                    <label translate="pages.testNumber.defaultFieldName.floatNr"></label>
                     <input
                         	name="floatNr"
                         	aria-label="floatNr"
                         	ng-model="search.floatNr"
                         	  type="number"  /> </md-input-container></md-grid-tile>
-            
-                  <md-grid-tile class="gray"
-                                  md-rowspan="2" md-colspan="3" md-colspan-sm="1">
-    <md-input-container flex>
-<label translate="pages.testNumber.list.search.placeholder.floatNrScale"></label>
+<md-grid-tile class="gray" md-rowspan="1" md-colspan="1" md-colspan-sm="1">
+                        <md-input-container flex>
+                    <label translate="pages.testNumber.defaultFieldName.floatNrScale"></label>
                     <input
                         	name="floatNrScale"
                         	aria-label="floatNrScale"
                         	ng-model="search.floatNrScale"
                         	  type="number"  /> </md-input-container></md-grid-tile>
-            
-                  <md-grid-tile class="gray"
-                                  md-rowspan="2" md-colspan="3" md-colspan-sm="1">
-    <md-input-container flex>
-<label translate="pages.testNumber.list.search.placeholder.integerNr"></label>
+<md-grid-tile class="gray" md-rowspan="1" md-colspan="1" md-colspan-sm="1">
+                        <md-input-container flex>
+                    <label translate="pages.testNumber.defaultFieldName.integerNr"></label>
                     <input
                         	name="integerNr"
                         	aria-label="integerNr"
                         	ng-model="search.integerNr"
                         	  type="number"  /> </md-input-container></md-grid-tile>
-            
-                  <md-grid-tile class="gray"
-                                  md-rowspan="2" md-colspan="3" md-colspan-sm="1">
-    <md-input-container flex>
-<label translate="pages.testNumber.list.search.placeholder.integerNrInList"></label>
+<md-grid-tile class="gray" md-rowspan="1" md-colspan="1" md-colspan-sm="1">
+                        <md-input-container flex>
+                    <label translate="pages.testNumber.defaultFieldName.integerNrInList"></label>
                     <input
                         	name="integerNrInList"
                         	aria-label="integerNrInList"
                         	ng-model="search.integerNrInList"
                         	  type="number"  /> </md-input-container></md-grid-tile>
-            
-                  <md-grid-tile class="gray"
-                                  md-rowspan="2" md-colspan="3" md-colspan-sm="1">
-    <md-input-container flex>
-<label translate="pages.testNumber.list.search.placeholder.integerNrMax"></label>
+<md-grid-tile class="gray" md-rowspan="1" md-colspan="1" md-colspan-sm="1">
+                        <md-input-container flex>
+                    <label translate="pages.testNumber.defaultFieldName.integerNrMax"></label>
                     <input
                         	name="integerNrMax"
                         	aria-label="integerNrMax"
                         	ng-model="search.integerNrMax"
                         	  type="number"  max="3"  /> </md-input-container></md-grid-tile>
-            
-                  <md-grid-tile class="gray"
-                                  md-rowspan="2" md-colspan="3" md-colspan-sm="1">
-    <md-input-container flex>
-<label translate="pages.testNumber.list.search.placeholder.integerNrMin"></label>
+<md-grid-tile class="gray" md-rowspan="1" md-colspan="1" md-colspan-sm="1">
+                        <md-input-container flex>
+                    <label translate="pages.testNumber.defaultFieldName.integerNrMin"></label>
                     <input
                         	name="integerNrMin"
                         	aria-label="integerNrMin"
                         	ng-model="search.integerNrMin"
                         	  type="number"  min="2"  /> </md-input-container></md-grid-tile>
-            
-                  <md-grid-tile class="gray"
-                                  md-rowspan="2" md-colspan="3" md-colspan-sm="1">
-    <md-input-container flex>
-<label translate="pages.testNumber.list.search.placeholder.integerNrNotEqual"></label>
+<md-grid-tile class="gray" md-rowspan="1" md-colspan="1" md-colspan-sm="1">
+                        <md-input-container flex>
+                    <label translate="pages.testNumber.defaultFieldName.integerNrNotEqual"></label>
                     <input
                         	name="integerNrNotEqual"
                         	aria-label="integerNrNotEqual"
                         	ng-model="search.integerNrNotEqual"
                         	  type="number"  /> </md-input-container></md-grid-tile>
-            
-                  <md-grid-tile class="gray"
-                                  md-rowspan="2" md-colspan="3" md-colspan-sm="1">
-    <md-input-container flex>
-<label translate="pages.testNumber.list.search.placeholder.integerNrRange"></label>
+<md-grid-tile class="gray" md-rowspan="1" md-colspan="1" md-colspan-sm="1">
+                        <md-input-container flex>
+                    <label translate="pages.testNumber.defaultFieldName.integerNrRange"></label>
                     <input
                         	name="integerNrRange"
                         	aria-label="integerNrRange"
                         	ng-model="search.integerNrRange"
                         	  type="range"  min="18"  max="65"  /> </md-input-container></md-grid-tile>
-            
-                  <md-grid-tile class="gray"
-                                  md-rowspan="2" md-colspan="3" md-colspan-sm="1">
-    <md-input-container flex>
-<label translate="pages.testNumber.list.search.placeholder.integerNrUnique"></label>
+<md-grid-tile class="gray" md-rowspan="1" md-colspan="1" md-colspan-sm="1">
+                        <md-input-container flex>
+                    <label translate="pages.testNumber.defaultFieldName.integerNrUnique"></label>
                     <input
                         	name="integerNrUnique"
                         	aria-label="integerNrUnique"
                         	ng-model="search.integerNrUnique"
                         	  type="number"  /> </md-input-container></md-grid-tile>
-            
-                  <md-grid-tile class="gray"
-                                  md-rowspan="2" md-colspan="3" md-colspan-sm="1">
-    <md-input-container flex>
-<label translate="pages.testNumber.list.search.placeholder.longNr"></label>
+<md-grid-tile class="gray" md-rowspan="1" md-colspan="1" md-colspan-sm="1">
+                        <md-input-container flex>
+                    <label translate="pages.testNumber.defaultFieldName.longNr"></label>
                     <input
                         	name="longNr"
                         	aria-label="longNr"
                         	ng-model="search.longNr"
                         	  type="number"  /> </md-input-container></md-grid-tile>
-            
+
             </md-grid-list>
-    
-                </form>
-            </md-content>
-</md-item>
+
+        </form>
+    </md-content>
+
     <md-content layout-padding layout="column" class="list-search">
         <div class="list-search-table" loading-container="tableParams.settings().$loading">
 	      <table class="table table-responsive" ng-table="tableParams" show-filter="true" >
 	      	<tbody>
 				<tr ng-repeat="testNumber in $data">
                     <td class="text-left" >
-                        <a class="btn btn-default btn-xs" ui-sref="app.testNumber.view({id:testNumber.id})" ng-if="!isModal">
-                            <i class="fa fa-eye"></i>
+                        <a ui-sref="app.testNumber.view({id:testNumber.id})" ng-if="!isModal" >
+                            <md-icon md-font-set="material-icons"
+                                     ng-class="{'md-primary':hovering}"
+                                     ng-mouseenter="hovering = true"
+                                     ng-mouseleave="hovering = false">remove_red_eye</md-icon>
                         </a>
-                        <a class="btn btn-default btn-xs" ui-sref="app.testNumber.view.edit({id:testNumber.id})" ng-if="!isModal">
-                            <i class="fa fa-edit"></i>
+                        <a ui-sref="app.testNumber.view.edit({id:testNumber.id})" ng-if="!isModal">
+                            <md-icon md-font-set="material-icons"
+                                     ng-class="{'md-accent':hovering}"
+                                     ng-mouseenter="hovering = true"
+                                     ng-mouseleave="hovering = false">edit</md-icon>
                         </a>
-                        <a class="btn btn-danger btn-xs" ng-click="deleteTestNumber(testNumber)" mx-show-loading ng-if="!isModal">
-                            <i class="fa fa-trash-o"></i>
+                        <a ng-click="deleteTestNumber(testNumber)" mx-show-loading ng-if="!isModal">
+                            <md-icon md-font-set="material-icons"
+                                     ng-class="{'md-warn':hovering}"
+                                     ng-mouseenter="hovering = true"
+                                     ng-mouseleave="hovering = false">delete</md-icon>
                         </a>
-                        <a class="btn btn-default btn-xs" ng-click="selectItemToField(testNumber)" ng-if="isModal">
-                            <i class="fa fa-plus"></i>
+                        <a ng-click="selectItemToField(testNumber)" ng-if="isModal">
+                            <md-icon md-font-set="material-icons"
+                                     ng-class="{'md-primary':hovering}"
+                                     ng-mouseenter="hovering = true"
+                                     ng-mouseleave="hovering = false">add_circle</md-icon>
                         </a>
                     </td>
 
-                    <td data-title="'pages.testNumber.list.table.header.id' | translate" sortable="'id'">{{::testNumber.id}}</td>					
+                    <td data-title="'pages.testNumber.defaultFieldName.id' | translate" sortable="'id'">{{::testNumber.id}}</td>					
 			   		
-        <td data-title="'pages.testNumber.list.table.header.doubleNr' | translate" sortable="'doubleNr'">
+        <td data-title="'pages.testNumber.defaultFieldName.doubleNr' | translate" sortable="'doubleNr'">
 {{::testNumber.doubleNr}}</td>				 	
 			   		
-        <td data-title="'pages.testNumber.list.table.header.floatNr' | translate" sortable="'floatNr'">
+        <td data-title="'pages.testNumber.defaultFieldName.floatNr' | translate" sortable="'floatNr'">
 {{::testNumber.floatNr}}</td>				 	
 			   		
-        <td data-title="'pages.testNumber.list.table.header.floatNrScale' | translate" sortable="'floatNrScale'">
+        <td data-title="'pages.testNumber.defaultFieldName.floatNrScale' | translate" sortable="'floatNrScale'">
 {{::testNumber.floatNrScale}}</td>				 	
 			   		
-        <td data-title="'pages.testNumber.list.table.header.integerNr' | translate" sortable="'integerNr'">
+        <td data-title="'pages.testNumber.defaultFieldName.integerNr' | translate" sortable="'integerNr'">
 {{::testNumber.integerNr}}</td>				 	
 			   		
-        <td data-title="'pages.testNumber.list.table.header.integerNrInList' | translate" sortable="'integerNrInList'">
+        <td data-title="'pages.testNumber.defaultFieldName.integerNrInList' | translate" sortable="'integerNrInList'">
 {{::testNumber.integerNrInList}}</td>				 	
 			   		
-        <td data-title="'pages.testNumber.list.table.header.integerNrMax' | translate" sortable="'integerNrMax'">
+        <td data-title="'pages.testNumber.defaultFieldName.integerNrMax' | translate" sortable="'integerNrMax'">
 {{::testNumber.integerNrMax}}</td>				 	
 			   		
-        <td data-title="'pages.testNumber.list.table.header.integerNrMin' | translate" sortable="'integerNrMin'">
+        <td data-title="'pages.testNumber.defaultFieldName.integerNrMin' | translate" sortable="'integerNrMin'">
 {{::testNumber.integerNrMin}}</td>				 	
 			   		
-        <td data-title="'pages.testNumber.list.table.header.integerNrNotEqual' | translate" sortable="'integerNrNotEqual'">
+        <td data-title="'pages.testNumber.defaultFieldName.integerNrNotEqual' | translate" sortable="'integerNrNotEqual'">
 {{::testNumber.integerNrNotEqual}}</td>				 	
 			   		
-        <td data-title="'pages.testNumber.list.table.header.integerNrRange' | translate" sortable="'integerNrRange'">
+        <td data-title="'pages.testNumber.defaultFieldName.integerNrRange' | translate" sortable="'integerNrRange'">
 {{::testNumber.integerNrRange}}</td>				 	
 			   		
-        <td data-title="'pages.testNumber.list.table.header.integerNrUnique' | translate" sortable="'integerNrUnique'">
+        <td data-title="'pages.testNumber.defaultFieldName.integerNrUnique' | translate" sortable="'integerNrUnique'">
 {{::testNumber.integerNrUnique}}</td>				 	
 			   		
-        <td data-title="'pages.testNumber.list.table.header.longNr' | translate" sortable="'longNr'">
+        <td data-title="'pages.testNumber.defaultFieldName.longNr' | translate" sortable="'longNr'">
 {{::testNumber.longNr}}</td>				 	
 
 				</tr>

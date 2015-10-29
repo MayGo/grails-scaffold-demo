@@ -1,45 +1,45 @@
 
 
 
-<div id="owner_view" ng-init="pageTitle = 'pages.owner.view.title'"
+<div ng-if="!isModal" id="owner_view" ng-init="pageTitle = 'pages.owner.view.title'"
      ng-include=" 'shared/blocks/page_heading.html' "></div>
-<div class="content-body">
-    <md-content layout-padding layout="column">
+
+<md-content layout="column">
 
 <div class="input-container" layout layout-sm="column">
 
-            <label translate="pages.owner.view.field.address" flex="20"></label>
-            <div class="read-field" ng-bind="owner.address" flex="30"></div>
+            <label translate="pages.owner.defaultFieldName.address" flex="30"></label>
+            <div class="read-field" ng-bind="owner.address" flex="70"></div>
     
 </div>
 <div class="input-container" layout layout-sm="column">
 
-            <label translate="pages.owner.view.field.city" flex="20"></label>
-            <div class="read-field" ng-bind="owner.city" flex="30"></div>
+            <label translate="pages.owner.defaultFieldName.city" flex="30"></label>
+            <div class="read-field" ng-bind="owner.city" flex="70"></div>
     
 </div>
 <div class="input-container" layout layout-sm="column">
 
-            <label translate="pages.owner.view.field.firstName" flex="20"></label>
-            <div class="read-field" ng-bind="owner.firstName" flex="30"></div>
+            <label translate="pages.owner.defaultFieldName.firstName" flex="30"></label>
+            <div class="read-field" ng-bind="owner.firstName" flex="70"></div>
     
 </div>
 <div class="input-container" layout layout-sm="column">
 
-            <label translate="pages.owner.view.field.lastName" flex="20"></label>
-            <div class="read-field" ng-bind="owner.lastName" flex="30"></div>
+            <label translate="pages.owner.defaultFieldName.lastName" flex="30"></label>
+            <div class="read-field" ng-bind="owner.lastName" flex="70"></div>
     
 </div>
 <div class="input-container" layout layout-sm="column">
 
-            <label translate="pages.owner.view.field.telephone" flex="20"></label>
-            <div class="read-field" ng-bind="owner.telephone" flex="30"></div>
+            <label translate="pages.owner.defaultFieldName.telephone" flex="30"></label>
+            <div class="read-field" ng-bind="owner.telephone" flex="70"></div>
     
 </div>
 <div class="input-container" layout layout-sm="column">
 <!--OneToMany-->
-            <label translate="pages.owner.view.field.pets" flex="20"></label>
-            <div class="read-field" ng-bind="owner.pets" flex="30"></div>
+            <label translate="pages.owner.defaultFieldName.pets" flex="30"></label>
+            <div class="read-field" ng-bind="owner.pets" flex="70"></div>
     
 </div>
 
@@ -61,26 +61,27 @@
 
         <md-button class="md-flat" ng-click="back()" translate="button.back" aria-label="back"></md-button>
     </section>
-    </md-content>
-</div>
+</md-content>
 
 
 <div ng-if="!isModal">
-    <tabset>
+    <md-content class="md-padding">
+        <md-tabs md-dynamic-height md-border-bottom>
 
+        <md-tab ui-sref="app.owner.view.pet({relationName:'owners'})"
+             ui-sref-active="active" label="asdsd">
+            <md-tab-label>
+                <span translate="pages.pet.view.lists"
+                        translate-value-isval="{{::'pages.pet.defaultFieldName.owner' | translate }}"
+                        translate-value-inval="{{::'pages.pet.name' | translate }}"></span>
+            </md-tab-label>
+        </md-tab>
 
-        <tab ui-sref="app.owner.view.pet({relationName:'owners'})"
-             ui-sref-active="active">
-            <tab-heading
-                   translate="pages.pet.view.lists"
-                   translate-value-isval="{{::'pages.pet.view.field.owner' | translate }}"
-                   translate-value-inval="{{::'pages.pet.name' | translate }}">
-            </tab-heading>
-        </tab>
+    </md-tabs>
 
-    </tabset>
-
-    <div ui-view="tabs" ><div class="content-body">{{::'pages.owner.view.selecttab' | translate}}</div></div>
+    <div ui-view="tabs" ><div class="content-body">{{::'tabs.selecttab' | translate}}</div></div>
+    </md-content>
 </div>
+
     
 

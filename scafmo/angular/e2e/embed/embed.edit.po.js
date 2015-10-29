@@ -14,7 +14,8 @@ var EditPage = function() {
 		this.acStrEl = element(by.model('embed.acStr'));
 		this.muFileLocationEl = element(by.model('embed.muFileLocation'));
 		this.myFileEl = element(by.model('embed.myFile'));
-		//page.myEmbeddedFieldAccordionEl.click()
+		//page.myEmbeddedFieldEmbeddedEl.click()
+		this.myEmbeddedField_jsonMapEl = element(by.model('embeddable.jsonMap'));
 		this.myEmbeddedField_myAcEl = element(by.model('embeddable.myAc'));
 		this.myEmbeddedField_strEl = element(by.model('embeddable.str'));
 

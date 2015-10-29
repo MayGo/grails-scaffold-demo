@@ -11,7 +11,7 @@ $stateProvider
 		.state('app.embed.list', {
 			url: '/list?search',//TODO: search so that search is not an object in url
 			views: {
-				"page@app.embed": {
+				'page@app.embed': {
 					templateUrl: 'app/embed/embed.list.html',
 					controller: 'EmbedListController'
 				}
@@ -22,7 +22,7 @@ $stateProvider
 				parent: 'app.embed.list'
 			},
 			views: {
-				"page@app.embed": {
+				'page@app.embed': {
 					templateUrl: 'app/embed/embed.form.html',
 					controller: 'EmbedEditController'
 				}
@@ -38,7 +38,7 @@ $stateProvider
 				parent: 'app.embed.list'
 			},
 			views: {
-				"page@app.embed": {
+				'page@app.embed': {
 					templateUrl: 'app/embed/embed.view.html',
 					controller: 'EmbedViewController'
 				}
@@ -55,7 +55,7 @@ $stateProvider
 		}).state('app.embed.view.edit',{
 			url: '/edit',
 			views: {
-				"page@app.embed": {
+				'page@app.embed': {
 					templateUrl: 'app/embed/embed.form.html',
 					controller: 'EmbedEditController',
 				}

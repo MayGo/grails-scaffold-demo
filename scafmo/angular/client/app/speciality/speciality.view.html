@@ -1,15 +1,15 @@
 
 
 
-<div id="speciality_view" ng-init="pageTitle = 'pages.speciality.view.title'"
+<div ng-if="!isModal" id="speciality_view" ng-init="pageTitle = 'pages.speciality.view.title'"
      ng-include=" 'shared/blocks/page_heading.html' "></div>
-<div class="content-body">
-    <md-content layout-padding layout="column">
+
+<md-content layout="column">
 
 <div class="input-container" layout layout-sm="column">
 
-            <label translate="pages.speciality.view.field.name" flex="20"></label>
-            <div class="read-field" ng-bind="speciality.name" flex="30"></div>
+            <label translate="pages.speciality.defaultFieldName.name" flex="30"></label>
+            <div class="read-field" ng-bind="speciality.name" flex="70"></div>
     
 </div>
 
@@ -31,8 +31,7 @@
 
         <md-button class="md-flat" ng-click="back()" translate="button.back" aria-label="back"></md-button>
     </section>
-    </md-content>
-</div>
+</md-content>
 
 
 

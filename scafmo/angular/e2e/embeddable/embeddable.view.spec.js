@@ -19,6 +19,7 @@ describe('embeddable view page', function() {
 
   it('should contain all fields.', function() {
     
+    expect(page.jsonMapEl).not.toBeNull()    
     expect(page.myAcEl).not.toBeNull()    
     expect(page.strEl).not.toBeNull()    
   });

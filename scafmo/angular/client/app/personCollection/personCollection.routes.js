@@ -11,7 +11,7 @@ $stateProvider
 		.state('app.personCollection.list', {
 			url: '/list?search',//TODO: search so that search is not an object in url
 			views: {
-				"page@app.personCollection": {
+				'page@app.personCollection': {
 					templateUrl: 'app/personCollection/personCollection.list.html',
 					controller: 'PersonCollectionListController'
 				}
@@ -22,7 +22,7 @@ $stateProvider
 				parent: 'app.personCollection.list'
 			},
 			views: {
-				"page@app.personCollection": {
+				'page@app.personCollection': {
 					templateUrl: 'app/personCollection/personCollection.form.html',
 					controller: 'PersonCollectionEditController'
 				}
@@ -38,7 +38,7 @@ $stateProvider
 				parent: 'app.personCollection.list'
 			},
 			views: {
-				"page@app.personCollection": {
+				'page@app.personCollection': {
 					templateUrl: 'app/personCollection/personCollection.view.html',
 					controller: 'PersonCollectionViewController'
 				}
@@ -55,7 +55,7 @@ $stateProvider
 		}).state('app.personCollection.view.edit',{
 			url: '/edit',
 			views: {
-				"page@app.personCollection": {
+				'page@app.personCollection': {
 					templateUrl: 'app/personCollection/personCollection.form.html',
 					controller: 'PersonCollectionEditController',
 				}
@@ -77,13 +77,10 @@ $stateProvider
 		data:{
 			isModal:true
 		},
-		onEnter: function($stateParams, $state, $modal, $resource) {
+		onEnter: function($stateParams, $state, $mdDialog) {
 			var modalId = $stateParams.modalId;
-
-			$modal.open({
-				size:'lg',
-				templateUrl: 'app/divisionCollection/divisionCollection.view.html',
-
+			$mdDialog.show({
+				templateUrl: 'app/divisionCollection/divisionCollection.view.modal.html',
 				resolve: {
 					divisionCollectionData: function($stateParams, DivisionCollectionService){
 						//TODO: Add parent ($stateParams.id) to query
@@ -95,10 +92,10 @@ $stateProvider
 					}
 				},
 				controller: 'DivisionCollectionViewController',
-			}).result.finally(function(item) {
+
+			}).then(function () {
 				$state.go('^');
 			});
-
 		}
 
 	}).state('app.personCollection.view.edit.divisionCollectionSearchModal',{

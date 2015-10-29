@@ -16,22 +16,22 @@ module.exports = function(){
 
 			var acCustomMapUrl = appConfig['testStringUrl'] || 'http://localhost:8080/testStringUrl';
 			var acCustomMapRe = new RegExp(quote(acCustomMapUrl) + ".*");
-			$httpBackend.whenGET(acCustomMapRe).respond(function(method, url){return [200, [{"id":null,"version":null,"acCustomMap":{"mykey":"myvalue"},"acMap":{"mykey":"myvalue"},"acStr":"Blank 2","muFileLocation":"myfile.txt","myFile":[116,101,115,116,49]}]]});//list
+			$httpBackend.whenGET(acCustomMapRe).respond(function(method, url){return [200, [{"id":null,"version":null,"acCustomMap":{"mykey":"myvalue"},"acMap":{"mykey":"myvalue"},"acStr":"Blank 152","muFileLocation":"myfile.txt","myFile":[116,101,115,116,49]}]]});//list
 			
 
 			var acMapUrl = appConfig['testStringUrl'] || 'http://localhost:8080/testStringUrl';
 			var acMapRe = new RegExp(quote(acMapUrl) + ".*");
-			$httpBackend.whenGET(acMapRe).respond(function(method, url){return [200, [{"id":null,"version":null,"acCustomMap":{"mykey":"myvalue"},"acMap":{"mykey":"myvalue"},"acStr":"Blank 2","muFileLocation":"myfile.txt","myFile":[116,101,115,116,49]}]]});//list
+			$httpBackend.whenGET(acMapRe).respond(function(method, url){return [200, [{"id":null,"version":null,"acCustomMap":{"mykey":"myvalue"},"acMap":{"mykey":"myvalue"},"acStr":"Blank 152","muFileLocation":"myfile.txt","myFile":[116,101,115,116,49]}]]});//list
 			
 
 			var acStrUrl = appConfig['testStringUrl'] || 'http://localhost:8080/testStringUrl';
 			var acStrRe = new RegExp(quote(acStrUrl) + ".*");
-			$httpBackend.whenGET(acStrRe).respond(function(method, url){return [200, [{"id":null,"version":null,"acCustomMap":{"mykey":"myvalue"},"acMap":{"mykey":"myvalue"},"acStr":"Blank 2","muFileLocation":"myfile.txt","myFile":[116,101,115,116,49]}]]});//list
+			$httpBackend.whenGET(acStrRe).respond(function(method, url){return [200, [{"id":null,"version":null,"acCustomMap":{"mykey":"myvalue"},"acMap":{"mykey":"myvalue"},"acStr":"Blank 152","muFileLocation":"myfile.txt","myFile":[116,101,115,116,49]}]]});//list
 			
 
 			var myEmbeddedField_myAcUrl = appConfig['testStringUrl'] || 'http://localhost:8080/testStringUrl';
 			var myEmbeddedField_myAcRe = new RegExp(quote(myEmbeddedField_myAcUrl) + ".*");
-			$httpBackend.whenGET(myEmbeddedField_myAcRe).respond(function(method, url){return [200, [{"id":null,"version":null,"myAc":{"mykey":"myvalue"},"str":"Blank 5"}]]});//list
+			$httpBackend.whenGET(myEmbeddedField_myAcRe).respond(function(method, url){return [200, [[]]]});//list
 			
 
 			//For everything else, don't mock

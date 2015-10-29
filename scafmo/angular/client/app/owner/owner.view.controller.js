@@ -1,7 +1,8 @@
 'use strict';
 
 angular.module('angularDemoApp')
-    .controller('OwnerViewController', function ($scope, $state, $stateParams, $translate, inform, OwnerService, ownerData) {
+    .controller('OwnerViewController', function ($scope, $state, $stateParams, $translate, inform,
+            OwnerService, ownerData,$mdDialog) {
 	 	$scope.owner = ownerData;
 
 		if($state.current.data){
@@ -16,5 +17,8 @@ angular.module('angularDemoApp')
 		};
 		$scope.go = function(route){
 			$state.go(route);
+		};
+		$scope.closeItemViewer = function () {
+			$mdDialog.hide();
 		};
 	});

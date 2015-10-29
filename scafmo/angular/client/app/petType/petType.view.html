@@ -1,15 +1,15 @@
 
 
 
-<div id="petType_view" ng-init="pageTitle = 'pages.petType.view.title'"
+<div ng-if="!isModal" id="petType_view" ng-init="pageTitle = 'pages.petType.view.title'"
      ng-include=" 'shared/blocks/page_heading.html' "></div>
-<div class="content-body">
-    <md-content layout-padding layout="column">
+
+<md-content layout="column">
 
 <div class="input-container" layout layout-sm="column">
 
-            <label translate="pages.petType.view.field.name" flex="20"></label>
-            <div class="read-field" ng-bind="petType.name" flex="30"></div>
+            <label translate="pages.petType.defaultFieldName.name" flex="30"></label>
+            <div class="read-field" ng-bind="petType.name" flex="70"></div>
     
 </div>
 
@@ -31,26 +31,27 @@
 
         <md-button class="md-flat" ng-click="back()" translate="button.back" aria-label="back"></md-button>
     </section>
-    </md-content>
-</div>
+</md-content>
 
 
 <div ng-if="!isModal">
-    <tabset>
+    <md-content class="md-padding">
+        <md-tabs md-dynamic-height md-border-bottom>
 
+        <md-tab ui-sref="app.petType.view.pet({relationName:'types'})"
+             ui-sref-active="active" label="asdsd">
+            <md-tab-label>
+                <span translate="pages.pet.view.lists"
+                        translate-value-isval="{{::'pages.pet.defaultFieldName.type' | translate }}"
+                        translate-value-inval="{{::'pages.pet.name' | translate }}"></span>
+            </md-tab-label>
+        </md-tab>
 
-        <tab ui-sref="app.petType.view.pet({relationName:'types'})"
-             ui-sref-active="active">
-            <tab-heading
-                   translate="pages.pet.view.lists"
-                   translate-value-isval="{{::'pages.pet.view.field.type' | translate }}"
-                   translate-value-inval="{{::'pages.pet.name' | translate }}">
-            </tab-heading>
-        </tab>
+    </md-tabs>
 
-    </tabset>
-
-    <div ui-view="tabs" ><div class="content-body">{{::'pages.petType.view.selecttab' | translate}}</div></div>
+    <div ui-view="tabs" ><div class="content-body">{{::'tabs.selecttab' | translate}}</div></div>
+    </md-content>
 </div>
+
     
 

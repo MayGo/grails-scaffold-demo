@@ -57,7 +57,8 @@ class TaskSearchServiceSpec extends Specification {
   'deadline':  new Date().clearTime(),
   'details':  'details',
   'status':  'Open',
-  'summary':  'Work Summary 152'
+  'summary':  'Work Summary 152',
+  'timeSpent':  0
 ]
 		return data
 	}

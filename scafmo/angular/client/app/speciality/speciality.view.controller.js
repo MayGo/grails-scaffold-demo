@@ -1,7 +1,8 @@
 'use strict';
 
 angular.module('angularDemoApp')
-    .controller('SpecialityViewController', function ($scope, $state, $stateParams, $translate, inform, SpecialityService, specialityData) {
+    .controller('SpecialityViewController', function ($scope, $state, $stateParams, $translate, inform,
+            SpecialityService, specialityData,$mdDialog) {
 	 	$scope.speciality = specialityData;
 
 		if($state.current.data){
@@ -16,5 +17,8 @@ angular.module('angularDemoApp')
 		};
 		$scope.go = function(route){
 			$state.go(route);
+		};
+		$scope.closeItemViewer = function () {
+			$mdDialog.hide();
 		};
 	});

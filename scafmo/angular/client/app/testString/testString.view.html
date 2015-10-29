@@ -1,81 +1,81 @@
 
 
 
-<div id="testString_view" ng-init="pageTitle = 'pages.testString.view.title'"
+<div ng-if="!isModal" id="testString_view" ng-init="pageTitle = 'pages.testString.view.title'"
      ng-include=" 'shared/blocks/page_heading.html' "></div>
-<div class="content-body">
-    <md-content layout-padding layout="column">
+
+<md-content layout="column">
 
 <div class="input-container" layout layout-sm="column">
 
-            <label translate="pages.testString.view.field.blankStr" flex="20"></label>
-            <div class="read-field" ng-bind="testString.blankStr" flex="30"></div>
+            <label translate="pages.testString.defaultFieldName.blankStr" flex="30"></label>
+            <div class="read-field" ng-bind="testString.blankStr" flex="70"></div>
     
 </div>
 <div class="input-container" layout layout-sm="column">
 
-            <label translate="pages.testString.view.field.creditCardStr" flex="20"></label>
-            <div class="read-field" ng-bind="testString.creditCardStr" flex="30"></div>
+            <label translate="pages.testString.defaultFieldName.creditCardStr" flex="30"></label>
+            <div class="read-field" ng-bind="testString.creditCardStr" flex="70"></div>
     
 </div>
 <div class="input-container" layout layout-sm="column">
 
-            <label translate="pages.testString.view.field.emailStr" flex="20"></label>
-            <div class="read-field" ng-bind="testString.emailStr" flex="30"></div>
+            <label translate="pages.testString.defaultFieldName.emailStr" flex="30"></label>
+            <div class="read-field" ng-bind="testString.emailStr" flex="70"></div>
     
 </div>
 <div class="input-container" layout layout-sm="column">
 
-            <label translate="pages.testString.view.field.inListStr" flex="20"></label>
-            <div class="read-field" ng-bind="testString.inListStr" flex="30"></div>
+            <label translate="pages.testString.defaultFieldName.inListStr" flex="30"></label>
+            <div class="read-field" ng-bind="testString.inListStr" flex="70"></div>
     
 </div>
 <div class="input-container" layout layout-sm="column">
 
-            <label translate="pages.testString.view.field.matchesStr" flex="20"></label>
-            <div class="read-field" ng-bind="testString.matchesStr" flex="30"></div>
+            <label translate="pages.testString.defaultFieldName.matchesStr" flex="30"></label>
+            <div class="read-field" ng-bind="testString.matchesStr" flex="70"></div>
     
 </div>
 <div class="input-container" layout layout-sm="column">
 
-            <label translate="pages.testString.view.field.maxSizeStr" flex="20"></label>
-            <div class="read-field" ng-bind="testString.maxSizeStr" flex="30"></div>
+            <label translate="pages.testString.defaultFieldName.maxSizeStr" flex="30"></label>
+            <div class="read-field" ng-bind="testString.maxSizeStr" flex="70"></div>
     
 </div>
 <div class="input-container" layout layout-sm="column">
 
-            <label translate="pages.testString.view.field.minSizeStr" flex="20"></label>
-            <div class="read-field" ng-bind="testString.minSizeStr" flex="30"></div>
+            <label translate="pages.testString.defaultFieldName.minSizeStr" flex="30"></label>
+            <div class="read-field" ng-bind="testString.minSizeStr" flex="70"></div>
     
 </div>
 <div class="input-container" layout layout-sm="column">
 
-            <label translate="pages.testString.view.field.notEqualStr" flex="20"></label>
-            <div class="read-field" ng-bind="testString.notEqualStr" flex="30"></div>
+            <label translate="pages.testString.defaultFieldName.notEqualStr" flex="30"></label>
+            <div class="read-field" ng-bind="testString.notEqualStr" flex="70"></div>
     
 </div>
 <div class="input-container" layout layout-sm="column">
 
-            <label translate="pages.testString.view.field.sizeStr" flex="20"></label>
-            <div class="read-field" ng-bind="testString.sizeStr" flex="30"></div>
+            <label translate="pages.testString.defaultFieldName.sizeStr" flex="30"></label>
+            <div class="read-field" ng-bind="testString.sizeStr" flex="70"></div>
     
 </div>
 <div class="input-container" layout layout-sm="column">
 
-            <label translate="pages.testString.view.field.textareaStr" flex="20"></label>
-            <div class="read-field" ng-bind="testString.textareaStr" flex="30"></div>
+            <label translate="pages.testString.defaultFieldName.textareaStr" flex="30"></label>
+            <div class="read-field" ng-bind="testString.textareaStr" flex="70"></div>
     
 </div>
 <div class="input-container" layout layout-sm="column">
 
-            <label translate="pages.testString.view.field.uniqueStr" flex="20"></label>
-            <div class="read-field" ng-bind="testString.uniqueStr" flex="30"></div>
+            <label translate="pages.testString.defaultFieldName.uniqueStr" flex="30"></label>
+            <div class="read-field" ng-bind="testString.uniqueStr" flex="70"></div>
     
 </div>
 <div class="input-container" layout layout-sm="column">
 
-            <label translate="pages.testString.view.field.urlStr" flex="20"></label>
-            <div class="read-field" ng-bind="testString.urlStr" flex="30"></div>
+            <label translate="pages.testString.defaultFieldName.urlStr" flex="30"></label>
+            <div class="read-field" ng-bind="testString.urlStr" flex="70"></div>
     
 </div>
 
@@ -97,26 +97,27 @@
 
         <md-button class="md-flat" ng-click="back()" translate="button.back" aria-label="back"></md-button>
     </section>
-    </md-content>
-</div>
+</md-content>
 
 
 <div ng-if="!isModal">
-    <tabset>
+    <md-content class="md-padding">
+        <md-tabs md-dynamic-height md-border-bottom>
 
+        <md-tab ui-sref="app.testString.view.testOther({relationName:'testStringTypes'})"
+             ui-sref-active="active" label="asdsd">
+            <md-tab-label>
+                <span translate="pages.testOther.view.lists"
+                        translate-value-isval="{{::'pages.testOther.defaultFieldName.testStringType' | translate }}"
+                        translate-value-inval="{{::'pages.testOther.name' | translate }}"></span>
+            </md-tab-label>
+        </md-tab>
 
-        <tab ui-sref="app.testString.view.testOther({relationName:'testStringTypes'})"
-             ui-sref-active="active">
-            <tab-heading
-                   translate="pages.testOther.view.lists"
-                   translate-value-isval="{{::'pages.testOther.view.field.testStringType' | translate }}"
-                   translate-value-inval="{{::'pages.testOther.name' | translate }}">
-            </tab-heading>
-        </tab>
+    </md-tabs>
 
-    </tabset>
-
-    <div ui-view="tabs" ><div class="content-body">{{::'pages.testString.view.selecttab' | translate}}</div></div>
+    <div ui-view="tabs" ><div class="content-body">{{::'tabs.selecttab' | translate}}</div></div>
+    </md-content>
 </div>
+
     
 

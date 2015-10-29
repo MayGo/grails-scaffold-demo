@@ -1,45 +1,45 @@
 
 
 
-<div id="task_view" ng-init="pageTitle = 'pages.task.view.title'"
+<div ng-if="!isModal" id="task_view" ng-init="pageTitle = 'pages.task.view.title'"
      ng-include=" 'shared/blocks/page_heading.html' "></div>
-<div class="content-body">
-    <md-content layout-padding layout="column">
+
+<md-content layout="column">
 
 <div class="input-container" layout layout-sm="column">
 
-        <label translate="pages.task.view.field.dateCreated" flex="20"></label>
-        <div class="read-field" ng-bind="task.dateCreated | date:'yyyy-MM-dd HH:mm'" flex="30"></div>
+        <label translate="pages.task.defaultFieldName.dateCreated" flex="30"></label>
+        <div class="read-field" ng-bind="task.dateCreated | date:'yyyy-MM-dd HH:mm'" flex="70"></div>
     
 </div>
 <div class="input-container" layout layout-sm="column">
 
-        <label translate="pages.task.view.field.deadline" flex="20"></label>
-        <div class="read-field" ng-bind="task.deadline | date:'yyyy-MM-dd HH:mm'" flex="30"></div>
+        <label translate="pages.task.defaultFieldName.deadline" flex="30"></label>
+        <div class="read-field" ng-bind="task.deadline | date:'yyyy-MM-dd HH:mm'" flex="70"></div>
     
 </div>
 <div class="input-container" layout layout-sm="column">
 
-            <label translate="pages.task.view.field.details" flex="20"></label>
-            <div class="read-field" ng-bind="task.details" flex="30"></div>
+            <label translate="pages.task.defaultFieldName.details" flex="30"></label>
+            <div class="read-field" ng-bind="task.details" flex="70"></div>
     
 </div>
 <div class="input-container" layout layout-sm="column">
 
-            <label translate="pages.task.view.field.status" flex="20"></label>
-            <div class="read-field" ng-bind="task.status" flex="30"></div>
+            <label translate="pages.task.defaultFieldName.status" flex="30"></label>
+            <div class="read-field" ng-bind="task.status" flex="70"></div>
     
 </div>
 <div class="input-container" layout layout-sm="column">
 
-            <label translate="pages.task.view.field.summary" flex="20"></label>
-            <div class="read-field" ng-bind="task.summary" flex="30"></div>
+            <label translate="pages.task.defaultFieldName.summary" flex="30"></label>
+            <div class="read-field" ng-bind="task.summary" flex="70"></div>
     
 </div>
 <div class="input-container" layout layout-sm="column">
 
-            <label translate="pages.task.view.field.timeSpent" flex="20"></label>
-            <div class="read-field" ng-bind="task.timeSpent" flex="30"></div>
+            <label translate="pages.task.defaultFieldName.timeSpent" flex="30"></label>
+            <div class="read-field" ng-bind="task.timeSpent" flex="70"></div>
     
 </div>
 <div class="input-container" layout layout-sm="column">
@@ -69,8 +69,7 @@
 
         <md-button class="md-flat" ng-click="back()" translate="button.back" aria-label="back"></md-button>
     </section>
-    </md-content>
-</div>
+</md-content>
 
 
 

@@ -10,6 +10,7 @@
 
 var ViewPage = function() {
   
+  this.jsonMapEl = element(by.binding('embeddable.jsonMap'));  
   this.myAcEl = element(by.binding('embeddable.myAc'));  
   this.strEl = element(by.binding('embeddable.str'));  
 };

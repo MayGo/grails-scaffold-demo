@@ -9,8 +9,8 @@
 
     <div class="input-container" layout layout-sm="column">
 		<label for="role"
-               translate="pages.userRole.view.edit.form.field.role" flex="20"/>
-        <md-input-container md-no-float="true" flex="30" layout="row">
+               translate="pages.userRole.defaultFieldName.role" flex="30"></label>
+        <md-input-container md-no-float="true" flex="70" layout="row">
             <!-- ManyToOne-->
         <md-autocomplete
                 input-name="role"
@@ -20,6 +20,7 @@
                 md-items="item in autocompleteService.roleQuery(searchText_role)"
                 md-item-text="item.name || item.label || item.id"
                 md-min-length="0"
+                flex
      required
         >
             <md-item-template>
@@ -37,8 +38,8 @@
 
     <div class="input-container" layout layout-sm="column">
 		<label for="user"
-               translate="pages.userRole.view.edit.form.field.user" flex="20"/>
-        <md-input-container md-no-float="true" flex="30" layout="row">
+               translate="pages.userRole.defaultFieldName.user" flex="30"></label>
+        <md-input-container md-no-float="true" flex="70" layout="row">
             <!-- ManyToOne-->
         <md-autocomplete
                 input-name="user"
@@ -48,6 +49,7 @@
                 md-items="item in autocompleteService.userQuery(searchText_user)"
                 md-item-text="item.name || item.label || item.id"
                 md-min-length="0"
+                flex
      required
         >
             <md-item-template>

@@ -11,7 +11,7 @@ $stateProvider
 		.state('app.embeddable.list', {
 			url: '/list?search',//TODO: search so that search is not an object in url
 			views: {
-				"page@app.embeddable": {
+				'page@app.embeddable': {
 					templateUrl: 'app/embeddable/embeddable.list.html',
 					controller: 'EmbeddableListController'
 				}
@@ -22,7 +22,7 @@ $stateProvider
 				parent: 'app.embeddable.list'
 			},
 			views: {
-				"page@app.embeddable": {
+				'page@app.embeddable': {
 					templateUrl: 'app/embeddable/embeddable.form.html',
 					controller: 'EmbeddableEditController'
 				}
@@ -38,7 +38,7 @@ $stateProvider
 				parent: 'app.embeddable.list'
 			},
 			views: {
-				"page@app.embeddable": {
+				'page@app.embeddable': {
 					templateUrl: 'app/embeddable/embeddable.view.html',
 					controller: 'EmbeddableViewController'
 				}
@@ -55,7 +55,7 @@ $stateProvider
 		}).state('app.embeddable.view.edit',{
 			url: '/edit',
 			views: {
-				"page@app.embeddable": {
+				'page@app.embeddable': {
 					templateUrl: 'app/embeddable/embeddable.form.html',
 					controller: 'EmbeddableEditController',
 				}
@@ -82,7 +82,7 @@ $stateProvider
 				isTab:true
 			},
 			views: {
-				"tabs": {
+				'tabs': {
 					templateUrl: 'app/embed/embed.list.html',
 					controller: 'EmbedListController'
 				}

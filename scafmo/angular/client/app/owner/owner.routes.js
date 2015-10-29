@@ -11,7 +11,7 @@ $stateProvider
 		.state('app.owner.list', {
 			url: '/list?search',//TODO: search so that search is not an object in url
 			views: {
-				"page@app.owner": {
+				'page@app.owner': {
 					templateUrl: 'app/owner/owner.list.html',
 					controller: 'OwnerListController'
 				}
@@ -22,7 +22,7 @@ $stateProvider
 				parent: 'app.owner.list'
 			},
 			views: {
-				"page@app.owner": {
+				'page@app.owner': {
 					templateUrl: 'app/owner/owner.form.html',
 					controller: 'OwnerEditController'
 				}
@@ -38,7 +38,7 @@ $stateProvider
 				parent: 'app.owner.list'
 			},
 			views: {
-				"page@app.owner": {
+				'page@app.owner': {
 					templateUrl: 'app/owner/owner.view.html',
 					controller: 'OwnerViewController'
 				}
@@ -55,7 +55,7 @@ $stateProvider
 		}).state('app.owner.view.edit',{
 			url: '/edit',
 			views: {
-				"page@app.owner": {
+				'page@app.owner': {
 					templateUrl: 'app/owner/owner.form.html',
 					controller: 'OwnerEditController',
 				}
@@ -82,7 +82,7 @@ $stateProvider
 				isTab:true
 			},
 			views: {
-				"tabs": {
+				'tabs': {
 					templateUrl: 'app/pet/pet.list.html',
 					controller: 'PetListController'
 				}

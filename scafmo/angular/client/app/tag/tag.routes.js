@@ -11,7 +11,7 @@ $stateProvider
 		.state('app.tag.list', {
 			url: '/list?search',//TODO: search so that search is not an object in url
 			views: {
-				"page@app.tag": {
+				'page@app.tag': {
 					templateUrl: 'app/tag/tag.list.html',
 					controller: 'TagListController'
 				}
@@ -22,7 +22,7 @@ $stateProvider
 				parent: 'app.tag.list'
 			},
 			views: {
-				"page@app.tag": {
+				'page@app.tag': {
 					templateUrl: 'app/tag/tag.form.html',
 					controller: 'TagEditController'
 				}
@@ -38,7 +38,7 @@ $stateProvider
 				parent: 'app.tag.list'
 			},
 			views: {
-				"page@app.tag": {
+				'page@app.tag': {
 					templateUrl: 'app/tag/tag.view.html',
 					controller: 'TagViewController'
 				}
@@ -55,7 +55,7 @@ $stateProvider
 		}).state('app.tag.view.edit',{
 			url: '/edit',
 			views: {
-				"page@app.tag": {
+				'page@app.tag': {
 					templateUrl: 'app/tag/tag.form.html',
 					controller: 'TagEditController',
 				}

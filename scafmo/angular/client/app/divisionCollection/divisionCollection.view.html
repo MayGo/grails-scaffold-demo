@@ -1,29 +1,29 @@
 
 
 
-<div id="divisionCollection_view" ng-init="pageTitle = 'pages.divisionCollection.view.title'"
+<div ng-if="!isModal" id="divisionCollection_view" ng-init="pageTitle = 'pages.divisionCollection.view.title'"
      ng-include=" 'shared/blocks/page_heading.html' "></div>
-<div class="content-body">
-    <md-content layout-padding layout="column">
+
+<md-content layout="column">
 
 <div class="input-container" layout layout-sm="column">
 
-            <label translate="pages.divisionCollection.view.field.name" flex="20"></label>
-            <div class="read-field" ng-bind="divisionCollection.name" flex="30"></div>
+            <label translate="pages.divisionCollection.defaultFieldName.name" flex="30"></label>
+            <div class="read-field" ng-bind="divisionCollection.name" flex="70"></div>
     
 </div>
 <div class="input-container" layout layout-sm="column">
 <!--OneToMany-->
-            <label translate="pages.divisionCollection.view.field.persons" flex="20"></label>
-            <div class="read-field" ng-bind="divisionCollection.persons" flex="30"></div>
+            <label translate="pages.divisionCollection.defaultFieldName.persons" flex="30"></label>
+            <div class="read-field" ng-bind="divisionCollection.persons" flex="70"></div>
     
 </div>
 <div class="input-container" layout layout-sm="column">
 <!--ManyToOne-->
 
-            <label translate="pages.divisionCollection.view.field.headDivision" flex="20"></label>
+            <label translate="pages.divisionCollection.defaultFieldName.headDivision" flex="30"></label>
             <div class="read-field">
-                <a  ui-sref="app.divisionCollection.view.divisionCollectionModal({modalId:divisionCollection.headDivision.id})" flex="30">
+                <a  ui-sref="app.divisionCollection.view.divisionCollectionModal({modalId:divisionCollection.headDivision.id})" flex="70">
                 <span ng-bind="divisionCollection.headDivision.id"></span> <span ng-bind="divisionCollection.headDivision.name"></span> </a></div>
 </div>
 
@@ -45,35 +45,36 @@
 
         <md-button class="md-flat" ng-click="back()" translate="button.back" aria-label="back"></md-button>
     </section>
-    </md-content>
-</div>
+</md-content>
 
 
 <div ng-if="!isModal">
-    <tabset>
+    <md-content class="md-padding">
+        <md-tabs md-dynamic-height md-border-bottom>
 
+        <md-tab ui-sref="app.divisionCollection.view.divisionCollection({relationName:'headDivisions'})"
+             ui-sref-active="active" label="asdsd">
+            <md-tab-label>
+                <span translate="pages.divisionCollection.view.lists"
+                        translate-value-isval="{{::'pages.divisionCollection.defaultFieldName.headDivision' | translate }}"
+                        translate-value-inval="{{::'pages.divisionCollection.name' | translate }}"></span>
+            </md-tab-label>
+        </md-tab>
 
-        <tab ui-sref="app.divisionCollection.view.divisionCollection({relationName:'headDivisions'})"
-             ui-sref-active="active">
-            <tab-heading
-                   translate="pages.divisionCollection.view.lists"
-                   translate-value-isval="{{::'pages.divisionCollection.view.field.headDivision' | translate }}"
-                   translate-value-inval="{{::'pages.divisionCollection.name' | translate }}">
-            </tab-heading>
-        </tab>
+        <md-tab ui-sref="app.divisionCollection.view.personCollection({relationName:'divisions'})"
+             ui-sref-active="active" label="asdsd">
+            <md-tab-label>
+                <span translate="pages.personCollection.view.lists"
+                        translate-value-isval="{{::'pages.personCollection.defaultFieldName.division' | translate }}"
+                        translate-value-inval="{{::'pages.personCollection.name' | translate }}"></span>
+            </md-tab-label>
+        </md-tab>
 
-        <tab ui-sref="app.divisionCollection.view.personCollection({relationName:'divisions'})"
-             ui-sref-active="active">
-            <tab-heading
-                   translate="pages.personCollection.view.lists"
-                   translate-value-isval="{{::'pages.personCollection.view.field.division' | translate }}"
-                   translate-value-inval="{{::'pages.personCollection.name' | translate }}">
-            </tab-heading>
-        </tab>
+    </md-tabs>
 
-    </tabset>
-
-    <div ui-view="tabs" ><div class="content-body">{{::'pages.divisionCollection.view.selecttab' | translate}}</div></div>
+    <div ui-view="tabs" ><div class="content-body">{{::'tabs.selecttab' | translate}}</div></div>
+    </md-content>
 </div>
+
     
 

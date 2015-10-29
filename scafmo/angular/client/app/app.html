@@ -1,11 +1,79 @@
-<div ng-init="app.settings.container = false;" class="md-navbar navbar {{app.settings.navbarCollapseColor}} md-whiteframe-z1 " data-ng-include=" 'shared/blocks/header.html' " >
+<md-sidenav md-is-locked-open="$mdMedia('gt-sm')" md-component-id="left"
+            class="md-whiteframe-z2 md-sidenav-left">
+  <md-toolbar md-theme="custom" class="md-hue-1 md-whiteframe-z2">
+    <md-button layout="row" layout-align="center center" class="md-toolbar-tools md-warn">
+      <span class="md-heading" translate="app.name"></span>
+    </md-button>
+  </md-toolbar>
+  <ul class="menu">
+    <li ng-repeat="section in appCtrl.menu.sections" class="parent-list-item {{section.className || ''}}" ng-class="{'parentActive' : appCtrl.isSectionSelected(section)}">
+      <h2 class="menu-heading md-subhead" ng-if="section.type === 'heading'" id="heading_{{ section.name | nospace }}">
+        {{section.name}}
+      </h2>
+      <menu-link section="section" ng-if="section.type === 'link'"></menu-link>
+
+      <menu-toggle flex layout="column" section="section" ng-if="section.type === 'toggle'"></menu-toggle>
+
+      <ul ng-if="section.children" class="menu-nested-list">
+        <li ng-repeat="child in section.children" ng-class="{'childActive' : appCtrl.isSectionSelected(child)}">
+          <menu-link section="child" ng-if="child.type === 'link'"></menu-link>
+
+          <menu-toggle section="child" ng-if="child.type === 'toggle'"></menu-toggle>
+        </li>
+      </ul>
+    </li>
+  </ul>
+
+  <md-divider ng-repeat-end></md-divider>
+  <md-button hide-gt-md flex ng-click="appCtrl.showActions($event)">
+    <div layout="row" class="md-tile-content">
+      Actions
+    </div>
+  </md-button>
+</md-sidenav>
+
+<div layout="column" flex>
+  <md-toolbar layout="row" layout-align="end center">
+    <md-button hide-sm class="md-menu-toolbar" aria-label="Search">
+      <i class="material-icons">search</i>
+    </md-button>
+    <md-button hide-sm class="toolbar-button" aria-label="Notifications">
+      <i class="material-icons">notifications</i>
+      <span class="notifications-label">7</span>
+    </md-button>
+    <md-button hide-sm class="toolbar-button" aria-label="Settings">
+      <i class="material-icons">settings</i>
+    </md-button>
+    <md-button hide-gt-sm ng-click="appCtrl.toggleItemsList()" aria-label="Menu">
+      <i class="material-icons">menu</i>
+    </md-button>
+  </md-toolbar>
+
+  <md-content flex class="md-padding page-content">
+    <div ui-view></div>
+  </md-content>
 </div>
-<div layout="row">
-  <!-- view -->
-  <div flex layout="column">
-    <div class="inform-placeholder" inform></div>
-    <a href class="off-screen-toggle hide" ui-toggle-class="off-screen" data-target=".md-aside" ></a>
-    <div class="md-content" ui-view></div>
-  </div>
-  <!-- / view -->
-</div>
+
+<md-sidenav md-is-locked-open="$mdMedia('gt-sm')" md-component-id="right"
+            class="md-whiteframe-z2 md-sidenav-right">
+  <md-toolbar layout="row">
+    <md-toolbar flex="80" class="md-warn" layout="row" layout-align="center center">
+      <img class="img-circle" ng-src="assets/img/feynman.jpg">
+      <md-menu>
+        <md-button class="capitalize" ng-click="$mdOpenMenu()" aria-label="Open menu">
+          <span>Richard Feynman</span>
+          <i class="material-icons">keyboard_arrow_down</i>
+        </md-button>
+        <md-menu-content>
+          <md-menu-item><md-button ng-click="$mdCloseMenu()" ui-sref="home.profile">Profile</md-button></md-menu-item>
+          <md-menu-item><md-button ng-click="$mdCloseMenu()" ui-sref="home.dashboard">Log out</md-button></md-menu-item>
+        </md-menu-content>
+      </md-menu>
+    </md-toolbar>
+    <md-toolbar flex="20" layout="row" layout-align="center center">
+      <md-button ng-click="appCtrl.showActions($event)" class="toolbar-button">
+        <i class="material-icons">more_vert</i>
+      </md-button>
+    </md-toolbar>
+  </md-toolbar>
+</md-sidenav>

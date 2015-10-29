@@ -59,7 +59,7 @@ class EmbedSearchServiceSpec extends Specification {
   'acMap':  [
     'mykey':  'myvalue'
   ],
-  'acStr':  'Blank 2',
+  'acStr':  'Blank 152',
   'muFileLocation':  'myfile.txt',
   'myFile':  
   [

@@ -9,7 +9,8 @@
 
 
 var EditPage = function() {
-			this.myAcEl = element(by.model('embeddable.myAc'));
+			this.jsonMapEl = element(by.model('embeddable.jsonMap'));
+		this.myAcEl = element(by.model('embeddable.myAc'));
 		this.strEl = element(by.model('embeddable.str'));
 
 };

@@ -147,6 +147,7 @@ class TestOtherModifyServiceSpec extends Specification {
 		Map data = [
   'id':  null,
   'version':  null,
+  'booleanNullable':  false,
   'testDate':  new Date().clearTime(),
   'testEnum':  'TEST_1'
 ]

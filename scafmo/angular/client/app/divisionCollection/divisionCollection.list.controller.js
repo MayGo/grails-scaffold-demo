@@ -8,7 +8,6 @@ angular.module('angularDemoApp')
 			$scope.isTab = $state.current.data.isTab;
 		}
 
-
 		$scope.deleteDivisionCollection = function(instance){
 			return DivisionCollectionService.deleteInstance(instance).then(function(instance){
 				$scope.tableParams.reload();
@@ -18,7 +17,6 @@ angular.module('angularDemoApp')
 
 
 		$scope.search = {};
-    $scope.search.divisionCollection = [];
 
 		if($location.search().filter) {
 			angular.extend($scope.search,$location.search())

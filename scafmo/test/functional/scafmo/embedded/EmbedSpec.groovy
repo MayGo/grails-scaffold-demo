@@ -42,16 +42,9 @@ class EmbedSpec extends RestQueries implements TestUtils{
 				acMap = [
   'mykey':  'myvalue'
 ]
-				acStr = 'Blank 1'
+				acStr = 'Blank 151'
 				muFileLocation = 'myfile.txt'
 				myFile = '[116, 101, 115, 116, 49]'
-				myEmbeddedField{
-					id = null
-				myAc = [
-  'mykey':  'myvalue'
-]
-				str = 'Blank 1'
-				}
 			}
 			
 			otherDomainId = response.json.id
@@ -60,7 +53,7 @@ class EmbedSpec extends RestQueries implements TestUtils{
 		then: 'Should create and return created values'
 //			response.json.acCustomMap == [mykey:myvalue]
 //			response.json.acMap == [mykey:myvalue]
-			response.json.acStr == 'Blank 1'
+			response.json.acStr == 'Blank 151'
 			response.json.muFileLocation == 'myfile.txt'
 			response.json.myFile == '[116, 101, 115, 116, 49]'
 			response.status == HttpStatus.CREATED.value()
@@ -75,16 +68,9 @@ class EmbedSpec extends RestQueries implements TestUtils{
 				acMap = [
   'mykey':  'myvalue'
 ]
-				acStr = 'Blank 2'
+				acStr = 'Blank 152'
 				muFileLocation = 'myfile.txt'
 				myFile = '[116, 101, 115, 116, 49]'
-				myEmbeddedField{
-					id = null
-				myAc = [
-  'mykey':  'myvalue'
-]
-				str = 'Blank 1'
-				}
 			}
 			
 			domainId = response.json.id
@@ -94,7 +80,7 @@ class EmbedSpec extends RestQueries implements TestUtils{
 
 //			response.json.acCustomMap == [mykey:myvalue]
 //			response.json.acMap == [mykey:myvalue]
-			response.json.acStr == 'Blank 2'
+			response.json.acStr == 'Blank 152'
 			response.json.muFileLocation == 'myfile.txt'
 			response.json.myFile == '[116, 101, 115, 116, 49]'
 			response.status == HttpStatus.CREATED.value()
@@ -111,7 +97,7 @@ class EmbedSpec extends RestQueries implements TestUtils{
 
 //			response.json.acCustomMap == [mykey:myvalue]
 //			response.json.acMap == [mykey:myvalue]
-			response.json.acStr == 'Blank 2'
+			response.json.acStr == 'Blank 152'
 			response.json.muFileLocation == 'myfile.txt'
 			response.json.myFile == '[116, 101, 115, 116, 49]'
 			response.status == HttpStatus.OK.value()
@@ -157,22 +143,15 @@ class EmbedSpec extends RestQueries implements TestUtils{
 				acMap = [
   'mykey':  'myvalue'
 ]
-				acStr = 'Blank 3'
+				acStr = 'Blank 153'
 				muFileLocation = 'myfile.txt'
 				myFile = '[116, 101, 115, 116, 49]'
-				myEmbeddedField{
-					id = null
-				myAc = [
-  'mykey':  'myvalue'
-]
-				str = 'Blank 1'
-				}
 
 			}
 		then: 'Should return updated values'
 //			response.json.acCustomMap == [mykey:myvalue]
 //			response.json.acMap == [mykey:myvalue]
-			response.json.acStr == 'Blank 3'
+			response.json.acStr == 'Blank 153'
 			response.json.muFileLocation == 'myfile.txt'
 			response.json.myFile == '[116, 101, 115, 116, 49]'
 
@@ -188,16 +167,9 @@ class EmbedSpec extends RestQueries implements TestUtils{
 				acMap = [
   'mykey':  'myvalue'
 ]
-				acStr = 'Blank 3'
+				acStr = 'Blank 153'
 				muFileLocation = 'myfile.txt'
 				myFile = '[116, 101, 115, 116, 49]'
-				myEmbeddedField{
-					id = null
-				myAc = [
-  'mykey':  'myvalue'
-]
-				str = 'Blank 1'
-				}
 
 			}
 		then: 'Should not find'
@@ -211,16 +183,9 @@ class EmbedSpec extends RestQueries implements TestUtils{
 				acMap = [
   'mykey':  'myvalue'
 ]
-				acStr = 'Blank 3'
+				acStr = 'Blank 153'
 				muFileLocation = 'myfile.txt'
 				myFile = '[116, 101, 115, 116, 49]'
-				myEmbeddedField{
-					id = null
-				myAc = [
-  'mykey':  'myvalue'
-]
-				str = 'Blank 1'
-				}
 
 			}
 		then: 'Should not find'
@@ -339,7 +304,7 @@ class EmbedSpec extends RestQueries implements TestUtils{
 			[:]                || 10
 			[acCustomMaps:'%7B"mykey":"myvalue"%7D'] || 10 
 			[acMaps:'%7B"mykey":"myvalue"%7D'] || 10 
-//Can't predict 'size'			[acStr:'Blank 3'] || 1 
+//Can't predict 'size'			[acStr:'Blank 153'] || 1 
 			[muFileLocation:'myfile.txt'] || 10 
 			[myFile:'[116, 101, 115, 116, 49]'] || 10 
 

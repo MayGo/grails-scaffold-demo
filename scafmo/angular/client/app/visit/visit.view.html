@@ -1,29 +1,29 @@
 
 
 
-<div id="visit_view" ng-init="pageTitle = 'pages.visit.view.title'"
+<div ng-if="!isModal" id="visit_view" ng-init="pageTitle = 'pages.visit.view.title'"
      ng-include=" 'shared/blocks/page_heading.html' "></div>
-<div class="content-body">
-    <md-content layout-padding layout="column">
+
+<md-content layout="column">
 
 <div class="input-container" layout layout-sm="column">
 
-        <label translate="pages.visit.view.field.date" flex="20"></label>
-        <div class="read-field" ng-bind="visit.date | date:'yyyy-MM-dd HH:mm'" flex="30"></div>
+        <label translate="pages.visit.defaultFieldName.date" flex="30"></label>
+        <div class="read-field" ng-bind="visit.date | date:'yyyy-MM-dd HH:mm'" flex="70"></div>
     
 </div>
 <div class="input-container" layout layout-sm="column">
 
-            <label translate="pages.visit.view.field.description" flex="20"></label>
-            <div class="read-field" ng-bind="visit.description" flex="30"></div>
+            <label translate="pages.visit.defaultFieldName.description" flex="30"></label>
+            <div class="read-field" ng-bind="visit.description" flex="70"></div>
     
 </div>
 <div class="input-container" layout layout-sm="column">
 <!--ManyToOne-->
 
-            <label translate="pages.visit.view.field.pet" flex="20"></label>
+            <label translate="pages.visit.defaultFieldName.pet" flex="30"></label>
             <div class="read-field">
-                <a  ui-sref="app.visit.view.petModal({modalId:visit.pet.id})" flex="30">
+                <a  ui-sref="app.visit.view.petModal({modalId:visit.pet.id})" flex="70">
                 <span ng-bind="visit.pet.id"></span> <span ng-bind="visit.pet.name"></span> <span ng-bind="visit.pet.birthDate"></span> </a></div>
 </div>
 
@@ -45,8 +45,7 @@
 
         <md-button class="md-flat" ng-click="back()" translate="button.back" aria-label="back"></md-button>
     </section>
-    </md-content>
-</div>
+</md-content>
 
 
 

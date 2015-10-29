@@ -1,7 +1,8 @@
 'use strict';
 
 angular.module('angularDemoApp')
-    .controller('DivisionCollectionlessViewController', function ($scope, $state, $stateParams, $translate, inform, DivisionCollectionlessService, divisionCollectionlessData) {
+    .controller('DivisionCollectionlessViewController', function ($scope, $state, $stateParams, $translate, inform,
+            DivisionCollectionlessService, divisionCollectionlessData,$mdDialog) {
 	 	$scope.divisionCollectionless = divisionCollectionlessData;
 
 		if($state.current.data){
@@ -16,5 +17,8 @@ angular.module('angularDemoApp')
 		};
 		$scope.go = function(route){
 			$state.go(route);
+		};
+		$scope.closeItemViewer = function () {
+			$mdDialog.hide();
 		};
 	});

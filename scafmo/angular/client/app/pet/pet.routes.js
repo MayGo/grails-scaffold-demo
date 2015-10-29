@@ -11,7 +11,7 @@ $stateProvider
 		.state('app.pet.list', {
 			url: '/list?search',//TODO: search so that search is not an object in url
 			views: {
-				"page@app.pet": {
+				'page@app.pet': {
 					templateUrl: 'app/pet/pet.list.html',
 					controller: 'PetListController'
 				}
@@ -22,7 +22,7 @@ $stateProvider
 				parent: 'app.pet.list'
 			},
 			views: {
-				"page@app.pet": {
+				'page@app.pet': {
 					templateUrl: 'app/pet/pet.form.html',
 					controller: 'PetEditController'
 				}
@@ -38,7 +38,7 @@ $stateProvider
 				parent: 'app.pet.list'
 			},
 			views: {
-				"page@app.pet": {
+				'page@app.pet': {
 					templateUrl: 'app/pet/pet.view.html',
 					controller: 'PetViewController'
 				}
@@ -55,7 +55,7 @@ $stateProvider
 		}).state('app.pet.view.edit',{
 			url: '/edit',
 			views: {
-				"page@app.pet": {
+				'page@app.pet': {
 					templateUrl: 'app/pet/pet.form.html',
 					controller: 'PetEditController',
 				}
@@ -77,13 +77,10 @@ $stateProvider
 		data:{
 			isModal:true
 		},
-		onEnter: function($stateParams, $state, $modal, $resource) {
+		onEnter: function($stateParams, $state, $mdDialog) {
 			var modalId = $stateParams.modalId;
-
-			$modal.open({
-				size:'lg',
-				templateUrl: 'app/petType/petType.view.html',
-
+			$mdDialog.show({
+				templateUrl: 'app/petType/petType.view.modal.html',
 				resolve: {
 					petTypeData: function($stateParams, PetTypeService){
 						//TODO: Add parent ($stateParams.id) to query
@@ -95,10 +92,10 @@ $stateProvider
 					}
 				},
 				controller: 'PetTypeViewController',
-			}).result.finally(function(item) {
+
+			}).then(function () {
 				$state.go('^');
 			});
-
 		}
 
 	}).state('app.pet.view.edit.petTypeSearchModal',{
@@ -111,13 +108,10 @@ $stateProvider
 		data:{
 			isModal:true
 		},
-		onEnter: function($stateParams, $state, $modal, $resource) {
+		onEnter: function($stateParams, $state, $mdDialog) {
 			var modalId = $stateParams.modalId;
-
-			$modal.open({
-				size:'lg',
-				templateUrl: 'app/owner/owner.view.html',
-
+			$mdDialog.show({
+				templateUrl: 'app/owner/owner.view.modal.html',
 				resolve: {
 					ownerData: function($stateParams, OwnerService){
 						//TODO: Add parent ($stateParams.id) to query
@@ -129,10 +123,10 @@ $stateProvider
 					}
 				},
 				controller: 'OwnerViewController',
-			}).result.finally(function(item) {
+
+			}).then(function () {
 				$state.go('^');
 			});
-
 		}
 
 	}).state('app.pet.view.edit.ownerSearchModal',{
@@ -150,7 +144,7 @@ $stateProvider
 				isTab:true
 			},
 			views: {
-				"tabs": {
+				'tabs': {
 					templateUrl: 'app/visit/visit.list.html',
 					controller: 'VisitListController'
 				}

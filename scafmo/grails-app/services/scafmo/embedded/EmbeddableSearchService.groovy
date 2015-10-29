@@ -70,6 +70,9 @@ class EmbeddableSearchService {
 					}
 				}
 			}
+			if (cmd.jsonMap != null) {
+				eq('jsonMap', cmd.jsonMap)
+			}
 			if (cmd.myAc != null) {
 				eq('myAc', cmd.myAc)
 			}

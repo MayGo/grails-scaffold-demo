@@ -11,7 +11,7 @@ $stateProvider
 		.state('app.role.list', {
 			url: '/list?search',//TODO: search so that search is not an object in url
 			views: {
-				"page@app.role": {
+				'page@app.role': {
 					templateUrl: 'app/role/role.list.html',
 					controller: 'RoleListController'
 				}
@@ -22,7 +22,7 @@ $stateProvider
 				parent: 'app.role.list'
 			},
 			views: {
-				"page@app.role": {
+				'page@app.role': {
 					templateUrl: 'app/role/role.form.html',
 					controller: 'RoleEditController'
 				}
@@ -38,7 +38,7 @@ $stateProvider
 				parent: 'app.role.list'
 			},
 			views: {
-				"page@app.role": {
+				'page@app.role': {
 					templateUrl: 'app/role/role.view.html',
 					controller: 'RoleViewController'
 				}
@@ -55,7 +55,7 @@ $stateProvider
 		}).state('app.role.view.edit',{
 			url: '/edit',
 			views: {
-				"page@app.role": {
+				'page@app.role': {
 					templateUrl: 'app/role/role.form.html',
 					controller: 'RoleEditController',
 				}
@@ -82,7 +82,7 @@ $stateProvider
 				isTab:true
 			},
 			views: {
-				"tabs": {
+				'tabs': {
 					templateUrl: 'app/userRole/userRole.list.html',
 					controller: 'UserRoleListController'
 				}

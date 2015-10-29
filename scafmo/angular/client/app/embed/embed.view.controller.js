@@ -1,7 +1,8 @@
 'use strict';
 
 angular.module('angularDemoApp')
-    .controller('EmbedViewController', function ($scope, $state, $stateParams, $translate, inform, EmbedService, embedData) {
+    .controller('EmbedViewController', function ($scope, $state, $stateParams, $translate, inform,
+            EmbedService, embedData,$mdDialog) {
 	 	$scope.embed = embedData;
 
 		if($state.current.data){
@@ -16,5 +17,8 @@ angular.module('angularDemoApp')
 		};
 		$scope.go = function(route){
 			$state.go(route);
+		};
+		$scope.closeItemViewer = function () {
+			$mdDialog.hide();
 		};
 	});

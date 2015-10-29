@@ -1,39 +1,39 @@
 
 
 
-<div id="user_view" ng-init="pageTitle = 'pages.user.view.title'"
+<div ng-if="!isModal" id="user_view" ng-init="pageTitle = 'pages.user.view.title'"
      ng-include=" 'shared/blocks/page_heading.html' "></div>
-<div class="content-body">
-    <md-content layout-padding layout="column">
+
+<md-content layout="column">
 
 <div class="input-container" layout layout-sm="column">
 
-            <label translate="pages.user.view.field.accountExpired" flex="20"></label>
-            <div class="read-field" ng-bind="user.accountExpired" flex="30"></div>
+            <label translate="pages.user.defaultFieldName.accountExpired" flex="30"></label>
+            <div class="read-field" ng-bind="user.accountExpired" flex="70"></div>
     
 </div>
 <div class="input-container" layout layout-sm="column">
 
-            <label translate="pages.user.view.field.accountLocked" flex="20"></label>
-            <div class="read-field" ng-bind="user.accountLocked" flex="30"></div>
+            <label translate="pages.user.defaultFieldName.accountLocked" flex="30"></label>
+            <div class="read-field" ng-bind="user.accountLocked" flex="70"></div>
     
 </div>
 <div class="input-container" layout layout-sm="column">
 
-            <label translate="pages.user.view.field.enabled" flex="20"></label>
-            <div class="read-field" ng-bind="user.enabled" flex="30"></div>
+            <label translate="pages.user.defaultFieldName.enabled" flex="30"></label>
+            <div class="read-field" ng-bind="user.enabled" flex="70"></div>
     
 </div>
 <div class="input-container" layout layout-sm="column">
 
-            <label translate="pages.user.view.field.passwordExpired" flex="20"></label>
-            <div class="read-field" ng-bind="user.passwordExpired" flex="30"></div>
+            <label translate="pages.user.defaultFieldName.passwordExpired" flex="30"></label>
+            <div class="read-field" ng-bind="user.passwordExpired" flex="70"></div>
     
 </div>
 <div class="input-container" layout layout-sm="column">
 
-            <label translate="pages.user.view.field.username" flex="20"></label>
-            <div class="read-field" ng-bind="user.username" flex="30"></div>
+            <label translate="pages.user.defaultFieldName.username" flex="30"></label>
+            <div class="read-field" ng-bind="user.username" flex="70"></div>
     
 </div>
 
@@ -55,26 +55,27 @@
 
         <md-button class="md-flat" ng-click="back()" translate="button.back" aria-label="back"></md-button>
     </section>
-    </md-content>
-</div>
+</md-content>
 
 
 <div ng-if="!isModal">
-    <tabset>
+    <md-content class="md-padding">
+        <md-tabs md-dynamic-height md-border-bottom>
 
+        <md-tab ui-sref="app.user.view.userRole({relationName:'users'})"
+             ui-sref-active="active" label="asdsd">
+            <md-tab-label>
+                <span translate="pages.userRole.view.lists"
+                        translate-value-isval="{{::'pages.userRole.defaultFieldName.user' | translate }}"
+                        translate-value-inval="{{::'pages.userRole.name' | translate }}"></span>
+            </md-tab-label>
+        </md-tab>
 
-        <tab ui-sref="app.user.view.userRole({relationName:'users'})"
-             ui-sref-active="active">
-            <tab-heading
-                   translate="pages.userRole.view.lists"
-                   translate-value-isval="{{::'pages.userRole.view.field.user' | translate }}"
-                   translate-value-inval="{{::'pages.userRole.name' | translate }}">
-            </tab-heading>
-        </tab>
+    </md-tabs>
 
-    </tabset>
-
-    <div ui-view="tabs" ><div class="content-body">{{::'pages.user.view.selecttab' | translate}}</div></div>
+    <div ui-view="tabs" ><div class="content-body">{{::'tabs.selecttab' | translate}}</div></div>
+    </md-content>
 </div>
+
     
 

@@ -158,6 +158,7 @@ class UserRoleModifyServiceSpec extends Specification {
     'id':  null,
     'version':  null,
     'enabled':  true,
+    'passwordExpired':  false,
     'username':  'John Doe 304'
   ]
 ]

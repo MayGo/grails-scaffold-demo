@@ -1,21 +1,21 @@
 
 
 
-<div id="tag_view" ng-init="pageTitle = 'pages.tag.view.title'"
+<div ng-if="!isModal" id="tag_view" ng-init="pageTitle = 'pages.tag.view.title'"
      ng-include=" 'shared/blocks/page_heading.html' "></div>
-<div class="content-body">
-    <md-content layout-padding layout="column">
+
+<md-content layout="column">
 
 <div class="input-container" layout layout-sm="column">
 
-            <label translate="pages.tag.view.field.name" flex="20"></label>
-            <div class="read-field" ng-bind="tag.name" flex="30"></div>
+            <label translate="pages.tag.defaultFieldName.name" flex="30"></label>
+            <div class="read-field" ng-bind="tag.name" flex="70"></div>
     
 </div>
 <div class="input-container" layout layout-sm="column">
 <!--ManyToMany-->
-        <label translate="pages.tag.view.field.tasks" flex="20"></label>
-        <div class="read-field" flex="30">
+        <label translate="pages.tag.defaultFieldName.tasks" flex="30"></label>
+        <div class="read-field" flex="70">
             <div ng-repeat="item in tag.tasks">
 <span ng-bind="item.id"></span> <span ng-bind="item.timeSpent"></span> <span ng-bind="item.summary"></span> <span ng-bind="item.status"></span> </div></div>
 </div>
@@ -38,8 +38,7 @@
 
         <md-button class="md-flat" ng-click="back()" translate="button.back" aria-label="back"></md-button>
     </section>
-    </md-content>
-</div>
+</md-content>
 
 
 

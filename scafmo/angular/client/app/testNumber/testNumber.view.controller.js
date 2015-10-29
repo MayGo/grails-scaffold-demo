@@ -1,7 +1,8 @@
 'use strict';
 
 angular.module('angularDemoApp')
-    .controller('TestNumberViewController', function ($scope, $state, $stateParams, $translate, inform, TestNumberService, testNumberData) {
+    .controller('TestNumberViewController', function ($scope, $state, $stateParams, $translate, inform,
+            TestNumberService, testNumberData,$mdDialog) {
 	 	$scope.testNumber = testNumberData;
 
 		if($state.current.data){
@@ -16,5 +17,8 @@ angular.module('angularDemoApp')
 		};
 		$scope.go = function(route){
 			$state.go(route);
+		};
+		$scope.closeItemViewer = function () {
+			$mdDialog.hide();
 		};
 	});

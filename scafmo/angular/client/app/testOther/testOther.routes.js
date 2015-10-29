@@ -11,7 +11,7 @@ $stateProvider
 		.state('app.testOther.list', {
 			url: '/list?search',//TODO: search so that search is not an object in url
 			views: {
-				"page@app.testOther": {
+				'page@app.testOther': {
 					templateUrl: 'app/testOther/testOther.list.html',
 					controller: 'TestOtherListController'
 				}
@@ -22,7 +22,7 @@ $stateProvider
 				parent: 'app.testOther.list'
 			},
 			views: {
-				"page@app.testOther": {
+				'page@app.testOther': {
 					templateUrl: 'app/testOther/testOther.form.html',
 					controller: 'TestOtherEditController'
 				}
@@ -38,7 +38,7 @@ $stateProvider
 				parent: 'app.testOther.list'
 			},
 			views: {
-				"page@app.testOther": {
+				'page@app.testOther': {
 					templateUrl: 'app/testOther/testOther.view.html',
 					controller: 'TestOtherViewController'
 				}
@@ -55,7 +55,7 @@ $stateProvider
 		}).state('app.testOther.view.edit',{
 			url: '/edit',
 			views: {
-				"page@app.testOther": {
+				'page@app.testOther': {
 					templateUrl: 'app/testOther/testOther.form.html',
 					controller: 'TestOtherEditController',
 				}
@@ -77,13 +77,10 @@ $stateProvider
 		data:{
 			isModal:true
 		},
-		onEnter: function($stateParams, $state, $modal, $resource) {
+		onEnter: function($stateParams, $state, $mdDialog) {
 			var modalId = $stateParams.modalId;
-
-			$modal.open({
-				size:'lg',
-				templateUrl: 'app/testString/testString.view.html',
-
+			$mdDialog.show({
+				templateUrl: 'app/testString/testString.view.modal.html',
 				resolve: {
 					testStringData: function($stateParams, TestStringService){
 						//TODO: Add parent ($stateParams.id) to query
@@ -95,10 +92,10 @@ $stateProvider
 					}
 				},
 				controller: 'TestStringViewController',
-			}).result.finally(function(item) {
+
+			}).then(function () {
 				$state.go('^');
 			});
-
 		}
 
 	}).state('app.testOther.view.edit.testStringSearchModal',{

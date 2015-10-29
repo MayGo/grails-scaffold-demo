@@ -1,7 +1,8 @@
 'use strict';
 
 angular.module('angularDemoApp')
-    .controller('PetViewController', function ($scope, $state, $stateParams, $translate, inform, PetService, petData) {
+    .controller('PetViewController', function ($scope, $state, $stateParams, $translate, inform,
+            PetService, petData,$mdDialog) {
 	 	$scope.pet = petData;
 
 		if($state.current.data){
@@ -16,5 +17,8 @@ angular.module('angularDemoApp')
 		};
 		$scope.go = function(route){
 			$state.go(route);
+		};
+		$scope.closeItemViewer = function () {
+			$mdDialog.hide();
 		};
 	});

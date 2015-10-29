@@ -11,7 +11,7 @@ $stateProvider
 		.state('app.userRole.list', {
 			url: '/list?search',//TODO: search so that search is not an object in url
 			views: {
-				"page@app.userRole": {
+				'page@app.userRole': {
 					templateUrl: 'app/userRole/userRole.list.html',
 					controller: 'UserRoleListController'
 				}
@@ -22,7 +22,7 @@ $stateProvider
 				parent: 'app.userRole.list'
 			},
 			views: {
-				"page@app.userRole": {
+				'page@app.userRole': {
 					templateUrl: 'app/userRole/userRole.form.html',
 					controller: 'UserRoleEditController'
 				}
@@ -38,7 +38,7 @@ $stateProvider
 				parent: 'app.userRole.list'
 			},
 			views: {
-				"page@app.userRole": {
+				'page@app.userRole': {
 					templateUrl: 'app/userRole/userRole.view.html',
 					controller: 'UserRoleViewController'
 				}
@@ -55,7 +55,7 @@ $stateProvider
 		}).state('app.userRole.view.edit',{
 			url: '/edit',
 			views: {
-				"page@app.userRole": {
+				'page@app.userRole': {
 					templateUrl: 'app/userRole/userRole.form.html',
 					controller: 'UserRoleEditController',
 				}
@@ -77,13 +77,10 @@ $stateProvider
 		data:{
 			isModal:true
 		},
-		onEnter: function($stateParams, $state, $modal, $resource) {
+		onEnter: function($stateParams, $state, $mdDialog) {
 			var modalId = $stateParams.modalId;
-
-			$modal.open({
-				size:'lg',
-				templateUrl: 'app/role/role.view.html',
-
+			$mdDialog.show({
+				templateUrl: 'app/role/role.view.modal.html',
 				resolve: {
 					roleData: function($stateParams, RoleService){
 						//TODO: Add parent ($stateParams.id) to query
@@ -95,10 +92,10 @@ $stateProvider
 					}
 				},
 				controller: 'RoleViewController',
-			}).result.finally(function(item) {
+
+			}).then(function () {
 				$state.go('^');
 			});
-
 		}
 
 	}).state('app.userRole.view.edit.roleSearchModal',{
@@ -111,13 +108,10 @@ $stateProvider
 		data:{
 			isModal:true
 		},
-		onEnter: function($stateParams, $state, $modal, $resource) {
+		onEnter: function($stateParams, $state, $mdDialog) {
 			var modalId = $stateParams.modalId;
-
-			$modal.open({
-				size:'lg',
-				templateUrl: 'app/user/user.view.html',
-
+			$mdDialog.show({
+				templateUrl: 'app/user/user.view.modal.html',
 				resolve: {
 					userData: function($stateParams, UserService){
 						//TODO: Add parent ($stateParams.id) to query
@@ -129,10 +123,10 @@ $stateProvider
 					}
 				},
 				controller: 'UserViewController',
-			}).result.finally(function(item) {
+
+			}).then(function () {
 				$state.go('^');
 			});
-
 		}
 
 	}).state('app.userRole.view.edit.userSearchModal',{

@@ -1,35 +1,35 @@
 
 
 
-<div id="testOther_view" ng-init="pageTitle = 'pages.testOther.view.title'"
+<div ng-if="!isModal" id="testOther_view" ng-init="pageTitle = 'pages.testOther.view.title'"
      ng-include=" 'shared/blocks/page_heading.html' "></div>
-<div class="content-body">
-    <md-content layout-padding layout="column">
+
+<md-content layout="column">
 
 <div class="input-container" layout layout-sm="column">
 
-            <label translate="pages.testOther.view.field.booleanNullable" flex="20"></label>
-            <div class="read-field" ng-bind="testOther.booleanNullable" flex="30"></div>
+            <label translate="pages.testOther.defaultFieldName.booleanNullable" flex="30"></label>
+            <div class="read-field" ng-bind="testOther.booleanNullable" flex="70"></div>
     
 </div>
 <div class="input-container" layout layout-sm="column">
 
-        <label translate="pages.testOther.view.field.testDate" flex="20"></label>
-        <div class="read-field" ng-bind="testOther.testDate | date:'yyyy-MM-dd HH:mm'" flex="30"></div>
+        <label translate="pages.testOther.defaultFieldName.testDate" flex="30"></label>
+        <div class="read-field" ng-bind="testOther.testDate | date:'yyyy-MM-dd HH:mm'" flex="70"></div>
     
 </div>
 <div class="input-container" layout layout-sm="column">
 
-            <label translate="pages.testOther.view.field.testEnum" flex="20"></label>
-            <div class="read-field" ng-bind="testOther.testEnum" flex="30"></div>
+            <label translate="pages.testOther.defaultFieldName.testEnum" flex="30"></label>
+            <div class="read-field" ng-bind="testOther.testEnum" flex="70"></div>
     
 </div>
 <div class="input-container" layout layout-sm="column">
 <!--ManyToOne-->
 
-            <label translate="pages.testOther.view.field.testStringType" flex="20"></label>
+            <label translate="pages.testOther.defaultFieldName.testStringType" flex="30"></label>
             <div class="read-field">
-                <a  ui-sref="app.testOther.view.testStringModal({modalId:testOther.testStringType.id})" flex="30">
+                <a  ui-sref="app.testOther.view.testStringModal({modalId:testOther.testStringType.id})" flex="70">
                 <span ng-bind="testOther.testStringType.id"></span> <span ng-bind="testOther.testStringType.urlStr"></span> <span ng-bind="testOther.testStringType.uniqueStr"></span> <span ng-bind="testOther.testStringType.sizeStr"></span> </a></div>
 </div>
 
@@ -51,8 +51,7 @@
 
         <md-button class="md-flat" ng-click="back()" translate="button.back" aria-label="back"></md-button>
     </section>
-    </md-content>
-</div>
+</md-content>
 
 
 

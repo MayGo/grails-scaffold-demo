@@ -16,7 +16,7 @@ module.exports = function(){
 
 			var myAcUrl = appConfig['testStringUrl'] || 'http://localhost:8080/testStringUrl';
 			var myAcRe = new RegExp(quote(myAcUrl) + ".*");
-			$httpBackend.whenGET(myAcRe).respond(function(method, url){return [200, [{"id":null,"version":null,"myAc":{"mykey":"myvalue"},"str":"Blank 3"}]]});//list
+			$httpBackend.whenGET(myAcRe).respond(function(method, url){return [200, [[]]]});//list
 			
 
 			//For everything else, don't mock

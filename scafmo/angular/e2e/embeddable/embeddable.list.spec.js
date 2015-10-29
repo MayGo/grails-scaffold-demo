@@ -16,6 +16,7 @@ describe('embeddable list page', function() {
  
 	it('should contain all search fields.', function() {
 	
+		expect(page.jsonMapEl).not.toBeNull()	
 		expect(page.myAcEl).not.toBeNull()	
 		expect(page.strEl).not.toBeNull()	
 	});

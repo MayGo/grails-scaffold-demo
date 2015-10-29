@@ -17,6 +17,7 @@ class EmbedSearchCommand {
 	String acStr
 	String muFileLocation
 	String myFile
+	Map myEmbeddedFieldJsonMap
 	List<Map> myEmbeddedFieldMyAcs
 	Map myEmbeddedFieldMyAc
 	String myEmbeddedFieldStr
@@ -32,6 +33,7 @@ class EmbedSearchCommand {
 		acStr nullable: true
 		muFileLocation nullable: true
 		myFile nullable: true
+		myEmbeddedFieldJsonMap nullable: true
 		myEmbeddedFieldMyAcs nullable: true
 		myEmbeddedFieldMyAc nullable: true
 		myEmbeddedFieldStr nullable: true

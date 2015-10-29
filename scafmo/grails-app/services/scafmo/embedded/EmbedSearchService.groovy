@@ -83,6 +83,9 @@ class EmbedSearchService {
 				ilike('muFileLocation', cmd.muFileLocation + '%')
 			}
 //byte - myFile
+			if (cmd.myEmbeddedFieldJsonMap != null) {
+				eq('myEmbeddedField.jsonMap', cmd.myEmbeddedFieldJsonMap)
+			}
 			if (cmd.myEmbeddedFieldMyAc != null) {
 				eq('myEmbeddedField.myAc', cmd.myEmbeddedFieldMyAc)
 			}

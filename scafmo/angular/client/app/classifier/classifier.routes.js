@@ -11,7 +11,7 @@ $stateProvider
 		.state('app.classifier.list', {
 			url: '/list?search',//TODO: search so that search is not an object in url
 			views: {
-				"page@app.classifier": {
+				'page@app.classifier': {
 					templateUrl: 'app/classifier/classifier.list.html',
 					controller: 'ClassifierListController'
 				}
@@ -22,7 +22,7 @@ $stateProvider
 				parent: 'app.classifier.list'
 			},
 			views: {
-				"page@app.classifier": {
+				'page@app.classifier': {
 					templateUrl: 'app/classifier/classifier.form.html',
 					controller: 'ClassifierEditController'
 				}
@@ -38,7 +38,7 @@ $stateProvider
 				parent: 'app.classifier.list'
 			},
 			views: {
-				"page@app.classifier": {
+				'page@app.classifier': {
 					templateUrl: 'app/classifier/classifier.view.html',
 					controller: 'ClassifierViewController'
 				}
@@ -55,7 +55,7 @@ $stateProvider
 		}).state('app.classifier.view.edit',{
 			url: '/edit',
 			views: {
-				"page@app.classifier": {
+				'page@app.classifier': {
 					templateUrl: 'app/classifier/classifier.form.html',
 					controller: 'ClassifierEditController',
 				}

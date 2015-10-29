@@ -10,6 +10,7 @@
 
 var EditPage = function() {
   
+  this.jsonMapEl = element(by.model('search.jsonMap'));  
   this.myAcEl = element(by.model('search.myAc'));  
   this.strEl = element(by.model('search.str'));  
 };

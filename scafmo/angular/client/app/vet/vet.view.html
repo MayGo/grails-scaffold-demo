@@ -1,27 +1,27 @@
 
 
 
-<div id="vet_view" ng-init="pageTitle = 'pages.vet.view.title'"
+<div ng-if="!isModal" id="vet_view" ng-init="pageTitle = 'pages.vet.view.title'"
      ng-include=" 'shared/blocks/page_heading.html' "></div>
-<div class="content-body">
-    <md-content layout-padding layout="column">
+
+<md-content layout="column">
 
 <div class="input-container" layout layout-sm="column">
 
-            <label translate="pages.vet.view.field.firstName" flex="20"></label>
-            <div class="read-field" ng-bind="vet.firstName" flex="30"></div>
+            <label translate="pages.vet.defaultFieldName.firstName" flex="30"></label>
+            <div class="read-field" ng-bind="vet.firstName" flex="70"></div>
     
 </div>
 <div class="input-container" layout layout-sm="column">
 
-            <label translate="pages.vet.view.field.lastName" flex="20"></label>
-            <div class="read-field" ng-bind="vet.lastName" flex="30"></div>
+            <label translate="pages.vet.defaultFieldName.lastName" flex="30"></label>
+            <div class="read-field" ng-bind="vet.lastName" flex="70"></div>
     
 </div>
 <div class="input-container" layout layout-sm="column">
 <!--ManyToMany-->
-        <label translate="pages.vet.view.field.specialities" flex="20"></label>
-        <div class="read-field" flex="30">
+        <label translate="pages.vet.defaultFieldName.specialities" flex="30"></label>
+        <div class="read-field" flex="70">
             <div ng-repeat="item in vet.specialities">
 <span ng-bind="item.id"></span> <span ng-bind="item.name"></span> </div></div>
 </div>
@@ -44,8 +44,7 @@
 
         <md-button class="md-flat" ng-click="back()" translate="button.back" aria-label="back"></md-button>
     </section>
-    </md-content>
-</div>
+</md-content>
 
 
 

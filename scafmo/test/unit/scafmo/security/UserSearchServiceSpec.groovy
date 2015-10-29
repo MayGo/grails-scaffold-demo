@@ -53,7 +53,10 @@ class UserSearchServiceSpec extends Specification {
 		Map data = [
   'id':  null,
   'version':  null,
+  'accountExpired':  false,
+  'accountLocked':  false,
   'enabled':  true,
+  'passwordExpired':  false,
   'username':  'John Doe 302'
 ]
 		return data

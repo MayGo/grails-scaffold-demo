@@ -11,7 +11,7 @@ $stateProvider
 		.state('app.divisionCollection.list', {
 			url: '/list?search',//TODO: search so that search is not an object in url
 			views: {
-				"page@app.divisionCollection": {
+				'page@app.divisionCollection': {
 					templateUrl: 'app/divisionCollection/divisionCollection.list.html',
 					controller: 'DivisionCollectionListController'
 				}
@@ -22,7 +22,7 @@ $stateProvider
 				parent: 'app.divisionCollection.list'
 			},
 			views: {
-				"page@app.divisionCollection": {
+				'page@app.divisionCollection': {
 					templateUrl: 'app/divisionCollection/divisionCollection.form.html',
 					controller: 'DivisionCollectionEditController'
 				}
@@ -38,7 +38,7 @@ $stateProvider
 				parent: 'app.divisionCollection.list'
 			},
 			views: {
-				"page@app.divisionCollection": {
+				'page@app.divisionCollection': {
 					templateUrl: 'app/divisionCollection/divisionCollection.view.html',
 					controller: 'DivisionCollectionViewController'
 				}
@@ -55,7 +55,7 @@ $stateProvider
 		}).state('app.divisionCollection.view.edit',{
 			url: '/edit',
 			views: {
-				"page@app.divisionCollection": {
+				'page@app.divisionCollection': {
 					templateUrl: 'app/divisionCollection/divisionCollection.form.html',
 					controller: 'DivisionCollectionEditController',
 				}
@@ -77,13 +77,10 @@ $stateProvider
 		data:{
 			isModal:true
 		},
-		onEnter: function($stateParams, $state, $modal, $resource) {
+		onEnter: function($stateParams, $state, $mdDialog) {
 			var modalId = $stateParams.modalId;
-
-			$modal.open({
-				size:'lg',
-				templateUrl: 'app/divisionCollection/divisionCollection.view.html',
-
+			$mdDialog.show({
+				templateUrl: 'app/divisionCollection/divisionCollection.view.modal.html',
 				resolve: {
 					divisionCollectionData: function($stateParams, DivisionCollectionService){
 						//TODO: Add parent ($stateParams.id) to query
@@ -95,10 +92,10 @@ $stateProvider
 					}
 				},
 				controller: 'DivisionCollectionViewController',
-			}).result.finally(function(item) {
+
+			}).then(function () {
 				$state.go('^');
 			});
-
 		}
 
 	}).state('app.divisionCollection.view.edit.divisionCollectionSearchModal',{
@@ -116,7 +113,7 @@ $stateProvider
 				isTab:true
 			},
 			views: {
-				"tabs": {
+				'tabs': {
 					templateUrl: 'app/divisionCollection/divisionCollection.list.html',
 					controller: 'DivisionCollectionListController'
 				}
@@ -132,7 +129,7 @@ $stateProvider
 				isTab:true
 			},
 			views: {
-				"tabs": {
+				'tabs': {
 					templateUrl: 'app/personCollection/personCollection.list.html',
 					controller: 'PersonCollectionListController'
 				}

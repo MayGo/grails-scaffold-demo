@@ -50,14 +50,7 @@ class EmbeddableSearchServiceSpec extends Specification {
 	@SuppressWarnings(['MethodSize'])
 	Map validData() {
 
-		Map data = [
-  'id':  null,
-  'version':  null,
-  'myAc':  [
-    'mykey':  'myvalue'
-  ],
-  'str':  'Blank 3'
-]
+		Map data = []
 		return data
 	}
 

@@ -11,7 +11,7 @@ $stateProvider
 		.state('app.visit.list', {
 			url: '/list?search',//TODO: search so that search is not an object in url
 			views: {
-				"page@app.visit": {
+				'page@app.visit': {
 					templateUrl: 'app/visit/visit.list.html',
 					controller: 'VisitListController'
 				}
@@ -22,7 +22,7 @@ $stateProvider
 				parent: 'app.visit.list'
 			},
 			views: {
-				"page@app.visit": {
+				'page@app.visit': {
 					templateUrl: 'app/visit/visit.form.html',
 					controller: 'VisitEditController'
 				}
@@ -38,7 +38,7 @@ $stateProvider
 				parent: 'app.visit.list'
 			},
 			views: {
-				"page@app.visit": {
+				'page@app.visit': {
 					templateUrl: 'app/visit/visit.view.html',
 					controller: 'VisitViewController'
 				}
@@ -55,7 +55,7 @@ $stateProvider
 		}).state('app.visit.view.edit',{
 			url: '/edit',
 			views: {
-				"page@app.visit": {
+				'page@app.visit': {
 					templateUrl: 'app/visit/visit.form.html',
 					controller: 'VisitEditController',
 				}
@@ -77,13 +77,10 @@ $stateProvider
 		data:{
 			isModal:true
 		},
-		onEnter: function($stateParams, $state, $modal, $resource) {
+		onEnter: function($stateParams, $state, $mdDialog) {
 			var modalId = $stateParams.modalId;
-
-			$modal.open({
-				size:'lg',
-				templateUrl: 'app/pet/pet.view.html',
-
+			$mdDialog.show({
+				templateUrl: 'app/pet/pet.view.modal.html',
 				resolve: {
 					petData: function($stateParams, PetService){
 						//TODO: Add parent ($stateParams.id) to query
@@ -95,10 +92,10 @@ $stateProvider
 					}
 				},
 				controller: 'PetViewController',
-			}).result.finally(function(item) {
+
+			}).then(function () {
 				$state.go('^');
 			});
-
 		}
 
 	}).state('app.visit.view.edit.petSearchModal',{

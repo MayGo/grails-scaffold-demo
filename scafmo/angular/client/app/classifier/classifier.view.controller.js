@@ -1,7 +1,8 @@
 'use strict';
 
 angular.module('angularDemoApp')
-    .controller('ClassifierViewController', function ($scope, $state, $stateParams, $translate, inform, ClassifierService, classifierData) {
+    .controller('ClassifierViewController', function ($scope, $state, $stateParams, $translate, inform,
+            ClassifierService, classifierData,$mdDialog) {
 	 	$scope.classifier = classifierData;
 
 		if($state.current.data){
@@ -16,5 +17,8 @@ angular.module('angularDemoApp')
 		};
 		$scope.go = function(route){
 			$state.go(route);
+		};
+		$scope.closeItemViewer = function () {
+			$mdDialog.hide();
 		};
 	});

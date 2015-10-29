@@ -11,7 +11,7 @@ $stateProvider
 		.state('app.vet.list', {
 			url: '/list?search',//TODO: search so that search is not an object in url
 			views: {
-				"page@app.vet": {
+				'page@app.vet': {
 					templateUrl: 'app/vet/vet.list.html',
 					controller: 'VetListController'
 				}
@@ -22,7 +22,7 @@ $stateProvider
 				parent: 'app.vet.list'
 			},
 			views: {
-				"page@app.vet": {
+				'page@app.vet': {
 					templateUrl: 'app/vet/vet.form.html',
 					controller: 'VetEditController'
 				}
@@ -38,7 +38,7 @@ $stateProvider
 				parent: 'app.vet.list'
 			},
 			views: {
-				"page@app.vet": {
+				'page@app.vet': {
 					templateUrl: 'app/vet/vet.view.html',
 					controller: 'VetViewController'
 				}
@@ -55,7 +55,7 @@ $stateProvider
 		}).state('app.vet.view.edit',{
 			url: '/edit',
 			views: {
-				"page@app.vet": {
+				'page@app.vet': {
 					templateUrl: 'app/vet/vet.form.html',
 					controller: 'VetEditController',
 				}

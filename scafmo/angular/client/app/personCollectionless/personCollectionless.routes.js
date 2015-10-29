@@ -11,7 +11,7 @@ $stateProvider
 		.state('app.personCollectionless.list', {
 			url: '/list?search',//TODO: search so that search is not an object in url
 			views: {
-				"page@app.personCollectionless": {
+				'page@app.personCollectionless': {
 					templateUrl: 'app/personCollectionless/personCollectionless.list.html',
 					controller: 'PersonCollectionlessListController'
 				}
@@ -22,7 +22,7 @@ $stateProvider
 				parent: 'app.personCollectionless.list'
 			},
 			views: {
-				"page@app.personCollectionless": {
+				'page@app.personCollectionless': {
 					templateUrl: 'app/personCollectionless/personCollectionless.form.html',
 					controller: 'PersonCollectionlessEditController'
 				}
@@ -38,7 +38,7 @@ $stateProvider
 				parent: 'app.personCollectionless.list'
 			},
 			views: {
-				"page@app.personCollectionless": {
+				'page@app.personCollectionless': {
 					templateUrl: 'app/personCollectionless/personCollectionless.view.html',
 					controller: 'PersonCollectionlessViewController'
 				}
@@ -55,7 +55,7 @@ $stateProvider
 		}).state('app.personCollectionless.view.edit',{
 			url: '/edit',
 			views: {
-				"page@app.personCollectionless": {
+				'page@app.personCollectionless': {
 					templateUrl: 'app/personCollectionless/personCollectionless.form.html',
 					controller: 'PersonCollectionlessEditController',
 				}
@@ -77,13 +77,10 @@ $stateProvider
 		data:{
 			isModal:true
 		},
-		onEnter: function($stateParams, $state, $modal, $resource) {
+		onEnter: function($stateParams, $state, $mdDialog) {
 			var modalId = $stateParams.modalId;
-
-			$modal.open({
-				size:'lg',
-				templateUrl: 'app/divisionCollectionless/divisionCollectionless.view.html',
-
+			$mdDialog.show({
+				templateUrl: 'app/divisionCollectionless/divisionCollectionless.view.modal.html',
 				resolve: {
 					divisionCollectionlessData: function($stateParams, DivisionCollectionlessService){
 						//TODO: Add parent ($stateParams.id) to query
@@ -95,10 +92,10 @@ $stateProvider
 					}
 				},
 				controller: 'DivisionCollectionlessViewController',
-			}).result.finally(function(item) {
+
+			}).then(function () {
 				$state.go('^');
 			});
-
 		}
 
 	}).state('app.personCollectionless.view.edit.divisionCollectionlessSearchModal',{

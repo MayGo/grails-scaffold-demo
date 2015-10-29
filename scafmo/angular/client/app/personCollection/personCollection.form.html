@@ -9,8 +9,8 @@
 
     <div class="input-container" layout layout-sm="column">
 		<label for="age"
-               translate="pages.personCollection.view.edit.form.field.age" flex="20"/>
-        <md-input-container md-no-float="true" flex="30" layout="row">
+               translate="pages.personCollection.defaultFieldName.age" flex="30"></label>
+        <md-input-container md-no-float="true" flex="70" layout="row">
             <input
                            name="age"
                            aria-label="age"
@@ -21,8 +21,8 @@
 
     <div class="input-container" layout layout-sm="column">
 		<label for="name"
-               translate="pages.personCollection.view.edit.form.field.name" flex="20"/>
-        <md-input-container md-no-float="true" flex="30" layout="row">
+               translate="pages.personCollection.defaultFieldName.name" flex="30"></label>
+        <md-input-container md-no-float="true" flex="70" layout="row">
             
                     <input name="name"
                            aria-label="name"
@@ -35,8 +35,8 @@
 
     <div class="input-container" layout layout-sm="column">
 		<label for="division"
-               translate="pages.personCollection.view.edit.form.field.division" flex="20"/>
-        <md-input-container md-no-float="true" flex="30" layout="row">
+               translate="pages.personCollection.defaultFieldName.division" flex="30"></label>
+        <md-input-container md-no-float="true" flex="70" layout="row">
             <!-- ManyToOne-->
         <md-autocomplete
                 input-name="division"
@@ -46,6 +46,7 @@
                 md-items="item in autocompleteService.divisionCollectionQuery(searchText_division)"
                 md-item-text="item.name || item.label || item.id"
                 md-min-length="0"
+                flex
     
         >
             <md-item-template>

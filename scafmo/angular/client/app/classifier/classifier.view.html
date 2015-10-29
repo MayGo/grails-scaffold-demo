@@ -1,33 +1,33 @@
 
 
 
-<div id="classifier_view" ng-init="pageTitle = 'pages.classifier.view.title'"
+<div ng-if="!isModal" id="classifier_view" ng-init="pageTitle = 'pages.classifier.view.title'"
      ng-include=" 'shared/blocks/page_heading.html' "></div>
-<div class="content-body">
-    <md-content layout-padding layout="column">
+
+<md-content layout="column">
 
 <div class="input-container" layout layout-sm="column">
 
-            <label translate="pages.classifier.view.field.classname" flex="20"></label>
-            <div class="read-field" ng-bind="classifier.classname" flex="30"></div>
+            <label translate="pages.classifier.defaultFieldName.classname" flex="30"></label>
+            <div class="read-field" ng-bind="classifier.classname" flex="70"></div>
     
 </div>
 <div class="input-container" layout layout-sm="column">
 
-            <label translate="pages.classifier.view.field.constant" flex="20"></label>
-            <div class="read-field" ng-bind="classifier.constant" flex="30"></div>
+            <label translate="pages.classifier.defaultFieldName.constant" flex="30"></label>
+            <div class="read-field" ng-bind="classifier.constant" flex="70"></div>
     
 </div>
 <div class="input-container" layout layout-sm="column">
 
-            <label translate="pages.classifier.view.field.description" flex="20"></label>
-            <div class="read-field" ng-bind="classifier.description" flex="30"></div>
+            <label translate="pages.classifier.defaultFieldName.description" flex="30"></label>
+            <div class="read-field" ng-bind="classifier.description" flex="70"></div>
     
 </div>
 <div class="input-container" layout layout-sm="column">
 
-            <label translate="pages.classifier.view.field.propertyname" flex="20"></label>
-            <div class="read-field" ng-bind="classifier.propertyname" flex="30"></div>
+            <label translate="pages.classifier.defaultFieldName.propertyname" flex="30"></label>
+            <div class="read-field" ng-bind="classifier.propertyname" flex="70"></div>
     
 </div>
 
@@ -49,8 +49,7 @@
 
         <md-button class="md-flat" ng-click="back()" translate="button.back" aria-label="back"></md-button>
     </section>
-    </md-content>
-</div>
+</md-content>
 
 
 

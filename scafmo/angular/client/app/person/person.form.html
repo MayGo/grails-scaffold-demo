@@ -1,16 +1,14 @@
 
 
 <div id="person_form"
-     ng-init="pageTitle = (isEditForm)?'pages.person.view.edit.title':'pages.person.create.title'" data-ng-include=" 'shared/blocks/page_heading.html' "></div>
+     ng-init="pageTitle = (isEditForm)?'pages.person.view.edit.title':'pages.person.create.title'" data-ng-include=" 'app/blocks/page_heading.html' "></div>
 
-<md-content layout-padding layout="column">
-    <form name="personForm" novalidate>
+<md-content >
+    <form name="personForm" novalidate layout-padding layout="column">
         <input name="version" type="hidden" ng-model="person.version" />
 
-    <div class="input-container" layout layout-sm="column">
-		<label for="firstName"
-               translate="pages.person.defaultFieldName.firstName" flex="30"></label>
-        <md-input-container md-no-float="true" flex="70" layout="row">
+        <md-input-container flex="100">
+            <label for="firstName" translate="pages.person.defaultFieldName.firstName"></label>
             
                     <input name="firstName"
                            aria-label="firstName"
@@ -18,13 +16,10 @@
                            ng-model="person.firstName"
                  required /> 
         </md-input-container>
-	</div>
 	
 
-    <div class="input-container" layout layout-sm="column">
-		<label for="lastName"
-               translate="pages.person.defaultFieldName.lastName" flex="30"></label>
-        <md-input-container md-no-float="true" flex="70" layout="row">
+        <md-input-container flex="100">
+            <label for="lastName" translate="pages.person.defaultFieldName.lastName"></label>
             
                     <input name="lastName"
                            aria-label="lastName"
@@ -32,7 +27,6 @@
                            ng-model="person.lastName"
                  required /> 
         </md-input-container>
-	</div>
 	
 
 

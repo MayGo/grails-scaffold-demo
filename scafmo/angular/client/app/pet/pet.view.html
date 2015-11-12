@@ -2,42 +2,42 @@
 
 
 <div ng-if="!isModal" id="pet_view" ng-init="pageTitle = 'pages.pet.view.title'"
-     ng-include=" 'shared/blocks/page_heading.html' "></div>
+     ng-include=" 'app/blocks/page_heading.html' "></div>
 
 <md-content layout="column">
 
-<div class="input-container" layout layout-sm="column">
+<div class="input-container" layout="row" layout-align="start center">
 
-        <label translate="pages.pet.defaultFieldName.birthDate" flex="30"></label>
-        <div class="read-field" ng-bind="pet.birthDate | date:'yyyy-MM-dd HH:mm'" flex="70"></div>
+        <label translate="pages.pet.defaultFieldName.birthDate" flex="20"></label>
+        <div class="read-field" ng-bind="pet.birthDate | date:'yyyy-MM-dd HH:mm'" flex="80"></div>
     
 </div>
-<div class="input-container" layout layout-sm="column">
+<div class="input-container" layout="row" layout-align="start center">
 
-            <label translate="pages.pet.defaultFieldName.name" flex="30"></label>
-            <div class="read-field" ng-bind="pet.name" flex="70"></div>
+            <label translate="pages.pet.defaultFieldName.name" flex="20"></label>
+            <div class="read-field" ng-bind="pet.name" flex="80"></div>
     
 </div>
-<div class="input-container" layout layout-sm="column">
+<div class="input-container" layout="row" layout-align="start center">
 <!--OneToMany-->
-            <label translate="pages.pet.defaultFieldName.visits" flex="30"></label>
-            <div class="read-field" ng-bind="pet.visits" flex="70"></div>
+            <label translate="pages.pet.defaultFieldName.visits" flex="20"></label>
+            <div class="read-field" ng-bind="pet.visits" flex="80"></div>
     
 </div>
-<div class="input-container" layout layout-sm="column">
+<div class="input-container" layout="row" layout-align="start center">
 <!--ManyToOne-->
 
-            <label translate="pages.pet.defaultFieldName.type" flex="30"></label>
+            <label translate="pages.pet.defaultFieldName.type" flex="20"></label>
             <div class="read-field">
-                <a  ui-sref="app.pet.view.petTypeModal({modalId:pet.type.id})" flex="70">
+                <a  ui-sref="app.pet.view.petTypeModal({modalId:pet.type.id})" flex="80">
                 <span ng-bind="pet.type.id"></span> <span ng-bind="pet.type.name"></span> </a></div>
 </div>
-<div class="input-container" layout layout-sm="column">
+<div class="input-container" layout="row" layout-align="start center">
 <!--ManyToOne-->
 
-            <label translate="pages.pet.defaultFieldName.owner" flex="30"></label>
+            <label translate="pages.pet.defaultFieldName.owner" flex="20"></label>
             <div class="read-field">
-                <a  ui-sref="app.pet.view.ownerModal({modalId:pet.owner.id})" flex="70">
+                <a  ui-sref="app.pet.view.ownerModal({modalId:pet.owner.id})" flex="80">
                 <span ng-bind="pet.owner.id"></span> <span ng-bind="pet.owner.telephone"></span> <span ng-bind="pet.owner.lastName"></span> <span ng-bind="pet.owner.firstName"></span> </a></div>
 </div>
 
@@ -63,7 +63,7 @@
 
 
 <div ng-if="!isModal">
-    <md-content class="md-padding">
+
         <md-tabs md-dynamic-height md-border-bottom>
 
         <md-tab ui-sref="app.pet.view.visit({relationName:'pets'})"
@@ -77,8 +77,7 @@
 
     </md-tabs>
 
-    <div ui-view="tabs" ><div class="content-body">{{::'tabs.selecttab' | translate}}</div></div>
-    </md-content>
+    <div ui-view="tabs" ><div class="md-padding">{{::'tabs.selecttab' | translate}}</div></div>
 </div>
 
     

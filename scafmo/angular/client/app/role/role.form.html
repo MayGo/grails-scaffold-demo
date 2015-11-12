@@ -1,16 +1,14 @@
 
 
 <div id="role_form"
-     ng-init="pageTitle = (isEditForm)?'pages.role.view.edit.title':'pages.role.create.title'" data-ng-include=" 'shared/blocks/page_heading.html' "></div>
+     ng-init="pageTitle = (isEditForm)?'pages.role.view.edit.title':'pages.role.create.title'" data-ng-include=" 'app/blocks/page_heading.html' "></div>
 
-<md-content layout-padding layout="column">
-    <form name="roleForm" novalidate>
+<md-content >
+    <form name="roleForm" novalidate layout-padding layout="column">
         <input name="version" type="hidden" ng-model="role.version" />
 
-    <div class="input-container" layout layout-sm="column">
-		<label for="authority"
-               translate="pages.role.defaultFieldName.authority" flex="30"></label>
-        <md-input-container md-no-float="true" flex="70" layout="row">
+        <md-input-container flex="100">
+            <label for="authority" translate="pages.role.defaultFieldName.authority"></label>
             
                     <input name="authority"
                            aria-label="authority"
@@ -18,7 +16,6 @@
                            ng-model="role.authority"
                  required /> 
         </md-input-container>
-	</div>
 	
 
 

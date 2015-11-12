@@ -1,35 +1,30 @@
 
 
 <div id="embeddable_form"
-     ng-init="pageTitle = (isEditForm)?'pages.embeddable.view.edit.title':'pages.embeddable.create.title'" data-ng-include=" 'shared/blocks/page_heading.html' "></div>
+     ng-init="pageTitle = (isEditForm)?'pages.embeddable.view.edit.title':'pages.embeddable.create.title'" data-ng-include=" 'app/blocks/page_heading.html' "></div>
 
-<md-content layout-padding layout="column">
-    <form name="embeddableForm" novalidate>
+<md-content >
+    <form name="embeddableForm" novalidate layout-padding layout="column">
         <input name="version" type="hidden" ng-model="embeddable.version" />
 
-    <div class="input-container" layout layout-sm="column">
-		<label for="jsonMap"
-               translate="pages.embeddable.defaultFieldName.jsonMap" flex="30"></label>
-        <md-input-container md-no-float="true" flex="70" layout="row">
+        <md-input-container flex="100">
+            <label for="jsonMap" translate="pages.embeddable.defaultFieldName.jsonMap"></label>
             
         <div class="jsonView">
             <json child="embeddable.jsonMap" default-collapsed="false" type="object"></json>
         </div> 
         </md-input-container>
-	</div>
 	
 
-    <div class="input-container" layout layout-sm="column">
-		<label for="myAc"
-               translate="pages.embeddable.defaultFieldName.myAc" flex="30"></label>
-        <md-input-container md-no-float="true" flex="70" layout="row">
+        <md-input-container flex="100">
+            <label for="myAc" translate="pages.embeddable.defaultFieldName.myAc"></label>
             <!--Autocomplete-->
         <md-autocomplete
                 input-name="myAc"
                 md-cache="false"
                 md-selected-item="embeddable.myAc"
                 md-search-text="searchText_myAc"
-                md-items="item in autocompleteService.testStringSimpleQuery(searchText_myAc)"
+                md-items="item in appCtrl.autocompleteService.testStringSimpleQuery(searchText_myAc)"
                 md-item-text="item.name || item.label || item.id"
                 md-min-length="0"
                 flex
@@ -41,13 +36,10 @@
         </md-autocomplete>
     
         </md-input-container>
-	</div>
 	
 
-    <div class="input-container" layout layout-sm="column">
-		<label for="str"
-               translate="pages.embeddable.defaultFieldName.str" flex="30"></label>
-        <md-input-container md-no-float="true" flex="70" layout="row">
+        <md-input-container flex="100">
+            <label for="str" translate="pages.embeddable.defaultFieldName.str"></label>
             
                     <input name="str"
                            aria-label="str"
@@ -55,7 +47,6 @@
                            ng-model="embeddable.str"
                  /> 
         </md-input-container>
-	</div>
 	
 
 

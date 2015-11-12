@@ -2,24 +2,24 @@
 
 
 <div ng-if="!isModal" id="userRole_view" ng-init="pageTitle = 'pages.userRole.view.title'"
-     ng-include=" 'shared/blocks/page_heading.html' "></div>
+     ng-include=" 'app/blocks/page_heading.html' "></div>
 
 <md-content layout="column">
 
-<div class="input-container" layout layout-sm="column">
+<div class="input-container" layout="row" layout-align="start center">
 <!--ManyToOne-->
 
-            <label translate="pages.userRole.defaultFieldName.role" flex="30"></label>
+            <label translate="pages.userRole.defaultFieldName.role" flex="20"></label>
             <div class="read-field">
-                <a  ui-sref="app.userRole.view.roleModal({modalId:userRole.role.id})" flex="70">
+                <a  ui-sref="app.userRole.view.roleModal({modalId:userRole.role.id})" flex="80">
                 <span ng-bind="userRole.role.id"></span> <span ng-bind="userRole.role.authority"></span> </a></div>
 </div>
-<div class="input-container" layout layout-sm="column">
+<div class="input-container" layout="row" layout-align="start center">
 <!--ManyToOne-->
 
-            <label translate="pages.userRole.defaultFieldName.user" flex="30"></label>
+            <label translate="pages.userRole.defaultFieldName.user" flex="20"></label>
             <div class="read-field">
-                <a  ui-sref="app.userRole.view.userModal({modalId:userRole.user.id})" flex="70">
+                <a  ui-sref="app.userRole.view.userModal({modalId:userRole.user.id})" flex="80">
                 <span ng-bind="userRole.user.id"></span> <span ng-bind="userRole.user.username"></span> <span ng-bind="userRole.user.passwordExpired"></span> <span ng-bind="userRole.user.enabled"></span> </a></div>
 </div>
 

@@ -2,32 +2,32 @@
 
 
 <div ng-if="!isModal" id="embeddable_view" ng-init="pageTitle = 'pages.embeddable.view.title'"
-     ng-include=" 'shared/blocks/page_heading.html' "></div>
+     ng-include=" 'app/blocks/page_heading.html' "></div>
 
 <md-content layout="column">
 
-<div class="input-container" layout layout-sm="column">
+<div class="input-container" layout="row" layout-align="start center">
 <!--Map-->
 
-        <label translate="pages.embeddable.defaultFieldName.jsonMap" flex="30"></label>
-        <div class="read-field" class="jsonView jsonRead" flex="70">
+        <label translate="pages.embeddable.defaultFieldName.jsonMap" flex="20"></label>
+        <div class="read-field" class="jsonView jsonRead" flex="80">
             <json child="embeddable.jsonMap" default-collapsed="false" type="object"></json>
         </div>
     
 </div>
-<div class="input-container" layout layout-sm="column">
+<div class="input-container" layout="row" layout-align="start center">
 <!--Autocomplete-->
 
-        <label translate="pages.embeddable.defaultFieldName.myAc" flex="30"></label>
-        <div class="read-field" ng-bind="embeddable.myAc && autocompleteService.testStringSimpleFormatLabel(embeddable.myAc)"
-             flex="70"
+        <label translate="pages.embeddable.defaultFieldName.myAc" flex="20"></label>
+        <div class="read-field" ng-bind="embeddable.myAc && appCtrl.autocompleteService.testStringSimpleFormatLabel(embeddable.myAc)"
+             flex="80"
                 ></div>
 
 </div>
-<div class="input-container" layout layout-sm="column">
+<div class="input-container" layout="row" layout-align="start center">
 
-            <label translate="pages.embeddable.defaultFieldName.str" flex="30"></label>
-            <div class="read-field" ng-bind="embeddable.str" flex="70"></div>
+            <label translate="pages.embeddable.defaultFieldName.str" flex="20"></label>
+            <div class="read-field" ng-bind="embeddable.str" flex="80"></div>
     
 </div>
 
@@ -53,7 +53,7 @@
 
 
 <div ng-if="!isModal">
-    <md-content class="md-padding">
+
         <md-tabs md-dynamic-height md-border-bottom>
 
         <md-tab ui-sref="app.embeddable.view.embed({relationName:'myEmbeddedFields'})"
@@ -67,8 +67,7 @@
 
     </md-tabs>
 
-    <div ui-view="tabs" ><div class="content-body">{{::'tabs.selecttab' | translate}}</div></div>
-    </md-content>
+    <div ui-view="tabs" ><div class="md-padding">{{::'tabs.selecttab' | translate}}</div></div>
 </div>
 
     

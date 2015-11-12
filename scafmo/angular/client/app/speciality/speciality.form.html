@@ -1,16 +1,14 @@
 
 
 <div id="speciality_form"
-     ng-init="pageTitle = (isEditForm)?'pages.speciality.view.edit.title':'pages.speciality.create.title'" data-ng-include=" 'shared/blocks/page_heading.html' "></div>
+     ng-init="pageTitle = (isEditForm)?'pages.speciality.view.edit.title':'pages.speciality.create.title'" data-ng-include=" 'app/blocks/page_heading.html' "></div>
 
-<md-content layout-padding layout="column">
-    <form name="specialityForm" novalidate>
+<md-content >
+    <form name="specialityForm" novalidate layout-padding layout="column">
         <input name="version" type="hidden" ng-model="speciality.version" />
 
-    <div class="input-container" layout layout-sm="column">
-		<label for="name"
-               translate="pages.speciality.defaultFieldName.name" flex="30"></label>
-        <md-input-container md-no-float="true" flex="70" layout="row">
+        <md-input-container flex="100">
+            <label for="name" translate="pages.speciality.defaultFieldName.name"></label>
             
                     <input name="name"
                            aria-label="name"
@@ -18,7 +16,6 @@
                            ng-model="speciality.name"
                  md-minlength="3"  md-maxlength="20"  required /> 
         </md-input-container>
-	</div>
 	
 
 

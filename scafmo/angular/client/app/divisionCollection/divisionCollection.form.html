@@ -1,16 +1,14 @@
 
 
 <div id="divisionCollection_form"
-     ng-init="pageTitle = (isEditForm)?'pages.divisionCollection.view.edit.title':'pages.divisionCollection.create.title'" data-ng-include=" 'shared/blocks/page_heading.html' "></div>
+     ng-init="pageTitle = (isEditForm)?'pages.divisionCollection.view.edit.title':'pages.divisionCollection.create.title'" data-ng-include=" 'app/blocks/page_heading.html' "></div>
 
-<md-content layout-padding layout="column">
-    <form name="divisionCollectionForm" novalidate>
+<md-content >
+    <form name="divisionCollectionForm" novalidate layout-padding layout="column">
         <input name="version" type="hidden" ng-model="divisionCollection.version" />
 
-    <div class="input-container" layout layout-sm="column">
-		<label for="name"
-               translate="pages.divisionCollection.defaultFieldName.name" flex="30"></label>
-        <md-input-container md-no-float="true" flex="70" layout="row">
+        <md-input-container flex="100">
+            <label for="name" translate="pages.divisionCollection.defaultFieldName.name"></label>
             
                     <input name="name"
                            aria-label="name"
@@ -18,13 +16,10 @@
                            ng-model="divisionCollection.name"
                  required /> 
         </md-input-container>
-	</div>
 	
 
-    <div class="input-container" layout layout-sm="column">
-		<label for="persons"
-               translate="pages.divisionCollection.defaultFieldName.persons" flex="30"></label>
-        <md-input-container md-no-float="true" flex="70" layout="row">
+        <md-input-container flex="100">
+            <label for="persons" translate="pages.divisionCollection.defaultFieldName.persons"></label>
             <!--OneToMany-->
             <md-chips
                     ng-model="divisionCollection.persons"
@@ -35,8 +30,11 @@
     ><md-autocomplete
                     md-selected-item="selectedItem_persons"
                     md-search-text="searchText_persons"
-                    md-items="item in autocompleteService.personCollectionQuery(searchText_persons, ['id','name','age'], true)"
-                    md-item-text="item.name">
+                    md-items="item in appCtrl.autocompleteService.personCollectionQuery(searchText_persons, ['id','name','age'], true)"
+                    md-item-text="item.name"
+                    md-min-length="0"
+                    placeholder="{{ 'pages.divisionCollection.defaultFieldName.persons' | translate }}"
+                >
                 <span md-highlight-text="searchText_persons">{{item.name}}</span>
             </md-autocomplete>
             <md-chip-template>
@@ -44,20 +42,17 @@
             </md-chip-template>
     </md-chips>
         </md-input-container>
-	</div>
 	
 
-    <div class="input-container" layout layout-sm="column">
-		<label for="headDivision"
-               translate="pages.divisionCollection.defaultFieldName.headDivision" flex="30"></label>
-        <md-input-container md-no-float="true" flex="70" layout="row">
-            <!-- ManyToOne-->
+        <md-input-container flex="100">
+            <label for="headDivision" translate="pages.divisionCollection.defaultFieldName.headDivision"></label>
+            <!-- ManyToOne--><div layout="row" layout-align="start center"> 
         <md-autocomplete
                 input-name="headDivision"
                 md-cache="false"
                 md-selected-item="divisionCollection.headDivision"
                 md-search-text="searchText_headDivision"
-                md-items="item in autocompleteService.divisionCollectionQuery(searchText_headDivision)"
+                md-items="item in appCtrl.autocompleteService.divisionCollectionQuery(searchText_headDivision)"
                 md-item-text="item.name || item.label || item.id"
                 md-min-length="0"
                 flex
@@ -71,9 +66,9 @@
          <item-selector update-model="divisionCollection.headDivision"
                item-link="app.divisionCollection.view.edit.divisionCollectionSearchModal" >
          </item-selector>
+        </div>
      
         </md-input-container>
-	</div>
 	
 
 

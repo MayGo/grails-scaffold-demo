@@ -38,3 +38,5 @@ target-eclipse/
 scafmo/target/
 scafmo/web-app/WEB-INF/tld/
 *.iml
+scafmo/.slcache/
+scafmo/out/

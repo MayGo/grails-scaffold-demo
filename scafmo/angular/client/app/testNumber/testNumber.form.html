@@ -1,64 +1,50 @@
 
 
 <div id="testNumber_form"
-     ng-init="pageTitle = (isEditForm)?'pages.testNumber.view.edit.title':'pages.testNumber.create.title'" data-ng-include=" 'shared/blocks/page_heading.html' "></div>
+     ng-init="pageTitle = (isEditForm)?'pages.testNumber.view.edit.title':'pages.testNumber.create.title'" data-ng-include=" 'app/blocks/page_heading.html' "></div>
 
-<md-content layout-padding layout="column">
-    <form name="testNumberForm" novalidate>
+<md-content >
+    <form name="testNumberForm" novalidate layout-padding layout="column">
         <input name="version" type="hidden" ng-model="testNumber.version" />
 
-    <div class="input-container" layout layout-sm="column">
-		<label for="doubleNr"
-               translate="pages.testNumber.defaultFieldName.doubleNr" flex="30"></label>
-        <md-input-container md-no-float="true" flex="70" layout="row">
+        <md-input-container flex="100">
+            <label for="doubleNr" translate="pages.testNumber.defaultFieldName.doubleNr"></label>
             <input
                            name="doubleNr"
                            aria-label="doubleNr"
                            ng-model="testNumber.doubleNr"  type="number"  />
         </md-input-container>
-	</div>
 	
 
-    <div class="input-container" layout layout-sm="column">
-		<label for="floatNr"
-               translate="pages.testNumber.defaultFieldName.floatNr" flex="30"></label>
-        <md-input-container md-no-float="true" flex="70" layout="row">
+        <md-input-container flex="100">
+            <label for="floatNr" translate="pages.testNumber.defaultFieldName.floatNr"></label>
             <input
                            name="floatNr"
                            aria-label="floatNr"
                            ng-model="testNumber.floatNr"  type="number"  />
         </md-input-container>
-	</div>
 	
 
-    <div class="input-container" layout layout-sm="column">
-		<label for="floatNrScale"
-               translate="pages.testNumber.defaultFieldName.floatNrScale" flex="30"></label>
-        <md-input-container md-no-float="true" flex="70" layout="row">
+        <md-input-container flex="100">
+            <label for="floatNrScale" translate="pages.testNumber.defaultFieldName.floatNrScale"></label>
             <input
                            name="floatNrScale"
                            aria-label="floatNrScale"
                            ng-model="testNumber.floatNrScale"  type="number"  />
         </md-input-container>
-	</div>
 	
 
-    <div class="input-container" layout layout-sm="column">
-		<label for="integerNr"
-               translate="pages.testNumber.defaultFieldName.integerNr" flex="30"></label>
-        <md-input-container md-no-float="true" flex="70" layout="row">
+        <md-input-container flex="100">
+            <label for="integerNr" translate="pages.testNumber.defaultFieldName.integerNr"></label>
             <input
                            name="integerNr"
                            aria-label="integerNr"
                            ng-model="testNumber.integerNr"  type="number"  />
         </md-input-container>
-	</div>
 	
 
-    <div class="input-container" layout layout-sm="column">
-		<label for="integerNrInList"
-               translate="pages.testNumber.defaultFieldName.integerNrInList" flex="30"></label>
-        <md-input-container md-no-float="true" flex="70" layout="row">
+        <md-input-container flex="100">
+            <label for="integerNrInList" translate="pages.testNumber.defaultFieldName.integerNrInList"></label>
             
             <md-select
                     aria-label="integerNrInList"
@@ -67,79 +53,60 @@
     </md-select>
 	
         </md-input-container>
-	</div>
 	
 
-    <div class="input-container" layout layout-sm="column">
-		<label for="integerNrMax"
-               translate="pages.testNumber.defaultFieldName.integerNrMax" flex="30"></label>
-        <md-input-container md-no-float="true" flex="70" layout="row">
+        <md-input-container flex="100">
+            <label for="integerNrMax" translate="pages.testNumber.defaultFieldName.integerNrMax"></label>
             <input
                            name="integerNrMax"
                            aria-label="integerNrMax"
                            ng-model="testNumber.integerNrMax"  type="number"  max="3"  />
         </md-input-container>
-	</div>
 	
 
-    <div class="input-container" layout layout-sm="column">
-		<label for="integerNrMin"
-               translate="pages.testNumber.defaultFieldName.integerNrMin" flex="30"></label>
-        <md-input-container md-no-float="true" flex="70" layout="row">
+        <md-input-container flex="100">
+            <label for="integerNrMin" translate="pages.testNumber.defaultFieldName.integerNrMin"></label>
             <input
                            name="integerNrMin"
                            aria-label="integerNrMin"
                            ng-model="testNumber.integerNrMin"  type="number"  min="2"  />
         </md-input-container>
-	</div>
 	
 
-    <div class="input-container" layout layout-sm="column">
-		<label for="integerNrNotEqual"
-               translate="pages.testNumber.defaultFieldName.integerNrNotEqual" flex="30"></label>
-        <md-input-container md-no-float="true" flex="70" layout="row">
+        <md-input-container flex="100">
+            <label for="integerNrNotEqual" translate="pages.testNumber.defaultFieldName.integerNrNotEqual"></label>
             <input
                            name="integerNrNotEqual"
                            aria-label="integerNrNotEqual"
                            ng-model="testNumber.integerNrNotEqual"  type="number"  />
         </md-input-container>
-	</div>
 	
 
-    <div class="input-container" layout layout-sm="column">
-		<label for="integerNrRange"
-               translate="pages.testNumber.defaultFieldName.integerNrRange" flex="30"></label>
-        <md-input-container md-no-float="true" flex="70" layout="row">
+        <md-input-container flex="100">
+            <label for="integerNrRange" translate="pages.testNumber.defaultFieldName.integerNrRange"></label>
             <input
                            name="integerNrRange"
                            aria-label="integerNrRange"
                            ng-model="testNumber.integerNrRange"  type="range"  min="18"  max="65"  />
         </md-input-container>
-	</div>
 	
 
-    <div class="input-container" layout layout-sm="column">
-		<label for="integerNrUnique"
-               translate="pages.testNumber.defaultFieldName.integerNrUnique" flex="30"></label>
-        <md-input-container md-no-float="true" flex="70" layout="row">
+        <md-input-container flex="100">
+            <label for="integerNrUnique" translate="pages.testNumber.defaultFieldName.integerNrUnique"></label>
             <input
                            name="integerNrUnique"
                            aria-label="integerNrUnique"
                            ng-model="testNumber.integerNrUnique"  type="number"  />
         </md-input-container>
-	</div>
 	
 
-    <div class="input-container" layout layout-sm="column">
-		<label for="longNr"
-               translate="pages.testNumber.defaultFieldName.longNr" flex="30"></label>
-        <md-input-container md-no-float="true" flex="70" layout="row">
+        <md-input-container flex="100">
+            <label for="longNr" translate="pages.testNumber.defaultFieldName.longNr"></label>
             <input
                            name="longNr"
                            aria-label="longNr"
                            ng-model="testNumber.longNr"  type="number"  />
         </md-input-container>
-	</div>
 	
 
 

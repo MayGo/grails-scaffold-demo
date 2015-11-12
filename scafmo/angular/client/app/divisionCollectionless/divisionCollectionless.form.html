@@ -1,16 +1,14 @@
 
 
 <div id="divisionCollectionless_form"
-     ng-init="pageTitle = (isEditForm)?'pages.divisionCollectionless.view.edit.title':'pages.divisionCollectionless.create.title'" data-ng-include=" 'shared/blocks/page_heading.html' "></div>
+     ng-init="pageTitle = (isEditForm)?'pages.divisionCollectionless.view.edit.title':'pages.divisionCollectionless.create.title'" data-ng-include=" 'app/blocks/page_heading.html' "></div>
 
-<md-content layout-padding layout="column">
-    <form name="divisionCollectionlessForm" novalidate>
+<md-content >
+    <form name="divisionCollectionlessForm" novalidate layout-padding layout="column">
         <input name="version" type="hidden" ng-model="divisionCollectionless.version" />
 
-    <div class="input-container" layout layout-sm="column">
-		<label for="name"
-               translate="pages.divisionCollectionless.defaultFieldName.name" flex="30"></label>
-        <md-input-container md-no-float="true" flex="70" layout="row">
+        <md-input-container flex="100">
+            <label for="name" translate="pages.divisionCollectionless.defaultFieldName.name"></label>
             
                     <input name="name"
                            aria-label="name"
@@ -18,20 +16,17 @@
                            ng-model="divisionCollectionless.name"
                  required /> 
         </md-input-container>
-	</div>
 	
 
-    <div class="input-container" layout layout-sm="column">
-		<label for="headDivision"
-               translate="pages.divisionCollectionless.defaultFieldName.headDivision" flex="30"></label>
-        <md-input-container md-no-float="true" flex="70" layout="row">
-            <!-- ManyToOne-->
+        <md-input-container flex="100">
+            <label for="headDivision" translate="pages.divisionCollectionless.defaultFieldName.headDivision"></label>
+            <!-- ManyToOne--><div layout="row" layout-align="start center"> 
         <md-autocomplete
                 input-name="headDivision"
                 md-cache="false"
                 md-selected-item="divisionCollectionless.headDivision"
                 md-search-text="searchText_headDivision"
-                md-items="item in autocompleteService.divisionCollectionlessQuery(searchText_headDivision)"
+                md-items="item in appCtrl.autocompleteService.divisionCollectionlessQuery(searchText_headDivision)"
                 md-item-text="item.name || item.label || item.id"
                 md-min-length="0"
                 flex
@@ -45,9 +40,9 @@
          <item-selector update-model="divisionCollectionless.headDivision"
                item-link="app.divisionCollectionless.view.edit.divisionCollectionlessSearchModal" >
          </item-selector>
+        </div>
      
         </md-input-container>
-	</div>
 	
 
 

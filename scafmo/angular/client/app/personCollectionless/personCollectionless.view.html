@@ -2,28 +2,28 @@
 
 
 <div ng-if="!isModal" id="personCollectionless_view" ng-init="pageTitle = 'pages.personCollectionless.view.title'"
-     ng-include=" 'shared/blocks/page_heading.html' "></div>
+     ng-include=" 'app/blocks/page_heading.html' "></div>
 
 <md-content layout="column">
 
-<div class="input-container" layout layout-sm="column">
+<div class="input-container" layout="row" layout-align="start center">
 
-            <label translate="pages.personCollectionless.defaultFieldName.age" flex="30"></label>
-            <div class="read-field" ng-bind="personCollectionless.age" flex="70"></div>
+            <label translate="pages.personCollectionless.defaultFieldName.age" flex="20"></label>
+            <div class="read-field" ng-bind="personCollectionless.age" flex="80"></div>
     
 </div>
-<div class="input-container" layout layout-sm="column">
+<div class="input-container" layout="row" layout-align="start center">
 
-            <label translate="pages.personCollectionless.defaultFieldName.name" flex="30"></label>
-            <div class="read-field" ng-bind="personCollectionless.name" flex="70"></div>
+            <label translate="pages.personCollectionless.defaultFieldName.name" flex="20"></label>
+            <div class="read-field" ng-bind="personCollectionless.name" flex="80"></div>
     
 </div>
-<div class="input-container" layout layout-sm="column">
+<div class="input-container" layout="row" layout-align="start center">
 <!--ManyToOne-->
 
-            <label translate="pages.personCollectionless.defaultFieldName.division" flex="30"></label>
+            <label translate="pages.personCollectionless.defaultFieldName.division" flex="20"></label>
             <div class="read-field">
-                <a  ui-sref="app.personCollectionless.view.divisionCollectionlessModal({modalId:personCollectionless.division.id})" flex="70">
+                <a  ui-sref="app.personCollectionless.view.divisionCollectionlessModal({modalId:personCollectionless.division.id})" flex="80">
                 <span ng-bind="personCollectionless.division.id"></span> <span ng-bind="personCollectionless.division.name"></span> </a></div>
 </div>
 

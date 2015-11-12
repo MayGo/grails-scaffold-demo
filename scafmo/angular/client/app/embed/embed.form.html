@@ -1,23 +1,21 @@
 
 
 <div id="embed_form"
-     ng-init="pageTitle = (isEditForm)?'pages.embed.view.edit.title':'pages.embed.create.title'" data-ng-include=" 'shared/blocks/page_heading.html' "></div>
+     ng-init="pageTitle = (isEditForm)?'pages.embed.view.edit.title':'pages.embed.create.title'" data-ng-include=" 'app/blocks/page_heading.html' "></div>
 
-<md-content layout-padding layout="column">
-    <form name="embedForm" novalidate>
+<md-content >
+    <form name="embedForm" novalidate layout-padding layout="column">
         <input name="version" type="hidden" ng-model="embed.version" />
 
-    <div class="input-container" layout layout-sm="column">
-		<label for="acCustomMap"
-               translate="pages.embed.defaultFieldName.acCustomMap" flex="30"></label>
-        <md-input-container md-no-float="true" flex="70" layout="row">
+        <md-input-container flex="100">
+            <label for="acCustomMap" translate="pages.embed.defaultFieldName.acCustomMap"></label>
             <!--Autocomplete-->
         <md-autocomplete
                 input-name="acCustomMap"
                 md-cache="false"
                 md-selected-item="embed.acCustomMap"
                 md-search-text="searchText_acCustomMap"
-                md-items="item in autocompleteService.testStringSimpleQuery(searchText_acCustomMap)"
+                md-items="item in appCtrl.autocompleteService.testStringSimpleQuery(searchText_acCustomMap)"
                 md-item-text="item.name || item.label || item.id"
                 md-min-length="0"
                 flex
@@ -29,20 +27,17 @@
         </md-autocomplete>
     
         </md-input-container>
-	</div>
 	
 
-    <div class="input-container" layout layout-sm="column">
-		<label for="acMap"
-               translate="pages.embed.defaultFieldName.acMap" flex="30"></label>
-        <md-input-container md-no-float="true" flex="70" layout="row">
+        <md-input-container flex="100">
+            <label for="acMap" translate="pages.embed.defaultFieldName.acMap"></label>
             <!--Autocomplete-->
         <md-autocomplete
                 input-name="acMap"
                 md-cache="false"
                 md-selected-item="embed.acMap"
                 md-search-text="searchText_acMap"
-                md-items="item in autocompleteService.testStringSimpleQuery(searchText_acMap)"
+                md-items="item in appCtrl.autocompleteService.testStringSimpleQuery(searchText_acMap)"
                 md-item-text="item.name || item.label || item.id"
                 md-min-length="0"
                 flex
@@ -54,20 +49,17 @@
         </md-autocomplete>
     
         </md-input-container>
-	</div>
 	
 
-    <div class="input-container" layout layout-sm="column">
-		<label for="acStr"
-               translate="pages.embed.defaultFieldName.acStr" flex="30"></label>
-        <md-input-container md-no-float="true" flex="70" layout="row">
+        <md-input-container flex="100">
+            <label for="acStr" translate="pages.embed.defaultFieldName.acStr"></label>
             <!--Autocomplete-->
         <md-autocomplete
                 input-name="acStr"
                 md-cache="false"
                 md-selected-item="embed.acStr"
                 md-search-text="searchText_acStr"
-                md-items="item in autocompleteService.testStringSimpleQuery(searchText_acStr)"
+                md-items="item in appCtrl.autocompleteService.testStringSimpleQuery(searchText_acStr)"
                 md-item-text="item.name || item.label || item.id"
                 md-min-length="0"
                 flex
@@ -79,13 +71,10 @@
         </md-autocomplete>
     
         </md-input-container>
-	</div>
 	
 
-    <div class="input-container" layout layout-sm="column">
-		<label for="muFileLocation"
-               translate="pages.embed.defaultFieldName.muFileLocation" flex="30"></label>
-        <md-input-container md-no-float="true" flex="70" layout="row">
+        <md-input-container flex="100">
+            <label for="muFileLocation" translate="pages.embed.defaultFieldName.muFileLocation"></label>
             <div class="input-group input-group">
     <div
          name="muFileLocation"
@@ -94,13 +83,10 @@
             ></div>
 </div>
         </md-input-container>
-	</div>
 	
 
-    <div class="input-container" layout layout-sm="column">
-		<label for="myFile"
-               translate="pages.embed.defaultFieldName.myFile" flex="30"></label>
-        <md-input-container md-no-float="true" flex="70" layout="row">
+        <md-input-container flex="100">
+            <label for="myFile" translate="pages.embed.defaultFieldName.myFile"></label>
             <div class="input-group input-group">
     <div
          name="myFile"
@@ -109,7 +95,6 @@
          ></div>
     </div>
         </md-input-container>
-	</div>
 	
 
         <div class="looks-like-toolbar" ng-init="myEmbeddedFieldOpen = true" ng-click="myEmbeddedFieldOpen = !myEmbeddedFieldOpen" id="myEmbeddedFieldEmbedded">
@@ -122,29 +107,24 @@
         </div>
         <md-content ng-show="myEmbeddedFieldOpen" layout-padding class="embedded-content">
                     
-    <div class="input-container" layout layout-sm="column">
-		<label for="myEmbeddedField.jsonMap"
-               translate="pages.embed.defaultFieldName.myEmbeddedField.jsonMap" flex="30"></label>
-        <md-input-container md-no-float="true" flex="70" layout="row">
+        <md-input-container flex="100">
+            <label for="myEmbeddedField.jsonMap" translate="pages.embed.defaultFieldName.myEmbeddedField.jsonMap"></label>
             
         <div class="jsonView">
             <json child="embed.myEmbeddedField.jsonMap" default-collapsed="false" type="object"></json>
         </div> 
         </md-input-container>
-	</div>
 	
 
-    <div class="input-container" layout layout-sm="column">
-		<label for="myEmbeddedField"
-               translate="pages.embed.defaultFieldName.myEmbeddedField.myAc" flex="30"></label>
-        <md-input-container md-no-float="true" flex="70" layout="row">
+        <md-input-container flex="100">
+            <label for="myEmbeddedField" translate="pages.embed.defaultFieldName.myEmbeddedField.myAc"></label>
             <!--Autocomplete-->
         <md-autocomplete
                 input-name="myEmbeddedField"
                 md-cache="false"
                 md-selected-item="embed.myEmbeddedField.myAc"
                 md-search-text="searchText_myEmbeddedField_myAc"
-                md-items="item in autocompleteService.testStringSimpleQuery(searchText_myEmbeddedField_myAc)"
+                md-items="item in appCtrl.autocompleteService.testStringSimpleQuery(searchText_myEmbeddedField_myAc)"
                 md-item-text="item.name || item.label || item.id"
                 md-min-length="0"
                 flex
@@ -156,13 +136,10 @@
         </md-autocomplete>
     
         </md-input-container>
-	</div>
 	
 
-    <div class="input-container" layout layout-sm="column">
-		<label for="myEmbeddedField.str"
-               translate="pages.embed.defaultFieldName.myEmbeddedField.str" flex="30"></label>
-        <md-input-container md-no-float="true" flex="70" layout="row">
+        <md-input-container flex="100">
+            <label for="myEmbeddedField.str" translate="pages.embed.defaultFieldName.myEmbeddedField.str"></label>
             
                     <input name="myEmbeddedField.str"
                            aria-label="myEmbeddedField.str"
@@ -170,7 +147,6 @@
                            ng-model="embed.myEmbeddedField.str"
                  /> 
         </md-input-container>
-	</div>
 	
 
         </md-content>

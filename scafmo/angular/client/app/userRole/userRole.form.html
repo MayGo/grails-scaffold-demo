@@ -1,23 +1,21 @@
 
 
 <div id="userRole_form"
-     ng-init="pageTitle = (isEditForm)?'pages.userRole.view.edit.title':'pages.userRole.create.title'" data-ng-include=" 'shared/blocks/page_heading.html' "></div>
+     ng-init="pageTitle = (isEditForm)?'pages.userRole.view.edit.title':'pages.userRole.create.title'" data-ng-include=" 'app/blocks/page_heading.html' "></div>
 
-<md-content layout-padding layout="column">
-    <form name="userRoleForm" novalidate>
+<md-content >
+    <form name="userRoleForm" novalidate layout-padding layout="column">
         <input name="version" type="hidden" ng-model="userRole.version" />
 
-    <div class="input-container" layout layout-sm="column">
-		<label for="role"
-               translate="pages.userRole.defaultFieldName.role" flex="30"></label>
-        <md-input-container md-no-float="true" flex="70" layout="row">
-            <!-- ManyToOne-->
+        <md-input-container flex="100">
+            <label for="role" translate="pages.userRole.defaultFieldName.role"></label>
+            <!-- ManyToOne--><div layout="row" layout-align="start center"> 
         <md-autocomplete
                 input-name="role"
                 md-cache="false"
                 md-selected-item="userRole.role"
                 md-search-text="searchText_role"
-                md-items="item in autocompleteService.roleQuery(searchText_role)"
+                md-items="item in appCtrl.autocompleteService.roleQuery(searchText_role)"
                 md-item-text="item.name || item.label || item.id"
                 md-min-length="0"
                 flex
@@ -31,22 +29,20 @@
          <item-selector update-model="userRole.role"
                item-link="app.userRole.view.edit.roleSearchModal" >
          </item-selector>
+        </div>
      
         </md-input-container>
-	</div>
 	
 
-    <div class="input-container" layout layout-sm="column">
-		<label for="user"
-               translate="pages.userRole.defaultFieldName.user" flex="30"></label>
-        <md-input-container md-no-float="true" flex="70" layout="row">
-            <!-- ManyToOne-->
+        <md-input-container flex="100">
+            <label for="user" translate="pages.userRole.defaultFieldName.user"></label>
+            <!-- ManyToOne--><div layout="row" layout-align="start center"> 
         <md-autocomplete
                 input-name="user"
                 md-cache="false"
                 md-selected-item="userRole.user"
                 md-search-text="searchText_user"
-                md-items="item in autocompleteService.userQuery(searchText_user)"
+                md-items="item in appCtrl.autocompleteService.userQuery(searchText_user)"
                 md-item-text="item.name || item.label || item.id"
                 md-min-length="0"
                 flex
@@ -60,9 +56,9 @@
          <item-selector update-model="userRole.user"
                item-link="app.userRole.view.edit.userSearchModal" >
          </item-selector>
+        </div>
      
         </md-input-container>
-	</div>
 	
 
 

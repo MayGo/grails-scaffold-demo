@@ -2,80 +2,80 @@
 
 
 <div ng-if="!isModal" id="testString_view" ng-init="pageTitle = 'pages.testString.view.title'"
-     ng-include=" 'shared/blocks/page_heading.html' "></div>
+     ng-include=" 'app/blocks/page_heading.html' "></div>
 
 <md-content layout="column">
 
-<div class="input-container" layout layout-sm="column">
+<div class="input-container" layout="row" layout-align="start center">
 
-            <label translate="pages.testString.defaultFieldName.blankStr" flex="30"></label>
-            <div class="read-field" ng-bind="testString.blankStr" flex="70"></div>
+            <label translate="pages.testString.defaultFieldName.blankStr" flex="20"></label>
+            <div class="read-field" ng-bind="testString.blankStr" flex="80"></div>
     
 </div>
-<div class="input-container" layout layout-sm="column">
+<div class="input-container" layout="row" layout-align="start center">
 
-            <label translate="pages.testString.defaultFieldName.creditCardStr" flex="30"></label>
-            <div class="read-field" ng-bind="testString.creditCardStr" flex="70"></div>
+            <label translate="pages.testString.defaultFieldName.creditCardStr" flex="20"></label>
+            <div class="read-field" ng-bind="testString.creditCardStr" flex="80"></div>
     
 </div>
-<div class="input-container" layout layout-sm="column">
+<div class="input-container" layout="row" layout-align="start center">
 
-            <label translate="pages.testString.defaultFieldName.emailStr" flex="30"></label>
-            <div class="read-field" ng-bind="testString.emailStr" flex="70"></div>
+            <label translate="pages.testString.defaultFieldName.emailStr" flex="20"></label>
+            <div class="read-field" ng-bind="testString.emailStr" flex="80"></div>
     
 </div>
-<div class="input-container" layout layout-sm="column">
+<div class="input-container" layout="row" layout-align="start center">
 
-            <label translate="pages.testString.defaultFieldName.inListStr" flex="30"></label>
-            <div class="read-field" ng-bind="testString.inListStr" flex="70"></div>
+            <label translate="pages.testString.defaultFieldName.inListStr" flex="20"></label>
+            <div class="read-field" ng-bind="testString.inListStr" flex="80"></div>
     
 </div>
-<div class="input-container" layout layout-sm="column">
+<div class="input-container" layout="row" layout-align="start center">
 
-            <label translate="pages.testString.defaultFieldName.matchesStr" flex="30"></label>
-            <div class="read-field" ng-bind="testString.matchesStr" flex="70"></div>
+            <label translate="pages.testString.defaultFieldName.matchesStr" flex="20"></label>
+            <div class="read-field" ng-bind="testString.matchesStr" flex="80"></div>
     
 </div>
-<div class="input-container" layout layout-sm="column">
+<div class="input-container" layout="row" layout-align="start center">
 
-            <label translate="pages.testString.defaultFieldName.maxSizeStr" flex="30"></label>
-            <div class="read-field" ng-bind="testString.maxSizeStr" flex="70"></div>
+            <label translate="pages.testString.defaultFieldName.maxSizeStr" flex="20"></label>
+            <div class="read-field" ng-bind="testString.maxSizeStr" flex="80"></div>
     
 </div>
-<div class="input-container" layout layout-sm="column">
+<div class="input-container" layout="row" layout-align="start center">
 
-            <label translate="pages.testString.defaultFieldName.minSizeStr" flex="30"></label>
-            <div class="read-field" ng-bind="testString.minSizeStr" flex="70"></div>
+            <label translate="pages.testString.defaultFieldName.minSizeStr" flex="20"></label>
+            <div class="read-field" ng-bind="testString.minSizeStr" flex="80"></div>
     
 </div>
-<div class="input-container" layout layout-sm="column">
+<div class="input-container" layout="row" layout-align="start center">
 
-            <label translate="pages.testString.defaultFieldName.notEqualStr" flex="30"></label>
-            <div class="read-field" ng-bind="testString.notEqualStr" flex="70"></div>
+            <label translate="pages.testString.defaultFieldName.notEqualStr" flex="20"></label>
+            <div class="read-field" ng-bind="testString.notEqualStr" flex="80"></div>
     
 </div>
-<div class="input-container" layout layout-sm="column">
+<div class="input-container" layout="row" layout-align="start center">
 
-            <label translate="pages.testString.defaultFieldName.sizeStr" flex="30"></label>
-            <div class="read-field" ng-bind="testString.sizeStr" flex="70"></div>
+            <label translate="pages.testString.defaultFieldName.sizeStr" flex="20"></label>
+            <div class="read-field" ng-bind="testString.sizeStr" flex="80"></div>
     
 </div>
-<div class="input-container" layout layout-sm="column">
+<div class="input-container" layout="row" layout-align="start center">
 
-            <label translate="pages.testString.defaultFieldName.textareaStr" flex="30"></label>
-            <div class="read-field" ng-bind="testString.textareaStr" flex="70"></div>
+            <label translate="pages.testString.defaultFieldName.textareaStr" flex="20"></label>
+            <div class="read-field" ng-bind="testString.textareaStr" flex="80"></div>
     
 </div>
-<div class="input-container" layout layout-sm="column">
+<div class="input-container" layout="row" layout-align="start center">
 
-            <label translate="pages.testString.defaultFieldName.uniqueStr" flex="30"></label>
-            <div class="read-field" ng-bind="testString.uniqueStr" flex="70"></div>
+            <label translate="pages.testString.defaultFieldName.uniqueStr" flex="20"></label>
+            <div class="read-field" ng-bind="testString.uniqueStr" flex="80"></div>
     
 </div>
-<div class="input-container" layout layout-sm="column">
+<div class="input-container" layout="row" layout-align="start center">
 
-            <label translate="pages.testString.defaultFieldName.urlStr" flex="30"></label>
-            <div class="read-field" ng-bind="testString.urlStr" flex="70"></div>
+            <label translate="pages.testString.defaultFieldName.urlStr" flex="20"></label>
+            <div class="read-field" ng-bind="testString.urlStr" flex="80"></div>
     
 </div>
 
@@ -101,7 +101,7 @@
 
 
 <div ng-if="!isModal">
-    <md-content class="md-padding">
+
         <md-tabs md-dynamic-height md-border-bottom>
 
         <md-tab ui-sref="app.testString.view.testOther({relationName:'testStringTypes'})"
@@ -115,8 +115,7 @@
 
     </md-tabs>
 
-    <div ui-view="tabs" ><div class="content-body">{{::'tabs.selecttab' | translate}}</div></div>
-    </md-content>
+    <div ui-view="tabs" ><div class="md-padding">{{::'tabs.selecttab' | translate}}</div></div>
 </div>
 
     

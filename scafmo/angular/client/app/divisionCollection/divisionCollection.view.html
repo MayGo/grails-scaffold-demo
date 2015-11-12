@@ -2,28 +2,28 @@
 
 
 <div ng-if="!isModal" id="divisionCollection_view" ng-init="pageTitle = 'pages.divisionCollection.view.title'"
-     ng-include=" 'shared/blocks/page_heading.html' "></div>
+     ng-include=" 'app/blocks/page_heading.html' "></div>
 
 <md-content layout="column">
 
-<div class="input-container" layout layout-sm="column">
+<div class="input-container" layout="row" layout-align="start center">
 
-            <label translate="pages.divisionCollection.defaultFieldName.name" flex="30"></label>
-            <div class="read-field" ng-bind="divisionCollection.name" flex="70"></div>
+            <label translate="pages.divisionCollection.defaultFieldName.name" flex="20"></label>
+            <div class="read-field" ng-bind="divisionCollection.name" flex="80"></div>
     
 </div>
-<div class="input-container" layout layout-sm="column">
+<div class="input-container" layout="row" layout-align="start center">
 <!--OneToMany-->
-            <label translate="pages.divisionCollection.defaultFieldName.persons" flex="30"></label>
-            <div class="read-field" ng-bind="divisionCollection.persons" flex="70"></div>
+            <label translate="pages.divisionCollection.defaultFieldName.persons" flex="20"></label>
+            <div class="read-field" ng-bind="divisionCollection.persons" flex="80"></div>
     
 </div>
-<div class="input-container" layout layout-sm="column">
+<div class="input-container" layout="row" layout-align="start center">
 <!--ManyToOne-->
 
-            <label translate="pages.divisionCollection.defaultFieldName.headDivision" flex="30"></label>
+            <label translate="pages.divisionCollection.defaultFieldName.headDivision" flex="20"></label>
             <div class="read-field">
-                <a  ui-sref="app.divisionCollection.view.divisionCollectionModal({modalId:divisionCollection.headDivision.id})" flex="70">
+                <a  ui-sref="app.divisionCollection.view.divisionCollectionModal({modalId:divisionCollection.headDivision.id})" flex="80">
                 <span ng-bind="divisionCollection.headDivision.id"></span> <span ng-bind="divisionCollection.headDivision.name"></span> </a></div>
 </div>
 
@@ -49,7 +49,7 @@
 
 
 <div ng-if="!isModal">
-    <md-content class="md-padding">
+
         <md-tabs md-dynamic-height md-border-bottom>
 
         <md-tab ui-sref="app.divisionCollection.view.divisionCollection({relationName:'headDivisions'})"
@@ -72,8 +72,7 @@
 
     </md-tabs>
 
-    <div ui-view="tabs" ><div class="content-body">{{::'tabs.selecttab' | translate}}</div></div>
-    </md-content>
+    <div ui-view="tabs" ><div class="md-padding">{{::'tabs.selecttab' | translate}}</div></div>
 </div>
 
     

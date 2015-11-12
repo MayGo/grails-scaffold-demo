@@ -1,16 +1,14 @@
 
 
 <div id="petType_form"
-     ng-init="pageTitle = (isEditForm)?'pages.petType.view.edit.title':'pages.petType.create.title'" data-ng-include=" 'shared/blocks/page_heading.html' "></div>
+     ng-init="pageTitle = (isEditForm)?'pages.petType.view.edit.title':'pages.petType.create.title'" data-ng-include=" 'app/blocks/page_heading.html' "></div>
 
-<md-content layout-padding layout="column">
-    <form name="petTypeForm" novalidate>
+<md-content >
+    <form name="petTypeForm" novalidate layout-padding layout="column">
         <input name="version" type="hidden" ng-model="petType.version" />
 
-    <div class="input-container" layout layout-sm="column">
-		<label for="name"
-               translate="pages.petType.defaultFieldName.name" flex="30"></label>
-        <md-input-container md-no-float="true" flex="70" layout="row">
+        <md-input-container flex="100">
+            <label for="name" translate="pages.petType.defaultFieldName.name"></label>
             
                     <input name="name"
                            aria-label="name"
@@ -18,7 +16,6 @@
                            ng-model="petType.name"
                  md-minlength="3"  md-maxlength="20"  required /> 
         </md-input-container>
-	</div>
 	
 
 

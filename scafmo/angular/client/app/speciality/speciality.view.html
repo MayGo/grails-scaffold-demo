@@ -2,14 +2,14 @@
 
 
 <div ng-if="!isModal" id="speciality_view" ng-init="pageTitle = 'pages.speciality.view.title'"
-     ng-include=" 'shared/blocks/page_heading.html' "></div>
+     ng-include=" 'app/blocks/page_heading.html' "></div>
 
 <md-content layout="column">
 
-<div class="input-container" layout layout-sm="column">
+<div class="input-container" layout="row" layout-align="start center">
 
-            <label translate="pages.speciality.defaultFieldName.name" flex="30"></label>
-            <div class="read-field" ng-bind="speciality.name" flex="70"></div>
+            <label translate="pages.speciality.defaultFieldName.name" flex="20"></label>
+            <div class="read-field" ng-bind="speciality.name" flex="80"></div>
     
 </div>
 

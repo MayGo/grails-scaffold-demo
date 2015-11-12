@@ -1,16 +1,14 @@
 
 
 <div id="pet_form"
-     ng-init="pageTitle = (isEditForm)?'pages.pet.view.edit.title':'pages.pet.create.title'" data-ng-include=" 'shared/blocks/page_heading.html' "></div>
+     ng-init="pageTitle = (isEditForm)?'pages.pet.view.edit.title':'pages.pet.create.title'" data-ng-include=" 'app/blocks/page_heading.html' "></div>
 
-<md-content layout-padding layout="column">
-    <form name="petForm" novalidate>
+<md-content >
+    <form name="petForm" novalidate layout-padding layout="column">
         <input name="version" type="hidden" ng-model="pet.version" />
 
-    <div class="input-container" layout layout-sm="column">
-		<label for="birthDate"
-               translate="pages.pet.defaultFieldName.birthDate" flex="30"></label>
-        <md-input-container md-no-float="true" flex="70" layout="row">
+        <md-input-container flex="100">
+            <label for="birthDate" translate="pages.pet.defaultFieldName.birthDate"></label>
             
      <input name="birthDate"
             aria-label="birthDate"
@@ -21,13 +19,10 @@
       />
       
         </md-input-container>
-	</div>
 	
 
-    <div class="input-container" layout layout-sm="column">
-		<label for="name"
-               translate="pages.pet.defaultFieldName.name" flex="30"></label>
-        <md-input-container md-no-float="true" flex="70" layout="row">
+        <md-input-container flex="100">
+            <label for="name" translate="pages.pet.defaultFieldName.name"></label>
             
                     <input name="name"
                            aria-label="name"
@@ -35,13 +30,10 @@
                            ng-model="pet.name"
                  required /> 
         </md-input-container>
-	</div>
 	
 
-    <div class="input-container" layout layout-sm="column">
-		<label for="visits"
-               translate="pages.pet.defaultFieldName.visits" flex="30"></label>
-        <md-input-container md-no-float="true" flex="70" layout="row">
+        <md-input-container flex="100">
+            <label for="visits" translate="pages.pet.defaultFieldName.visits"></label>
             <!--OneToMany-->
             <md-chips
                     ng-model="pet.visits"
@@ -52,8 +44,11 @@
     ><md-autocomplete
                     md-selected-item="selectedItem_visits"
                     md-search-text="searchText_visits"
-                    md-items="item in autocompleteService.visitQuery(searchText_visits, ['id','description','date'], true)"
-                    md-item-text="item.name">
+                    md-items="item in appCtrl.autocompleteService.visitQuery(searchText_visits, ['id','description','date'], true)"
+                    md-item-text="item.name"
+                    md-min-length="0"
+                    placeholder="{{ 'pages.pet.defaultFieldName.visits' | translate }}"
+                >
                 <span md-highlight-text="searchText_visits">{{item.name}}</span>
             </md-autocomplete>
             <md-chip-template>
@@ -61,20 +56,17 @@
             </md-chip-template>
     </md-chips>
         </md-input-container>
-	</div>
 	
 
-    <div class="input-container" layout layout-sm="column">
-		<label for="type"
-               translate="pages.pet.defaultFieldName.type" flex="30"></label>
-        <md-input-container md-no-float="true" flex="70" layout="row">
-            <!-- ManyToOne-->
+        <md-input-container flex="100">
+            <label for="type" translate="pages.pet.defaultFieldName.type"></label>
+            <!-- ManyToOne--><div layout="row" layout-align="start center"> 
         <md-autocomplete
                 input-name="type"
                 md-cache="false"
                 md-selected-item="pet.type"
                 md-search-text="searchText_type"
-                md-items="item in autocompleteService.petTypeQuery(searchText_type)"
+                md-items="item in appCtrl.autocompleteService.petTypeQuery(searchText_type)"
                 md-item-text="item.name || item.label || item.id"
                 md-min-length="0"
                 flex
@@ -88,22 +80,20 @@
          <item-selector update-model="pet.type"
                item-link="app.pet.view.edit.petTypeSearchModal" >
          </item-selector>
+        </div>
      
         </md-input-container>
-	</div>
 	
 
-    <div class="input-container" layout layout-sm="column">
-		<label for="owner"
-               translate="pages.pet.defaultFieldName.owner" flex="30"></label>
-        <md-input-container md-no-float="true" flex="70" layout="row">
-            <!-- ManyToOne-->
+        <md-input-container flex="100">
+            <label for="owner" translate="pages.pet.defaultFieldName.owner"></label>
+            <!-- ManyToOne--><div layout="row" layout-align="start center"> 
         <md-autocomplete
                 input-name="owner"
                 md-cache="false"
                 md-selected-item="pet.owner"
                 md-search-text="searchText_owner"
-                md-items="item in autocompleteService.ownerQuery(searchText_owner)"
+                md-items="item in appCtrl.autocompleteService.ownerQuery(searchText_owner)"
                 md-item-text="item.name || item.label || item.id"
                 md-min-length="0"
                 flex
@@ -117,9 +107,9 @@
          <item-selector update-model="pet.owner"
                item-link="app.pet.view.edit.ownerSearchModal" >
          </item-selector>
+        </div>
      
         </md-input-container>
-	</div>
 	
 
 

@@ -2,47 +2,47 @@
 
 
 <div ng-if="!isModal" id="embed_view" ng-init="pageTitle = 'pages.embed.view.title'"
-     ng-include=" 'shared/blocks/page_heading.html' "></div>
+     ng-include=" 'app/blocks/page_heading.html' "></div>
 
 <md-content layout="column">
 
-<div class="input-container" layout layout-sm="column">
+<div class="input-container" layout="row" layout-align="start center">
 <!--Autocomplete-->
 
-        <label translate="pages.embed.defaultFieldName.acCustomMap" flex="30"></label>
-        <div class="read-field" ng-bind="embed.acCustomMap && autocompleteService.testStringSimpleFormatLabel(embed.acCustomMap)"
-             flex="70"
+        <label translate="pages.embed.defaultFieldName.acCustomMap" flex="20"></label>
+        <div class="read-field" ng-bind="embed.acCustomMap && appCtrl.autocompleteService.testStringSimpleFormatLabel(embed.acCustomMap)"
+             flex="80"
                 ></div>
 
 </div>
-<div class="input-container" layout layout-sm="column">
+<div class="input-container" layout="row" layout-align="start center">
 <!--Autocomplete-->
 
-        <label translate="pages.embed.defaultFieldName.acMap" flex="30"></label>
-        <div class="read-field" ng-bind="embed.acMap && autocompleteService.testStringSimpleFormatLabel(embed.acMap)"
-             flex="70"
+        <label translate="pages.embed.defaultFieldName.acMap" flex="20"></label>
+        <div class="read-field" ng-bind="embed.acMap && appCtrl.autocompleteService.testStringSimpleFormatLabel(embed.acMap)"
+             flex="80"
                 ></div>
 
 </div>
-<div class="input-container" layout layout-sm="column">
+<div class="input-container" layout="row" layout-align="start center">
 <!--Autocomplete-->
 
-        <label translate="pages.embed.defaultFieldName.acStr" flex="30"></label>
-        <div class="read-field" ng-bind="embed.acStr && autocompleteService.testStringSimpleFormatLabel(embed.acStr)"
-             flex="70"
+        <label translate="pages.embed.defaultFieldName.acStr" flex="20"></label>
+        <div class="read-field" ng-bind="embed.acStr && appCtrl.autocompleteService.testStringSimpleFormatLabel(embed.acStr)"
+             flex="80"
                 ></div>
 
 </div>
-<div class="input-container" layout layout-sm="column">
+<div class="input-container" layout="row" layout-align="start center">
 
-            <label translate="pages.embed.defaultFieldName.muFileLocation" flex="30"></label>
-            <div class="read-field" ng-bind="embed.muFileLocation" flex="70"></div>
+            <label translate="pages.embed.defaultFieldName.muFileLocation" flex="20"></label>
+            <div class="read-field" ng-bind="embed.muFileLocation" flex="80"></div>
     
 </div>
-<div class="input-container" layout layout-sm="column">
+<div class="input-container" layout="row" layout-align="start center">
 
-            <label translate="pages.embed.defaultFieldName.myFile" flex="30"></label>
-            <div class="read-field" ng-model="embed.myFile" byte-downloader flex="70"></div>
+            <label translate="pages.embed.defaultFieldName.myFile" flex="20"></label>
+            <div class="read-field" ng-model="embed.myFile" byte-downloader flex="80"></div>
     
 </div>
 
@@ -56,28 +56,28 @@
                         </div>
                     </div>
                     <md-content ng-if="embedOpen" layout-padding class="embedded-content">
-                    <div class="input-container" layout layout-sm="column">
+                    <div class="input-container" layout="row" layout-align="start center">
 <!--Map-->
 
-        <label translate="pages.embed.defaultFieldName.myEmbeddedField.jsonMap" flex="30"></label>
-        <div class="read-field" class="jsonView jsonRead" flex="70">
+        <label translate="pages.embed.defaultFieldName.myEmbeddedField.jsonMap" flex="20"></label>
+        <div class="read-field" class="jsonView jsonRead" flex="80">
             <json child="embed.myEmbeddedField.jsonMap" default-collapsed="false" type="object"></json>
         </div>
     
 </div>
-<div class="input-container" layout layout-sm="column">
+<div class="input-container" layout="row" layout-align="start center">
 <!--Autocomplete-->
 
-        <label translate="pages.embed.defaultFieldName.myEmbeddedField.myAc" flex="30"></label>
-        <div class="read-field" ng-bind="embed.myEmbeddedField.myAc && autocompleteService.testStringSimpleFormatLabel(embed.myEmbeddedField.myAc)"
-             flex="70"
+        <label translate="pages.embed.defaultFieldName.myEmbeddedField.myAc" flex="20"></label>
+        <div class="read-field" ng-bind="embed.myEmbeddedField.myAc && appCtrl.autocompleteService.testStringSimpleFormatLabel(embed.myEmbeddedField.myAc)"
+             flex="80"
                 ></div>
 
 </div>
-<div class="input-container" layout layout-sm="column">
+<div class="input-container" layout="row" layout-align="start center">
 
-            <label translate="pages.embed.defaultFieldName.myEmbeddedField.str" flex="30"></label>
-            <div class="read-field" ng-bind="embed.myEmbeddedField.str" flex="70"></div>
+            <label translate="pages.embed.defaultFieldName.myEmbeddedField.str" flex="20"></label>
+            <div class="read-field" ng-bind="embed.myEmbeddedField.str" flex="80"></div>
     
 </div>
 

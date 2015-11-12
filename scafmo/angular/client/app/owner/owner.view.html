@@ -2,44 +2,44 @@
 
 
 <div ng-if="!isModal" id="owner_view" ng-init="pageTitle = 'pages.owner.view.title'"
-     ng-include=" 'shared/blocks/page_heading.html' "></div>
+     ng-include=" 'app/blocks/page_heading.html' "></div>
 
 <md-content layout="column">
 
-<div class="input-container" layout layout-sm="column">
+<div class="input-container" layout="row" layout-align="start center">
 
-            <label translate="pages.owner.defaultFieldName.address" flex="30"></label>
-            <div class="read-field" ng-bind="owner.address" flex="70"></div>
+            <label translate="pages.owner.defaultFieldName.address" flex="20"></label>
+            <div class="read-field" ng-bind="owner.address" flex="80"></div>
     
 </div>
-<div class="input-container" layout layout-sm="column">
+<div class="input-container" layout="row" layout-align="start center">
 
-            <label translate="pages.owner.defaultFieldName.city" flex="30"></label>
-            <div class="read-field" ng-bind="owner.city" flex="70"></div>
+            <label translate="pages.owner.defaultFieldName.city" flex="20"></label>
+            <div class="read-field" ng-bind="owner.city" flex="80"></div>
     
 </div>
-<div class="input-container" layout layout-sm="column">
+<div class="input-container" layout="row" layout-align="start center">
 
-            <label translate="pages.owner.defaultFieldName.firstName" flex="30"></label>
-            <div class="read-field" ng-bind="owner.firstName" flex="70"></div>
+            <label translate="pages.owner.defaultFieldName.firstName" flex="20"></label>
+            <div class="read-field" ng-bind="owner.firstName" flex="80"></div>
     
 </div>
-<div class="input-container" layout layout-sm="column">
+<div class="input-container" layout="row" layout-align="start center">
 
-            <label translate="pages.owner.defaultFieldName.lastName" flex="30"></label>
-            <div class="read-field" ng-bind="owner.lastName" flex="70"></div>
+            <label translate="pages.owner.defaultFieldName.lastName" flex="20"></label>
+            <div class="read-field" ng-bind="owner.lastName" flex="80"></div>
     
 </div>
-<div class="input-container" layout layout-sm="column">
+<div class="input-container" layout="row" layout-align="start center">
 
-            <label translate="pages.owner.defaultFieldName.telephone" flex="30"></label>
-            <div class="read-field" ng-bind="owner.telephone" flex="70"></div>
+            <label translate="pages.owner.defaultFieldName.telephone" flex="20"></label>
+            <div class="read-field" ng-bind="owner.telephone" flex="80"></div>
     
 </div>
-<div class="input-container" layout layout-sm="column">
+<div class="input-container" layout="row" layout-align="start center">
 <!--OneToMany-->
-            <label translate="pages.owner.defaultFieldName.pets" flex="30"></label>
-            <div class="read-field" ng-bind="owner.pets" flex="70"></div>
+            <label translate="pages.owner.defaultFieldName.pets" flex="20"></label>
+            <div class="read-field" ng-bind="owner.pets" flex="80"></div>
     
 </div>
 
@@ -65,7 +65,7 @@
 
 
 <div ng-if="!isModal">
-    <md-content class="md-padding">
+
         <md-tabs md-dynamic-height md-border-bottom>
 
         <md-tab ui-sref="app.owner.view.pet({relationName:'owners'})"
@@ -79,8 +79,7 @@
 
     </md-tabs>
 
-    <div ui-view="tabs" ><div class="content-body">{{::'tabs.selecttab' | translate}}</div></div>
-    </md-content>
+    <div ui-view="tabs" ><div class="md-padding">{{::'tabs.selecttab' | translate}}</div></div>
 </div>
 
     

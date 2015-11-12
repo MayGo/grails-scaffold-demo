@@ -1,32 +1,30 @@
 
-<div ng-if="!isModal" id="person_list" ng-init="pageTitle = 'pages.person.list.title'"
-     data-ng-include=" 'shared/blocks/page_heading.html' "></div>
-<div>
-
-
-<md-content>
-    <md-toolbar class="md-gray" ng-click="isSearchOpen = !isSearchOpen">
+    <!-- Content Header (Page header) -->
+    <md-toolbar md-scroll-shrink id="person_list" class="md-hue-1" ng-init="pageTitle = 'pages.person.list.title'">
         <div class="md-toolbar-tools">
-            <md-button class="md-raised">
-                <md-icon md-font-set="material-icons" class="md-primary">search</md-icon>
-                <span translate="button.search"></span>
-            </md-button>
+            <h3>
+                <span translate-once="{{::pageTitle}}"></span>
+            </h3>
             <span flex></span>
-            <md-button class="md-raised" ng-if="!isModal" ui-sref="app.person.create" ng-click="$event.stopPropagation();" >
-                <md-icon md-font-set="material-icons" class="md-primary">add_circle</md-icon>
-                <span translate="pages.person.list.new"></span>
+            <md-button class="md-icon-button" ng-click="isSearchOpen = !isSearchOpen">
+                <md-icon md-font-set="material-icons" class="md-primary">search</md-icon>
+                <md-tooltip ><span translate="button.search"></span></md-tooltip>
             </md-button>
+            <md-button class="md-icon-button" ng-if="!isModal" ui-sref="app.person.create" ng-click="$event.stopPropagation();" >
+                <md-icon md-font-set="material-icons" class="md-primary">add_circle</md-icon>
+                <md-tooltip ><span translate="pages.person.list.new"></span></md-tooltip>
+            </md-button>
+            <div class="breadcrumb" ng-if="!isModal && !isTab" ncy-breadcrumb>
+            </div>
         </div>
     </md-toolbar>
-    <md-content ng-if="isSearchOpen" layout-padding>
+
+    <md-content>
+
+    <div ng-if="isSearchOpen" layout-padding>
          <form name="personForm" novalidate>
-             <md-grid-list
-                     md-row-height="50px"
-                     md-cols="6"
-                     md-cols-sm="1" md-cols-md="4"
-                     md-gutter="6px"
-                   >
-            <md-grid-tile class="gray" md-rowspan="1" md-colspan="1" md-colspan-sm="1">
+             <div layout="row" layout-align="start start">
+             
                         <md-input-container flex>
                     <label translate="pages.person.defaultFieldName.firstName"></label>
                     <input
@@ -34,8 +32,8 @@
                     	aria-label="firstName"
                    		ng-model="search.firstName"
                    		type="text"
-                 /> </md-input-container></md-grid-tile>
-<md-grid-tile class="gray" md-rowspan="1" md-colspan="1" md-colspan-sm="1">
+                 /> </md-input-container>
+
                         <md-input-container flex>
                     <label translate="pages.person.defaultFieldName.lastName"></label>
                     <input
@@ -43,19 +41,19 @@
                     	aria-label="lastName"
                    		ng-model="search.lastName"
                    		type="text"
-                 /> </md-input-container></md-grid-tile>
+                 /> </md-input-container>
 
-            </md-grid-list>
+             </div>
 
         </form>
-    </md-content>
+    </div>
 
     <md-content layout-padding layout="column" class="list-search">
         <div class="list-search-table" loading-container="tableParams.settings().$loading">
 	      <table class="table table-responsive" ng-table="tableParams" show-filter="true" >
 	      	<tbody>
 				<tr ng-repeat="person in $data">
-                    <td class="text-left" >
+                    <td class="text-left action-buttons">
                         <a ui-sref="app.person.view({id:person.id})" ng-if="!isModal" >
                             <md-icon md-font-set="material-icons"
                                      ng-class="{'md-primary':hovering}"

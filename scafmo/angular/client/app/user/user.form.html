@@ -1,16 +1,14 @@
 
 
 <div id="user_form"
-     ng-init="pageTitle = (isEditForm)?'pages.user.view.edit.title':'pages.user.create.title'" data-ng-include=" 'shared/blocks/page_heading.html' "></div>
+     ng-init="pageTitle = (isEditForm)?'pages.user.view.edit.title':'pages.user.create.title'" data-ng-include=" 'app/blocks/page_heading.html' "></div>
 
-<md-content layout-padding layout="column">
-    <form name="userForm" novalidate>
+<md-content >
+    <form name="userForm" novalidate layout-padding layout="column">
         <input name="version" type="hidden" ng-model="user.version" />
 
-    <div class="input-container" layout layout-sm="column">
-		<label for="accountExpired"
-               translate="pages.user.defaultFieldName.accountExpired" flex="30"></label>
-        <md-input-container md-no-float="true" flex="70" layout="row">
+        <md-input-container flex="100">
+            <label for="accountExpired" translate="pages.user.defaultFieldName.accountExpired"></label>
             
 <md-switch name="accountExpired"
            ng-model="user.accountExpired"
@@ -18,13 +16,10 @@
 </md-switch>
 		
         </md-input-container>
-	</div>
 	
 
-    <div class="input-container" layout layout-sm="column">
-		<label for="accountLocked"
-               translate="pages.user.defaultFieldName.accountLocked" flex="30"></label>
-        <md-input-container md-no-float="true" flex="70" layout="row">
+        <md-input-container flex="100">
+            <label for="accountLocked" translate="pages.user.defaultFieldName.accountLocked"></label>
             
 <md-switch name="accountLocked"
            ng-model="user.accountLocked"
@@ -32,13 +27,10 @@
 </md-switch>
 		
         </md-input-container>
-	</div>
 	
 
-    <div class="input-container" layout layout-sm="column">
-		<label for="enabled"
-               translate="pages.user.defaultFieldName.enabled" flex="30"></label>
-        <md-input-container md-no-float="true" flex="70" layout="row">
+        <md-input-container flex="100">
+            <label for="enabled" translate="pages.user.defaultFieldName.enabled"></label>
             
 <md-switch name="enabled"
            ng-model="user.enabled"
@@ -46,13 +38,10 @@
 </md-switch>
 		
         </md-input-container>
-	</div>
 	
 
-    <div class="input-container" layout layout-sm="column">
-		<label for="passwordExpired"
-               translate="pages.user.defaultFieldName.passwordExpired" flex="30"></label>
-        <md-input-container md-no-float="true" flex="70" layout="row">
+        <md-input-container flex="100">
+            <label for="passwordExpired" translate="pages.user.defaultFieldName.passwordExpired"></label>
             
 <md-switch name="passwordExpired"
            ng-model="user.passwordExpired"
@@ -60,13 +49,10 @@
 </md-switch>
 		
         </md-input-container>
-	</div>
 	
 
-    <div class="input-container" layout layout-sm="column">
-		<label for="username"
-               translate="pages.user.defaultFieldName.username" flex="30"></label>
-        <md-input-container md-no-float="true" flex="70" layout="row">
+        <md-input-container flex="100">
+            <label for="username" translate="pages.user.defaultFieldName.username"></label>
             
                     <input name="username"
                            aria-label="username"
@@ -74,7 +60,6 @@
                            ng-model="user.username"
                  required /> 
         </md-input-container>
-	</div>
 	
 
 

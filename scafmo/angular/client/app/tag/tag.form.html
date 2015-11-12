@@ -1,16 +1,14 @@
 
 
 <div id="tag_form"
-     ng-init="pageTitle = (isEditForm)?'pages.tag.view.edit.title':'pages.tag.create.title'" data-ng-include=" 'shared/blocks/page_heading.html' "></div>
+     ng-init="pageTitle = (isEditForm)?'pages.tag.view.edit.title':'pages.tag.create.title'" data-ng-include=" 'app/blocks/page_heading.html' "></div>
 
-<md-content layout-padding layout="column">
-    <form name="tagForm" novalidate>
+<md-content >
+    <form name="tagForm" novalidate layout-padding layout="column">
         <input name="version" type="hidden" ng-model="tag.version" />
 
-    <div class="input-container" layout layout-sm="column">
-		<label for="name"
-               translate="pages.tag.defaultFieldName.name" flex="30"></label>
-        <md-input-container md-no-float="true" flex="70" layout="row">
+        <md-input-container flex="100">
+            <label for="name" translate="pages.tag.defaultFieldName.name"></label>
             
                     <input name="name"
                            aria-label="name"
@@ -18,13 +16,10 @@
                            ng-model="tag.name"
                  required /> 
         </md-input-container>
-	</div>
 	
 
-    <div class="input-container" layout layout-sm="column">
-		<label for="tasks"
-               translate="pages.tag.defaultFieldName.tasks" flex="30"></label>
-        <md-input-container md-no-float="true" flex="70" layout="row">
+        <md-input-container flex="100">
+            <label for="tasks" translate="pages.tag.defaultFieldName.tasks"></label>
             <!--ManyToMany-->
             <md-chips
                     ng-model="tag.tasks"
@@ -35,8 +30,11 @@
     ><md-autocomplete
                     md-selected-item="selectedItem_tasks"
                     md-search-text="searchText_tasks"
-                    md-items="item in autocompleteService.taskQuery(searchText_tasks, ['id','timeSpent','summary','status'], true)"
-                    md-item-text="item.name">
+                    md-items="item in appCtrl.autocompleteService.taskQuery(searchText_tasks, ['id','timeSpent','summary','status'], true)"
+                    md-item-text="item.name"
+                    md-min-length="0"
+                    placeholder="{{ 'pages.tag.defaultFieldName.tasks' | translate }}"
+                >
                 <span md-highlight-text="searchText_tasks">{{item.name}}</span>
             </md-autocomplete>
             <md-chip-template>
@@ -44,7 +42,6 @@
             </md-chip-template>
     </md-chips>
         </md-input-container>
-	</div>
 	
 
 

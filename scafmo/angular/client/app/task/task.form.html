@@ -1,16 +1,14 @@
 
 
 <div id="task_form"
-     ng-init="pageTitle = (isEditForm)?'pages.task.view.edit.title':'pages.task.create.title'" data-ng-include=" 'shared/blocks/page_heading.html' "></div>
+     ng-init="pageTitle = (isEditForm)?'pages.task.view.edit.title':'pages.task.create.title'" data-ng-include=" 'app/blocks/page_heading.html' "></div>
 
-<md-content layout-padding layout="column">
-    <form name="taskForm" novalidate>
+<md-content >
+    <form name="taskForm" novalidate layout-padding layout="column">
         <input name="version" type="hidden" ng-model="task.version" />
 
-    <div class="input-container" layout layout-sm="column">
-		<label for="dateCreated"
-               translate="pages.task.defaultFieldName.dateCreated" flex="30"></label>
-        <md-input-container md-no-float="true" flex="70" layout="row">
+        <md-input-container flex="100">
+            <label for="dateCreated" translate="pages.task.defaultFieldName.dateCreated"></label>
             
      <input name="dateCreated"
             aria-label="dateCreated"
@@ -21,13 +19,10 @@
       />
       
         </md-input-container>
-	</div>
 	
 
-    <div class="input-container" layout layout-sm="column">
-		<label for="deadline"
-               translate="pages.task.defaultFieldName.deadline" flex="30"></label>
-        <md-input-container md-no-float="true" flex="70" layout="row">
+        <md-input-container flex="100">
+            <label for="deadline" translate="pages.task.defaultFieldName.deadline"></label>
             
      <input name="deadline"
             aria-label="deadline"
@@ -38,13 +33,10 @@
       />
       
         </md-input-container>
-	</div>
 	
 
-    <div class="input-container" layout layout-sm="column">
-		<label for="details"
-               translate="pages.task.defaultFieldName.details" flex="30"></label>
-        <md-input-container md-no-float="true" flex="70" layout="row">
+        <md-input-container flex="100">
+            <label for="details" translate="pages.task.defaultFieldName.details"></label>
             
             <textarea rows="5"
                       name="details"
@@ -53,13 +45,10 @@
                       ng-model="task.details"
                  md-maxlength="1000"  required > </textarea>
         </md-input-container>
-	</div>
 	
 
-    <div class="input-container" layout layout-sm="column">
-		<label for="status"
-               translate="pages.task.defaultFieldName.status" flex="30"></label>
-        <md-input-container md-no-float="true" flex="70" layout="row">
+        <md-input-container flex="100">
+            <label for="status" translate="pages.task.defaultFieldName.status"></label>
             
             <md-select
                     aria-label="status"
@@ -68,13 +57,10 @@
     </md-select>
 	
         </md-input-container>
-	</div>
 	
 
-    <div class="input-container" layout layout-sm="column">
-		<label for="summary"
-               translate="pages.task.defaultFieldName.summary" flex="30"></label>
-        <md-input-container md-no-float="true" flex="70" layout="row">
+        <md-input-container flex="100">
+            <label for="summary" translate="pages.task.defaultFieldName.summary"></label>
             
                     <input name="summary"
                            aria-label="summary"
@@ -82,25 +68,19 @@
                            ng-model="task.summary"
                  required /> 
         </md-input-container>
-	</div>
 	
 
-    <div class="input-container" layout layout-sm="column">
-		<label for="timeSpent"
-               translate="pages.task.defaultFieldName.timeSpent" flex="30"></label>
-        <md-input-container md-no-float="true" flex="70" layout="row">
+        <md-input-container flex="100">
+            <label for="timeSpent" translate="pages.task.defaultFieldName.timeSpent"></label>
             <input
                            name="timeSpent"
                            aria-label="timeSpent"
                            ng-model="task.timeSpent"  type="number"  min="0"  required />
         </md-input-container>
-	</div>
 	
 
-    <div class="input-container" layout layout-sm="column">
-		<label for="tags"
-               translate="pages.task.defaultFieldName.tags" flex="30"></label>
-        <md-input-container md-no-float="true" flex="70" layout="row">
+        <md-input-container flex="100">
+            <label for="tags" translate="pages.task.defaultFieldName.tags"></label>
             <!--ManyToMany-->
             <md-chips
                     ng-model="task.tags"
@@ -111,8 +91,11 @@
     ><md-autocomplete
                     md-selected-item="selectedItem_tags"
                     md-search-text="searchText_tags"
-                    md-items="item in autocompleteService.tagQuery(searchText_tags, ['id','name'], true)"
-                    md-item-text="item.name">
+                    md-items="item in appCtrl.autocompleteService.tagQuery(searchText_tags, ['id','name'], true)"
+                    md-item-text="item.name"
+                    md-min-length="0"
+                    placeholder="{{ 'pages.task.defaultFieldName.tags' | translate }}"
+                >
                 <span md-highlight-text="searchText_tags">{{item.name}}</span>
             </md-autocomplete>
             <md-chip-template>
@@ -120,7 +103,6 @@
             </md-chip-template>
     </md-chips>
         </md-input-container>
-	</div>
 	
 
 

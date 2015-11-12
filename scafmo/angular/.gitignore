@@ -1,0 +1,14 @@
+node_modules/
+bower_components/
+.sass-cache/
+.idea/
+.tmp/
+dist/
+menetlusui.iml
+client/client.iml
+men-ui.iml
+test-results/
+bower_components*
+jshint-results/
+results/
+coverage/

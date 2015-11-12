@@ -1,32 +1,32 @@
 
-<div ng-if="!isModal" id="embed_list" ng-init="pageTitle = 'pages.embed.list.title'"
-     data-ng-include=" 'shared/blocks/page_heading.html' "></div>
-<div>
-
-
-<md-content>
-    <md-toolbar class="md-gray" ng-click="isSearchOpen = !isSearchOpen">
+    <!-- Content Header (Page header) -->
+    <md-toolbar md-scroll-shrink id="embed_list" class="md-hue-1" ng-init="pageTitle = 'pages.embed.list.title'">
         <div class="md-toolbar-tools">
-            <md-button class="md-raised">
-                <md-icon md-font-set="material-icons" class="md-primary">search</md-icon>
-                <span translate="button.search"></span>
-            </md-button>
+            <h3>
+                <span translate-once="{{::pageTitle}}"></span>
+            </h3>
             <span flex></span>
-            <md-button class="md-raised" ng-if="!isModal" ui-sref="app.embed.create" ng-click="$event.stopPropagation();" >
-                <md-icon md-font-set="material-icons" class="md-primary">add_circle</md-icon>
-                <span translate="pages.embed.list.new"></span>
+            <md-button class="md-icon-button" ng-click="isSearchOpen = !isSearchOpen">
+                <md-icon md-font-set="material-icons" class="md-primary">search</md-icon>
+                <md-tooltip ><span translate="button.search"></span></md-tooltip>
             </md-button>
+            <md-button class="md-icon-button" ng-if="!isModal" ui-sref="app.embed.create" ng-click="$event.stopPropagation();" >
+                <md-icon md-font-set="material-icons" class="md-primary">add_circle</md-icon>
+                <md-tooltip ><span translate="pages.embed.list.new"></span></md-tooltip>
+            </md-button>
+            <div class="breadcrumb" ng-if="!isModal && !isTab" ncy-breadcrumb>
+            </div>
         </div>
     </md-toolbar>
-    <md-content ng-if="isSearchOpen" layout-padding>
+
+    <md-content>
+
+    <div ng-if="isSearchOpen" layout-padding>
          <form name="embedForm" novalidate>
-             <md-grid-list
-                     md-row-height="50px"
-                     md-cols="6"
-                     md-cols-sm="1" md-cols-md="4"
-                     md-gutter="6px"
-                   >
-            <md-grid-tile class="gray" md-rowspan="1" md-colspan="3" md-colspan-sm="1"><md-input-container flex class="chips-autocomplete" md-no-float><!--ManyToOne-->
+             <div layout="row" layout-align="start start">
+             
+                        <md-input-container flex>
+                    <!--ManyToOne-->
     <md-chips
             ng-init="search.acCustomMaps = []"
             ng-model="search.acCustomMaps"
@@ -36,8 +36,9 @@
     ><md-autocomplete
             md-selected-item="selectedItem_acCustomMap"
             md-search-text="searchText_acCustomMap"
-            md-items="item in autocompleteService.testStringSimpleQuery(searchText_acCustomMap)"
+            md-items="item in appCtrl.autocompleteService.testStringSimpleQuery(searchText_acCustomMap)"
             md-item-text="item.name || item.label"
+            md-min-length="0"
             placeholder="{{'pages.embed.defaultFieldName.acCustomMap' | translate}}"
         >
         <span md-highlight-text="searchText_acCustomMap">{{item.name || item.label}}</span>
@@ -45,8 +46,10 @@
     <md-chip-template>
         <span>{{$chip.name || $chip.label}}</span>
     </md-chip-template>
-    </md-chips></md-input-container></md-grid-tile>
-<md-grid-tile class="gray" md-rowspan="1" md-colspan="3" md-colspan-sm="1"><md-input-container flex class="chips-autocomplete" md-no-float><!--ManyToOne-->
+    </md-chips></md-input-container>
+
+                        <md-input-container flex>
+                    <!--ManyToOne-->
     <md-chips
             ng-init="search.acMaps = []"
             ng-model="search.acMaps"
@@ -56,8 +59,9 @@
     ><md-autocomplete
             md-selected-item="selectedItem_acMap"
             md-search-text="searchText_acMap"
-            md-items="item in autocompleteService.testStringSimpleQuery(searchText_acMap)"
+            md-items="item in appCtrl.autocompleteService.testStringSimpleQuery(searchText_acMap)"
             md-item-text="item.name || item.label"
+            md-min-length="0"
             placeholder="{{'pages.embed.defaultFieldName.acMap' | translate}}"
         >
         <span md-highlight-text="searchText_acMap">{{item.name || item.label}}</span>
@@ -65,8 +69,10 @@
     <md-chip-template>
         <span>{{$chip.name || $chip.label}}</span>
     </md-chip-template>
-    </md-chips></md-input-container></md-grid-tile>
-<md-grid-tile class="gray" md-rowspan="1" md-colspan="3" md-colspan-sm="1"><md-input-container flex class="chips-autocomplete" md-no-float><!--ManyToOne-->
+    </md-chips></md-input-container>
+
+                        <md-input-container flex>
+                    <!--ManyToOne-->
     <md-chips
             ng-init="search.acStrs = []"
             ng-model="search.acStrs"
@@ -76,8 +82,9 @@
     ><md-autocomplete
             md-selected-item="selectedItem_acStr"
             md-search-text="searchText_acStr"
-            md-items="item in autocompleteService.testStringSimpleQuery(searchText_acStr)"
+            md-items="item in appCtrl.autocompleteService.testStringSimpleQuery(searchText_acStr)"
             md-item-text="item.name || item.label"
+            md-min-length="0"
             placeholder="{{'pages.embed.defaultFieldName.acStr' | translate}}"
         >
         <span md-highlight-text="searchText_acStr">{{item.name || item.label}}</span>
@@ -85,8 +92,8 @@
     <md-chip-template>
         <span>{{$chip.name || $chip.label}}</span>
     </md-chip-template>
-    </md-chips></md-input-container></md-grid-tile>
-<md-grid-tile class="gray" md-rowspan="1" md-colspan="1" md-colspan-sm="1">
+    </md-chips></md-input-container>
+
                         <md-input-container flex>
                     <label translate="pages.embed.defaultFieldName.muFileLocation"></label>
                     <input
@@ -94,8 +101,8 @@
                     	aria-label="muFileLocation"
                    		ng-model="search.muFileLocation"
                    		type="text"
-                 /> </md-input-container></md-grid-tile>
-<md-grid-tile class="gray" md-rowspan="1" md-colspan="1" md-colspan-sm="1">
+                 /> </md-input-container>
+
                         <md-input-container flex>
                     <label translate="pages.embed.defaultFieldName.myFile"></label>
                     <input 
@@ -103,9 +110,11 @@
                     	aria-label="myFile"
                     	ng-model="search.myFile"
                     	>
-              </md-input-container></md-grid-tile>
+              </md-input-container>
 <!-- No type for jsonMap -->
-<md-grid-tile class="gray" md-rowspan="1" md-colspan="3" md-colspan-sm="1"><md-input-container flex class="chips-autocomplete" md-no-float><!--ManyToOne-->
+
+                        <md-input-container flex>
+                    <!--ManyToOne-->
     <md-chips
             ng-init="search.myEmbeddedFieldMyAcs = []"
             ng-model="search.myEmbeddedFieldMyAcs"
@@ -115,8 +124,9 @@
     ><md-autocomplete
             md-selected-item="selectedItem_myEmbeddedField_myAc"
             md-search-text="searchText_myEmbeddedField_myAc"
-            md-items="item in autocompleteService.testStringSimpleQuery(searchText_myEmbeddedField_myAc)"
+            md-items="item in appCtrl.autocompleteService.testStringSimpleQuery(searchText_myEmbeddedField_myAc)"
             md-item-text="item.name || item.label"
+            md-min-length="0"
             placeholder="{{'pages.embed.defaultFieldName.myEmbeddedField.myAc' | translate}}"
         >
         <span md-highlight-text="searchText_myEmbeddedField_myAc">{{item.name || item.label}}</span>
@@ -124,8 +134,8 @@
     <md-chip-template>
         <span>{{$chip.name || $chip.label}}</span>
     </md-chip-template>
-    </md-chips></md-input-container></md-grid-tile>
-<md-grid-tile class="gray" md-rowspan="1" md-colspan="1" md-colspan-sm="1">
+    </md-chips></md-input-container>
+
                         <md-input-container flex>
                     <label translate="pages.embed.defaultFieldName.myEmbeddedField.str"></label>
                     <input
@@ -133,19 +143,19 @@
                     	aria-label="myEmbeddedField.str"
                    		ng-model="search.myEmbeddedField.str"
                    		type="text"
-                 /> </md-input-container></md-grid-tile>
+                 /> </md-input-container>
 
-            </md-grid-list>
+             </div>
 
         </form>
-    </md-content>
+    </div>
 
     <md-content layout-padding layout="column" class="list-search">
         <div class="list-search-table" loading-container="tableParams.settings().$loading">
 	      <table class="table table-responsive" ng-table="tableParams" show-filter="true" >
 	      	<tbody>
 				<tr ng-repeat="embed in $data">
-                    <td class="text-left" >
+                    <td class="text-left action-buttons">
                         <a ui-sref="app.embed.view({id:embed.id})" ng-if="!isModal" >
                             <md-icon md-font-set="material-icons"
                                      ng-class="{'md-primary':hovering}"

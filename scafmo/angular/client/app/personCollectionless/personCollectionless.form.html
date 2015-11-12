@@ -1,28 +1,23 @@
 
 
 <div id="personCollectionless_form"
-     ng-init="pageTitle = (isEditForm)?'pages.personCollectionless.view.edit.title':'pages.personCollectionless.create.title'" data-ng-include=" 'shared/blocks/page_heading.html' "></div>
+     ng-init="pageTitle = (isEditForm)?'pages.personCollectionless.view.edit.title':'pages.personCollectionless.create.title'" data-ng-include=" 'app/blocks/page_heading.html' "></div>
 
-<md-content layout-padding layout="column">
-    <form name="personCollectionlessForm" novalidate>
+<md-content >
+    <form name="personCollectionlessForm" novalidate layout-padding layout="column">
         <input name="version" type="hidden" ng-model="personCollectionless.version" />
 
-    <div class="input-container" layout layout-sm="column">
-		<label for="age"
-               translate="pages.personCollectionless.defaultFieldName.age" flex="30"></label>
-        <md-input-container md-no-float="true" flex="70" layout="row">
+        <md-input-container flex="100">
+            <label for="age" translate="pages.personCollectionless.defaultFieldName.age"></label>
             <input
                            name="age"
                            aria-label="age"
                            ng-model="personCollectionless.age"  type="number"  required />
         </md-input-container>
-	</div>
 	
 
-    <div class="input-container" layout layout-sm="column">
-		<label for="name"
-               translate="pages.personCollectionless.defaultFieldName.name" flex="30"></label>
-        <md-input-container md-no-float="true" flex="70" layout="row">
+        <md-input-container flex="100">
+            <label for="name" translate="pages.personCollectionless.defaultFieldName.name"></label>
             
                     <input name="name"
                            aria-label="name"
@@ -30,20 +25,17 @@
                            ng-model="personCollectionless.name"
                  required /> 
         </md-input-container>
-	</div>
 	
 
-    <div class="input-container" layout layout-sm="column">
-		<label for="division"
-               translate="pages.personCollectionless.defaultFieldName.division" flex="30"></label>
-        <md-input-container md-no-float="true" flex="70" layout="row">
-            <!-- ManyToOne-->
+        <md-input-container flex="100">
+            <label for="division" translate="pages.personCollectionless.defaultFieldName.division"></label>
+            <!-- ManyToOne--><div layout="row" layout-align="start center"> 
         <md-autocomplete
                 input-name="division"
                 md-cache="false"
                 md-selected-item="personCollectionless.division"
                 md-search-text="searchText_division"
-                md-items="item in autocompleteService.divisionCollectionlessQuery(searchText_division)"
+                md-items="item in appCtrl.autocompleteService.divisionCollectionlessQuery(searchText_division)"
                 md-item-text="item.name || item.label || item.id"
                 md-min-length="0"
                 flex
@@ -57,9 +49,9 @@
          <item-selector update-model="personCollectionless.division"
                item-link="app.personCollectionless.view.edit.divisionCollectionlessSearchModal" >
          </item-selector>
+        </div>
      
         </md-input-container>
-	</div>
 	
 
 

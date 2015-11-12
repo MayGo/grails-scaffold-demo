@@ -1,0 +1,1044 @@
+{
+  "app": {
+    "name": "Scafmo",
+    "title": "Scafmo"
+  },
+  "button": {
+    "submit": "Save",
+    "back": "Back",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "edit": "Edit",
+    "copy": "Copy",
+    "search": "Search",
+    "true": "True",
+    "false": "False",
+    "none": "None"
+  },
+  "searchSelect": {
+    "true": "True",
+    "false": "False",
+    "none": ""
+  },
+  "tabs": {
+    "selecttab": "Click on tab to show table"
+  },
+  "header": {
+    "navbar": {
+      "UPLOAD": "Upload",
+      "new": {
+        "NEW": "New"
+      },
+      "user": {
+        "settings": "Settings",
+        "docs": "Help"
+      },
+      "NOTIFICATIONS": "Notifications",
+      "logout": "Logout"
+    }
+  },
+  "messages": {
+    "loading": "Loading ..."
+  },
+  "upload":{
+      "title":"Upload files",
+      "file":"Upload file",
+      "or":"OR",
+      "drop":"Drag And Drop your file here",
+      "queue":"Upload queue",
+      "length":"Queue lenght",
+      "progress":"Queue progress",
+      "uploadAll":"Upload all",
+      "cancelAll":"Cancel all",
+      "removeAll":"Remove all",
+      "upload":"Upload",
+      "cancel":"Cancel",
+      "remove":"Remove",
+      "name":"Name",
+      "size":"Size",
+      "progress":"Progress",
+      "status":"Status",
+      "actions":"Actions"
+  },
+  "pages":{
+	"Dashboard":{
+		"lastinserted":{
+			"title":"Last Inserted",
+			"view":"View",
+			"table":{
+				"header":{
+					"id":"Id",
+					"name":"Name",
+					"description":"Description"
+				}
+			}
+		}
+	},
+	"error":{
+		"title": "Error Page"
+	},
+	"session":{
+		"messages":{
+			"default": "There was error loading page",
+			"permission-denied": "You don't have permissions to view page: ",
+			"relogin":"Not authorized to view page",
+			"forbidden":"Forbidden to view page",
+			"logging-out": "Logging out ...",
+			"logged-out": "Logged out",
+			"already-logged-out": "Already logged out",
+			"state-change-error": "State change error"
+		},
+		"logout":{
+			"login-again":"Login again",
+			"logout-cas":"Logout from CAS"
+		}
+	},
+	"settings":{
+		"title":"Settings",
+		"view":{
+			"title":"Settings",
+			"info":{
+				"title":"User info",
+				"permissions":"Permissions"
+			}
+		}
+	},
+
+	
+		"tag":{
+			"name":"Tag",
+			"defaultFieldName":{
+			
+						"name":"Name",					
+						"tasks":"Tasks",					
+				"id": "Id"
+			},
+
+			"list":{
+				"title": "Tag List",
+				"new": " New Tag",
+				"table":{
+					"title":"Tag Table"
+				}
+			},
+			"view":{
+				"title": "Tag View",
+				"lists": "{{isval}} in {{inval}}",
+				"edit":{
+					"title": "Edit Tag",
+						"form":{
+						"title":"Tag Form"
+					}
+				}
+			},
+
+			"messages":{
+				"delete": "Deleted Tag",
+				"update": "Updated Tag",
+				"create": "Created Tag"
+			},
+			"create":{
+				"title": "Create Tag"
+			}
+		},
+	
+		"task":{
+			"name":"Task",
+			"defaultFieldName":{
+			
+						"dateCreated":"Date Created",					
+						"deadline":"Deadline",					
+						"details":"Details",					
+						"status":"Status",					
+						"summary":"Summary",					
+						"tags":"Tags",					
+						"timeSpent":"Time Spent",					
+				"id": "Id"
+			},
+
+			"list":{
+				"title": "Task List",
+				"new": " New Task",
+				"table":{
+					"title":"Task Table"
+				}
+			},
+			"view":{
+				"title": "Task View",
+				"lists": "{{isval}} in {{inval}}",
+				"edit":{
+					"title": "Edit Task",
+						"form":{
+						"title":"Task Form"
+					}
+				}
+			},
+
+			"messages":{
+				"delete": "Deleted Task",
+				"update": "Updated Task",
+				"create": "Created Task"
+			},
+			"create":{
+				"title": "Create Task"
+			}
+		},
+	
+		"owner":{
+			"name":"Owner",
+			"defaultFieldName":{
+			
+						"address":"Address",					
+						"city":"City",					
+						"firstName":"First Name",					
+						"lastName":"Last Name",					
+						"pets":"Pets",					
+						"telephone":"Telephone",					
+				"id": "Id"
+			},
+
+			"list":{
+				"title": "Owner List",
+				"new": " New Owner",
+				"table":{
+					"title":"Owner Table"
+				}
+			},
+			"view":{
+				"title": "Owner View",
+				"lists": "{{isval}} in {{inval}}",
+				"edit":{
+					"title": "Edit Owner",
+						"form":{
+						"title":"Owner Form"
+					}
+				}
+			},
+
+			"messages":{
+				"delete": "Deleted Owner",
+				"update": "Updated Owner",
+				"create": "Created Owner"
+			},
+			"create":{
+				"title": "Create Owner"
+			}
+		},
+	
+		"person":{
+			"name":"Person",
+			"defaultFieldName":{
+			
+						"firstName":"First Name",					
+						"lastName":"Last Name",					
+				"id": "Id"
+			},
+
+			"list":{
+				"title": "Person List",
+				"new": " New Person",
+				"table":{
+					"title":"Person Table"
+				}
+			},
+			"view":{
+				"title": "Person View",
+				"lists": "{{isval}} in {{inval}}",
+				"edit":{
+					"title": "Edit Person",
+						"form":{
+						"title":"Person Form"
+					}
+				}
+			},
+
+			"messages":{
+				"delete": "Deleted Person",
+				"update": "Updated Person",
+				"create": "Created Person"
+			},
+			"create":{
+				"title": "Create Person"
+			}
+		},
+	
+		"pet":{
+			"name":"Pet",
+			"defaultFieldName":{
+			
+						"birthDate":"Birth Date",					
+						"name":"Name",					
+						"owner":"Owner",					
+						"type":"Type",					
+						"visits":"Visits",					
+				"id": "Id"
+			},
+
+			"list":{
+				"title": "Pet List",
+				"new": " New Pet",
+				"table":{
+					"title":"Pet Table"
+				}
+			},
+			"view":{
+				"title": "Pet View",
+				"lists": "{{isval}} in {{inval}}",
+				"edit":{
+					"title": "Edit Pet",
+						"form":{
+						"title":"Pet Form"
+					}
+				}
+			},
+
+			"messages":{
+				"delete": "Deleted Pet",
+				"update": "Updated Pet",
+				"create": "Created Pet"
+			},
+			"create":{
+				"title": "Create Pet"
+			}
+		},
+	
+		"petType":{
+			"name":"Pet Type",
+			"defaultFieldName":{
+			
+						"name":"Name",					
+				"id": "Id"
+			},
+
+			"list":{
+				"title": "Pet Type List",
+				"new": " New Pet Type",
+				"table":{
+					"title":"Pet Type Table"
+				}
+			},
+			"view":{
+				"title": "Pet Type View",
+				"lists": "{{isval}} in {{inval}}",
+				"edit":{
+					"title": "Edit Pet Type",
+						"form":{
+						"title":"Pet Type Form"
+					}
+				}
+			},
+
+			"messages":{
+				"delete": "Deleted Pet Type",
+				"update": "Updated Pet Type",
+				"create": "Created Pet Type"
+			},
+			"create":{
+				"title": "Create Pet Type"
+			}
+		},
+	
+		"speciality":{
+			"name":"Speciality",
+			"defaultFieldName":{
+			
+						"name":"Name",					
+				"id": "Id"
+			},
+
+			"list":{
+				"title": "Speciality List",
+				"new": " New Speciality",
+				"table":{
+					"title":"Speciality Table"
+				}
+			},
+			"view":{
+				"title": "Speciality View",
+				"lists": "{{isval}} in {{inval}}",
+				"edit":{
+					"title": "Edit Speciality",
+						"form":{
+						"title":"Speciality Form"
+					}
+				}
+			},
+
+			"messages":{
+				"delete": "Deleted Speciality",
+				"update": "Updated Speciality",
+				"create": "Created Speciality"
+			},
+			"create":{
+				"title": "Create Speciality"
+			}
+		},
+	
+		"vet":{
+			"name":"Vet",
+			"defaultFieldName":{
+			
+						"firstName":"First Name",					
+						"lastName":"Last Name",					
+						"specialities":"Specialities",					
+				"id": "Id"
+			},
+
+			"list":{
+				"title": "Vet List",
+				"new": " New Vet",
+				"table":{
+					"title":"Vet Table"
+				}
+			},
+			"view":{
+				"title": "Vet View",
+				"lists": "{{isval}} in {{inval}}",
+				"edit":{
+					"title": "Edit Vet",
+						"form":{
+						"title":"Vet Form"
+					}
+				}
+			},
+
+			"messages":{
+				"delete": "Deleted Vet",
+				"update": "Updated Vet",
+				"create": "Created Vet"
+			},
+			"create":{
+				"title": "Create Vet"
+			}
+		},
+	
+		"visit":{
+			"name":"Visit",
+			"defaultFieldName":{
+			
+						"date":"Date",					
+						"description":"Description",					
+						"pet":"Pet",					
+				"id": "Id"
+			},
+
+			"list":{
+				"title": "Visit List",
+				"new": " New Visit",
+				"table":{
+					"title":"Visit Table"
+				}
+			},
+			"view":{
+				"title": "Visit View",
+				"lists": "{{isval}} in {{inval}}",
+				"edit":{
+					"title": "Edit Visit",
+						"form":{
+						"title":"Visit Form"
+					}
+				}
+			},
+
+			"messages":{
+				"delete": "Deleted Visit",
+				"update": "Updated Visit",
+				"create": "Created Visit"
+			},
+			"create":{
+				"title": "Create Visit"
+			}
+		},
+	
+		"divisionCollection":{
+			"name":"Division Collection",
+			"defaultFieldName":{
+			
+						"headDivision":"Head Division",					
+						"name":"Name",					
+						"persons":"Persons",					
+				"id": "Id"
+			},
+
+			"list":{
+				"title": "Division Collection List",
+				"new": " New Division Collection",
+				"table":{
+					"title":"Division Collection Table"
+				}
+			},
+			"view":{
+				"title": "Division Collection View",
+				"lists": "{{isval}} in {{inval}}",
+				"edit":{
+					"title": "Edit Division Collection",
+						"form":{
+						"title":"Division Collection Form"
+					}
+				}
+			},
+
+			"messages":{
+				"delete": "Deleted Division Collection",
+				"update": "Updated Division Collection",
+				"create": "Created Division Collection"
+			},
+			"create":{
+				"title": "Create Division Collection"
+			}
+		},
+	
+		"divisionCollectionless":{
+			"name":"Division Collectionless",
+			"defaultFieldName":{
+			
+						"headDivision":"Head Division",					
+						"name":"Name",					
+				"id": "Id"
+			},
+
+			"list":{
+				"title": "Division Collectionless List",
+				"new": " New Division Collectionless",
+				"table":{
+					"title":"Division Collectionless Table"
+				}
+			},
+			"view":{
+				"title": "Division Collectionless View",
+				"lists": "{{isval}} in {{inval}}",
+				"edit":{
+					"title": "Edit Division Collectionless",
+						"form":{
+						"title":"Division Collectionless Form"
+					}
+				}
+			},
+
+			"messages":{
+				"delete": "Deleted Division Collectionless",
+				"update": "Updated Division Collectionless",
+				"create": "Created Division Collectionless"
+			},
+			"create":{
+				"title": "Create Division Collectionless"
+			}
+		},
+	
+		"personCollection":{
+			"name":"Person Collection",
+			"defaultFieldName":{
+			
+						"age":"Age",					
+						"division":"Division",					
+						"name":"Name",					
+				"id": "Id"
+			},
+
+			"list":{
+				"title": "Person Collection List",
+				"new": " New Person Collection",
+				"table":{
+					"title":"Person Collection Table"
+				}
+			},
+			"view":{
+				"title": "Person Collection View",
+				"lists": "{{isval}} in {{inval}}",
+				"edit":{
+					"title": "Edit Person Collection",
+						"form":{
+						"title":"Person Collection Form"
+					}
+				}
+			},
+
+			"messages":{
+				"delete": "Deleted Person Collection",
+				"update": "Updated Person Collection",
+				"create": "Created Person Collection"
+			},
+			"create":{
+				"title": "Create Person Collection"
+			}
+		},
+	
+		"personCollectionless":{
+			"name":"Person Collectionless",
+			"defaultFieldName":{
+			
+						"age":"Age",					
+						"division":"Division",					
+						"name":"Name",					
+				"id": "Id"
+			},
+
+			"list":{
+				"title": "Person Collectionless List",
+				"new": " New Person Collectionless",
+				"table":{
+					"title":"Person Collectionless Table"
+				}
+			},
+			"view":{
+				"title": "Person Collectionless View",
+				"lists": "{{isval}} in {{inval}}",
+				"edit":{
+					"title": "Edit Person Collectionless",
+						"form":{
+						"title":"Person Collectionless Form"
+					}
+				}
+			},
+
+			"messages":{
+				"delete": "Deleted Person Collectionless",
+				"update": "Updated Person Collectionless",
+				"create": "Created Person Collectionless"
+			},
+			"create":{
+				"title": "Create Person Collectionless"
+			}
+		},
+	
+		"testNumber":{
+			"name":"Test Number",
+			"defaultFieldName":{
+			
+						"doubleNr":"Double Nr",					
+						"floatNr":"Float Nr",					
+						"floatNrScale":"Float Nr Scale",					
+						"integerNr":"Integer Nr",					
+						"integerNrInList":"Integer Nr In List",					
+						"integerNrMax":"Integer Nr Max",					
+						"integerNrMin":"Integer Nr Min",					
+						"integerNrNotEqual":"Integer Nr Not Equal",					
+						"integerNrRange":"Integer Nr Range",					
+						"integerNrUnique":"Integer Nr Unique",					
+						"longNr":"Long Nr",					
+				"id": "Id"
+			},
+
+			"list":{
+				"title": "Test Number List",
+				"new": " New Test Number",
+				"table":{
+					"title":"Test Number Table"
+				}
+			},
+			"view":{
+				"title": "Test Number View",
+				"lists": "{{isval}} in {{inval}}",
+				"edit":{
+					"title": "Edit Test Number",
+						"form":{
+						"title":"Test Number Form"
+					}
+				}
+			},
+
+			"messages":{
+				"delete": "Deleted Test Number",
+				"update": "Updated Test Number",
+				"create": "Created Test Number"
+			},
+			"create":{
+				"title": "Create Test Number"
+			}
+		},
+	
+		"testOther":{
+			"name":"Test Other",
+			"defaultFieldName":{
+			
+						"booleanNullable":"Boolean Nullable",					
+						"testDate":"Test Date",					
+						"testEnum":"Test Enum",					
+						"testStringType":"Test String Type",					
+				"id": "Id"
+			},
+
+			"list":{
+				"title": "Test Other List",
+				"new": " New Test Other",
+				"table":{
+					"title":"Test Other Table"
+				}
+			},
+			"view":{
+				"title": "Test Other View",
+				"lists": "{{isval}} in {{inval}}",
+				"edit":{
+					"title": "Edit Test Other",
+						"form":{
+						"title":"Test Other Form"
+					}
+				}
+			},
+
+			"messages":{
+				"delete": "Deleted Test Other",
+				"update": "Updated Test Other",
+				"create": "Created Test Other"
+			},
+			"create":{
+				"title": "Create Test Other"
+			}
+		},
+	
+		"testString":{
+			"name":"Test String",
+			"defaultFieldName":{
+			
+						"blankStr":"Blank Str",					
+						"creditCardStr":"Credit Card Str",					
+						"emailStr":"Email Str",					
+						"inListStr":"In List Str",					
+						"matchesStr":"Matches Str",					
+						"maxSizeStr":"Max Size Str",					
+						"minSizeStr":"Min Size Str",					
+						"notEqualStr":"Not Equal Str",					
+						"sizeStr":"Size Str",					
+						"textareaStr":"Textarea Str",					
+						"uniqueStr":"Unique Str",					
+						"urlStr":"Url Str",					
+				"id": "Id"
+			},
+
+			"list":{
+				"title": "Test String List",
+				"new": " New Test String",
+				"table":{
+					"title":"Test String Table"
+				}
+			},
+			"view":{
+				"title": "Test String View",
+				"lists": "{{isval}} in {{inval}}",
+				"edit":{
+					"title": "Edit Test String",
+						"form":{
+						"title":"Test String Form"
+					}
+				}
+			},
+
+			"messages":{
+				"delete": "Deleted Test String",
+				"update": "Updated Test String",
+				"create": "Created Test String"
+			},
+			"create":{
+				"title": "Create Test String"
+			}
+		},
+	
+		"embed":{
+			"name":"Embed",
+			"defaultFieldName":{
+			
+						"acCustomMap":"Ac Custom Map",					
+						"acMap":"Ac Map",					
+						"acStr":"Ac Str",					
+						"muFileLocation":"Mu File Location",					
+						"myEmbeddedField.title":"My Embedded Field",					
+						"myEmbeddedField.id":"Id",						
+						"myEmbeddedField.jsonMap":"Json Map",						
+						"myEmbeddedField.myAc":"My Ac",						
+						"myEmbeddedField.str":"Str",						
+						"myEmbeddedField.version":"Version",						
+						"myFile":"My File",					
+				"id": "Id"
+			},
+
+			"list":{
+				"title": "Embed List",
+				"new": " New Embed",
+				"table":{
+					"title":"Embed Table"
+				}
+			},
+			"view":{
+				"title": "Embed View",
+				"lists": "{{isval}} in {{inval}}",
+				"edit":{
+					"title": "Edit Embed",
+						"form":{
+						"title":"Embed Form"
+					}
+				}
+			},
+
+			"messages":{
+				"delete": "Deleted Embed",
+				"update": "Updated Embed",
+				"create": "Created Embed"
+			},
+			"create":{
+				"title": "Create Embed"
+			}
+		},
+	
+		"embeddable":{
+			"name":"Embeddable",
+			"defaultFieldName":{
+			
+						"jsonMap":"Json Map",					
+						"myAc":"My Ac",					
+						"str":"Str",					
+				"id": "Id"
+			},
+
+			"list":{
+				"title": "Embeddable List",
+				"new": " New Embeddable",
+				"table":{
+					"title":"Embeddable Table"
+				}
+			},
+			"view":{
+				"title": "Embeddable View",
+				"lists": "{{isval}} in {{inval}}",
+				"edit":{
+					"title": "Edit Embeddable",
+						"form":{
+						"title":"Embeddable Form"
+					}
+				}
+			},
+
+			"messages":{
+				"delete": "Deleted Embeddable",
+				"update": "Updated Embeddable",
+				"create": "Created Embeddable"
+			},
+			"create":{
+				"title": "Create Embeddable"
+			}
+		},
+	
+		"role":{
+			"name":"Role",
+			"defaultFieldName":{
+			
+						"authority":"Authority",					
+				"id": "Id"
+			},
+
+			"list":{
+				"title": "Role List",
+				"new": " New Role",
+				"table":{
+					"title":"Role Table"
+				}
+			},
+			"view":{
+				"title": "Role View",
+				"lists": "{{isval}} in {{inval}}",
+				"edit":{
+					"title": "Edit Role",
+						"form":{
+						"title":"Role Form"
+					}
+				}
+			},
+
+			"messages":{
+				"delete": "Deleted Role",
+				"update": "Updated Role",
+				"create": "Created Role"
+			},
+			"create":{
+				"title": "Create Role"
+			}
+		},
+	
+		"user":{
+			"name":"User",
+			"defaultFieldName":{
+			
+						"accountExpired":"Account Expired",					
+						"accountLocked":"Account Locked",					
+						"enabled":"Enabled",					
+						"passwordExpired":"Password Expired",					
+						"username":"Username",					
+				"id": "Id"
+			},
+
+			"list":{
+				"title": "User List",
+				"new": " New User",
+				"table":{
+					"title":"User Table"
+				}
+			},
+			"view":{
+				"title": "User View",
+				"lists": "{{isval}} in {{inval}}",
+				"edit":{
+					"title": "Edit User",
+						"form":{
+						"title":"User Form"
+					}
+				}
+			},
+
+			"messages":{
+				"delete": "Deleted User",
+				"update": "Updated User",
+				"create": "Created User"
+			},
+			"create":{
+				"title": "Create User"
+			}
+		},
+	
+		"userRole":{
+			"name":"User Role",
+			"defaultFieldName":{
+			
+						"role":"Role",					
+						"user":"User",					
+				"id": "Id"
+			},
+
+			"list":{
+				"title": "User Role List",
+				"new": " New User Role",
+				"table":{
+					"title":"User Role Table"
+				}
+			},
+			"view":{
+				"title": "User Role View",
+				"lists": "{{isval}} in {{inval}}",
+				"edit":{
+					"title": "Edit User Role",
+						"form":{
+						"title":"User Role Form"
+					}
+				}
+			},
+
+			"messages":{
+				"delete": "Deleted User Role",
+				"update": "Updated User Role",
+				"create": "Created User Role"
+			},
+			"create":{
+				"title": "Create User Role"
+			}
+		},
+	
+		"classifier":{
+			"name":"Classifier",
+			"defaultFieldName":{
+			
+						"classname":"Classname",					
+						"constant":"Constant",					
+						"description":"Description",					
+						"propertyname":"Propertyname",					
+				"id": "Id"
+			},
+
+			"list":{
+				"title": "Classifier List",
+				"new": " New Classifier",
+				"table":{
+					"title":"Classifier Table"
+				}
+			},
+			"view":{
+				"title": "Classifier View",
+				"lists": "{{isval}} in {{inval}}",
+				"edit":{
+					"title": "Edit Classifier",
+						"form":{
+						"title":"Classifier Form"
+					}
+				}
+			},
+
+			"messages":{
+				"delete": "Deleted Classifier",
+				"update": "Updated Classifier",
+				"create": "Created Classifier"
+			},
+			"create":{
+				"title": "Create Classifier"
+			}
+		}
+	
+},
+"menu" :{
+	"static":{
+		"HEADER" : "Navigation",
+		"DASHBOARD" : "Dashboard"
+	},
+	"domain":{
+	
+		"tag":"Tag",
+	
+		"task":"Task",
+	
+		"owner":"Owner",
+	
+		"person":"Person",
+	
+		"pet":"Pet",
+	
+		"petType":"Pet Type",
+	
+		"speciality":"Speciality",
+	
+		"vet":"Vet",
+	
+		"visit":"Visit",
+	
+		"divisionCollection":"Division Collection",
+	
+		"divisionCollectionless":"Division Collectionless",
+	
+		"personCollection":"Person Collection",
+	
+		"personCollectionless":"Person Collectionless",
+	
+		"testNumber":"Test Number",
+	
+		"testOther":"Test Other",
+	
+		"testString":"Test String",
+	
+		"embed":"Embed",
+	
+		"embeddable":"Embeddable",
+	
+		"role":"Role",
+	
+		"user":"User",
+	
+		"userRole":"User Role",
+	
+		"classifier":"Classifier"
+	
+	},
+	"package":{
+	
+		"pomodoro":"Pomodoro",
+	
+		"samples":"Samples",
+	
+		"collection":"Collection",
+	
+		"constr":"Constr",
+	
+		"embedded":"Embedded",
+	
+		"security":"Security",
+	
+		"test":"Test"
+	
+	}
+  }
+}
+

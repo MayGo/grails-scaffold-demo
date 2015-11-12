@@ -1,16 +1,14 @@
 
 
 <div id="testString_form"
-     ng-init="pageTitle = (isEditForm)?'pages.testString.view.edit.title':'pages.testString.create.title'" data-ng-include=" 'shared/blocks/page_heading.html' "></div>
+     ng-init="pageTitle = (isEditForm)?'pages.testString.view.edit.title':'pages.testString.create.title'" data-ng-include=" 'app/blocks/page_heading.html' "></div>
 
-<md-content layout-padding layout="column">
-    <form name="testStringForm" novalidate>
+<md-content >
+    <form name="testStringForm" novalidate layout-padding layout="column">
         <input name="version" type="hidden" ng-model="testString.version" />
 
-    <div class="input-container" layout layout-sm="column">
-		<label for="blankStr"
-               translate="pages.testString.defaultFieldName.blankStr" flex="30"></label>
-        <md-input-container md-no-float="true" flex="70" layout="row">
+        <md-input-container flex="100">
+            <label for="blankStr" translate="pages.testString.defaultFieldName.blankStr"></label>
             
                     <input name="blankStr"
                            aria-label="blankStr"
@@ -18,13 +16,10 @@
                            ng-model="testString.blankStr"
                  /> 
         </md-input-container>
-	</div>
 	
 
-    <div class="input-container" layout layout-sm="column">
-		<label for="creditCardStr"
-               translate="pages.testString.defaultFieldName.creditCardStr" flex="30"></label>
-        <md-input-container md-no-float="true" flex="70" layout="row">
+        <md-input-container flex="100">
+            <label for="creditCardStr" translate="pages.testString.defaultFieldName.creditCardStr"></label>
             
                     <input name="creditCardStr"
                            aria-label="creditCardStr"
@@ -32,13 +27,10 @@
                            ng-model="testString.creditCardStr"
                  /> 
         </md-input-container>
-	</div>
 	
 
-    <div class="input-container" layout layout-sm="column">
-		<label for="emailStr"
-               translate="pages.testString.defaultFieldName.emailStr" flex="30"></label>
-        <md-input-container md-no-float="true" flex="70" layout="row">
+        <md-input-container flex="100">
+            <label for="emailStr" translate="pages.testString.defaultFieldName.emailStr"></label>
             
                     <input name="emailStr"
                            aria-label="emailStr"
@@ -46,13 +38,10 @@
                            ng-model="testString.emailStr"
                  /> 
         </md-input-container>
-	</div>
 	
 
-    <div class="input-container" layout layout-sm="column">
-		<label for="inListStr"
-               translate="pages.testString.defaultFieldName.inListStr" flex="30"></label>
-        <md-input-container md-no-float="true" flex="70" layout="row">
+        <md-input-container flex="100">
+            <label for="inListStr" translate="pages.testString.defaultFieldName.inListStr"></label>
             
             <md-select
                     aria-label="inListStr"
@@ -61,13 +50,10 @@
     </md-select>
 	
         </md-input-container>
-	</div>
 	
 
-    <div class="input-container" layout layout-sm="column">
-		<label for="matchesStr"
-               translate="pages.testString.defaultFieldName.matchesStr" flex="30"></label>
-        <md-input-container md-no-float="true" flex="70" layout="row">
+        <md-input-container flex="100">
+            <label for="matchesStr" translate="pages.testString.defaultFieldName.matchesStr"></label>
             
                     <input name="matchesStr"
                            aria-label="matchesStr"
@@ -75,13 +61,10 @@
                            ng-model="testString.matchesStr"
                  ng-pattern="/[a-zA-Z]+/"  /> 
         </md-input-container>
-	</div>
 	
 
-    <div class="input-container" layout layout-sm="column">
-		<label for="maxSizeStr"
-               translate="pages.testString.defaultFieldName.maxSizeStr" flex="30"></label>
-        <md-input-container md-no-float="true" flex="70" layout="row">
+        <md-input-container flex="100">
+            <label for="maxSizeStr" translate="pages.testString.defaultFieldName.maxSizeStr"></label>
             
                     <input name="maxSizeStr"
                            aria-label="maxSizeStr"
@@ -89,13 +72,10 @@
                            ng-model="testString.maxSizeStr"
                  md-maxlength="5"  /> 
         </md-input-container>
-	</div>
 	
 
-    <div class="input-container" layout layout-sm="column">
-		<label for="minSizeStr"
-               translate="pages.testString.defaultFieldName.minSizeStr" flex="30"></label>
-        <md-input-container md-no-float="true" flex="70" layout="row">
+        <md-input-container flex="100">
+            <label for="minSizeStr" translate="pages.testString.defaultFieldName.minSizeStr"></label>
             
                     <input name="minSizeStr"
                            aria-label="minSizeStr"
@@ -103,13 +83,10 @@
                            ng-model="testString.minSizeStr"
                  md-minlength="2"  /> 
         </md-input-container>
-	</div>
 	
 
-    <div class="input-container" layout layout-sm="column">
-		<label for="notEqualStr"
-               translate="pages.testString.defaultFieldName.notEqualStr" flex="30"></label>
-        <md-input-container md-no-float="true" flex="70" layout="row">
+        <md-input-container flex="100">
+            <label for="notEqualStr" translate="pages.testString.defaultFieldName.notEqualStr"></label>
             
                     <input name="notEqualStr"
                            aria-label="notEqualStr"
@@ -117,13 +94,10 @@
                            ng-model="testString.notEqualStr"
                  /> 
         </md-input-container>
-	</div>
 	
 
-    <div class="input-container" layout layout-sm="column">
-		<label for="sizeStr"
-               translate="pages.testString.defaultFieldName.sizeStr" flex="30"></label>
-        <md-input-container md-no-float="true" flex="70" layout="row">
+        <md-input-container flex="100">
+            <label for="sizeStr" translate="pages.testString.defaultFieldName.sizeStr"></label>
             
                     <input name="sizeStr"
                            aria-label="sizeStr"
@@ -131,13 +105,10 @@
                            ng-model="testString.sizeStr"
                  md-minlength="1"  md-maxlength="100"  /> 
         </md-input-container>
-	</div>
 	
 
-    <div class="input-container" layout layout-sm="column">
-		<label for="textareaStr"
-               translate="pages.testString.defaultFieldName.textareaStr" flex="30"></label>
-        <md-input-container md-no-float="true" flex="70" layout="row">
+        <md-input-container flex="100">
+            <label for="textareaStr" translate="pages.testString.defaultFieldName.textareaStr"></label>
             
             <textarea rows="5"
                       name="textareaStr"
@@ -146,13 +117,10 @@
                       ng-model="testString.textareaStr"
                  md-minlength="1"  md-maxlength="1000"  > </textarea>
         </md-input-container>
-	</div>
 	
 
-    <div class="input-container" layout layout-sm="column">
-		<label for="uniqueStr"
-               translate="pages.testString.defaultFieldName.uniqueStr" flex="30"></label>
-        <md-input-container md-no-float="true" flex="70" layout="row">
+        <md-input-container flex="100">
+            <label for="uniqueStr" translate="pages.testString.defaultFieldName.uniqueStr"></label>
             
                     <input name="uniqueStr"
                            aria-label="uniqueStr"
@@ -160,13 +128,10 @@
                            ng-model="testString.uniqueStr"
                  /> 
         </md-input-container>
-	</div>
 	
 
-    <div class="input-container" layout layout-sm="column">
-		<label for="urlStr"
-               translate="pages.testString.defaultFieldName.urlStr" flex="30"></label>
-        <md-input-container md-no-float="true" flex="70" layout="row">
+        <md-input-container flex="100">
+            <label for="urlStr" translate="pages.testString.defaultFieldName.urlStr"></label>
             
                     <input name="urlStr"
                            aria-label="urlStr"
@@ -174,7 +139,6 @@
                            ng-model="testString.urlStr"
                  /> 
         </md-input-container>
-	</div>
 	
 
 

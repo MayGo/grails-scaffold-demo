@@ -2,47 +2,47 @@
 
 
 <div ng-if="!isModal" id="task_view" ng-init="pageTitle = 'pages.task.view.title'"
-     ng-include=" 'shared/blocks/page_heading.html' "></div>
+     ng-include=" 'app/blocks/page_heading.html' "></div>
 
 <md-content layout="column">
 
-<div class="input-container" layout layout-sm="column">
+<div class="input-container" layout="row" layout-align="start center">
 
-        <label translate="pages.task.defaultFieldName.dateCreated" flex="30"></label>
-        <div class="read-field" ng-bind="task.dateCreated | date:'yyyy-MM-dd HH:mm'" flex="70"></div>
+        <label translate="pages.task.defaultFieldName.dateCreated" flex="20"></label>
+        <div class="read-field" ng-bind="task.dateCreated | date:'yyyy-MM-dd HH:mm'" flex="80"></div>
     
 </div>
-<div class="input-container" layout layout-sm="column">
+<div class="input-container" layout="row" layout-align="start center">
 
-        <label translate="pages.task.defaultFieldName.deadline" flex="30"></label>
-        <div class="read-field" ng-bind="task.deadline | date:'yyyy-MM-dd HH:mm'" flex="70"></div>
+        <label translate="pages.task.defaultFieldName.deadline" flex="20"></label>
+        <div class="read-field" ng-bind="task.deadline | date:'yyyy-MM-dd HH:mm'" flex="80"></div>
     
 </div>
-<div class="input-container" layout layout-sm="column">
+<div class="input-container" layout="row" layout-align="start center">
 
-            <label translate="pages.task.defaultFieldName.details" flex="30"></label>
-            <div class="read-field" ng-bind="task.details" flex="70"></div>
+            <label translate="pages.task.defaultFieldName.details" flex="20"></label>
+            <div class="read-field" ng-bind="task.details" flex="80"></div>
     
 </div>
-<div class="input-container" layout layout-sm="column">
+<div class="input-container" layout="row" layout-align="start center">
 
-            <label translate="pages.task.defaultFieldName.status" flex="30"></label>
-            <div class="read-field" ng-bind="task.status" flex="70"></div>
+            <label translate="pages.task.defaultFieldName.status" flex="20"></label>
+            <div class="read-field" ng-bind="task.status" flex="80"></div>
     
 </div>
-<div class="input-container" layout layout-sm="column">
+<div class="input-container" layout="row" layout-align="start center">
 
-            <label translate="pages.task.defaultFieldName.summary" flex="30"></label>
-            <div class="read-field" ng-bind="task.summary" flex="70"></div>
+            <label translate="pages.task.defaultFieldName.summary" flex="20"></label>
+            <div class="read-field" ng-bind="task.summary" flex="80"></div>
     
 </div>
-<div class="input-container" layout layout-sm="column">
+<div class="input-container" layout="row" layout-align="start center">
 
-            <label translate="pages.task.defaultFieldName.timeSpent" flex="30"></label>
-            <div class="read-field" ng-bind="task.timeSpent" flex="70"></div>
+            <label translate="pages.task.defaultFieldName.timeSpent" flex="20"></label>
+            <div class="read-field" ng-bind="task.timeSpent" flex="80"></div>
     
 </div>
-<div class="input-container" layout layout-sm="column">
+<div class="input-container" layout="row" layout-align="start center">
 //JoinProperty
     //tag
                 //task

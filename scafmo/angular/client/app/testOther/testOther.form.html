@@ -1,16 +1,14 @@
 
 
 <div id="testOther_form"
-     ng-init="pageTitle = (isEditForm)?'pages.testOther.view.edit.title':'pages.testOther.create.title'" data-ng-include=" 'shared/blocks/page_heading.html' "></div>
+     ng-init="pageTitle = (isEditForm)?'pages.testOther.view.edit.title':'pages.testOther.create.title'" data-ng-include=" 'app/blocks/page_heading.html' "></div>
 
-<md-content layout-padding layout="column">
-    <form name="testOtherForm" novalidate>
+<md-content >
+    <form name="testOtherForm" novalidate layout-padding layout="column">
         <input name="version" type="hidden" ng-model="testOther.version" />
 
-    <div class="input-container" layout layout-sm="column">
-		<label for="booleanNullable"
-               translate="pages.testOther.defaultFieldName.booleanNullable" flex="30"></label>
-        <md-input-container md-no-float="true" flex="70" layout="row">
+        <md-input-container flex="100">
+            <label for="booleanNullable" translate="pages.testOther.defaultFieldName.booleanNullable"></label>
             
 <md-switch name="booleanNullable"
            ng-model="testOther.booleanNullable"
@@ -18,13 +16,10 @@
 </md-switch>
 		
         </md-input-container>
-	</div>
 	
 
-    <div class="input-container" layout layout-sm="column">
-		<label for="testDate"
-               translate="pages.testOther.defaultFieldName.testDate" flex="30"></label>
-        <md-input-container md-no-float="true" flex="70" layout="row">
+        <md-input-container flex="100">
+            <label for="testDate" translate="pages.testOther.defaultFieldName.testDate"></label>
             
      <input name="testDate"
             aria-label="testDate"
@@ -35,35 +30,29 @@
       />
       
         </md-input-container>
-	</div>
 	
 
-    <div class="input-container" layout layout-sm="column">
-		<label for="testEnum"
-               translate="pages.testOther.defaultFieldName.testEnum" flex="30"></label>
-        <md-input-container md-no-float="true" flex="70" layout="row">
+        <md-input-container flex="100">
+            <label for="testEnum" translate="pages.testOther.defaultFieldName.testEnum"></label>
             
             <md-select
                     aria-label="testEnum"
                     ng-model="testOther.testEnum"
-    ><md-option ng-repeat="item in autocompleteService.testOtherTestEnumList" >{{item}}</md-option>
+    ><md-option ng-repeat="item in appCtrl.autocompleteService.testOtherTestEnumList" >{{item}}</md-option>
             </md-select>
  
         </md-input-container>
-	</div>
 	
 
-    <div class="input-container" layout layout-sm="column">
-		<label for="testStringType"
-               translate="pages.testOther.defaultFieldName.testStringType" flex="30"></label>
-        <md-input-container md-no-float="true" flex="70" layout="row">
-            <!-- ManyToOne-->
+        <md-input-container flex="100">
+            <label for="testStringType" translate="pages.testOther.defaultFieldName.testStringType"></label>
+            <!-- ManyToOne--><div layout="row" layout-align="start center"> 
         <md-autocomplete
                 input-name="testStringType"
                 md-cache="false"
                 md-selected-item="testOther.testStringType"
                 md-search-text="searchText_testStringType"
-                md-items="item in autocompleteService.testStringQuery(searchText_testStringType)"
+                md-items="item in appCtrl.autocompleteService.testStringQuery(searchText_testStringType)"
                 md-item-text="item.name || item.label || item.id"
                 md-min-length="0"
                 flex
@@ -77,9 +66,9 @@
          <item-selector update-model="testOther.testStringType"
                item-link="app.testOther.view.edit.testStringSearchModal" >
          </item-selector>
+        </div>
      
         </md-input-container>
-	</div>
 	
 
 

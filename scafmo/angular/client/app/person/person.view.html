@@ -2,20 +2,20 @@
 
 
 <div ng-if="!isModal" id="person_view" ng-init="pageTitle = 'pages.person.view.title'"
-     ng-include=" 'shared/blocks/page_heading.html' "></div>
+     ng-include=" 'app/blocks/page_heading.html' "></div>
 
 <md-content layout="column">
 
-<div class="input-container" layout layout-sm="column">
+<div class="input-container" layout="row" layout-align="start center">
 
-            <label translate="pages.person.defaultFieldName.firstName" flex="30"></label>
-            <div class="read-field" ng-bind="person.firstName" flex="70"></div>
+            <label translate="pages.person.defaultFieldName.firstName" flex="20"></label>
+            <div class="read-field" ng-bind="person.firstName" flex="80"></div>
     
 </div>
-<div class="input-container" layout layout-sm="column">
+<div class="input-container" layout="row" layout-align="start center">
 
-            <label translate="pages.person.defaultFieldName.lastName" flex="30"></label>
-            <div class="read-field" ng-bind="person.lastName" flex="70"></div>
+            <label translate="pages.person.defaultFieldName.lastName" flex="20"></label>
+            <div class="read-field" ng-bind="person.lastName" flex="80"></div>
     
 </div>
 

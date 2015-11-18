@@ -3,7 +3,7 @@
 
 
 angular.module('angularDemoApp')
-    .controller('PetEditController', function ($scope, $state, $q, $stateParams, PetService, petData, $translate, inform , VisitService) {
+    .controller('PetEditController', function ($scope, $state, $q, $stateParams, PetService, petData, $translate, logger , VisitService) {
     	$scope.isEditForm = ($stateParams.id)?true:false;
 
 		$scope.pet = petData;
@@ -17,7 +17,7 @@ angular.module('angularDemoApp')
 							if(angular.element('#'+error.field).length) {
 								frmController.setExternalValidation(error.field, undefined, error.message);
 							} else {
-								inform.add(error.message, {ttl: -1,'type': 'warning'});
+								logger.error(error.message);
 							}
 		                });
 		            }
@@ -27,7 +27,7 @@ angular.module('angularDemoApp')
 	    	if($scope.isEditForm){
 	    		PetService.update($scope.pet, function(response) {	
 	    			$translate('pages.pet.messages.update').then(function (msg) {
-				    	inform.add(msg, {'type': 'success'});
+				    	logger.info(msg);
 					});
 	            	deferred.resolve(response);
 		        },errorCallback);
@@ -35,7 +35,7 @@ angular.module('angularDemoApp')
     			PetService.save($scope.pet,function(response) {
 					
     				$translate('pages.pet.messages.create').then(function (msg) {
-				    	inform.add(msg, {'type': 'success'});
+				    	logger.info(msg);
 					});
 					$state.go('^.view', { id: response.id }, {location: 'replace'});
 					deferred.resolve(response);

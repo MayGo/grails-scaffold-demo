@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('angularDemoApp')
-    .controller('DivisionCollectionlessViewController', function ($scope, $state, $stateParams, $translate, inform,
+    .controller('DivisionCollectionlessViewController', function ($scope, $state, $stateParams, $translate,
             DivisionCollectionlessService, divisionCollectionlessData,$mdDialog) {
 	 	$scope.divisionCollectionless = divisionCollectionlessData;
 

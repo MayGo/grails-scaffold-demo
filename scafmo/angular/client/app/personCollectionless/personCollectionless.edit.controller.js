@@ -3,7 +3,7 @@
 
 
 angular.module('angularDemoApp')
-    .controller('PersonCollectionlessEditController', function ($scope, $state, $q, $stateParams, PersonCollectionlessService, personCollectionlessData, $translate, inform ) {
+    .controller('PersonCollectionlessEditController', function ($scope, $state, $q, $stateParams, PersonCollectionlessService, personCollectionlessData, $translate, logger ) {
     	$scope.isEditForm = ($stateParams.id)?true:false;
 
 		$scope.personCollectionless = personCollectionlessData;
@@ -17,7 +17,7 @@ angular.module('angularDemoApp')
 							if(angular.element('#'+error.field).length) {
 								frmController.setExternalValidation(error.field, undefined, error.message);
 							} else {
-								inform.add(error.message, {ttl: -1,'type': 'warning'});
+								logger.error(error.message);
 							}
 		                });
 		            }
@@ -27,7 +27,7 @@ angular.module('angularDemoApp')
 	    	if($scope.isEditForm){
 	    		PersonCollectionlessService.update($scope.personCollectionless, function(response) {	
 	    			$translate('pages.personCollectionless.messages.update').then(function (msg) {
-				    	inform.add(msg, {'type': 'success'});
+				    	logger.info(msg);
 					});
 	            	deferred.resolve(response);
 		        },errorCallback);
@@ -35,7 +35,7 @@ angular.module('angularDemoApp')
     			PersonCollectionlessService.save($scope.personCollectionless,function(response) {
 					
     				$translate('pages.personCollectionless.messages.create').then(function (msg) {
-				    	inform.add(msg, {'type': 'success'});
+				    	logger.info(msg);
 					});
 					$state.go('^.view', { id: response.id }, {location: 'replace'});
 					deferred.resolve(response);

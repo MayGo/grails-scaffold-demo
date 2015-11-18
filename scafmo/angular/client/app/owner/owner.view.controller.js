@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('angularDemoApp')
-    .controller('OwnerViewController', function ($scope, $state, $stateParams, $translate, inform,
+    .controller('OwnerViewController', function ($scope, $state, $stateParams, $translate,
             OwnerService, ownerData,$mdDialog) {
 	 	$scope.owner = ownerData;
 

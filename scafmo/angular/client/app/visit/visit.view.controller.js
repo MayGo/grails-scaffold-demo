@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('angularDemoApp')
-    .controller('VisitViewController', function ($scope, $state, $stateParams, $translate, inform,
+    .controller('VisitViewController', function ($scope, $state, $stateParams, $translate,
             VisitService, visitData,$mdDialog) {
 	 	$scope.visit = visitData;
 

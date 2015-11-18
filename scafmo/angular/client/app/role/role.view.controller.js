@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('angularDemoApp')
-    .controller('RoleViewController', function ($scope, $state, $stateParams, $translate, inform,
+    .controller('RoleViewController', function ($scope, $state, $stateParams, $translate,
             RoleService, roleData,$mdDialog) {
 	 	$scope.role = roleData;
 

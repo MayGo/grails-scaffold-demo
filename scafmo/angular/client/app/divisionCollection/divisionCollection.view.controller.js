@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('angularDemoApp')
-    .controller('DivisionCollectionViewController', function ($scope, $state, $stateParams, $translate, inform,
+    .controller('DivisionCollectionViewController', function ($scope, $state, $stateParams, $translate,
             DivisionCollectionService, divisionCollectionData,$mdDialog) {
 	 	$scope.divisionCollection = divisionCollectionData;
 

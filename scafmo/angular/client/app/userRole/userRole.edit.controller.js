@@ -3,7 +3,7 @@
 
 
 angular.module('angularDemoApp')
-    .controller('UserRoleEditController', function ($scope, $state, $q, $stateParams, UserRoleService, userRoleData, $translate, inform ) {
+    .controller('UserRoleEditController', function ($scope, $state, $q, $stateParams, UserRoleService, userRoleData, $translate, logger ) {
     	$scope.isEditForm = ($stateParams.id)?true:false;
 
 		$scope.userRole = userRoleData;
@@ -17,7 +17,7 @@ angular.module('angularDemoApp')
 							if(angular.element('#'+error.field).length) {
 								frmController.setExternalValidation(error.field, undefined, error.message);
 							} else {
-								inform.add(error.message, {ttl: -1,'type': 'warning'});
+								logger.error(error.message);
 							}
 		                });
 		            }
@@ -27,7 +27,7 @@ angular.module('angularDemoApp')
 	    	if($scope.isEditForm){
 	    		UserRoleService.update($scope.userRole, function(response) {	
 	    			$translate('pages.userRole.messages.update').then(function (msg) {
-				    	inform.add(msg, {'type': 'success'});
+				    	logger.info(msg);
 					});
 	            	deferred.resolve(response);
 		        },errorCallback);
@@ -35,7 +35,7 @@ angular.module('angularDemoApp')
     			UserRoleService.save($scope.userRole,function(response) {
 					
     				$translate('pages.userRole.messages.create').then(function (msg) {
-				    	inform.add(msg, {'type': 'success'});
+				    	logger.info(msg);
 					});
 					$state.go('^.view', { id: response.id }, {location: 'replace'});
 					deferred.resolve(response);

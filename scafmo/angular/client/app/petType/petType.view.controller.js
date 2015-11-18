@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('angularDemoApp')
-    .controller('PetTypeViewController', function ($scope, $state, $stateParams, $translate, inform,
+    .controller('PetTypeViewController', function ($scope, $state, $stateParams, $translate,
             PetTypeService, petTypeData,$mdDialog) {
 	 	$scope.petType = petTypeData;
 

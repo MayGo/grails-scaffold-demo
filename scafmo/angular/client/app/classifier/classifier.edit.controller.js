@@ -3,7 +3,7 @@
 
 
 angular.module('angularDemoApp')
-    .controller('ClassifierEditController', function ($scope, $state, $q, $stateParams, ClassifierService, classifierData, $translate, inform ) {
+    .controller('ClassifierEditController', function ($scope, $state, $q, $stateParams, ClassifierService, classifierData, $translate, logger ) {
     	$scope.isEditForm = ($stateParams.id)?true:false;
 
 		$scope.classifier = classifierData;
@@ -17,7 +17,7 @@ angular.module('angularDemoApp')
 							if(angular.element('#'+error.field).length) {
 								frmController.setExternalValidation(error.field, undefined, error.message);
 							} else {
-								inform.add(error.message, {ttl: -1,'type': 'warning'});
+								logger.error(error.message);
 							}
 		                });
 		            }
@@ -27,7 +27,7 @@ angular.module('angularDemoApp')
 	    	if($scope.isEditForm){
 	    		ClassifierService.update($scope.classifier, function(response) {	
 	    			$translate('pages.classifier.messages.update').then(function (msg) {
-				    	inform.add(msg, {'type': 'success'});
+				    	logger.info(msg);
 					});
 	            	deferred.resolve(response);
 		        },errorCallback);
@@ -35,7 +35,7 @@ angular.module('angularDemoApp')
     			ClassifierService.save($scope.classifier,function(response) {
 					
     				$translate('pages.classifier.messages.create').then(function (msg) {
-				    	inform.add(msg, {'type': 'success'});
+				    	logger.info(msg);
 					});
 					$state.go('^.view', { id: response.id }, {location: 'replace'});
 					deferred.resolve(response);

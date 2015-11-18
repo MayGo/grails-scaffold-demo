@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('angularDemoApp')
-  .service('EmbeddableService', function($resource, $translate, appConfig, inform){
+  .service('EmbeddableService', function($resource, $translate, appConfig, logger){
   		var service = {};
   		
   		var resource = $resource(appConfig.restUrl + '/embeddables/v1/:id', { id: '@id' }, {
@@ -15,7 +15,7 @@ angular.module('angularDemoApp')
 			return instance.$delete(
 				function(instance) {
 					$translate('pages.embeddable.messages.delete').then(function (msg) {
-						inform.add(msg, {'type': 'warning'});
+						logger.info(msg);
 					});
 
 					return instance;//returning chained promise

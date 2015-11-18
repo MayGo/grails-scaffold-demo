@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('angularDemoApp')
-    .controller('PersonCollectionlessViewController', function ($scope, $state, $stateParams, $translate, inform,
+    .controller('PersonCollectionlessViewController', function ($scope, $state, $stateParams, $translate,
             PersonCollectionlessService, personCollectionlessData,$mdDialog) {
 	 	$scope.personCollectionless = personCollectionlessData;
 

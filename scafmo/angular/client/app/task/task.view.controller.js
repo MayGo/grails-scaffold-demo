@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('angularDemoApp')
-    .controller('TaskViewController', function ($scope, $state, $stateParams, $translate, inform,
+    .controller('TaskViewController', function ($scope, $state, $stateParams, $translate,
             TaskService, taskData,$mdDialog) {
 	 	$scope.task = taskData;
 

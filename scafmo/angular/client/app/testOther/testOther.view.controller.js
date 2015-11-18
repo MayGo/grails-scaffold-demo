@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('angularDemoApp')
-    .controller('TestOtherViewController', function ($scope, $state, $stateParams, $translate, inform,
+    .controller('TestOtherViewController', function ($scope, $state, $stateParams, $translate,
             TestOtherService, testOtherData,$mdDialog) {
 	 	$scope.testOther = testOtherData;
 

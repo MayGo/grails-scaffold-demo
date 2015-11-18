@@ -3,7 +3,7 @@
 
 
 angular.module('angularDemoApp')
-    .controller('DivisionCollectionEditController', function ($scope, $state, $q, $stateParams, DivisionCollectionService, divisionCollectionData, $translate, inform , PersonCollectionService) {
+    .controller('DivisionCollectionEditController', function ($scope, $state, $q, $stateParams, DivisionCollectionService, divisionCollectionData, $translate, logger , PersonCollectionService) {
     	$scope.isEditForm = ($stateParams.id)?true:false;
 
 		$scope.divisionCollection = divisionCollectionData;
@@ -17,7 +17,7 @@ angular.module('angularDemoApp')
 							if(angular.element('#'+error.field).length) {
 								frmController.setExternalValidation(error.field, undefined, error.message);
 							} else {
-								inform.add(error.message, {ttl: -1,'type': 'warning'});
+								logger.error(error.message);
 							}
 		                });
 		            }
@@ -27,7 +27,7 @@ angular.module('angularDemoApp')
 	    	if($scope.isEditForm){
 	    		DivisionCollectionService.update($scope.divisionCollection, function(response) {	
 	    			$translate('pages.divisionCollection.messages.update').then(function (msg) {
-				    	inform.add(msg, {'type': 'success'});
+				    	logger.info(msg);
 					});
 	            	deferred.resolve(response);
 		        },errorCallback);
@@ -35,7 +35,7 @@ angular.module('angularDemoApp')
     			DivisionCollectionService.save($scope.divisionCollection,function(response) {
 					
     				$translate('pages.divisionCollection.messages.create').then(function (msg) {
-				    	inform.add(msg, {'type': 'success'});
+				    	logger.info(msg);
 					});
 					$state.go('^.view', { id: response.id }, {location: 'replace'});
 					deferred.resolve(response);

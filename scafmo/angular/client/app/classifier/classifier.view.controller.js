@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('angularDemoApp')
-    .controller('ClassifierViewController', function ($scope, $state, $stateParams, $translate, inform,
+    .controller('ClassifierViewController', function ($scope, $state, $stateParams, $translate,
             ClassifierService, classifierData,$mdDialog) {
 	 	$scope.classifier = classifierData;
 

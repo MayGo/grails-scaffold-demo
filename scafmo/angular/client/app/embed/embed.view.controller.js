@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('angularDemoApp')
-    .controller('EmbedViewController', function ($scope, $state, $stateParams, $translate, inform,
+    .controller('EmbedViewController', function ($scope, $state, $stateParams, $translate,
             EmbedService, embedData,$mdDialog) {
 	 	$scope.embed = embedData;
 

@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('angularDemoApp')
-    .controller('SpecialityViewController', function ($scope, $state, $stateParams, $translate, inform,
+    .controller('SpecialityViewController', function ($scope, $state, $stateParams, $translate,
             SpecialityService, specialityData,$mdDialog) {
 	 	$scope.speciality = specialityData;
 

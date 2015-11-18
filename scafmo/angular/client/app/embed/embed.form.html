@@ -97,16 +97,9 @@
         </md-input-container>
 	
 
-        <div class="looks-like-toolbar" ng-init="myEmbeddedFieldOpen = true" ng-click="myEmbeddedFieldOpen = !myEmbeddedFieldOpen" id="myEmbeddedFieldEmbedded">
-            <div class="md-toolbar-tools">
-                <h2 translate='pages.embed.defaultFieldName.myEmbeddedField.title'></h2>
-                <span flex></span>
-                <md-icon md-font-set="material-icons" class="md-primary" ng-if="!myEmbeddedFieldOpen">expand_more</md-icon>
-                <md-icon md-font-set="material-icons" class="md-primary" ng-if="myEmbeddedFieldOpen">expand_less</md-icon>
-            </div>
-        </div>
-        <md-content ng-show="myEmbeddedFieldOpen" layout-padding class="embedded-content">
-                    
+        <collapse-bar id="myEmbeddedFieldEmbedded" title='pages.embed.defaultFieldName.myEmbeddedField.title'>
+            <div layout-padding layout="column">
+                
         <md-input-container flex="100">
             <label for="myEmbeddedField.jsonMap" translate="pages.embed.defaultFieldName.myEmbeddedField.jsonMap"></label>
             
@@ -149,7 +142,8 @@
         </md-input-container>
 	
 
-        </md-content>
+            </div>
+       </collapse-bar>
 
 
         <section layout="row" layout-sm="column" layout-align="bottom left">

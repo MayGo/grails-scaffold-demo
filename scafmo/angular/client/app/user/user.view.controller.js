@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('angularDemoApp')
-    .controller('UserViewController', function ($scope, $state, $stateParams, $translate, inform,
+    .controller('UserViewController', function ($scope, $state, $stateParams, $translate,
             UserService, userData,$mdDialog) {
 	 	$scope.user = userData;
 

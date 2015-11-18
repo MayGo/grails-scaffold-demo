@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('angularDemoApp')
-    .controller('TagViewController', function ($scope, $state, $stateParams, $translate, inform,
+    .controller('TagViewController', function ($scope, $state, $stateParams, $translate,
             TagService, tagData,$mdDialog) {
 	 	$scope.tag = tagData;
 

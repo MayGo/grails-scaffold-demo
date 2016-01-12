@@ -10,6 +10,9 @@ $stateProvider
 		})
 		.state('app.vet.list', {
 			url: '/list?search',//TODO: search so that search is not an object in url
+			ncyBreadcrumb: {
+				label: '{{"pages.vet.list.title" | translate}} '
+			},
 			views: {
 				'page@app.vet': {
 					templateUrl: 'app/vet/vet.list.html',
@@ -19,7 +22,8 @@ $stateProvider
 		}).state('app.vet.create',{
 			url: '/create',
 			ncyBreadcrumb: {
-				parent: 'app.vet.list'
+				parent: 'app.vet.list',
+				label: '{{"pages.Vet.create.title" | translate}}'
 			},
 			views: {
 				'page@app.vet': {
@@ -35,7 +39,8 @@ $stateProvider
 		}).state('app.vet.view',{
 			url: '/view/:id',
 			ncyBreadcrumb: {
-				parent: 'app.vet.list'
+				parent: 'app.vet.list',
+				label: '{{"pages.vet.view.title" | translate}} '
 			},
 			views: {
 				'page@app.vet': {
@@ -54,6 +59,9 @@ $stateProvider
 			}
 		}).state('app.vet.view.edit',{
 			url: '/edit',
+            ncyBreadcrumb: {
+                label: '{{"pages.vet.view.edit.title" | translate}} '
+            },
 			views: {
 				'page@app.vet': {
 					templateUrl: 'app/vet/vet.form.html',

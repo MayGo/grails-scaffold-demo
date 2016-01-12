@@ -45,6 +45,16 @@ class EmbedSpec extends RestQueries implements TestUtils{
 				acStr = 'Blank 151'
 				muFileLocation = 'myfile.txt'
 				myFile = '[116, 101, 115, 116, 49]'
+				myEmbeddedField{
+					id = null
+				jsonMap = [
+  'mykey':  'myvalue'
+]
+				myAc = [
+  'mykey':  'myvalue'
+]
+				str = 'Blank 151'
+				}
 			}
 			
 			otherDomainId = response.json.id
@@ -71,6 +81,16 @@ class EmbedSpec extends RestQueries implements TestUtils{
 				acStr = 'Blank 152'
 				muFileLocation = 'myfile.txt'
 				myFile = '[116, 101, 115, 116, 49]'
+				myEmbeddedField{
+					id = null
+				jsonMap = [
+  'mykey':  'myvalue'
+]
+				myAc = [
+  'mykey':  'myvalue'
+]
+				str = 'Blank 151'
+				}
 			}
 			
 			domainId = response.json.id
@@ -146,6 +166,16 @@ class EmbedSpec extends RestQueries implements TestUtils{
 				acStr = 'Blank 153'
 				muFileLocation = 'myfile.txt'
 				myFile = '[116, 101, 115, 116, 49]'
+				myEmbeddedField{
+					id = null
+				jsonMap = [
+  'mykey':  'myvalue'
+]
+				myAc = [
+  'mykey':  'myvalue'
+]
+				str = 'Blank 151'
+				}
 
 			}
 		then: 'Should return updated values'
@@ -170,6 +200,16 @@ class EmbedSpec extends RestQueries implements TestUtils{
 				acStr = 'Blank 153'
 				muFileLocation = 'myfile.txt'
 				myFile = '[116, 101, 115, 116, 49]'
+				myEmbeddedField{
+					id = null
+				jsonMap = [
+  'mykey':  'myvalue'
+]
+				myAc = [
+  'mykey':  'myvalue'
+]
+				str = 'Blank 151'
+				}
 
 			}
 		then: 'Should not find'
@@ -186,6 +226,16 @@ class EmbedSpec extends RestQueries implements TestUtils{
 				acStr = 'Blank 153'
 				muFileLocation = 'myfile.txt'
 				myFile = '[116, 101, 115, 116, 49]'
+				myEmbeddedField{
+					id = null
+				jsonMap = [
+  'mykey':  'myvalue'
+]
+				myAc = [
+  'mykey':  'myvalue'
+]
+				str = 'Blank 151'
+				}
 
 			}
 		then: 'Should not find'

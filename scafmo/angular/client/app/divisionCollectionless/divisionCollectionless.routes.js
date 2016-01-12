@@ -10,6 +10,9 @@ $stateProvider
 		})
 		.state('app.divisionCollectionless.list', {
 			url: '/list?search',//TODO: search so that search is not an object in url
+			ncyBreadcrumb: {
+				label: '{{"pages.divisionCollectionless.list.title" | translate}} '
+			},
 			views: {
 				'page@app.divisionCollectionless': {
 					templateUrl: 'app/divisionCollectionless/divisionCollectionless.list.html',
@@ -19,7 +22,8 @@ $stateProvider
 		}).state('app.divisionCollectionless.create',{
 			url: '/create',
 			ncyBreadcrumb: {
-				parent: 'app.divisionCollectionless.list'
+				parent: 'app.divisionCollectionless.list',
+				label: '{{"pages.DivisionCollectionless.create.title" | translate}}'
 			},
 			views: {
 				'page@app.divisionCollectionless': {
@@ -35,7 +39,8 @@ $stateProvider
 		}).state('app.divisionCollectionless.view',{
 			url: '/view/:id',
 			ncyBreadcrumb: {
-				parent: 'app.divisionCollectionless.list'
+				parent: 'app.divisionCollectionless.list',
+				label: '{{"pages.divisionCollectionless.view.title" | translate}} '
 			},
 			views: {
 				'page@app.divisionCollectionless': {
@@ -54,6 +59,9 @@ $stateProvider
 			}
 		}).state('app.divisionCollectionless.view.edit',{
 			url: '/edit',
+            ncyBreadcrumb: {
+                label: '{{"pages.divisionCollectionless.view.edit.title" | translate}} '
+            },
 			views: {
 				'page@app.divisionCollectionless': {
 					templateUrl: 'app/divisionCollectionless/divisionCollectionless.form.html',

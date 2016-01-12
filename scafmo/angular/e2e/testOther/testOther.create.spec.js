@@ -31,7 +31,7 @@ describe('testOther create page', function() {
 		expect(page.submitButton.isEnabled()).toBe(false);
 		//Fill the form
 		page.booleanNullableEl.click();
-		page.testDateEl.sendKeys('27.10.2015');
+		page.testDateEl.sendKeys('12.01.2016');
 		page.testEnumEl.sendKeys('TEST_1');
 		page.testStringTypeEl.sendKeys('');//no val for testStringType
 

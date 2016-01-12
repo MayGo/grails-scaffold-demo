@@ -28,9 +28,9 @@ describe('visit create page', function() {
 	it('after filling all the fields, should submit and change route to view', function() {
 		expect(page.submitButton.isEnabled()).toBe(false);
 		//Fill the form
-		page.dateEl.sendKeys('27.10.2015');
+		page.dateEl.sendKeys('12.01.2016');
 		page.descriptionEl.sendKeys('description');
-		page.petEl.sendKeys('Tue_Oct_27_00:00:00_EET_2015').sendKeys(protractor.Key.ENTER);
+		page.petEl.sendKeys('Tue_Jan_12_00:00:00_EET_2016').sendKeys(protractor.Key.ENTER);
 
 		expect(page.submitButton.isEnabled()).toBe(true);
 		page.submitButton.click();

@@ -1,3 +1,6 @@
+import defpackage.InternalFrontendHelper
+import defpackage.CustomMarshallerRegistrar
+
 class BootStrap {
 
 	def testUserGeneratorService
@@ -8,6 +11,10 @@ class BootStrap {
 
 		defpackage.CustomMarshallerRegistrar.registerMarshallers()
 		defpackage.InternalFrontendHelper.writeConfig('angular/client/')
+
+
+		CustomMarshallerRegistrar.registerMarshallers()
+		InternalFrontendHelper.writeConfig('angular/client/')
 		testUserGeneratorService.generate()
 		testDataGeneratorService.generate()
 

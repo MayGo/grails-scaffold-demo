@@ -10,6 +10,9 @@ $stateProvider
 		})
 		.state('app.classifier.list', {
 			url: '/list?search',//TODO: search so that search is not an object in url
+			ncyBreadcrumb: {
+				label: '{{"pages.classifier.list.title" | translate}} '
+			},
 			views: {
 				'page@app.classifier': {
 					templateUrl: 'app/classifier/classifier.list.html',
@@ -19,7 +22,8 @@ $stateProvider
 		}).state('app.classifier.create',{
 			url: '/create',
 			ncyBreadcrumb: {
-				parent: 'app.classifier.list'
+				parent: 'app.classifier.list',
+				label: '{{"pages.Classifier.create.title" | translate}}'
 			},
 			views: {
 				'page@app.classifier': {
@@ -35,7 +39,8 @@ $stateProvider
 		}).state('app.classifier.view',{
 			url: '/view/:id',
 			ncyBreadcrumb: {
-				parent: 'app.classifier.list'
+				parent: 'app.classifier.list',
+				label: '{{"pages.classifier.view.title" | translate}} '
 			},
 			views: {
 				'page@app.classifier': {
@@ -54,6 +59,9 @@ $stateProvider
 			}
 		}).state('app.classifier.view.edit',{
 			url: '/edit',
+            ncyBreadcrumb: {
+                label: '{{"pages.classifier.view.edit.title" | translate}} '
+            },
 			views: {
 				'page@app.classifier': {
 					templateUrl: 'app/classifier/classifier.form.html',

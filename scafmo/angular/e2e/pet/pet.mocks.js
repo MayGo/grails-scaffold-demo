@@ -15,7 +15,7 @@ module.exports = function(){
 			//Mock relations
 
 			var visitsUrl =/.*\/visits\/v1.*/;
-			$httpBackend.whenGET(visitsUrl).respond(function(method, url){return [200, [{'id': '1','description': 'description','date': 'Tue Oct 27 00:00:00 EET 2015'}]]});//list
+			$httpBackend.whenGET(visitsUrl).respond(function(method, url){return [200, [{'id': '1','description': 'description','date': 'Tue Jan 12 00:00:00 EET 2016'}]]});//list
 
 			var typeUrl =/.*\/pettypes\/v1.*/;
 			$httpBackend.whenGET(typeUrl).respond(function(method, url){return [200, [{'id': '1','name': 'Type 455'}]]});//list

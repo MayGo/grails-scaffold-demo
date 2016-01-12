@@ -10,6 +10,9 @@ $stateProvider
 		})
 		.state('app.personCollection.list', {
 			url: '/list?search',//TODO: search so that search is not an object in url
+			ncyBreadcrumb: {
+				label: '{{"pages.personCollection.list.title" | translate}} '
+			},
 			views: {
 				'page@app.personCollection': {
 					templateUrl: 'app/personCollection/personCollection.list.html',
@@ -19,7 +22,8 @@ $stateProvider
 		}).state('app.personCollection.create',{
 			url: '/create',
 			ncyBreadcrumb: {
-				parent: 'app.personCollection.list'
+				parent: 'app.personCollection.list',
+				label: '{{"pages.PersonCollection.create.title" | translate}}'
 			},
 			views: {
 				'page@app.personCollection': {
@@ -35,7 +39,8 @@ $stateProvider
 		}).state('app.personCollection.view',{
 			url: '/view/:id',
 			ncyBreadcrumb: {
-				parent: 'app.personCollection.list'
+				parent: 'app.personCollection.list',
+				label: '{{"pages.personCollection.view.title" | translate}} '
 			},
 			views: {
 				'page@app.personCollection': {
@@ -54,6 +59,9 @@ $stateProvider
 			}
 		}).state('app.personCollection.view.edit',{
 			url: '/edit',
+            ncyBreadcrumb: {
+                label: '{{"pages.personCollection.view.edit.title" | translate}} '
+            },
 			views: {
 				'page@app.personCollection': {
 					templateUrl: 'app/personCollection/personCollection.form.html',

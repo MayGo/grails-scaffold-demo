@@ -10,6 +10,9 @@ $stateProvider
 		})
 		.state('app.petType.list', {
 			url: '/list?search',//TODO: search so that search is not an object in url
+			ncyBreadcrumb: {
+				label: '{{"pages.petType.list.title" | translate}} '
+			},
 			views: {
 				'page@app.petType': {
 					templateUrl: 'app/petType/petType.list.html',
@@ -19,7 +22,8 @@ $stateProvider
 		}).state('app.petType.create',{
 			url: '/create',
 			ncyBreadcrumb: {
-				parent: 'app.petType.list'
+				parent: 'app.petType.list',
+				label: '{{"pages.PetType.create.title" | translate}}'
 			},
 			views: {
 				'page@app.petType': {
@@ -35,7 +39,8 @@ $stateProvider
 		}).state('app.petType.view',{
 			url: '/view/:id',
 			ncyBreadcrumb: {
-				parent: 'app.petType.list'
+				parent: 'app.petType.list',
+				label: '{{"pages.petType.view.title" | translate}} '
 			},
 			views: {
 				'page@app.petType': {
@@ -54,6 +59,9 @@ $stateProvider
 			}
 		}).state('app.petType.view.edit',{
 			url: '/edit',
+            ncyBreadcrumb: {
+                label: '{{"pages.petType.view.edit.title" | translate}} '
+            },
 			views: {
 				'page@app.petType': {
 					templateUrl: 'app/petType/petType.form.html',

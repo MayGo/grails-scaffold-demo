@@ -1,6 +1,6 @@
 {
   "restUrl": "http://localhost:8080/scafmo",
-  "loginUrl": "https://cas.dwl.smit",
-  "logoutUrl": "http://localhost:8080/scafm/api/logout",
-  "securityEnabled": true
+  "loginUrl": "https://something.com",
+  "logoutUrl": "http://localhost:8080/scafmo/api/logout",
+  "securityEnabled": false
 }

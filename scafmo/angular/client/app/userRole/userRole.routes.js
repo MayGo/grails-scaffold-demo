@@ -10,6 +10,9 @@ $stateProvider
 		})
 		.state('app.userRole.list', {
 			url: '/list?search',//TODO: search so that search is not an object in url
+			ncyBreadcrumb: {
+				label: '{{"pages.userRole.list.title" | translate}} '
+			},
 			views: {
 				'page@app.userRole': {
 					templateUrl: 'app/userRole/userRole.list.html',
@@ -19,7 +22,8 @@ $stateProvider
 		}).state('app.userRole.create',{
 			url: '/create',
 			ncyBreadcrumb: {
-				parent: 'app.userRole.list'
+				parent: 'app.userRole.list',
+				label: '{{"pages.UserRole.create.title" | translate}}'
 			},
 			views: {
 				'page@app.userRole': {
@@ -35,7 +39,8 @@ $stateProvider
 		}).state('app.userRole.view',{
 			url: '/view/:id',
 			ncyBreadcrumb: {
-				parent: 'app.userRole.list'
+				parent: 'app.userRole.list',
+				label: '{{"pages.userRole.view.title" | translate}} '
 			},
 			views: {
 				'page@app.userRole': {
@@ -54,6 +59,9 @@ $stateProvider
 			}
 		}).state('app.userRole.view.edit',{
 			url: '/edit',
+            ncyBreadcrumb: {
+                label: '{{"pages.userRole.view.edit.title" | translate}} '
+            },
 			views: {
 				'page@app.userRole': {
 					templateUrl: 'app/userRole/userRole.form.html',

@@ -31,7 +31,7 @@ module.exports = function(){
 
 			var myEmbeddedField_myAcUrl = appConfig['testStringUrl'] || 'http://localhost:8080/testStringUrl';
 			var myEmbeddedField_myAcRe = new RegExp(quote(myEmbeddedField_myAcUrl) + ".*");
-			$httpBackend.whenGET(myEmbeddedField_myAcRe).respond(function(method, url){return [200, [[]]]});//list
+			$httpBackend.whenGET(myEmbeddedField_myAcRe).respond(function(method, url){return [200, [{"id":null,"version":null,"jsonMap":{"mykey":"myvalue"},"myAc":{"mykey":"myvalue"},"str":"Blank 155"}]]});//list
 			
 
 			//For everything else, don't mock

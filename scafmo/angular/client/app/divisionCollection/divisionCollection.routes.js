@@ -10,6 +10,9 @@ $stateProvider
 		})
 		.state('app.divisionCollection.list', {
 			url: '/list?search',//TODO: search so that search is not an object in url
+			ncyBreadcrumb: {
+				label: '{{"pages.divisionCollection.list.title" | translate}} '
+			},
 			views: {
 				'page@app.divisionCollection': {
 					templateUrl: 'app/divisionCollection/divisionCollection.list.html',
@@ -19,7 +22,8 @@ $stateProvider
 		}).state('app.divisionCollection.create',{
 			url: '/create',
 			ncyBreadcrumb: {
-				parent: 'app.divisionCollection.list'
+				parent: 'app.divisionCollection.list',
+				label: '{{"pages.DivisionCollection.create.title" | translate}}'
 			},
 			views: {
 				'page@app.divisionCollection': {
@@ -35,7 +39,8 @@ $stateProvider
 		}).state('app.divisionCollection.view',{
 			url: '/view/:id',
 			ncyBreadcrumb: {
-				parent: 'app.divisionCollection.list'
+				parent: 'app.divisionCollection.list',
+				label: '{{"pages.divisionCollection.view.title" | translate}} '
 			},
 			views: {
 				'page@app.divisionCollection': {
@@ -54,6 +59,9 @@ $stateProvider
 			}
 		}).state('app.divisionCollection.view.edit',{
 			url: '/edit',
+            ncyBreadcrumb: {
+                label: '{{"pages.divisionCollection.view.edit.title" | translate}} '
+            },
 			views: {
 				'page@app.divisionCollection': {
 					templateUrl: 'app/divisionCollection/divisionCollection.form.html',

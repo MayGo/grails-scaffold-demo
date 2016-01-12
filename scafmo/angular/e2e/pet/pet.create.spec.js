@@ -32,7 +32,7 @@ describe('pet create page', function() {
 	it('after filling all the fields, should submit and change route to view', function() {
 		expect(page.submitButton.isEnabled()).toBe(false);
 		//Fill the form
-		page.birthDateEl.sendKeys('27.10.2015');
+		page.birthDateEl.sendKeys('12.01.2016');
 		page.nameEl.sendKeys('Pet 302');
 		page.visitsEl.sendKeys('');//no val for visits
 		page.typeEl.sendKeys('Type_452').sendKeys(protractor.Key.ENTER);

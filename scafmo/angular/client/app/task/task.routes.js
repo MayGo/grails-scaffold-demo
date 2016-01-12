@@ -10,6 +10,9 @@ $stateProvider
 		})
 		.state('app.task.list', {
 			url: '/list?search',//TODO: search so that search is not an object in url
+			ncyBreadcrumb: {
+				label: '{{"pages.task.list.title" | translate}} '
+			},
 			views: {
 				'page@app.task': {
 					templateUrl: 'app/task/task.list.html',
@@ -19,7 +22,8 @@ $stateProvider
 		}).state('app.task.create',{
 			url: '/create',
 			ncyBreadcrumb: {
-				parent: 'app.task.list'
+				parent: 'app.task.list',
+				label: '{{"pages.Task.create.title" | translate}}'
 			},
 			views: {
 				'page@app.task': {
@@ -35,7 +39,8 @@ $stateProvider
 		}).state('app.task.view',{
 			url: '/view/:id',
 			ncyBreadcrumb: {
-				parent: 'app.task.list'
+				parent: 'app.task.list',
+				label: '{{"pages.task.view.title" | translate}} '
 			},
 			views: {
 				'page@app.task': {
@@ -54,6 +59,9 @@ $stateProvider
 			}
 		}).state('app.task.view.edit',{
 			url: '/edit',
+            ncyBreadcrumb: {
+                label: '{{"pages.task.view.edit.title" | translate}} '
+            },
 			views: {
 				'page@app.task': {
 					templateUrl: 'app/task/task.form.html',

@@ -36,18 +36,35 @@ class EmbeddableSpec extends RestQueries implements TestUtils{
 	void 'Test creating another Embeddable instance.'() {//This is for creating some data to test list sorting
 		when: 'Create embeddable'
 			response = sendCreateWithData(){
+				jsonMap = [
+  'mykey':  'myvalue'
+]
+				myAc = [
+  'mykey':  'myvalue'
+]
+				str = 'Blank 152'
 			}
 			
 			otherDomainId = response.json.id
 			
 
 		then: 'Should create and return created values'
+//			response.json.jsonMap == [mykey:myvalue]
+//			response.json.myAc == [mykey:myvalue]
+			response.json.str == 'Blank 152'
 			response.status == HttpStatus.CREATED.value()
 	}
 
 	void 'Test creating Embeddable instance.'() {
 		when: 'Create embeddable'
 			response = sendCreateWithData(){
+				jsonMap = [
+  'mykey':  'myvalue'
+]
+				myAc = [
+  'mykey':  'myvalue'
+]
+				str = 'Blank 153'
 			}
 			
 			domainId = response.json.id
@@ -55,6 +72,9 @@ class EmbeddableSpec extends RestQueries implements TestUtils{
 
 		then: 'Should create and return created values'
 
+//			response.json.jsonMap == [mykey:myvalue]
+//			response.json.myAc == [mykey:myvalue]
+			response.json.str == 'Blank 153'
 			response.status == HttpStatus.CREATED.value()
 	}
 
@@ -67,6 +87,9 @@ class EmbeddableSpec extends RestQueries implements TestUtils{
 			response = readDomainItemWithParams(domainId.toString(), "")
 		then: 'Should return correct values'
 
+//			response.json.jsonMap == [mykey:myvalue]
+//			response.json.myAc == [mykey:myvalue]
+			response.json.str == 'Blank 153'
 			response.status == HttpStatus.OK.value()
 	}
 
@@ -104,9 +127,19 @@ class EmbeddableSpec extends RestQueries implements TestUtils{
 	void 'Test updating Embeddable instance.'() {
 		when: 'Update embeddable'
 			response = sendUpdateWithData(domainId.toString()){
+				jsonMap = [
+  'mykey':  'myvalue'
+]
+				myAc = [
+  'mykey':  'myvalue'
+]
+				str = 'Blank 154'
 
 			}
 		then: 'Should return updated values'
+//			response.json.jsonMap == [mykey:myvalue]
+//			response.json.myAc == [mykey:myvalue]
+			response.json.str == 'Blank 154'
 
 			response.status == HttpStatus.OK.value()
 	}
@@ -114,14 +147,28 @@ class EmbeddableSpec extends RestQueries implements TestUtils{
 	void 'Test updating unexisting Embeddable instance.'() {
 		when: 'Update unexisting embeddable'
 			response = sendUpdateWithData('9999999999'){
-	
+					jsonMap = [
+  'mykey':  'myvalue'
+]
+				myAc = [
+  'mykey':  'myvalue'
+]
+				str = 'Blank 154'
+
 			}
 		then: 'Should not find'
 			response.status == HttpStatus.NOT_FOUND.value()
 
 		when: 'Update unexisting embeddable id not a number'
 			response = sendUpdateWithData('nonexistent'){
-	
+					jsonMap = [
+  'mykey':  'myvalue'
+]
+				myAc = [
+  'mykey':  'myvalue'
+]
+				str = 'Blank 154'
+
 			}
 		then: 'Should not find'
 			response.status == HttpStatus.UNPROCESSABLE_ENTITY.value()
@@ -237,6 +284,9 @@ class EmbeddableSpec extends RestQueries implements TestUtils{
 		where:
 			filter 	        || respSize
 			[:]                || 10
+			[jsonMaps:'%7B"mykey":"myvalue"%7D'] || 10 
+			[myAcs:'%7B"mykey":"myvalue"%7D'] || 10 
+//Can't predict 'size'			[str:'Blank 154'] || 1 
 
 	}
 

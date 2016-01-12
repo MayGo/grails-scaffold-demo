@@ -55,7 +55,7 @@ angular
         }
 
       } catch (ex) {
-        logger.error('$httpProvider', ex);
+        $log.error('$httpProvider', ex);
       }
 
       return $q.reject(rejection);

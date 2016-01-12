@@ -144,7 +144,17 @@ class EmbeddableModifyServiceSpec extends Specification {
 	@SuppressWarnings(['MethodSize'])
 	Map validData() {
 
-		Map data = []
+		Map data = [
+  'id':  null,
+  'version':  null,
+  'jsonMap':  [
+    'mykey':  'myvalue'
+  ],
+  'myAc':  [
+    'mykey':  'myvalue'
+  ],
+  'str':  'Blank 153'
+]
 		return data
 	}
 

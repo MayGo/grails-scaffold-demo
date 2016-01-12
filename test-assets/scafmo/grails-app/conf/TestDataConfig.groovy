@@ -119,6 +119,7 @@ testDataConfig {
 
 			str = {->"Blank ${i++}" }
 			myAc = {->["mykey": "myvalue"] }
+			jsonMap = {->["mykey": "myvalue"] }
 		}
 		
 	}

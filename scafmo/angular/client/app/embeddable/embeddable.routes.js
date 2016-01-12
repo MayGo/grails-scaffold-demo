@@ -10,6 +10,9 @@ $stateProvider
 		})
 		.state('app.embeddable.list', {
 			url: '/list?search',//TODO: search so that search is not an object in url
+			ncyBreadcrumb: {
+				label: '{{"pages.embeddable.list.title" | translate}} '
+			},
 			views: {
 				'page@app.embeddable': {
 					templateUrl: 'app/embeddable/embeddable.list.html',
@@ -19,7 +22,8 @@ $stateProvider
 		}).state('app.embeddable.create',{
 			url: '/create',
 			ncyBreadcrumb: {
-				parent: 'app.embeddable.list'
+				parent: 'app.embeddable.list',
+				label: '{{"pages.Embeddable.create.title" | translate}}'
 			},
 			views: {
 				'page@app.embeddable': {
@@ -35,7 +39,8 @@ $stateProvider
 		}).state('app.embeddable.view',{
 			url: '/view/:id',
 			ncyBreadcrumb: {
-				parent: 'app.embeddable.list'
+				parent: 'app.embeddable.list',
+				label: '{{"pages.embeddable.view.title" | translate}} '
 			},
 			views: {
 				'page@app.embeddable': {
@@ -54,6 +59,9 @@ $stateProvider
 			}
 		}).state('app.embeddable.view.edit',{
 			url: '/edit',
+            ncyBreadcrumb: {
+                label: '{{"pages.embeddable.view.edit.title" | translate}} '
+            },
 			views: {
 				'page@app.embeddable': {
 					templateUrl: 'app/embeddable/embeddable.form.html',

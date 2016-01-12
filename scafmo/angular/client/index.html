@@ -18,12 +18,14 @@
 	<!-- build:css({.tmp/serve,'client'}) styles/vendor.css -->
 	<!-- bower:css -->
 	<!-- run `gulp inject` to automatically populate bower styles dependencies -->
+  <link rel="stylesheet" href="dist_inside_grails/styles/vendor-6567d31f6c.css"/>
 	<!-- endbower -->
 	<!-- endbuild -->
 
 	<!-- build:css({.tmp/serve,'client'}) styles/app.css -->
 	<!-- inject:css -->
 	<!-- css files will be automatically insert here -->
+	<link rel="stylesheet" href="app/app.css">
 	<!-- endinject -->
 	<!-- endbuild -->
 
@@ -41,12 +43,206 @@
 <!-- build:js('client') scripts/vendor.js -->
 <!-- bower:js -->
 <!-- run `gulp inject` to automatically populate bower script dependencies -->
+<script src="dist_inside_grails/scripts/vendor-43317565cc.js"></script>
 <!-- endbower -->
 <!-- endbuild -->
 
 <!-- build:js({.tmp/serve,.tmp/partials,client}) scripts/app.js -->
 <!-- inject:js -->
 <!-- js files will be automatically insert here -->
+<script src="app/services/logger/logger.module.js"></script>
+<script src="app/services/logger/logger.js"></script>
+<script src="app/services/exception/exception.module.js"></script>
+<script src="app/services/exception/exception.js"></script>
+<script src="app/services/exception/exception-handler.provider.js"></script>
+<script src="app/app.module.js"></script>
+<script src="app/components/menu/menu.service.js"></script>
+<script src="app/components/menu/menu.directive.js"></script>
+<script src="app/components/menu/menu-toggle.directive.js"></script>
+<script src="app/components/menu/menu-templates.js"></script>
+<script src="app/components/menu/menu-link.directive.js"></script>
+<script src="app/components/collapse-bar/collapse-bar.directive.js"></script>
+<script src="app/components/collapse-bar/collapse-bar.controller.js"></script>
+
+<script src="app/settings/settings.js"></script>
+<script src="app/settings/settings.controller.js"></script>
+<script src="app/search/search.js"></script>
+<script src="app/search/search.controller.js"></script>
+<script src="app/session/session.service.js"></script>
+
+<script src="app/services/materialElementModifier.service.js"></script>
+<script src="app/services/httpInterceptor.service.js"></script>
+<script src="app/services/formUtils.js"></script>
+
+
+
+<script src="app/login/login.js"></script>
+<script src="app/login/login.controller.js"></script>
+<script src="app/logout/relogin.controller.js"></script>
+<script src="app/logout/logout.js"></script>
+<script src="app/logout/logout.controller.js"></script>
+<script src="app/error/error.js"></script>
+<script src="app/error/error.controller.js"></script>
+
+
+<script src="app/dashboard/dashboard.js"></script>
+<script src="app/dashboard/dashboard.controller.js"></script>
+<script src="app/directives/ui-shift.js"></script>
+<script src="app/directives/toggleclass.directive.js"></script>
+<script src="app/directives/state-to-i10n.directive.js"></script>
+<script src="app/directives/show-loading.directive.js"></script>
+<script src="app/directives/objectFormatter.directive.js"></script>
+<script src="app/directives/nospace.directive.js"></script>
+<script src="app/directives/menu.directive.js"></script>
+<script src="app/directives/loadingContainer.directive.js"></script>
+<script src="app/directives/itemSelector.service.js"></script>
+<script src="app/directives/itemSelector.directive.js"></script>
+<script src="app/directives/humanizeDoc.directive.js"></script>
+<script src="app/directives/byte-downloader.directive.js"></script>
+
+<script src="app/controllers/SearchController.js"></script>
+<script src="app/controllers/ProfileController.js"></script>
+<script src="app/controllers/MessagesController.js"></script>
+<script src="app/app.service.tmpl.js"></script>
+<script src="app/app.service.js"></script>
+<script src="app/app.runtime-config.js"></script>
+<script src="app/app.router.js"></script>
+<script src="app/app.dynamic-config.js"></script>
+<script src="app/app.controller.js"></script>
+<script src="app/app.config.js"></script>
+
+<script src="app/tag/tag.routes.js"></script>
+<script src="app/tag/tag.edit.controller.js"></script>
+<script src="app/tag/tag.list.controller.js"></script>
+<script src="app/tag/tag.view.controller.js"></script>
+<script src="app/tag/tag.service.js"></script>
+
+<script src="app/task/task.routes.js"></script>
+<script src="app/task/task.edit.controller.js"></script>
+<script src="app/task/task.list.controller.js"></script>
+<script src="app/task/task.view.controller.js"></script>
+<script src="app/task/task.service.js"></script>
+
+<script src="app/owner/owner.routes.js"></script>
+<script src="app/owner/owner.edit.controller.js"></script>
+<script src="app/owner/owner.list.controller.js"></script>
+<script src="app/owner/owner.view.controller.js"></script>
+<script src="app/owner/owner.service.js"></script>
+
+<script src="app/person/person.routes.js"></script>
+<script src="app/person/person.edit.controller.js"></script>
+<script src="app/person/person.list.controller.js"></script>
+<script src="app/person/person.view.controller.js"></script>
+<script src="app/person/person.service.js"></script>
+
+<script src="app/pet/pet.routes.js"></script>
+<script src="app/pet/pet.edit.controller.js"></script>
+<script src="app/pet/pet.list.controller.js"></script>
+<script src="app/pet/pet.view.controller.js"></script>
+<script src="app/pet/pet.service.js"></script>
+
+<script src="app/petType/petType.routes.js"></script>
+<script src="app/petType/petType.edit.controller.js"></script>
+<script src="app/petType/petType.list.controller.js"></script>
+<script src="app/petType/petType.view.controller.js"></script>
+<script src="app/petType/petType.service.js"></script>
+
+<script src="app/speciality/speciality.routes.js"></script>
+<script src="app/speciality/speciality.edit.controller.js"></script>
+<script src="app/speciality/speciality.list.controller.js"></script>
+<script src="app/speciality/speciality.view.controller.js"></script>
+<script src="app/speciality/speciality.service.js"></script>
+
+<script src="app/vet/vet.routes.js"></script>
+<script src="app/vet/vet.edit.controller.js"></script>
+<script src="app/vet/vet.list.controller.js"></script>
+<script src="app/vet/vet.view.controller.js"></script>
+<script src="app/vet/vet.service.js"></script>
+
+<script src="app/visit/visit.routes.js"></script>
+<script src="app/visit/visit.edit.controller.js"></script>
+<script src="app/visit/visit.list.controller.js"></script>
+<script src="app/visit/visit.view.controller.js"></script>
+<script src="app/visit/visit.service.js"></script>
+
+<script src="app/divisionCollection/divisionCollection.routes.js"></script>
+<script src="app/divisionCollection/divisionCollection.edit.controller.js"></script>
+<script src="app/divisionCollection/divisionCollection.list.controller.js"></script>
+<script src="app/divisionCollection/divisionCollection.view.controller.js"></script>
+<script src="app/divisionCollection/divisionCollection.service.js"></script>
+
+<script src="app/divisionCollectionless/divisionCollectionless.routes.js"></script>
+<script src="app/divisionCollectionless/divisionCollectionless.edit.controller.js"></script>
+<script src="app/divisionCollectionless/divisionCollectionless.list.controller.js"></script>
+<script src="app/divisionCollectionless/divisionCollectionless.view.controller.js"></script>
+<script src="app/divisionCollectionless/divisionCollectionless.service.js"></script>
+
+<script src="app/personCollection/personCollection.routes.js"></script>
+<script src="app/personCollection/personCollection.edit.controller.js"></script>
+<script src="app/personCollection/personCollection.list.controller.js"></script>
+<script src="app/personCollection/personCollection.view.controller.js"></script>
+<script src="app/personCollection/personCollection.service.js"></script>
+
+<script src="app/personCollectionless/personCollectionless.routes.js"></script>
+<script src="app/personCollectionless/personCollectionless.edit.controller.js"></script>
+<script src="app/personCollectionless/personCollectionless.list.controller.js"></script>
+<script src="app/personCollectionless/personCollectionless.view.controller.js"></script>
+<script src="app/personCollectionless/personCollectionless.service.js"></script>
+
+<script src="app/testNumber/testNumber.routes.js"></script>
+<script src="app/testNumber/testNumber.edit.controller.js"></script>
+<script src="app/testNumber/testNumber.list.controller.js"></script>
+<script src="app/testNumber/testNumber.view.controller.js"></script>
+<script src="app/testNumber/testNumber.service.js"></script>
+
+<script src="app/testOther/testOther.routes.js"></script>
+<script src="app/testOther/testOther.edit.controller.js"></script>
+<script src="app/testOther/testOther.list.controller.js"></script>
+<script src="app/testOther/testOther.view.controller.js"></script>
+<script src="app/testOther/testOther.service.js"></script>
+
+<script src="app/testString/testString.routes.js"></script>
+<script src="app/testString/testString.edit.controller.js"></script>
+<script src="app/testString/testString.list.controller.js"></script>
+<script src="app/testString/testString.view.controller.js"></script>
+<script src="app/testString/testString.service.js"></script>
+
+<script src="app/embed/embed.routes.js"></script>
+<script src="app/embed/embed.edit.controller.js"></script>
+<script src="app/embed/embed.list.controller.js"></script>
+<script src="app/embed/embed.view.controller.js"></script>
+<script src="app/embed/embed.service.js"></script>
+
+<script src="app/embeddable/embeddable.routes.js"></script>
+<script src="app/embeddable/embeddable.edit.controller.js"></script>
+<script src="app/embeddable/embeddable.list.controller.js"></script>
+<script src="app/embeddable/embeddable.view.controller.js"></script>
+<script src="app/embeddable/embeddable.service.js"></script>
+
+<script src="app/role/role.routes.js"></script>
+<script src="app/role/role.edit.controller.js"></script>
+<script src="app/role/role.list.controller.js"></script>
+<script src="app/role/role.view.controller.js"></script>
+<script src="app/role/role.service.js"></script>
+
+<script src="app/user/user.routes.js"></script>
+<script src="app/user/user.edit.controller.js"></script>
+<script src="app/user/user.list.controller.js"></script>
+<script src="app/user/user.view.controller.js"></script>
+<script src="app/user/user.service.js"></script>
+
+<script src="app/userRole/userRole.routes.js"></script>
+<script src="app/userRole/userRole.edit.controller.js"></script>
+<script src="app/userRole/userRole.list.controller.js"></script>
+<script src="app/userRole/userRole.view.controller.js"></script>
+<script src="app/userRole/userRole.service.js"></script>
+
+<script src="app/classifier/classifier.routes.js"></script>
+<script src="app/classifier/classifier.edit.controller.js"></script>
+<script src="app/classifier/classifier.list.controller.js"></script>
+<script src="app/classifier/classifier.view.controller.js"></script>
+<script src="app/classifier/classifier.service.js"></script>
+
 <!-- endinject -->
 
 <!-- inject:partials -->
@@ -54,138 +250,6 @@
 <!-- endinject -->
 <!-- endbuild -->
 
-
-<!--<script src="app/tag/tag.routes.js"></script>
-<script src="app/tag/tag.edit.controller.js"></script>
-<script src="app/tag/tag.list.controller.js"></script>
-<script src="app/tag/tag.view.controller.js"></script>
-<script src="app/tag/tag.service.js"></script>-->
-
-<!--<script src="app/task/task.routes.js"></script>
-<script src="app/task/task.edit.controller.js"></script>
-<script src="app/task/task.list.controller.js"></script>
-<script src="app/task/task.view.controller.js"></script>
-<script src="app/task/task.service.js"></script>-->
-
-<!--<script src="app/owner/owner.routes.js"></script>
-<script src="app/owner/owner.edit.controller.js"></script>
-<script src="app/owner/owner.list.controller.js"></script>
-<script src="app/owner/owner.view.controller.js"></script>
-<script src="app/owner/owner.service.js"></script>-->
-
-<!--<script src="app/person/person.routes.js"></script>
-<script src="app/person/person.edit.controller.js"></script>
-<script src="app/person/person.list.controller.js"></script>
-<script src="app/person/person.view.controller.js"></script>
-<script src="app/person/person.service.js"></script>-->
-
-<!--<script src="app/pet/pet.routes.js"></script>
-<script src="app/pet/pet.edit.controller.js"></script>
-<script src="app/pet/pet.list.controller.js"></script>
-<script src="app/pet/pet.view.controller.js"></script>
-<script src="app/pet/pet.service.js"></script>-->
-
-<!--<script src="app/petType/petType.routes.js"></script>
-<script src="app/petType/petType.edit.controller.js"></script>
-<script src="app/petType/petType.list.controller.js"></script>
-<script src="app/petType/petType.view.controller.js"></script>
-<script src="app/petType/petType.service.js"></script>-->
-
-<!--<script src="app/speciality/speciality.routes.js"></script>
-<script src="app/speciality/speciality.edit.controller.js"></script>
-<script src="app/speciality/speciality.list.controller.js"></script>
-<script src="app/speciality/speciality.view.controller.js"></script>
-<script src="app/speciality/speciality.service.js"></script>-->
-
-<!--<script src="app/vet/vet.routes.js"></script>
-<script src="app/vet/vet.edit.controller.js"></script>
-<script src="app/vet/vet.list.controller.js"></script>
-<script src="app/vet/vet.view.controller.js"></script>
-<script src="app/vet/vet.service.js"></script>-->
-
-<!--<script src="app/visit/visit.routes.js"></script>
-<script src="app/visit/visit.edit.controller.js"></script>
-<script src="app/visit/visit.list.controller.js"></script>
-<script src="app/visit/visit.view.controller.js"></script>
-<script src="app/visit/visit.service.js"></script>-->
-
-<!--<script src="app/divisionCollection/divisionCollection.routes.js"></script>
-<script src="app/divisionCollection/divisionCollection.edit.controller.js"></script>
-<script src="app/divisionCollection/divisionCollection.list.controller.js"></script>
-<script src="app/divisionCollection/divisionCollection.view.controller.js"></script>
-<script src="app/divisionCollection/divisionCollection.service.js"></script>-->
-
-<!--<script src="app/divisionCollectionless/divisionCollectionless.routes.js"></script>
-<script src="app/divisionCollectionless/divisionCollectionless.edit.controller.js"></script>
-<script src="app/divisionCollectionless/divisionCollectionless.list.controller.js"></script>
-<script src="app/divisionCollectionless/divisionCollectionless.view.controller.js"></script>
-<script src="app/divisionCollectionless/divisionCollectionless.service.js"></script>-->
-
-<!--<script src="app/personCollection/personCollection.routes.js"></script>
-<script src="app/personCollection/personCollection.edit.controller.js"></script>
-<script src="app/personCollection/personCollection.list.controller.js"></script>
-<script src="app/personCollection/personCollection.view.controller.js"></script>
-<script src="app/personCollection/personCollection.service.js"></script>-->
-
-<!--<script src="app/personCollectionless/personCollectionless.routes.js"></script>
-<script src="app/personCollectionless/personCollectionless.edit.controller.js"></script>
-<script src="app/personCollectionless/personCollectionless.list.controller.js"></script>
-<script src="app/personCollectionless/personCollectionless.view.controller.js"></script>
-<script src="app/personCollectionless/personCollectionless.service.js"></script>-->
-
-<!--<script src="app/testNumber/testNumber.routes.js"></script>
-<script src="app/testNumber/testNumber.edit.controller.js"></script>
-<script src="app/testNumber/testNumber.list.controller.js"></script>
-<script src="app/testNumber/testNumber.view.controller.js"></script>
-<script src="app/testNumber/testNumber.service.js"></script>-->
-
-<!--<script src="app/testOther/testOther.routes.js"></script>
-<script src="app/testOther/testOther.edit.controller.js"></script>
-<script src="app/testOther/testOther.list.controller.js"></script>
-<script src="app/testOther/testOther.view.controller.js"></script>
-<script src="app/testOther/testOther.service.js"></script>-->
-
-<!--<script src="app/testString/testString.routes.js"></script>
-<script src="app/testString/testString.edit.controller.js"></script>
-<script src="app/testString/testString.list.controller.js"></script>
-<script src="app/testString/testString.view.controller.js"></script>
-<script src="app/testString/testString.service.js"></script>-->
-
-<!--<script src="app/embed/embed.routes.js"></script>
-<script src="app/embed/embed.edit.controller.js"></script>
-<script src="app/embed/embed.list.controller.js"></script>
-<script src="app/embed/embed.view.controller.js"></script>
-<script src="app/embed/embed.service.js"></script>-->
-
-<!--<script src="app/embeddable/embeddable.routes.js"></script>
-<script src="app/embeddable/embeddable.edit.controller.js"></script>
-<script src="app/embeddable/embeddable.list.controller.js"></script>
-<script src="app/embeddable/embeddable.view.controller.js"></script>
-<script src="app/embeddable/embeddable.service.js"></script>-->
-
-<!--<script src="app/role/role.routes.js"></script>
-<script src="app/role/role.edit.controller.js"></script>
-<script src="app/role/role.list.controller.js"></script>
-<script src="app/role/role.view.controller.js"></script>
-<script src="app/role/role.service.js"></script>-->
-
-<!--<script src="app/user/user.routes.js"></script>
-<script src="app/user/user.edit.controller.js"></script>
-<script src="app/user/user.list.controller.js"></script>
-<script src="app/user/user.view.controller.js"></script>
-<script src="app/user/user.service.js"></script>-->
-
-<!--<script src="app/userRole/userRole.routes.js"></script>
-<script src="app/userRole/userRole.edit.controller.js"></script>
-<script src="app/userRole/userRole.list.controller.js"></script>
-<script src="app/userRole/userRole.view.controller.js"></script>
-<script src="app/userRole/userRole.service.js"></script>-->
-
-<!--<script src="app/classifier/classifier.routes.js"></script>
-<script src="app/classifier/classifier.edit.controller.js"></script>
-<script src="app/classifier/classifier.list.controller.js"></script>
-<script src="app/classifier/classifier.view.controller.js"></script>
-<script src="app/classifier/classifier.service.js"></script>-->
 
 </body>
 </html>
